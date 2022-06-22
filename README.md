@@ -25,7 +25,7 @@ Utente visitatore:
 -	Registrarsi presso la piattaforma.
 
 Utente registrato – Studente:
--	Visualizzare informazioni riguardanti la carriera dello studente (reputazione acquisita, media, esami superati, cfu acquisiti, ecc…);
+-	Visualizzare informazioni riguardanti la sua carriera (reputazione acquisita, media, esami superati, cfu acquisiti, ecc…);
 -	Prenotarsi agli appelli dei corsi relativi al suo percorso di studi;
 -	Contribuire alla bacheca dei corsi, uno spazio dove più utenti possono discutere di argomenti riguardanti il singolo corso;
 -	Recensire i post/commenti degli altri studenti;
