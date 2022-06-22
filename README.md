@@ -29,7 +29,7 @@ Utente registrato – Studente:
 -	Prenotarsi agli appelli dei corsi relativi al suo percorso di studi;
 -	Contribuire alla bacheca dei corsi, uno spazio dove più utenti possono discutere di argomenti riguardanti il singolo corso;
 -	Recensire i post/commenti degli altri studenti;
--	Visualizzare le pagine FAQ dei corsi, ed eventualmente contribuire con delle risposte.
+-	Visualizzare le pagine FAQ dei corsi, ed eventualmente contribuire con delle domande.
 
 Utente registrato – Professore:
 -	Aggiungere, modificare o eliminare appelli del suo corso;
