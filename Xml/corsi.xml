@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<corsi xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="corsi.xsd">
+    <corso>
+        <id>1</id>
+        <nome>Basi di Dati</nome>
+        <descrizione>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ultricies.</descrizione>
+        <matricolaProf>1</matricolaProf>
+        <colore>lightblue</colore>
+        <anno>3</anno>
+        <semestre>1</semestre>
+        <curriculum>Informatica</curriculum>
+        <cfu>9</cfu>
+        <ssd>ING/INF-04</ssd>
+    </corso>
+</corsi>

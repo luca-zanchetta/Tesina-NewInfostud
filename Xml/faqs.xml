@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faqs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="faqs.xsd">
+   <faq>
+        <id>1</id>
+        <domanda>Si puo studiare sulle slide?</domanda>
+        <risposta>Si, in particolare su quelle che mettero'a disposizione durante il corso</risposta>
+        <utilitaTotale>1</utilitaTotale> 
+   </faq>
+</faqs>

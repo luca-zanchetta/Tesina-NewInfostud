@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<posts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="posts.xsd">
+    <post>
+        <id>1</id>
+        <titolo>Ricerca Appunti!!!</titolo>
+        <corpo>Cerco appunti di basi di dati. Ringrazio in anticipo.</corpo>
+        <matricolaStudente>1</matricolaStudente>
+        <utilitaTotale>1</utilitaTotale>
+        <idCorso>1</idCorso>
+    </post>
+</posts>
