@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<votiFAQ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="votoFAQ.xsd">
+  <votoFAQ>
+    <id>1</id>
+    <matricolaStudente>1</matricolaStudente>
+    <idFAQ>1</idFAQ>
+    <utilita>1</utilita>
+  </votoFAQ>
+</votiFAQ>

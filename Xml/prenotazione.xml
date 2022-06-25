@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<prenotazioni xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="prenotazione.xsd">
+  <prenotazione>
+    <id>1</id>
+    <matricolaStudente>1</matricolaStudente>
+    <idAppello>1</idAppello>
+    <esito>25</esito>
+  </prenotazione>
+</prenotazioni>
