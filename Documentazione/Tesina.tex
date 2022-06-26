@@ -415,10 +415,10 @@ Per quanto riguarda l'utenza \textbf{Docente}, i campi \emph{nome}, \emph{cognom
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
 <amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
-    <amministratore>
-        <username>admin</username>
-        <password>admin</password>
-    </amministratore>
+ <amministratore>
+  <username>admin</username>
+  <password>admin</password>
+ </amministratore>
 </amministrazione>
 \end{lstlisting}
 
@@ -449,30 +449,606 @@ Per quanto riguarda l'utenza \textbf{Docente}, i campi \emph{nome}, \emph{cognom
 </xsd:schema>
 \end{lstlisting}
 
+\medskip
+
 \subsubsection{Appartiene}
+
+\emph{FILE .XML}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
-<appartenenze xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="appartiene.xsd">
-  <appartenenza>
-    <id>1</id>
-    <idCorso>1</idCorso>
-    <idCorsoDiLaurea>1</idCorsoDiLaurea>
-  </appartenenza>
-</appartenenze>
+<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
+ <amministratore>
+  <username>admin</username>
+  <password>admin</password>
+ </amministratore>
+</amministrazione>
 \end{lstlisting}
+
+\emph{FILE .XSD}
+
+\begin{lstlisting}[language=XML]
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:element name="amministrazione">
+ <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+ </xsd:element>
+<xsd:element name="amministratore">
+ <xsd:complexType>
+  <xsd:sequence>
+   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+</xsd:element>
+<xsd:element name="username" type="xsd:string"/>
+<xsd:element name="password" type="xsd:string"/>
+</xsd:schema>
+\end{lstlisting}
+
+\medskip
 
 \subsubsection{Appelli}
 
+\emph{FILE .XML}
+
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
-<appelli xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="appelli.xsd">
-    <appello>
-        <id>1</id>
-        <idCorso>1</idCorso>
-        <dataOra>01/01/2000 10:10</dataOra>
-    </appello>
-</appelli>
+<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
+ <amministratore>
+  <username>admin</username>
+  <password>admin</password>
+ </amministratore>
+</amministrazione>
+\end{lstlisting}
+
+\emph{FILE .XSD}
+
+\begin{lstlisting}[language=XML]
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:element name="amministrazione">
+ <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+ </xsd:element>
+<xsd:element name="amministratore">
+ <xsd:complexType>
+  <xsd:sequence>
+   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+</xsd:element>
+<xsd:element name="username" type="xsd:string"/>
+<xsd:element name="password" type="xsd:string"/>
+</xsd:schema>
+\end{lstlisting}
+
+\medskip
+
+\subsubsection{Commenti}
+
+\emph{FILE .XML}
+
+\begin{lstlisting}[language=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
+ <amministratore>
+  <username>admin</username>
+  <password>admin</password>
+ </amministratore>
+</amministrazione>
+\end{lstlisting}
+
+\emph{FILE .XSD}
+
+\begin{lstlisting}[language=XML]
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:element name="amministrazione">
+ <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+ </xsd:element>
+<xsd:element name="amministratore">
+ <xsd:complexType>
+  <xsd:sequence>
+   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+</xsd:element>
+<xsd:element name="username" type="xsd:string"/>
+<xsd:element name="password" type="xsd:string"/>
+</xsd:schema>
+\end{lstlisting}
+
+\medskip
+
+\subsubsection{Corsi}
+
+\emph{FILE .XML}
+
+\begin{lstlisting}[language=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
+ <amministratore>
+  <username>admin</username>
+  <password>admin</password>
+ </amministratore>
+</amministrazione>
+\end{lstlisting}
+
+\emph{FILE .XSD}
+
+\begin{lstlisting}[language=XML]
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:element name="amministrazione">
+ <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+ </xsd:element>
+<xsd:element name="amministratore">
+ <xsd:complexType>
+  <xsd:sequence>
+   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+</xsd:element>
+<xsd:element name="username" type="xsd:string"/>
+<xsd:element name="password" type="xsd:string"/>
+</xsd:schema>
+\end{lstlisting}
+
+\medskip
+
+\subsubsection{Corsi di laurea}
+
+\emph{FILE .XML}
+
+\begin{lstlisting}[language=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
+ <amministratore>
+  <username>admin</username>
+  <password>admin</password>
+ </amministratore>
+</amministrazione>
+\end{lstlisting}
+
+\emph{FILE .XSD}
+
+\begin{lstlisting}[language=XML]
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:element name="amministrazione">
+ <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+ </xsd:element>
+<xsd:element name="amministratore">
+ <xsd:complexType>
+  <xsd:sequence>
+   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+</xsd:element>
+<xsd:element name="username" type="xsd:string"/>
+<xsd:element name="password" type="xsd:string"/>
+</xsd:schema>
+\end{lstlisting}
+
+\medskip
+
+\subsubsection{Docenti}
+
+\emph{FILE .XML}
+
+\begin{lstlisting}[language=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
+ <amministratore>
+  <username>admin</username>
+  <password>admin</password>
+ </amministratore>
+</amministrazione>
+\end{lstlisting}
+
+\emph{FILE .XSD}
+
+\begin{lstlisting}[language=XML]
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:element name="amministrazione">
+ <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+ </xsd:element>
+<xsd:element name="amministratore">
+ <xsd:complexType>
+  <xsd:sequence>
+   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+</xsd:element>
+<xsd:element name="username" type="xsd:string"/>
+<xsd:element name="password" type="xsd:string"/>
+</xsd:schema>
+\end{lstlisting}
+
+\medskip
+
+\subsubsection{FAQs}
+
+\emph{FILE .XML}
+
+\begin{lstlisting}[language=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
+ <amministratore>
+  <username>admin</username>
+  <password>admin</password>
+ </amministratore>
+</amministrazione>
+\end{lstlisting}
+
+\emph{FILE .XSD}
+
+\begin{lstlisting}[language=XML]
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:element name="amministrazione">
+ <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+ </xsd:element>
+<xsd:element name="amministratore">
+ <xsd:complexType>
+  <xsd:sequence>
+   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+</xsd:element>
+<xsd:element name="username" type="xsd:string"/>
+<xsd:element name="password" type="xsd:string"/>
+</xsd:schema>
+\end{lstlisting}
+
+\medskip
+
+\subsubsection{POSTs}
+
+\emph{FILE .XML}
+
+\begin{lstlisting}[language=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
+ <amministratore>
+  <username>admin</username>
+  <password>admin</password>
+ </amministratore>
+</amministrazione>
+\end{lstlisting}
+
+\emph{FILE .XSD}
+
+\begin{lstlisting}[language=XML]
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:element name="amministrazione">
+ <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+ </xsd:element>
+<xsd:element name="amministratore">
+ <xsd:complexType>
+  <xsd:sequence>
+   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+</xsd:element>
+<xsd:element name="username" type="xsd:string"/>
+<xsd:element name="password" type="xsd:string"/>
+</xsd:schema>
+\end{lstlisting}
+
+\medskip
+
+\subsubsection{Prenotazioni}
+
+\emph{FILE .XML}
+
+\begin{lstlisting}[language=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
+ <amministratore>
+  <username>admin</username>
+  <password>admin</password>
+ </amministratore>
+</amministrazione>
+\end{lstlisting}
+
+\emph{FILE .XSD}
+
+\begin{lstlisting}[language=XML]
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:element name="amministrazione">
+ <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+ </xsd:element>
+<xsd:element name="amministratore">
+ <xsd:complexType>
+  <xsd:sequence>
+   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+</xsd:element>
+<xsd:element name="username" type="xsd:string"/>
+<xsd:element name="password" type="xsd:string"/>
+</xsd:schema>
+\end{lstlisting}
+
+\medskip
+
+\subsubsection{Segreteria}
+
+\emph{FILE .XML}
+
+\begin{lstlisting}[language=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
+ <amministratore>
+  <username>admin</username>
+  <password>admin</password>
+ </amministratore>
+</amministrazione>
+\end{lstlisting}
+
+\emph{FILE .XSD}
+
+\begin{lstlisting}[language=XML]
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:element name="amministrazione">
+ <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+ </xsd:element>
+<xsd:element name="amministratore">
+ <xsd:complexType>
+  <xsd:sequence>
+   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+</xsd:element>
+<xsd:element name="username" type="xsd:string"/>
+<xsd:element name="password" type="xsd:string"/>
+</xsd:schema>
+\end{lstlisting}
+
+\medskip
+
+\subsubsection{Studenti}
+
+\emph{FILE .XML}
+
+\begin{lstlisting}[language=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
+ <amministratore>
+  <username>admin</username>
+  <password>admin</password>
+ </amministratore>
+</amministrazione>
+\end{lstlisting}
+
+\emph{FILE .XSD}
+
+\begin{lstlisting}[language=XML]
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:element name="amministrazione">
+ <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+ </xsd:element>
+<xsd:element name="amministratore">
+ <xsd:complexType>
+  <xsd:sequence>
+   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+</xsd:element>
+<xsd:element name="username" type="xsd:string"/>
+<xsd:element name="password" type="xsd:string"/>
+</xsd:schema>
+\end{lstlisting}
+
+\medskip
+
+\subsubsection{VotoCommento}
+
+\emph{FILE .XML}
+
+\begin{lstlisting}[language=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
+ <amministratore>
+  <username>admin</username>
+  <password>admin</password>
+ </amministratore>
+</amministrazione>
+\end{lstlisting}
+
+\emph{FILE .XSD}
+
+\begin{lstlisting}[language=XML]
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:element name="amministrazione">
+ <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+ </xsd:element>
+<xsd:element name="amministratore">
+ <xsd:complexType>
+  <xsd:sequence>
+   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+</xsd:element>
+<xsd:element name="username" type="xsd:string"/>
+<xsd:element name="password" type="xsd:string"/>
+</xsd:schema>
+\end{lstlisting}
+
+\medskip
+
+\subsubsection{VotoFAQ}
+
+\emph{FILE .XML}
+
+\begin{lstlisting}[language=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
+ <amministratore>
+  <username>admin</username>
+  <password>admin</password>
+ </amministratore>
+</amministrazione>
+\end{lstlisting}
+
+\emph{FILE .XSD}
+
+\begin{lstlisting}[language=XML]
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:element name="amministrazione">
+ <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+ </xsd:element>
+<xsd:element name="amministratore">
+ <xsd:complexType>
+  <xsd:sequence>
+   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+</xsd:element>
+<xsd:element name="username" type="xsd:string"/>
+<xsd:element name="password" type="xsd:string"/>
+</xsd:schema>
+\end{lstlisting}
+
+\medskip
+
+\subsubsection{VotoPost}
+
+\emph{FILE .XML}
+
+\begin{lstlisting}[language=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
+ <amministratore>
+  <username>admin</username>
+  <password>admin</password>
+ </amministratore>
+</amministrazione>
+\end{lstlisting}
+
+\emph{FILE .XSD}
+
+\begin{lstlisting}[language=XML]
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:element name="amministrazione">
+ <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+ </xsd:element>
+<xsd:element name="amministratore">
+ <xsd:complexType>
+  <xsd:sequence>
+   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+</xsd:element>
+<xsd:element name="username" type="xsd:string"/>
+<xsd:element name="password" type="xsd:string"/>
+</xsd:schema>
 \end{lstlisting}
 \section{Definizioni XML}
 

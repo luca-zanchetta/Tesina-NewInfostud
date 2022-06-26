@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.6.23)  26 JUN 2022 11:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.6.23)  26 JUN 2022 11:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -224,27 +224,28 @@ LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 4
 
 (D:\Programmi\miKTeX\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-) [15] [16] [17] [18
-
-]
+) [15] [16] [17] [18] [19]
+[20] [21] [22] [23] [24] [25] [26]
 Capitolo 2.
-[19] [20
+[27
+
+] [28
 
 ]
 Capitolo 3.
-[21] [22
+[29] [30
 
 ]
 Capitolo 4.
-[23] (Tesina.aux) ) 
+[31] (Tesina.aux) ) 
 Here is how much of TeX's memory you used:
- 5299 strings out of 478582
- 76845 string characters out of 2856069
- 786316 words of memory out of 3000000
- 23436 multiletter control sequences out of 15000+600000
+ 5291 strings out of 478582
+ 76736 string characters out of 2856069
+ 797316 words of memory out of 3000000
+ 23428 multiletter control sequences out of 15000+600000
  486549 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,7n,62p,1186b,1227s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 55i,7n,62p,1186b,1783s stack positions out of 10000i,1000n,20000p,200000b,80000s
  <C:\Users\matti\AppData\Local\MiKTeX\fonts/pk/ljfour/jknapp
 en/ec/dpi600\ectt0900.pk> <C:\Users\matti\AppData\Local\MiKTeX\fonts/pk/ljfour/
 jknappen/ec/dpi600\ecrm0600.pk> <C:\Users\matti\AppData\Local\MiKTeX\fonts/pk/l
@@ -261,9 +262,9 @@ sers\matti\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk>
 ecrm1095.pk> <C:\Users\matti\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/d
 pi600\ecrm1200.pk> <C:\Users\matti\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappe
 n/ec/dpi600\ecrm1728.pk>
-Output written on Tesina.pdf (23 pages, 174988 bytes).
+Output written on Tesina.pdf (31 pages, 200016 bytes).
 PDF statistics:
- 508 PDF objects out of 1000 (max. 8388607)
+ 534 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

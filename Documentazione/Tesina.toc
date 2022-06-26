@@ -29,8 +29,20 @@
 \contentsline {subsection}{\numberline {1.3.2}Struttura file xml}{15}{}%
 \contentsline {subsubsection}{Amministrazione}{15}{}%
 \contentsline {subsubsection}{Appartiene}{16}{}%
-\contentsline {subsubsection}{Appelli}{16}{}%
-\contentsline {section}{\numberline {1.4}Definizioni XML}{17}{}%
-\contentsline {chapter}{\numberline {2}Manuale utente}{19}{}%
-\contentsline {chapter}{\numberline {3}Programmazione}{21}{}%
-\contentsline {chapter}{\numberline {4}Elenco utenze}{23}{}%
+\contentsline {subsubsection}{Appelli}{17}{}%
+\contentsline {subsubsection}{Commenti}{18}{}%
+\contentsline {subsubsection}{Corsi}{18}{}%
+\contentsline {subsubsection}{Corsi di laurea}{19}{}%
+\contentsline {subsubsection}{Docenti}{20}{}%
+\contentsline {subsubsection}{FAQs}{20}{}%
+\contentsline {subsubsection}{POSTs}{21}{}%
+\contentsline {subsubsection}{Prenotazioni}{22}{}%
+\contentsline {subsubsection}{Segreteria}{23}{}%
+\contentsline {subsubsection}{Studenti}{23}{}%
+\contentsline {subsubsection}{VotoCommento}{24}{}%
+\contentsline {subsubsection}{VotoFAQ}{25}{}%
+\contentsline {subsubsection}{VotoPost}{26}{}%
+\contentsline {section}{\numberline {1.4}Definizioni XML}{26}{}%
+\contentsline {chapter}{\numberline {2}Manuale utente}{27}{}%
+\contentsline {chapter}{\numberline {3}Programmazione}{29}{}%
+\contentsline {chapter}{\numberline {4}Elenco utenze}{31}{}%
