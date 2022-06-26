@@ -410,7 +410,11 @@ Per quanto riguarda l'utenza \textbf{Docente}, i campi \emph{nome}, \emph{cognom
 
 \subsubsection{Amministrazione}
 
-\emph{FILE .XML}
+Il file in questione rappresenta l'elenco degli utenti amministratori. Per tali, si è scelto di memorizzare i soli campi dedicati all'autenticazione.
+
+\medskip
+
+\emph{Amministrazione.XML}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
@@ -422,7 +426,9 @@ Per quanto riguarda l'utenza \textbf{Docente}, i campi \emph{nome}, \emph{cognom
 </amministrazione>
 \end{lstlisting}
 
-\emph{FILE .XSD}
+\medskip
+
+\emph{Amministrazione.XSD}
 
 \begin{lstlisting}[language=XML]
 
@@ -453,42 +459,54 @@ Per quanto riguarda l'utenza \textbf{Docente}, i campi \emph{nome}, \emph{cognom
 
 \subsubsection{Appartiene}
 
-\emph{FILE .XML}
+Il file in questione realizza l'associazione tra \emph{Corso} e \emph{Corso di laurea}. Il singolo elemento \emph{Appartiene} si compone della coppia di chiavi, \emph{idCorso} e \emph{idCorsoDiLaurea}, il cui significato è l'appartenenza di un dato corso ad un determinato corso di laurea. È inoltre presente un id identificativo del singolo elemento.
+
+\medskip
+
+\emph{Appartiene.XML}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
-<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
- <amministratore>
-  <username>admin</username>
-  <password>admin</password>
- </amministratore>
-</amministrazione>
+<appartenenze xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="appartiene.xsd">
+ <appartenenza>
+  <id>1</id>
+  <idCorso>1</idCorso>
+  <idCorsoDiLaurea>1</idCorsoDiLaurea>
+ </appartenenza>
+</appartenenze>
 \end{lstlisting}
 
-\emph{FILE .XSD}
+\medskip
+
+\emph{Appartiene.XSD}
 
 \begin{lstlisting}[language=XML]
 
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-<xsd:element name="amministrazione">
- <xsd:complexType>
-   <xsd:sequence>
-    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
-      </xsd:sequence>
-   </xsd:complexType>
- </xsd:element>
-<xsd:element name="amministratore">
- <xsd:complexType>
+<xsd:element name="appartenenze">  <!-- Tabella delle appartenenze ai corsi di laurea, da parte dei corsi -->
+ <xsd:complexType> 
   <xsd:sequence>
-   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
-   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="appartenenza" minOccurs="1" maxOccurs="1" />
   </xsd:sequence>
  </xsd:complexType>
 </xsd:element>
-<xsd:element name="username" type="xsd:string"/>
-<xsd:element name="password" type="xsd:string"/>
+
+<xsd:element name="appartenenza">  <!-- Singola appartenenza ad un corso di laurea, da parte di un singolo corso -->
+ <xsd:complexType> 
+  <xsd:sequence>
+   <xsd:element ref="id" minOccurs="1" maxOccurs="1" /> 
+   <xsd:element ref="idCorso" minOccurs="1" maxOccurs="1" /> 
+  <xsd:element ref="idCorsoDiLaurea" minOccurs="1" maxOccurs="1" /> 
+ </xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+
+<xsd:element name="id" type="xsd:short" />
+<xsd:element name="idCorso" type="xsd:short" />
+<xsd:element name="idCorsoDiLaurea" type="xsd:short" />
+
 </xsd:schema>
 \end{lstlisting}
 
@@ -496,19 +514,26 @@ Per quanto riguarda l'utenza \textbf{Docente}, i campi \emph{nome}, \emph{cognom
 
 \subsubsection{Appelli}
 
-\emph{FILE .XML}
+Il file in questione memorizza gli appelli associati a ciascun esame. Un singolo elemento \emph{appello} è costituito da: un id univoco, un campo \emph{idCorso} che memorizza il corso al quale l'appello riferisce e un campo \emph{dataOra} che rappresenta la data e ora durante il quale si svolgerà l'appello.
+
+\medskip
+
+\emph{Appelli.XML}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
-<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
- <amministratore>
-  <username>admin</username>
-  <password>admin</password>
- </amministratore>
-</amministrazione>
+<appelli xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="appelli.xsd">
+ <appello>
+  <id>1</id>
+  <idCorso>1</idCorso>
+  <dataOra>01/01/2000 10:10</dataOra>
+ </appello>
+</appelli>
 \end{lstlisting}
 
-\emph{FILE .XSD}
+\medskip
+
+\emph{Appelli.XSD}
 
 \begin{lstlisting}[language=XML]
 
@@ -517,11 +542,11 @@ Per quanto riguarda l'utenza \textbf{Docente}, i campi \emph{nome}, \emph{cognom
 
 <xsd:element name="amministrazione">
  <xsd:complexType>
-   <xsd:sequence>
-    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
-      </xsd:sequence>
-   </xsd:complexType>
- </xsd:element>
+  <xsd:sequence>
+   <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
+  </xsd:sequence>
+ </xsd:complexType>
+</xsd:element>
 <xsd:element name="amministratore">
  <xsd:complexType>
   <xsd:sequence>
@@ -539,42 +564,56 @@ Per quanto riguarda l'utenza \textbf{Docente}, i campi \emph{nome}, \emph{cognom
 
 \subsubsection{Commenti}
 
-\emph{FILE .XML}
+Il file in questione memorizza la lista dei commenti pubblicati a seguito di un post contenuto in una data bacheca. Il singolo elemento \emph{commento} è costituito da: un id univoco, il corpo testuale del commento, la matricola dello studente che ha pubblicato il commento, l'accordo medio, e l'id del post che lo contiene. In particolare, il campo \emph{accordoMedio} contiene la media di tutti i voti che il commento ha ricevuto (\emph{nella sezione riguardante il file votoCommento viene approfondito meglio il funzionamento del sistema di voto}).
+
+\medskip
+
+\emph{Commenti.XML}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
-<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
- <amministratore>
-  <username>admin</username>
-  <password>admin</password>
- </amministratore>
-</amministrazione>
+<commenti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="commenti.xsd">
+ <commento>
+  <id>1</id>
+  <corpo>Te li invio subito!</corpo>
+  <matricolaStudente>1</matricolaStudente>
+  <accordoMedio>2</accordoMedio>
+  <idPost>1</idPost>
+ </commento>
+</commenti>
 \end{lstlisting}
 
-\emph{FILE .XSD}
+\medskip
+
+\emph{Commenti.XSD}
 
 \begin{lstlisting}[language=XML]
 
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-
-<xsd:element name="amministrazione">
- <xsd:complexType>
+ <xsd:element name="commenti">
+  <xsd:complexType>
    <xsd:sequence>
-    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
-      </xsd:sequence>
-   </xsd:complexType>
+    <xsd:element ref="commento" maxOccurs="unbounded" />
+   </xsd:sequence>
+  </xsd:complexType>
  </xsd:element>
-<xsd:element name="amministratore">
+<xsd:element name="commento"> <!-- singola "riga" della tabella -->
  <xsd:complexType>
   <xsd:sequence>
-   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
-   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
-  </xsd:sequence>
+   <xsd:element ref="id" minOccurs="1" maxOccurs="1" />
+   <xsd:element ref="corpo"  minOccurs="1" maxOccurs="1" />
+   <xsd:element ref="matricolaStudente" minOccurs="1" maxOccurs="1" />
+   <xsd:element ref="accordoMedio" minOccurs="1" maxOccurs="1" />
+   <xsd:element ref="idPost" minOccurs="1" maxOccurs="1" />
+  </xsd:sequence>   
  </xsd:complexType>
 </xsd:element>
-<xsd:element name="username" type="xsd:string"/>
-<xsd:element name="password" type="xsd:string"/>
+<xsd:element name="id" type="xsd:integer"/>
+<xsd:element name="corpo" type="xsd:string"/>
+<xsd:element name="matricolaStudente" type="xsd:integer"/>
+<xsd:element name="accordoMedio" type="xsd:float"/>
+<xsd:element name="idPost" type="xsd:integer"/>
 </xsd:schema>
 \end{lstlisting}
 
@@ -582,42 +621,71 @@ Per quanto riguarda l'utenza \textbf{Docente}, i campi \emph{nome}, \emph{cognom
 
 \subsubsection{Corsi}
 
-\emph{FILE .XML}
+Il file in questione memorizza la lista di tutti i corsi presenti nella piattaforma. Il singolo elemento di tipo corso è costituito da: un id univoco, un campo descrizione, un campo \emph{matricolaProf} che memorizza il professore associato al corso, un campo \emph{colore}, contenente il colore di visualizzazione del corso all'interno della piattaforma. È inoltre presente un insieme di campi memorizzanti le informazioni didattiche del corso quali: anno, semestre, curriculum, cfu e ssd.
+
+\medskip
+
+\emph{Corsi.XML}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
-<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
- <amministratore>
-  <username>admin</username>
-  <password>admin</password>
- </amministratore>
-</amministrazione>
+<corsi xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="corsi.xsd">
+ <corso>
+  <id>1</id>
+  <nome>Basi di Dati</nome>
+  <descrizione>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ultricies.</descrizione>
+  <matricolaProf>1</matricolaProf>
+  <colore>lightblue</colore>
+  <anno>3</anno>
+  <semestre>1</semestre>
+  <curriculum>Informatica</curriculum>
+  <cfu>9</cfu>
+  <ssd>ING/INF-04</ssd>
+ </corso>
+</corsi>
 \end{lstlisting}
 
-\emph{FILE .XSD}
+\medskip
+
+\emph{Corsi.XSD}
 
 \begin{lstlisting}[language=XML]
 
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-
-<xsd:element name="amministrazione">
- <xsd:complexType>
+ <xsd:element name="corsi">
+  <xsd:complexType>
    <xsd:sequence>
-    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
-      </xsd:sequence>
-   </xsd:complexType>
+    <xsd:element ref="corso" maxOccurs="unbounded" />
+   </xsd:sequence>
+  </xsd:complexType>
  </xsd:element>
-<xsd:element name="amministratore">
+<xsd:element name="corso"> <!-- singola "riga" della tabella -->
  <xsd:complexType>
   <xsd:sequence>
-   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
-   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
-  </xsd:sequence>
+   <xsd:element ref="id" minOccurs="1" maxOccurs="1" /> 
+   <xsd:element ref="nome" minOccurs="1" maxOccurs="1" />
+   <xsd:element ref="descrizione"  minOccurs="1" maxOccurs="1" />
+   <xsd:element ref="matricolaProf" minOccurs="1" maxOccurs="1" />
+   <xsd:element ref="colore" minOccurs="1" maxOccurs="1" />
+   <xsd:element ref="anno" minOccurs="1" maxOccurs="1" />
+   <xsd:element ref="semestre" minOccurs="1" maxOccurs="1" />
+   <xsd:element ref="curriculum" minOccurs="1" maxOccurs="1" />
+   <xsd:element ref="cfu" minOccurs="1" maxOccurs="1" />
+   <xsd:element ref="ssd" minOccurs="1" maxOccurs="1" />
+  </xsd:sequence>   
  </xsd:complexType>
 </xsd:element>
-<xsd:element name="username" type="xsd:string"/>
-<xsd:element name="password" type="xsd:string"/>
+ <xsd:element name="id" type="xsd:integer"/>
+ <xsd:element name="nome" type="xsd:string"/>
+ <xsd:element name="descrizione" type="xsd:string"/>
+ <xsd:element name="matricolaProf" type="xsd:integer"/>
+ <xsd:element name="colore" type="xsd:string"/>
+ <xsd:element name="anno" type="xsd:short"/>
+ <xsd:element name="curriculum" type="xsd:string"/>
+ <xsd:element name="semestre" type="xsd:short"/>
+ <xsd:element name="cfu" type="xsd:short"/>
+ <xsd:element name="ssd" type="xsd:string"/>
 </xsd:schema>
 \end{lstlisting}
 
@@ -625,42 +693,48 @@ Per quanto riguarda l'utenza \textbf{Docente}, i campi \emph{nome}, \emph{cognom
 
 \subsubsection{Corsi di laurea}
 
-\emph{FILE .XML}
+Il file in questione memorizza la lista dei corsi di laurea gestiti dalla piattaforma. Per ciascun corso di laurea si è scelto di memorizzare solamente il nome, oltre ad un campo id per identificarlo.
+
+\medskip
+
+\emph{CorsiDiLaurea.XML}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
-<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
- <amministratore>
-  <username>admin</username>
-  <password>admin</password>
- </amministratore>
-</amministrazione>
+<corsiDiLaurea xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="corsiDiLaurea.xsd">
+ <corsoDiLaurea>
+  <id>1</id>
+  <nome>Ingegneria dell'Informazione</nome>
+ </corsoDiLaurea>
+</corsiDiLaurea>
 \end{lstlisting}
 
-\emph{FILE .XSD}
+\medskip
+
+\emph{CorsiDiLaurea.XSD}
 
 \begin{lstlisting}[language=XML]
 
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-<xsd:element name="amministrazione">
- <xsd:complexType>
-   <xsd:sequence>
-    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
-      </xsd:sequence>
-   </xsd:complexType>
- </xsd:element>
-<xsd:element name="amministratore">
+<xsd:element name="corsiDiLaurea">
  <xsd:complexType>
   <xsd:sequence>
-   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
-   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="corsoDiLaurea" minOccurs="0" maxOccurs="unbounded" />
   </xsd:sequence>
  </xsd:complexType>
 </xsd:element>
-<xsd:element name="username" type="xsd:string"/>
-<xsd:element name="password" type="xsd:string"/>
+<xsd:element name="corsoDiLaurea">
+ <xsd:complexType>
+  <xsd:sequence>
+   <xsd:element ref="id" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="nome" minOccurs="1" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+</xsd:element>
+<xsd:element name="id" type="xsd:integer"/>
+<xsd:element name="nome" type="xsd:string"/>
 </xsd:schema>
 \end{lstlisting}
 
@@ -668,42 +742,59 @@ Per quanto riguarda l'utenza \textbf{Docente}, i campi \emph{nome}, \emph{cognom
 
 \subsubsection{Docenti}
 
-\emph{FILE .XML}
+Il file in questione memorizza la lista di docenti registrati presso la piattaforma. Come già detto nella sezione \emph{Anagrafica}, un singolo elemento docente si costituisce, da un campo matricola, che funge sia da identificativo univoco sia come username per l'autenticazione, un campo password, i campi anagrafici nome e cognome e un campo \emph{idCorso} che memorizza il corso associato al docente.
+
+\medskip
+
+\emph{Docenti.XML}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
-<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
- <amministratore>
-  <username>admin</username>
-  <password>admin</password>
- </amministratore>
-</amministrazione>
+<docenti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="docenti.xsd">
+ <docente>
+  <matricola>1</matricola>
+  <nome>Umberto</nome>
+  <cognome>Nanni</cognome>
+  <password>meglio che niente</password>
+  <idCorso>1</idCorso>
+ </docente>
+</docenti>
 \end{lstlisting}
 
-\emph{FILE .XSD}
+\medskip
+
+\emph{Docenti.XSD}
 
 \begin{lstlisting}[language=XML]
 
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-<xsd:element name="amministrazione">
- <xsd:complexType>
-   <xsd:sequence>
-    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
-      </xsd:sequence>
-   </xsd:complexType>
- </xsd:element>
-<xsd:element name="amministratore">
+<xsd:element name="docenti">
  <xsd:complexType>
   <xsd:sequence>
-   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
-   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="docente" minOccurs="0" maxOccurs="unbounded" />
   </xsd:sequence>
  </xsd:complexType>
 </xsd:element>
-<xsd:element name="username" type="xsd:string"/>
+<xsd:element name="docente">
+ <xsd:complexType>
+  <xsd:sequence>
+   <xsd:element ref="matricola" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="nome" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="cognome" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="idCorso" minOccurs="1" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+</xsd:element>
+
+<xsd:element name="matricola" type="xsd:integer"/>
+<xsd:element name="nome" type="xsd:string"/>
+<xsd:element name="cognome" type="xsd:string"/>
 <xsd:element name="password" type="xsd:string"/>
+<xsd:element name="idCorso" type="xsd:integer"/>
+  
 </xsd:schema>
 \end{lstlisting}
 
@@ -711,42 +802,55 @@ Per quanto riguarda l'utenza \textbf{Docente}, i campi \emph{nome}, \emph{cognom
 
 \subsubsection{FAQs}
 
-\emph{FILE .XML}
+Il file in questione memorizza la lista di tutte le FAQs presenti nel sistema. Essendo una faq costituita da un coppia domanda e risposta, un singolo elemento di questo di tipo è costituito da i campi \emph{domanda} e \emph{risposta}. Sono inoltre presenti un campo identificativo id, un campo utilitaTotale, ricavato sommando tutti i voti \emph{utilità} ricevuti dalla faq (si veda la sezione riguardante \emph{votoFaq} dove viene approfondito il funzionamento del sistema di voto), ed infine è presente un campo \emph{idCorso} che memorizza il corso al quale la faq riferisce.
+
+\medskip
+
+\emph{faqs.XML}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
-<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
- <amministratore>
-  <username>admin</username>
-  <password>admin</password>
- </amministratore>
-</amministrazione>
+<faqs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="faqs.xsd">
+ <faq>
+  <id>1</id>
+  <domanda>Si puo studiare sulle slide?</domanda>
+  <risposta>Si, in particolare su quelle che mettero'a disposizione durante il corso</risposta>
+  <utilitaTotale>1</utilitaTotale>
+  <idCorso>1<idCorso>
+ </faq>
+</faqs>
 \end{lstlisting}
 
-\emph{FILE .XSD}
+\medskip
+
+\emph{faqs.XSD}
 
 \begin{lstlisting}[language=XML]
-
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-
-<xsd:element name="amministrazione">
- <xsd:complexType>
+ <xsd:element name="faqs">
+  <xsd:complexType>
    <xsd:sequence>
-    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
-      </xsd:sequence>
-   </xsd:complexType>
+    <xsd:element ref="faq" minOccurs="0" maxOccurs="unbounded" />
+   </xsd:sequence>
+  </xsd:complexType>
  </xsd:element>
-<xsd:element name="amministratore">
+<xsd:element name="faq">
  <xsd:complexType>
   <xsd:sequence>
-   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
-   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="id" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="domanda" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="risposta" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="utilitaTotale" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="idCorso" minOccurs="1" maxOccurs="1"/>
   </xsd:sequence>
  </xsd:complexType>
 </xsd:element>
-<xsd:element name="username" type="xsd:string"/>
-<xsd:element name="password" type="xsd:string"/>
+<xsd:element name="id" type="xsd:integer"/>
+<xsd:element name="domanda" type="xsd:string"/>
+<xsd:element name="risposta" type="xsd:string"/>
+<xsd:element name="utilitaTotale" type="xsd:string"/>
+<xsd:element name="idCorso" type="xsd:integer"/>
 </xsd:schema>
 \end{lstlisting}
 
