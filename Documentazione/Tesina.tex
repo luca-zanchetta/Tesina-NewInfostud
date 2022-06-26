@@ -5,7 +5,36 @@
 \usepackage {url}					% per scrivere gli indirizzi Internet
 \usepackage{graphicx}
 \usepackage{latexsym}
+\usepackage{listings}
+\usepackage{xcolor}
 
+%Stile display del codice
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+%fine stile
 \begin{document}
 
 \author{Luca Zanchetta, Mattia Aquilina}
@@ -302,48 +331,149 @@ L'utente amministratore, per ragioni amministrative, può accedere alle funziona
 \section{Strutture dati}
 In questa sezione verranno approfonditi alcuni aspetti della piattaforma. Partiremo con l'indicare alcuni esempi di utenza che potranno essere presenti nel portale; questi esempi sono riportati nelle tabelle sottostanti.
 
-\begin{description}
-\item[Studente]
+\medskip
 
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\subsection{Anagrafica}
+
+\textbf{Studente}
+
+\medskip
+
+\resizebox{\textwidth}{!}{\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 \hline
 Matricola & Nome & Cognome & Password & DataNascita & ReputazioneTotale & CFU & Media & CorsoLaurea\\
 \hline
 1 & Mario & Rossi & supermario & 01/01/2000 & 0 & 0 & 0 & 1\\
 \hline
-\end{tabular}
+\end{tabular}}
 
-\item[Professore]
+\medskip
 
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
-\hline
-a & a & aa & aaaa\\
-\hline
-a & aaa & aa & a\\
-\hline
-\end{tabular}
+\textbf{Docente}
 
-\item[Segreteria]
+\medskip
 
-\begin{tabular}{|l|l|l|r|}
+\begin{tabular}{|c|c|c|c|c|}
 \hline
-a & a & aa & aaaa\\
+Matricola & Nome & Cognome & Password & idCorso\\
 \hline
-a & aaa & aa & a\\
+1 & Umberto & Nanni & meglio che niente & 1\\
 \hline
 \end{tabular}
 
-\item[Amministratore]
+\medskip
 
-\begin{tabular}{|l|l|l|r|}
+\textbf{Segreteria}
+
+\medskip
+
+\begin{tabular}{|c|c|}
 \hline
-a & a & aa & aaaa\\
+Username & Password \\
 \hline
-a & aaa & aa & a\\
+segretario1 & segretario1\\
 \hline
 \end{tabular}
-\end{description}
 
+\medskip
+
+\textbf{Amministratore}
+
+\medskip
+
+
+\begin{tabular}{|c|c|}
+\hline
+Username & Password \\
+\hline
+admin & admin\\
+\hline
+\end{tabular}
+
+\medskip
+\medskip
+
+Senza considerare in campi adibiti all'autenticazione e l'identificazione, quali: matricola e password per \emph{studenti} e \emph{docenti}, username e password per \emph{Segreteria} e \emph{Amministratori}, il significato dei rimanenti campi è esplicato di seguito.
+
+\medskip
+
+Per quanto riguarda l'utenza \textbf{Studente}, i campi \emph{nome}, \emph{cognome} e \emph{data di nascita} rappresentano i dati anagrafici. 
+Il campo \emph{ReputazioneTotale} rappresenta la reputazione totale acquisita dallo studente in seguito alle sue interazioni con le bacheche. In particolare, questo campo viene è determinato a partire dalla media di tutti i voti \emph{accordo} ricevuti.
+I campi \emph{CFU} e \emph{Media} riguardano la sfera degli esami; il campo \emph{CFU} rappresenta il totale dei crediti formativi acquisiti dallo studente mentre il campo \emph{Media} è ricavato effettuando la media di tutte le votazioni conseguite.
+Infine, il campo \emph{CorsoLaurea} indica il percorso di studi intrapreso dallo studente considerato.
+
+\medskip
+
+Per quanto riguarda l'utenza \textbf{Docente}, i campi \emph{nome}, \emph{cognome} rappresentano i dati anagrafici.
+
+\subsection{Struttura file xml}
+
+\subsubsection{Amministrazione}
+
+\emph{FILE .XML}
+
+\begin{lstlisting}[language=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
+    <amministratore>
+        <username>admin</username>
+        <password>admin</password>
+    </amministratore>
+</amministrazione>
+\end{lstlisting}
+
+\emph{FILE .XSD}
+
+\begin{lstlisting}[language=XML]
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:element name="amministrazione">
+ <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+ </xsd:element>
+<xsd:element name="amministratore">
+ <xsd:complexType>
+  <xsd:sequence>
+   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+  </xsd:sequence>
+ </xsd:complexType>
+</xsd:element>
+<xsd:element name="username" type="xsd:string"/>
+<xsd:element name="password" type="xsd:string"/>
+</xsd:schema>
+\end{lstlisting}
+
+\subsubsection{Appartiene}
+
+\begin{lstlisting}[language=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<appartenenze xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="appartiene.xsd">
+  <appartenenza>
+    <id>1</id>
+    <idCorso>1</idCorso>
+    <idCorsoDiLaurea>1</idCorsoDiLaurea>
+  </appartenenza>
+</appartenenze>
+\end{lstlisting}
+
+\subsubsection{Appelli}
+
+\begin{lstlisting}[language=XML]
+<?xml version="1.0" encoding="UTF-8"?>
+<appelli xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="appelli.xsd">
+    <appello>
+        <id>1</id>
+        <idCorso>1</idCorso>
+        <dataOra>01/01/2000 10:10</dataOra>
+    </appello>
+</appelli>
+\end{lstlisting}
 \section{Definizioni XML}
 
 \chapter{Manuale utente}
