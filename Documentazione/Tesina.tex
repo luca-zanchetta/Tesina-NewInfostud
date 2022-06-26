@@ -208,7 +208,7 @@ Uno studente, potendo visualizzare tutti gli appelli relativi al corso a cui è 
 
 Una bacheca è uno spazio che permette a diversi studenti di scambiarsi informazioni. Tale scambio di informazioni, che può essere volto all'aiuto reciproco, può avvenire tramite la pubblicazione di post o tramite replica a post già esistenti.
 
-Una bacheca contiene tutti i post, con i relativi commenti, riguardanti un singolo esame di un corso di laurea; di conseguenza, la piattaforma mette a disposizione una bacheca per ogni esame di ogni corso di laurea. Con il termine \emph{post} si intende un messaggio testuale, con funzione di opinione, commento o intervento, inviato nella relativa bacheca. Tutti i post di una bacheca saranno presentati all'utente sotto forma di riquadro testuale, il cui contenuto rappresenta l'effettiva informazione; inoltre, un post è caratterizzato anche dal suo autore e dall'istante temporale di pubblicazione. Un \emph{commento} è un messaggio testuale di intervento in relazione al post cui si riferisce; viene visualizzato in subordinazione al post cui si riferisce, ed è caratterizzato da un contenuto testuale, che rappresenta l'informazione di intervento, dal suo autore e dall'istante temporale di pubblicazione. Ogni post ed ogni commento, infine, possono essere recensiti e giudicati da altri studenti in base a criteri di utilità e accordo, che saranno definiti nel seguito del paragrafo.
+Una bacheca contiene tutti i post, con i relativi commenti, riguardanti un singolo esame di un corso di laurea; di conseguenza, la piattaforma mette a disposizione una bacheca per ogni esame di ogni corso di laurea. Con il termine \emph{post} si intende un messaggio testuale, con funzione di opinione, commento o intervento, inviato nella relativa bacheca. Tutti i post di una bacheca saranno presentati all'utente sotto forma di riquadro testuale, il cui contenuto rappresenta l'effettiva informazione; inoltre, un post è caratterizzato anche dal suo autore e dall'istante temporale di pubblicazione. Un \emph{commento} è un messaggio testuale di intervento in relazione al post cui si riferisce; viene visualizzato in subordinazione al post cui si riferisce, ed è caratterizzato da un contenuto testuale, che rappresenta l'informazione di intervento, dal suo autore e dall'istante temporale di pubblicazione. Ogni post ed ogni commento, infine, possono essere recensiti e giudicati da altri studenti in base a criteri di utilità e accordo, che saranno definiti nel seguito del paragrafo. Le recensioni dei commenti, in particolare, sono volte a stabilire la reputazione totale di uno studente: essa, infatti, viene calcolata come media di tutti i voti di accordo che lo studente stesso ha ricevuto nelle sue interazioni con gli altri studenti, commentando i post delle varie bacheche messe a disposizione dalla piattaforma. Le precise modalità di valutazione saranno esplicate in seguito.
 
 Uno studente, qualora avesse la necessità di ricavare informazioni aggiuntive su un singolo esame, può scegliere di visitare l'apposita bacheca, nella quale saranno contenuti i post e relativi commenti riguardanti l'esame in oggetto. Nel caso in cui le richieste dello studente non risultassero soddisfatte dai post esistenti nella bacheca, lo studente in questione può decidere di creare egli stesso un post, in cui avanzare esplicitamente la richiesta. Tale post potrà poi essere commentato da altri studenti. Nel caso in cui, invece, lo studente si sentisse preparato per rispondere ad una domanda presente in un post già esistente in bacheca, egli può scegliere di commentare quello stesso post, inserendo la risposta che ritiene più opportuna.
 
@@ -234,7 +234,7 @@ Il sistema delle FAQ è un potente strumento che permette ai professori di andar
 
 Uno studente può accedere ad una homepage dedicata contente l'elenco di tutte le FAQ associate agli esami del suo corso di laurea. Ciascun elemento reindirizza lo studente ad una pagina che permette di visualizzare l'elenco delle FAQ relative all'esame selezionato. Quest'ultima pagina è costituita da due blocchi, disposti in colonna: il primo situato nella parte alta della pagina contente le FAQ complete di domanda e risposta; il secondo invece, conterrà quelle FAQ, proposte dagli studenti, a cui non è ancora stata data una risposta.
 
-Lo studente, oltre a poter visualizzare il semplice elenco delle FAQ, ha la possibilità di proporre nuove domande al docente, o votare, tramite un sistema basato sull'\emph{utilità}, analogo a quello già precedentemente esplicato. 
+Lo studente, oltre a poter visualizzare il semplice elenco delle FAQ, ha la possibilità di proporre nuove domande al docente, o di votarle, tramite un sistema basato sull'\emph{utilità} analogo a quello già precedentemente esplicato. 
 
 \emph{Si fa notare al lettore che lo studente \textbf{NON} è in grado di rispondere ad una domanda proposta in una FAQ; tale compito è di competenza del docente.}
 
@@ -858,42 +858,58 @@ Il file in questione memorizza la lista di tutte le FAQs presenti nel sistema. E
 
 \subsubsection{POSTs}
 
+Una delle funzionalità della piattaforma consiste, come già esplicato nel corso del presente capitolo, nel dare la possibilità agli studenti di usufruire di alcune bacheche, una per ogni corso. In ogni bacheca, uno studente può pubblicare dei post, oppure commentare post già esistenti. Pertanto, per poter memorizzare i dati relativi ad ogni post, è necessaria una tabella dei post; ogni record di questa tabella rappresenta il singolo post pubblicato. In particolare, ogni post è caratterizzato da un \emph{id}, da un \emph{titolo}, da un \emph{corpo} contenente il contenuto informativo del post stesso, dalla \emph{matricola} dello studente che lo ha pubblicato, dalla sua \emph{utilità totale} e dall'\emph{id} del corso cui si riferisce la bacheca in cui è stato pubblicato il post.
+
+L'\emph{utilità totale} di un post viene stabilita dalla somma algebrica di tutti i voti di utilità attribuiti al post stesso; in particolare, come verrà successivamente mostrato nel dettaglio, il voto di un post può essere effettuato tramite un meccanismo di \emph{up}, che corrisponde ad un \emph{+1} sul punteggio di utilità totale, e di \emph{down}, che invece corrisponde ad un \emph{-1}.
+
+\medskip
+
 \emph{FILE .XML}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
-<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
- <amministratore>
-  <username>admin</username>
-  <password>admin</password>
- </amministratore>
-</amministrazione>
+<posts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="posts.xsd">
+    <post>
+        <id>1</id>
+        <titolo>Ricerca Appunti!!!</titolo>
+        <corpo>Cerco appunti di basi di dati. Ringrazio in anticipo.</corpo>
+        <matricolaStudente>1</matricolaStudente>
+        <utilitaTotale>1</utilitaTotale>
+        <idCorso>1</idCorso>
+    </post>
+</posts>
 \end{lstlisting}
 
 \emph{FILE .XSD}
 
 \begin{lstlisting}[language=XML]
-
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-
-<xsd:element name="amministrazione">
- <xsd:complexType>
-   <xsd:sequence>
-    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
-      </xsd:sequence>
-   </xsd:complexType>
- </xsd:element>
-<xsd:element name="amministratore">
- <xsd:complexType>
-  <xsd:sequence>
-   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
-   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
-  </xsd:sequence>
- </xsd:complexType>
-</xsd:element>
-<xsd:element name="username" type="xsd:string"/>
-<xsd:element name="password" type="xsd:string"/>
+    <xsd:element name="posts">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="post" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="post"> <!-- singola "riga" della tabella -->
+    <xsd:complexType>
+        <xsd:sequence>
+        <xsd:element ref="id" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="titolo" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="corpo"  minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="matricolaStudente" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="utilitaTotale" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="idCorso" minOccurs="1" maxOccurs="1" />
+        </xsd:sequence>   
+    </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="id" type="xsd:integer"/>
+    <xsd:element name="titolo" type="xsd:string"/>
+    <xsd:element name="corpo" type="xsd:string"/>
+    <xsd:element name="matricolaStudente" type="xsd:integer"/>
+    <xsd:element name="utilitaTotale" type="xsd:integer"/>
+    <xsd:element name="idCorso" type="xsd:integer"/>
 </xsd:schema>
 \end{lstlisting}
 
@@ -901,42 +917,61 @@ Il file in questione memorizza la lista di tutte le FAQs presenti nel sistema. E
 
 \subsubsection{Prenotazioni}
 
+Una delle funzionalità cardine del portale è la possibilità, da parte degli studenti, di prenotare gli esami. A tal proposito, è necessaria una tabella contenente tutte le prenotazioni effettuate; il singolo record di questa tabella rappresenta la singola prenotazione effettuata da parte di uno studente. La singola prenotazione, in realtà, rappresenta una singola istanza dell'esame effettuato dallo studente: infatti, essa risulta essere caratterizzata da un \emph{id}, dalla \emph{matricola} dello studente che ha sostenuto o che deve sostenere l'esame, dall'\emph{id} dell'appello prenotato e dall'\emph{esito} dell'esame, in termini di votazione conseguita.
+
+L'\emph{esito}, in particolare, è un elemento delicato: se uno studente ha solo prenotato un appello senza aver svolto il relativo esame, infatti, l'esito dell'esame stesso sarà impostato al valore predefinito \textbf{NULL}, indicando appunto il fatto che l'esame deve essere ancora sostenuto. Qualora lo studente avesse già sostenuto l'esame prenotato, invece, la voce \emph{esito} potrà assumere i seguenti valori:
+\begin{itemize}
+\item Un numero \textbf{intero compreso tra 18 e 30}, indicante il voto in trentesimi proposto dal docente;
+\item Una lettera \textbf{R}, indicante il fatto che lo studente ha sostenuto l'esame, ma si è ritirato dal suo svolgimento;
+\item Una lettera \textbf{B}, indicante il fatto che lo studente ha sostenuto l'esame, riportando tuttavia una valutazione insufficiente.
+\end{itemize}
+
+\medskip
+
 \emph{FILE .XML}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
-<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
- <amministratore>
-  <username>admin</username>
-  <password>admin</password>
- </amministratore>
-</amministrazione>
+<prenotazioni xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="prenotazione.xsd">
+  <prenotazione>
+    <id>1</id>
+    <matricolaStudente>1</matricolaStudente>
+    <idAppello>1</idAppello>
+    <esito>25</esito>
+  </prenotazione>
+</prenotazioni>
 \end{lstlisting}
 
 \emph{FILE .XSD}
 
 \begin{lstlisting}[language=XML]
-
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-<xsd:element name="amministrazione">
- <xsd:complexType>
-   <xsd:sequence>
-    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
+<xsd:element name="prenotazioni">  <!-- Tabella delle prenotazioni agli appelli -->
+   <xsd:complexType> 
+      <xsd:sequence>
+	      <xsd:element ref="prenotazione" minOccurs="1" maxOccurs="1" />
       </xsd:sequence>
    </xsd:complexType>
- </xsd:element>
-<xsd:element name="amministratore">
- <xsd:complexType>
-  <xsd:sequence>
-   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
-   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
-  </xsd:sequence>
- </xsd:complexType>
 </xsd:element>
-<xsd:element name="username" type="xsd:string"/>
-<xsd:element name="password" type="xsd:string"/>
+
+<xsd:element name="prenotazione">  <!-- Singola prenotazione -->
+   <xsd:complexType> 
+      <xsd:sequence>
+        <xsd:element ref="id" minOccurs="1" maxOccurs="1" /> 
+        <xsd:element ref="matricolaStudente" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="idAppello" minOccurs="1" maxOccurs="1" /> 
+        <xsd:element ref="esito" minOccurs="1" maxOccurs="1" /> 
+      </xsd:sequence>
+   </xsd:complexType>
+</xsd:element>
+
+<xsd:element name="id" type="xsd:short" />
+<xsd:element name="matricolaStudente" type="xsd:integer" />
+<xsd:element name="idAppello" type="xsd:short" />
+<xsd:element name="esito" type="xsd:string" />
+
 </xsd:schema>
 \end{lstlisting}
 
@@ -944,42 +979,45 @@ Il file in questione memorizza la lista di tutte le FAQs presenti nel sistema. E
 
 \subsubsection{Segreteria}
 
+Gli utenti della piattaforma, come già precedentemente esplicato, possono essere di quattro diverse categorie; una di esse è la categoria \emph{segreteria}. Per memorizzare i dati relativi ad ogni segretario autorizzato della piattaforma, si rende necessaria una tabella dei segretari, in cui il singolo record rappresenta il singolo segretario registrato; tale tabella viene costruita nel file XML mostrato di seguito. Come possiamo notare dalla grammatica (il file \emph{.xsd}) presentata di seguito, il singolo segretario è caratterizzato da uno \emph{username} e da una \emph{password} (qui mostrata in chiaro), utili per eseguire l'autenticazione e per avere accesso a tutte le funzionalità già trattate nel corso dei precedenti paragrafi.
+
+\medskip
+
 \emph{FILE .XML}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
-<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
- <amministratore>
-  <username>admin</username>
-  <password>admin</password>
- </amministratore>
-</amministrazione>
+<segreteria xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="segreteria.xsd">
+    <segretario>
+        <username>segretario1</username>
+        <password>segretario1</password>
+    </segretario>
+</segreteria>
 \end{lstlisting}
 
 \emph{FILE .XSD}
 
 \begin{lstlisting}[language=XML]
-
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-<xsd:element name="amministrazione">
- <xsd:complexType>
-   <xsd:sequence>
-    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
-      </xsd:sequence>
-   </xsd:complexType>
- </xsd:element>
-<xsd:element name="amministratore">
- <xsd:complexType>
-  <xsd:sequence>
-   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
-   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
-  </xsd:sequence>
- </xsd:complexType>
-</xsd:element>
-<xsd:element name="username" type="xsd:string"/>
-<xsd:element name="password" type="xsd:string"/>
+    <xsd:element name="segreteria">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="segretario" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="segretario">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="username" type="xsd:string"/>
+    <xsd:element name="password" type="xsd:string"/>
 </xsd:schema>
 \end{lstlisting}
 
@@ -987,42 +1025,67 @@ Il file in questione memorizza la lista di tutte le FAQs presenti nel sistema. E
 
 \subsubsection{Studenti}
 
+Gli utenti della piattaforma, come già precedentemente esplicato, possono essere di quattro diverse categorie; una di esse è la categoria \emph{studente}. Per memorizzare i dati relativi ad ogni studente della piattaforma, si rende necessaria una tabella degli studenti, in cui il singolo record rappresenta il singolo studente registrato; tale tabella viene costruita nel file XML mostrato di seguito. Come possiamo notare dalla grammatica (il file \emph{.xsd}) presentata di seguito, il singolo studente è caratterizzato da una \emph{matricola}, da un \emph{nome}, da un \emph{cognome}, dalla \emph{password} che egli stesso ha scelto in fase di registrazione (qui riportata in chiaro), dalla sua \emph{data di nascita}, dalla sua \emph{reputazione totale}, dal totale dei \emph{cfu} acquisiti durante la sua carriera, dalla \emph{media} dei voti conseguiti negli esami registrati e dall'\emph{id} del corso di laurea cui si riferisce il suo percorso di studi.
+
+La \emph{reputazione totale} di uno studente viene calcolata come media di tutti i voti di accordo che lo studente stesso ha ricevuto nelle sue interazioni con gli altri studenti, commentando i post delle varie bacheche messe a disposizione dalla piattaforma. Pertanto, la reputazione totale verrà rappresentata come un numero intero compreso fra 1 e 5, dato che il singolo voto di accordo presenta tale modalità di valutazione.
+
+\medskip
+
 \emph{FILE .XML}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
-<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
- <amministratore>
-  <username>admin</username>
-  <password>admin</password>
- </amministratore>
-</amministrazione>
+<studenti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="studenti.xsd">
+    <studente>
+        <matricola>1</matricola>
+        <nome>Mario</nome>
+        <cognome>Rossi</cognome>
+        <password>supermario</password>
+        <dataNascita>01/01/2000</dataNascita>
+        <reputazioneTotale>0</reputazioneTotale>
+        <cfuTotale>0</cfuTotale>
+        <media>0</media>
+        <idCorsoDiLaurea>1</idCorsoDiLaurea>
+    </studente>
+</studenti>
 \end{lstlisting}
 
 \emph{FILE .XSD}
 
 \begin{lstlisting}[language=XML]
-
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-
-<xsd:element name="amministrazione">
- <xsd:complexType>
-   <xsd:sequence>
-    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
-      </xsd:sequence>
-   </xsd:complexType>
- </xsd:element>
-<xsd:element name="amministratore">
- <xsd:complexType>
-  <xsd:sequence>
-   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
-   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
-  </xsd:sequence>
- </xsd:complexType>
-</xsd:element>
-<xsd:element name="username" type="xsd:string"/>
-<xsd:element name="password" type="xsd:string"/>
+   <xsd:element name="studenti">
+       <xsd:complexType>
+           <xsd:sequence>
+               <xsd:element ref="studente" minOccurs="0" maxOccurs="unbounded" />
+           </xsd:sequence>
+       </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="studente">
+       <xsd:complexType>
+           <xsd:sequence>
+               <xsd:element ref="matricola" minOccurs="1" maxOccurs="1"/>
+               <xsd:element ref="nome" minOccurs="1" maxOccurs="1"/>
+               <xsd:element ref="cognome" minOccurs="1" maxOccurs="1"/>
+               <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+               <xsd:element ref="dataNascita" minOccurs="1" maxOccurs="1"/>
+               <xsd:element ref="reputazioneTotale" minOccurs="1" maxOccurs="1"/>
+               <xsd:element ref="cfuTotale" minOccurs="1" maxOccurs="1"/>
+               <xsd:element ref="media" minOccurs="1" maxOccurs="1"/>
+               <xsd:element ref="idCorsoDiLaurea" minOccurs="1" maxOccurs="1"/>
+           </xsd:sequence>
+       </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="matricola" type="xsd:integer"/>
+   <xsd:element name="nome" type="xsd:string"/>
+   <xsd:element name="cognome" type="xsd:string"/>
+   <xsd:element name="password" type="xsd:string"/>
+   <xsd:element name="dataNascita" type="xsd:string"/>
+   <xsd:element name="reputazioneTotale" type="xsd:integer"/>
+   <xsd:element name="cfuTotale" type="xsd:integer"/>
+   <xsd:element name="media" type="xsd:float"/>
+   <xsd:element name="idCorsoDiLaurea" type="xsd:integer"/>
 </xsd:schema>
 \end{lstlisting}
 
@@ -1030,42 +1093,56 @@ Il file in questione memorizza la lista di tutte le FAQs presenti nel sistema. E
 
 \subsubsection{VotoCommento}
 
+Come già precedentemente esplicato, i commenti presenti all'interno di un post possono essere recensiti; la singola recensione di un commento, una volta effettuata, viene memorizzata nel file XML mostrato di seguito. Questo file è necessario per costruire una tabella di recensioni di commenti ai post, in cui il singolo record rappresenta la singola recensione effettuata. In particolare, come possiamo notare dalla grammatica (il file \emph{.xsd}) presentata di seguito, la singola recensione è caratterizzata da un \emph{id}, dalla \emph{matricola} dello studente che ha votato il commento, dall'\emph{id} del commento che è stato votato, dal punteggio di \emph{accordo} assegnato al commento stesso (che può essere un numero intero compreso fra 1 e 5, in base al grado di accordo personale assegnato dallo studente che effettua la votazione) e dall'\emph{id}, che in realtà è una matricola, dell'autore del post cui il commento si riferisce. Questi elementi vengono rappresentati con degli interi (\emph{short} nel caso degli id e del punteggio di accordo, per politiche di risparmio dimensionale).
+
+\medskip
+
 \emph{FILE .XML}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
-<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
- <amministratore>
-  <username>admin</username>
-  <password>admin</password>
- </amministratore>
-</amministrazione>
+<votiCommento xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="votoCommento.xsd">
+  <votoCommento>
+    <id>1</id>
+    <matricolaStudente>1</matricolaStudente>
+    <idCommento>1</idCommento>
+    <accordo>2</accordo>
+    <idAutoreCommento>1</idAutoreCommento>
+  </votoCommento>
+</votiCommento>
 \end{lstlisting}
 
 \emph{FILE .XSD}
 
 \begin{lstlisting}[language=XML]
-
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-<xsd:element name="amministrazione">
- <xsd:complexType>
-   <xsd:sequence>
-    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
+<xsd:element name="votiCommento">  <!-- Tabella dei voti sui commenti -->
+   <xsd:complexType> 
+      <xsd:sequence>
+	      <xsd:element ref="votoCommento" minOccurs="1" maxOccurs="1" />
       </xsd:sequence>
    </xsd:complexType>
- </xsd:element>
-<xsd:element name="amministratore">
- <xsd:complexType>
-  <xsd:sequence>
-   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
-   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
-  </xsd:sequence>
- </xsd:complexType>
 </xsd:element>
-<xsd:element name="username" type="xsd:string"/>
-<xsd:element name="password" type="xsd:string"/>
+
+<xsd:element name="votoCommento">  <!-- Singolo voto -->
+   <xsd:complexType> 
+      <xsd:sequence>
+        <xsd:element ref="id" minOccurs="1" maxOccurs="1" /> 
+        <xsd:element ref="matricolaStudente" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="idCommento" minOccurs="1" maxOccurs="1" /> 
+        <xsd:element ref="accordo" minOccurs="1" maxOccurs="1" /> 
+	<xsd:element ref="idAutoreCommento" minOccurs="1" maxOccurs="1" /> 
+      </xsd:sequence>
+   </xsd:complexType>
+</xsd:element>
+
+<xsd:element name="id" type="xsd:short" />
+<xsd:element name="matricolaStudente" type="xsd:integer" />
+<xsd:element name="idCommento" type="xsd:short" />
+<xsd:element name="accordo" type="xsd:short" />
+<xsd:element name="idAutoreCommento" type="xsd:integer" /> 
 </xsd:schema>
 \end{lstlisting}
 
@@ -1073,42 +1150,54 @@ Il file in questione memorizza la lista di tutte le FAQs presenti nel sistema. E
 
 \subsubsection{VotoFAQ}
 
+Come già precedentemente esplicato, le domande presenti nella sezione FAQ possono essere recensite; la singola recensione di una domanda, una volta effettuata, viene memorizzata nel file XML mostrato di seguito. Questo file è necessario per costruire una tabella di recensioni di domande della sezione FAQ, in cui il singolo record rappresenta la singola recensione effettuata. In particolare, come possiamo notare dalla grammatica (il file \emph{.xsd}) presentata di seguito, la singola recensione è caratterizzata da un \emph{id}, dalla \emph{matricola} dello studente che ha votato la domanda, dall'\emph{id} della FAQ che è stata votata e dal punteggio di \emph{utilità} assegnato alla FAQ stessa (che può essere un +1 od un -1), in base al grado di utilità assegnato dallo studente che effettua la votazione. Questi elementi vengono rappresentati con degli interi (\emph{short} nel caso degli id e del punteggio di utilità, per politiche di risparmio dimensionale).
+
+\medskip
+
 \emph{FILE .XML}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
-<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
- <amministratore>
-  <username>admin</username>
-  <password>admin</password>
- </amministratore>
-</amministrazione>
+<votiFAQ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="votoFAQ.xsd">
+  <votoFAQ>
+    <id>1</id>
+    <matricolaStudente>1</matricolaStudente>
+    <idFAQ>1</idFAQ>
+    <utilita>1</utilita>
+  </votoFAQ>
+</votiFAQ>
 \end{lstlisting}
 
 \emph{FILE .XSD}
 
 \begin{lstlisting}[language=XML]
-
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-<xsd:element name="amministrazione">
- <xsd:complexType>
-   <xsd:sequence>
-    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
+<xsd:element name="votiFAQ">  <!-- Tabella dei voti sulle FAQ -->
+   <xsd:complexType> 
+      <xsd:sequence>
+	      <xsd:element ref="votoFAQ" minOccurs="1" maxOccurs="1" />
       </xsd:sequence>
    </xsd:complexType>
- </xsd:element>
-<xsd:element name="amministratore">
- <xsd:complexType>
-  <xsd:sequence>
-   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
-   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
-  </xsd:sequence>
- </xsd:complexType>
 </xsd:element>
-<xsd:element name="username" type="xsd:string"/>
-<xsd:element name="password" type="xsd:string"/>
+
+<xsd:element name="votoFAQ">  <!-- Singolo voto -->
+   <xsd:complexType> 
+      <xsd:sequence>
+        <xsd:element ref="id" minOccurs="1" maxOccurs="1" /> 
+        <xsd:element ref="matricolaStudente" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="idFAQ" minOccurs="1" maxOccurs="1" /> 
+        <xsd:element ref="utilita" minOccurs="1" maxOccurs="1" /> 
+      </xsd:sequence>
+   </xsd:complexType>
+</xsd:element>
+
+<xsd:element name="id" type="xsd:short" />
+<xsd:element name="matricolaStudente" type="xsd:integer" />
+<xsd:element name="idFAQ" type="xsd:short" />
+<xsd:element name="utilita" type="xsd:short" />
+
 </xsd:schema>
 \end{lstlisting}
 
@@ -1116,42 +1205,54 @@ Il file in questione memorizza la lista di tutte le FAQs presenti nel sistema. E
 
 \subsubsection{VotoPost}
 
+Come già precedentemente esplicato, i post possono essere recensiti; la singola recensione di un post, una volta effettuata, viene memorizzata nel file XML mostrato di seguito. Questo file è necessario per costruire una tabella di recensioni di post, in cui il singolo record rappresenta la singola recensione effettuata. In particolare, come possiamo notare dalla grammatica (il file \emph{.xsd}) presentata di seguito, la singola recensione è caratterizzata da un \emph{id}, dalla \emph{matricola} dello studente che ha votato il post, dall'\emph{id} del post che è stato votato e dal punteggio di \emph{utilità} assegnato al post stesso (che può essere un +1 od un -1), in base al grado di utilità assegnato dallo studente che effettua la votazione. Questi elementi vengono rappresentati con degli interi (\emph{short} nel caso degli id e del punteggio di utilità, per politiche di risparmio dimensionale).
+
+\medskip
+
 \emph{FILE .XML}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
-<amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
- <amministratore>
-  <username>admin</username>
-  <password>admin</password>
- </amministratore>
-</amministrazione>
+<votiPost xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="votoPost.xsd">
+  <votoPost>
+    <id>1</id>
+    <matricolaStudente>1</matricolaStudente>
+    <idPost>1</idPost>
+    <utilita>1</utilita>
+  </votoPost>
+</votiPost>
 \end{lstlisting}
 
 \emph{FILE .XSD}
 
 \begin{lstlisting}[language=XML]
-
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-<xsd:element name="amministrazione">
- <xsd:complexType>
-   <xsd:sequence>
-    <xsd:element ref="amministratore" minOccurs="0" maxOccurs="unbounded" />
+<xsd:element name="votiPost">  <!-- Tabella dei voti sui post -->
+   <xsd:complexType> 
+      <xsd:sequence>
+	      <xsd:element ref="votoPost" minOccurs="1" maxOccurs="1" />
       </xsd:sequence>
    </xsd:complexType>
- </xsd:element>
-<xsd:element name="amministratore">
- <xsd:complexType>
-  <xsd:sequence>
-   <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
-   <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
-  </xsd:sequence>
- </xsd:complexType>
 </xsd:element>
-<xsd:element name="username" type="xsd:string"/>
-<xsd:element name="password" type="xsd:string"/>
+
+<xsd:element name="votoPost">  <!-- Singolo voto -->
+   <xsd:complexType> 
+      <xsd:sequence>
+        <xsd:element ref="id" minOccurs="1" maxOccurs="1" /> 
+        <xsd:element ref="matricolaStudente" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="idPost" minOccurs="1" maxOccurs="1" /> 
+        <xsd:element ref="utilita" minOccurs="1" maxOccurs="1" /> 
+      </xsd:sequence>
+   </xsd:complexType>
+</xsd:element>
+
+<xsd:element name="id" type="xsd:short" />
+<xsd:element name="matricolaStudente" type="xsd:integer" />
+<xsd:element name="idPost" type="xsd:short" />
+<xsd:element name="utilita" type="xsd:short" />
+
 </xsd:schema>
 \end{lstlisting}
 \section{Definizioni XML}

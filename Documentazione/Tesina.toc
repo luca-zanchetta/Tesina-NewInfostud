@@ -1,48 +1,48 @@
-\babel@toc {italian}{}\relax 
-\babel@toc {italian}{}\relax 
-\contentsline {chapter}{\numberline {1}Introduzione e descrizione dei dati}{5}{}%
-\contentsline {section}{\numberline {1.1}Specifiche introduttive}{5}{}%
-\contentsline {section}{\numberline {1.2}Funzionalità specifiche}{8}{}%
-\contentsline {subsection}{\numberline {1.2.1}Funzionalità visitatore}{8}{}%
-\contentsline {subsubsection}{Login e registrazione}{8}{}%
-\contentsline {subsubsection}{Visualizzazione di corsi ed esami}{8}{}%
-\contentsline {subsection}{\numberline {1.2.2}Funzionalità studente}{9}{}%
-\contentsline {subsubsection}{Visualizzazione informazioni personali}{9}{}%
-\contentsline {subsubsection}{Gestione delle prenotazioni degli appelli}{9}{}%
-\contentsline {subsubsection}{Utilizzo della bacheca dei corsi}{10}{}%
-\contentsline {subsubsection}{Recensione di post e commenti}{11}{}%
-\contentsline {subsubsection}{Utilizzo del sistema delle FAQ}{11}{}%
-\contentsline {subsection}{\numberline {1.2.3}Funzionalità professore}{12}{}%
-\contentsline {subsubsection}{Gestione degli appelli ed esami}{12}{}%
-\contentsline {subsubsection}{Utilizzo del sistema delle FAQ}{12}{}%
-\contentsline {subsection}{\numberline {1.2.4}Funzionalità segreteria}{12}{}%
-\contentsline {subsubsection}{Moderazione delle bacheche}{12}{}%
-\contentsline {subsubsection}{Moderazione delle FAQ}{13}{}%
-\contentsline {subsubsection}{Gestione degli appelli}{13}{}%
-\contentsline {subsection}{\numberline {1.2.5}Funzionalità amministratore}{13}{}%
-\contentsline {subsubsection}{Gestione degli account utenti}{13}{}%
-\contentsline {subsubsection}{Moderazione delle bacheche}{14}{}%
-\contentsline {subsubsection}{Moderazione delle FAQ}{14}{}%
-\contentsline {subsubsection}{Gestione degli appelli}{14}{}%
-\contentsline {section}{\numberline {1.3}Strutture dati}{14}{}%
-\contentsline {subsection}{\numberline {1.3.1}Anagrafica}{15}{}%
-\contentsline {subsection}{\numberline {1.3.2}Struttura file xml}{15}{}%
-\contentsline {subsubsection}{Amministrazione}{15}{}%
-\contentsline {subsubsection}{Appartiene}{16}{}%
-\contentsline {subsubsection}{Appelli}{17}{}%
-\contentsline {subsubsection}{Commenti}{18}{}%
-\contentsline {subsubsection}{Corsi}{19}{}%
-\contentsline {subsubsection}{Corsi di laurea}{21}{}%
-\contentsline {subsubsection}{Docenti}{21}{}%
-\contentsline {subsubsection}{FAQs}{22}{}%
-\contentsline {subsubsection}{POSTs}{23}{}%
-\contentsline {subsubsection}{Prenotazioni}{24}{}%
-\contentsline {subsubsection}{Segreteria}{25}{}%
-\contentsline {subsubsection}{Studenti}{26}{}%
-\contentsline {subsubsection}{VotoCommento}{26}{}%
-\contentsline {subsubsection}{VotoFAQ}{27}{}%
-\contentsline {subsubsection}{VotoPost}{28}{}%
-\contentsline {section}{\numberline {1.4}Definizioni XML}{29}{}%
-\contentsline {chapter}{\numberline {2}Manuale utente}{31}{}%
-\contentsline {chapter}{\numberline {3}Programmazione}{33}{}%
-\contentsline {chapter}{\numberline {4}Elenco utenze}{35}{}%
+\babel@toc {italian}{}
+\babel@toc {italian}{}
+\contentsline {chapter}{\numberline {1}Introduzione e descrizione dei dati}{5}%
+\contentsline {section}{\numberline {1.1}Specifiche introduttive}{5}%
+\contentsline {section}{\numberline {1.2}Funzionalità specifiche}{8}%
+\contentsline {subsection}{\numberline {1.2.1}Funzionalità visitatore}{8}%
+\contentsline {subsubsection}{Login e registrazione}{8}%
+\contentsline {subsubsection}{Visualizzazione di corsi ed esami}{8}%
+\contentsline {subsection}{\numberline {1.2.2}Funzionalità studente}{9}%
+\contentsline {subsubsection}{Visualizzazione informazioni personali}{9}%
+\contentsline {subsubsection}{Gestione delle prenotazioni degli appelli}{9}%
+\contentsline {subsubsection}{Utilizzo della bacheca dei corsi}{10}%
+\contentsline {subsubsection}{Recensione di post e commenti}{11}%
+\contentsline {subsubsection}{Utilizzo del sistema delle FAQ}{11}%
+\contentsline {subsection}{\numberline {1.2.3}Funzionalità professore}{12}%
+\contentsline {subsubsection}{Gestione degli appelli ed esami}{12}%
+\contentsline {subsubsection}{Utilizzo del sistema delle FAQ}{12}%
+\contentsline {subsection}{\numberline {1.2.4}Funzionalità segreteria}{12}%
+\contentsline {subsubsection}{Moderazione delle bacheche}{12}%
+\contentsline {subsubsection}{Moderazione delle FAQ}{13}%
+\contentsline {subsubsection}{Gestione degli appelli}{13}%
+\contentsline {subsection}{\numberline {1.2.5}Funzionalità amministratore}{13}%
+\contentsline {subsubsection}{Gestione degli account utenti}{13}%
+\contentsline {subsubsection}{Moderazione delle bacheche}{14}%
+\contentsline {subsubsection}{Moderazione delle FAQ}{14}%
+\contentsline {subsubsection}{Gestione degli appelli}{14}%
+\contentsline {section}{\numberline {1.3}Strutture dati}{15}%
+\contentsline {subsection}{\numberline {1.3.1}Anagrafica}{15}%
+\contentsline {subsection}{\numberline {1.3.2}Struttura file xml}{15}%
+\contentsline {subsubsection}{Amministrazione}{15}%
+\contentsline {subsubsection}{Appartiene}{16}%
+\contentsline {subsubsection}{Appelli}{17}%
+\contentsline {subsubsection}{Commenti}{18}%
+\contentsline {subsubsection}{Corsi}{19}%
+\contentsline {subsubsection}{Corsi di laurea}{21}%
+\contentsline {subsubsection}{Docenti}{21}%
+\contentsline {subsubsection}{FAQs}{23}%
+\contentsline {subsubsection}{POSTs}{24}%
+\contentsline {subsubsection}{Prenotazioni}{25}%
+\contentsline {subsubsection}{Segreteria}{27}%
+\contentsline {subsubsection}{Studenti}{28}%
+\contentsline {subsubsection}{VotoCommento}{29}%
+\contentsline {subsubsection}{VotoFAQ}{31}%
+\contentsline {subsubsection}{VotoPost}{32}%
+\contentsline {section}{\numberline {1.4}Definizioni XML}{33}%
+\contentsline {chapter}{\numberline {2}Manuale utente}{35}%
+\contentsline {chapter}{\numberline {3}Programmazione}{37}%
+\contentsline {chapter}{\numberline {4}Elenco utenze}{39}%
