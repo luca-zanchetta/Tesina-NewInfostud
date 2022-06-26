@@ -1,0 +1,31 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\contentsline {chapter}{\numberline {1}Introduzione e descrizione dei dati}{5}{}%
+\contentsline {section}{\numberline {1.1}Specifiche introduttive}{5}{}%
+\contentsline {section}{\numberline {1.2}Funzionalità specifiche}{8}{}%
+\contentsline {subsection}{\numberline {1.2.1}Funzionalità visitatore}{8}{}%
+\contentsline {subsubsection}{Login e registrazione}{8}{}%
+\contentsline {subsubsection}{Visualizzazione di corsi ed esami}{8}{}%
+\contentsline {subsection}{\numberline {1.2.2}Funzionalità studente}{9}{}%
+\contentsline {subsubsection}{Visualizzazione informazioni personali}{9}{}%
+\contentsline {subsubsection}{Gestione delle prenotazioni degli appelli}{9}{}%
+\contentsline {subsubsection}{Utilizzo della bacheca dei corsi}{10}{}%
+\contentsline {subsubsection}{Recensione di post e commenti}{11}{}%
+\contentsline {subsubsection}{Utilizzo del sistema delle FAQ}{11}{}%
+\contentsline {subsection}{\numberline {1.2.3}Funzionalità professore}{12}{}%
+\contentsline {subsubsection}{Gestione degli appelli ed esami}{12}{}%
+\contentsline {subsubsection}{Utilizzo del sistema delle FAQ}{12}{}%
+\contentsline {subsection}{\numberline {1.2.4}Funzionalità segreteria}{12}{}%
+\contentsline {subsubsection}{Moderazione delle bacheche}{12}{}%
+\contentsline {subsubsection}{Moderazione delle FAQ}{13}{}%
+\contentsline {subsubsection}{Gestione degli appelli}{13}{}%
+\contentsline {subsection}{\numberline {1.2.5}Funzionalità amministratore}{13}{}%
+\contentsline {subsubsection}{Gestione degli account utenti}{13}{}%
+\contentsline {subsubsection}{Moderazione delle bacheche}{14}{}%
+\contentsline {subsubsection}{Moderazione delle FAQ}{14}{}%
+\contentsline {subsubsection}{Gestione degli appelli}{14}{}%
+\contentsline {section}{\numberline {1.3}Strutture dati}{14}{}%
+\contentsline {section}{\numberline {1.4}Definizioni XML}{15}{}%
+\contentsline {chapter}{\numberline {2}Manuale utente}{17}{}%
+\contentsline {chapter}{\numberline {3}Programmazione}{19}{}%
+\contentsline {chapter}{\numberline {4}Elenco utenze}{21}{}%
