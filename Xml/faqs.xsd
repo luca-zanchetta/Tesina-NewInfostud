@@ -15,6 +15,7 @@
                 <xsd:element ref="domanda" minOccurs="1" maxOccurs="1"/>
                 <xsd:element ref="risposta" minOccurs="1" maxOccurs="1"/>
                 <xsd:element ref="utilitaTotale" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="idCorso" minOccurs="1" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -22,4 +23,5 @@
     <xsd:element name="domanda" type="xsd:string"/>
     <xsd:element name="risposta" type="xsd:string"/>
     <xsd:element name="utilitaTotale" type="xsd:string"/>
+    <xsd:element name="idCorso" type="xsd:integer"/>
 </xsd:schema>

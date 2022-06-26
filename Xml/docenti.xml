@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <docenti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="docenti.xsd">
     <docente>
         <matricola>1</matricola>
         <nome>Umberto</nome>
         <cognome>Nanni</cognome>
+        <password>meglio che niente</password>
         <idCorso>1</idCorso>
     </docente>
 </docenti>

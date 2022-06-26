@@ -4,6 +4,7 @@
         <id>1</id>
         <domanda>Si puo studiare sulle slide?</domanda>
         <risposta>Si, in particolare su quelle che mettero'a disposizione durante il corso</risposta>
-        <utilitaTotale>1</utilitaTotale> 
+        <utilitaTotale>1</utilitaTotale>
+        <idCorso>1<idCorso>
    </faq>
 </faqs>
