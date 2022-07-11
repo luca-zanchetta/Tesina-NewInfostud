@@ -1,0 +1,15 @@
+\BOOKMARK [0][-]{chapter.1}{Introduzione e descrizione dei dati}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Specifiche introduttive}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Funzionalit\340 specifiche}{chapter.1}% 3
+\BOOKMARK [2][-]{subsection.1.2.1}{Funzionalit\340 visitatore}{section.1.2}% 4
+\BOOKMARK [2][-]{subsection.1.2.2}{Funzionalit\340 studente}{section.1.2}% 5
+\BOOKMARK [2][-]{subsection.1.2.3}{Funzionalit\340 professore}{section.1.2}% 6
+\BOOKMARK [2][-]{subsection.1.2.4}{Funzionalit\340 segreteria}{section.1.2}% 7
+\BOOKMARK [2][-]{subsection.1.2.5}{Funzionalit\340 amministratore}{section.1.2}% 8
+\BOOKMARK [1][-]{section.1.3}{Strutture dati}{chapter.1}% 9
+\BOOKMARK [2][-]{subsection.1.3.1}{Anagrafica}{section.1.3}% 10
+\BOOKMARK [2][-]{subsection.1.3.2}{Struttura file xml}{section.1.3}% 11
+\BOOKMARK [1][-]{section.1.4}{Definizioni XML}{chapter.1}% 12
+\BOOKMARK [0][-]{chapter.2}{Manuale utente}{}% 13
+\BOOKMARK [0][-]{chapter.3}{Programmazione}{}% 14
+\BOOKMARK [0][-]{chapter.4}{Elenco utenze}{}% 15

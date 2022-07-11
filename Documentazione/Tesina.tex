@@ -7,6 +7,14 @@
 \usepackage{latexsym}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true,
+				     linkcolor=black,}
+				     %filecolor=magenta,
+		           %urlcolor=cyan,
+				     %pdftitle={Overleaf Example},
+				     %pdfpagemode=FullScreen,}
 
 %Stile display del codice
 \definecolor{codegreen}{rgb}{0,0.6,0}
@@ -46,6 +54,7 @@
 \chapter{Introduzione e descrizione dei dati}
 
 \section{Specifiche introduttive}
+\label{sec:specifiche}
 
 Si propone di realizzare una piattaforma che replichi le funzionalità del noto portale infostud. Il sito è visitabile a partire da una pagina home, accessibile da tutte le utenze, che illustra i corsi di laurea offerti dall’università con annesse informazioni relative agli esami che essi prevedono.
   
@@ -814,7 +823,7 @@ Il file in questione memorizza la lista di tutte le FAQs presenti nel sistema. E
  <faq>
   <id>1</id>
   <domanda>Si puo studiare sulle slide?</domanda>
-  <risposta>Si, in particolare su quelle che mettero'a disposizione durante il corso</risposta>
+  <risposta>Si, in particolare su quelle che saranno messe a disposizione durante il corso</risposta>
   <utilitaTotale>1</utilitaTotale>
   <idCorso>1<idCorso>
  </faq>
@@ -1256,6 +1265,60 @@ Come già precedentemente esplicato, i post possono essere recensiti; la singola
 </xsd:schema>
 \end{lstlisting}
 \section{Definizioni XML}
+
+In questa sezione andremo a discutere una selezione a campione di 12 elementi scelti da alcuni file definiti nella precedente sezione. Per ogni elemento, verrà specificato il motivo della sua definizione facendo riferimento alla parte di specifica testuale che lo rende necessario.
+
+\medskip
+
+\subsubsection{accordoMedio - commenti.xml}
+
+L'elemento in questione, presente nel file \emph{commenti.xml} \hyperref[sec:?]{\textcolor{gray}{[$\uparrow$]}}, si riferisce all'accordo medio totale conseguito da un singolo commento. La sua presenza si è resa necessaria per semplificare la generazione dell'elenco dei commenti, come richiesto dalle specifiche \hyperref[sec:specifiche]{\textcolor{gray}{[$\uparrow$]}}. In particolare, questo campo viene aggiornato ogni qualvolta venisse effettuata una nuova votazione sul commento cui questo accordo fa riferimento.
+
+\medskip
+
+\subsubsection{accordo - votoCommento.xml}
+
+\medskip
+
+\subsubsection{utilitaTotale - FAQs.xml}
+
+\medskip
+
+\subsubsection{utilitaTotale - posts.xml}
+
+\medskip
+
+\subsubsection{utilita - votoFAQ.xml}
+
+\medskip
+
+\subsubsection{utilita - votoPost.xml} %
+
+\medskip
+
+\subsubsection{cfuTotale - studenti.xml}
+
+\medskip
+
+\subsubsection{cfu - corsi.xml}
+
+\medskip
+
+\subsubsection{reputazioneTotale - studenti.xml}
+
+\medskip
+
+\subsubsection{matricolaStudente - posts.xml}
+
+\medskip
+
+\subsubsection{matricolaProf - corsi.xml}
+
+\medskip
+
+\subsubsection{esito - prenotazione.xml}
+
+\medskip
 
 \chapter{Manuale utente}
 
