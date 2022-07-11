@@ -48,7 +48,6 @@
 \author{Luca Zanchetta, Mattia Aquilina}
 \title{Tesina LWEB - neWinfoStud}
 \maketitle
-\
 \tableofcontents
 
 \chapter{Introduzione e descrizione dei dati}
@@ -214,6 +213,8 @@ Uno studente, potendo visualizzare tutti gli appelli relativi al corso a cui è 
 \medskip
 
 \subsubsection{Utilizzo della bacheca dei corsi}
+
+\label{sec:bacheca}
 
 Una bacheca è uno spazio che permette a diversi studenti di scambiarsi informazioni. Tale scambio di informazioni, che può essere volto all'aiuto reciproco, può avvenire tramite la pubblicazione di post o tramite replica a post già esistenti.
 
@@ -579,6 +580,8 @@ Il file in questione memorizza la lista dei commenti pubblicati a seguito di un 
 
 \emph{Commenti.XML}
 
+\label{sec:commenti}
+
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
 <commenti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="commenti.xsd">
@@ -635,6 +638,8 @@ Il file in questione memorizza la lista di tutti i corsi presenti nella piattafo
 \medskip
 
 \emph{Corsi.XML}
+
+\label{sec:corsi}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
@@ -817,6 +822,8 @@ Il file in questione memorizza la lista di tutte le FAQs presenti nel sistema. E
 
 \emph{faqs.XML}
 
+\label{sec:faqs}
+
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
 <faqs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="faqs.xsd">
@@ -873,7 +880,9 @@ L'\emph{utilità totale} di un post viene stabilita dalla somma algebrica di tut
 
 \medskip
 
-\emph{FILE .XML}
+\emph{posts.XML}
+
+\label{sec:posts}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
@@ -889,7 +898,7 @@ L'\emph{utilità totale} di un post viene stabilita dalla somma algebrica di tut
 </posts>
 \end{lstlisting}
 
-\emph{FILE .XSD}
+\emph{posts.XSD}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
@@ -926,6 +935,8 @@ L'\emph{utilità totale} di un post viene stabilita dalla somma algebrica di tut
 
 \subsubsection{Prenotazioni}
 
+\label{sec:esito}
+
 Una delle funzionalità cardine del portale è la possibilità, da parte degli studenti, di prenotare gli esami. A tal proposito, è necessaria una tabella contenente tutte le prenotazioni effettuate; il singolo record di questa tabella rappresenta la singola prenotazione effettuata da parte di uno studente. La singola prenotazione, in realtà, rappresenta una singola istanza dell'esame effettuato dallo studente: infatti, essa risulta essere caratterizzata da un \emph{id}, dalla \emph{matricola} dello studente che ha sostenuto o che deve sostenere l'esame, dall'\emph{id} dell'appello prenotato e dall'\emph{esito} dell'esame, in termini di votazione conseguita.
 
 L'\emph{esito}, in particolare, è un elemento delicato: se uno studente ha solo prenotato un appello senza aver svolto il relativo esame, infatti, l'esito dell'esame stesso sarà impostato al valore predefinito \textbf{NULL}, indicando appunto il fatto che l'esame deve essere ancora sostenuto. Qualora lo studente avesse già sostenuto l'esame prenotato, invece, la voce \emph{esito} potrà assumere i seguenti valori:
@@ -937,7 +948,9 @@ L'\emph{esito}, in particolare, è un elemento delicato: se uno studente ha solo
 
 \medskip
 
-\emph{FILE .XML}
+\emph{prenotazioni.XML}
+
+\label{sec:prenotazioni}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
@@ -951,7 +964,7 @@ L'\emph{esito}, in particolare, è un elemento delicato: se uno studente ha solo
 </prenotazioni>
 \end{lstlisting}
 
-\emph{FILE .XSD}
+\emph{prenotazioni.XSD}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
@@ -992,7 +1005,7 @@ Gli utenti della piattaforma, come già precedentemente esplicato, possono esser
 
 \medskip
 
-\emph{FILE .XML}
+\emph{segreteria.XML}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1004,7 +1017,7 @@ Gli utenti della piattaforma, come già precedentemente esplicato, possono esser
 </segreteria>
 \end{lstlisting}
 
-\emph{FILE .XSD}
+\emph{segreteria.XSD}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1040,7 +1053,9 @@ La \emph{reputazione totale} di uno studente viene calcolata come media di tutti
 
 \medskip
 
-\emph{FILE .XML}
+\emph{studenti.XML}
+
+\label{sec:studenti}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1059,7 +1074,7 @@ La \emph{reputazione totale} di uno studente viene calcolata come media di tutti
 </studenti>
 \end{lstlisting}
 
-\emph{FILE .XSD}
+\emph{studenti.XSD}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1106,7 +1121,9 @@ Come già precedentemente esplicato, i commenti presenti all'interno di un post 
 
 \medskip
 
-\emph{FILE .XML}
+\emph{votoCommento.XML}
+
+\label{sec:votoCommento}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1121,7 +1138,7 @@ Come già precedentemente esplicato, i commenti presenti all'interno di un post 
 </votiCommento>
 \end{lstlisting}
 
-\emph{FILE .XSD}
+\emph{votoCommento.XSD}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1163,7 +1180,9 @@ Come già precedentemente esplicato, le domande presenti nella sezione FAQ posso
 
 \medskip
 
-\emph{FILE .XML}
+\emph{votoFAQ.XML}
+
+\label{sec:votoFAQ}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1177,7 +1196,7 @@ Come già precedentemente esplicato, le domande presenti nella sezione FAQ posso
 </votiFAQ>
 \end{lstlisting}
 
-\emph{FILE .XSD}
+\emph{votoFAQ.XSD}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1218,7 +1237,9 @@ Come già precedentemente esplicato, i post possono essere recensiti; la singola
 
 \medskip
 
-\emph{FILE .XML}
+\emph{votoPost.XML}
+
+\label{sec:votoPost}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1232,7 +1253,7 @@ Come già precedentemente esplicato, i post possono essere recensiti; la singola
 </votiPost>
 \end{lstlisting}
 
-\emph{FILE .XSD}
+\emph{votoPost.XSD}
 
 \begin{lstlisting}[language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1264,6 +1285,9 @@ Come già precedentemente esplicato, i post possono essere recensiti; la singola
 
 </xsd:schema>
 \end{lstlisting}
+
+\medskip
+
 \section{Definizioni XML}
 
 In questa sezione andremo a discutere una selezione a campione di 12 elementi scelti da alcuni file definiti nella precedente sezione. Per ogni elemento, verrà specificato il motivo della sua definizione facendo riferimento alla parte di specifica testuale che lo rende necessario.
@@ -1272,62 +1296,94 @@ In questa sezione andremo a discutere una selezione a campione di 12 elementi sc
 
 \subsubsection{accordoMedio - commenti.xml}
 
-L'elemento in questione, presente nel file \emph{commenti.xml} \hyperref[sec:?]{\textcolor{gray}{[$\uparrow$]}}, si riferisce all'accordo medio totale conseguito da un singolo commento. La sua presenza si è resa necessaria per semplificare la generazione dell'elenco dei commenti, come richiesto dalle specifiche \hyperref[sec:specifiche]{\textcolor{gray}{[$\uparrow$]}}. In particolare, questo campo viene aggiornato ogni qualvolta venisse effettuata una nuova votazione sul commento cui questo accordo fa riferimento.
+L'elemento in questione, presente nel file \emph{commenti.xml} \hyperref[sec:commenti]{\textcolor{gray}{[$\uparrow$]}}, si riferisce all'accordo medio totale conseguito da un singolo commento. La sua presenza si è resa necessaria per la generazione dell'elenco dei commenti, come richiesto dalle specifiche \hyperref[sec:specifiche]{\textcolor{gray}{[$\uparrow$]}}. In particolare, questo campo viene aggiornato ogni qualvolta venisse effettuata una nuova votazione sul commento cui questo accordo fa riferimento.
+
+\medskip
+
+\emph{Si noti la differenza con l'elemento successivo.}
 
 \medskip
 
 \subsubsection{accordo - votoCommento.xml}
 
+L'elemento in questione, presente nel file \emph{votoCommento.xml} \hyperref[sec:votoCommento]{\textcolor{gray}{[$\uparrow$]}}, si riferisce al singolo voto espresso su un commento relativo ad un post. La sua presenza si è resa necessaria per esprimere il grado di accordo del singolo utente che si accinge ad esprimere la votazione in merito al commento che sta visualizzando; tale diritto di espressione viene espressamente richiesto dalle specifiche \hyperref[sec:specifiche]{\textcolor{gray}{[$\uparrow$]}}.
+
 \medskip
 
 \subsubsection{utilitaTotale - FAQs.xml}
+
+L'elemento in questione, presente nel file \emph{FAQs.xml} \hyperref[sec:faqs]{\textcolor{gray}{[$\uparrow$]}}, si riferisce all'utilità complessiva del contenuto informativo della FAQ cui si fa riferimento. La sua presenza si è resa necessaria per la generazione dell'elenco delle FAQ, espressamente richiesto dalle specifiche \hyperref[sec:specifiche]{\textcolor{gray}{[$\uparrow$]}}. In particolare, l'utilità totale di una FAQ racchiude la somma algebrica di tutte le valutazioni di utilità riferite alla FAQ stessa \hyperref[sec:votofaq]{\textcolor{gray}{[$\downarrow$]}}.
+
+\medskip
+
+\emph{Si noti la differenza con l'elemento successivo.}
 
 \medskip
 
 \subsubsection{utilitaTotale - posts.xml}
 
+L'elemento in questione, presente nel file \emph{posts.xml} \hyperref[sec:posts]{\textcolor{gray}{[$\uparrow$]}}, si riferisce all'utilità complessiva del contenuto informativo del post cui si fa riferimento. La sua presenza si è resa necessaria per la generazione dell'elenco dei post contenuti in una bacheca, espressamente richiesto dalle specifiche \hyperref[sec:specifiche]{\textcolor{gray}{[$\uparrow$]}}. In particolare, l'utilità totale di un post racchiude la somma algebrica di tutte le valutazioni di utilità riferite al post stesso \hyperref[sec:votopost]{\textcolor{gray}{[$\downarrow$]}}.
+
 \medskip
 
 \subsubsection{utilita - votoFAQ.xml}
 
+\label{sec:votofaq}
+
+L'elemento in questione, presente nel file \emph{votoFAQ.xml} \hyperref[sec:votoFAQ]{\textcolor{gray}{[$\uparrow$]}}, si riferisce al grado di utilità del contenuto informativo della FAQ cui si fa riferimento. La sua presenza si è resa necessaria per permettere l'espressione del suddetto grado di utilità, da parte di un singolo studente; ciò viene espressamente richiesto nelle specifiche \hyperref[sec:specifiche]{\textcolor{gray}{[$\uparrow$]}}. Ricordiamo, a puro titolo di richiamo, che un singolo voto di utilità può essere un \emph{up} (+1) o un \emph{down} (-1), da cui si deduce la semantica della somma algebrica effettuata.
+
 \medskip
 
-\subsubsection{utilita - votoPost.xml} %
+\emph{Si noti la differenza con l'elemento successivo.}
+
+\medskip
+
+\subsubsection{utilita - votoPost.xml}
+
+\label{sec:votopost}
+
+L'elemento in questione, presente nel file \emph{votoPost.xml} \hyperref[sec:votoPost]{\textcolor{gray}{[$\uparrow$]}}, si riferisce al grado di utilità del contenuto informativo del post cui si fa riferimento. La sua presenza si è resa necessaria per permettere l'espressione del suddetto grado di utilità, da parte di un singolo studente; ciò viene espressamente richiesto nelle specifiche \hyperref[sec:specifiche]{\textcolor{gray}{[$\uparrow$]}}. Ricordiamo, a puro titolo di richiamo, che un singolo voto di utilità può essere un \emph{up} (+1) o un \emph{down} (-1), da cui si deduce la semantica della somma algebrica effettuata.
 
 \medskip
 
 \subsubsection{cfuTotale - studenti.xml}
 
-L'elemento in questione, presente nel file \emph{studenti.xml} \hyperref[sec:?]{\textcolor{gray}{[$\uparrow$]}}, si riferisce al totale dei CFU acquisiti da un singolo studente. La presenza di questo campo è necessaria a descrivere l'andamento complessivo della carriera di un determinato studente. Ogni qualvolta venisse registrato un'esame con esito positivo(\emph{voto compreso tra 18 e 30}) il valore in questione verrebbe aggiornato.
+L'elemento in questione, presente nel file \emph{studenti.xml} \hyperref[sec:studenti]{\textcolor{gray}{[$\uparrow$]}}, si riferisce al totale dei CFU acquisiti da un singolo studente. La presenza di questo campo è necessaria a descrivere l'andamento complessivo della carriera di un determinato studente. Ogni qualvolta venisse registrato un'esame con esito positivo (\emph{voto compreso tra 18 e 30}) il valore in questione verrebbe aggiornato.
+
+\medskip
 
 \emph{Si noti la differenza con l'elemento successivo.}
+
 \medskip
 
 \subsubsection{cfu - corsi.xml}
 
-L'elemento in questione, presente nel file \emph{corsi.xml} \hyperref[sec:?]{\textcolor{gray}{[$\uparrow$]}}, si riferisce al valore dei crediti formativi associati ad un determinato esame. La presenza di quest'ultimo è indispensabile al fine di determinare i cfu totali acquisiti da un determinato studente.
+L'elemento in questione, presente nel file \emph{corsi.xml} \hyperref[sec:corsi]{\textcolor{gray}{[$\uparrow$]}}, si riferisce al valore dei crediti formativi associati ad un determinato esame. La presenza di quest'ultimo è indispensabile al fine di determinare i cfu totali acquisiti da un determinato studente.
+
 \medskip
 
 \subsubsection{reputazioneTotale - studenti.xml}
 
-L'elemento in questione, presente nel file \emph{studenti.xml} \hyperref[sec:?]{\textcolor{gray}{[$\uparrow$]}}, si riferisce alla reputazione totale conseguita da uno studente grazie al suo contributo nelle diverse bacheche. La sua presenza si è resa necessaria per semplificare la visualizzazione della carriera di uno studente. Inoltre, realizza un'importante comportamento della piattaforma, esplicato nella sezione ?\hyperref[sec:?]{\textcolor{gray}{[$\uparrow$]}}
+L'elemento in questione, presente nel file \emph{studenti.xml} \hyperref[sec:studenti]{\textcolor{gray}{[$\uparrow$]}}, si riferisce alla reputazione totale conseguita da uno studente grazie al suo contributo nelle diverse bacheche. La sua presenza si è resa necessaria per semplificare la visualizzazione della carriera di uno studente. Inoltre, realizza un'importante comportamento della piattaforma, esplicato nella sezione dedicata \hyperref[sec:bacheca]{\textcolor{gray}{[$\uparrow$]}}.
 
 \medskip
 
 \subsubsection{matricolaStudente - posts.xml}
 
-L'elemento in questione, presente nel file \emph{posts.xml} \hyperref[sec:?]{\textcolor{gray}{[$\uparrow$]}}, si riferisce alla matricola dello studente creatore del post. È ovviamente necessario per realizzare l'associazione tra studenti e post, permettendo di tenere traccia degli autori dei singoli post.
+L'elemento in questione, presente nel file \emph{posts.xml} \hyperref[sec:posts]{\textcolor{gray}{[$\uparrow$]}}, si riferisce alla matricola dello studente creatore del post. È ovviamente necessario per realizzare l'associazione tra studenti e post, permettendo di tenere traccia degli autori dei singoli post.
 
 \medskip
 
 \subsubsection{matricolaProf - corsi.xml}
 
-L'elemento in questione, presente nel file \emph{corsi.xml} \hyperref[sec:?]{\textcolor{gray}{[$\uparrow$]}}, si riferisce alla matricola del professore correntemente assegnato ad un determinato corso. È ovviamente necessario al fine di realizzare l'associazione tra corsi e docente.
+L'elemento in questione, presente nel file \emph{corsi.xml} \hyperref[sec:corsi]{\textcolor{gray}{[$\uparrow$]}}, si riferisce alla matricola del professore correntemente assegnato ad un determinato corso. È ovviamente necessario al fine di realizzare l'associazione tra corsi e docente.
+
 \medskip
 
-\subsubsection{esito - prenotazione.xml}
+\subsubsection{esito - prenotazioni.xml}
 
-L'elemento in questione, presente nel file \emph{prenotazione.xml} \hyperref[sec:?]{\textcolor{gray}{[$\uparrow$]}}, si riferisce all'esito conseguito in un singolo esame. Come già esplicato precedentemente(si veda sezione ?\hyperref[sec:?]{\textcolor{gray}{[$\uparrow$]}}), questo campo può assumere diversi valori dipendentemente se l'esito è positivo o negativo. L'elemento è necessario per tenere traccia dello storico degli esami sostenuti da un determinato studente.
+L'elemento in questione, presente nel file \emph{prenotazione.xml} \hyperref[sec:prenotazioni]{\textcolor{gray}{[$\uparrow$]}}, si riferisce all'esito conseguito in un singolo esame. Come già esplicato precedentemente (si veda la sezione dedicata \hyperref[sec:esito]{\textcolor{gray}{[$\uparrow$]}}), questo campo può assumere diversi valori dipendentemente se l'esito è positivo o negativo. L'elemento è necessario per tenere traccia dello storico degli esami sostenuti da un determinato studente.
+
 \medskip
 
 \chapter{Manuale utente}
