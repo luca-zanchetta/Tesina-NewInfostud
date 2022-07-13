@@ -34,6 +34,7 @@ div.nav-left {
     color: white;
     position: relative;
 }
+
 div.nav-logo {
     position: relative;
     object-fit: contain;
@@ -63,6 +64,14 @@ div.nav-right {
     display: flex;
     flex: 1;
     justify-content: flex-end;
+    align-items: center;
+}
+.nav-right>h2{
+    margin: .5%;
+    padding: 1%;
+    color: white;
+    position: relative;
+    border-radius: 10%;
 }
 div.vertical-bar {
     border-left: 1px solid #4a4a4c;
@@ -75,18 +84,32 @@ div.vertical-bar {
     border: none;
     width: 100%;
 }
+.nav-right>h2>a {
+    all: inherit;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+.nav-right>h2:hover {
+    background-color: #822433;
+}
 .nav-left>h2>form>input {
     display: inline;
     background-color: #ffffff00;
     position: absolute;
     border: none;
     width: 100%;
-}   
-a.logout {
-    all: inherit;
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
+}
+
+.nav-right>h2>form {
+    display: flex;
+}
+.nav-right>h2>form>input{
+    display: inline;
+    background-color: #ffffff00;
+    position: absolute;
+    border: none;
+    width: 100%;
 }
 /*Menu fixed sulla sinistra*/
 .sidebar {
@@ -97,8 +120,8 @@ a.logout {
     flex-direction: column;
 }
 .sidebar>h5{
-    margin-top: 25px;
-    margin-bottom: 25px;
+    margin-top: 1%;
+    margin-bottom: 1%;
     color: white;
 }
 a.opzione {
@@ -106,6 +129,14 @@ a.opzione {
     color: white;
     text-decoration: none;
     cursor: pointer;
+}
+
+a.opzionetab {
+    all: inherit;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: 0.5%;
 }
 a.opzione:hover{
     background-color: rgba(0, 255, 255, 0.67);
@@ -115,6 +146,7 @@ div.central-block {
     display: flex;
 }
 div.body {
+    width: 70%;
     padding-top: 2%;
     display: flex;
     flex: 1;   

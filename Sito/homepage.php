@@ -1,7 +1,3 @@
-<?php
-require_once('phpFunctions.php');
-session_start();
-?>
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -20,89 +16,52 @@ session_start();
                 </a>
             </div>
             <div class="vertical-bar"></div>
-                <h2>
-                    <form action="">
-                        <input type="button">
-                    </form>
-                    Infostud
-                </h2>
-            <div class="vertical-bar"></div>
-                <?php
-                    if(isset($_SESSION['login'])){
-                        ?>
-                        <h2>
-                            <a class="logout" href="amministrazione.php">
-                                Amministrazione
-                            </a>
-                        </h2>
-                        <div class="vertical-bar"></div>
-                        <h2>
-                            <a class="logout" href="logout.php">
-                                Logout
-                            </a>
-                        </h2>
-                    <?php
-                    }else{
-                        ?>
-                        <h2>
-                            <a class="logout" href="login.php">
-                                Login
-                            </a>
-                        </h2>
-                    <?php
-                    }
-                ?>      
-        </div>
-        <div class="nav-central">
-            <form action="homepage.php" method="GET">
-                <div class="nav-logo">
-                    <input type="submit" name="ricerca" value="">
-                    <img src="search.png" alt="err" width="20px" style="display: inline-flex;">
-                </div>    
-                    <input type="text" name="filtro" value="<?php if(isset($_GET['filtro'])) echo $_GET['filtro'];?>">              
-            </form>
+            <h2>
+                <form action="">
+                    <input type="button">
+                </form>
+                Infostud
+            </h2>  
         </div>
         <div class="nav-right">
-            <img src="account.png" alt="dasdas" width="90px">
+            <h2>
+                <form action="login.php" method="POST">
+                    <input type="submit" value="">
+                    <input name="loginType" type="hidden" value="1">
+                </form>
+                    Studenti      
+            </h2>
+            <div class="vertical-bar"></div>
+            <h2>
+                <form action="login.php">
+                    <input type="submit" value="">
+                    <input name="loginType" type="hidden" value="2">
+                </form>
+                    Docenti
+                
+            </h2>
+            <div class="vertical-bar"></div>
+            <h2>
+                <form action="login.php">
+                    <input type="submit" value="">
+                    <input name="loginType" type="hidden" value="3">
+                </form>
+                    Segreteria
+                
+            </h2>
+            <div class="vertical-bar"></div>
+            <h2>
+                <form action="login.php">
+                    <input type="submit" value="">
+                    <input name="loginType" type="hidden" value="4">
+                </form>
+                    Amministrazione
+            </h2>   
         </div>
     </div>
     <div class="central-block">
-        <div class="sidebar">
-            <h5>
-                <a class="opzione" href="homepage.php">Visualizza corsi</a>
-            </h5>
-            <h5>
-                <a class="opzione" href="visualizzaAppelli.php">Visualizza appelli</a>
-            </h5>
-        </div>
         <div class="body">
-            <h1 style="text-align: center; color: green;">CORSI DISPONIBILI:</h1>
-            <div class="container-esami">
-                <?php 
-                $listaCorsi = [];
-                if(isset($_GET['filtro']) && $_GET['filtro'] != "")
-                    $listaCorsi = getCorsiLike($_GET['filtro']);
-                else
-                    $listaCorsi = getCorsi();
-
-                    foreach($listaCorsi as $corso){
-                        ?>
-                         <div class="blocco-esame" style="background-color:<?php echo $corso->id_colore?>">
-                            <div class="nome-esame" >
-                                <?php echo $corso->nome?>
-                            </div> 
-                                <div class="info-button">
-                                    Info
-                                    <form action="visualizza-corso.php" method="GET">
-                                        <input type="submit" name="iscriviti" value="" >
-                                        <input type="hidden" name="corso" value="<?php echo $corso->id?>">
-                                    </form>
-                                </div>  
-                            </div>  
-                        <?php
-                    }  
-                ?>   
-            </div>           
+                      
         </div>
     </div>
 </div>
