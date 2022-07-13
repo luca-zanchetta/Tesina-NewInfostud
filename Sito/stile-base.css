@@ -1,0 +1,298 @@
+/*classe contente le regole di stile comuni a tutte le pagine del sito*/
+body {
+    font-family: helvetica,arial,sans-serif;
+    background-image: url(sfondo.jpg);/*da decidere*/
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    line-height: 1.5em;
+    margin: 0;
+    overflow: hidden;
+}
+/*Barra Di navigazione fissata in alto*/
+div.header {
+    top: 0;
+    border-bottom: 1px solid black;
+    background-color: #1b1b1b;
+    display: flex;
+    align-items: center;
+    z-index: 100;
+    width: 100%;
+    position:sticky;
+}
+div.nav-left {
+    display: flex;
+    align-items: center;
+    flex:1;
+}
+.header>div {
+    margin: 15px;
+}
+.nav-left>h2{
+    margin: 15px;
+    color: white;
+    position: relative;
+}
+div.nav-logo {
+    position: relative;
+    object-fit: contain;
+    margin-left: 20px;
+}
+div.nav-central{
+    background-color: #4a4a4c;
+    height: 3.5rem;
+    display: flex;
+    width: 25%;
+    border-radius: 8px;
+    overflow: hidden;
+    align-items: center;
+}
+.nav-central>form {
+    display: flex;
+}
+.nav-central>form>input{
+    outline: none;
+    background-color: transparent;
+    flex: 1;
+    margin-left: 15px;
+    font-size: large;
+    border: none;
+}
+div.nav-right {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+}
+div.vertical-bar {
+    border-left: 1px solid #4a4a4c;
+    height: 3rem;
+}
+.nav-logo>input {
+    display: inline;
+    background-color: #ffffff00;
+    position: absolute;
+    border: none;
+    width: 100%;
+}
+.nav-left>h2>form>input {
+    display: inline;
+    background-color: #ffffff00;
+    position: absolute;
+    border: none;
+    width: 100%;
+}   
+a.logout {
+    all: inherit;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+/*Menu fixed sulla sinistra*/
+.sidebar {
+    padding: 10px;
+    width: 10%;
+    background-color: #1f1f23;
+    display: flex;
+    flex-direction: column;
+}
+.sidebar>h5{
+    margin-top: 25px;
+    margin-bottom: 25px;
+    color: white;
+}
+a.opzione {
+    all: inherit;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+a.opzione:hover{
+    background-color: rgba(0, 255, 255, 0.67);
+}
+/*corpo della pagina*/
+div.central-block {
+    display: flex;
+}
+div.body {
+    padding-top: 2%;
+    display: flex;
+    flex: 1;   
+    overflow: scroll;
+    height: 87vh;
+    flex-direction: column;
+    padding-bottom: 2%;
+}
+div.body-title {
+    display: flex;
+    align-content: right;
+}
+div.body-title>h2 {
+    color: black;
+    margin-left: 20px;
+}
+/*contenitore blocco esami*/
+div.container-esami {
+    justify-content: center; 
+    display: flex; 
+    flex-wrap: wrap;
+    padding-bottom: 10%;
+}
+div.container-admin {
+    justify-content: center; 
+    display: flex; 
+    flex-wrap: wrap;
+    padding-top: 3%;
+}
+div.blocco-esame {
+    margin: 1%;
+    width: 450px;
+    height: 150px;
+    border-radius: 20px;
+    display: flex; 
+    flex-direction: column;
+    padding: 1em;
+    background-color: aqua;
+    align-content: space-around;
+    align-items: center;
+}
+input.button-iscrizione {
+    width: 250px;
+    height: 50px;
+    font-weight: bold;
+    font-size: large;
+    margin: 2ex;
+    cursor: pointer;
+}
+input.button-iscrizione:hover {
+    background-color:honeydew;
+}
+
+div.zero-esami_central {
+    text-align: center;
+    display: flexbox;
+    position: relative;
+    border-width: 3px;
+	border-style: ridge;     
+    border-color: firebrick;
+	margin-top: 5em;
+    margin-bottom: 2em;
+    margin-left: 1%;
+    margin-right: 1%;
+    min-width: 20%;
+    border-top-left-radius: 4%;
+    border-top-right-radius: 4%;
+    border-bottom-left-radius: 4%;
+    border-bottom-right-radius: 4%;
+    background-color: gainsboro;
+}
+.bottoneHome {
+    width: 200px;
+    height: 50px;
+    font-weight: bold;
+    font-size: large;
+    margin: 2ex;
+    cursor: pointer;
+}
+.bottoneHome:hover {
+    background-color:honeydew;
+}
+div.box-avviso {
+    text-align: center;
+    display: flexbox;
+    position: relative;
+    border-width: 3px;
+	border-style: ridge;     
+    border-color: firebrick;
+	margin-top: 5em;
+    margin-bottom: 2em;
+    margin-left: 20%;
+    margin-right: 20%;
+    min-width: 20%;
+    border-top-left-radius: 4%;
+    border-top-right-radius: 4%;
+    border-bottom-left-radius: 4%;
+    border-bottom-right-radius: 4%;
+    background-color: gainsboro;
+}
+
+/*contenitori di testo*/
+
+div.nome-esame {
+    justify-content: space-around;
+    display: inline-flex;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+div.info-button {
+    display: inline-flex;
+    margin-top: 15%;
+    border: 2px solid black;
+    justify-content: center;
+    padding: 1%;
+    width: 30%;
+    cursor: pointer;
+    position: relative;
+}
+.info-button:hover {
+    background-color: rgba(0, 255, 255, 0.396);
+}
+.info-button>form>input {
+    top: 0;
+    left: 0;
+    background-color: #ffffff00;
+    position: absolute;
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+span#pagetitle {
+    font-size: 2em;
+    font-weight: bold;
+    color: red;
+    overflow: hidden;
+}
+/*media query
+@media screen and (max-width: 600px) {
+    body {
+      background-color: olive;
+    }  
+    
+    div.menu-fixed-container {
+        float: left;
+        height: 200px;
+        text-align: center;
+        display: flex;
+        text-overflow: wrap;
+    }
+    div.menu-tendina {
+        display: flex;
+        background-color: pink;
+        border-radius: 24px;
+        padding: 1.5%;
+        flex: 1;
+        flex-direction: column;
+    }
+  }
+*/
+
+/* Bottoni admin */
+input.admin {
+    width: 250px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 130%;
+    padding: 3%;
+    background-color:antiquewhite;
+}
+input.admin:hover {
+    background-color: gold;
+    width: 300px;
+    height: 70px;
+    font-size: 150%;
+    transition: width 0.7s, height 0.7s;
+}
+form.admin {
+    margin: 2%;
+}
