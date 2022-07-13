@@ -37,7 +37,7 @@ function console_log( $data ){
 function getCorsi(){
      /*accedo al file xml*/
     $xmlString = "";
-    foreach ( file("corsi.xml") as $node ) {
+    foreach ( file("Xml/corsi.xml") as $node ) {
         $xmlString .= trim($node);
     }
     
@@ -81,7 +81,7 @@ function getCorsi(){
 function getCorsoById($_id){
     /*accedo al file xml*/
     $xmlString = "";
-   foreach ( file("corsi.xml") as $node ) {
+   foreach ( file("Xml/corsi.xml") as $node ) {
        $xmlString .= trim($node);
    }
    
@@ -124,7 +124,7 @@ function getCorsoById($_id){
 }
 function getCorsiLike($_nome){
     $xmlString = "";
-    foreach ( file("corsi.xml") as $node ) {
+    foreach ( file("Xml/corsi.xml") as $node ) {
         $xmlString .= trim($node);
     }
     
@@ -166,9 +166,10 @@ function getCorsiLike($_nome){
     return $listaCorsi;
 }
 
+/*
 function existsUser($_username,$_password){
     $xmlString = "";
-    foreach ( file("utenti.xml") as $node ) {
+    foreach ( file("Xml/utenti.xml") as $node ) {
         $xmlString .= trim($node);
     }
     
@@ -198,7 +199,7 @@ function existsUser($_username,$_password){
 
 function getUserByUsername($_username) {
     $xmlString = "";
-    foreach ( file("utenti.xml") as $node ) {
+    foreach ( file("Xml/utenti.xml") as $node ) {
         $xmlString .= trim($node);
     }
     
@@ -222,11 +223,11 @@ function getUserByUsername($_username) {
             return $user;
     }
     return null;
-}
+}*/         /* Il file utenti.xml non è previsto */
 
 function getNomeCorso($num) {
     $xmlString = "";
-    foreach ( file("corsi.xml") as $node ) {
+    foreach ( file("Xml/corsi.xml") as $node ) {
         $xmlString .= trim($node);
     }
     
@@ -255,7 +256,7 @@ function getNomeCorso($num) {
 
 function getColoreCorso($num) {
     $xmlString = "";
-    foreach ( file("corsi.xml") as $node ) {
+    foreach ( file("Xml/corsi.xml") as $node ) {
         $xmlString .= trim($node);
     }
     
@@ -287,7 +288,7 @@ function getColoreCorso($num) {
 
 function cercaCorso($nomeCorsoDaCercare) {
     $xmlString = "";
-    foreach ( file("corsi.xml") as $node ) {
+    foreach ( file("Xml/corsi.xml") as $node ) {
         $xmlString .= trim($node);
     }
     
@@ -316,7 +317,7 @@ function cercaCorso($nomeCorsoDaCercare) {
 
 function calcolaIdCorso() {
     $xmlString = "";
-    foreach ( file("corsi.xml") as $node ) {
+    foreach ( file("Xml/corsi.xml") as $node ) {
         $xmlString .= trim($node);
     }
     
@@ -343,7 +344,7 @@ function calcolaIdCorso() {
 
 function inserisciCorso($nuovoCorso) {
        
-    $xml = simplexml_load_file('corsi.xml');
+    $xml = simplexml_load_file('Xml/corsi.xml');
 
     $newcorso = $xml->addChild('corso'); //crea una tupla<corso> </corso>
     $asd = $newcorso->addChild('id', $nuovoCorso->id);
@@ -358,7 +359,7 @@ function inserisciCorso($nuovoCorso) {
     $asd = $newcorso->addChild('ssd', $nuovoCorso->ssd);
     
     //sovrascrive il vecchio file con i nuovi dati
-    $f = fopen('corsi.xml', "w");
+    $f = fopen('Xml/corsi.xml', "w");
     $result = fwrite($f,  $xml->asXML());
     fclose($f);
     if(!$result) return FALSE;
@@ -367,9 +368,10 @@ function inserisciCorso($nuovoCorso) {
     
 }
 
+/*
 function getColori() {
     $xmlString = "";
-    foreach ( file("colori.xml") as $node ) {
+    foreach ( file("Xml/colori.xml") as $node ) {
         $xmlString .= trim($node);
     }
     
@@ -389,11 +391,11 @@ function getColori() {
     }
 
     return $listaColori;    
-}
+}*/     /* Il file colori.xml non è previsto */
 
 function inserisciAppello($nuovoAppello) {
     $xmlString = "";
-    foreach ( file("appelli.xml") as $node ) {
+    foreach ( file("Xml/appelli.xml") as $node ) {
         $xmlString .= trim($node);
     }
     
@@ -413,7 +415,7 @@ function inserisciAppello($nuovoAppello) {
 
     //il codice inserito non è duplicato
 
-    $xml = simplexml_load_file('appelli.xml');
+    $xml = simplexml_load_file('Xml/appelli.xml');
 
     $newcorso = $xml->addChild('appello'); //crea una tupla<corso> </corso>
     $asd = $newcorso->addChild('codice', $nuovoAppello->codice);
@@ -422,7 +424,7 @@ function inserisciAppello($nuovoAppello) {
     $asd = $newcorso->addChild('id_corso', $nuovoAppello->id_corso);
 
     //sovrascrive il vecchio file con i nuovi dati
-    $f = fopen('appelli.xml', "w");
+    $f = fopen('Xml/appelli.xml', "w");
     $result = fwrite($f,  $xml->asXML());
     fclose($f);
     if(!$result) return FALSE;
@@ -431,7 +433,7 @@ function inserisciAppello($nuovoAppello) {
 }
 function eliminaAppello($codice){
     $xmlString = "";
-    foreach ( file("appelli.xml") as $node ) {
+    foreach ( file("Xml/appelli.xml") as $node ) {
         $xmlString .= trim($node);
     }
 
@@ -452,12 +454,12 @@ function eliminaAppello($codice){
     //Now remove it.
     if ($nodeToRemove->parentNode->removeChild($nodeToRemove) == null) return false;
     
-    echo $doc->save("appelli.xml"); 
+    echo $doc->save("Xml/appelli.xml"); 
     return true;
 }
 function eliminaAppelliCorso($id_corso){
     $xmlString = "";
-    foreach ( file("appelli.xml") as $node ) {
+    foreach ( file("Xml/appelli.xml") as $node ) {
         $xmlString .= trim($node);
     }
 
@@ -478,13 +480,13 @@ function eliminaAppelliCorso($id_corso){
             $record->parentNode->removeChild($record);
     }
 
-    echo $doc->save("appelli.xml"); 
+    echo $doc->save("Xml/appelli.xml"); 
     return true;
 }
 
 function eliminaCorso($_id) {
     $xmlString = "";
-    foreach ( file("corsi.xml") as $node ) {
+    foreach ( file("Xml/corsi.xml") as $node ) {
         $xmlString .= trim($node);
     }
 
@@ -504,7 +506,7 @@ function eliminaCorso($_id) {
             
     }
 
-    echo $doc->save("corsi.xml"); 
+    echo $doc->save("Xml/corsi.xml"); 
     return true;
 }
 ?>
