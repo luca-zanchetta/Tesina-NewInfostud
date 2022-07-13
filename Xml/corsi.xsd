@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <xsd:element name="corsi">
         <xsd:complexType>
@@ -20,6 +20,7 @@
         <xsd:element ref="curriculum" minOccurs="1" maxOccurs="1" />
         <xsd:element ref="cfu" minOccurs="1" maxOccurs="1" />
         <xsd:element ref="ssd" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="idCorsoLaurea" minOccurs="1" maxOccurs="1" />
         </xsd:sequence>   
     </xsd:complexType>
     </xsd:element>
@@ -33,4 +34,5 @@
     <xsd:element name="semestre" type="xsd:short"/>
     <xsd:element name="cfu" type="xsd:short"/>
     <xsd:element name="ssd" type="xsd:string"/>
+    <xsd:element name="idCorsoLaurea" type="xsd:short"/>
 </xsd:schema>
