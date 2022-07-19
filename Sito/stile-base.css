@@ -170,6 +170,12 @@ div.container-esami {
     flex-wrap: wrap;
     padding-bottom: 10%;
 }
+div.container-home {
+    justify-content: center; 
+    display: flex; 
+    flex-wrap: wrap;
+    padding-bottom: 5%;
+}
 div.container-admin {
     justify-content: center; 
     display: flex; 
@@ -187,6 +193,24 @@ div.blocco-esame {
     background-color: aqua;
     align-content: space-around;
     align-items: center;
+}
+div.blocco-home {
+    margin: 5%;
+    width: 450px;
+    height: 150px;
+    border-radius: 20px;
+    display: flex; 
+    flex-direction: column;
+    padding: 1em;
+    background-color: firebrick;
+    align-content: space-around;
+    align-items: center;
+}
+div.blocco-home>a {
+    color:white;
+    font-weight: bold;
+    font-size: 150%;
+    margin-top: 10%;
 }
 input.button-iscrizione {
     width: 250px;

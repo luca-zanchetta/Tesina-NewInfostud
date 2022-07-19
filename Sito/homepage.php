@@ -61,7 +61,17 @@
     </div>
     <div class="central-block">
         <div class="body">
-                      
+            <div class="container-home">
+                <div class="blocco-home">
+                    <a href="">I nostri corsi di laurea</a>
+                </div>
+                <div class="blocco-home">
+                    <a href="">I nostri corsi</a>
+                </div>
+                <div class="blocco-home">
+                    <a href="">I nostri docenti</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
