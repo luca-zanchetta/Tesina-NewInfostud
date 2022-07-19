@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <link rel="stylesheet" href="stile-base.css">
+    <link rel="stylesheet" href="stileLogin.css">
     <title>Homepage</title>
 </head>
 <body>
@@ -61,16 +62,11 @@
     </div>
     <div class="central-block">
         <div class="body">
-            <div class="container-home">
-                <div class="blocco-home">
-                    <a href="fittizia.php">I nostri corsi di laurea</a>
-                </div>
-                <div class="blocco-home">
-                    <a href="fittizia.php">I nostri corsi</a>
-                </div>
-                <div class="blocco-home">
-                    <a href="fittizia.php">I nostri docenti</a>
-                </div>
+            <div class="box">
+                <h2>Work in progress...</h2>
+                <form action="homepage.php">
+                <input class="bottoneHome" type="submit" name="reg" value="TORNA ALLA HOME">
+            </form>
             </div>
         </div>
     </div>

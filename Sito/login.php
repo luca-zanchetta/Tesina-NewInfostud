@@ -1,3 +1,9 @@
+<?php
+    if(isset($_POST['loginType'])) {
+        $login = $_POST['loginType'];
+    }
+?>
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html
 PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -28,31 +34,35 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         </div>
         <div class="nav-right">
             <h2>
-                <form action="login.php">
+                <form action="login.php" method="POST">
                     <input type="submit" value="">
+                    <input name="loginType" type="hidden" value="Studente">
                 </form>
                     Studenti      
             </h2>
             <div class="vertical-bar"></div>
             <h2>
-                <form action="login.php">
+                <form action="login.php" method="POST">
                     <input type="submit" value="">
+                    <input name="loginType" type="hidden" value="Docente">
                 </form>
                     Docenti
                 
             </h2>
             <div class="vertical-bar"></div>
             <h2>
-                <form action="login.php">
+                <form action="login.php" method="POST">
                     <input type="submit" value="">
+                    <input name="loginType" type="hidden" value="Segretario">
                 </form>
                     Segreteria
                 
             </h2>
             <div class="vertical-bar"></div>
             <h2>
-                <form action="login.php">
+                <form action="login.php" method="POST">
                     <input type="submit" value="">
+                    <input name="loginType" type="hidden" value="Amministratore">
                 </form>
                     Amministrazione
             </h2>   
@@ -60,7 +70,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     </div>
 <div class="central-block">
     <div class="body">
-        <h2 class="title">LOGIN PER /da inserire con php/</h2> 
+        <h2 class="title">Login <?php echo $login; ?></h2> 
 
         <form action="<?php $_SERVER['PHP_SELF']?>" method="post">
         <div class="box">
@@ -78,15 +88,15 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
             <br />
             <h2>Password:</h2>
             <input class="textField" type="password" name="password">
-        </div> 
-        <div>
+            <br />
             <input class="bottoni" type="submit" name="invio" value="LOGIN">
-        </div>
+        </div> 
         </form>
         <div class="box2">
             <h2>Non sei registrato?</h2>
-            <form action="form_registrazione.php">
+            <form action="form_registrazione.php" method="POST">
                 <input class="bottoni2" type="submit" name="reg" value="REGISTRATI">
+                <input name="loginType" type="hidden" value=<?php echo $login ?>>
             </form>
         </div>
         <?php
