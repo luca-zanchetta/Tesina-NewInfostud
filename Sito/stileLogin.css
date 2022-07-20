@@ -288,14 +288,16 @@ h1, h2, h3, h4 {
     margin: 2ex;
     cursor: pointer;
     font-size: large;
+    border-radius: 9px;
 }
 .bottoni2 {
-    width: 150px;
-    height: 50px;
+    width: 100px;
+    height: 35px;
     font-weight: bold;
     margin: 2ex;
     cursor: pointer;
-    font-size: large;
+    font-size: small;
+    border-radius: 9px;
 }
 .bottoni:hover, .bottoni2:hover {
     background-color:honeydew;

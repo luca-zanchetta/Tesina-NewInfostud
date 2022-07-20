@@ -1,3 +1,12 @@
+<?php
+    if(isset($_POST['loginType'])) {
+        $login = $_POST['loginType'];
+    }
+    else {
+        header('Location: homepage.php');
+    }
+?>
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -6,7 +15,7 @@
 <head>
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileLogin.css">
-    <title>Homepage</title>
+    <title>Registrazione - Infostud</title>
 </head>
 <body>
     <div class="header">
@@ -34,7 +43,7 @@
             </h2>
             <div class="vertical-bar"></div>
             <h2>
-                <form action="login.php">
+                <form action="login.php" method="POST">
                     <input type="submit" value="">
                     <input name="loginType" type="hidden" value="Docente">
                 </form>
@@ -43,7 +52,7 @@
             </h2>
             <div class="vertical-bar"></div>
             <h2>
-                <form action="login.php">
+                <form action="login.php" method="POST">
                     <input type="submit" value="">
                     <input name="loginType" type="hidden" value="Segretario">
                 </form>
@@ -52,7 +61,7 @@
             </h2>
             <div class="vertical-bar"></div>
             <h2>
-                <form action="login.php">
+                <form action="login.php" method="POST">
                     <input type="submit" value="">
                     <input name="loginType" type="hidden" value="Amministratore">
                 </form>
@@ -62,12 +71,7 @@
     </div>
     <div class="central-block">
         <div class="body">
-            <div class="box">
-                <h2>Work in progress...</h2>
-                <form action="homepage.php" method="POST">
-                    <input class="bottoneHome" type="submit" name="reg" value="TORNA ALLA HOME">
-                </form>
-            </div>
+            <h2 class="title">Registrazione <?php echo $login; ?></h2>
         </div>
     </div>
 </div>

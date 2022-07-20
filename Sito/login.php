@@ -2,6 +2,9 @@
     if(isset($_POST['loginType'])) {
         $login = $_POST['loginType'];
     }
+    else {
+        header('Location: homepage.php');
+    }
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -74,15 +77,33 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 
         <form action="<?php $_SERVER['PHP_SELF']?>" method="post">
         <div class="box">
-            <h2>Matr o IGN:</h2>
             <?php
-                if(isset($_POST['matricola'])) {
+                if(isset($_POST['loginType']) && ($login == "Studente" || $login == "Docente")) {
+            ?>
+            <h2>Matricola:</h2>
+            <?php
+                }
+                elseif(isset($_POST['loginType']) && ($login == "Segretario" || $login == "Amministratore")) {
+            ?>
+            <h2>Username:</h2>
+            <?php
+                }
+
+                if(isset($_POST['matricola']) && ($login == "Studente" || $login == "Docente")) {
                     echo "<input class=\"textField\" type=\"text\" name=\"matricola\" value=\"{$_POST['matricola']}\">";
                 }
-                elseif(!isset($_POST['matricola'])) {
-                    ?>
+                elseif(!isset($_POST['matricola']) && ($login == "Studente" || $login == "Docente")) {
+                ?>
                     <input class="textField" type="text" name="matricola">
-                    <?php
+                <?php
+                }
+                elseif(isset($_POST['username']) && ($login == "Segretario" || $login == "Amministratore")) {
+                    echo "<input class=\"textField\" type=\"text\" name=\"matricola\" value=\"{$_POST['username']}\">";
+                }
+                elseif(!isset($_POST['username']) && ($login == "Segretario" || $login == "Amministratore")) {
+                ?>
+                    <input class="textField" type="text" name="username">
+                <?php
                 }
             ?>
             <br />
@@ -90,34 +111,42 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
             <input class="textField" type="password" name="password">
             <br />
             <input class="bottoni" type="submit" name="invio" value="LOGIN">
+            <br />
+            </form>
+            <form action="form_registrazione.php" method="POST">
+                <div style="justify-content: center; display: flex; flex-direction: row; margin-top: 2em;">
+                    <h3>oppure</h3>
+                    <input class="bottoni2" type="submit" name="reg" value="REGISTRATI">
+                    <input name="loginType" type="hidden" value=<?php echo $login ?>>
+                </div>
+            </form>
         </div> 
-        </form>
-        <div class="box2">
+        <!-- <div class="box2">
             <h2>Non sei registrato?</h2>
             <form action="form_registrazione.php" method="POST">
                 <input class="bottoni2" type="submit" name="reg" value="REGISTRATI">
-                <input name="loginType" type="hidden" value=<?php echo $login ?>>
+                <input name="loginType" type="hidden" value=<?php #echo $login ?>>
             </form>
-        </div>
+        </div> -->
         <?php
-            if(isset($_POST['invio']) && ($_POST['matricola'] == "" || $_POST['password'] == "")) { // Manca qualche dato
-                echo "
-                    <div class=\"box4\">
-                        <h2 class=\"error\">DATI MANCANTI! Riprovare.</h2>
-                    </div>";
-            }
-            elseif(isset($_POST['invio']) && (!$utente) && ($verifica_presenza == 1) && !(($_POST['matricola'] == "" || $_POST['password'] == ""))) { // Lo studente non è registrato
-                echo "
-                    <div class=\"box4\">
-                        <h2 class=\"error\">PASSWORD ERRATA! Riprovare.</h2>
-                    </div>";
-            }            
-            elseif(isset($_POST['invio']) && (!$utente) && ($verifica_presenza == 0) && !(($_POST['matricola'] == "" || $_POST['password'] == ""))) { // Lo studente non è registrato
-                echo "
-                    <div class=\"box4\">
-                        <h2 class=\"error\">STUDENTE NON REGISTRATO! Riprovare.</h2>
-                    </div>";
-            }
+            // if(isset($_POST['invio']) && ($_POST['matricola'] == "" || $_POST['password'] == "")) { // Manca qualche dato
+            //     echo "
+            //         <div class=\"box4\">
+            //             <h2 class=\"error\">DATI MANCANTI! Riprovare.</h2>
+            //         </div>";
+            // }
+            // elseif(isset($_POST['invio']) && (!$utente) && ($verifica_presenza == 1) && !(($_POST['matricola'] == "" || $_POST['password'] == ""))) { // Lo studente non è registrato
+            //     echo "
+            //         <div class=\"box4\">
+            //             <h2 class=\"error\">PASSWORD ERRATA! Riprovare.</h2>
+            //         </div>";
+            // }            
+            // elseif(isset($_POST['invio']) && (!$utente) && ($verifica_presenza == 0) && !(($_POST['matricola'] == "" || $_POST['password'] == ""))) { // Lo studente non è registrato
+            //     echo "
+            //         <div class=\"box4\">
+            //             <h2 class=\"error\">STUDENTE NON REGISTRATO! Riprovare.</h2>
+            //         </div>";
+            // }
         ?>
     </div>
 </div>

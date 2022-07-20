@@ -33,7 +33,7 @@
             </h2>
             <div class="vertical-bar"></div>
             <h2>
-                <form action="login.php">
+                <form action="login.php" method="POST">
                     <input type="submit" value="">
                     <input name="loginType" type="hidden" value="Docente">
                 </form>
@@ -42,7 +42,7 @@
             </h2>
             <div class="vertical-bar"></div>
             <h2>
-                <form action="login.php">
+                <form action="login.php" method="POST">
                     <input type="submit" value="">
                     <input name="loginType" type="hidden" value="Segretario">
                 </form>
@@ -51,7 +51,7 @@
             </h2>
             <div class="vertical-bar"></div>
             <h2>
-                <form action="login.php">
+                <form action="login.php" method="POST">
                     <input type="submit" value="">
                     <input name="loginType" type="hidden" value="Amministratore">
                 </form>

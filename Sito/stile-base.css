@@ -92,6 +92,7 @@ div.vertical-bar {
 }
 .nav-right>h2:hover {
     background-color: #822433;
+    cursor: pointer;
 }
 .nav-left>h2>form>input {
     display: inline;
