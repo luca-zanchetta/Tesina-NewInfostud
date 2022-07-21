@@ -164,6 +164,11 @@ div.body-title>h2 {
     color: black;
     margin-left: 20px;
 }
+hr.redBar {
+    border: solid;
+    width: 95%; 
+    color: red;
+}
 /*contenitore blocco esami*/
 div.container-esami {
     justify-content: center; 

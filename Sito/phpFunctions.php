@@ -26,6 +26,10 @@ class appello{
     public $data_scadenza;
     public $id_corso;
 }
+class corsoDiLaurea {
+    public $id;
+    public $nome;
+}
 /*======================================================*/
 /*=====================Funzioni php=====================*/
 /*======================================================*/
@@ -508,5 +512,33 @@ function eliminaCorso($_id) {
 
     echo $doc->save("Xml/corsi.xml"); 
     return true;
+}
+
+function getCorsiDiLaurea() {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("Xml/corsoDiLaurea.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaCorsiDiLaurea = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $corsoDiLaurea = new corsoDiLaurea();
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $corsoDiLaurea->id = $con->textContent;
+        $con = $con->nextSibling;
+        $corsoDiLaurea->nome = $con->textContent;
+             
+        $listaCorsiDiLaurea[] = $corso;
+    }
+    return $listaCorsiDiLaurea;
 }
 ?>
