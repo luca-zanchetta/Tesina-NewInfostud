@@ -72,6 +72,73 @@
     <div class="central-block">
         <div class="body">
             <h2 class="title">Registrazione <?php echo $login; ?></h2>
+            <?php
+            if($login == "Studente") {?>
+            <div class="boxReg">
+                <div class="regContainer">
+                    <div class="labels">
+                        <h3>Nome: </h3>
+                        <h3>Cognome: </h3>
+                        <h3>Data di nascita: </h3>
+                        <h3>Password: </h3>
+                    </div>
+                    <div class="inputs">
+                        <input class="textField" type="text" name="nome">
+                        <input class="textField" type="text" name="cognome">
+                        <input class="textField" type="text" name="dataNascita">
+                        <input class="textField" type="password" name="password">
+                    </div>
+                </div>
+                <div style="padding-top: 1%; margin-left: 30%;">
+                    <form action="fittizia.php" method="POST">
+                        <input class="bottoni" type="submit" name="reg" value="INVIO">
+                    </form>
+                </div>
+            </div>
+            <?php
+            }
+            elseif($login == "Docente") {?>
+            <div class="boxReg">
+                <div class="regContainer">
+                    <div class="labels">
+                        <h3>Nome: </h3>
+                        <h3>Cognome: </h3>
+                        <h3>Password: </h3>
+                    </div>
+                    <div class="inputs">
+                        <input class="textField" type="text" name="nome">
+                        <input class="textField" type="text" name="cognome">
+                        <input class="textField" type="password" name="password">
+                    </div>
+                </div>
+                <div style="padding-top: 1%; margin-left: 30%;">
+                    <form action="fittizia.php" method="POST">
+                        <input class="bottoni" type="submit" name="reg" value="INVIO">
+                    </form>
+                </div>
+            </div>
+            <?php
+            }
+            elseif($login == "Segretario" || $login == "Amministratore") {?>
+            <div class="boxReg">
+                <div class="regContainer">
+                    <div class="labels">
+                        <h3>Username: </h3>
+                        <h3>Password: </h3>
+                    </div>
+                    <div class="inputs">
+                        <input class="textField" type="text" name="username">
+                        <input class="textField" type="password" name="password">
+                    </div>
+                </div>
+                <div style="padding-top: 1%; margin-left: 30%;">
+                    <form action="fittizia.php" method="POST">
+                        <input class="bottoni" type="submit" name="reg" value="INVIO">
+                    </form>
+                </div>
+            </div>
+            <?php
+            }?>
         </div>
     </div>
 </div>
