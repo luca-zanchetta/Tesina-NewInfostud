@@ -66,7 +66,7 @@ div.nav-central{
 }
 div.nav-right {
     display: flex;
-    flex-grow: .4;
+    flex-grow: .5;
     justify-content: flex-end;
     align-items: center;
 }
