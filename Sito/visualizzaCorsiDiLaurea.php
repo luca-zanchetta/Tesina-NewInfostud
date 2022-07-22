@@ -1,5 +1,5 @@
 <?php
-require_once('phpFunctions.php');
+require_once('../Sito/phpFunctions.php');
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -28,7 +28,7 @@ require_once('phpFunctions.php');
             </h2>  
         </div>
         <div class="nav-central">
-            <form action="homepage.php" method="GET">
+            <form action="visualizzaCorsiDiLaurea.php" method="POST">
                 <div class="nav-logo">
                     <input type="submit" name="ricerca" value="">
                     <img src="search.png" alt="err" width="20px" style="display: inline-flex;">
@@ -87,6 +87,56 @@ require_once('phpFunctions.php');
         <div class="body">
             <h2 style="margin-left: 2.5%; font-size: 200%;">I NOSTRI CORSI DI LAUREA:</h2>
             <hr class="redBar" />
+            <br />
+            
+            <?php
+                $corsiDiLaurea = [];
+                if(isset($_POST['filtro']) && $_POST['filtro'] != "") {
+                    $corsiDiLaurea = getCorsiDiLaureaLike($_POST['filtro']);
+
+                    if(!$corsiDiLaurea) {
+                        echo "<h3 class=\"voceElenco\">Non sono disponibili corsi di laurea corrispondenti.</h3>";
+                    }
+                    else {
+                        echo '<hr class="blackBar" />';
+                    }
+
+                    foreach($corsiDiLaurea as $corsoDiLaurea) {
+                    ?>
+                        <div style="display: flex; flex-direction: row;">
+                            <?php echo "<h3 class=\"voceElenco\">".$corsoDiLaurea->nome."</h3>";?>
+                            <a href="fittizia.php">
+                                <img class="arrow" src="arrowBlack.png">
+                            </a>
+                        </div>
+                        <hr class="blackBar" />
+                    <?php
+                    }
+                }
+                else {
+                    $corsiDiLaurea = getCorsiDiLaurea();
+
+                    if(!$corsiDiLaurea) {
+                        echo "<h3 class=\"voceElenco\">Al momento non sono disponibili corsi di laurea.</h3>";
+                    }
+                    else {
+                        echo '<hr class="blackBar" />';
+                    }
+
+                    foreach($corsiDiLaurea as $corsoDiLaurea) {
+                    ?>
+                        <div style="display: flex; flex-direction: row;">
+                            <?php echo "<h3 class=\"voceElenco\">".$corsoDiLaurea->nome."</h3>";?>
+                            <a href="fittizia.php">
+                                <img class="arrow" src="arrowBlack.png">
+                            </a>
+                        </div>
+                        <hr class="blackBar" />
+                    <?php
+                    }
+                }
+                
+            ?>
         </div>
     </div>
 </div>

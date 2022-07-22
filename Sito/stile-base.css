@@ -175,7 +175,17 @@ div.body-title>h2 {
 hr.redBar {
     border: solid;
     width: 95%; 
-    color: red;
+    border-color: red;
+}
+hr.blackBar {
+    border-color: black;
+    width: 87%; 
+}
+h3.voceElenco {
+    margin-left: 7%;
+}
+a>img.arrow {
+    margin-left: 1800%;
 }
 /*contenitore blocco esami*/
 div.container-esami {
