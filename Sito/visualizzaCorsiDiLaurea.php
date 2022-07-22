@@ -1,3 +1,7 @@
+<?php
+require_once('phpFunctions.php');
+?>
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -5,9 +9,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <link rel="stylesheet" href="stile-base.css">
-    <title>Homepage</title>
+    <title>Corsi di Laurea - Infostud</title>
 </head>
-<body style="background-image: url('sapienza.jpg');">
+<body style="background-color: gainsboro;">
     <div class="header">
         <div class="nav-left">
             <div class="nav-logo">
@@ -22,6 +26,15 @@
                 </form>
                 Infostud
             </h2>  
+        </div>
+        <div class="nav-central">
+            <form action="homepage.php" method="GET">
+                <div class="nav-logo">
+                    <input type="submit" name="ricerca" value="">
+                    <img src="search.png" alt="err" width="20px" style="display: inline-flex;">
+                </div>    
+                    <input type="text" name="filtro">              
+            </form>
         </div>
         <div class="nav-right">
             <h2>
@@ -60,18 +73,20 @@
         </div>
     </div>
     <div class="central-block">
+        <div class="sidebar">
+            <h5>
+                <a class="opzione" href="homepage.php">Homepage</a>
+            </h5>
+            <h5>
+                <a class="opzione" href="fittizia.php">I nostri corsi</a>
+            </h5>
+            <h5>
+                <a class="opzione" href="fittizia.php">I nostri docenti</a>
+            </h5>
+        </div>
         <div class="body">
-            <div class="container-home">
-                <div class="blocco-home">
-                    <a href="visualizzaCorsiDiLaurea.php">I nostri corsi di laurea</a>
-                </div>
-                <div class="blocco-home">
-                    <a href="fittizia.php">I nostri corsi</a>
-                </div>
-                <div class="blocco-home">
-                    <a href="fittizia.php">I nostri docenti</a>
-                </div>
-            </div>
+            <h2 style="margin-left: 2.5%; font-size: 200%;">I NOSTRI CORSI DI LAUREA:</h2>
+            <hr class="redBar" />
         </div>
     </div>
 </div>

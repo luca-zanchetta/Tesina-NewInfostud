@@ -5,9 +5,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <link rel="stylesheet" href="stile-base.css">
+    <link rel="stylesheet" href="stileLogin.css">
     <title>Homepage</title>
 </head>
-<body style="background-image: url('sapienza.jpg');">
+<body>
     <div class="header">
         <div class="nav-left">
             <div class="nav-logo">
@@ -33,7 +34,7 @@
             </h2>
             <div class="vertical-bar"></div>
             <h2>
-                <form action="login.php" method="POST">
+                <form action="login.php">
                     <input type="submit" value="">
                     <input name="loginType" type="hidden" value="Docente">
                 </form>
@@ -42,7 +43,7 @@
             </h2>
             <div class="vertical-bar"></div>
             <h2>
-                <form action="login.php" method="POST">
+                <form action="login.php">
                     <input type="submit" value="">
                     <input name="loginType" type="hidden" value="Segretario">
                 </form>
@@ -51,7 +52,7 @@
             </h2>
             <div class="vertical-bar"></div>
             <h2>
-                <form action="login.php" method="POST">
+                <form action="login.php">
                     <input type="submit" value="">
                     <input name="loginType" type="hidden" value="Amministratore">
                 </form>
@@ -61,16 +62,11 @@
     </div>
     <div class="central-block">
         <div class="body">
-            <div class="container-home">
-                <div class="blocco-home">
-                    <a href="visualizzaCorsiDiLaurea.php">I nostri corsi di laurea</a>
-                </div>
-                <div class="blocco-home">
-                    <a href="fittizia.php">I nostri corsi</a>
-                </div>
-                <div class="blocco-home">
-                    <a href="fittizia.php">I nostri docenti</a>
-                </div>
+            <div class="box">
+                <h2>Work in progress...</h2>
+                <form action="homepage.php" method="POST">
+                    <input class="bottoneHome" type="submit" name="reg" value="TORNA ALLA HOME">
+                </form>
             </div>
         </div>
     </div>

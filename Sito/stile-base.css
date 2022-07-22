@@ -24,7 +24,7 @@ div.header {
 div.nav-left {
     display: flex;
     align-items: center;
-    flex:1;
+    flex:0.5;
 }
 .header>div {
     margin: 15px;
@@ -44,6 +44,8 @@ div.nav-central{
     background-color: #4a4a4c;
     height: 3.5rem;
     display: flex;
+    flex: 1;
+    justify-content: flex-start;
     width: 25%;
     border-radius: 8px;
     overflow: hidden;
@@ -51,8 +53,10 @@ div.nav-central{
 }
 .nav-central>form {
     display: flex;
+    width: 100%;
 }
 .nav-central>form>input{
+    width: 100%;
     outline: none;
     background-color: transparent;
     flex: 1;
@@ -62,11 +66,12 @@ div.nav-central{
 }
 div.nav-right {
     display: flex;
-    flex: 1;
+    flex-grow: .5;
     justify-content: flex-end;
     align-items: center;
 }
 .nav-right>h2{
+    display: flex;
     margin: .5%;
     padding: 1%;
     color: white;
@@ -76,6 +81,8 @@ div.nav-right {
 div.vertical-bar {
     border-left: 1px solid #4a4a4c;
     height: 3rem;
+    display: flex;
+    flex-grow: 0;
 }
 .nav-logo>input {
     display: inline;
@@ -92,6 +99,7 @@ div.vertical-bar {
 }
 .nav-right>h2:hover {
     background-color: #822433;
+    cursor: pointer;
 }
 .nav-left>h2>form>input {
     display: inline;
@@ -105,7 +113,8 @@ div.vertical-bar {
     display: flex;
 }
 .nav-right>h2>form>input{
-    display: inline;
+    display: flex;
+    flex: 1;
     background-color: #ffffff00;
     position: absolute;
     border: none;
@@ -163,12 +172,23 @@ div.body-title>h2 {
     color: black;
     margin-left: 20px;
 }
+hr.redBar {
+    border: solid;
+    width: 95%; 
+    color: red;
+}
 /*contenitore blocco esami*/
 div.container-esami {
     justify-content: center; 
     display: flex; 
     flex-wrap: wrap;
     padding-bottom: 10%;
+}
+div.container-home {
+    justify-content: center; 
+    display: flex; 
+    flex-wrap: wrap;
+    padding-bottom: 5%;
 }
 div.container-admin {
     justify-content: center; 
@@ -187,6 +207,24 @@ div.blocco-esame {
     background-color: aqua;
     align-content: space-around;
     align-items: center;
+}
+div.blocco-home {
+    margin: 5%;
+    width: 450px;
+    height: 150px;
+    border-radius: 20px;
+    display: flex; 
+    flex-direction: column;
+    padding: 1em;
+    background-color: firebrick;
+    align-content: space-around;
+    align-items: center;
+}
+div.blocco-home>a {
+    color:white;
+    font-weight: bold;
+    font-size: 150%;
+    margin-top: 10%;
 }
 input.button-iscrizione {
     width: 250px;
