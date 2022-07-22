@@ -66,7 +66,7 @@
                     <a href="visualizzaCorsiDiLaurea.php">I nostri corsi di laurea</a>
                 </div>
                 <div class="blocco-home">
-                    <a href="fittizia.php">I nostri corsi</a>
+                    <a href="visualizzaCorsi.php">I nostri corsi</a>
                 </div>
                 <div class="blocco-home">
                     <a href="fittizia.php">I nostri docenti</a>
