@@ -6,13 +6,14 @@ class corso {
     public $id;
     public $nome;
     public $descrizione;
-    public $info_prof;
-    public $id_colore;
+    public $matricola_prof;
+    public $colore;
     public $anno;
     public $semestre;
     public $curriculum;
     public $cfu;
     public $ssd;
+    public $id_corso_laurea;
 }
 class utente {
     public $matricola;
@@ -29,6 +30,13 @@ class appello{
 class corsoDiLaurea {
     public $id;
     public $nome;
+}
+class docente {
+    public $matricola;
+    public $nome;
+    public $cognome;
+    public $password;
+    public $id_corso;
 }
 /*======================================================*/
 /*=====================Funzioni php=====================*/
@@ -63,9 +71,9 @@ function getCorsi(){
         $con = $con->nextSibling;
         $corso->descrizione = $con->textContent;
         $con = $con->nextSibling;
-        $corso->info_prof = $con->textContent;
+        $corso->matricola_prof = $con->textContent;
         $con = $con->nextSibling;
-        $corso->id_colore = $con->textContent;
+        $corso->colore = $con->textContent;
         $con = $con->nextSibling;
         $corso->anno = $con->textContent;
         $con = $con->nextSibling;
@@ -76,7 +84,9 @@ function getCorsi(){
         $corso->cfu = $con->textContent;
         $con = $con->nextSibling;
         $corso->ssd = $con->textContent;
-        
+        $con = $con->nextSibling;
+        $corso->id_corso_laurea = $con->textContent;
+
         $listaCorsi[] = $corso;
     }
     return $listaCorsi;
@@ -146,13 +156,13 @@ function getCorsiLike($_nome){
         $con = $record->firstChild;
         $corso->id = $con->textContent;
         $con = $con->nextSibling;
-        $corso->nome = $con->textContent;  
+        $corso->nome = $con->textContent;
         $con = $con->nextSibling;
         $corso->descrizione = $con->textContent;
         $con = $con->nextSibling;
-        $corso->info_prof = $con->textContent;
+        $corso->matricola_prof = $con->textContent;
         $con = $con->nextSibling;
-        $corso->id_colore = $con->textContent;
+        $corso->colore = $con->textContent;
         $con = $con->nextSibling;
         $corso->anno = $con->textContent;
         $con = $con->nextSibling;
@@ -163,6 +173,8 @@ function getCorsiLike($_nome){
         $corso->cfu = $con->textContent;
         $con = $con->nextSibling;
         $corso->ssd = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->id_corso_laurea = $con->textContent;
         
         /*controllo sul nome*/
         if(preg_match("#^{$_nome}#i", $corso->nome)) $listaCorsi[] = $corso;
@@ -570,5 +582,102 @@ function getCorsiDiLaureaLike($_nome) {
             $listaCorsiDiLaurea[] = $corsoDiLaurea;
     }
     return $listaCorsiDiLaurea;
+}
+
+function getNomeCorsoDiLaureaByID($_id) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/corsoDiLaurea.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $corsoDiLaurea = new corsoDiLaurea();
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $corsoDiLaurea->id = $con->textContent;
+        $con = $con->nextSibling;
+        $corsoDiLaurea->nome = $con->textContent;
+        if($corsoDiLaurea->id == $_id)
+            return $corsoDiLaurea->nome;
+    }
+    return NULL;
+}
+
+function getDocenti() {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/docenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaDocenti = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $docente = new docente();
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $docente->matricola = $con->textContent;
+        $con = $con->nextSibling;
+        $docente->nome = $con->textContent;
+        $con = $con->nextSibling;
+        $docente->cognome = $con->textContent;
+        $con = $con->nextSibling;
+        $docente->password = $con->textContent;
+        $con = $con->nextSibling;
+        $docente->id_corso = $con->textContent;
+             
+        $listaDocenti[] = $docente;
+    }
+    return $listaDocenti;
+}
+
+function getDocentiLike($_nome) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/docenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaDocenti = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $docente = new docente();
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $docente->matricola = $con->textContent;
+        $con = $con->nextSibling;
+        $docente->nome = $con->textContent;
+        $con = $con->nextSibling;
+        $docente->cognome = $con->textContent;
+        $con = $con->nextSibling;
+        $docente->password = $con->textContent;
+        $con = $con->nextSibling;
+        $docente->id_corso = $con->textContent;
+        
+        /*controllo sul nome*/
+        if(preg_match("#^{$_nome}#i", ($docente->cognome." ".$docente->nome)))
+            $listaDocenti[] = $docente;
+    }
+    return $listaDocenti;
+    
 }
 ?>

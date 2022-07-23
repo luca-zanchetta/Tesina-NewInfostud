@@ -28,7 +28,7 @@ require_once('../Sito/phpFunctions.php');
             </h2>  
         </div>
         <div class="nav-central">
-            <form action="visualizzaCorsi.php" method="POST">
+            <form action="visualizzaDocenti.php" method="POST">
                 <div class="nav-logo">
                     <input type="submit" name="ricerca" value="">
                     <img src="search.png" alt="err" width="20px" style="display: inline-flex;">
@@ -81,11 +81,11 @@ require_once('../Sito/phpFunctions.php');
                 <a class="opzione" href="visualizzaCorsiDiLaurea.php">I nostri corsi di laurea</a>
             </h5>
             <h5>
-                <a class="opzione" href="visualizzaDocenti.php">I nostri docenti</a>
+                <a class="opzione" href="visualizzaCorsi.php">I nostri corsi</a>
             </h5>
         </div>
         <div class="body">
-            <h2 style="margin-left: 2.5%; font-size: 200%;">I NOSTRI CORSI:</h2>
+            <h2 style="margin-left: 2.5%; font-size: 200%;">I NOSTRI DOCENTI:</h2>
             <hr class="redBar" />
             <br />
             <table>
@@ -93,47 +93,49 @@ require_once('../Sito/phpFunctions.php');
             <?php
                 $corsi = [];
                 if(isset($_POST['filtro']) && $_POST['filtro'] != "") {
-                    $corsi = getCorsiLike($_POST['filtro']);
+                    $corsi = getDocentiLike($_POST['filtro']);
 
                     if(!$corsi) {
-                        echo "<h3 class=\"voceElenco\">Nessun corso corrispondente ai criteri di ricerca.</h3>";
+                        echo "<h3 class=\"voceElenco\">Nessun docente corrispondente ai criteri di ricerca.</h3>";
                     }
                     else {
-                        echo '<tr style="background-color: black;"><td></td><td></td><td></td></tr>';
-                        foreach($corsi as $corso) {
-                            $nomeCorsoDiLaurea = getNomeCorsoDiLaureaByID($corso->id_corso_laurea);
+                        echo '<tr style="background-color: black;"><td></td><td></td><td></td><td></td></tr>';
+                        foreach($docenti as $docente) {
+                            $nomeCorso = getNomeCorso($docente->id_corso);
                         ?>
                             <tr>
-                                <td><?php echo "<h3 class=\"voceElenco\">".$corso->nome."</h3>";?></td>
-                                <td><?php echo "<h3 class=\"voceElenco\">".$nomeCorsoDiLaurea."</h3>";?></td>
+                                <td><?php echo "<h3 class=\"voceElenco\">".$docente->cognome."</h3>";?></td>
+                                <td><?php echo "<h3 class=\"voceElenco\">".$docente->nome."</h3>";?></td>
+                                <td><?php echo "<h3 class=\"voceElenco\">".$nomeCorso."</h3>";?></td>
                                 <td><a href="fittizia.php">
                                         <img class="arrow" src="arrowBlack.png">
                                     </a></td>
                             </tr>
-                            <tr style="background-color: black;"><td></td><td></td><td></td></tr>
+                            <tr style="background-color: black;"><td></td><td></td><td></td><td></td></tr>
                         <?php
                         }
                     }
                 }
                 else {
-                    $corsi = getCorsi();
+                    $docenti = getDocenti();
 
-                    if(!$corsi) {
-                        echo "<h3 class=\"voceElenco\">Al momento non sono disponibili corsi.</h3>";
+                    if(!$docenti) {
+                        echo "<h3 class=\"voceElenco\">Al momento non ci sono docenti registrati.</h3>";
                     }
                     else {
-                        echo '<tr style="background-color: black;"><td></td><td></td><td></td></tr>';
-                        foreach($corsi as $corso) {
-                            $nomeCorsoDiLaurea = getNomeCorsoDiLaureaByID($corso->id_corso_laurea);
+                        echo '<tr style="background-color: black;"><td></td><td></td><td></td><td></td></tr>';
+                        foreach($docenti as $docente) {
+                            $nomeCorso = getNomeCorso($docente->id_corso);
                         ?>
                             <tr>
-                                <td><?php echo "<h3 class=\"voceElenco\">".$corso->nome."</h3>";?></td>
-                                <td><?php echo "<h3 class=\"voceElenco\">".$nomeCorsoDiLaurea."</h3>";?></td>
+                                <td><?php echo "<h3 class=\"voceElenco\">".$docente->cognome."</h3>";?></td>
+                                <td><?php echo "<h3 class=\"voceElenco\">".$docente->nome."</h3>";?></td>
+                                <td><?php echo "<h3 class=\"voceElenco\">".$nomeCorso."</h3>";?></td>
                                 <td><a href="fittizia.php">
                                         <img class="arrow" src="arrowBlack.png">
                                     </a></td>
                             </tr>
-                            <tr style="background-color: black;"><td></td><td></td><td></td></tr>
+                            <tr style="background-color: black;"><td></td><td></td><td></td><td></td></tr>
                         <?php
                         }
                     }

@@ -81,36 +81,36 @@ require_once('../Sito/phpFunctions.php');
                 <a class="opzione" href="visualizzaCorsi.php">I nostri corsi</a>
             </h5>
             <h5>
-                <a class="opzione" href="fittizia.php">I nostri docenti</a>
+                <a class="opzione" href="visualizzaDocenti.php">I nostri docenti</a>
             </h5>
         </div>
         <div class="body">
             <h2 style="margin-left: 2.5%; font-size: 200%;">I NOSTRI CORSI DI LAUREA:</h2>
             <hr class="redBar" />
             <br />
-            
+            <table>
+                <tbody>
             <?php
                 $corsiDiLaurea = [];
                 if(isset($_POST['filtro']) && $_POST['filtro'] != "") {
                     $corsiDiLaurea = getCorsiDiLaureaLike($_POST['filtro']);
 
                     if(!$corsiDiLaurea) {
-                        echo "<h3 class=\"voceElenco\">Non sono disponibili corsi di laurea corrispondenti.</h3>";
+                        echo "<h3 class=\"voceElenco\">Non sono disponibili corsi di laurea corrispondenti ai criteri di ricerca.</h3>";
                     }
                     else {
-                        echo '<hr class="blackBar" />';
-                    }
-
-                    foreach($corsiDiLaurea as $corsoDiLaurea) {
-                    ?>
-                        <div style="display: flex; flex-direction: row;">
-                            <?php echo "<h3 class=\"voceElenco\">".$corsoDiLaurea->nome."</h3>";?>
-                            <a href="fittizia.php">
-                                <img class="arrow" src="arrowBlack.png">
-                            </a>
-                        </div>
-                        <hr class="blackBar" />
-                    <?php
+                        echo '<tr class="blackBar"><td></td><td></td></tr>';
+                        foreach($corsiDiLaurea as $corsoDiLaurea) {
+                        ?>
+                            <tr>
+                                <td><?php echo "<h3 class=\"voceElenco\">".$corsoDiLaurea->nome."</h3>";?></td>
+                                <td><a href="fittizia.php">
+                                        <img class="arrow" src="arrowBlack.png">
+                                    </a></td>
+                            </tr>
+                            <tr class="blackBar"><td></td><td></td></tr>
+                        <?php
+                        }
                     }
                 }
                 else {
@@ -120,23 +120,23 @@ require_once('../Sito/phpFunctions.php');
                         echo "<h3 class=\"voceElenco\">Al momento non sono disponibili corsi di laurea.</h3>";
                     }
                     else {
-                        echo '<hr class="blackBar" />';
-                    }
-
-                    foreach($corsiDiLaurea as $corsoDiLaurea) {
-                    ?>
-                        <div style="display: flex; flex-direction: row;">
-                            <?php echo "<h3 class=\"voceElenco\">".$corsoDiLaurea->nome."</h3>";?>
-                            <a href="fittizia.php">
-                                <img class="arrow" src="arrowBlack.png">
-                            </a>
-                        </div>
-                        <hr class="blackBar" />
-                    <?php
+                        echo '<tr class="blackBar"><td></td><td></td></tr>';
+                        foreach($corsiDiLaurea as $corsoDiLaurea) {
+                        ?>
+                            <tr>
+                                <td><?php echo "<h3 class=\"voceElenco\">".$corsoDiLaurea->nome."</h3>";?></td>
+                                <td><a href="fittizia.php">
+                                        <img class="arrow" src="arrowBlack.png">
+                                    </a></td>
+                            </tr>
+                            <tr class="blackBar"><td></td><td></td></tr>
+                        <?php
+                        }
                     }
                 }
-                
             ?>
+            </tbody>
+            </table>
         </div>
     </div>
 </div>
