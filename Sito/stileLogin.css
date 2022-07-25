@@ -100,6 +100,14 @@ div.body {
     overflow-y: scroll;
     flex-direction: column;
 }
+div.bodyReg {
+    padding-top: 2%;
+    display: flex;
+    flex: 1;
+    height: 80vh;
+    overflow-y: scroll;
+    flex-direction: column;
+}
 div.body-title {
     display: flex;
     text-align: center;
@@ -296,6 +304,22 @@ div.inputs {
 }
 .textField:hover {
     background-color:honeydew;
+}
+div.materie {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: -15%;
+    margin-right: 10%;
+    
+}
+select.materie {
+    width: 60%;
+    height: 130%;
+    font-weight: bold;
+    font-size: large;
+    border-radius: 5px;
+    cursor: pointer;
+    border: solid 2px;
 }
 h2.title {
     color: red;
