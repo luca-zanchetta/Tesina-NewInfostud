@@ -175,9 +175,9 @@ else {
                         echo "<input class=\"textField\" type=\"text\" name=\"cognome\">";
                     
                     if(isset($_POST['dataNascita']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"dataNascita\" value=\"{$_POST['dataNascita']}\">";
+                        echo "<input class=\"textField\" type=\"date\" name=\"dataNascita\" value=\"{$_POST['dataNascita']}\">";
                     elseif(!isset($_POST['dataNascita']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"dataNascita\">";
+                        echo "<input class=\"textField\" type=\"date\" name=\"dataNascita\">";
                     ?>
                         <input class="textField" type="password" name="password">
                     </div>

@@ -1,4 +1,6 @@
 <?php
+require_once('phpFunctions.php');
+
 /* ================================= 
 =========== PHP CLASSES ============
 ==================================== */
@@ -30,7 +32,7 @@ class studente {
     public $idCorsoLaurea;
 
     public function __construct($nome, $cognome, $password, $dataNascita) {
-        $this->matricola = 0; /* generaMatricola("Studente") */
+        $this->matricola = generaMatricola("Studente");
         $this->nome = $nome;
         $this->cognome = $cognome;
         $this->password = $password;
@@ -51,7 +53,7 @@ class docente {
     public $idCorso;
 
     public function __construct($nome, $cognome, $password, $idCorso) {
-        $this->matricola = 0; /* generaMatricola("Docente") */
+        $this->matricola = generaMatricola("Docente");
         $this->nome = $nome;
         $this->cognome = $cognome;
         $this->password = $password;

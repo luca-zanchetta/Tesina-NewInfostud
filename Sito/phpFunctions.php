@@ -381,7 +381,7 @@ function getDocenti() {
     $listaDocenti = [];
      
     for ($i=0; $i<$records->length; $i++) {
-        $docente = new docente();
+        $docente = new docente("", "", "", 0);  # Default constructor
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -416,7 +416,7 @@ function getDocentiLike($_nome) {
     $listaDocenti = [];
      
     for ($i=0; $i<$records->length; $i++) {
-        $docente = new docente();
+        $docente = new docente("", "", "", 0);  # Default constructor
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -435,6 +435,39 @@ function getDocentiLike($_nome) {
             $listaDocenti[] = $docente;
     }
     return $listaDocenti;  
+}
+
+
+function generaMatricola($tipoUtenza) {
+    $file = "";
+
+    if($tipoUtenza == "Studente")
+        $file = '../Xml/studenti.xml';
+    elseif($tipoUtenza == "Docente")
+        $file = '../Xml/docenti.xml';
+    else
+        return 0;   /* ERRORE */
+
+
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/docenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+
+    for ($i=0; $i<$records->length; $i++) {
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $ultimaMatricola = $con->textContent;
+    }
+
+    return ($ultimaMatricola + 1);
 }
 
 
