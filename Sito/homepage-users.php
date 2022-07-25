@@ -39,7 +39,7 @@
                 <a class="opzione" href="visualizzaAppelli.php">Esami</a>
             </h5>
             <div style="display:flex;">
-                <img src="arrow.png" alt="duce" width="20px" style="display:flex;">
+                <img src="arrow.png" alt="freccia" width="20px" style="display:flex;">
                 <h5 style="display: flex;margin:0px;">
                     <a class="opzionetab" href="visualizzaAppelli.php" style="display: flex;margin:0px;">Visualizza prenotazioni</a>
                 </h5>
