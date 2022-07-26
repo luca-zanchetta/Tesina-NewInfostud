@@ -1,10 +1,89 @@
 <?php
-    if(isset($_POST['loginType'])) {
-        $login = $_POST['loginType'];
+require_once('phpFunctions.php');
+require_once('phpClasses.php');
+
+if(isset($_POST['loginType'])) {
+    $login = $_POST['loginType'];
+
+    if(isset($_POST['invio'])) {
+        $presenza_dati = FALSE;
+
+        switch($login) {
+            case "Studente":
+                if((isset($_POST['nome']) && $_POST['nome'] != "") && (isset($_POST['cognome']) && $_POST['cognome'] != "") && (isset($_POST['dataNascita']) && $_POST['dataNascita'] != "") && (isset($_POST['password']) && $_POST['password'] != "")) {
+                    $presenza_dati = TRUE;
+                    
+                    $studente = new studente (
+                        $_POST['nome'], 
+                        $_POST['cognome'], 
+                        $_POST['password'], 
+                        $_POST['dataNascita']
+                    );             
+
+                    if(!inserisciStudente($studente))
+                        header('Location: avvisoErrore.html');
+                    else
+                        header('Location: avvisoOK.html');
+                }
+                break;
+
+            case "Docente":
+                if((isset($_POST['nome']) && $_POST['nome'] != "") && (isset($_POST['cognome']) && $_POST['cognome'] != "") && (isset($_POST['materia']) && $_POST['materia'] != "Seleziona materia...") && (isset($_POST['password']) && $_POST['password'] != "")) {
+                    $presenza_dati = TRUE;
+
+                    $idCorso = cercaCorso($_POST['materia']);
+
+                    $docente = new docente (
+                        $_POST['nome'],
+                        $_POST['cognome'],
+                        $_POST['password'],
+                        $idCorso
+                    );
+
+                    if(!inserisciDocente($docente))
+                        header('Location: avvisoErrore.html');
+                    else
+                        header('Location: avvisoOK.html');
+                }
+                break;
+
+            case "Segretario":
+                if((isset($_POST['username']) && $_POST['username'] != "") && (isset($_POST['password']) && $_POST['password'] != "")) {
+                    $presenza_dati = TRUE;
+
+                    $segretario = new segretario (
+                        $_POST['username'],
+                        $_POST['password']
+                    );
+
+                    if(!inserisciSegretario($segretario))
+                        header('Location: avvisoErrore.html');
+                    else
+                        header('Location: avvisoOK.html');
+                }
+                break;
+
+            case "Amministratore":
+                if((isset($_POST['username']) && $_POST['username'] != "") && (isset($_POST['password']) && $_POST['password'] != "")) {
+                    $presenza_dati = TRUE;
+
+                    $amministratore = new amministratore (
+                        $_POST['username'],
+                        $_POST['password']
+                    );
+
+                    if(!inserisciAmministratore($amministratore))
+                        header('Location: avvisoErrore.html');
+                    else
+                        header('Location: avvisoOK.html');
+                }
+                break;
+        }
     }
-    else {
-        header('Location: homepage.php');
-    }
+}
+else {
+    header('Location: homepage.php');
+}
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -70,11 +149,12 @@
         </div>
     </div>
     <div class="central-block">
-        <div class="body">
+        <div class="bodyReg">
             <h2 class="title">Registrazione <?php echo $login; ?></h2>
             <?php
             if($login == "Studente") {?>
             <div class="boxReg">
+            <form action="form_registrazione.php" method="POST">
                 <div class="regContainer">
                     <div class="labels">
                         <h3>Nome: </h3>
@@ -83,62 +163,143 @@
                         <h3>Password: </h3>
                     </div>
                     <div class="inputs">
-                        <input class="textField" type="text" name="nome">
-                        <input class="textField" type="text" name="cognome">
-                        <input class="textField" type="text" name="dataNascita">
+                    <?php
+                    if(isset($_POST['nome']))
+                        echo "<input class=\"textField\" type=\"text\" name=\"nome\" value=\"{$_POST['nome']}\">";
+                    elseif(!isset($_POST['nome']))
+                        echo "<input class=\"textField\" type=\"text\" name=\"nome\">";
+                    
+                    if(isset($_POST['cognome']))
+                        echo "<input class=\"textField\" type=\"text\" name=\"cognome\" value=\"{$_POST['cognome']}\">";
+                    elseif(!isset($_POST['cognome']))
+                        echo "<input class=\"textField\" type=\"text\" name=\"cognome\">";
+                    
+                    if(isset($_POST['dataNascita']))
+                        echo "<input class=\"textField\" type=\"date\" name=\"dataNascita\" value=\"{$_POST['dataNascita']}\">";
+                    elseif(!isset($_POST['dataNascita']))
+                        echo "<input class=\"textField\" type=\"date\" name=\"dataNascita\">";
+                    ?>
                         <input class="textField" type="password" name="password">
                     </div>
                 </div>
                 <div style="padding-top: 1%; margin-left: 30%;">
-                    <form action="fittizia.php" method="POST">
-                        <input class="bottoni" type="submit" name="reg" value="INVIO">
-                    </form>
+                    <input class="bottoni" type="submit" name="invio" value="INVIO">
+                    <input name="loginType" type="hidden" value="Studente">
                 </div>
+            </form>
             </div>
             <?php
             }
             elseif($login == "Docente") {?>
             <div class="boxReg">
+            <form action="form_registrazione.php" method="POST">
                 <div class="regContainer">
                     <div class="labels">
                         <h3>Nome: </h3>
                         <h3>Cognome: </h3>
+                        <h3>Materia: </h3>
                         <h3>Password: </h3>
                     </div>
                     <div class="inputs">
-                        <input class="textField" type="text" name="nome">
-                        <input class="textField" type="text" name="cognome">
+                    <?php
+                    if(isset($_POST['nome']))
+                        echo "<input class=\"textField\" type=\"text\" name=\"nome\" value=\"{$_POST['nome']}\">";
+                    elseif(!isset($_POST['nome']))
+                        echo "<input class=\"textField\" type=\"text\" name=\"nome\">";
+                    
+                    if(isset($_POST['cognome']))
+                        echo "<input class=\"textField\" type=\"text\" name=\"cognome\" value=\"{$_POST['cognome']}\">";
+                    elseif(!isset($_POST['cognome']))
+                        echo "<input class=\"textField\" type=\"text\" name=\"cognome\">";
+                    ?>
+                        <div class="materie">
+                            <select class="materie" name="materia">
+                                <?php
+                                if(isset($_POST['materia']) && $_POST['materia'] != "seleziona")
+                                    echo "<option value=\"{$_POST['materia']}\">{$_POST['materia']}</option>";
+                                elseif(!isset($_POST['materia']))
+                                    echo "<option value=\"seleziona\">Seleziona materia...</option>";
+                                
+                                $materie = [];
+                                $materie = getCorsi();
+                                foreach($materie as $materia) {
+                                    echo "<option value=\"{$materia->nome}\">{$materia->nome}</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
                         <input class="textField" type="password" name="password">
                     </div>
                 </div>
                 <div style="padding-top: 1%; margin-left: 30%;">
-                    <form action="fittizia.php" method="POST">
-                        <input class="bottoni" type="submit" name="reg" value="INVIO">
-                    </form>
+                    <input class="bottoni" type="submit" name="invio" value="INVIO">
+                    <input name="loginType" type="hidden" value="Docente">
                 </div>
+            </form>
             </div>
             <?php
             }
-            elseif($login == "Segretario" || $login == "Amministratore") {?>
+            elseif($login == "Segretario") {?>
             <div class="boxReg">
+            <form action="form_registrazione.php" method="POST">
                 <div class="regContainer">
                     <div class="labels">
                         <h3>Username: </h3>
                         <h3>Password: </h3>
                     </div>
                     <div class="inputs">
-                        <input class="textField" type="text" name="username">
+                    <?php
+                    if(isset($_POST['username']))
+                        echo "<input class=\"textField\" type=\"text\" name=\"username\" value=\"{$_POST['username']}\">";
+                    elseif(!isset($_POST['username']))
+                        echo "<input class=\"textField\" type=\"text\" name=\"username\">";
+                    ?>
                         <input class="textField" type="password" name="password">
                     </div>
                 </div>
                 <div style="padding-top: 1%; margin-left: 30%;">
-                    <form action="fittizia.php" method="POST">
-                        <input class="bottoni" type="submit" name="reg" value="INVIO">
-                    </form>
+                    <input class="bottoni" type="submit" name="invio" value="INVIO">
+                    <input name="loginType" type="hidden" value="Segretario">
                 </div>
+            </form>
             </div>
             <?php
-            }?>
+            }
+            elseif($login == "Amministratore") {?>
+            <div class="boxReg">
+            <form action="form_registrazione.php" method="POST">
+                <div class="regContainer">
+                    <div class="labels">
+                        <h3>Username: </h3>
+                        <h3>Password: </h3>
+                    </div>
+                    <div class="inputs">
+                    <?php
+                    if(isset($_POST['username']))
+                        echo "<input class=\"textField\" type=\"text\" name=\"username\" value=\"{$_POST['username']}\">";
+                    elseif(!isset($_POST['username']))
+                        echo "<input class=\"textField\" type=\"text\" name=\"username\">";
+                    ?>
+                        <input class="textField" type="password" name="password">
+                    </div>
+                </div>
+                <div style="padding-top: 1%; margin-left: 30%;">
+                    <input class="bottoni" type="submit" name="invio" value="INVIO">
+                    <input name="loginType" type="hidden" value="Amministratore">
+                </div>
+            </form>
+            </div>
+            <?php
+            }
+            if(isset($_POST['invio']) && !$presenza_dati) { // Manca qualche dato
+                echo '
+                    <div class="box4">
+                        <h2 class="error">DATI MANCANTI! Riprovare.</h2>
+                    </div>';
+                if(isset($_POST['materia']))
+                    echo "<h3>{$_POST['materia']}</h3>";
+            }
+            ?>
         </div>
     </div>
 </div>

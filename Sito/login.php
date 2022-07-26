@@ -1,10 +1,84 @@
 <?php
-    if(isset($_POST['loginType'])) {
-        $login = $_POST['loginType'];
+require_once('phpFunctions.php');
+
+if(isset($_POST['loginType'])) {
+    $login = $_POST['loginType'];
+
+    if(isset($_POST['login'])) {
+        $presenzaDati = FALSE;
+        $registrato = FALSE;
+        $autenticato = FALSE;
+
+        switch($login) {
+            case "Studente":
+                if((isset($_POST['matricola']) && $_POST['matricola'] != "") && ((isset($_POST['password']) && $_POST['password'] != ""))) {
+                    $presenzaDati = TRUE;
+                        
+                    $registrato = verificaPresenzaMatricola($_POST['matricola'], $login);
+                    if($registrato)
+                        $autenticato = verificaPasswordStudentiDocenti($_POST['password'], $login);
+                        
+                    if($autenticato) {
+                        session_start();
+                        $_SESSION['loginType'] = $login;
+                        header('Location: homepage-users.php');
+                    }
+                }
+                break;
+                    
+            case "Docente":
+                if((isset($_POST['matricola']) && $_POST['matricola'] != "") && ((isset($_POST['password']) && $_POST['password'] != ""))) {
+                    $presenzaDati = TRUE;
+
+                    $registrato = verificaPresenzaMatricola($_POST['matricola'], $login);
+                    if($registrato)
+                        $autenticato = verificaPasswordStudentiDocenti($_POST['password'], $login);
+                        
+                    if($autenticato) {
+                        session_start();
+                        $_SESSION['loginType'] = $login;
+                        header('Location: homepage-users.php');
+                    }
+                }
+                break;
+
+            case "Segretario":
+                if((isset($_POST['username']) && $_POST['username'] != "") && ((isset($_POST['password']) && $_POST['password'] != ""))) {
+                    $presenzaDati = TRUE;
+
+                    $registrato = verificaPresenzaUsername($_POST['username'], $login);
+                    if($registrato)
+                        $autenticato = verificaPasswordSegretarioAmministratore($_POST['password'], $login);
+                        
+                    if($autenticato) {
+                        session_start();
+                        $_SESSION['loginType'] = $login;
+                        header('Location: homepage-users.php');
+                    }
+                }
+                break;
+
+            case "Amministratore":
+                if((isset($_POST['username']) && $_POST['username'] != "") && ((isset($_POST['password']) && $_POST['password'] != ""))) {
+                    $presenzaDati = TRUE;
+
+                    $registrato = verificaPresenzaUsername($_POST['username'], $login);
+                    if($registrato)
+                        $autenticato = verificaPasswordSegretarioAmministratore($_POST['password'], $login);
+                        
+                    if($autenticato) {
+                        session_start();
+                        $_SESSION['loginType'] = $login;
+                        header('Location: homepage-users.php');
+                    }
+                }
+                break;
+        }
     }
-    else {
-        header('Location: homepage.php');
-    }
+}
+else {
+    header('Location: homepage.php');
+}
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -75,7 +149,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     <div class="body">
         <h2 class="title">Login <?php echo $login; ?></h2> 
 
-        <form action="<?php $_SERVER['PHP_SELF']?>" method="post">
+        <form action="login.php" method="POST">
         <div class="box">
             <?php
                 if(isset($_POST['loginType']) && ($login == "Studente" || $login == "Docente")) {
@@ -110,7 +184,8 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
             <h2>Password:</h2>
             <input class="textField" type="password" name="password">
             <br />
-            <input class="bottoni" type="submit" name="invio" value="LOGIN">
+            <input class="bottoni" type="submit" name="login" value="LOGIN">
+            <input name="loginType" type="hidden" value="<?php echo $login; ?>">
             <br />
             </form>
             <form action="form_registrazione.php" method="POST">
@@ -121,32 +196,27 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                 </div>
             </form>
         </div> 
-        <!-- <div class="box2">
-            <h2>Non sei registrato?</h2>
-            <form action="form_registrazione.php" method="POST">
-                <input class="bottoni2" type="submit" name="reg" value="REGISTRATI">
-                <input name="loginType" type="hidden" value=<?php #echo $login ?>>
-            </form>
-        </div> -->
         <?php
-            // if(isset($_POST['invio']) && ($_POST['matricola'] == "" || $_POST['password'] == "")) { // Manca qualche dato
-            //     echo "
-            //         <div class=\"box4\">
-            //             <h2 class=\"error\">DATI MANCANTI! Riprovare.</h2>
-            //         </div>";
-            // }
-            // elseif(isset($_POST['invio']) && (!$utente) && ($verifica_presenza == 1) && !(($_POST['matricola'] == "" || $_POST['password'] == ""))) { // Lo studente non è registrato
-            //     echo "
-            //         <div class=\"box4\">
-            //             <h2 class=\"error\">PASSWORD ERRATA! Riprovare.</h2>
-            //         </div>";
-            // }            
-            // elseif(isset($_POST['invio']) && (!$utente) && ($verifica_presenza == 0) && !(($_POST['matricola'] == "" || $_POST['password'] == ""))) { // Lo studente non è registrato
-            //     echo "
-            //         <div class=\"box4\">
-            //             <h2 class=\"error\">STUDENTE NON REGISTRATO! Riprovare.</h2>
-            //         </div>";
-            // }
+        if(isset($_POST['login'])) {
+            if(!$presenzaDati) {                // Manca qualche dato
+                echo "
+                    <div class=\"box4\">
+                        <h2 class=\"error\">DATI MANCANTI! Riprovare.</h2>
+                    </div>";
+            }
+            if($presenzaDati && !$registrato) {                  // Utente non registrato
+                echo "
+                    <div class=\"box4\">
+                        <h2 class=\"error\">UTENTE NON REGISTRATO! Riprovare.</h2>
+                    </div>";
+            }
+            if($presenzaDati && $registrato && !$autenticato) {  // Password errata
+                echo "
+                    <div class=\"box4\">
+                        <h2 class=\"error\">PASSWORD ERRATA! Riprovare.</h2>
+                    </div>";
+            }
+        }
         ?>
     </div>
 </div>
