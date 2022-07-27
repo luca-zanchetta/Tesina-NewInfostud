@@ -22,8 +22,10 @@ if(isset($_POST['loginType'])) {
 
                     if(!inserisciStudente($studente))
                         header('Location: avvisoErrore.html');
-                    else
-                        header('Location: avvisoOK.html');
+                    else {
+                        setcookie('matricola', $studente->matricola);
+                        header('Location: avvisoOK.php');
+                    }
                 }
                 break;
 
@@ -42,8 +44,10 @@ if(isset($_POST['loginType'])) {
 
                     if(!inserisciDocente($docente))
                         header('Location: avvisoErrore.html');
-                    else
-                        header('Location: avvisoOK.html');
+                    else {
+                        setcookie('matricola', $docente->matricola);
+                        header('Location: avvisoOK.php');
+                    }
                 }
                 break;
 
@@ -59,7 +63,7 @@ if(isset($_POST['loginType'])) {
                     if(!inserisciSegretario($segretario))
                         header('Location: avvisoErrore.html');
                     else
-                        header('Location: avvisoOK.html');
+                        header('Location: avvisoOK.php');
                 }
                 break;
 
@@ -75,7 +79,7 @@ if(isset($_POST['loginType'])) {
                     if(!inserisciAmministratore($amministratore))
                         header('Location: avvisoErrore.html');
                     else
-                        header('Location: avvisoOK.html');
+                        header('Location: avvisoOK.php');
                 }
                 break;
         }
