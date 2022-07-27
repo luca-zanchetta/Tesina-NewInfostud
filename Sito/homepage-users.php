@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+require_once('phpFunctions.php');
+
+if(!isset($_SESSION['loginType']))
+    header('Location: homepage.php');
+?>
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -25,10 +34,20 @@
             <div class="vertical-bar"></div>
         </div>
         <div class="nav-right">
+        <h2>
+            <form action="logout.php">
+                <input type="submit" value="">
+            </form>
+                Logout
+        </h2>
         </div>
     </div>
     <div class="central-block">
-        <div class="sidebar">
+        <?php
+        if(isset($_SESSION['loginType']))
+            creaSidebar($_SESSION['loginType']);
+        ?>
+        <!--<div class="sidebar">
             <h5>
                 <a class="opzione" href="homepage.php">Profilo</a>
             </h5>
@@ -45,7 +64,7 @@
                 </h5>
             </div>
             
-        </div>
+        </div>-->
         <div class="body">
             <h1 style="text-align: center; color: green;">CORSI DISPONIBILI:</h1>
             <div class="container-esami">
