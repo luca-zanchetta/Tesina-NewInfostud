@@ -104,9 +104,10 @@ div.bodyReg {
     padding-top: 2%;
     display: flex;
     flex: 1;
-    height: 80vh;
+    height: 70vh;
     overflow-y: scroll;
     flex-direction: column;
+    padding-bottom: 10%;
 }
 div.body-title {
     display: flex;

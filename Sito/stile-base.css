@@ -9,6 +9,7 @@ body {
     line-height: 1.5em;
     margin: 0;
     overflow: hidden;
+    padding-bottom: 10%;
 }
 /*Barra Di navigazione fissata in alto*/
 div.header {

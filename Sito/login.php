@@ -146,7 +146,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         </div>
     </div>
 <div class="central-block">
-    <div class="body">
+    <div class="bodyReg">
         <h2 class="title">Login <?php echo $login; ?></h2> 
 
         <form action="login.php" method="POST">
