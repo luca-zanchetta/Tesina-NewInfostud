@@ -97,7 +97,7 @@
                         <h2>Nome</h2>
                     </div>
                 </div> 
-                <hr>
+                <hr />
                 <div class="listItem">
                     <div class="element">
                         <h2>Basi di dati</h2>
@@ -106,10 +106,10 @@
                         
                     </div>
                     <div class="lastElement">
-                    <img src="arrow.png" alt="err" width="30px" height="30px" style="display:flex;align-content:center">
+                    <img src="arrowBlack.png" alt="err" width="30px" height="30px" style="display:flex;align-content:center">
                     </div>
                 </div> 
-                <hr>
+                <hr />
                 <div class="listItem">
                     <div class="element">
                         <h2>Elettronica I</h2>
@@ -118,7 +118,7 @@
                         
                     </div>
                     <div class="lastElement">
-                    <img src="arrow.png" alt="err" width="30px" height="30px" style="display:flex;align-content:center">
+                        <a href="fittizia.php"><img class="arrow" width="30px" height="30px" alt="err" src="arrowBlack.png"></a>
                     </div>
                 </div> 
             <hr>

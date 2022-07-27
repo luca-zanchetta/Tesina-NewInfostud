@@ -9,6 +9,7 @@ require_once('../Sito/phpFunctions.php');
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <link rel="stylesheet" href="stile-base.css">
+    <link rel="stylesheet" href="stileVisualizzazioneLista.css">
     <title>Corsi di Laurea - Infostud</title>
 </head>
 <body style="background-color: gainsboro;">
@@ -88,8 +89,19 @@ require_once('../Sito/phpFunctions.php');
             <h2 style="margin-left: 2.5%; font-size: 200%;">I NOSTRI DOCENTI:</h2>
             <hr class="redBar" />
             <br />
-            <table>
-                <tbody>
+            <div class="listContainer">
+                <div class="listItem">
+                    <div class="element" style="width: 25%;">
+                        <h2>Cognome</h2>
+                    </div>
+                    <div class="element" style="width: 25%;">
+                        <h2>Nome</h2>
+                    </div>
+                    <div class="element" style="width: 25%;">
+                        <h2>Materia</h2>
+                    </div>
+                </div>
+                <hr />
             <?php
                 $corsi = [];
                 if(isset($_POST['filtro']) && $_POST['filtro'] != "") {
@@ -99,19 +111,24 @@ require_once('../Sito/phpFunctions.php');
                         echo "<h3 class=\"voceElenco\">Nessun docente corrispondente ai criteri di ricerca.</h3>";
                     }
                     else {
-                        echo '<tr style="background-color: black;"><td></td><td></td><td></td><td></td></tr>';
                         foreach($docenti as $docente) {
                             $nomeCorso = getNomeCorso($docente->id_corso);
                         ?>
-                            <tr>
-                                <td><?php echo "<h3 class=\"voceElenco\">".$docente->cognome."</h3>";?></td>
-                                <td><?php echo "<h3 class=\"voceElenco\">".$docente->nome."</h3>";?></td>
-                                <td><?php echo "<h3 class=\"voceElenco\">".$nomeCorso."</h3>";?></td>
-                                <td><a href="fittizia.php">
-                                        <img class="arrow" src="arrowBlack.png">
-                                    </a></td>
-                            </tr>
-                            <tr style="background-color: black;"><td></td><td></td><td></td><td></td></tr>
+                            <div class="listItem">
+                                <div class="element" style="width: 25%;">
+                                    <h2><?php echo $docente->cognome ?></h2>
+                                </div>
+                                <div class="element" style="width: 25%;">
+                                    <h2><?php echo $docente->nome ?></h2>
+                                </div>
+                                <div class="element" style="width: 25%;">
+                                    <h2><?php echo $nomeCorso ?></h2>
+                                </div>
+                                <div class="lastElement" style="width: 25%;">
+                                    <a href="fittizia.php"><img class="arrow" width="30px" height="30px" alt="err" src="arrowBlack.png"></a>
+                                </div>
+                            </div>
+                            <hr />
                         <?php
                         }
                     }
@@ -123,26 +140,30 @@ require_once('../Sito/phpFunctions.php');
                         echo "<h3 class=\"voceElenco\">Al momento non ci sono docenti registrati.</h3>";
                     }
                     else {
-                        echo '<tr style="background-color: black;"><td></td><td></td><td></td><td></td></tr>';
                         foreach($docenti as $docente) {
                             $nomeCorso = getNomeCorso($docente->id_corso);
                         ?>
-                            <tr>
-                                <td><?php echo "<h3 class=\"voceElenco\">".$docente->cognome."</h3>";?></td>
-                                <td><?php echo "<h3 class=\"voceElenco\">".$docente->nome."</h3>";?></td>
-                                <td><?php echo "<h3 class=\"voceElenco\">".$nomeCorso."</h3>";?></td>
-                                <td><a href="fittizia.php">
-                                        <img class="arrow" src="arrowBlack.png">
-                                    </a></td>
-                            </tr>
-                            <tr style="background-color: black;"><td></td><td></td><td></td><td></td></tr>
+                            <div class="listItem">
+                                <div class="element" style="width: 25%;">
+                                    <h2><?php echo $docente->cognome ?></h2>
+                                </div>
+                                <div class="element" style="width: 25%;">
+                                    <h2><?php echo $docente->nome ?></h2>
+                                </div>
+                                <div class="element" style="width: 25%;">
+                                    <h2><?php echo $nomeCorso ?></h2>
+                                </div>
+                                <div class="lastElement" style="width: 25%;">
+                                    <a href="fittizia.php"><img class="arrow" width="30px" height="30px" alt="err" src="arrowBlack.png"></a>
+                                </div>
+                            </div>
+                            <hr />
                         <?php
                         }
                     }
                 }
             ?>
-            </tbody>
-            </table>
+            </div>
         </div>
     </div>
 </div>

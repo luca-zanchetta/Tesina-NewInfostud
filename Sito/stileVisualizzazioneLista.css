@@ -40,4 +40,7 @@ div.lastElement {
     height: 3px;
     border-radius: 2px;
 }
-
+img.arrow {
+    display: flex;
+    align-content: center;
+}

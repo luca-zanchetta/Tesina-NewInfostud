@@ -9,6 +9,7 @@ require_once('../Sito/phpFunctions.php');
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <link rel="stylesheet" href="stile-base.css">
+    <link rel="stylesheet" href="stileVisualizzazioneLista.css">
     <title>Corsi di Laurea - Infostud</title>
 </head>
 <body style="background-color: gainsboro;">
@@ -88,8 +89,16 @@ require_once('../Sito/phpFunctions.php');
             <h2 style="margin-left: 2.5%; font-size: 200%;">I NOSTRI CORSI:</h2>
             <hr class="redBar" />
             <br />
-            <table>
-                <tbody>
+            <div class="listContainer">
+                <div class="listItem">
+                    <div class="element">
+                        <h2>Corso</h2>
+                    </div>
+                    <div class="element">
+                        <h2>Corso di Laurea</h2>
+                    </div>
+                </div>
+                <hr />
             <?php
                 $corsi = [];
                 if(isset($_POST['filtro']) && $_POST['filtro'] != "") {
@@ -99,18 +108,21 @@ require_once('../Sito/phpFunctions.php');
                         echo "<h3 class=\"voceElenco\">Nessun corso corrispondente ai criteri di ricerca.</h3>";
                     }
                     else {
-                        echo '<tr style="background-color: black;"><td></td><td></td><td></td></tr>';
                         foreach($corsi as $corso) {
                             $nomeCorsoDiLaurea = getNomeCorsoDiLaureaByID($corso->id_corso_laurea);
                         ?>
-                            <tr>
-                                <td><?php echo "<h3 class=\"voceElenco\">".$corso->nome."</h3>";?></td>
-                                <td><?php echo "<h3 class=\"voceElenco\">".$nomeCorsoDiLaurea."</h3>";?></td>
-                                <td><a href="fittizia.php">
-                                        <img class="arrow" src="arrowBlack.png">
-                                    </a></td>
-                            </tr>
-                            <tr style="background-color: black;"><td></td><td></td><td></td></tr>
+                            <div class="listItem">
+                                <div class="element">
+                                    <h2><?php echo $corso->nome; ?></h2>
+                                </div>
+                                <div class="element">
+                                    <h2><?php echo $nomeCorsoDiLaurea; ?></h2>
+                                </div>
+                                <div class="lastElement">
+                                    <a href="fittizia.php"><img class="arrow" width="30px" height="30px" alt="err" src="arrowBlack.png"></a>
+                                </div>
+                            </div>
+                            <hr />
                         <?php
                         }
                     }
@@ -122,25 +134,27 @@ require_once('../Sito/phpFunctions.php');
                         echo "<h3 class=\"voceElenco\">Al momento non sono disponibili corsi.</h3>";
                     }
                     else {
-                        echo '<tr style="background-color: black;"><td></td><td></td><td></td></tr>';
                         foreach($corsi as $corso) {
                             $nomeCorsoDiLaurea = getNomeCorsoDiLaureaByID($corso->id_corso_laurea);
                         ?>
-                            <tr>
-                                <td><?php echo "<h3 class=\"voceElenco\">".$corso->nome."</h3>";?></td>
-                                <td><?php echo "<h3 class=\"voceElenco\">".$nomeCorsoDiLaurea."</h3>";?></td>
-                                <td><a href="fittizia.php">
-                                        <img class="arrow" src="arrowBlack.png">
-                                    </a></td>
-                            </tr>
-                            <tr style="background-color: black;"><td></td><td></td><td></td></tr>
+                            <div class="listItem">
+                                <div class="element">
+                                    <h2><?php echo $corso->nome; ?></h2>
+                                </div>
+                                <div class="element">
+                                    <h2><?php echo $nomeCorsoDiLaurea; ?></h2>
+                                </div>
+                                <div class="lastElement">
+                                    <a href="fittizia.php"><img class="arrow" width="30px" height="30px" alt="err" src="arrowBlack.png"></a>
+                                </div>
+                            </div>
+                            <hr />
                         <?php
                         }
                     }
                 }
             ?>
-            </tbody>
-            </table>
+            </div>
         </div>
     </div>
 </div>
