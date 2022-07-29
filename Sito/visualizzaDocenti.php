@@ -10,7 +10,7 @@ require_once('../Sito/phpFunctions.php');
 <head>
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileVisualizzazioneLista.css">
-    <title>Corsi di Laurea - Infostud</title>
+    <title>Docenti - Infostud</title>
 </head>
 <body style="background-color: gainsboro;">
     <div class="header">
