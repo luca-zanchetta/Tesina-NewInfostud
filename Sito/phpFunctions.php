@@ -245,19 +245,19 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza studenti</a>
+                        <a class="opzionetab" href="visualizzaStudentiAdmin.php" style="display: flex; margin: 0px;">Visualizza studenti</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza docenti</a>
+                        <a class="opzionetab" href="visualizzaDocentiAdmin.php" style="display: flex; margin: 0px;">Visualizza docenti</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza segreteria</a>
+                        <a class="opzionetab" href="visualizzaSegreteriaAdmin.php" style="display: flex; margin: 0px;">Visualizza segreteria</a>
                     </h5>
                 </div>
 
@@ -266,6 +266,39 @@ function creaSidebar($loginType) {
             ';
             break;
     }
+}
+
+
+function generaMatricola($tipoUtenza) {
+    $file = "";
+
+    if($tipoUtenza == "Studente")
+        $file = '../Xml/studenti.xml';
+    elseif($tipoUtenza == "Docente")
+        $file = '../Xml/docenti.xml';
+    else
+        return 0;   /* ERRORE */
+
+
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file($file) as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+
+    for ($i=0; $i<$records->length; $i++) {
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $ultimaMatricola = $con->textContent;
+    }
+
+    return ($ultimaMatricola + 1);
 }
 
 
@@ -810,6 +843,39 @@ function getDocenti() {
 }
 
 
+function getDocenteFromMatricola($matr) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/docenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $docente = new docente("", "", "", 0);  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $docente->matricola = $con->textContent;
+        $con = $con->nextSibling;
+        $docente->nome = $con->textContent;
+        $con = $con->nextSibling;
+        $docente->cognome = $con->textContent;
+        $con = $con->nextSibling;
+        $docente->password = $con->textContent;
+        $con = $con->nextSibling;
+        $docente->id_corso = $con->textContent;
+             
+        if($docente->matricola == $matr) return $docente;
+    }
+    return NULL;
+}
+
+
 function getDocentiLike($_nome) {
     /*accedo al file xml*/
     $xmlString = "";
@@ -847,20 +913,10 @@ function getDocentiLike($_nome) {
 }
 
 
-function generaMatricola($tipoUtenza) {
-    $file = "";
-
-    if($tipoUtenza == "Studente")
-        $file = '../Xml/studenti.xml';
-    elseif($tipoUtenza == "Docente")
-        $file = '../Xml/docenti.xml';
-    else
-        return 0;   /* ERRORE */
-
-
+function getStudenti() {
     /*accedo al file xml*/
     $xmlString = "";
-    foreach ( file($file) as $node ) {
+    foreach ( file("../Xml/studenti.xml") as $node ) {
         $xmlString .= trim($node);
     }
          
@@ -868,15 +924,135 @@ function generaMatricola($tipoUtenza) {
     $doc = new DOMDocument();
     $doc->loadXML($xmlString);
     $records = $doc->documentElement->childNodes;
-
+     
+    $listaStudenti = [];
+     
     for ($i=0; $i<$records->length; $i++) {
+        $studente = new studente("", "", "", "");  # Default constructor
         $record = $records->item($i);
              
         $con = $record->firstChild;
-        $ultimaMatricola = $con->textContent;
+        $studente->matricola = $con->textContent;
+        $con = $con->nextSibling;
+        $studente->nome = $con->textContent;
+        $con = $con->nextSibling;
+        $studente->cognome = $con->textContent;
+        $con = $con->nextSibling;
+        $studente->password = $con->textContent;
+        $con = $con->nextSibling;
+        $studente->dataNascita = $con->textContent;
+        $con = $con->nextSibling;
+        $studente->reputazioneTotale = $con->textContent;
+        $con = $con->nextSibling;
+        $studente->cfuTotale = $con->textContent;
+        $con = $con->nextSibling;
+        $studente->media = $con->textContent;
+        $con = $con->nextSibling;
+        $studente->idCorsoLaurea = $con->textContent;
+             
+        $listaStudenti[] = $studente;
     }
+    return $listaStudenti;
+}
 
-    return ($ultimaMatricola + 1);
+
+function getStudenteFromMatricola($matr) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/studenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $studente = new studente("", "", "", "");  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $studente->matricola = $con->textContent;
+        $con = $con->nextSibling;
+        $studente->nome = $con->textContent;
+        $con = $con->nextSibling;
+        $studente->cognome = $con->textContent;
+        $con = $con->nextSibling;
+        $studente->password = $con->textContent;
+        $con = $con->nextSibling;
+        $studente->dataNascita = $con->textContent;
+        $con = $con->nextSibling;
+        $studente->reputazioneTotale = $con->textContent;
+        $con = $con->nextSibling;
+        $studente->cfuTotale = $con->textContent;
+        $con = $con->nextSibling;
+        $studente->media = $con->textContent;
+        $con = $con->nextSibling;
+        $studente->idCorsoLaurea = $con->textContent;
+             
+        if($studente->matricola == $matr) return $studente;
+    }
+    return NULL;
+}
+
+
+function getSegretari() {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/segreteria.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaSegretari = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $segretario = new segretario("", "");  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $segretario->username = $con->textContent;
+        $con = $con->nextSibling;
+        $segretario->password = $con->textContent;
+             
+        $listaSegretari[] = $segretario;
+    }
+    return $listaSegretari;
+}
+
+
+function getSegretariLike($uname) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/segreteria.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaSegretari = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $segretario = new segretario("", "");  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $segretario->username = $con->textContent;
+        $con = $con->nextSibling;
+        $segretario->password = $con->textContent;
+             
+        if(preg_match("#^{$uname}#i", $segretario->username))
+            $listaSegretari[] = $segretario;
+    }
+    return $listaSegretari;
 }
 
 

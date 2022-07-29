@@ -374,19 +374,17 @@ span#pagetitle {
 
 /* Bottoni admin */
 input.admin {
-    width: 250px;
+    width: 110px;
     height: 50px;
     font-weight: bold;
-    font-size: 130%;
+    font-size: 110%;
     padding: 3%;
-    background-color:antiquewhite;
+    background-color:ghostwhite;
+    border-radius: 9px;
+    cursor: pointer;
 }
 input.admin:hover {
     background-color: gold;
-    width: 300px;
-    height: 70px;
-    font-size: 150%;
-    transition: width 0.7s, height 0.7s;
 }
 form.admin {
     margin: 2%;
