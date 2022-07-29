@@ -1,11 +1,12 @@
 /*classe contente le regole di stile comuni a tutte le pagine del sito*/
-body {
+body.bodyLogin {
     font-family: helvetica,arial,sans-serif;
     background-image: url(sfondo.jpg);/*da decidere*/
     background-size: cover;
     background-position: top center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-color: white;
     line-height: 1.5em;
     margin: 0;
     overflow: hidden;

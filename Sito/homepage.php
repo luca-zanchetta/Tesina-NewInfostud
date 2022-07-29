@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -24,6 +26,8 @@
             </h2>  
         </div>
         <div class="nav-right">
+        <?php
+        if(!isset($_SESSION['loginType'])) {?>
             <h2>
                 <form action="login.php" method="POST">
                     <input type="submit" value="">
@@ -56,7 +60,24 @@
                     <input name="loginType" type="hidden" value="Amministratore">
                 </form>
                     Amministrazione
-            </h2>   
+            </h2>
+        <?php
+        }
+        elseif(isset($_SESSION['loginType'])) {?>
+            <h2>
+                <form action="logout.php">
+                    <input type="submit" value="">
+                </form>
+                    Logout
+            </h2>
+            <div class="vertical-bar"></div>
+            <div class="nav-logo">
+                <a href="homepage-users.php">
+                    <img src="account.png" alt="logo" width="90px">
+                </a>
+            </div>
+        <?php
+        }?>   
         </div>
     </div>
     <div class="central-block">

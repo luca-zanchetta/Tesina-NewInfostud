@@ -100,7 +100,7 @@ else {
     <link rel="stylesheet" href="stileLogin.css">
     <title>Registrazione - Infostud</title>
 </head>
-<body>
+<body class="bodyLogin">
     <div class="header">
         <div class="nav-left">
             <div class="nav-logo">

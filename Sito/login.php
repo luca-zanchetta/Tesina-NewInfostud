@@ -93,7 +93,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     <link rel="stylesheet" href="stileLogin.css">
     <link rel="stylesheet" href="stile-base.css">
 </head>
-<body>
+<body class="bodyLogin">
 <div class="header">
         <div class="nav-left">
             <div class="nav-logo">

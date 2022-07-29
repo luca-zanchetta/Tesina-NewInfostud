@@ -40,6 +40,12 @@ if(!isset($_SESSION['loginType']))
             </form>
                 Logout
         </h2>
+        <div class="vertical-bar"></div>
+            <div class="nav-logo">
+                <a href="homepage-users.php">
+                    <img src="account.png" alt="logo" width="90px">
+                </a>
+            </div>
         </div>
     </div>
     <div class="central-block">

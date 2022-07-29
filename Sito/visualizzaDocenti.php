@@ -38,6 +38,8 @@ require_once('../Sito/phpFunctions.php');
             </form>
         </div>
         <div class="nav-right">
+        <?php
+        if(!isset($_SESSION['loginType'])) {?>
             <h2>
                 <form action="login.php" method="POST">
                     <input type="submit" value="">
@@ -70,7 +72,24 @@ require_once('../Sito/phpFunctions.php');
                     <input name="loginType" type="hidden" value="Amministratore">
                 </form>
                     Amministrazione
-            </h2>   
+            </h2>
+        <?php
+        }
+        elseif(isset($_SESSION['loginType'])) {?>
+            <h2>
+                <form action="logout.php">
+                    <input type="submit" value="">
+                </form>
+                    Logout
+            </h2>
+            <div class="vertical-bar"></div>
+            <div class="nav-logo">
+                <a href="homepage-users.php">
+                    <img src="account.png" alt="logo" width="90px">
+                </a>
+            </div>
+        <?php
+        }?>   
         </div>
     </div>
     <div class="central-block">
@@ -88,7 +107,6 @@ require_once('../Sito/phpFunctions.php');
         <div class="body">
             <h2 style="margin-left: 2.5%; font-size: 200%;">I NOSTRI DOCENTI:</h2>
             <hr class="redBar" />
-            <br />
             <div class="listContainer">
                 <div class="listItem">
                     <div class="element" style="width: 25%;">
