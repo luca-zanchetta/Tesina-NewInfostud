@@ -24,13 +24,13 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
+                        <a class="opzionetab" href="homepage-users-Anagrafica.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza carriera</a>
+                        <a class="opzionetab" href="homepage-users-Carriera.php" style="display: flex; margin: 0px;">Visualizza carriera</a>
                     </h5>
                 </div>
 
@@ -42,19 +42,19 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Appelli prenotati</a>
+                        <a class="opzionetab" href="homepage-users-appelliPrenotati.php" style="display: flex; margin: 0px;">Appelli prenotati</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Prenota appello</a>
+                        <a class="opzionetab" href="homepage-users-prenotaAppello.php" style="display: flex; margin: 0px;">Prenota appello</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Esami sostenuti</a>
+                        <a class="opzionetab" href="homepage-users-esamiSostenuti.php" style="display: flex; margin: 0px;">Esami sostenuti</a>
                     </h5>
                 </div>
 
@@ -62,7 +62,7 @@ function creaSidebar($loginType) {
 
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzione" href="fittizia.php">Bacheca</a>
+                        <a class="opzione" href="homepage-bacheca.php">Bacheca</a>
                     </h5>
                 </div>
 
@@ -70,7 +70,7 @@ function creaSidebar($loginType) {
 
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzione" href="fittizia.php">FAQ</a>
+                        <a class="opzione" href="homepage-faq.php">FAQ</a>
                     </h5>
                 </div>
 
@@ -89,7 +89,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
+                        <a class="opzionetab" href="homepage-users-Anagrafica.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
                 </div>
 
@@ -115,7 +115,7 @@ function creaSidebar($loginType) {
 
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzione" href="fittizia.php">FAQ</a>
+                        <a class="opzione" href="homepage-faq.php">FAQ</a>
                     </h5>
                 </div>
 
@@ -134,7 +134,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
+                        <a class="opzionetab" href="homepage-users-Anagrafica.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
                 </div>
 
@@ -166,7 +166,7 @@ function creaSidebar($loginType) {
 
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzione" href="fittizia.php">Bacheca</a>
+                        <a class="opzione" href="homepage-bacheca.php">Bacheca</a>
                     </h5>
                 </div>
 
@@ -174,7 +174,7 @@ function creaSidebar($loginType) {
 
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzione" href="fittizia.php">FAQ</a>
+                        <a class="opzione" href="homepage-faq.php">FAQ</a>
                     </h5>
                 </div>
 
@@ -193,7 +193,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
+                        <a class="opzionetab" href="homepage-users-Anagrafica.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
                 </div>
 
@@ -225,7 +225,7 @@ function creaSidebar($loginType) {
 
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzione" href="fittizia.php">Bacheca</a>
+                        <a class="opzione" href="homepage-bacheca.php">Bacheca</a>
                     </h5>
                 </div>
 
@@ -233,7 +233,7 @@ function creaSidebar($loginType) {
 
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzione" href="fittizia.php">FAQ</a>
+                        <a class="opzione" href="homepage-faq.php">FAQ</a>
                     </h5>
                 </div>
 

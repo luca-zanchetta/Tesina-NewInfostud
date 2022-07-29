@@ -53,24 +53,6 @@ if(!isset($_SESSION['loginType']))
         if(isset($_SESSION['loginType']))
             creaSidebar($_SESSION['loginType']);
         ?>
-        <!--<div class="sidebar">
-            <h5>
-                <a class="opzione" href="homepage.php">Profilo</a>
-            </h5>
-            <h5>
-                <a class="opzione" href="visualizzaAppelli.php">Visualizza corsi</a>
-            </h5>
-            <h5>
-                <a class="opzione" href="visualizzaAppelli.php">Esami</a>
-            </h5>
-            <div style="display:flex;">
-                <img src="arrow.png" alt="freccia" width="20px" style="display:flex;">
-                <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="visualizzaAppelli.php" style="display: flex;margin:0px;">Visualizza prenotazioni</a>
-                </h5>
-            </div>
-            
-        </div>-->
         <div class="body">
             <h1 style="text-align: center; color: green;">CORSI DISPONIBILI:</h1>
             <div class="container-esami">
