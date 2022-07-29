@@ -148,8 +148,21 @@ a.opzionetab {
     cursor: pointer;
     margin-left: 0.5%;
 }
-a.opzione:hover{
+a.opzione:hover {
     background-color: rgba(0, 255, 255, 0.67);
+    width: 110%;
+    height: 110%;
+    font-size: 110%;
+    transition: width 1s, height 1s;
+    border-radius: 9px;
+}
+a.opzionetab:hover {
+    background-color: rgba(0, 255, 255, 0.67);
+    width: 110%;
+    height: 110%;
+    font-size: 110%;
+    transition: width 1s, height 1s;
+    border-radius: 9px;
 }
 /*corpo della pagina*/
 div.central-block {

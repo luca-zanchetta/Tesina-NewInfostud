@@ -12,6 +12,263 @@ function console_log( $data ){
 }
 
 
+function creaSidebar($loginType) {
+    switch($loginType) {
+
+        case "Studente":
+            echo '
+            <div class="sidebar">
+                <h5>
+                    Informazioni
+                </h5>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
+                    </h5>
+                </div>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza carriera</a>
+                    </h5>
+                </div>
+
+                <hr style="width: 90%; margin-left: -2%;" />
+
+                <h5>
+                    Esami
+                </h5>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Appelli prenotati</a>
+                    </h5>
+                </div>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Prenota appello</a>
+                    </h5>
+                </div>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Esami sostenuti</a>
+                    </h5>
+                </div>
+
+                <hr style="width: 90%; margin-left: -2%;" />
+
+                <div style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzione" href="fittizia.php">Bacheca</a>
+                    </h5>
+                </div>
+
+                <hr style="width: 90%; margin-left: -2%;" />
+
+                <div style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzione" href="fittizia.php">FAQ</a>
+                    </h5>
+                </div>
+
+                <hr style="width: 90%; margin-left: -2%;" />
+            </div>
+            ';
+            break;
+
+
+        case "Docente":
+            echo '
+            <div class="sidebar">
+                <h5>
+                    Informazioni
+                </h5>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
+                    </h5>
+                </div>
+
+                <hr style="width: 90%; margin-left: -2%;" />
+
+                <h5>
+                    Esami
+                </h5>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Inserisci appello</a>
+                    </h5>
+                </div>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza appelli</a>
+                    </h5>
+                </div>
+
+                <hr style="width: 90%; margin-left: -2%;" />
+
+                <div style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzione" href="fittizia.php">FAQ</a>
+                    </h5>
+                </div>
+
+                <hr style="width: 90%; margin-left: -2%;" />
+            </div>
+            ';
+            break;
+
+
+        case "Segretario":
+            echo '
+            <div class="sidebar">
+                <h5>
+                    Informazioni
+                </h5>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
+                    </h5>
+                </div>
+
+                <hr style="width: 90%; margin-left: -2%;" />
+
+                <h5>
+                    Esami
+                </h5>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Inserisci appello</a>
+                    </h5>
+                </div>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza appelli</a>
+                    </h5>
+                </div>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Gestione prenotazioni</a>
+                    </h5>
+                </div>
+
+                <hr style="width: 90%; margin-left: -2%;" />
+
+                <div style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzione" href="fittizia.php">Bacheca</a>
+                    </h5>
+                </div>
+
+                <hr style="width: 90%; margin-left: -2%;" />
+
+                <div style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzione" href="fittizia.php">FAQ</a>
+                    </h5>
+                </div>
+
+                <hr style="width: 90%; margin-left: -2%;" />
+            </div>
+            ';
+            break;
+
+
+        case "Amministratore":
+            echo '
+            <div class="sidebar">
+                <h5>
+                    Informazioni
+                </h5>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
+                    </h5>
+                </div>
+
+                <hr style="width: 90%; margin-left: -2%;" />
+
+                <h5>
+                    Esami
+                </h5>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Inserisci appello</a>
+                    </h5>
+                </div>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza appelli</a>
+                    </h5>
+                </div>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Gestione prenotazioni</a>
+                    </h5>
+                </div>
+
+                <hr style="width: 90%; margin-left: -2%;" />
+
+                <div style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzione" href="fittizia.php">Bacheca</a>
+                    </h5>
+                </div>
+
+                <hr style="width: 90%; margin-left: -2%;" />
+
+                <div style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzione" href="fittizia.php">FAQ</a>
+                    </h5>
+                </div>
+
+                <hr style="width: 90%; margin-left: -2%;" />
+
+                <h5>
+                    Moderazione utenze
+                </h5>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza studenti</a>
+                    </h5>
+                </div>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza docenti</a>
+                    </h5>
+                </div>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza segreteria</a>
+                    </h5>
+                </div>
+
+                <hr style="width: 90%; margin-left: -2%;" />
+            </div>
+            ';
+            break;
+    }
+}
+
+
 
 
 
