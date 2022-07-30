@@ -65,7 +65,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="homepage-users-Anagrafica.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
+                        <a class="opzionetab" href="homepage-users.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
@@ -130,7 +130,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="homepage-users-Anagrafica.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
+                        <a class="opzionetab" href="homepage-users.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
                 </div>
 
@@ -175,7 +175,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="homepage-users-Anagrafica.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
+                        <a class="opzionetab" href="homepage-users.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
                 </div>
 
@@ -234,7 +234,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="homepage-users-Anagrafica.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
+                        <a class="opzionetab" href="homepage-users.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
                 </div>
 
@@ -392,6 +392,85 @@ function displayFullSegretario($segretario) {
         </div>  
         <div class="infoVoice">
             <h2>Password: '.$segretario->password.'</h2>
+        </div>  
+    </div>
+</div>
+    ';
+}
+
+
+function displayAnagraficaStudente($studente) {
+    echo '
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+    <div style="margin-left: 2%;">
+        <div class="infoVoice">
+            <h2>Matricola: '.$studente->matricola.'</h2>
+        </div>
+        <div class="infoVoice">
+            <h2>Nome: '.$studente->nome.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Cognome: '.$studente->cognome.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Data di nascita: '.$studente->dataNascita.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Password: '.$studente->password.'</h2>
+        </div>  
+    </div>
+</div>
+    ';
+}
+
+
+function displayAnagraficaDocente($docente) {
+    echo '
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+    <div style="margin-left: 2%;">
+        <div class="infoVoice">
+            <h2>Matricola: '.$docente->matricola.'</h2>
+        </div> 
+        <div class="infoVoice">
+            <h2>Nome: '.$docente->nome.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Cognome: '.$docente->cognome.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Password: '.$docente->password.'</h2>
+        </div>
+    </div>
+</div>
+    ';
+}
+
+
+function displayAnagraficaSegretario($segretario) {
+    echo '
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+    <div style="margin-left: 2%;">
+        <div class="infoVoice">
+            <h2>Username: '.$segretario->username.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Password: '.$segretario->password.'</h2>
+        </div>  
+    </div>
+</div>
+    ';
+}
+
+
+function displayAnagraficaAmministratore($amministratore) {
+    echo '
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+    <div style="margin-left: 2%;">
+        <div class="infoVoice">
+            <h2>Username: '.$amministratore->username.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Password: '.$amministratore->password.'</h2>
         </div>  
     </div>
 </div>
@@ -1178,6 +1257,35 @@ function getSegretarioFromUsername($uname) {
              
         if($segretario->username == $uname)
             return $segretario;
+    }
+    return NULL;
+}
+
+
+function getAdminFromUsername($uname) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/amministrazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $admin = new amministratore("", "");  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $admin->username = $con->textContent;
+        $con = $con->nextSibling;
+        $admin->password = $con->textContent;
+             
+        if($admin->username == $uname)
+            return $admin;
     }
     return NULL;
 }

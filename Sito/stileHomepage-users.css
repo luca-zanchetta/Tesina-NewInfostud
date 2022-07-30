@@ -13,6 +13,7 @@ div.infoTitle-position {
 }
 .infoTitle-position>h2 {
     display: flex;
+    margin-left: 3%;
 }
 div.infoTitle-user{ 
     display: flex;
@@ -22,6 +23,7 @@ div.infoTitle-user{
 }
 .infoTitle-user>h2 {
     display: flex;
+    margin-right: 3%;
 }
 .body>hr {
   display:flex;
