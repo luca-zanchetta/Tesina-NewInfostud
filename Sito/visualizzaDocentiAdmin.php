@@ -10,6 +10,7 @@ session_start();
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <link rel="stylesheet" href="stile-base.css">
+    <link rel="stylesheet" href="stile-amministrazione.css">
     <link rel="stylesheet" href="stileVisualizzazioneLista.css">
     <title>Docenti - Infostud</title>
 </head>
@@ -137,9 +138,9 @@ session_start();
                                     <h2><?php echo $docente->nome; ?></h2>
                                 </div>
                                 <div class="element">
-                                    <form action="fittizia.php">
-                                        <input class="admin" type="submit" name="gestisci" value="GESTISCI">
-                                        <input type="hidden" name="matricola" value="<?echo $docente->matricola; ?>">
+                                    <form action="gestioneUtenza.php" method="POST">
+                                        <input class="admin" type="submit" name="gestisciDocente" value="GESTISCI">
+                                        <input type="hidden" name="matricola" value="<?php echo $docente->matricola; ?>">
                                     </form>
                                 </div>
                             </div>
@@ -167,9 +168,9 @@ session_start();
                                     <h2><?php echo $docente->nome; ?></h2>
                                 </div>
                                 <div class="element">
-                                    <form action="fittizia.php">
-                                        <input class="admin" type="submit" name="gestisci" value="GESTISCI">
-                                        <input type="hidden" name="matricola" value="<?echo $docente->matricola; ?>">
+                                    <form action="gestioneUtenza.php" method="POST">
+                                        <input class="admin" type="submit" name="gestisciDocente" value="GESTISCI">
+                                        <input type="hidden" name="matricola" value="<?php echo $docente->matricola; ?>">
                                     </form>
                                 </div>
                             </div>

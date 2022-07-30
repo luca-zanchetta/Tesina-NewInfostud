@@ -371,21 +371,3 @@ span#pagetitle {
     }
   }
 */
-
-/* Bottoni admin */
-input.admin {
-    width: 110px;
-    height: 50px;
-    font-weight: bold;
-    font-size: 110%;
-    padding: 3%;
-    background-color:ghostwhite;
-    border-radius: 9px;
-    cursor: pointer;
-}
-input.admin:hover {
-    background-color: gold;
-}
-form.admin {
-    margin: 2%;
-}

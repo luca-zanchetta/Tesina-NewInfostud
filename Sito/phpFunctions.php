@@ -12,6 +12,47 @@ function console_log( $data ){
 }
 
 
+function generaMatricola($tipoUtenza) {
+    $file = "";
+
+    if($tipoUtenza == "Studente")
+        $file = '../Xml/studenti.xml';
+    elseif($tipoUtenza == "Docente")
+        $file = '../Xml/docenti.xml';
+    else
+        return 0;   /* ERRORE */
+
+
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file($file) as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+
+    for ($i=0; $i<$records->length; $i++) {
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $ultimaMatricola = $con->textContent;
+    }
+
+    return ($ultimaMatricola + 1);
+}
+
+
+
+
+
+/* ================================= 
+======== Display functions =========
+==================================== */
+
+
 function creaSidebar($loginType) {
     switch($loginType) {
 
@@ -269,36 +310,92 @@ function creaSidebar($loginType) {
 }
 
 
-function generaMatricola($tipoUtenza) {
-    $file = "";
+function displayFullStudente($studente) {
+    $corsoDiLaurea = getNomeCorsoDiLaureaByID($studente->idCorsoLaurea);
+    echo '
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+    <div style="margin-left: 2%;">
+        <div class="infoVoice">
+            <h2>Utenza: Studente</h2>
+        </div>
+        <div class="infoVoice">
+            <h2>Nome: '.$studente->nome.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Cognome: '.$studente->cognome.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Matricola: '.$studente->matricola.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Corso di laurea: '.$corsoDiLaurea.'</h2>
+        </div>
+        <div class="infoVoice">
+            <h2>Data di nascita: '.$studente->dataNascita.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Password: '.$studente->password.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Reputazione totale: '.$studente->reputazioneTotale.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>CFU totali: '.$studente->cfuTotale.'</h2>
+        </div>
+        <div class="infoVoice">
+            <h2>Media voti: '.$studente->media.'</h2>
+        </div>
+    </div>
+</div>
+    ';
+}
 
-    if($tipoUtenza == "Studente")
-        $file = '../Xml/studenti.xml';
-    elseif($tipoUtenza == "Docente")
-        $file = '../Xml/docenti.xml';
-    else
-        return 0;   /* ERRORE */
+
+function displayFullDocente($docente) {
+    $corso = getNomeCorso($docente->id_corso);
+    echo '
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+    <div style="margin-left: 2%;">
+        <div class="infoVoice">
+            <h2>Utenza: Docente</h2>
+        </div>
+        <div class="infoVoice">
+            <h2>Nome: '.$docente->nome.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Cognome: '.$docente->cognome.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Matricola: '.$docente->matricola.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Insegnamento: '.$corso.'</h2>
+        </div> 
+        <div class="infoVoice">
+            <h2>Password: '.$docente->password.'</h2>
+        </div>
+    </div>
+</div>
+    ';
+}
 
 
-    /*accedo al file xml*/
-    $xmlString = "";
-    foreach ( file($file) as $node ) {
-        $xmlString .= trim($node);
-    }
-         
-    // Creazione del documento
-    $doc = new DOMDocument();
-    $doc->loadXML($xmlString);
-    $records = $doc->documentElement->childNodes;
-
-    for ($i=0; $i<$records->length; $i++) {
-        $record = $records->item($i);
-             
-        $con = $record->firstChild;
-        $ultimaMatricola = $con->textContent;
-    }
-
-    return ($ultimaMatricola + 1);
+function displayFullSegretario($segretario) {
+    echo '
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+    <div style="margin-left: 2%;">
+        <div class="infoVoice">
+            <h2>Utenza: Segretario</h2>
+        </div>
+        <div class="infoVoice">
+            <h2>Username: '.$segretario->username.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Password: '.$segretario->password.'</h2>
+        </div>  
+    </div>
+</div>
+    ';
 }
 
 
@@ -612,6 +709,8 @@ function getNomeCorso($num) {
     $doc->loadXML($xmlString);
     $records = $doc->documentElement->childNodes;
 
+    $nomeCorso = "ERRORE";
+
     if($records->length > 0) { /* C'è almeno un corso */
         for ($i=0; $i<$records->length; $i++) {
             $record = $records->item($i); // i-esimo corso
@@ -624,7 +723,6 @@ function getNomeCorso($num) {
             }
         }
     }
-    else $nomeCorso = "ERRORE";
 
     return $nomeCorso;
 }
@@ -1053,6 +1151,35 @@ function getSegretariLike($uname) {
             $listaSegretari[] = $segretario;
     }
     return $listaSegretari;
+}
+
+
+function getSegretarioFromUsername($uname) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/segreteria.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $segretario = new segretario("", "");  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $segretario->username = $con->textContent;
+        $con = $con->nextSibling;
+        $segretario->password = $con->textContent;
+             
+        if($segretario->username == $uname)
+            return $segretario;
+    }
+    return NULL;
 }
 
 

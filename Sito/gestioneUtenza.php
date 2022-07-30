@@ -1,6 +1,10 @@
 <?php
 require_once('../Sito/phpFunctions.php');
 session_start();
+
+if(!isset($_POST['gestisciStudente']) && !isset($_POST['gestisciDocente']) && !isset($_POST['gestisciSegretario'])) {
+    header('Location: homepage-users.php');
+}
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -11,8 +15,8 @@ session_start();
 <head>
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stile-amministrazione.css">
-    <link rel="stylesheet" href="stileVisualizzazioneLista.css">
-    <title>Segreteria - Infostud</title>
+    <link rel="stylesheet" href="stileHomepage-users.css">
+    <title>Gestione Utenza - Infostud</title>
 </head>
 <body style="background-color: gainsboro;">
     <div class="header">
@@ -30,7 +34,7 @@ session_start();
                 Infostud
             </h2>  
         </div>
-        <div class="nav-central">
+        <!-- <div class="nav-central">
             <form action="visualizzaStudentiAdmin.php" method="POST">
                 <div class="nav-logo">
                     <input type="submit" name="ricerca" value="">
@@ -38,7 +42,7 @@ session_start();
                 </div>    
                     <input type="text" name="filtro">              
             </form>
-        </div>
+        </div> -->
         <div class="nav-right">
         <?php
         if(!isset($_SESSION['loginType'])) {?>
@@ -100,76 +104,48 @@ session_start();
             creaSidebar($_SESSION['loginType']);
         ?>
         <div class="body">
-            <h2 style="margin-left: 2.5%; font-size: 200%;">SEGRETARI ISCRITTI:</h2>
-            <hr class="redBar" />
-            <div class="listContainer">
-                <div class="listItem">
-                    <div class="element">
-                        <h2>Username</h2>
-                    </div>
+            <div class="infoTitle">
+                <div class="infoTitle-position">
+                    <?php
+                    if(isset($_POST['gestisciStudente']))
+                        echo '<h2 style="margin-left: 3%;">GESTIONE STUDENTE</h2>';
+                    elseif(isset($_POST['gestisciDocente']))
+                        echo '<h2 style="margin-left: 3%;">GESTIONE DOCENTE</h2>';
+                    elseif(isset($_POST['gestisciSegretario']))
+                        echo '<h2 style="margin-left: 3%;">GESTIONE SEGRETARIO</h2>';
+                    ?>
                 </div>
-                <hr />
+                <div class="infoTitle-user">
+                <?php
+                    if(isset($_POST['gestisciStudente'])) {
+                        $studente = getStudenteFromMatricola($_POST['matricola']);
+                        echo "<h2 style=\"margin-right: 3%;\">{$studente->nome} {$studente->cognome}, {$studente->matricola}</h2>";
+                    }
+                    elseif(isset($_POST['gestisciDocente'])) {
+                        $docente = getDocenteFromMatricola($_POST['matricola']);
+                        echo "<h2 style=\"margin-right: 3%;\">{$docente->nome} {$docente->cognome}, {$docente->matricola}</h2>";
+                    }
+                    elseif(isset($_POST['gestisciSegretario'])) {       
+                        $segretario = getSegretarioFromUsername($_POST['username']);
+                        echo "<h2 style=\"margin-right: 3%;\">{$segretario->username}</h2>";
+                    }?>
+                </div>
+            </div>    
+            <hr class="redBar"/>
             <?php
-                $segretari = [];     // Da implementare ricerca con MATRICOLA (vedi relazione)
-                if(isset($_POST['filtro']) && $_POST['filtro'] != "") {
-                    $segretari = getSegretariLike($_POST['filtro']);
+            if(isset($_POST['gestisciStudente'])) 
+                displayFullStudente($studente);
 
-                    if(!$segretari) {
-                        echo "<h3 class=\"voceElenco\">Nessun segretario corrispondente ai criteri di ricerca.</h3>";
-                    }
-                    else {
-                        foreach($segretari as $segretario) {
-                        ?>
-                            <div class="listItem">
-                                <div class="element">
-                                    <h2><?php echo $segretario->username; ?></h2>
-                                </div>
-                                <div class="element">
-                                </div>
-                                <div class="element">
-                                </div>
-                                <div class="element">
-                                    <form action="gestioneUtenza.php" method="POST">
-                                        <input class="admin" type="submit" name="gestisciSegretario" value="GESTISCI">
-                                        <input type="hidden" name="username" value="<?php echo $segretario->username; ?>">
-                                    </form>
-                                </div>
-                            </div>
-                            <hr />
-                        <?php
-                        }
-                    }
-                }
-                else {
-                    $segretari = getSegretari();
-
-                    if(!$segretari) {
-                        echo "<h3 class=\"voceElenco\">Nessun segretario registrato.</h3>";
-                    }
-                    else {
-                        foreach($segretari as $segretario) {
-                        ?>
-                            <div class="listItem">
-                                <div class="element">
-                                    <h2><?php echo $segretario->username; ?></h2>
-                                </div>
-                                <div class="element">
-                                </div>
-                                <div class="element">
-                                </div>
-                                <div class="element">
-                                    <form action="gestioneUtenza.php" method="POST">
-                                        <input class="admin" type="submit" name="gestisciSegretario" value="GESTISCI">
-                                        <input type="hidden" name="username" value="<?php echo $segretario->username; ?>">
-                                    </form>
-                                </div>
-                            </div>
-                            <hr />
-                        <?php
-                        }
-                    }
-                }
+            elseif(isset($_POST['gestisciDocente'])) 
+                displayFullDocente($docente);
+                
+            elseif(isset($_POST['gestisciSegretario']))
+                displayFullSegretario($segretario);
             ?>
+            <div class="menuAdmin" style="margin-left: 30%; margin-top: 5%;">
+                <form action="fittizia.php" style=""><input class="admin" type="submit" value="MODIFICA"></form>
+                <form action="fittizia.php" style="margin-left: 20%;"><input class="admin" type="submit" value="SOSPENDI"></form>
+                <form action="fittizia.php" style="margin-left: 20%;"><input class="admin" type="submit" value="ELIMINA"></form>
             </div>
         </div>
     </div>

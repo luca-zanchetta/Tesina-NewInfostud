@@ -79,3 +79,43 @@ div.submit{
 .submit>input {
     height: 2rem;
 }
+
+
+/* Bottoni admin */
+div.menuAdmin {
+    display: flex;
+    width: 33%;
+    align-content: center;
+    align-items: center;
+    margin: 1%;
+    padding-bottom: 5%;
+}
+input.admin {
+    width: 110px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 110%;
+    padding: 3%;
+    background-color:ghostwhite;
+    border-radius: 9px;
+    cursor: pointer;
+}
+input.admin:hover {
+    background-color: gold;
+}
+div.menuAdmin>input.admin {
+    width: 120px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 110%;
+    padding: 2%;
+    background-color:ghostwhite;
+    border-radius: 9px;
+    cursor: pointer;
+}
+div.menuAdmin>input.admin:hover {
+    background-color: gold;
+}
+form.admin {
+    margin: 2%;
+}
