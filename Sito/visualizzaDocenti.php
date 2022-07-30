@@ -94,15 +94,21 @@ require_once('../Sito/phpFunctions.php');
     </div>
     <div class="central-block">
         <div class="sidebar">
-            <h5>
-                <a class="opzione" href="homepage.php">Homepage</a>
-            </h5>
-            <h5>
-                <a class="opzione" href="visualizzaCorsiDiLaurea.php">I nostri corsi di laurea</a>
-            </h5>
-            <h5>
-                <a class="opzione" href="visualizzaCorsi.php">I nostri corsi</a>
-            </h5>
+            <div style="display: flex;">
+                <h5 style="display: flex; margin: 0px;">
+                    <a class="opzione" href="homepage.php">Homepage</a>
+                </h5>
+            </div>
+            <div style="display: flex;">
+                <h5 style="display: flex; margin: 0px;">
+                    <a class="opzione" href="visualizzaCorsiDiLaurea.php">I nostri corsi di laurea</a>
+                </h5>
+            </div>
+            <div style="display: flex;">
+                <h5 style="display: flex; margin: 0px;">
+                    <a class="opzione" href="visualizzaCorsi.php">I nostri corsi</a>
+                </h5>
+            </div>
         </div>
         <div class="body">
             <h2 style="margin-left: 2.5%; font-size: 200%;">I NOSTRI DOCENTI:</h2>
