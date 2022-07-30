@@ -21,6 +21,7 @@ if(isset($_POST['loginType'])) {
                     if($autenticato) {
                         session_start();
                         $_SESSION['loginType'] = $login;
+                        $_SESSION['matricola'] = $_POST['matricola'];
                         header('Location: homepage-users.php');
                     }
                 }
@@ -37,6 +38,7 @@ if(isset($_POST['loginType'])) {
                     if($autenticato) {
                         session_start();
                         $_SESSION['loginType'] = $login;
+                        $_SESSION['matricola'] = $_POST['matricola'];
                         header('Location: homepage-users.php');
                     }
                 }
@@ -53,6 +55,7 @@ if(isset($_POST['loginType'])) {
                     if($autenticato) {
                         session_start();
                         $_SESSION['loginType'] = $login;
+                        $_SESSION['username'] = $_POST['username'];
                         header('Location: homepage-users.php');
                     }
                 }
@@ -69,6 +72,7 @@ if(isset($_POST['loginType'])) {
                     if($autenticato) {
                         session_start();
                         $_SESSION['loginType'] = $login;
+                        $_SESSION['username'] = $_POST['username'];
                         header('Location: homepage-users.php');
                     }
                 }
