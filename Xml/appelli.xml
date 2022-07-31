@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <appelli xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="appelli.xsd">
     <appello>
         <id>1</id>
         <idCorso>1</idCorso>
-        <dataOra>01/01/2000 10:10</dataOra>
+        <dataOra>2000-01-01 10:10</dataOra>
     </appello>
 </appelli>
