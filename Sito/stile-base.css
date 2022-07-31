@@ -195,9 +195,11 @@ tr.blackBar {
     background-color: black;
 }
 hr.redBar {
-    border: solid;
-    width: 95%; 
-    border-color: red;
+    display:flex;
+    width: 96%;               
+    background-color:red;
+    height: 5px;
+    border-radius: 2px;
 }
 h3.voceElenco {
     margin-left: 7%;
