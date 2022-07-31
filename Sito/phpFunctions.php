@@ -699,7 +699,7 @@ function getCorsi() {
         $con = $con->nextSibling;
         $corso->ssd = $con->textContent;
         $con = $con->nextSibling;
-        $corso->id_corso_laurea = $con->textContent;
+        $corso->idCorsoLaurea = $con->textContent;
 
         $listaCorsi[] = $corso;
     }
@@ -746,6 +746,8 @@ function getCorsoById($_id) {
        $corso->cfu = $con->textContent;
        $con = $con->nextSibling;
        $corso->ssd = $con->textContent;
+       $con = $con->nextSibling;
+       $corso->idCorsoLaurea = $con->textContent;
        
        return $corso;
    }
@@ -791,7 +793,7 @@ function getCorsiLike($_nome){
         $con = $con->nextSibling;
         $corso->ssd = $con->textContent;
         $con = $con->nextSibling;
-        $corso->id_corso_laurea = $con->textContent;
+        $corso->idCorsoLaurea = $con->textContent;
         
         /*controllo sul nome*/
         if(preg_match("#^{$_nome}#i", $corso->nome)) $listaCorsi[] = $corso;
@@ -1311,6 +1313,244 @@ function getAdminFromUsername($uname) {
             return $admin;
     }
     return NULL;
+}
+
+
+function getAppelli() {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/appelli.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaAppelli = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $appello = new appello();  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $appello->id = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->idCorso = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->dataOra = $con->textContent;
+             
+        $listaAppelli[] = $appello;
+    }
+    return $listaAppelli;
+}
+
+
+function getAppelliFromCorsoDiLaurea($idCorsoLaurea) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/appelli.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaAppelli = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $appello = new appello();  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $appello->id = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->idCorso = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->dataOra = $con->textContent;
+
+        $corso = getCorsoById($appello->idCorso);
+
+        if($corso->idCorsoLaurea == $idCorsoLaurea)
+            $listaAppelli[] = $appello;
+    }
+    return $listaAppelli;
+}
+
+
+function getAppelloFromId($idAppello) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/appelli.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+    
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $appello = new appello();  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $appello->id = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->idCorso = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->dataOra = $con->textContent;
+
+        if($appello->id == $idAppello)
+            return $appello;
+    }
+    return NULL;
+}
+
+
+function getEsamiSostenuti($studente) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/prenotazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaEsami = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $esame = new prenotazione();  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $esame->id = $con->textContent;
+        $con = $con->nextSibling;
+        $esame->matricolaStudente = $con->textContent;
+        $con = $con->nextSibling;
+        $esame->idAppello = $con->textContent;
+        $con = $con->nextSibling;
+        $esame->esito = $con->textContent;
+
+        $appello = getAppelloFromId($esame->idAppello);
+        $corso = getCorsoById($appello->idCorso);
+
+        if($esame->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
+            if($esame->esito != "NULL")
+                $listaEsami[] = $esame;
+    }
+    return $listaEsami;
+}
+
+
+function getEsamiSuperati($studente) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/prenotazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaEsamiSuperati = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $esame = new prenotazione();  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $esame->id = $con->textContent;
+        $con = $con->nextSibling;
+        $esame->matricolaStudente = $con->textContent;
+        $con = $con->nextSibling;
+        $esame->idAppello = $con->textContent;
+        $con = $con->nextSibling;
+        $esame->esito = $con->textContent;
+
+        $appello = getAppelloFromId($esame->idAppello);
+        $corso = getCorsoById($appello->idCorso);
+
+        if($esame->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
+            if($esame->esito != "NULL" && $esame->esito != "R" && $esame->esito != "B")
+                $listaEsamiSuperati[] = $esame;
+    }
+    return $listaEsamiSuperati;
+}
+
+
+function getAppelliPrenotati($studente) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/prenotazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaPrenotazioni = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $prenotazione = new prenotazione();  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $prenotazione->id = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->matricolaStudente = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->idAppello = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->esito = $con->textContent;
+
+        $appello = getAppelloFromId($prenotazione->idAppello);
+        $corso = getCorsoById($appello->idCorso);
+
+        if($prenotazione->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
+            if($prenotazione->esito == "NULL")
+                $listaPrenotazioni[] = $prenotazione;
+    }
+    return $listaPrenotazioni;
+}
+
+
+function getAppelliPrenotabili($studente) {
+    $appelli = [];
+    $appelli = getAppelliFromCorsoDiLaurea($studente->idCorsoLaurea);
+
+    $appelliPrenotati = [];
+    $appelliPrenotati = getAppelliPrenotati($studente);
+
+    $esamiSuperati = [];
+    $esamiSuperati = getEsamiSuperati($studente);
+
+    // Prendo gli appelli non prenotati
+    $listaAppelliNonPrenotati = [];
+    foreach($appelli as $appello)
+        foreach($appelliPrenotati as $appelloPrenotato)
+            if($appello->id != $appelloPrenotato->idAppello)
+                $listaAppelliNonPrenotati[] = $appello;
+
+    // Tra gli appelli non prenotati, prendo quelli di esami NON superati
+    $listaAppelliPrenotabili = [];
+    foreach($listaAppelliNonPrenotati as $appelloNonPrenotato)
+        foreach($esamiSuperati as $esameSuperato)
+            if($appelloNonPrenotato->id != $esameSuperato->idAppello)
+                $listaAppelliPrenotabili[] = $appelloNonPrenotato;
+
+    return $listaAppelliPrenotabili;
 }
 
 
