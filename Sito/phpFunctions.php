@@ -478,6 +478,29 @@ function displayAnagraficaAmministratore($amministratore) {
 }
 
 
+function displayCarrieraStudente($studente) {
+    $corsoDiLaurea = getNomeCorsoDiLaureaByID($studente->idCorsoLaurea);
+    echo '
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+    <div style="margin-left: 2%;"> 
+        <div class="infoVoice">
+            <h2>Corso di laurea: '.$corsoDiLaurea.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Reputazione totale: '.$studente->reputazioneTotale.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>CFU totali: '.$studente->cfuTotale.'</h2>
+        </div>
+        <div class="infoVoice">
+            <h2>Media voti: '.$studente->media.'</h2>
+        </div>
+    </div>
+</div>
+    ';
+}
+
+
 
 
 
