@@ -501,6 +501,35 @@ function displayCarrieraStudente($studente) {
 }
 
 
+function displayAppelliPrenotabili($studente) {
+    $appelli = [];
+    $appelli = getAppelliPrenotabili($studente);
+
+    if(!$appelli)
+        echo '<h2>Nessun appello prenotabile trovato.</h2>';
+    else {
+        foreach($appelli as $appello) {
+            $corso = getCorsoById($appello->idCorso);
+            echo '
+            <div class="blocco-esame" style="background-color:lightblue;">
+                <div class="nome-esame">
+                    '.$corso->nome."<br />".$appello->dataOra.'
+                </div> 
+                    <div class="info-button">
+                        PRENOTA
+                        <form action="fittizia.php" method="POST">
+                        <input type="submit" name="prenota" value="" >
+                        <input type="hidden" name="matricola" value="'.$_SESSION['matricola'].'">
+                        <input type="hidden" name="idAppello" value="'.$appello->id.'">
+                    </form>
+                </div>  
+            </div>
+            ';
+        }
+    }
+}
+
+
 
 
 
@@ -1529,6 +1558,9 @@ function getAppelliPrenotati($studente) {
 function getAppelliPrenotabili($studente) {
     $appelli = [];
     $appelli = getAppelliFromCorsoDiLaurea($studente->idCorsoLaurea);
+    if(!$appelli)
+        return NULL;
+
 
     $appelliPrenotati = [];
     $appelliPrenotati = getAppelliPrenotati($studente);
@@ -1536,21 +1568,51 @@ function getAppelliPrenotabili($studente) {
     $esamiSuperati = [];
     $esamiSuperati = getEsamiSuperati($studente);
 
-    // Prendo gli appelli non prenotati
-    $listaAppelliNonPrenotati = [];
-    foreach($appelli as $appello)
-        foreach($appelliPrenotati as $appelloPrenotato)
-            if($appello->id != $appelloPrenotato->idAppello)
-                $listaAppelliNonPrenotati[] = $appello;
 
-    // Tra gli appelli non prenotati, prendo quelli di esami NON superati
-    $listaAppelliPrenotabili = [];
-    foreach($listaAppelliNonPrenotati as $appelloNonPrenotato)
-        foreach($esamiSuperati as $esameSuperato)
-            if($appelloNonPrenotato->id != $esameSuperato->idAppello)
-                $listaAppelliPrenotabili[] = $appelloNonPrenotato;
+    if(!$appelliPrenotati && !$esamiSuperati)
+        // Prendo tutti gli appelli
+        return $appelli;
 
-    return $listaAppelliPrenotabili;
+    elseif($appelliPrenotati && !$esamiSuperati) {
+        // Prendo gli appelli non prenotati
+        $listaAppelliNonPrenotati = [];
+        foreach($appelli as $appello)
+            foreach($appelliPrenotati as $appelloPrenotato)
+                if($appello->id != $appelloPrenotato->idAppello)
+                    $listaAppelliNonPrenotati[] = $appello;
+        
+        return $listaAppelliNonPrenotati;
+    }
+
+    elseif(!$appelliPrenotati && $esamiSuperati) {
+        // Prendo gli appelli degli esami non superati
+        $listaEsamiNonSuperati = [];
+        foreach($appelli as $appello)
+            foreach($esamiSuperati as $esameSuperato)
+                if($appello->id != $esameSuperato->idAppello)
+                    $listaEsamiNonSuperati[] = $appello;
+        
+        return $listaEsamiNonSuperati;
+    }
+
+    elseif($appelliPrenotati && $esamiSuperati) {
+        // Tra gli appelli non prenotati, prendo quelli di esami NON superati
+        $listaAppelliNonPrenotati = [];
+        foreach($appelli as $appello)
+            foreach($appelliPrenotati as $appelloPrenotato)
+                if($appello->id != $appelloPrenotato->idAppello)
+                    $listaAppelliNonPrenotati[] = $appello;
+        
+        $listaAppelliPrenotabili = [];
+        foreach($listaAppelliNonPrenotati as $appelloNonPrenotato)
+            foreach($esamiSuperati as $esameSuperato)
+                if($appelloNonPrenotato->id != $esameSuperato->idAppello)
+                    $listaAppelliPrenotabili[] = $appelloNonPrenotato;
+
+        return $listaAppelliPrenotabili;
+    }
+
+    return NULL;    // Nel dubbio è vuota
 }
 
 
