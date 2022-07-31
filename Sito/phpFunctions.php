@@ -1554,6 +1554,11 @@ function getAppelliPrenotabili($studente) {
 }
 
 
+function getDataFromDataora($dataora) {
+    return substr($dataora, 0, 10);
+}
+
+
 
 
 
