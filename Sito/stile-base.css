@@ -1,6 +1,6 @@
 /*classe contente le regole di stile comuni a tutte le pagine del sito*/
 body {
-    background: gainsboro;
+    background-color: gainsboro;
     font-family: helvetica,arial,sans-serif;
     background-image: url(sfondo.jpg);/*da decidere*/
     background-size: cover;
