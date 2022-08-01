@@ -12,6 +12,7 @@ div.listItem {
     flex-direction: row;
     height: fit-content;
     border-radius: 2%;
+    position: relative;
 }
 
 div.element {
@@ -43,4 +44,12 @@ div.lastElement {
 img.arrow {
     display: flex;
     align-content: center;
+}
+
+input {
+    height: 100%;
+    width: 95%;
+    position: absolute;
+    border: none;
+    background: #ffffff00;
 }

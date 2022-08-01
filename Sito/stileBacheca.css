@@ -9,6 +9,7 @@ div.pageNav {
 }
 
 div.prev {
+    position: relative;
     display: flex;
     width: 50px;
     margin-right: 10px;
@@ -19,6 +20,7 @@ div.prev {
 }
 
 div.next {
+    position: relative;
     display: flex;
     margin-left: 10px;
     border-radius: 2px;
@@ -43,6 +45,7 @@ div.pageList {
 }
 
 div.pageNumber {
+    position: relative;
     display: flex;
     justify-content: center;
     width: 30px;
@@ -90,10 +93,11 @@ div.postItem {
     display: flex;
     flex-direction: row;
     background-color: #83012b91;
-    padding: .5% 0 .5% 0;
+    position: relative;
 }
 
 .postItem:hover {
+    border-radius: 4px;
     width: 105%; 
     margin-left: -2%
 }
@@ -101,7 +105,7 @@ div.postItem {
 div.postItemAlt {
     display: flex;
     flex-direction: row;
-    background-color: #d4d4d491;
+    background-color: #d0afba91;
     padding: .5% 0 .5% 0;
 }
 .postItemAlt:hover {
@@ -114,6 +118,7 @@ div.postData {
     display: flex;
     flex-direction: column;
     justify-content: flex start;
+    padding: .5% 0 .5% 0;
 }
 div.postName {
     display: flex ;
@@ -160,9 +165,10 @@ div.postDate {
     justify-content: flex-end;
 }
 
-input {
-    display: inline;
-    background-color: #ffffff00;
+input.bottoneForm {
+    height: 100%;
+    width: 100%;
     position: absolute;
     border: none;
+    background: #ffffff00;
 }

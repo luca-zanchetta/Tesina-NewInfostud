@@ -6,7 +6,7 @@ body {
     background-position: top center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-color: gainsboro;
+    background-color: rgba(220, 220, 220, 0.396);
     line-height: 1.5em;
     margin: 0;
     overflow: hidden;
@@ -349,6 +349,37 @@ span#pagetitle {
     font-weight: bold;
     color: red;
     overflow: hidden;
+}
+/* form inside H2*/
+h2.hForm{
+    display: flex;
+    color: #1b1b1b;
+    position: relative;
+    border-radius: 10%;
+}
+
+h2.hForm:hover {
+    background-color: #82243449;
+    cursor: pointer;
+}
+.hForm>form>input {
+    display: inline;
+    background-color: #ffffff00;
+    position: absolute;
+    border: none;
+    width: 100%;
+}
+
+.hForm>form {
+    display: flex;
+}
+.hForm>form>input{
+    display: flex;
+    flex: 1;
+    background-color: #ffffff00;
+    position: absolute;
+    border: none;
+    width: 100%;
 }
 /*media query
 @media screen and (max-width: 600px) {

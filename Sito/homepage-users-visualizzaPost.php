@@ -1,14 +1,26 @@
+<?php
+session_start();
+require_once('phpFunctions.php');
+
+if(!isset($_SESSION['loginType']) || (isset($_SESSION['loginType']) && $_SESSION['loginType'] != "Studente"))
+    header('Location: homepage.php');
+
+if(isset($_SESSION['matricola']))
+    $studenteLoggato = getStudenteFromMatricola($_SESSION['matricola']);
+?>
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <link rel="stylesheet" href="stile-base.css">
-    <link rel="stylesheet" href="stileHomepage-users.css">
-    <link rel="stylesheet" href="stileBacheca.css">
-    <link rel="stylesheet" href="stilePost.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="stile-base.css">
+        <link rel="stylesheet" href="stileHomepage-users.css">
+        <link rel="stylesheet" href="stileBacheca.css">
+        <link rel="stylesheet" href="stilePost.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <title>Homepage</title>
     <style>
         .checked {
@@ -40,54 +52,17 @@
             </form>
                 Logout
         </h2>
+        <div class="vertical-bar"></div>
+            <div class="nav-logo">
+                <a href="homepage-users.php">
+                    <img src="account.png" alt="logo" width="90px">
+                </a>
+            </div>
+        </div>
         </div>
     </div>
     <div class="central-block">
-        <div class="sidebar">
-            <h5>
-                Informazioni
-            </h5>
-            <div style="display:flex;">
-                <img src="arrow.png" alt="err" width="20px" height="20px" style="display:flex;align-content:center">
-                <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="homepage-users-Anagrafica.php" style="display: flex;margin:0px;">Visualizza anagrafica</a>
-                </h5>
-            </div>
-            <div style="display:flex;">
-                <img src="arrow.png" alt="err" width="20px" height="20px" style="display:flex;align-content:center">
-                <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="homepage-users-Carriera.php" style="display: flex;margin:0px;">Visualizza carriera</a>
-                </h5>
-            </div>
-            <h5>
-                Esami
-            </h5>
-            <div style="display:flex;">
-                <img src="arrow.png" alt="err" width="20px" height="20px" style="display:flex;align-content:center">
-                <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="homepage-users-appelliPrenotati.php" style="display: flex;margin:0px;">Appelli prenotati</a>
-                </h5>
-            </div>
-            <div style="display:flex;">
-                <img src="arrow.png" alt="err" width="20px" height="20px" style="display:flex;align-content:center">
-                <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="homepage-users-prenotaAppello.php" style="display: flex;margin:0px;">Prenota Appello</a>
-                </h5>
-            </div>
-            <div style="display:flex;">
-                <img src="arrow.png" alt="err" width="20px" height="20px" style="display:flex;align-content:center">
-                <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="homepage-users-esamiSostenuti.php" style="display: flex;margin:0px;">Esami Sostenuti</a>
-                </h5>
-            </div>
-            <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="homepage-bacheca.php" style="display: flex;margin:0px;">Bacheca</a>
-            </h5>
-            <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="homepage-faq.php" style="display: flex;margin:0px;">FAQ</a>
-            </h5>
-            
-        </div>
+        <?php creaSidebar($_SESSION['loginType']); ?>
         <div class="body">
             <div class="infoTitle">
                 <div class="infoTitle-position">
@@ -112,10 +87,10 @@
                 </div>
             </div>
             <div class="pageNav">
-                <form action="">
+                <form action="homepage-users-visualizzaBacheca.php">
                 <div class="prev">
                     Prev  
-                    <input type="submit" value=""> <!--Struttura di ogni bottone -->
+                    <input type="submit" value="" class="bottoneForm"> <!--Struttura di ogni bottone -->
                     <input type="hidden">
                 </div>
                 </form>
@@ -126,7 +101,7 @@
                     <form action="">
                     <div class="pageNumber">
                         2
-                        <input type="submit" value=""> <!--Struttura di ogni bottone -->
+                        <input type="submit" value="" class="bottoneForm"> <!--Struttura di ogni bottone -->
                         <input type="hidden">
                     </div>
                     </form>
@@ -137,7 +112,7 @@
                 <form action="">
                 <div class="next">
                     Next
-                    <input type="submit" value=""> <!--Struttura di ogni bottone -->
+                    <input type="submit" value="" class="bottoneForm"> <!--Struttura di ogni bottone -->
                         <input type="hidden">
                 </div>
                 </form>
@@ -172,11 +147,20 @@
                                 Il tuo voto: 
                             </div> 
                             <div class="commentVoteContainer">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
+                                <div class="stars">
+                                    <form action="">
+                                        <input class="star star-5" id="star-5" type="radio" name="star"/>
+                                        <label class="star star-5" for="star-5"></label>
+                                        <input class="star star-4" id="star-4" type="radio" name="star"/>
+                                        <label class="star star-4" for="star-4"></label>
+                                        <input class="star star-3" id="star-3" type="radio" name="star"/>
+                                        <label class="star star-3" for="star-3"></label>
+                                        <input class="star star-2" id="star-2" type="radio" name="star"/>
+                                        <label class="star star-2" for="star-2"></label>
+                                        <input class="star star-1" id="star-1" type="radio" name="star"/>
+                                        <label class="star star-1" for="star-1"></label>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                         <div class="commentText">
