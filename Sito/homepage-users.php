@@ -1,10 +1,34 @@
 <?php
 session_start();
-
 require_once('phpFunctions.php');
 
 if(!isset($_SESSION['loginType']))
     header('Location: homepage.php');
+elseif(isset($_SESSION['loginType']))
+    $loginType = $_SESSION['loginType'];
+
+switch($loginType) {
+
+    case "Studente":
+        if(isset($_SESSION['matricola']))
+            $studenteLoggato = getStudenteFromMatricola($_SESSION['matricola']);
+        break;
+
+    case "Docente":
+        if(isset($_SESSION['matricola']))
+            $docenteLoggato = getDocenteFromMatricola($_SESSION['matricola']);
+        break;
+
+    case "Segretario":
+        if(isset($_SESSION['username']))
+            $segretarioLoggato = getSegretarioFromUsername($_SESSION['username']);
+        break;
+
+    case "Amministratore":
+        if(isset($_SESSION['username']))
+            $adminLoggato = getAdminFromUsername($_SESSION['username']);
+        break;
+}
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -14,7 +38,8 @@ if(!isset($_SESSION['loginType']))
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <link rel="stylesheet" href="stile-base.css">
-    <title>Homepage</title>
+    <link rel="stylesheet" href="stileHomepage-users.css">
+    <title>Homepage - Infostud</title>
 </head>
 <body>
     <div class="header">
@@ -47,6 +72,7 @@ if(!isset($_SESSION['loginType']))
                 </a>
             </div>
         </div>
+        </div>
     </div>
     <div class="central-block">
         <?php
@@ -54,9 +80,37 @@ if(!isset($_SESSION['loginType']))
             creaSidebar($_SESSION['loginType']);
         ?>
         <div class="body">
-            <h1 style="text-align: center; color: green;">CORSI DISPONIBILI:</h1>
-            <div class="container-esami">
-            </div>           
+            <div class="infoTitle">
+                <div class="infoTitle-position">
+                    <h2>ANAGRAFICA</h2>
+                </div>
+                <div class="infoTitle-user">
+                <?php
+                    if($loginType == "Studente") {
+                        echo "<h2>{$studenteLoggato->nome} {$studenteLoggato->cognome}, {$studenteLoggato->matricola}</h2>";
+                    }
+                    elseif($loginType == "Docente") {
+                        echo "<h2>{$docenteLoggato->nome} {$docenteLoggato->cognome}, {$docenteLoggato->matricola}</h2>";
+                    }
+                    elseif($loginType == "Segretario") {       
+                        echo "<h2>{$segretarioLoggato->username}</h2>";
+                    }
+                    elseif($loginType == "Amministratore") {
+                        echo "<h2>{$adminLoggato->username}</h2>";
+                    }?>
+                </div>
+            </div>    
+            <hr />
+            <?php
+            if($loginType == "Studente")
+                displayAnagraficaStudente($studenteLoggato);
+            elseif($loginType == "Docente") 
+                displayAnagraficaDocente($docenteLoggato);
+            elseif($loginType == "Segretario")
+                displayAnagraficaSegretario($segretarioLoggato);
+            elseif($loginType == "Amministratore")
+                displayAnagraficaAmministratore($adminLoggato);
+            ?>
         </div>
     </div>
 </div>

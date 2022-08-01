@@ -16,7 +16,7 @@ class corso {
     public $curriculum;
     public $cfu;
     public $ssd;
-    public $id_corso_laurea;
+    public $idCorsoLaurea;
 }
 
 
@@ -84,16 +84,23 @@ class amministratore {
 }
 
 
-class appello{
-    public $codice;
-    public $data_appello;
-    public $data_scadenza;
-    public $id_corso;
+class appello {
+    public $id;
+    public $dataOra;
+    public $idCorso;
 }
 
 
 class corsoDiLaurea {
     public $id;
     public $nome;
+}
+
+
+class prenotazione {
+    public $id;
+    public $matricolaStudente;
+    public $idAppello;
+    public $esito;
 }
 ?>

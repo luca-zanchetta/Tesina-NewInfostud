@@ -65,7 +65,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="homepage-users-Anagrafica.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
+                        <a class="opzionetab" href="homepage-users.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
@@ -130,7 +130,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="homepage-users-Anagrafica.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
+                        <a class="opzionetab" href="homepage-users.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
                 </div>
 
@@ -175,7 +175,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="homepage-users-Anagrafica.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
+                        <a class="opzionetab" href="homepage-users.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
                 </div>
 
@@ -234,7 +234,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="homepage-users-Anagrafica.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
+                        <a class="opzionetab" href="homepage-users.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
                 </div>
 
@@ -396,6 +396,137 @@ function displayFullSegretario($segretario) {
     </div>
 </div>
     ';
+}
+
+
+function displayAnagraficaStudente($studente) {
+    echo '
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+    <div style="margin-left: 2%;">
+        <div class="infoVoice">
+            <h2>Matricola: '.$studente->matricola.'</h2>
+        </div>
+        <div class="infoVoice">
+            <h2>Nome: '.$studente->nome.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Cognome: '.$studente->cognome.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Data di nascita: '.$studente->dataNascita.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Password: '.$studente->password.'</h2>
+        </div>  
+    </div>
+</div>
+    ';
+}
+
+
+function displayAnagraficaDocente($docente) {
+    echo '
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+    <div style="margin-left: 2%;">
+        <div class="infoVoice">
+            <h2>Matricola: '.$docente->matricola.'</h2>
+        </div> 
+        <div class="infoVoice">
+            <h2>Nome: '.$docente->nome.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Cognome: '.$docente->cognome.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Password: '.$docente->password.'</h2>
+        </div>
+    </div>
+</div>
+    ';
+}
+
+
+function displayAnagraficaSegretario($segretario) {
+    echo '
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+    <div style="margin-left: 2%;">
+        <div class="infoVoice">
+            <h2>Username: '.$segretario->username.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Password: '.$segretario->password.'</h2>
+        </div>  
+    </div>
+</div>
+    ';
+}
+
+
+function displayAnagraficaAmministratore($amministratore) {
+    echo '
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+    <div style="margin-left: 2%;">
+        <div class="infoVoice">
+            <h2>Username: '.$amministratore->username.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Password: '.$amministratore->password.'</h2>
+        </div>  
+    </div>
+</div>
+    ';
+}
+
+
+function displayCarrieraStudente($studente) {
+    $corsoDiLaurea = getNomeCorsoDiLaureaByID($studente->idCorsoLaurea);
+    echo '
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+    <div style="margin-left: 2%;"> 
+        <div class="infoVoice">
+            <h2>Corso di laurea: '.$corsoDiLaurea.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>Reputazione totale: '.$studente->reputazioneTotale.'</h2>
+        </div>  
+        <div class="infoVoice">
+            <h2>CFU totali: '.$studente->cfuTotale.'</h2>
+        </div>
+        <div class="infoVoice">
+            <h2>Media voti: '.$studente->media.'</h2>
+        </div>
+    </div>
+</div>
+    ';
+}
+
+
+function displayAppelliPrenotabili($studente) {
+    $appelli = [];
+    $appelli = getAppelliPrenotabili($studente);
+
+    if(!$appelli)
+        echo '<h2>Nessun appello prenotabile trovato.</h2>';
+    else {
+        foreach($appelli as $appello) {
+            $corso = getCorsoById($appello->idCorso);
+            echo '
+            <div class="blocco-esame" style="background-color:lightblue;">
+                <div class="nome-esame">
+                    '.$corso->nome."<br />".$appello->dataOra.'
+                </div> 
+                    <div class="info-button">
+                        PRENOTA
+                        <form action="fittizia.php" method="POST">
+                        <input type="submit" name="prenota" value="" >
+                        <input type="hidden" name="matricola" value="'.$_SESSION['matricola'].'">
+                        <input type="hidden" name="idAppello" value="'.$appello->id.'">
+                    </form>
+                </div>  
+            </div>
+            ';
+        }
+    }
 }
 
 
@@ -597,7 +728,7 @@ function getCorsi() {
         $con = $con->nextSibling;
         $corso->ssd = $con->textContent;
         $con = $con->nextSibling;
-        $corso->id_corso_laurea = $con->textContent;
+        $corso->idCorsoLaurea = $con->textContent;
 
         $listaCorsi[] = $corso;
     }
@@ -644,6 +775,8 @@ function getCorsoById($_id) {
        $corso->cfu = $con->textContent;
        $con = $con->nextSibling;
        $corso->ssd = $con->textContent;
+       $con = $con->nextSibling;
+       $corso->idCorsoLaurea = $con->textContent;
        
        return $corso;
    }
@@ -689,7 +822,7 @@ function getCorsiLike($_nome){
         $con = $con->nextSibling;
         $corso->ssd = $con->textContent;
         $con = $con->nextSibling;
-        $corso->id_corso_laurea = $con->textContent;
+        $corso->idCorsoLaurea = $con->textContent;
         
         /*controllo sul nome*/
         if(preg_match("#^{$_nome}#i", $corso->nome)) $listaCorsi[] = $corso;
@@ -1180,6 +1313,311 @@ function getSegretarioFromUsername($uname) {
             return $segretario;
     }
     return NULL;
+}
+
+
+function getAdminFromUsername($uname) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/amministrazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $admin = new amministratore("", "");  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $admin->username = $con->textContent;
+        $con = $con->nextSibling;
+        $admin->password = $con->textContent;
+             
+        if($admin->username == $uname)
+            return $admin;
+    }
+    return NULL;
+}
+
+
+function getAppelli() {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/appelli.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaAppelli = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $appello = new appello();  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $appello->id = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->idCorso = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->dataOra = $con->textContent;
+             
+        $listaAppelli[] = $appello;
+    }
+    return $listaAppelli;
+}
+
+
+function getAppelliFromCorsoDiLaurea($idCorsoLaurea) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/appelli.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaAppelli = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $appello = new appello();  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $appello->id = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->idCorso = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->dataOra = $con->textContent;
+
+        $corso = getCorsoById($appello->idCorso);
+
+        if($corso->idCorsoLaurea == $idCorsoLaurea)
+            $listaAppelli[] = $appello;
+    }
+    return $listaAppelli;
+}
+
+
+function getAppelloFromId($idAppello) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/appelli.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+    
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $appello = new appello();  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $appello->id = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->idCorso = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->dataOra = $con->textContent;
+
+        if($appello->id == $idAppello)
+            return $appello;
+    }
+    return NULL;
+}
+
+
+function getEsamiSostenuti($studente) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/prenotazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaEsami = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $esame = new prenotazione();  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $esame->id = $con->textContent;
+        $con = $con->nextSibling;
+        $esame->matricolaStudente = $con->textContent;
+        $con = $con->nextSibling;
+        $esame->idAppello = $con->textContent;
+        $con = $con->nextSibling;
+        $esame->esito = $con->textContent;
+
+        $appello = getAppelloFromId($esame->idAppello);
+        $corso = getCorsoById($appello->idCorso);
+
+        if($esame->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
+            if($esame->esito != "NULL")
+                $listaEsami[] = $esame;
+    }
+    return $listaEsami;
+}
+
+
+function getEsamiSuperati($studente) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/prenotazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaEsamiSuperati = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $esame = new prenotazione();  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $esame->id = $con->textContent;
+        $con = $con->nextSibling;
+        $esame->matricolaStudente = $con->textContent;
+        $con = $con->nextSibling;
+        $esame->idAppello = $con->textContent;
+        $con = $con->nextSibling;
+        $esame->esito = $con->textContent;
+
+        $appello = getAppelloFromId($esame->idAppello);
+        $corso = getCorsoById($appello->idCorso);
+
+        if($esame->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
+            if($esame->esito != "NULL" && $esame->esito != "R" && $esame->esito != "B")
+                $listaEsamiSuperati[] = $esame;
+    }
+    return $listaEsamiSuperati;
+}
+
+
+function getAppelliPrenotati($studente) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/prenotazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaPrenotazioni = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $prenotazione = new prenotazione();  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $prenotazione->id = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->matricolaStudente = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->idAppello = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->esito = $con->textContent;
+
+        $appello = getAppelloFromId($prenotazione->idAppello);
+        $corso = getCorsoById($appello->idCorso);
+
+        if($prenotazione->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
+            if($prenotazione->esito == "NULL")
+                $listaPrenotazioni[] = $prenotazione;
+    }
+    return $listaPrenotazioni;
+}
+
+
+function getAppelliPrenotabili($studente) {
+    $appelli = [];
+    $appelli = getAppelliFromCorsoDiLaurea($studente->idCorsoLaurea);
+    if(!$appelli)
+        return NULL;
+
+
+    $appelliPrenotati = [];
+    $appelliPrenotati = getAppelliPrenotati($studente);
+
+    $esamiSuperati = [];
+    $esamiSuperati = getEsamiSuperati($studente);
+
+
+    if(!$appelliPrenotati && !$esamiSuperati)
+        // Prendo tutti gli appelli
+        return $appelli;
+
+    elseif($appelliPrenotati && !$esamiSuperati) {
+        // Prendo gli appelli non prenotati
+        $listaAppelliNonPrenotati = [];
+        foreach($appelli as $appello)
+            foreach($appelliPrenotati as $appelloPrenotato)
+                if($appello->id != $appelloPrenotato->idAppello)
+                    $listaAppelliNonPrenotati[] = $appello;
+        
+        return $listaAppelliNonPrenotati;
+    }
+
+    elseif(!$appelliPrenotati && $esamiSuperati) {
+        // Prendo gli appelli degli esami non superati
+        $listaEsamiNonSuperati = [];
+        foreach($appelli as $appello)
+            foreach($esamiSuperati as $esameSuperato)
+                if($appello->id != $esameSuperato->idAppello)
+                    $listaEsamiNonSuperati[] = $appello;
+        
+        return $listaEsamiNonSuperati;
+    }
+
+    elseif($appelliPrenotati && $esamiSuperati) {
+        // Tra gli appelli non prenotati, prendo quelli di esami NON superati
+        $listaAppelliNonPrenotati = [];
+        foreach($appelli as $appello)
+            foreach($appelliPrenotati as $appelloPrenotato)
+                if($appello->id != $appelloPrenotato->idAppello)
+                    $listaAppelliNonPrenotati[] = $appello;
+        
+        $listaAppelliPrenotabili = [];
+        foreach($listaAppelliNonPrenotati as $appelloNonPrenotato)
+            foreach($esamiSuperati as $esameSuperato)
+                if($appelloNonPrenotato->id != $esameSuperato->idAppello)
+                    $listaAppelliPrenotabili[] = $appelloNonPrenotato;
+
+        return $listaAppelliPrenotabili;
+    }
+
+    return NULL;    // Nel dubbio è vuota
+}
+
+
+function getDataFromDataora($dataora) {
+    return substr($dataora, 0, 10);
 }
 
 

@@ -1,3 +1,14 @@
+<?php
+session_start();
+require_once("../Sito/phpFunctions.php");
+
+if(!isset($_SESSION['loginType']) || $_SESSION['loginType'] != "Studente")
+    header('Location: homepage-users.php');
+
+if(isset($_SESSION['matricola']) && ($_SESSION['loginType'] == "Studente"))
+    $studenteLoggato = getStudenteFromMatricola($_SESSION['matricola']);
+?>
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -6,7 +17,7 @@
 <head>
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileHomepage-users.css">
-    <title>Homepage</title>
+    <title>Prenota appello - Infostud</title>
 </head>
 <body>
     <div class="header">
@@ -27,139 +38,35 @@
         </div>
         <div class="nav-right">
         <h2>
-            <form action="">
-                <input type="button">
+            <form action="logout.php">
+                <input type="submit" value="">
             </form>
                 Logout
         </h2>
+        <div class="vertical-bar"></div>
+            <div class="nav-logo">
+                <a href="homepage-users.php">
+                    <img src="account.png" alt="logo" width="90px">
+                </a>
+            </div>
         </div>
     </div>
     <div class="central-block">
-    <div class="sidebar">
-            <h5>
-                Informazioni
-            </h5>
-            <div style="display:flex;">
-                <img src="arrow.png" alt="duce" width="20px" height="20px" style="display:flex;align-content:center">
-                <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="homepage-users-Anagrafica.php" style="display: flex;margin:0px;">Visualizza anagrafica</a>
-                </h5>
-            </div>
-            <div style="display:flex;">
-                <img src="arrow.png" alt="duce" width="20px" height="20px" style="display:flex;align-content:center">
-                <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="homepage-users-Carriera.php" style="display: flex;margin:0px;">Visualizza carriera</a>
-                </h5>
-            </div>
-            <h5>
-                Esami
-            </h5>
-            <div style="display:flex;">
-                <img src="arrow.png" alt="duce" width="20px" height="20px" style="display:flex;align-content:center">
-                <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="homepage-users-appelliPrenotati.php" style="display: flex;margin:0px;">Appelli prenotati</a>
-                </h5>
-            </div>
-            <div style="display:flex;">
-                <img src="arrow.png" alt="duce" width="20px" height="20px" style="display:flex;align-content:center">
-                <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="homepage-users-prenotaAppello.php" style="display: flex;margin:0px;">Prenota Appello</a>
-                </h5>
-            </div>
-            <div style="display:flex;">
-                <img src="arrow.png" alt="duce" width="20px" height="20px" style="display:flex;align-content:center">
-                <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="homepage-users-esamiSostenuti.php" style="display: flex;margin:0px;">Esami Sostenuti</a>
-                </h5>
-            </div>
-            <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="homepage-bacheca.php" style="display: flex;margin:0px;">Bacheca</a>
-            </h5>
-            <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="homepage-faq.php" style="display: flex;margin:0px;">FAQ</a>
-            </h5>   
-        </div>
+    <?php creaSidebar($_SESSION['loginType']); ?>
         <div class="body">
             <div class="infoTitle">
                 <div class="infoTitle-position">
-                    <h2>Home > Prenota esame</h2><!--Generato dallo script-->
+                    <h2>Home > Prenota esame</h2>
                 </div>
                 <div class="infoTitle-user">
-                    <h2>Nome,Cognome, Matricola</h2><!--Generato dallo script-->
+                <?php
+                    echo "<h2>{$studenteLoggato->nome} {$studenteLoggato->cognome}, {$studenteLoggato->matricola}</h2>";
+                ?>
                 </div>
             </div>    
             <hr />
-            <div class="container-esami"> 
-                <div class="blocco-esame" style="background-color:red">
-                    <div class="nome-esame" >
-                        prova
-                    </div> 
-                        <div class="info-button">
-                            PRENOTA
-                            <form action="prenotaAppello.php" method="GET">
-                            <input type="submit" name="iscriviti" value="" >
-                            <input type="hidden" name="corso" value="">
-                            <input type="hidden" name="nomeCorso" value="">
-                            <input type="hidden" name="coloreCorso" value="">
-                        </form>
-                    </div>  
-                </div>
-                <div class="blocco-esame" style="background-color:red">
-                    <div class="nome-esame" >
-                        prova
-                    </div> 
-                        <div class="info-button">
-                            PRENOTA
-                            <form action="prenotaAppello.php" method="GET">
-                            <input type="submit" name="iscriviti" value="" >
-                            <input type="hidden" name="corso" value="">
-                            <input type="hidden" name="nomeCorso" value="">
-                            <input type="hidden" name="coloreCorso" value="">
-                        </form>
-                    </div>  
-                </div>     
-                <div class="blocco-esame" style="background-color:red">
-                    <div class="nome-esame" >
-                        prova
-                    </div> 
-                        <div class="info-button">
-                            PRENOTA
-                            <form action="prenotaAppello.php" method="GET">
-                            <input type="submit" name="iscriviti" value="" >
-                            <input type="hidden" name="corso" value="">
-                            <input type="hidden" name="nomeCorso" value="">
-                            <input type="hidden" name="coloreCorso" value="">
-                        </form>
-                    </div>  
-                </div>     
-                <div class="blocco-esame" style="background-color:red">
-                    <div class="nome-esame" >
-                        prova
-                    </div> 
-                        <div class="info-button">
-                            PRENOTA
-                            <form action="prenotaAppello.php" method="GET">
-                            <input type="submit" name="iscriviti" value="" >
-                            <input type="hidden" name="corso" value="">
-                            <input type="hidden" name="nomeCorso" value="">
-                            <input type="hidden" name="coloreCorso" value="">
-                        </form>
-                    </div>  
-                </div>     
-                <div class="blocco-esame" style="background-color:red">
-                    <div class="nome-esame" >
-                        prova
-                    </div> 
-                        <div class="info-button">
-                            PRENOTA
-                            <form action="prenotaAppello.php" method="GET">
-                            <input type="submit" name="iscriviti" value="" >
-                            <input type="hidden" name="corso" value="">
-                            <input type="hidden" name="nomeCorso" value="">
-                            <input type="hidden" name="coloreCorso" value="">
-                        </form>
-                    </div>  
-                </div>           
+            <div class="container-esami">
+                <?php displayAppelliPrenotabili($studenteLoggato); ?>           
             </div>
         </div>
     </div>
