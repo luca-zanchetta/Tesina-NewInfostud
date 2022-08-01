@@ -8,7 +8,13 @@
     <link rel="stylesheet" href="stileHomepage-users.css">
     <link rel="stylesheet" href="stileBacheca.css">
     <link rel="stylesheet" href="stilePost.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Homepage</title>
+    <style>
+        .checked {
+        color: orange;
+        }
+    </style>
 </head>
 <body>
     <div class="header">
@@ -106,24 +112,41 @@
                 </div>
             </div>
             <div class="pageNav">
+                <form action="">
                 <div class="prev">
                     Prev  
+                    <input type="submit" value=""> <!--Struttura di ogni bottone -->
+                    <input type="hidden">
                 </div>
+                </form>
                 <div class="pageList">
                     <div class="pageNumber">
                         1
                     </div>
+                    <form action="">
                     <div class="pageNumber">
                         2
+                        <input type="submit" value=""> <!--Struttura di ogni bottone -->
+                        <input type="hidden">
                     </div>
+                    </form>
                     <div class="pageNumber">
                         3
                     </div>
                 </div>
+                <form action="">
                 <div class="next">
                     Next
+                    <input type="submit" value=""> <!--Struttura di ogni bottone -->
+                        <input type="hidden">
+                </div>
+                </form>
+                <div class="utilitiesContainer">
+                    <img src="plus.png" alt="plus" width="30px">
+                    <img src="minus-sign.png" alt="plus" width="30px">
                 </div>
             </div>
+            
             <div class="commentContainer">
                 <div class="comment">
                     <div class="commentAuthorData">
@@ -143,24 +166,17 @@
                     <div class="commentContent">
                         <div class="commentTopBar">
                             <div class="commentTime">
-                                Mar 31,2022
+                                Mar 31,2022 · Voto Totale : 3,4
                             </div>
+                            <div class="commentTime" style="justify-content: flex-end;">
+                                Il tuo voto: 
+                            </div> 
                             <div class="commentVoteContainer">
-                                <div class="star">
-                                    yo
-                                </div>
-                                <div class="star">
-                                    yo
-                                </div>
-                                <div class="star">
-                                    yo
-                                </div>
-                                <div class="star">
-                                    yo
-                                </div>
-                                <div class="star">
-                                    yo
-                                </div>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
                             </div>
                         </div>
                         <div class="commentText">
@@ -189,21 +205,7 @@
                                 Mar 31,2022
                             </div>
                             <div class="commentVoteContainer">
-                                <div class="star">
-                                    yo
-                                </div>
-                                <div class="star">
-                                    yo
-                                </div>
-                                <div class="star">
-                                    yo
-                                </div>
-                                <div class="star">
-                                    yo
-                                </div>
-                                <div class="star">
-                                    yo
-                                </div>
+
                             </div>
                         </div>
                         <div class="commentText">
@@ -232,21 +234,11 @@
                                 Mar 31,2022
                             </div>
                             <div class="commentVoteContainer">
-                                <div class="star">
-                                    yo
-                                </div>
-                                <div class="star">
-                                    yo
-                                </div>
-                                <div class="star">
-                                    yo
-                                </div>
-                                <div class="star">
-                                    yo
-                                </div>
-                                <div class="star">
-                                    yo
-                                </div>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
                             </div>
                         </div>
                         <div class="commentText">

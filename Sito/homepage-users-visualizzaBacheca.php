@@ -93,7 +93,7 @@
             <hr />
             <div class="pageNav">
                 <div class="prev">
-                    Prev
+                    Prev  
                 </div>
                 <div class="pageList">
                     <div class="pageNumber">
@@ -115,6 +115,55 @@
                     <h3>Filters</h3>
                 </div>
                 <div class="postContainer">
+                    <div class="postItem">
+                        <div class="postData">
+                            <div class="postName">
+                                <h3>Cerco appunti basi di dati</h3>
+                            </div>
+                            <div class="postAuthor">
+                                <h4>Marco, Rossi, 1928342</h4>
+                            </div>
+                        </div>
+                        <div class="repliesOrUtility">
+                            <h3>Replies</h3>
+                            <h3>12</h3>
+                        </div>
+                        <div class="repliesOrUtility">
+                            <h3>Utility</h3>
+                            <h3>9</h3>
+                        </div>
+                        <div class="postDate">
+                            <h3>Jul 31,2022</h3>
+                        </div>
+                    </div>
+                    <div class="postItemAlt">
+                        <div class="postData">
+                            <div class="postName">
+                                <h3>Aiuto BD</h3>
+                            </div>
+                            <div class="postAuthor">
+                                <h4>Francesco, Totti 1293492</h4>
+                            </div>
+                        </div>
+                        <div class="repliesOrUtility">
+                            <h3>Replies</h3>
+                            <h3>3</h3>
+                        </div>
+                        <div class="repliesOrUtility">
+                            <h3>Utility</h3>
+                            <h3>2</h3>
+                        </div>
+                        <div class="postDate">
+                            <h3>Jul 1,2022</h3>
+                        </div>
+                    </div>
+                    <hr style="
+                        background-color: cyan;
+                        height: 8px;
+                        margin: 0%;
+                        border:0;
+                        display: flex;"
+                    >
                     <div class="postItem">
                         <div class="postData">
                             <div class="postName">

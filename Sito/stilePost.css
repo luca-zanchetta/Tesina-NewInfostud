@@ -3,6 +3,7 @@ div.postInfo {
     flex-direction: column;
     border-radius: 4px;
     margin: 1% 1% .2% 1%;
+    padding: 1%;
     background-color: blanchedalmond;
 }
 
@@ -53,6 +54,7 @@ div.commentAuthorData {
     width: fit-content;
     flex-direction: column;
     border-right: 3px solid black;
+    padding: 1%;
 }
 
 div.authorDataElement {
@@ -65,7 +67,8 @@ div.commentTopBar{
     display: flex;
     flex-direction: row;
     position: relative;
-    width: 100%;
+    margin: 1%;
+    align-items: center;
 }
 
 div.commentContent {
@@ -87,6 +90,7 @@ div.commentVoteContainer {
     display: flex;
     flex-direction: row;
     align-content: flex-end;
+    
 }
 
 div.star {
@@ -100,4 +104,13 @@ div.commentText {
     margin: .5%;
     border-radius: 5px;
     background-color: darkcyan;
+}
+
+/*regole per barra admin*/
+
+div.utilitiesContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: -webkit-fill-available;
 }
