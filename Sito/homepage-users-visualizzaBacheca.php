@@ -41,13 +41,13 @@
                 Informazioni
             </h5>
             <div style="display:flex;">
-                <img src="arrow.png" alt="duce" width="20px" height="20px" style="display:flex;align-content:center">
+                <img src="arrow.png" alt="err" width="20px" height="20px" style="display:flex;align-content:center">
                 <h5 style="display: flex;margin:0px;">
                     <a class="opzionetab" href="homepage-users-Anagrafica.php" style="display: flex;margin:0px;">Visualizza anagrafica</a>
                 </h5>
             </div>
             <div style="display:flex;">
-                <img src="arrow.png" alt="duce" width="20px" height="20px" style="display:flex;align-content:center">
+                <img src="arrow.png" alt="err" width="20px" height="20px" style="display:flex;align-content:center">
                 <h5 style="display: flex;margin:0px;">
                     <a class="opzionetab" href="homepage-users-Carriera.php" style="display: flex;margin:0px;">Visualizza carriera</a>
                 </h5>
@@ -56,19 +56,19 @@
                 Esami
             </h5>
             <div style="display:flex;">
-                <img src="arrow.png" alt="duce" width="20px" height="20px" style="display:flex;align-content:center">
+                <img src="arrow.png" alt="err" width="20px" height="20px" style="display:flex;align-content:center">
                 <h5 style="display: flex;margin:0px;">
                     <a class="opzionetab" href="homepage-users-appelliPrenotati.php" style="display: flex;margin:0px;">Appelli prenotati</a>
                 </h5>
             </div>
             <div style="display:flex;">
-                <img src="arrow.png" alt="duce" width="20px" height="20px" style="display:flex;align-content:center">
+                <img src="arrow.png" alt="err" width="20px" height="20px" style="display:flex;align-content:center">
                 <h5 style="display: flex;margin:0px;">
                     <a class="opzionetab" href="homepage-users-prenotaAppello.php" style="display: flex;margin:0px;">Prenota Appello</a>
                 </h5>
             </div>
             <div style="display:flex;">
-                <img src="arrow.png" alt="duce" width="20px" height="20px" style="display:flex;align-content:center">
+                <img src="arrow.png" alt="err" width="20px" height="20px" style="display:flex;align-content:center">
                 <h5 style="display: flex;margin:0px;">
                     <a class="opzionetab" href="homepage-users-esamiSostenuti.php" style="display: flex;margin:0px;">Esami Sostenuti</a>
                 </h5>
