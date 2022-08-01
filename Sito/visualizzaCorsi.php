@@ -133,7 +133,7 @@ require_once('../Sito/phpFunctions.php');
                     }
                     else {
                         foreach($corsi as $corso) {
-                            $nomeCorsoDiLaurea = getNomeCorsoDiLaureaByID($corso->id_corso_laurea);
+                            $nomeCorsoDiLaurea = getNomeCorsoDiLaureaByID($corso->idCorsoLaurea);
                         ?>
                             <div class="listItem">
                                 <div class="element">
@@ -159,7 +159,7 @@ require_once('../Sito/phpFunctions.php');
                     }
                     else {
                         foreach($corsi as $corso) {
-                            $nomeCorsoDiLaurea = getNomeCorsoDiLaureaByID($corso->id_corso_laurea);
+                            $nomeCorsoDiLaurea = getNomeCorsoDiLaureaByID($corso->idCorsoLaurea);
                         ?>
                             <div class="listItem">
                                 <div class="element">
