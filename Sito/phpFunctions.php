@@ -63,13 +63,13 @@ function creaSidebar($loginType) {
                     Informazioni
                 </h5>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" height="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="homepage-users.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" height="20px" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="homepage-users-Carriera.php" style="display: flex; margin: 0px;">Visualizza carriera</a>
                     </h5>
@@ -81,19 +81,19 @@ function creaSidebar($loginType) {
                     Esami
                 </h5>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" height="20px" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="homepage-users-appelliPrenotati.php" style="display: flex; margin: 0px;">Appelli prenotati</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" height="20px" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="homepage-users-prenotaAppello.php" style="display: flex; margin: 0px;">Prenota appello</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" height="20px"  width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="homepage-users-esamiSostenuti.php" style="display: flex; margin: 0px;">Esami sostenuti</a>
                     </h5>
@@ -128,7 +128,7 @@ function creaSidebar($loginType) {
                     Informazioni
                 </h5>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" height="20px" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="homepage-users.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
@@ -140,13 +140,13 @@ function creaSidebar($loginType) {
                     Esami
                 </h5>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" height="20px"  width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Inserisci appello</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" height="20px" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza appelli</a>
                     </h5>
@@ -173,7 +173,7 @@ function creaSidebar($loginType) {
                     Informazioni
                 </h5>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" height="20px"  style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="homepage-users.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
@@ -185,19 +185,19 @@ function creaSidebar($loginType) {
                     Esami
                 </h5>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" height="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Inserisci appello</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" height="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza appelli</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" height="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Gestione prenotazioni</a>
                     </h5>
@@ -232,7 +232,7 @@ function creaSidebar($loginType) {
                     Informazioni
                 </h5>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" height="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="homepage-users.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
@@ -244,19 +244,19 @@ function creaSidebar($loginType) {
                     Esami
                 </h5>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" height="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Inserisci appello</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" height="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza appelli</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" height="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Gestione prenotazioni</a>
                     </h5>
@@ -284,19 +284,16 @@ function creaSidebar($loginType) {
                     Moderazione utenze
                 </h5>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
-                    <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="visualizzaStudentiAdmin.php" style="display: flex; margin: 0px;">Visualizza studenti</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" height="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="visualizzaDocentiAdmin.php" style="display: flex; margin: 0px;">Visualizza docenti</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" height="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="visualizzaSegreteriaAdmin.php" style="display: flex; margin: 0px;">Visualizza segreteria</a>
                     </h5>
