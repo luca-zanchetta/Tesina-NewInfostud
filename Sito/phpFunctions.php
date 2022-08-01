@@ -103,7 +103,7 @@ function creaSidebar($loginType) {
 
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzione" href="homepage-bacheca.php">Bacheca</a>
+                        <a class="opzione" href="homepage-users-visualizzaBacheca.php">Bacheca</a>
                     </h5>
                 </div>
 
@@ -207,7 +207,7 @@ function creaSidebar($loginType) {
 
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzione" href="homepage-bacheca.php">Bacheca</a>
+                        <a class="opzione" href="homepage-users-visualizzaBacheca">Bacheca</a>
                     </h5>
                 </div>
 
@@ -266,7 +266,7 @@ function creaSidebar($loginType) {
 
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzione" href="homepage-bacheca.php">Bacheca</a>
+                        <a class="opzione" href="homepage-users-visualizzaBacheca">Bacheca</a>
                     </h5>
                 </div>
 
