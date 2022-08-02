@@ -63,13 +63,13 @@ function creaSidebar($loginType) {
                     Informazioni
                 </h5>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" height="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="homepage-users.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" height="20px" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="homepage-users-Carriera.php" style="display: flex; margin: 0px;">Visualizza carriera</a>
                     </h5>
@@ -81,19 +81,19 @@ function creaSidebar($loginType) {
                     Esami
                 </h5>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" height="20px" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="homepage-users-appelliPrenotati.php" style="display: flex; margin: 0px;">Appelli prenotati</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" height="20px" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="homepage-users-prenotaAppello.php" style="display: flex; margin: 0px;">Prenota appello</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" height="20px"  width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="homepage-users-esamiSostenuti.php" style="display: flex; margin: 0px;">Esami sostenuti</a>
                     </h5>
@@ -128,7 +128,7 @@ function creaSidebar($loginType) {
                     Informazioni
                 </h5>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" height="20px" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="homepage-users.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
@@ -140,13 +140,13 @@ function creaSidebar($loginType) {
                     Esami
                 </h5>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" height="20px"  width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Inserisci appello</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" height="20px" width="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza appelli</a>
                     </h5>
@@ -173,7 +173,7 @@ function creaSidebar($loginType) {
                     Informazioni
                 </h5>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" height="20px"  style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="homepage-users.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
@@ -185,19 +185,19 @@ function creaSidebar($loginType) {
                     Esami
                 </h5>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" height="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Inserisci appello</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" height="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza appelli</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" height="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Gestione prenotazioni</a>
                     </h5>
@@ -232,7 +232,7 @@ function creaSidebar($loginType) {
                     Informazioni
                 </h5>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" height="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="homepage-users.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
@@ -244,19 +244,19 @@ function creaSidebar($loginType) {
                     Esami
                 </h5>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" height="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Inserisci appello</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" height="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza appelli</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" height="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Gestione prenotazioni</a>
                     </h5>
@@ -266,7 +266,7 @@ function creaSidebar($loginType) {
 
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzione" href="homepage-users-visualizzaBacheca">Bacheca</a>
+                        <a class="opzione" href="homepage-users-visualizzaBacheca.php">Bacheca</a>
                     </h5>
                 </div>
 
@@ -284,18 +284,39 @@ function creaSidebar($loginType) {
                     Moderazione utenze
                 </h5>
                 <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="visualizzaStudentiAdmin.php" style="display: flex; margin: 0px;">Visualizza studenti</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" height="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="visualizzaDocentiAdmin.php" style="display: flex; margin: 0px;">Visualizza docenti</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
-                    <img src="arrow.png" alt="freccia" width="20px" height="20px" style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="visualizzaSegreteriaAdmin.php" style="display: flex; margin: 0px;">Visualizza segreteria</a>
+                    </h5>
+                </div>
+
+                <hr style="width: 90%; margin-left: -2%;" />
+
+                <h5>
+                    Altre funzionalità
+                </h5>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="inserisciCorsoDiLaurea.php" style="display: flex; margin: 0px;">Inserisci corso di laurea</a>
+                    </h5>
+                </div>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="inserisciCorso.php" style="display: flex; margin: 0px;">Inserisci corso</a>
                     </h5>
                 </div>
 
@@ -949,10 +970,38 @@ function calcolaIdCorso() {
 }
 
 
+function calcolaIdCorsoDiLaurea() {
+    $xmlString = "";
+    foreach ( file("../Xml/corsiDiLaurea.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+    
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+
+    $listaId = [];
+    for ($i=0; $i<$records->length; $i++) {
+        $record = $records->item($i);
+        
+        $con = $record->firstChild;
+        $listaId[] = $con->textContent;
+    }
+
+    $id=1;
+    while(in_array($id,$listaId)){
+        $id++;
+    }
+
+    return $id;
+}
+
+
 function getCorsiDiLaurea() {
     /*accedo al file xml*/
     $xmlString = "";
-    foreach ( file("../Xml/corsoDiLaurea.xml") as $node ) {
+    foreach ( file("../Xml/corsiDiLaurea.xml") as $node ) {
         $xmlString .= trim($node);
     }
          
