@@ -9,6 +9,13 @@ if(isset($_SESSION['username']))
     $adminLoggato = getAdminFromUsername($_SESSION['username']);
 else
     echo "<p>ERRORE</p>";
+
+if(isset($_POST['invio'])) {
+    $presenzaDati = FALSE;
+
+    if(isset($_POST['nome']) && $_POST['nome'] != "")
+        $presenzaDati = TRUE;
+}
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -73,7 +80,7 @@ else
             </div>    
             <hr />
             <div class="boxInsCDL">
-            <form action="fittizia.php" method="POST">
+            <form action="inserisciCorsoDiLaurea.php" method="POST">
                 <div class="insContainer">
                     <div class="labels">
                         <h3>Nome: </h3>
@@ -93,6 +100,11 @@ else
             </form>
             </div>
             <?php
+            if(isset($_POST['invio']) && !$presenzaDati)
+                echo "
+                <div style=\"margin-left: -6%; padding-bottom: 7%;\">
+                    <h2 class=\"error\">DATI MANCANTI! Riprovare.</h2>
+                </div>";
             ?>
         </div>
     </div>

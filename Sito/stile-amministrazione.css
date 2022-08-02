@@ -120,6 +120,7 @@ form.admin {
     margin: 2%;
 }
 
+
 /* Form di inserimento corsi di laurea e corsi - da stileLogin.css*/
 
 .boxInsCDL {
@@ -218,4 +219,11 @@ textarea {
 }
 textarea:hover {
     background-color:honeydew;
+}
+h2.error {
+    position: relative;
+    text-align: center;
+    font-size: 200%;
+    font-weight: bold;
+    color: blue;
 }

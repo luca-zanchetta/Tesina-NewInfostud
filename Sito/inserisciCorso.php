@@ -9,6 +9,22 @@ if(isset($_SESSION['username']))
     $adminLoggato = getAdminFromUsername($_SESSION['username']);
 else
     echo "<p>ERRORE</p>";
+
+
+if(isset($_POST['invio'])) {
+    $presenzaDati = FALSE;
+
+    if((isset($_POST['nome']) && $_POST['nome'] != "") && 
+       (isset($_POST['docente']) && $_POST['docente'] != "seleziona") && 
+       (isset($_POST['anno']) && $_POST['anno'] != "seleziona") && 
+       (isset($_POST['semestre']) && $_POST['semestre'] != "seleziona") &&
+       (isset($_POST['curriculum']) && $_POST['curriculum'] != "") &&
+       (isset($_POST['cfu']) && $_POST['cfu'] != "seleziona") &&
+       (isset($_POST['ssd']) && $_POST['ssd'] != "") &&
+       (isset($_POST['corsoLaurea']) && $_POST['corsoLaurea'] != "seleziona") &&
+       (isset($_POST['descrizione']) && $_POST['descrizione'] != ""))
+            $presenzaDati = TRUE;
+}
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -75,7 +91,7 @@ else
                 <hr class="redBar" />
             </div>
             <div class="boxInsC">
-            <form action="fittizia.php" method="POST" id="input">
+            <form action="inserisciCorso.php" method="POST" id="input">
                 <div class="insContainer">
                     <div class="labels">
                         <h3>Nome: </h3>
@@ -185,6 +201,11 @@ else
             </form>
             </div>
             <?php
+            if(isset($_POST['invio']) && !$presenzaDati)
+                echo "
+                <div style=\"margin-left: -6%; padding-bottom: 7%;\">
+                    <h2 class=\"error\">DATI MANCANTI! Riprovare.</h2>
+                </div>";
             ?>
         </div>
     </div>
