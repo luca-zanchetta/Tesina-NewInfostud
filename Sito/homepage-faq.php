@@ -1,3 +1,14 @@
+<?php
+session_start();
+require_once('phpFunctions.php');
+
+if(!isset($_SESSION['loginType']) || (isset($_SESSION['loginType']) && $_SESSION['loginType'] != "Studente"))
+    header('Location: homepage.php');
+
+if(isset($_SESSION['matricola']))
+    $studenteLoggato = getStudenteFromMatricola($_SESSION['matricola']);
+?>
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -33,58 +44,21 @@
             </form>
                 Logout
         </h2>
+        <div class="vertical-bar"></div>
+            <div class="nav-logo">
+                <a href="homepage-users.php">
+                    <img src="account.png" alt="logo" width="90px">
+                </a>
+            </div>
+        </div>
         </div>
     </div>
     <div class="central-block">
-    <div class="sidebar">
-            <h5>
-                Informazioni
-            </h5>
-            <div style="display:flex;">
-                <img src="arrow.png" alt="duce" width="20px" height="20px" style="display:flex;align-content:center">
-                <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="homepage-users-Anagrafica.php" style="display: flex;margin:0px;">Visualizza anagrafica</a>
-                </h5>
-            </div>
-            <div style="display:flex;">
-                <img src="arrow.png" alt="duce" width="20px" height="20px" style="display:flex;align-content:center">
-                <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="homepage-users-Carriera.php" style="display: flex;margin:0px;">Visualizza carriera</a>
-                </h5>
-            </div>
-            <h5>
-                Esami
-            </h5>
-            <div style="display:flex;">
-                <img src="arrow.png" alt="duce" width="20px" height="20px" style="display:flex;align-content:center">
-                <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="homepage-users-appelliPrenotati.php" style="display: flex;margin:0px;">Appelli prenotati</a>
-                </h5>
-            </div>
-            <div style="display:flex;">
-                <img src="arrow.png" alt="duce" width="20px" height="20px" style="display:flex;align-content:center">
-                <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="homepage-users-prenotaAppello.php" style="display: flex;margin:0px;">Prenota Appello</a>
-                </h5>
-            </div>
-            <div style="display:flex;">
-                <img src="arrow.png" alt="duce" width="20px" height="20px" style="display:flex;align-content:center">
-                <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="homepage-users-esamiSostenuti.php" style="display: flex;margin:0px;">Esami Sostenuti</a>
-                </h5>
-            </div>
-            <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="homepage-bacheca.php" style="display: flex;margin:0px;">Bacheca</a>
-            </h5>
-            <h5 style="display: flex;margin:0px;">
-                    <a class="opzionetab" href="homepage-faq.php" style="display: flex;margin:0px;">FAQ</a>
-            </h5>
-            
-        </div>
+        <?php creaSidebar($_SESSION['loginType']); ?>
         <div class="body">
             <div class="infoTitle">
                 <div class="infoTitle-position">
-                    <h2>Home > Faq</h2><!--Generato dallo script-->
+                    <h2>Home > Bacheche</h2><!--Generato dallo script-->
                 </div>
                 <div class="infoTitle-user">
                     <h2>Nome,Cognome, Matricola</h2><!--Generato dallo script-->
@@ -97,19 +71,23 @@
                         <h2>Nome</h2>
                     </div>
                 </div> 
-                <hr>
-                <div class="listItem">
-                    <div class="element">
-                        <h2>Basi di dati</h2>
-                    </div>
-                    <div class="element">
-                        
-                    </div>
-                    <div class="lastElement">
-                    <img src="arrow.png" alt="err" width="30px" height="30px" style="display:flex;align-content:center">
-                    </div>
-                </div> 
-                <hr>
+                <hr />
+                <form action="homepage-users-visualizzaFaq.php">
+                    <div class="listItem">
+                        <input type="submit" value="" class="bottoneCorsi"> <!--Struttura di ogni bottone -->
+                        <input type="hidden">
+                        <div class="element">
+                            <h2>Basi di dati</h2>
+                        </div>
+                        <div class="element">
+                            
+                        </div>
+                        <div class="lastElement">
+                            <img src="arrowBlack.png" alt="err" width="30px" height="30px" style="display:flex;align-content:center">
+                        </div>
+                    </div> 
+                </form>
+                <hr />
                 <div class="listItem">
                     <div class="element">
                         <h2>Elettronica I</h2>
@@ -118,7 +96,7 @@
                         
                     </div>
                     <div class="lastElement">
-                    <img src="arrow.png" alt="err" width="30px" height="30px" style="display:flex;align-content:center">
+                        <a href="fittizia.php"><img class="arrow" width="30px" height="30px" alt="err" src="arrowBlack.png"></a>
                     </div>
                 </div> 
             <hr>
