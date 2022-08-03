@@ -134,7 +134,25 @@ form.admin {
     border-color: firebrick;
 	margin-top: 3em;
     margin-bottom: 5em;
-    width: 30%;
+    width: fit-content;
+    margin-left: 30%;
+    min-width: 20%;
+    border-radius: 4%;
+    background-color: rgba(240, 255, 240, 0.102);
+    padding: 1%;
+}
+.boxInsAPP {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    border-width: 3px;
+	border-style: ridge;     
+    border-color: firebrick;
+	margin-top: 3em;
+    margin-bottom: 5em;
+    width: fit-content;
     margin-left: 30%;
     min-width: 20%;
     border-radius: 4%;
@@ -152,8 +170,8 @@ form.admin {
     border-color: firebrick;
 	margin-top: 3em;
     margin-bottom: 5em;
-    width: 50%;
-    margin-left: 23%;
+    width: fit-content;
+    margin-left: 30%;
     min-width: 20%;
     border-radius: 4%;
     background-color: rgba(240, 255, 240, 0.102);

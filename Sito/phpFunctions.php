@@ -142,7 +142,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Inserisci appello</a>
+                        <a class="opzionetab" href="inserisciAppello.php" style="display: flex; margin: 0px;">Inserisci appello</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
@@ -187,7 +187,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Inserisci appello</a>
+                        <a class="opzionetab" href="inserisciAppello.php" style="display: flex; margin: 0px;">Inserisci appello</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
@@ -246,7 +246,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Inserisci appello</a>
+                        <a class="opzionetab" href="inserisciAppello.php" style="display: flex; margin: 0px;">Inserisci appello</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
@@ -1030,7 +1030,7 @@ function getCorsiDiLaurea() {
 function getCorsiDiLaureaLike($_nome) {
     /*accedo al file xml*/
     $xmlString = "";
-    foreach ( file("../Xml/corsoDiLaurea.xml") as $node ) {
+    foreach ( file("../Xml/corsiDiLaurea.xml") as $node ) {
         $xmlString .= trim($node);
     }
          
@@ -1061,7 +1061,7 @@ function getCorsiDiLaureaLike($_nome) {
 function getNomeCorsoDiLaureaByID($_id) {
     /*accedo al file xml*/
     $xmlString = "";
-    foreach ( file("../Xml/corsoDiLaurea.xml") as $node ) {
+    foreach ( file("../Xml/corsiDiLaurea.xml") as $node ) {
         $xmlString .= trim($node);
     }
          
