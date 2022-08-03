@@ -148,7 +148,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza appelli</a>
+                        <a class="opzionetab" href="visualizzaAppelli.php" style="display: flex; margin: 0px;">Visualizza appelli</a>
                     </h5>
                 </div>
 
@@ -193,7 +193,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza appelli</a>
+                        <a class="opzionetab" href="visualizzaAppelli.php" style="display: flex; margin: 0px;">Visualizza appelli</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
@@ -252,7 +252,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Visualizza appelli</a>
+                        <a class="opzionetab" href="visualizzaAppelli.php" style="display: flex; margin: 0px;">Visualizza appelli</a>
                     </h5>
                 </div>
                 <div style="display: flex;">
@@ -543,6 +543,99 @@ function displayAppelliPrenotabili($studente) {
                 </div>  
             </div>
             ';
+        }
+    }
+}
+
+
+function displayFullAppelli() {
+    $appelli = [];
+    $appelli = getAppelli();
+
+    if(!$appelli)
+        echo '<h2>Nessun appello trovato.</h2>';
+    else {
+        foreach($appelli as $appello) {
+            $corso = getCorsoById($appello->idCorso);
+            echo '
+            <div class="blocco-esame" style="background-color:lightblue;">
+                <div class="nome-esame">
+                    '.$corso->nome."<br />".$appello->dataOra.'
+                </div> 
+                    <div class="info-button">
+                        INFO
+                        <form action="fittizia.php" method="POST">
+                        <input type="submit" name="prenota" value="" >
+                        <input type="hidden" name="idAppello" value="'.$appello->id.'">
+                    </form>
+                </div>  
+            </div>
+            ';
+        }
+    }
+}
+
+
+function displayAppelliFromCorso($idCorso) {
+    $appelli = [];
+    $appelli = getAppelliFromCorso($idCorso);
+
+    if(!$appelli)
+        echo '<h2>Nessun appello trovato.</h2>';
+    else {
+        foreach($appelli as $appello) {
+            $corso = getCorsoById($appello->idCorso);
+            echo '
+            <div class="blocco-esame" style="background-color:lightblue;">
+                <div class="nome-esame">
+                    '.$corso->nome."<br />".$appello->dataOra.'
+                </div> 
+                    <div class="info-button">
+                        INFO
+                        <form action="fittizia.php" method="POST">
+                        <input type="submit" name="prenota" value="" >
+                        <input type="hidden" name="idAppello" value="'.$appello->id.'">
+                    </form>
+                </div>  
+            </div>
+            ';
+        }
+    }
+}
+
+
+function displayAppelliLike($nomeCorso) {
+    $corsi = [];
+    $corsi = getCorsiLike($nomeCorso);
+
+    if(!$corsi)
+        echo '<h2>Nessun appello corrispondente ai criteri di ricerca.</h2>';
+    else {
+        foreach($corsi as $corso) {
+            $appelli = [];
+            $appelli = getAppelliFromCorso($corso->id);
+            if(!$appelli) {
+                echo '<h2>Nessun appello corrispondente ai criteri di ricerca.</h2>';
+                break;
+            }
+            else {
+                foreach($appelli as $appello) {
+                    echo '
+                    <div class="blocco-esame" style="background-color:lightblue;">
+                        <div class="nome-esame">
+                            '.$corso->nome."<br />".$appello->dataOra.'
+                        </div> 
+                            <div class="info-button">
+                                INFO
+                                <form action="fittizia.php" method="POST">
+                                <input type="submit" name="prenota" value="" >
+                                <input type="hidden" name="idAppello" value="'.$appello->id.'">
+                            </form>
+                        </div>  
+                    </div>
+                    ';
+                }
+            }
         }
     }
 }
@@ -1145,7 +1238,7 @@ function getDocenteFromMatricola($matr) {
         $con = $con->nextSibling;
         $docente->password = $con->textContent;
         $con = $con->nextSibling;
-        $docente->id_corso = $con->textContent;
+        $docente->idCorso = $con->textContent;
              
         if($docente->matricola == $matr) return $docente;
     }
@@ -1180,7 +1273,7 @@ function getDocentiLike($_nome) {
         $con = $con->nextSibling;
         $docente->password = $con->textContent;
         $con = $con->nextSibling;
-        $docente->id_corso = $con->textContent;
+        $docente->idCorso = $con->textContent;
         
         /*controllo sul nome*/
         if(preg_match("#^{$_nome}#i", ($docente->cognome." ".$docente->nome)))
@@ -1450,6 +1543,38 @@ function getAppelliFromCorsoDiLaurea($idCorsoLaurea) {
         $corso = getCorsoById($appello->idCorso);
 
         if($corso->idCorsoLaurea == $idCorsoLaurea)
+            $listaAppelli[] = $appello;
+    }
+    return $listaAppelli;
+}
+
+
+function getAppelliFromCorso($idCorso) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/appelli.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+    
+    $listaAppelli = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $appello = new appello();  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $appello->id = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->idCorso = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->dataOra = $con->textContent;
+
+        if($appello->idCorso == $idCorso)
             $listaAppelli[] = $appello;
     }
     return $listaAppelli;
