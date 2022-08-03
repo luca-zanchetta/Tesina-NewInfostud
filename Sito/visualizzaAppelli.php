@@ -98,7 +98,7 @@ else
                 elseif($_SESSION['loginType'] == "Segretario" || $_SESSION['loginType'] == "Amministratore") {
                     
                     if(isset($_POST['filtro']) && $_POST['filtro'] != "")
-                        displayAppelliLike($_POST['filtro']);   // Da implementare
+                        displayAppelliLike($_POST['filtro']);
                     else
                         displayFullAppelli();
                 }
