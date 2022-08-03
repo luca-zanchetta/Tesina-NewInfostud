@@ -7,6 +7,7 @@ if(!isset($_SESSION['loginType']) || (isset($_SESSION['loginType']) && $_SESSION
 
 if(isset($_SESSION['matricola']))
     $studenteLoggato = getStudenteFromMatricola($_SESSION['matricola']);
+
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -15,12 +16,12 @@ if(isset($_SESSION['matricola']))
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-
-        <link rel="stylesheet" href="stile-base.css">
-        <link rel="stylesheet" href="stileHomepage-users.css">
-        <link rel="stylesheet" href="stileBacheca.css">
-        <link rel="stylesheet" href="stilePost.css">
-        <link rel="stylesheet" href="stileFaq.css">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="stile-base.css">
+    <link rel="stylesheet" href="stileHomepage-users.css">
+    <link rel="stylesheet" href="stileBacheca.css">
+    <link rel="stylesheet" href="stilePost.css">
+    <link rel="stylesheet" href="stileFaq.css">
     <title>Homepage</title>
 </head>
 <body>
@@ -65,7 +66,7 @@ if(isset($_SESSION['matricola']))
                         <h2>Home > Bacheca > Basi di Dati</h2><!--Generato dallo script-->
                     </div>
                     <div class="infoTitle-user">
-                        <h2>Nome,Cognome, Matricola</h2><!--Generato dallo script-->
+                        <h2>Nome, Cognome, Matricola</h2><!--Generato dallo script-->
                     </div>
                 </div>    
                 <hr />
@@ -202,10 +203,16 @@ if(isset($_SESSION['matricola']))
                                     <div class="contentTitle">
                                         Risposta
                                     </div>
-                                    <div class="content">
-                                        Il libro è un'aggiunta, potrà tranquillamente affrontare l'esame studiando sul materiale checkdate
-                                        metterò a disposizione durante il corso
-                                    </div>
+                                    <form action="">
+                                        <div class="content"> 
+                                            <input id="inputId" type="text" value="Il libro è un'aggiunta, potrà tranquillamente affrontare l'esame studiando sul materiale."> 
+                                            <div id="textId">Il libro è un'aggiunta, potrà tranquillamente affrontare l'esame studiando sul materiale.</div>
+                                        </div>
+                                        <div class="editButton">
+                                            <input type="submit" value="" onclick="toggleInput('viene passato id della faq')">
+                                            <img  src="edit.png" alt="err">
+                                        </div>
+                                    </form>
                                 </div>
                                 <div class="faqAuthorData">
                                     Da david in data 5 dicembre 2020
@@ -371,3 +378,34 @@ if(isset($_SESSION['matricola']))
 </div>
 </body>
 </html>
+<script>
+    function toggleInput(id) {
+        event.preventDefault();
+        if(document.getElementById("textId").style.display == "none"){
+            
+            document.getElementById("inputId").style.display = "none";
+            document.getElementById("textId").style.display = "flex";
+
+            _newText = $("#inputId").val()
+            console.log(_newText);
+            document.getElementById("textId").textContent = _newText;
+
+            //Possiamo usare uno script esterno volendo
+            jQuery.ajax({
+                        url: 'homepage-users-visualizzaFaq.php',
+                        type: 'POST',
+                        data: jQuery.param({ newText: _newText, id:id}) ,
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        success: function (response) {
+                            console.log("Success");
+                        },
+                        error: function () {
+                            console.log("error");
+                        }});
+
+        }else{
+            document.getElementById("textId").style.display = "none";
+            document.getElementById("inputId").style.display = "flex";
+        }
+    }
+</script>
