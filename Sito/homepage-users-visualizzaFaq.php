@@ -2,7 +2,7 @@
 session_start();
 require_once('phpFunctions.php');
 
-if(!isset($_SESSION['loginType']) || (isset($_SESSION['loginType']) && $_SESSION['loginType'] != "Studente"))
+if(!isset($_SESSION['loginType']))
     header('Location: homepage.php');
 
 if(isset($_SESSION['matricola']))
