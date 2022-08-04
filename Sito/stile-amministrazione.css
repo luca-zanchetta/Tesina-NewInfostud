@@ -119,3 +119,129 @@ div.menuAdmin>input.admin:hover {
 form.admin {
     margin: 2%;
 }
+
+
+/* Form di inserimento corsi di laurea e corsi - da stileLogin.css*/
+
+.boxInsCDL {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    border-width: 3px;
+	border-style: ridge;     
+    border-color: firebrick;
+	margin-top: 3em;
+    margin-bottom: 5em;
+    width: fit-content;
+    margin-left: 30%;
+    min-width: 20%;
+    border-radius: 4%;
+    background-color: rgba(240, 255, 240, 0.102);
+    padding: 1%;
+}
+.boxInsAPP {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    border-width: 3px;
+	border-style: ridge;     
+    border-color: firebrick;
+	margin-top: 3em;
+    margin-bottom: 5em;
+    width: fit-content;
+    margin-left: 30%;
+    min-width: 20%;
+    border-radius: 4%;
+    background-color: rgba(240, 255, 240, 0.102);
+    padding: 1%;
+}
+.boxInsC {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    border-width: 3px;
+	border-style: ridge;     
+    border-color: firebrick;
+	margin-top: 3em;
+    margin-bottom: 5em;
+    width: fit-content;
+    margin-left: 30%;
+    min-width: 20%;
+    border-radius: 4%;
+    background-color: rgba(240, 255, 240, 0.102);
+    padding: 1%;
+}
+div.insContainer {
+    display: flex; 
+    flex-direction: row; 
+    flex-wrap: wrap;
+    justify-content: center;
+}
+div.labels {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+div.inputs {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.bottoni {
+    width: 100px;
+    height: 50px;
+    font-weight: bold;
+    margin: 2ex;
+    cursor: pointer;
+    font-size: large;
+    border-radius: 9px;
+}
+.bottoni:hover {
+    background-color:honeydew;
+}
+.textField {
+    width: 200px;
+    height: 25px;
+    font-size: large;
+    margin: 1em;
+    border-radius: 5px;
+}
+.textField:hover {
+    background-color:honeydew;
+}
+select.choice {
+    width: 68%;
+    margin-left: 8%;
+    font-weight: bold;
+    font-size: large;
+    border-radius: 5px;
+    cursor: pointer;
+    border: solid 2px;
+    margin: 1em;
+}
+textarea {
+    width: 50%; 
+    height: 80px;
+    resize: none;
+    font-size: 170%;
+    border: solid 2px;
+    border-radius: 6px;
+}
+textarea:hover {
+    background-color:honeydew;
+}
+h2.error {
+    position: relative;
+    text-align: center;
+    font-size: 200%;
+    font-weight: bold;
+    color: blue;
+}

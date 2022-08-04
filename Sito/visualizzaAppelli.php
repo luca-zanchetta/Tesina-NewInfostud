@@ -1,6 +1,19 @@
 <?php
-require_once('phpFunctions.php');
 session_start();
+require_once("../Sito/phpFunctions.php");
+
+if(!isset($_SESSION['loginType']) || $_SESSION['loginType'] == "Studente")
+    header('Location: homepage-users.php');
+
+
+if(isset($_SESSION['username']) && $_SESSION['loginType'] == "Amministratore")
+    $adminLoggato = getAdminFromUsername($_SESSION['username']);
+elseif(isset($_SESSION['username']) && $_SESSION['loginType'] == "Segretario")
+    $segretarioLoggato = getSegretarioFromUsername($_SESSION['username']);
+elseif(isset($_SESSION['matricola']) && $_SESSION['loginType'] == "Docente")
+    $docenteLoggato = getDocenteFromMatricola($_SESSION['matricola']);
+else
+    echo "<p>ERRORE</p>";
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -10,7 +23,8 @@ session_start();
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <link rel="stylesheet" href="stile-base.css">
-    <title>Homepage</title>
+    <link rel="stylesheet" href="stileHomepage-users.css">
+    <title>Visualizza appelli - Infostud</title>
 </head>
 <body>
     <div class="header">
@@ -28,163 +42,69 @@ session_start();
                     Infostud
                 </h2>
             <div class="vertical-bar"></div>
-            <?php
-                if(isset($_SESSION['login'])){
-                    ?>
-                    <h2>
-                        <a class="logout" href="amministrazione.php">
-                            Amministrazione
-                        </a>
-                    </h2>
-                    <div class="vertical-bar"></div>
-                    <h2>
-                        <a class="logout" href="logout.php">
-                            Logout
-                        </a>
-                    </h2>
-                <?php
-                }
-                else{
-                    ?>
-                    <h2>
-                        <a class="logout" href="login.php">
-                            Login
-                        </a>
-                    </h2>
-                <?php
-                }
-            ?>
         </div>
-        <div class="nav-central">
-            <form action="visualizzaAppelli.php" method="POST">
-                <div class="nav-logo">
-                    <input type="submit" name="ricerca" value="">
-                    <img src="search.png" alt="err" width="20px" style="display: inline-flex;">
-                </div>    
-                    <input type="text" name="filtro">              
-            </form>
-        </div>
+        <?php
+        if($_SESSION['loginType'] == "Segretario" || $_SESSION['loginType'] == "Amministratore") {?>
+            <div class="nav-central">
+                <form action="visualizzaAppelli.php" method="POST">
+                    <div class="nav-logo">
+                        <input type="submit" name="ricerca" value="">
+                        <img src="search.png" alt="err" width="20px" style="display: inline-flex;">
+                    </div>    
+                        <input type="text" name="filtro">              
+                </form>
+            </div>
+        <?php
+        }?>
         <div class="nav-right">
-            <img src="account.png" alt="dasdas" width="90px">
+        <h2>
+            <form action="logout.php">
+                <input type="submit" value="">
+            </form>
+                Logout
+        </h2>
+        <div class="vertical-bar"></div>
+            <div class="nav-logo">
+                <a href="homepage-users.php">
+                    <img src="account.png" alt="logo" width="90px">
+                </a>
+            </div>
         </div>
     </div>
     <div class="central-block">
-        <div class="sidebar">
-            <h5>
-                <a class="opzione" href="homepage.php">Visualizza corsi</a>
-            </h5>
-            <h5>
-                <a class="opzione" href="visualizzaAppelli.php">Visualizza appelli</a>
-            </h5>
-        </div>
+    <?php creaSidebar($_SESSION['loginType']); ?>
         <div class="body">
-            <h1 style="text-align: center; color: green;">APPELLI DISPONIBILI:</h1>
-            <div class="container-esami">
+            <div class="infoTitle">
+                <div class="infoTitle-position">
+                    <h2>Home > Visualizza appelli</h2>
+                </div>
+                <div class="infoTitle-user">
                 <?php
-                // Stringa con il contenuto del file XML, privo di spazi o cose simili
-                $xmlString = "";
-                foreach ( file("appelli.xml") as $node ) {
-                    $xmlString .= trim($node);
-                }
-                
-                // Creazione del documento
-                $doc = new DOMDocument();
-                // Caricamento del contenuto informativo del file XML
-                $doc->loadXML($xmlString);
-                // Lista degli elementi del file XML caricato
-                $records = $doc->documentElement->childNodes;
+                if(isset($_SESSION['username']) && $_SESSION['loginType'] == "Amministratore")
+                    echo "<h2>{$adminLoggato->username}</h2>";
+                elseif(isset($_SESSION['username']) && $_SESSION['loginType'] == "Segretario")
+                    echo "<h2>{$segretarioLoggato->username}</h2>";
+                elseif(isset($_SESSION['matricola']) && $_SESSION['loginType'] == "Docente")
+                    echo "<h2>{$docenteLoggato->nome} {$docenteLoggato->cognome}, {$docenteLoggato->matricola}</h2>";                   
+                ?>
+                </div>
+            </div>    
+            <hr />
+            <div class="container-esami">
+                <?php 
+                if($_SESSION['loginType'] == "Docente")
+                    displayAppelliFromCorso($docenteLoggato->idCorso);
 
-                if($records->length > 0) { /* C'è almeno un appello */
-                    $listaCorsi = [];
-                    if(isset($_POST['filtro']) && $_POST['filtro'] != "") {
-                        $listaCorsi = getCorsiLike($_POST['filtro']);
-                        foreach($listaCorsi as $corso){
-                            $idCorso = $corso->id;
-                            if($idCorso != 0) {
-                                for ($i=0; $i<$records->length; $i++) {
-                                    $record = $records->item($i); // i-esimo appello
-                
-                                    $codiceElement = $record->firstChild;   // Codice
-                                    $codice = $codiceElement->textContent;
-                                    $dataAppelloElement = $codiceElement->nextSibling;  // Data appello
-                                    $dataAppello = $dataAppelloElement->textContent;
-                                    $dataScandenzaElement = $dataAppelloElement->nextSibling; // Data scadenza (è veramente necessaria?)
-                                    $dataScandenza = $dataScandenzaElement->textContent;
-                                    $idElement = $dataScandenzaElement->nextSibling;
-                                    $id = $idElement->textContent;
-    
-                                    $nomeCorso = $corso->nome;
-                                    $colore = $corso->id_colore;
-    
-                                    if($idCorso == $id) {
-                                    ?>
-                                        <div class="blocco-esame" style="background-color:<?php echo $colore?>">
-                                            <div class="nome-esame" >
-                                                <?php echo $nomeCorso?><br />
-                                                <?php echo $dataAppello?>
-                                            </div>  
-                                        </div>                                     
-                                        <?php
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    elseif(isset($_POST['filtro']) && $_POST['filtro'] == "") {
-                    ?>
-                        <form action="homepage.php" method="post">
-                            <div class="zero-esami_central">
-                                <h2>ERRORE: Il campo di ricerca non pu&ograve; essere vuoto!</h2>
-                                <input class="bottoneHome" type="submit" name="home" value="TORNA ALLA HOME">
-                            </div>
-                        </form>
-                    <?php
-                    }
-                    else {
-                        $listaCorsi = getCorsi();
-                        foreach($listaCorsi as $corso){
-                            for ($i=0; $i<$records->length; $i++) {
-                                $record = $records->item($i); // i-esimo appello
-            
-                                $codiceElement = $record->firstChild;   // Codice
-                                $codice = $codiceElement->textContent;
-                                $dataAppelloElement = $codiceElement->nextSibling;  // Data appello
-                                $dataAppello = $dataAppelloElement->textContent;
-                                $dataScandenzaElement = $dataAppelloElement->nextSibling; // Data scadenza (è veramente necessaria?)
-                                $dataScandenza = $dataScandenzaElement->textContent;
-                                $idElement = $dataScandenzaElement->nextSibling;
-                                $id = $idElement->textContent;
-                                
-                                $idCorso = $corso->id;
-    
-                                $nomeCorso = $corso->nome;
-                                $colore = $corso->id_colore;
-        
-                                if($idCorso == $id) {
-                                ?>
-                                    <div class="blocco-esame" style="background-color:<?php echo $colore?>">
-                                        <div class="nome-esame" >
-                                            <?php echo $nomeCorso?><br />
-                                            <?php echo $dataAppello?>
-                                        </div>  
-                                    </div>                                     
-                                <?php
-                                }
-                            }
-                        }
-                    }
+                elseif($_SESSION['loginType'] == "Segretario" || $_SESSION['loginType'] == "Amministratore") {
+                    
+                    if(isset($_POST['filtro']) && $_POST['filtro'] != "")
+                        displayAppelliLike($_POST['filtro']);
+                    else
+                        displayFullAppelli();
                 }
-                else { /* Non ci sono appelli */
-                    ?>
-                        <form action="homepage.php" method="post">
-                            <div class="zero-esami_central">
-                                <h2>Nessun appello disponibile!</h2>
-                                <input class="bottoneHome" type="submit" name="home" value="TORNA ALLA HOME">
-                            </div>
-                        </form>
-                    <?php
-                }?>
-            </div>           
+                    
+                ?>           
+            </div>
         </div>
     </div>
 </div>
