@@ -6,4 +6,10 @@
     <idAppello>1</idAppello>
     <esito>25</esito>
   </prenotazione>
+  <prenotazione>
+    <id>2</id>
+    <matricolaStudente>1</matricolaStudente>
+    <idAppello>1</idAppello>
+    <esito>NULL</esito>
+  </prenotazione>
 </prenotazioni>
