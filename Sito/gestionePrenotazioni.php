@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_SESSION['src'] = "edit";
+$_SESSION['src'] = "manage";
 require_once("../Sito/phpFunctions.php");
 
 
@@ -26,7 +26,7 @@ else
 <head>
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileHomepage-users.css">
-    <title>Visualizza appelli - Infostud</title>
+    <title>Gestione prenotazioni - Infostud</title>
 </head>
 <body>
     <div class="header">
@@ -78,7 +78,7 @@ else
         <div class="body">
             <div class="infoTitle">
                 <div class="infoTitle-position">
-                    <h2>Home > Visualizza appelli</h2>
+                    <h2>Home > Gestione prenotazioni</h2>
                 </div>
                 <div class="infoTitle-user">
                 <?php
@@ -93,7 +93,7 @@ else
             </div>    
             <hr />
             <div class="container-esami">
-                <?php
+                <?php                 
                 if($_SESSION['loginType'] == "Docente")
                     displayAppelliFromCorso($docenteLoggato->idCorso);
 

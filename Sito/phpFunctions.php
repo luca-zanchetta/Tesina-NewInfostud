@@ -151,12 +151,18 @@ function creaSidebar($loginType) {
                         <a class="opzionetab" href="visualizzaAppelli.php" style="display: flex; margin: 0px;">Visualizza appelli</a>
                     </h5>
                 </div>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="gestionePrenotazioni.php" style="display: flex; margin: 0px;">Gestione prenotazioni</a>
+                    </h5>
+                </div>
 
                 <hr style="width: 90%; margin-left: -2%;" />
 
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzione" href="homepage-faq.php">FAQ</a>
+                        <a class="opzione" href="homepage-users-visualizzaFaq.php">FAQ</a>
                     </h5>
                 </div>
 
@@ -199,7 +205,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Gestione prenotazioni</a>
+                        <a class="opzionetab" href="gestionePrenotazioni.php" style="display: flex; margin: 0px;">Gestione prenotazioni</a>
                     </h5>
                 </div>
 
@@ -258,7 +264,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Gestione prenotazioni</a>
+                        <a class="opzionetab" href="gestionePrenotazioni.php" style="display: flex; margin: 0px;">Gestione prenotazioni</a>
                     </h5>
                 </div>
 
@@ -533,9 +539,9 @@ function displayAppelliPrenotabili($studente) {
                 <div class="nome-esame">
                     '.$corso->nome."<br />".$appello->dataOra.'
                 </div> 
-                    <div class="info-button">
-                        PRENOTA
-                        <form action="fittizia.php" method="POST">
+                <div class="info-button">
+                    PRENOTA
+                    <form action="fittizia.php" method="POST">
                         <input type="submit" name="prenota" value="" >
                         <input type="hidden" name="matricola" value="'.$_SESSION['matricola'].'">
                         <input type="hidden" name="idAppello" value="'.$appello->id.'">
@@ -557,20 +563,51 @@ function displayFullAppelli() {
     else {
         foreach($appelli as $appello) {
             $corso = getCorsoById($appello->idCorso);
-            echo '
-            <div class="blocco-esame" style="background-color:lightblue;">
-                <div class="nome-esame">
-                    '.$corso->nome."<br />".$appello->dataOra.'
-                </div> 
+            
+            if($_SESSION['src'] == "manage") {
+                echo '
+                <div class="blocco-esame" style="background-color:lightblue;">
+                    <div class="nome-esame">
+                        '.$corso->nome."<br />".$appello->dataOra.'
+                    </div> 
                     <div class="info-button">
                         INFO
-                        <form action="fittizia.php" method="POST">
-                        <input type="submit" name="prenota" value="" >
-                        <input type="hidden" name="idAppello" value="'.$appello->id.'">
-                    </form>
-                </div>  
-            </div>
-            ';
+                        <form action="visualizzaPrenotazioni.php" method="POST">
+                            <input type="submit" name="info" value="" >
+                            <input type="hidden" name="idAppello" value="'.$appello->id.'">
+                        </form>
+                    </div>  
+                </div>
+                ';
+            }
+
+            elseif($_SESSION['src'] == "edit") {
+                echo '
+                <div class="blocco-esame" style="background-color:lightblue;">
+                    <div class="nome-esame">
+                        '.$corso->nome."<br />".$appello->dataOra.'
+                    </div> 
+                    <div style="display: flex; flex-direction: row; padding-top: 10%; margin-left: -10%;">
+                        <div class="info-button" style="padding-left: 15%; padding-right: 15%;">
+                            MODIFICA
+                            <form action="fittizia.php" method="POST">
+                                <input type="submit" name="modifica" value="" >
+                                <input type="hidden" name="idAppello" value="'.$appello->id.'">
+                                <input type="hidden" name="idCorso" value="'.$appello->idCorso.'">
+                                <input type="hidden" name="dataOra" value="'.$appello->dataOra.'">
+                            </form>
+                        </div>  
+                        <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
+                            ELIMINA
+                            <form action="fittizia.php" method="POST">
+                                <input type="submit" name="elimina" value="" >
+                                <input type="hidden" name="idAppello" value="'.$appello->id.'">
+                            </form>
+                        </div> 
+                    </div>
+                </div>
+                ';
+            }
         }
     }
 }
@@ -585,20 +622,51 @@ function displayAppelliFromCorso($idCorso) {
     else {
         foreach($appelli as $appello) {
             $corso = getCorsoById($appello->idCorso);
-            echo '
-            <div class="blocco-esame" style="background-color:lightblue;">
-                <div class="nome-esame">
-                    '.$corso->nome."<br />".$appello->dataOra.'
-                </div> 
+            
+            if($_SESSION['src'] == "manage") {
+                echo '
+                <div class="blocco-esame" style="background-color:lightblue;">
+                    <div class="nome-esame">
+                        '.$corso->nome."<br />".$appello->dataOra.'
+                    </div> 
                     <div class="info-button">
                         INFO
-                        <form action="fittizia.php" method="POST">
-                        <input type="submit" name="prenota" value="" >
-                        <input type="hidden" name="idAppello" value="'.$appello->id.'">
-                    </form>
-                </div>  
-            </div>
-            ';
+                        <form action="visualizzaPrenotazioni.php" method="POST">
+                            <input type="submit" name="info" value="" >
+                            <input type="hidden" name="idAppello" value="'.$appello->id.'">
+                        </form>
+                    </div>  
+                </div>
+                ';
+            }
+
+            elseif($_SESSION['src'] == "edit") {
+                echo '
+                <div class="blocco-esame" style="background-color:lightblue;">
+                    <div class="nome-esame">
+                        '.$corso->nome."<br />".$appello->dataOra.'
+                    </div> 
+                    <div style="display: flex; flex-direction: row; padding-top: 10%; margin-left: -10%;">
+                        <div class="info-button" style="padding-left: 15%; padding-right: 15%;">
+                            MODIFICA
+                            <form action="fittizia.php" method="POST">
+                                <input type="submit" name="modifica" value="" >
+                                <input type="hidden" name="idAppello" value="'.$appello->id.'">
+                                <input type="hidden" name="idCorso" value="'.$appello->idCorso.'">
+                                <input type="hidden" name="dataOra" value="'.$appello->dataOra.'">
+                            </form>
+                        </div>  
+                        <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
+                            ELIMINA
+                            <form action="fittizia.php" method="POST">
+                                <input type="submit" name="elimina" value="" >
+                                <input type="hidden" name="idAppello" value="'.$appello->id.'">
+                            </form>
+                        </div> 
+                    </div> 
+                </div>
+                ';
+            }
         }
     }
 }
@@ -620,20 +688,50 @@ function displayAppelliLike($nomeCorso) {
             }
             else {
                 foreach($appelli as $appello) {
-                    echo '
-                    <div class="blocco-esame" style="background-color:lightblue;">
-                        <div class="nome-esame">
-                            '.$corso->nome."<br />".$appello->dataOra.'
-                        </div> 
+                    if($_SESSION['src'] == "manage") {
+                        echo '
+                        <div class="blocco-esame" style="background-color:lightblue;">
+                            <div class="nome-esame">
+                                '.$corso->nome."<br />".$appello->dataOra.'
+                            </div> 
                             <div class="info-button">
                                 INFO
-                                <form action="fittizia.php" method="POST">
-                                <input type="submit" name="prenota" value="" >
-                                <input type="hidden" name="idAppello" value="'.$appello->id.'">
-                            </form>
-                        </div>  
-                    </div>
-                    ';
+                                <form action="visualizzaPrenotazioni.php" method="POST">
+                                    <input type="submit" name="info" value="" >
+                                    <input type="hidden" name="idAppello" value="'.$appello->id.'">
+                                </form>
+                            </div>  
+                        </div>
+                        ';
+                    }
+        
+                    elseif($_SESSION['src'] == "edit") {
+                        echo '
+                        <div class="blocco-esame" style="background-color:lightblue;">
+                            <div class="nome-esame">
+                                '.$corso->nome."<br />".$appello->dataOra.'
+                            </div> 
+                            <div style="display: flex; flex-direction: row; padding-top: 10%; margin-left: -10%;">
+                                <div class="info-button" style="padding-left: 15%; padding-right: 15%;">
+                                    MODIFICA
+                                    <form action="fittizia.php" method="POST">
+                                        <input type="submit" name="modifica" value="" >
+                                        <input type="hidden" name="idAppello" value="'.$appello->id.'">
+                                        <input type="hidden" name="idCorso" value="'.$appello->idCorso.'">
+                                        <input type="hidden" name="dataOra" value="'.$appello->dataOra.'">
+                                    </form>
+                                </div>  
+                                <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
+                                    ELIMINA
+                                    <form action="fittizia.php" method="POST">
+                                        <input type="submit" name="elimina" value="" >
+                                        <input type="hidden" name="idAppello" value="'.$appello->id.'">
+                                    </form>
+                                </div> 
+                            </div>
+                        </div>
+                        ';
+                    }
                 }
             }
         }
@@ -1789,6 +1887,73 @@ function getAppelliPrenotabili($studente) {
 
 function getDataFromDataora($dataora) {
     return substr($dataora, 0, 10);
+}
+
+
+function getPrenotazioniFromAppello($idAppello) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/prenotazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaPrenotazioni = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $prenotazione = new prenotazione();  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $prenotazione->id = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->matricolaStudente = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->idAppello = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->esito = $con->textContent;
+
+        if($prenotazione->idAppello == $idAppello && $prenotazione->esito == "NULL")
+            $listaPrenotazioni[] = $prenotazione;
+    }
+    return $listaPrenotazioni;
+}
+
+
+function getFullPrenotazioni() {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/prenotazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaPrenotazioni = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $prenotazione = new prenotazione();  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $prenotazione->id = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->matricolaStudente = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->idAppello = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->esito = $con->textContent;
+
+        $listaPrenotazioni[] = $prenotazione;
+    }
+    return $listaPrenotazioni;
 }
 
 
