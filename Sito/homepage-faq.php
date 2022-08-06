@@ -2,7 +2,7 @@
 session_start();
 require_once('phpFunctions.php');
 
-if(!isset($_SESSION['loginType']) || (isset($_SESSION['loginType']) && $_SESSION['loginType'] != "Studente"))
+if(!isset($_SESSION['loginType']))
     header('Location: homepage.php');
 
 if(isset($_SESSION['matricola']))
@@ -58,7 +58,7 @@ if(isset($_SESSION['matricola']))
         <div class="body">
             <div class="infoTitle">
                 <div class="infoTitle-position">
-                    <h2>Home > Bacheche</h2><!--Generato dallo script-->
+                    <h2>Home > FAQ</h2><!--Generato dallo script-->
                 </div>
                 <div class="infoTitle-user">
                     <h2>Nome,Cognome, Matricola</h2><!--Generato dallo script-->
@@ -71,7 +71,7 @@ if(isset($_SESSION['matricola']))
                         <h2>Nome</h2>
                     </div>
                 </div> 
-                <hr />
+                <hr class="redBar" />
                 <form action="homepage-users-visualizzaFaq.php">
                     <div class="listItem">
                         <input type="submit" value="" class="bottoneCorsi"> <!--Struttura di ogni bottone -->

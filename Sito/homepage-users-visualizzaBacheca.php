@@ -2,7 +2,7 @@
 session_start();
 require_once('phpFunctions.php');
 
-if(!isset($_SESSION['loginType']) || (isset($_SESSION['loginType']) && $_SESSION['loginType'] != "Studente"))
+if(!isset($_SESSION['loginType']) || (isset($_SESSION['loginType']) && $_SESSION['loginType'] == "Docente"))
     header('Location: homepage.php');
 
 if(isset($_SESSION['matricola']))
@@ -81,7 +81,7 @@ if(isset($_SESSION['matricola']))
                     <h2>Nome, Cognome, Matricola</h2><!--Generato dallo script-->
                 </div>
             </div>    
-            <hr />
+            <hr class="redBar" />
             <div class="pageNav">
                 <div class="prev">
                     Prev  

@@ -13,9 +13,9 @@ div.upDown {
 
 .upDown>form>div>img {
     display: flex;
-    width: 20px;
-    height: 20px;
-    position: relativec;
+    width: 30px;
+    height: 30px;
+    position: relative;
 }
 
 .upDown>form>div {

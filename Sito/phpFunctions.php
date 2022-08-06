@@ -99,7 +99,7 @@ function creaSidebar($loginType) {
                 <hr style="width: 90%; margin-left: -2%;" />
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzione" href="homepage-users-visualizzaBacheca.php">Bacheca</a>
+                        <a class="opzione" href="homepage-bacheca.php">Bacheca</a>
                     </h5>
                 </div>
                 <hr style="width: 90%; margin-left: -2%;" />
@@ -151,7 +151,7 @@ function creaSidebar($loginType) {
                 <hr style="width: 90%; margin-left: -2%;" />
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzione" href="homepage-users-visualizzaFaq.php">FAQ</a>
+                        <a class="opzione" href="homepage-faq.php">FAQ</a>
                     </h5>
                 </div>
                 <hr style="width: 90%; margin-left: -2%;" />
@@ -197,7 +197,7 @@ function creaSidebar($loginType) {
                 <hr style="width: 90%; margin-left: -2%;" />
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzione" href="homepage-users-visualizzaBacheca">Bacheca</a>
+                        <a class="opzione" href="homepage-bacheca">Bacheca</a>
                     </h5>
                 </div>
                 <hr style="width: 90%; margin-left: -2%;" />
@@ -249,7 +249,7 @@ function creaSidebar($loginType) {
                 <hr style="width: 90%; margin-left: -2%;" />
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzione" href="homepage-users-visualizzaBacheca.php">Bacheca</a>
+                        <a class="opzione" href="homepage-bacheca.php">Bacheca</a>
                     </h5>
                 </div>
                 <hr style="width: 90%; margin-left: -2%;" />

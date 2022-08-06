@@ -200,7 +200,7 @@ hr.redBar {
     width: 96%;               
     background-color:red;
     height: 5px;
-    border-radius: 2px;
+    border-radius: 5px;
 }
 h3.voceElenco {
     margin-left: 7%;

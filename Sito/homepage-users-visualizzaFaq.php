@@ -2,7 +2,7 @@
 session_start();
 require_once('phpFunctions.php');
 
-if(!isset($_SESSION['loginType']) || (isset($_SESSION['loginType']) && $_SESSION['loginType'] != "Studente"))
+if(!isset($_SESSION['loginType']))
     header('Location: homepage.php');
 
 if(isset($_SESSION['matricola']))
@@ -69,7 +69,7 @@ if(isset($_SESSION['matricola']))
                         <h2>Nome, Cognome, Matricola</h2><!--Generato dallo script-->
                     </div>
                 </div>    
-                <hr />
+                <hr class="redBar" />
                 <!-- Container delle domande con risposta -->
                 <div class="container">
                     <div class="title">
@@ -362,7 +362,7 @@ if(isset($_SESSION['matricola']))
                 </div>
                 <!-- Container della form di input -->
                 <div class="formContainer">
-                    <div class="formBorder">
+                    <div class="formBorder" style="background-color: gainsboro;">
                         <div class="formTitle">
                             Proponi una nuova domanda
                         </div>
