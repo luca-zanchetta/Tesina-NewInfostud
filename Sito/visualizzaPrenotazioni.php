@@ -1,8 +1,6 @@
 <?php
 session_start();
-$_SESSION['src'] = "edit";
 require_once("../Sito/phpFunctions.php");
-
 
 if(!isset($_SESSION['loginType']) || $_SESSION['loginType'] == "Studente")
     header('Location: homepage-users.php');
@@ -26,7 +24,9 @@ else
 <head>
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileHomepage-users.css">
-    <title>Visualizza appelli - Infostud</title>
+    <link rel="stylesheet" href="stileVisualizzazioneLista.css">
+    <link rel="stylesheet" href="stile-amministrazione.css">
+    <title>Visualizza prenotazioni - Infostud</title>
 </head>
 <body>
     <div class="header">
@@ -78,7 +78,7 @@ else
         <div class="body">
             <div class="infoTitle">
                 <div class="infoTitle-position">
-                    <h2>Home > Visualizza appelli</h2>
+                    <h2>Home > Visualizza appelli > Informazioni</h2>
                 </div>
                 <div class="infoTitle-user">
                 <?php
@@ -92,19 +92,79 @@ else
                 </div>
             </div>    
             <hr />
-            <div class="container-esami">
+            <div class="listContainer">
+                <div class="listItem">
+                    <div class="element">
+                        <h2>Appello del</h2>
+                    </div>
+                    <div class="element">
+                        <h2>Corso</h2>
+                    </div>
+                    <div class="element">
+                        <h2>Studente</h2>
+                    </div>
+                    <div class="lastElement">
+                        <h2>Esito</h2>
+                    </div>
+                </div>
+                <hr />
                 <?php
-                if($_SESSION['loginType'] == "Docente")
-                    displayAppelliFromCorso($docenteLoggato->idCorso);
-
-                elseif($_SESSION['loginType'] == "Segretario" || $_SESSION['loginType'] == "Amministratore") {
+                if(isset($_POST['idAppello']))
+                    $appello = getAppelloFromId($_POST['idAppello']);
+                $corso = getCorsoById($appello->idCorso);
                     
-                    if(isset($_POST['filtro']) && $_POST['filtro'] != "")
-                        displayAppelliLike($_POST['filtro']);
-                    else
-                        displayFullAppelli();
-                } 
-                ?>           
+                $prenotazioni = [];
+                $prenotazioni = getPrenotazioniFromAppello($appello->id);
+    
+                if(!$prenotazioni) {
+                    echo "<h3 class=\"voceElenco\">Nessuna prenotazione registrata.</h3>";
+                }
+                else {
+                    foreach($prenotazioni as $prenotazione) {
+                        $studente = getStudenteFromMatricola($prenotazione->matricolaStudente);
+                        $data = getDataFromDataora($appello->dataOra);
+                    ?>
+                        <div class="listItem">
+                            <input type="hidden" name="idPrenotazione" value="<?php echo $prenotazione->id; ?>">
+                            <div class="element">
+                                <h2><?php echo "{$data}" ?></h2>
+                            </div>
+                            <div class="element">
+                                <h2><?php echo "{$corso->nome}" ?></h2>
+                            </div>
+                            <div class="element">
+                                <h2><?php echo "{$studente->cognome} {$studente->nome}, {$studente->matricola}" ;?></h2>
+                            </div>
+                            <div class="lastElement">
+                                <select class="choice" name="esito" onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();' style="width: 30%;">
+                                    <option value="NULL">NULL</option>
+                                    <option value="B">B</option>
+                                    <option value="R">R</option>
+                                <?php
+                                    for($i = 18; $i <= 30; $i++)
+                                        echo "<option value=\"{$i}\">{$i}</option>";
+                                ?>
+                                    <option value="31">30L</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr />
+                    <?php
+                    }
+                }
+                if($prenotazioni) {
+                ?>
+                <div class="listItem" style="margin-top: 5%;">
+                    <div class="element"></div>
+                    <div class="element"></div>
+                    <div class="element"></div>
+                    <div class="element">
+                    <form action="fittizia.php" method="POST">
+                        <input class="verbalizza" type="submit" name="verbalizza" value="VERBALIZZA">
+                    </form>
+                    </div>
+                </div><?php
+                }?>
             </div>
         </div>
     </div>

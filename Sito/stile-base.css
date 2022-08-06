@@ -7,7 +7,7 @@ body {
     background-position: top center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-color: rgba(220, 220, 220, 0.396);
+    background-color: gainsboro;
     line-height: 1.5em;
     margin: 0;
     overflow: hidden;
