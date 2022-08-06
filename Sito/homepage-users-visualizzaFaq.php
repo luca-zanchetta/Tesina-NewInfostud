@@ -2,7 +2,7 @@
 session_start();
 require_once('phpFunctions.php');
 
-if(!isset($_SESSION['loginType']))
+if(!isset($_SESSION['loginType']) || (isset($_SESSION['loginType']) && $_SESSION['loginType'] != "Studente"))
     header('Location: homepage.php');
 
 if(isset($_SESSION['matricola']))
@@ -380,21 +380,22 @@ if(isset($_SESSION['matricola']))
 </html>
 <script>
     function toggleInput(id) {
-        event.preventDefault();
+       
         if(document.getElementById("textId").style.display == "none"){
             
             document.getElementById("inputId").style.display = "none";
             document.getElementById("textId").style.display = "flex";
 
-            _newText = $("#inputId").val()
+            _newText = $("#inputId").val(); 
+
             console.log(_newText);
             document.getElementById("textId").textContent = _newText;
 
             //Possiamo usare uno script esterno volendo
             jQuery.ajax({
-                        url: 'homepage-users-visualizzaFaq.php',
+                        url: 'script.php',
                         type: 'POST',
-                        data: jQuery.param({ newText: _newText, id:id}) ,
+                        data: jQuery.param({newText: _newText, id:id, richiesta: "modificaFaq"}), 
                         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                         success: function (response) {
                             console.log("Success");
@@ -407,5 +408,6 @@ if(isset($_SESSION['matricola']))
             document.getElementById("textId").style.display = "none";
             document.getElementById("inputId").style.display = "flex";
         }
+        event.preventDefault();
     }
 </script>

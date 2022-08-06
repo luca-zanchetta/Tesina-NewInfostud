@@ -74,9 +74,7 @@ function creaSidebar($loginType) {
                         <a class="opzionetab" href="homepage-users-Carriera.php" style="display: flex; margin: 0px;">Visualizza carriera</a>
                     </h5>
                 </div>
-
                 <hr style="width: 90%; margin-left: -2%;" />
-
                 <h5>
                     Esami
                 </h5>
@@ -98,23 +96,18 @@ function creaSidebar($loginType) {
                         <a class="opzionetab" href="homepage-users-esamiSostenuti.php" style="display: flex; margin: 0px;">Esami sostenuti</a>
                     </h5>
                 </div>
-
                 <hr style="width: 90%; margin-left: -2%;" />
-
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzione" href="homepage-users-visualizzaBacheca.php">Bacheca</a>
                     </h5>
                 </div>
-
                 <hr style="width: 90%; margin-left: -2%;" />
-
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzione" href="homepage-faq.php">FAQ</a>
                     </h5>
                 </div>
-
                 <hr style="width: 90%; margin-left: -2%;" />
             </div>
             ';
@@ -133,9 +126,7 @@ function creaSidebar($loginType) {
                         <a class="opzionetab" href="homepage-users.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
                 </div>
-
                 <hr style="width: 90%; margin-left: -2%;" />
-
                 <h5>
                     Esami
                 </h5>
@@ -157,15 +148,12 @@ function creaSidebar($loginType) {
                         <a class="opzionetab" href="gestionePrenotazioni.php" style="display: flex; margin: 0px;">Gestione prenotazioni</a>
                     </h5>
                 </div>
-
                 <hr style="width: 90%; margin-left: -2%;" />
-
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzione" href="homepage-users-visualizzaFaq.php">FAQ</a>
                     </h5>
                 </div>
-
                 <hr style="width: 90%; margin-left: -2%;" />
             </div>
             ';
@@ -184,9 +172,7 @@ function creaSidebar($loginType) {
                         <a class="opzionetab" href="homepage-users.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
                 </div>
-
                 <hr style="width: 90%; margin-left: -2%;" />
-
                 <h5>
                     Esami
                 </h5>
@@ -208,23 +194,18 @@ function creaSidebar($loginType) {
                         <a class="opzionetab" href="gestionePrenotazioni.php" style="display: flex; margin: 0px;">Gestione prenotazioni</a>
                     </h5>
                 </div>
-
                 <hr style="width: 90%; margin-left: -2%;" />
-
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzione" href="homepage-users-visualizzaBacheca">Bacheca</a>
                     </h5>
                 </div>
-
                 <hr style="width: 90%; margin-left: -2%;" />
-
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzione" href="homepage-faq.php">FAQ</a>
                     </h5>
                 </div>
-
                 <hr style="width: 90%; margin-left: -2%;" />
             </div>
             ';
@@ -243,9 +224,7 @@ function creaSidebar($loginType) {
                         <a class="opzionetab" href="homepage-users.php" style="display: flex; margin: 0px;">Visualizza anagrafica</a>
                     </h5>
                 </div>
-
                 <hr style="width: 90%; margin-left: -2%;" />
-
                 <h5>
                     Esami
                 </h5>
@@ -267,25 +246,19 @@ function creaSidebar($loginType) {
                         <a class="opzionetab" href="gestionePrenotazioni.php" style="display: flex; margin: 0px;">Gestione prenotazioni</a>
                     </h5>
                 </div>
-
                 <hr style="width: 90%; margin-left: -2%;" />
-
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzione" href="homepage-users-visualizzaBacheca.php">Bacheca</a>
                     </h5>
                 </div>
-
                 <hr style="width: 90%; margin-left: -2%;" />
-
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzione" href="homepage-faq.php">FAQ</a>
                     </h5>
                 </div>
-
                 <hr style="width: 90%; margin-left: -2%;" />
-
                 <h5>
                     Moderazione utenze
                 </h5>
@@ -307,9 +280,7 @@ function creaSidebar($loginType) {
                         <a class="opzionetab" href="visualizzaSegreteriaAdmin.php" style="display: flex; margin: 0px;">Visualizza segreteria</a>
                     </h5>
                 </div>
-
                 <hr style="width: 90%; margin-left: -2%;" />
-
                 <h5>
                     Altre funzionalità
                 </h5>
@@ -325,7 +296,6 @@ function creaSidebar($loginType) {
                         <a class="opzionetab" href="inserisciCorso.php" style="display: flex; margin: 0px;">Inserisci corso</a>
                     </h5>
                 </div>
-
                 <hr style="width: 90%; margin-left: -2%;" />
             </div>
             ';
