@@ -786,6 +786,69 @@ function displayAppelliLike($nomeCorso) {
 }
 
 
+function displayAppelliAfterDate($data) {
+    if($_SESSION['loginType'] == "Docente") {
+        $docente = getDocenteFromMatricola($_SESSION['matricola']);
+        $appelli = getAppelliAfterDateFromCorso($data, $docente->idCorso);
+    }
+    else 
+        $appelli = getAppelliAfterDate($data);
+
+    if(!$appelli)
+        echo '<h2>Nessun appello corrispondente ai criteri di ricerca.</h2>';
+    else {
+        foreach($appelli as $appello) {
+            $corso = getCorsoById($appello->idCorso);
+    
+            if($_SESSION['src'] == "manage") {
+                echo '
+                <div class="blocco-esame" style="background-color:lightblue;">
+                    <div class="nome-esame">
+                        '.$corso->nome."<br />".$appello->dataOra.'
+                    </div> 
+                    <div class="info-button">
+                        INFO
+                        <form action="visualizzaPrenotazioni.php" method="POST">
+                            <input type="submit" name="info" value="" >
+                            <input type="hidden" name="idAppello" value="'.$appello->id.'">
+                        </form>
+                    </div>  
+                </div>
+                ';
+            }
+    
+            elseif($_SESSION['src'] == "edit") {
+                echo '
+                <div class="blocco-esame" style="background-color:lightblue;">
+                    <div class="nome-esame">
+                        '.$corso->nome."<br />".$appello->dataOra.'
+                    </div> 
+                    <div style="display: flex; flex-direction: row; padding-top: 10%; margin-left: -10%;">
+                        <div class="info-button" style="padding-left: 15%; padding-right: 15%;">
+                            MODIFICA
+                            <form action="fittizia.php" method="POST">
+                                <input type="submit" name="modifica" value="" >
+                                <input type="hidden" name="idAppello" value="'.$appello->id.'">
+                                <input type="hidden" name="idCorso" value="'.$appello->idCorso.'">
+                                <input type="hidden" name="dataOra" value="'.$appello->dataOra.'">
+                            </form>
+                        </div>  
+                        <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
+                            ELIMINA
+                            <form action="fittizia.php" method="POST">
+                                <input type="submit" name="elimina" value="" >
+                                <input type="hidden" name="idAppello" value="'.$appello->id.'">
+                            </form>
+                        </div> 
+                    </div>
+                </div>
+                ';
+            }
+        }
+    }
+}
+
+
 
 
 
@@ -2006,6 +2069,84 @@ function getAppelliPrenotabili($studente) {
     }
 
     return NULL;    // Nel dubbio è vuota
+}
+
+
+function getAppelliAfterDate($data) {
+    $dataRif = strtotime($data);
+    $dataRif = date('Y-m-d', $dataRif);
+
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/appelli.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaAppelli = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $appello = new appello("", 0);  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $appello->id = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->idCorso = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->dataOra = $con->textContent;
+
+        $dataAppello = getDataFromDataora($appello->dataOra);
+        $dataAppello = strtotime($dataAppello);
+        $dataAppello = date('Y-m-d', $dataAppello);
+
+        if($dataAppello >= $dataRif)
+            $listaAppelli[] = $appello;
+    }
+    return $listaAppelli;
+}
+
+
+function getAppelliAfterDateFromCorso($data, $idCorso) {
+    $dataRif = strtotime($data);
+    $dataRif = date('Y-m-d', $dataRif);
+
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/appelli.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaAppelli = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $appello = new appello("", 0);  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $appello->id = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->idCorso = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->dataOra = $con->textContent;
+
+        $dataAppello = getDataFromDataora($appello->dataOra);
+        $dataAppello = strtotime($dataAppello);
+        $dataAppello = date('Y-m-d', $dataAppello);
+
+        if($dataAppello >= $dataRif && $appello->idCorso == $idCorso)
+            $listaAppelli[] = $appello;
+    }
+    return $listaAppelli;
 }
 
 

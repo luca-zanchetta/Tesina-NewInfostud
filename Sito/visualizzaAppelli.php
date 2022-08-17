@@ -45,19 +45,15 @@ else
                 </h2>
             <div class="vertical-bar"></div>
         </div>
-        <?php
-        if($_SESSION['loginType'] == "Segretario" || $_SESSION['loginType'] == "Amministratore") {?>
-            <div class="nav-central">
-                <form action="visualizzaAppelli.php" method="POST">
-                    <div class="nav-logo">
-                        <input type="submit" name="ricerca" value="">
-                        <img src="search.png" alt="err" width="20px" style="display: inline-flex;">
-                    </div>    
-                        <input type="text" name="filtro">              
-                </form>
-            </div>
-        <?php
-        }?>
+        <div class="nav-central">
+            <form action="visualizzaAppelli.php" method="POST">
+                <div class="nav-logo">
+                    <input type="submit" name="ricerca" value="">
+                    <img src="search.png" alt="err" width="20px" style="display: inline-flex;">
+                </div>    
+                    <input type="date" name="filtro">              
+            </form>
+        </div>
         <div class="nav-right">
         <h2>
             <form action="logout.php">
@@ -97,13 +93,18 @@ else
                 if($_SESSION['loginType'] == "Docente" && $docenteLoggato->idCorso == 0)
                     echo '<h2 style="text-align: center;">ERRORE: il docente non ha un corso assegnato.</h2>';
                 
-                elseif($_SESSION['loginType'] == "Docente" && $docenteLoggato->idCorso != 0)
-                    displayAppelliFromCorso($docenteLoggato->idCorso);
+                elseif($_SESSION['loginType'] == "Docente" && $docenteLoggato->idCorso != 0) {
+                    
+                    if(isset($_POST['filtro']) && $_POST['filtro'] != "")
+                        displayAppelliAfterDate($_POST['filtro'], $docenteLoggato->idCorso);
+                    else
+                        displayAppelliFromCorso($docenteLoggato->idCorso);
+                }
 
                 elseif($_SESSION['loginType'] == "Segretario" || $_SESSION['loginType'] == "Amministratore") {
                     
                     if(isset($_POST['filtro']) && $_POST['filtro'] != "")
-                        displayAppelliLike($_POST['filtro']);
+                        displayAppelliAfterDate($_POST['filtro']);
                     else
                         displayFullAppelli();
                 } 
