@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('../Sito/phpFunctions.php');
 ?>
 
@@ -148,9 +149,6 @@ require_once('../Sito/phpFunctions.php');
                                 <div class="element" style="width: 25%;">
                                     <h2><?php echo $nomeCorso ?></h2>
                                 </div>
-                                <div class="lastElement" style="width: 25%;">
-                                    <a href="fittizia.php"><img class="arrow" width="30px" height="30px" alt="err" src="arrowBlack.png"></a>
-                                </div>
                             </div>
                             <hr />
                         <?php
@@ -176,9 +174,6 @@ require_once('../Sito/phpFunctions.php');
                                 </div>
                                 <div class="element" style="width: 25%;">
                                     <h2><?php echo $nomeCorso ?></h2>
-                                </div>
-                                <div class="lastElement" style="width: 25%;">
-                                    <a href="fittizia.php"><img class="arrow" width="30px" height="30px" alt="err" src="arrowBlack.png"></a>
                                 </div>
                             </div>
                             <hr />
