@@ -93,6 +93,10 @@
                     echo "<h1>{$_COOKIE['corso']}</h1>";
                     setcookie('corso', '', time()-60);
                 }
+                elseif(isset($_COOKIE['appello'])) {
+                    echo "<h1>{$_COOKIE['appello']}</h1>";
+                    setcookie('appello', '', time()-60);
+                }
                 else
                     echo "<h1>ERRORE: Registrazione fallita.</h1>";
                 ?>

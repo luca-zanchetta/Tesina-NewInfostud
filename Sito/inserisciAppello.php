@@ -18,18 +18,32 @@ else
 if(isset($_POST['invio'])) {
     $presenzaDati = FALSE;
 
-    if($_SESSION['loginType'] == "Docente") {
+    if($_SESSION['loginType'] == "Docente" && $docenteLoggato->idCorso != 0) {
         if((isset($_POST['data']) && $_POST['data'] != "") &&
-        (isset($_POST['ora']) && $_POST['ora'] != ""))
-             $presenzaDati = TRUE;
+           (isset($_POST['ora']) && $_POST['ora'] != "")) {
+                $presenzaDati = TRUE;
+
+                $dataOra = "".strval($_POST['data'])." ".strval($_POST['ora'])."";
+                $appello = new appello($dataOra, $docenteLoggato->idCorso);
+                $tmp = inserisciAppello($appello);
+        }
     }
     else {
         if((isset($_POST['data']) && $_POST['data'] != "") &&
            (isset($_POST['ora']) && $_POST['ora'] != "") &&
-           (isset($_POST['corso']) && $_POST['corso'] != "seleziona"))
-             $presenzaDati = TRUE;
+           (isset($_POST['corso']) && $_POST['corso'] != "seleziona")) {
+                $presenzaDati = TRUE;
+
+                $dataOra = "".strval($_POST['data'])." ".strval($_POST['ora'])."";
+                $appello = new appello($dataOra, $_POST['corso']);
+                $tmp = inserisciAppello($appello);
+        }
     }
 
+    if(!$tmp)
+        header('Location: avvisoErrore.php');
+    else
+        header('Location: avvisoOK.php');
 }
 ?>
 
@@ -101,6 +115,11 @@ if(isset($_POST['invio'])) {
             <div>    
                 <hr class="redBar" />
             </div>
+            <?php
+            if($_SESSION['loginType'] == "Docente" && $docenteLoggato->idCorso == 0)
+                echo '<h2 style="text-align: center;">ERRORE: il docente non ha un corso assegnato.</h2>';
+            else {
+            ?>
             <div class="boxInsAPP">
             <form action="inserisciAppello.php" method="POST" id="input">
                 <div class="insContainer">
@@ -149,6 +168,8 @@ if(isset($_POST['invio'])) {
             </form>
             </div>
             <?php
+            }
+
             if(isset($_POST['invio']) && !$presenzaDati)
                 echo "
                 <div style=\"margin-left: -6%; padding-bottom: 7%;\">

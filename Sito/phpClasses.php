@@ -102,6 +102,12 @@ class appello {
     public $id;
     public $dataOra;
     public $idCorso;
+
+    public function __construct($dataOra, $idCorso) {
+        $this->id = calcolaIdAppello();
+        $this->dataOra = $dataOra;
+        $this->idCorso = $idCorso;
+    }
 }
 
 

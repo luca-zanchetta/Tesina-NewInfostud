@@ -67,6 +67,20 @@ function verificaPresenzaCorso($corso) {
 }
 
 
+function verificaPresenzaAppello($appello) {
+    $listaAppelli = getAppelliFromCorso($appello->idCorso);
+    $dataAppello = getDataFromDataora($appello->dataOra);
+
+    foreach($listaAppelli as $app) {
+        $dataApp = getDataFromDataora($app->dataOra);
+        if($dataAppello == $dataApp)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+
 function assegnaCorso($corso, $matricola_prof) {
     $prof = getDocenteFromMatricola($matricola_prof);
     $prof->idCorso = $corso->id;
@@ -1235,6 +1249,34 @@ function calcolaIdCorsoDiLaurea() {
 }
 
 
+function calcolaIdAppello() {
+    $xmlString = "";
+    foreach ( file("../Xml/appelli.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+    
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+
+    $listaId = [];
+    for ($i=0; $i<$records->length; $i++) {
+        $record = $records->item($i);
+        
+        $con = $record->firstChild;
+        $listaId[] = $con->textContent;
+    }
+
+    $id=1;
+    while(in_array($id,$listaId)){
+        $id++;
+    }
+
+    return $id;
+}
+
+
 function getCorsiDiLaurea() {
     /*accedo al file xml*/
     $xmlString = "";
@@ -1679,7 +1721,7 @@ function getAppelli() {
     $listaAppelli = [];
      
     for ($i=0; $i<$records->length; $i++) {
-        $appello = new appello();  # Default constructor
+        $appello = new appello("", 0);  # Default constructor
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -1710,7 +1752,7 @@ function getAppelliFromCorsoDiLaurea($idCorsoLaurea) {
     $listaAppelli = [];
      
     for ($i=0; $i<$records->length; $i++) {
-        $appello = new appello();  # Default constructor
+        $appello = new appello("", 0);  # Default constructor
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -1744,7 +1786,7 @@ function getAppelliFromCorso($idCorso) {
     $listaAppelli = [];
      
     for ($i=0; $i<$records->length; $i++) {
-        $appello = new appello();  # Default constructor
+        $appello = new appello("", 0);  # Default constructor
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -1775,7 +1817,7 @@ function getAppelloFromId($idAppello) {
     
      
     for ($i=0; $i<$records->length; $i++) {
-        $appello = new appello();  # Default constructor
+        $appello = new appello("", 0);  # Default constructor
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -2085,46 +2127,6 @@ function inserisciCorso($nuovoCorso) {
 }
 
 
-function inserisciAppello($nuovoAppello) {
-    $xmlString = "";
-    foreach ( file("../Xml/appelli.xml") as $node ) {
-        $xmlString .= trim($node);
-    }
-    
-    // Creazione del documento
-    $doc = new DOMDocument();
-    $doc->loadXML($xmlString);
-    $records = $doc->documentElement->childNodes;
-
-    for ($i=0; $i<$records->length; $i++) {
-        $record = $records->item($i);
-        
-        $con = $record->firstChild;
-        $codice = $con->textContent;
-
-        if($codice == $nuovoAppello->codice) return false;
-    }
-
-    //il codice inserito non è duplicato
-
-    $xml = simplexml_load_file('../Xml/appelli.xml');
-
-    $newcorso = $xml->addChild('appello'); //crea una tupla <appello> </appello>
-    $asd = $newcorso->addChild('codice', $nuovoAppello->codice);
-    $asd = $newcorso->addChild('data_appello', $nuovoAppello->data_appello);
-    $asd = $newcorso->addChild('data_scadenza', $nuovoAppello->data_scadenza);
-    $asd = $newcorso->addChild('id_corso', $nuovoAppello->id_corso);
-
-    //sovrascrive il vecchio file con i nuovi dati
-    $f = fopen('../Xml/appelli.xml', "w");
-    $result = fwrite($f,  $xml->asXML());
-    fclose($f);
-    if(!$result) return FALSE;
-    else
-        return TRUE;
-}
-
-
 function inserisciStudente($studente) {
     $xmlString = "";
     foreach ( file("../Xml/studenti.xml") as $node ) {
@@ -2294,6 +2296,40 @@ function inserisciCorsoDiLaurea($corsoDiLaurea) {
     
     // Sovrascrive il vecchio file con i nuovi dati
     $f = fopen('../Xml/corsiDiLaurea.xml', "w");
+    $result = fwrite($f,  $xml->asXML());
+    fclose($f);
+
+    if(!$result) 
+        return FALSE;
+    else
+        return TRUE;
+}
+
+
+function inserisciAppello($appello) {
+    $xmlString = "";
+    foreach ( file("../Xml/appelli.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+    
+    $corso = getCorsoById($appello->idCorso);
+    $data = getDataFromDataora($appello->dataOra);
+
+    if(verificaPresenzaAppello($appello))  {
+        setcookie('appello', "ERRORE: Esiste già un appello di {$corso->nome} nel giorno {$data}!");
+        return FALSE;
+    }
+
+    $xml = simplexml_load_file('../Xml/appelli.xml');
+
+    // Crea una tupla <appello> </appello>
+    $newAppello = $xml->addChild('appello'); 
+    $tmp = $newAppello->addChild('id', $appello->id);
+    $tmp = $newAppello->addChild('idCorso', $appello->idCorso);
+    $tmp = $newAppello->addChild('dataOra', $appello->dataOra);
+    
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/appelli.xml', "w");
     $result = fwrite($f,  $xml->asXML());
     fclose($f);
 

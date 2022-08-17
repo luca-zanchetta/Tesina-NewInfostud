@@ -94,7 +94,10 @@ else
             <hr />
             <div class="container-esami">
                 <?php
-                if($_SESSION['loginType'] == "Docente")
+                if($_SESSION['loginType'] == "Docente" && $docenteLoggato->idCorso == 0)
+                    echo '<h2 style="text-align: center;">ERRORE: il docente non ha un corso assegnato.</h2>';
+                
+                elseif($_SESSION['loginType'] == "Docente" && $docenteLoggato->idCorso != 0)
                     displayAppelliFromCorso($docenteLoggato->idCorso);
 
                 elseif($_SESSION['loginType'] == "Segretario" || $_SESSION['loginType'] == "Amministratore") {
