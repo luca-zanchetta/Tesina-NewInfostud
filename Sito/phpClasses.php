@@ -17,6 +17,20 @@ class corso {
     public $cfu;
     public $ssd;
     public $idCorsoLaurea;
+
+    public function __construct($nome, $descrizione, $matricola_prof, $anno, $semestre, $curriculum, $cfu, $ssd, $idCorsoLaurea) {
+        $this->id = calcolaIdCorso();
+        $this->nome = $nome;
+        $this->descrizione = $descrizione;
+        $this->matricola_prof = $matricola_prof;
+        $this->anno = $anno;
+        $this->semestre = $semestre;
+        $this->curriculum = $curriculum;
+        $this->cfu = $cfu;
+        $this->ssd = $ssd;
+        $this->idCorsoLaurea = $idCorsoLaurea;
+        $this->colore = 'lightblue';
+    }
 }
 
 
@@ -94,6 +108,11 @@ class appello {
 class corsoDiLaurea {
     public $id;
     public $nome;
+
+    public function __construct($nome) {
+        $this->id = calcolaIdCorsoDiLaurea();
+        $this->nome = $nome;
+    }
 }
 
 

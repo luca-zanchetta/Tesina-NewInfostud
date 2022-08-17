@@ -8,7 +8,7 @@
 <head>
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileLogin.css">
-    <title>Successo :D</title>
+    <title>ERRORE :(</title>
 </head>
 <body style="background-color: white;">
     <div class="header">
@@ -84,15 +84,18 @@
     <div class="central-block">
         <div class="bodyReg">
             <div class="box">
-                <h1>Registrazione avvenuta con successo!</h1>
-                <br />
                 <?php
-                if(isset($_COOKIE['matricola'])) {
-                    echo "<h3>Matricola: {$_COOKIE['matricola']}</h3>";
-                    setcookie('matricola', '', time()-60);      # Unset cookie
+                if(isset($_COOKIE['cdl'])) {
+                    echo "<h1>{$_COOKIE['cdl']}</h1>";
+                    setcookie('cdl', '', time()-60);
                 }
+                elseif(isset($_COOKIE['corso'])) {
+                    echo "<h1>{$_COOKIE['corso']}</h1>";
+                    setcookie('corso', '', time()-60);
+                }
+                else
+                    echo "<h1>ERRORE: Registrazione fallita.</h1>";
                 ?>
-                
             </div>
             <div style="padding-bottom: 10%;">
                 <form action="homepage.php">

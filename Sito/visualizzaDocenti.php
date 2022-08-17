@@ -165,7 +165,7 @@ require_once('../Sito/phpFunctions.php');
                     }
                     else {
                         foreach($docenti as $docente) {
-                            $nomeCorso = getNomeCorso($docente->id_corso);
+                            $nomeCorso = getNomeCorso($docente->idCorso);
                         ?>
                             <div class="listItem">
                                 <div class="element" style="width: 25%;">

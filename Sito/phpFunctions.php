@@ -41,7 +41,70 @@ function generaMatricola($tipoUtenza) {
         $ultimaMatricola = $con->textContent;
     }
 
-    return ($ultimaMatricola + 1);
+    return (intval($ultimaMatricola) + 1);
+}
+
+
+function verificaPresenzaCorsoDiLaurea($nome) {
+    $listaCorsiDiLaurea = getCorsiDiLaurea();
+
+    foreach($listaCorsiDiLaurea as $corso)
+        if(strtolower($corso->nome) == strtolower($nome))
+            return TRUE;
+    
+    return FALSE;
+}
+
+
+function verificaPresenzaCorso($corso) {
+    $listaCorsi = getCorsiFromCorsoDiLaurea($corso->idCorsoLaurea);
+
+    foreach($listaCorsi as $c)
+        if($c->nome == $corso->nome)
+            return TRUE;
+    
+    return FALSE;
+}
+
+
+function assegnaCorso($corso, $matricola_prof) {
+    $prof = getDocenteFromMatricola($matricola_prof);
+    $prof->idCorso = $corso->id;
+
+    // Eliminazione temporanea del docente target
+    
+    $xmlString = "";
+    foreach ( file("../Xml/docenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $nodeToRemove = null;
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->getElementsByTagName("docente");
+
+    for ($i=0; $i<$records->length; $i++) {
+        $record = $records->item($i);
+
+        $con = $record->firstChild;
+        $matricola = $con->textContent;
+
+        if($matricola_prof == $matricola) {
+            $nodeToRemove = $record;
+            break;
+        }
+    }
+
+    if ($nodeToRemove->parentNode->removeChild($nodeToRemove) == null) return false;
+    echo $doc->save("../Xml/docenti.xml");
+    
+    
+    // Reinserimento del docente, con l'id del corso aggiornato
+    $tmp = inserisciDocente($prof);
+    if(!$tmp)
+        return FALSE;
+
+    return TRUE;
 }
 
 
@@ -883,7 +946,7 @@ function getCorsi() {
     $listaCorsi = [];
 
     for ($i=0; $i<$records->length; $i++) {
-        $corso = new corso();
+        $corso = new corso("", "", "", "", "", "", "", "", "");
         $record = $records->item($i);
         
         $con = $record->firstChild;
@@ -928,7 +991,7 @@ function getCorsoById($_id) {
    $records = $doc->documentElement->childNodes;
 
    for ($i=0; $i<$records->length; $i++) {
-       $corso = new corso();
+       $corso = new corso("", "", "", "", "", "", "", "", "");
        $record = $records->item($i);
 
        $con = $record->firstChild;
@@ -977,7 +1040,7 @@ function getCorsiLike($_nome){
     $listaCorsi = [];
 
     for ($i=0; $i<$records->length; $i++) {
-        $corso = new corso();
+        $corso = new corso("", "", "", "", "", "", "", "", "");
         $record = $records->item($i);
         
         $con = $record->firstChild;
@@ -1010,6 +1073,19 @@ function getCorsiLike($_nome){
 }
 
 
+function getCorsiFromCorsoDiLaurea($idCorsoLaurea) {
+    $listaCorsi = [];
+    $corsi = getCorsi();
+
+    foreach($corsi as $corso) {
+        if($corso->idCorsoLaurea == $idCorsoLaurea) 
+            $listaCorsi[] = $corso;
+    }
+
+    return $listaCorsi;
+}
+
+
 function getNomeCorso($num) {
     $xmlString = "";
     foreach ( file("../Xml/corsi.xml") as $node ) {
@@ -1021,7 +1097,7 @@ function getNomeCorso($num) {
     $doc->loadXML($xmlString);
     $records = $doc->documentElement->childNodes;
 
-    $nomeCorso = "ERRORE";
+    $nomeCorso = "N/A";
 
     if($records->length > 0) { /* C'è almeno un corso */
         for ($i=0; $i<$records->length; $i++) {
@@ -1174,7 +1250,7 @@ function getCorsiDiLaurea() {
     $listaCorsiDiLaurea = [];
      
     for ($i=0; $i<$records->length; $i++) {
-        $corsoDiLaurea = new corsoDiLaurea();
+        $corsoDiLaurea = new corsoDiLaurea("");
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -1203,7 +1279,7 @@ function getCorsiDiLaureaLike($_nome) {
     $listaCorsiDiLaurea = [];
      
     for ($i=0; $i<$records->length; $i++) {
-        $corsoDiLaurea = new corsoDiLaurea();
+        $corsoDiLaurea = new corsoDiLaurea("");
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -1232,7 +1308,7 @@ function getNomeCorsoDiLaureaByID($_id) {
     $records = $doc->documentElement->childNodes;
      
     for ($i=0; $i<$records->length; $i++) {
-        $corsoDiLaurea = new corsoDiLaurea();
+        $corsoDiLaurea = new corsoDiLaurea("");
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -1273,7 +1349,7 @@ function getDocenti() {
         $con = $con->nextSibling;
         $docente->password = $con->textContent;
         $con = $con->nextSibling;
-        $docente->id_corso = $con->textContent;
+        $docente->idCorso = $con->textContent;
              
         $listaDocenti[] = $docente;
     }
@@ -1348,6 +1424,42 @@ function getDocentiLike($_nome) {
             $listaDocenti[] = $docente;
     }
     return $listaDocenti;  
+}
+
+
+function getDocentiDisponibili() {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/docenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaDocenti = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $docente = new docente("", "", "", 0);  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $docente->matricola = $con->textContent;
+        $con = $con->nextSibling;
+        $docente->nome = $con->textContent;
+        $con = $con->nextSibling;
+        $docente->cognome = $con->textContent;
+        $con = $con->nextSibling;
+        $docente->password = $con->textContent;
+        $con = $con->nextSibling;
+        $docente->idCorso = $con->textContent;
+
+        if($docente->idCorso == 0) 
+            $listaDocenti[] = $docente;
+    }
+    return $listaDocenti;
 }
 
 
@@ -1935,26 +2047,39 @@ function getFullPrenotazioni() {
 ==================================== */
 
 function inserisciCorso($nuovoCorso) {
-       
+    $xmlString = "";
+    foreach ( file("../Xml/docenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+    
+    if(verificaPresenzaCorso($nuovoCorso)) {
+        setcookie('corso', "ERRORE: Il corso \"{$corso->nome}\" esiste già!");
+        return FALSE;
+    }
+
     $xml = simplexml_load_file('../Xml/corsi.xml');
 
-    $newcorso = $xml->addChild('corso'); //crea una tupla<corso> </corso>
+    // Crea una tupla <corso> </corso>
+    $newcorso = $xml->addChild('corso');
     $asd = $newcorso->addChild('id', $nuovoCorso->id);
     $asd = $newcorso->addChild('nome', $nuovoCorso->nome);
     $asd = $newcorso->addChild('descrizione', $nuovoCorso->descrizione);
-    $asd = $newcorso->addChild('info_prof', $nuovoCorso->info_prof);
-    $asd = $newcorso->addChild('id_colore', $nuovoCorso->id_colore);
+    $asd = $newcorso->addChild('matricolaProf', $nuovoCorso->matricola_prof);
+    $asd = $newcorso->addChild('colore', 'lightblue');
     $asd = $newcorso->addChild('anno', $nuovoCorso->anno);
     $asd = $newcorso->addChild('semestre', $nuovoCorso->semestre);
     $asd = $newcorso->addChild('curriculum', $nuovoCorso->curriculum);
     $asd = $newcorso->addChild('cfu', $nuovoCorso->cfu);
     $asd = $newcorso->addChild('ssd', $nuovoCorso->ssd);
-    
+    $asd = $newcorso->addChild('idCorsoLaurea', $nuovoCorso->idCorsoLaurea);
+
     //sovrascrive il vecchio file con i nuovi dati
     $f = fopen('../Xml/corsi.xml', "w");
     $result = fwrite($f,  $xml->asXML());
     fclose($f);
-    if(!$result) return FALSE;
+
+    if(!$result) 
+        return FALSE;
     else
         return TRUE;
 }
@@ -2141,6 +2266,36 @@ function inserisciAmministratore($amministratore) {
     $result = fwrite($f,  $xml->asXML());
     fclose($f);
 
+
+    if(!$result) 
+        return FALSE;
+    else
+        return TRUE;
+}
+
+
+function inserisciCorsoDiLaurea($corsoDiLaurea) {
+    $xmlString = "";
+    foreach ( file("../Xml/docenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+    
+    if(verificaPresenzaCorsoDiLaurea($corsoDiLaurea->nome))  {
+        setcookie('cdl', "ERRORE: Il corso di laurea \"{$corsoDiLaurea->nome}\" esiste già!");
+        return FALSE;
+    }
+
+    $xml = simplexml_load_file('../Xml/corsiDiLaurea.xml');
+
+    // Crea una tupla <corsoDiLaurea> </corsoDiLaurea>
+    $newcorsoDiLaurea = $xml->addChild('corsoDiLaurea'); 
+    $tmp = $newcorsoDiLaurea->addChild('id', $corsoDiLaurea->id);
+    $tmp = $newcorsoDiLaurea->addChild('nome', $corsoDiLaurea->nome);
+    
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/corsiDiLaurea.xml', "w");
+    $result = fwrite($f,  $xml->asXML());
+    fclose($f);
 
     if(!$result) 
         return FALSE;

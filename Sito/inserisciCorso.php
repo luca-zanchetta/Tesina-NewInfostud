@@ -22,8 +22,23 @@ if(isset($_POST['invio'])) {
        (isset($_POST['cfu']) && $_POST['cfu'] != "seleziona") &&
        (isset($_POST['ssd']) && $_POST['ssd'] != "") &&
        (isset($_POST['corsoLaurea']) && $_POST['corsoLaurea'] != "seleziona") &&
-       (isset($_POST['descrizione']) && $_POST['descrizione'] != ""))
+       (isset($_POST['descrizione']) && $_POST['descrizione'] != "")) {
             $presenzaDati = TRUE;
+
+            $corso = new corso($_POST['nome'], $_POST['descrizione'], $_POST['docente'], 
+                               $_POST['anno'], $_POST['semestre'], $_POST['curriculum'],
+                               $_POST['cfu'], $_POST['ssd'], $_POST['corsoLaurea']);
+
+                               
+            $tmp = inserisciCorso($corso);
+            if(!$tmp)
+                header('Location: avvisoErrore.php');
+            else {
+                $tmp = assegnaCorso($corso, $_POST['docente']);
+                if($tmp)
+                    header('Location: avvisoOK.php');
+            }
+       }
 }
 ?>
 
@@ -118,7 +133,7 @@ if(isset($_POST['invio'])) {
                                 echo "<option value=\"seleziona\">Docente...</option>";
                                         
                             $docenti = [];
-                            $docenti = getDocenti();
+                            $docenti = getDocentiDisponibili();
                             foreach($docenti as $docente) {
                                 echo "<option value=\"{$docente->matricola}\">{$docente->nome} {$docente->cognome}</option>";
                             }

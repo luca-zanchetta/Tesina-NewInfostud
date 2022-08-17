@@ -13,8 +13,18 @@ else
 if(isset($_POST['invio'])) {
     $presenzaDati = FALSE;
 
-    if(isset($_POST['nome']) && $_POST['nome'] != "")
+    if(isset($_POST['nome']) && $_POST['nome'] != "") {
         $presenzaDati = TRUE;
+
+        $corsoDiLaurea = new corsoDiLaurea($_POST['nome']);
+
+        if(!inserisciCorsoDiLaurea($corsoDiLaurea)) {
+            
+            header('Location: avvisoErrore.php');
+        }
+        else
+            header('Location: avvisoOK.php');
+    }
 }
 ?>
 
