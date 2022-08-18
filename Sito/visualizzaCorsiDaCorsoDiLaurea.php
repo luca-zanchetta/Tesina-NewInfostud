@@ -1,6 +1,15 @@
 <?php
 session_start();
 require_once('../Sito/phpFunctions.php');
+
+if(!isset($_POST['idCorsoLaurea'])) {
+    if(isset($_SESSION['loginType']))
+        header('Location: homepage-users.php');
+    else
+        header('Location: homepage.php');
+}
+
+$nomeCorsoDiLaurea = getNomeCorsoDiLaureaByID($_POST['idCorsoLaurea']);
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -30,12 +39,13 @@ require_once('../Sito/phpFunctions.php');
             </h2>  
         </div>
         <div class="nav-central">
-            <form action="visualizzaCorsi.php" method="POST">
+            <form action="visualizzaCorsiDaCorsoDiLaurea.php" method="POST">
                 <div class="nav-logo">
                     <input type="submit" name="ricerca" value="">
                     <img src="search.png" alt="err" width="20px" style="display: inline-flex;">
                 </div>    
-                    <input type="text" name="filtro">              
+                    <input type="text" name="filtro">
+                    <input type="hidden" name="idCorsoLaurea" value="<?php echo $_POST['idCorsoLaurea']; ?>">              
             </form>
         </div>
         <div class="nav-right">
@@ -112,36 +122,33 @@ require_once('../Sito/phpFunctions.php');
             </div>
         </div>
         <div class="body">
-            <h2 style="margin-left: 2.5%; font-size: 200%;">I NOSTRI CORSI:</h2>
+            <h2 style="margin-left: 2.5%; font-size: 200%;">Corsi di <?php echo $nomeCorsoDiLaurea; ?>:</h2>
             <div><hr class="redBar" /></div>
             <div class="listContainer">
                 <div class="listItem">
                     <div class="element">
-                        <h2>Corso</h2>
+                        <h2>Nome corso</h2>
                     </div>
                     <div class="element">
-                        <h2>Corso di Laurea</h2>
                     </div>
                 </div>
                 <hr />
             <?php
                 $corsi = [];
                 if(isset($_POST['filtro']) && $_POST['filtro'] != "") {
-                    $corsi = getCorsiLike($_POST['filtro']);
+                    $corsi = getCorsiFromCorsoDiLaureaLike($_POST['idCorsoLaurea'], $_POST['filtro']);
 
                     if(!$corsi) {
                         echo "<h3 class=\"voceElenco\">Nessun corso corrispondente ai criteri di ricerca.</h3>";
                     }
                     else {
                         foreach($corsi as $corso) {
-                            $nomeCorsoDiLaurea = getNomeCorsoDiLaureaByID($corso->idCorsoLaurea);
                         ?>
                             <div class="listItem">
                                 <div class="element">
                                     <h2><?php echo $corso->nome; ?></h2>
                                 </div>
                                 <div class="element">
-                                    <h2><?php echo $nomeCorsoDiLaurea; ?></h2>
                                 </div>
                                 <div class="lastElement">
                                     <form action="fittizia.php" method="POST">
@@ -155,21 +162,19 @@ require_once('../Sito/phpFunctions.php');
                     }
                 }
                 else {
-                    $corsi = getCorsi();
+                    $corsi = getCorsiFromCorsoDiLaurea($_POST['idCorsoLaurea']);
 
                     if(!$corsi) {
                         echo "<h3 class=\"voceElenco\">Al momento non sono disponibili corsi.</h3>";
                     }
                     else {
                         foreach($corsi as $corso) {
-                            $nomeCorsoDiLaurea = getNomeCorsoDiLaureaByID($corso->idCorsoLaurea);
                         ?>
                             <div class="listItem">
                                 <div class="element">
                                     <h2><?php echo $corso->nome; ?></h2>
                                 </div>
                                 <div class="element">
-                                    <h2><?php echo $nomeCorsoDiLaurea; ?></h2>
                                 </div>
                                 <div class="lastElement">
                                     <form action="fittizia.php" method="POST">

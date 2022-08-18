@@ -1163,6 +1163,54 @@ function getCorsiFromCorsoDiLaurea($idCorsoLaurea) {
 }
 
 
+function getCorsiFromCorsoDiLaureaLike($idCorsoLaurea, $_nome) {
+    $xmlString = "";
+    foreach ( file("../Xml/corsi.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+    
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+
+    $listaCorsi = [];
+
+    for ($i=0; $i<$records->length; $i++) {
+        $corso = new corso("", "", "", "", "", "", "", "", "");
+        $record = $records->item($i);
+        
+        $con = $record->firstChild;
+        $corso->id = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->nome = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->descrizione = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->matricola_prof = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->colore = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->anno = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->semstre = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->curriculum = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->cfu = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->ssd = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->idCorsoLaurea = $con->textContent;
+        
+        /* Controllo sul nome e sul corso di laurea di appartenenza */
+        if(preg_match("#^{$_nome}#i", $corso->nome) && $corso->idCorsoLaurea == $idCorsoLaurea) 
+            $listaCorsi[] = $corso;
+    }
+    return $listaCorsi;
+}
+
+
 function getNomeCorso($num) {
     $xmlString = "";
     foreach ( file("../Xml/corsi.xml") as $node ) {
