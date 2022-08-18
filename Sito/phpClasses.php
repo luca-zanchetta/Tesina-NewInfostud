@@ -127,5 +127,12 @@ class prenotazione {
     public $matricolaStudente;
     public $idAppello;
     public $esito;
+
+    public function __construct($matricolaStudente, $idAppello) {
+        $this->id = calcolaIdPrenotazione();
+        $this->matricolaStudente = $matricolaStudente;
+        $this->idAppello = $idAppello;
+        $this->esito = "NULL";
+    }
 }
 ?>

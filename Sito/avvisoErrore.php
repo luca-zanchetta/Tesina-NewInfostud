@@ -102,9 +102,18 @@
                 ?>
             </div>
             <div style="padding-bottom: 10%;">
+            <?php
+            if(isset($_SESSION['loginType'])) {?>
+                <form action="homepage-users.php">
+                    <input class="bottoneHome" type="submit" name="invio" value="Torna alla home">
+                </form>
+            <?php
+            }
+            else {?>
                 <form action="homepage.php">
                     <input class="bottoneHome" type="submit" name="invio" value="Torna alla home">
                 </form>
+            <?php}?>
             </div>
         </div>
     </div>
