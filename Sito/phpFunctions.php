@@ -2662,4 +2662,31 @@ function eliminaCorso($_id) {
     echo $doc->save("../Xml/corsi.xml"); 
     return true;
 }
+
+
+function eliminaPrenotazioneAppello($idPrenotazione) {
+    $xmlString = "";
+    foreach ( file("../Xml/prenotazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->getElementsByTagName("prenotazione");
+    for ($i=0; $i<$records->length; $i++) {
+        $record = $records->item($i);
+
+        $con = $record->firstChild;
+        $id = $con->textContent;
+
+        if($id == $idPrenotazione){
+            $record->parentNode->removeChild($record);
+            break;
+        }
+            
+    }
+
+    echo $doc->save("../Xml/prenotazione.xml"); 
+    return TRUE;
+}
 ?>

@@ -18,6 +18,7 @@ if(isset($_SESSION['matricola']) && ($_SESSION['loginType'] == "Studente"))
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileVisualizzazioneLista.css">
     <link rel="stylesheet" href="stileHomepage-users.css">
+    <link rel="stylesheet" href="stile-amministrazione.css">
     <title>Appelli prenotati - Infostud</title>
 </head>
 <body>
@@ -95,7 +96,10 @@ if(isset($_SESSION['matricola']) && ($_SESSION['loginType'] == "Studente"))
                                     <h2><?php echo $appello->dataOra ?></h2>
                                 </div>
                                 <div class="lastElement">
-                                    <a href="fittizia.php" style="all:inherit; cursor:pointer;"><h2>annulla</h2></a>
+                                    <form action="eliminaPrenotazioneAppello-script.php" method="POST">
+                                        <input class="admin" type="submit" name="annulla" value="ANNULLA">
+                                        <input type="hidden" name="idPrenotazione" value="<?php echo $prenotazione->id; ?>">
+                                    </form>
                                 </div>
                             </div>
                             <hr />
