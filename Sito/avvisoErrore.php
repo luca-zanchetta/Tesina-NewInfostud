@@ -97,6 +97,10 @@
                     echo "<h1>{$_COOKIE['appello']}</h1>";
                     setcookie('appello', '', time()-60);
                 }
+                elseif(isset($_COOKIE['verb'])) {
+                    echo "<h1>{$_COOKIE['verb']}</h1>";
+                    setcookie('verb', '', time()-60);
+                }
                 else
                     echo "<h1>ERRORE: Registrazione fallita.</h1>";
                 ?>
@@ -113,7 +117,8 @@
                 <form action="homepage.php">
                     <input class="bottoneHome" type="submit" name="invio" value="Torna alla home">
                 </form>
-            <?php}?>
+            <?php
+            }?>
             </div>
         </div>
     </div>

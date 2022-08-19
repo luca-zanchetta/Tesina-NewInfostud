@@ -79,12 +79,12 @@ if(isset($_SESSION['matricola']) && ($_SESSION['loginType'] == "Studente"))
                 </div> 
                 <hr />
                 <?php
-                    $appelliPrenotati = getAppelliPrenotati($studenteLoggato);
-                    if(!$appelliPrenotati) {
+                    $prenotazioni = getPrenotazioniStudente($studenteLoggato);
+                    if(!$prenotazioni) {
                         echo "<h3 class=\"voceElenco\">Non risultano prenotazioni effettuate.</h3>";
                     }
                     else {
-                        foreach($appelliPrenotati as $prenotazione) {
+                        foreach($prenotazioni as $prenotazione) {
                             $appello = getAppelloFromId($prenotazione->idAppello);
                             $corso = getCorsoById($appello->idCorso);
                         ?>

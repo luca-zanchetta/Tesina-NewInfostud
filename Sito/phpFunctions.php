@@ -81,47 +81,6 @@ function verificaPresenzaAppello($appello) {
 }
 
 
-function assegnaCorso($corso, $matricola_prof) {
-    $prof = getDocenteFromMatricola($matricola_prof);
-    $prof->idCorso = $corso->id;
-
-    // Eliminazione temporanea del docente target
-    
-    $xmlString = "";
-    foreach ( file("../Xml/docenti.xml") as $node ) {
-        $xmlString .= trim($node);
-    }
-
-    $nodeToRemove = null;
-    $doc = new DOMDocument();
-    $doc->loadXML($xmlString);
-    $records = $doc->documentElement->getElementsByTagName("docente");
-
-    for ($i=0; $i<$records->length; $i++) {
-        $record = $records->item($i);
-
-        $con = $record->firstChild;
-        $matricola = $con->textContent;
-
-        if($matricola_prof == $matricola) {
-            $nodeToRemove = $record;
-            break;
-        }
-    }
-
-    if ($nodeToRemove->parentNode->removeChild($nodeToRemove) == null) return false;
-    echo $doc->save("../Xml/docenti.xml");
-    
-    
-    // Reinserimento del docente, con l'id del corso aggiornato
-    $tmp = inserisciDocente($prof);
-    if(!$tmp)
-        return FALSE;
-
-    return TRUE;
-}
-
-
 
 
 
@@ -423,7 +382,7 @@ function displayFullStudente($studente) {
 
 
 function displayFullDocente($docente) {
-    $corso = getNomeCorso($docente->id_corso);
+    $corso = getNomeCorso($docente->idCorso);
     echo '
 <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
     <div style="margin-left: 2%;">
@@ -2043,7 +2002,7 @@ function getEsamiSuperati($studente) {
 
         if($esame->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
             if($esame->esito != "NULL" && $esame->esito != "R" && $esame->esito != "B")
-                $listaEsamiSuperati[] = $esame;
+                $listaEsamiSuperati[] = $corso->id;
     }
     return $listaEsamiSuperati;
 }
@@ -2081,7 +2040,7 @@ function getAppelliPrenotati($studente) {
 
         if($prenotazione->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
             if($prenotazione->esito == "NULL")
-                $listaPrenotazioni[] = $prenotazione;
+                $listaPrenotazioni[] = $appello;
     }
     return $listaPrenotazioni;
 }
@@ -2100,85 +2059,97 @@ function getAppelliPrenotabili($studente) {
     $esamiSuperati = [];
     $esamiSuperati = getEsamiSuperati($studente);
 
+    $appelliPrenotabili = [];
+    foreach($appelli as $appello) {
+        $dataAppello = getDataFromDataora($appello->dataOra);
+        $dataAppello = strtotime($dataAppello);
+        $dataAppello = date('Y-m-d', $dataAppello);
 
-    if(!$appelliPrenotati && !$esamiSuperati) {
-        // Prendo tutti gli appelli successivi alla data odierna
-        $lista = [];
-        foreach($appelli as $appello) {
-            $dataAppello = getDataFromDataora($appello->dataOra);
-            $dataAppello = strtotime($dataAppello);
-            $dataAppello = date('Y-m-d', $dataAppello);
-
-            if($dataAppello > date('Y-m-d'))
-                $lista[] = $appello;
-        }
-        return $lista;
+        if($dataAppello > date('Y-m-d') && !in_array($appello, $appelliPrenotati) && !in_array($appello->idCorso, $esamiSuperati))
+            $appelliPrenotabili[] = $appello;
     }
 
-    elseif($appelliPrenotati && !$esamiSuperati) {
-        // Prendo gli appelli non prenotati successivi alla data odierna
-        $listaAppelliNonPrenotati = [];
-        foreach($appelli as $appello) {
-            $dataAppello = getDataFromDataora($appello->dataOra);
-            $dataAppello = strtotime($dataAppello);
-            $dataAppello = date('Y-m-d', $dataAppello);
+    return $appelliPrenotabili;
 
-            foreach($appelliPrenotati as $appelloPrenotato)
-                if($appello->id != $appelloPrenotato->idAppello && $dataAppello > date('Y-m-d'))
-                    $listaAppelliNonPrenotati[] = $appello;
-        }
+
+    // if(!$appelliPrenotati && !$esamiSuperati) {
+    //     // Prendo tutti gli appelli successivi alla data odierna
+    //     $lista = [];
+    //     foreach($appelli as $appello) {
+    //         $dataAppello = getDataFromDataora($appello->dataOra);
+    //         $dataAppello = strtotime($dataAppello);
+    //         $dataAppello = date('Y-m-d', $dataAppello);
+
+    //         if($dataAppello > date('Y-m-d'))
+    //             $lista[] = $appello;
+    //     }
+    //     return $lista;
+    // }
+
+    // elseif($appelliPrenotati && !$esamiSuperati) {
+    //     // Prendo gli appelli non prenotati successivi alla data odierna
+    //     $listaAppelliNonPrenotati = [];
+    //     foreach($appelli as $appello) {
+    //         $dataAppello = getDataFromDataora($appello->dataOra);
+    //         $dataAppello = strtotime($dataAppello);
+    //         $dataAppello = date('Y-m-d', $dataAppello);
+
+    //         foreach($appelliPrenotati as $appelloPrenotato)
+    //             if($appello->id != $appelloPrenotato->idAppello && $dataAppello > date('Y-m-d'))
+    //                 $listaAppelliNonPrenotati[] = $appello;
+    //     }
         
-        return $listaAppelliNonPrenotati;
-    }
+    //     return $listaAppelliNonPrenotati;
+    // }
 
-    elseif(!$appelliPrenotati && $esamiSuperati) {
-        // Prendo gli appelli degli esami non superati successivi alla data odierna
-        $listaEsamiNonSuperati = [];
-        foreach($appelli as $appello) {
-            $dataAppello = getDataFromDataora($appello->dataOra);
-            $dataAppello = strtotime($dataAppello);
-            $dataAppello = date('Y-m-d', $dataAppello);
+    // elseif(!$appelliPrenotati && $esamiSuperati) {
+    //     // Prendo gli appelli degli esami non superati successivi alla data odierna
+    //     $listaEsamiNonSuperati = [];
+    //     foreach($appelli as $appello) {
+    //         $dataAppello = getDataFromDataora($appello->dataOra);
+    //         $dataAppello = strtotime($dataAppello);
+    //         $dataAppello = date('Y-m-d', $dataAppello);
 
-            foreach($esamiSuperati as $esameSuperato) {
-                $appelloEsameSuperato = getAppelloFromId($esameSuperato->idAppello);
+    //         foreach($esamiSuperati as $esameSuperato) {
+    //             $appelloEsameSuperato = getAppelloFromId($esameSuperato->idAppello);
                 
-                if($appello->id != $esameSuperato->idAppello && $dataAppello > date('Y-m-d') && $appello->idCorso != $appelloEsameSuperato->idCorso)
-                    $listaEsamiNonSuperati[] = $appello;
-            }
-        }
+    //             if($appello->id != $esameSuperato->idAppello && $dataAppello > date('Y-m-d') && $appello->idCorso != $appelloEsameSuperato->idCorso)
+    //                 $listaEsamiNonSuperati[] = $appello;
+    //         }
+    //     }
         
-        return $listaEsamiNonSuperati;
-    }
+    //     return $listaEsamiNonSuperati;
+    // }
 
-    elseif($appelliPrenotati && $esamiSuperati) {
-        // Tra gli appelli non prenotati, prendo quelli di esami NON superati, successivi alla data odierna
-        $listaAppelliNonPrenotati = [];
-        foreach($appelli as $appello) {
-            $dataAppello = getDataFromDataora($appello->dataOra);
-            $dataAppello = strtotime($dataAppello);
-            $dataAppello = date('Y-m-d', $dataAppello);
+    // elseif($appelliPrenotati && $esamiSuperati) {
+    //     // Tra gli appelli non prenotati, prendo quelli di esami NON superati, successivi alla data odierna
+    //     $listaAppelliNonPrenotati = [];
+    //     foreach($appelli as $appello) {
+    //         $dataAppello = getDataFromDataora($appello->dataOra);
+    //         $dataAppello = strtotime($dataAppello);
+    //         $dataAppello = date('Y-m-d', $dataAppello);
 
-            foreach($appelliPrenotati as $appelloPrenotato)
-                if($appello->id != $appelloPrenotato->idAppello && $dataAppello > date('Y-m-d'))
-                    $listaAppelliNonPrenotati[] = $appello;
-        }
+    //         foreach($appelliPrenotati as $appelloPrenotato)
+    //             if($appello->id != $appelloPrenotato->idAppello && $dataAppello > date('Y-m-d'))
+    //                 $listaAppelliNonPrenotati[] = $appello;
+    //     }
         
-        $listaAppelliPrenotabili = [];
-        foreach($listaAppelliNonPrenotati as $appelloNonPrenotato) {
-            foreach($esamiSuperati as $esameSuperato) {
-                $appelloEsameSuperato = getAppelloFromId($esameSuperato->idAppello);
+    //     $listaAppelliPrenotabili = [];
+    //     foreach($listaAppelliNonPrenotati as $appelloNonPrenotato) {
+    //         foreach($esamiSuperati as $esameSuperato) {
+    //             $appelloEsameSuperato = getAppelloFromId($esameSuperato->idAppello);
 
-                if($appelloNonPrenotato->id != $esameSuperato->idAppello && $appelloNonPrenotato->idCorso != $appelloEsameSuperato->idCorso)
-                    $listaAppelliPrenotabili[] = $appelloNonPrenotato;
-            }
+    //             if($appelloNonPrenotato->id != $esameSuperato->idAppello && $appelloNonPrenotato->idCorso != $appelloEsameSuperato->idCorso)
+    //                 $listaAppelliPrenotabili[] = $appelloNonPrenotato;
+    //         }
 
-        }
+    //     }
 
 
-        return $listaAppelliPrenotabili;
-    }
+    //     return $listaAppelliPrenotabili;
+    // }
 
-    return NULL;    // Nel dubbio è vuota
+    // return NULL;    // Nel dubbio è vuota
 }
 
 
@@ -2262,6 +2233,44 @@ function getAppelliAfterDateFromCorso($data, $idCorso) {
 
 function getDataFromDataora($dataora) {
     return substr($dataora, 0, 10);
+}
+
+
+function getPrenotazioniStudente($studente) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/prenotazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaPrenotazioni = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $prenotazione = new prenotazione(0, 0);  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $prenotazione->id = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->matricolaStudente = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->idAppello = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->esito = $con->textContent;
+
+        $appello = getAppelloFromId($prenotazione->idAppello);
+        $corso = getCorsoById($appello->idCorso);
+
+        if($prenotazione->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
+            if($prenotazione->esito == "NULL")
+                $listaPrenotazioni[] = $prenotazione;
+    }
+    return $listaPrenotazioni;
 }
 
 
@@ -2625,6 +2634,7 @@ function inserisciPrenotazioneAppello($matricolaStudente, $idAppello) {
 
 
 
+
 /* ================================= 
 ======== Delete functions ==========
 ==================================== */
@@ -2736,5 +2746,67 @@ function eliminaPrenotazioneAppello($idPrenotazione) {
 
     echo $doc->save("../Xml/prenotazione.xml"); 
     return TRUE;
+}
+
+
+
+
+
+/* ================================= 
+======== Modify functions ==========
+==================================== */
+
+function assegnaCorso($corso, $matricola_prof) {
+    $xmlString = "";
+    foreach ( file("../Xml/docenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $docenti = simplexml_load_file('../Xml/docenti.xml');
+
+    foreach($docenti as $docente)
+        if($docente->matricola == $matricola_prof)
+            $docente->idCorso = $corso->id;
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/docenti.xml', "w");
+    $result = fwrite($f,  $docenti->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    else
+        return TRUE;
+}
+
+
+function modificaEsitoPrenotazione($idPrenotazione, $nuovoEsito) {
+    if($idPrenotazione == 0)
+        return FALSE;
+
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/prenotazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $prenotazioni = simplexml_load_file('../Xml/prenotazione.xml');
+
+    foreach($prenotazioni as $prenotazione) {
+        if($prenotazione->id == $idPrenotazione)
+            $prenotazione->esito = $nuovoEsito;
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/prenotazione.xml', "w");
+    $result = fwrite($f,  $prenotazioni->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    else
+        return TRUE;
 }
 ?>
