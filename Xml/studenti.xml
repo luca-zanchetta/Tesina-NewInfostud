@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <studenti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="studenti.xsd">
   <studente>
     <matricola>1</matricola>
@@ -7,8 +7,8 @@
     <password>supermario</password>
     <dataNascita>2000-01-01</dataNascita>
     <reputazioneTotale>0</reputazioneTotale>
-    <cfuTotale>0</cfuTotale>
-    <media>0</media>
+    <cfuTotale>18</cfuTotale>
+    <media>26.5</media>
     <idCorsoDiLaurea>1</idCorsoDiLaurea>
   </studente>
 </studenti>

@@ -12,8 +12,8 @@
     <cfu>9</cfu>
     <ssd>ING/INF-04</ssd>
     <idCorsoLaurea>1</idCorsoLaurea>
-    </corso>
-    <corso>
+  </corso>
+  <corso>
     <id>2</id>
     <nome>Linguaggi per il Web</nome>
     <descrizione>Acquisizione di nozioni fondamentali su- presentazione di risorse web,- sviluppo di applicazioni web, mediante opportune tecniche e linguaggi di programmazione;- rappresentazione e gestione dei dati rilevanti per un'applicazione web, mediante basi di dati e tecnologia XML Messa in pratica delle nozioni sopraelencate, mediante lo svolgimento di una tesina, orientata alla progettazione ed implementazione di una non banale applicazione web.</descrizione>
@@ -115,6 +115,19 @@
     <curriculum>Gestionale</curriculum>
     <cfu>6</cfu>
     <ssd>ING/GES-04</ssd>
+    <idCorsoLaurea>1</idCorsoLaurea>
+  </corso>
+  <corso>
+    <id>8</id>
+    <nome>Fisica 1</nome>
+    <descrizione>Il corso introduce la metodologia scientifica e sviluppa i concetti ed il formalismo della meccanica newtoniana e della termodinamica classica. Il corso è finalizzato a far acquisire allo studente una sufficiente familiarità con i modelli di base della fisica classica e, in particolare, con il concetto di grandezza fisica e con il ruolo che rivestono i Principi della Fisica. Lo studente, al termine della sua preparazione, dovrà essere in grado di applicare i concetti appresi alla risoluzione di semplici problemi di meccanica e di termodinamica.</descrizione>
+    <matricolaProf>3</matricolaProf>
+    <colore>lightblue</colore>
+    <anno>1</anno>
+    <semestre>2</semestre>
+    <curriculum>Fisica</curriculum>
+    <cfu>9</cfu>
+    <ssd>FIS/01</ssd>
     <idCorsoLaurea>1</idCorsoLaurea>
   </corso>
 </corsi>
