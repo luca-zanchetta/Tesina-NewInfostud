@@ -105,6 +105,10 @@
                     echo "<h1>{$_COOKIE['modificaAppello']}</h1>";
                     setcookie('modificaAppello', '', time()-60);
                 }
+                elseif(isset($_COOKIE['elimina'])) {
+                    echo "<h1>{$_COOKIE['elimina']}</h1>";
+                    setcookie('elimina', '', time()-60);
+                }
                 else
                     echo "<h1>ERRORE: Registrazione fallita.</h1>";
                 ?>

@@ -605,7 +605,7 @@ function displayFullAppelli() {
                         </div>  
                         <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
                             ELIMINA
-                            <form action="fittizia.php" method="POST">
+                            <form action="eliminaAppello-script.php" method="POST">
                                 <input type="submit" name="elimina" value="" >
                                 <input type="hidden" name="idAppello" value="'.$appello->id.'">
                             </form>
@@ -664,7 +664,7 @@ function displayAppelliFromCorso($idCorso) {
                         </div>  
                         <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
                             ELIMINA
-                            <form action="fittizia.php" method="POST">
+                            <form action="eliminaAppello-script.php" method="POST">
                                 <input type="submit" name="elimina" value="" >
                                 <input type="hidden" name="idAppello" value="'.$appello->id.'">
                             </form>
@@ -729,7 +729,7 @@ function displayAppelliLike($nomeCorso) {
                                 </div>  
                                 <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
                                     ELIMINA
-                                    <form action="fittizia.php" method="POST">
+                                    <form action="eliminaAppello-script.php" method="POST">
                                         <input type="submit" name="elimina" value="" >
                                         <input type="hidden" name="idAppello" value="'.$appello->id.'">
                                     </form>
@@ -794,7 +794,7 @@ function displayAppelliAfterDate($data) {
                         </div>  
                         <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
                             ELIMINA
-                            <form action="fittizia.php" method="POST">
+                            <form action="eliminaAppello-script.php" method="POST">
                                 <input type="submit" name="elimina" value="" >
                                 <input type="hidden" name="idAppello" value="'.$appello->id.'">
                             </form>
@@ -2633,7 +2633,11 @@ function inserisciPrenotazioneAppello($matricolaStudente, $idAppello) {
 ======== Delete functions ==========
 ==================================== */
 
-function eliminaAppello($codice){
+function eliminaAppello($idAppello) {
+    if($idAppello == 0)
+        return FALSE;
+    
+
     $xmlString = "";
     foreach ( file("../Xml/appelli.xml") as $node ) {
         $xmlString .= trim($node);
@@ -2643,21 +2647,25 @@ function eliminaAppello($codice){
     $doc = new DOMDocument();
     $doc->loadXML($xmlString);
     $records = $doc->documentElement->getElementsByTagName("appello");
+
     for ($i=0; $i<$records->length; $i++) {
         $record = $records->item($i);
 
         $con = $record->firstChild;
-        $_codice = $con->textContent;
+        $id = $con->textContent;
 
-        if($codice == $_codice)
+        if($idAppello == $id) {
             $nodeToRemove=$record;
+            break;
+        }
     }
 
-    //Now remove it.
-    if ($nodeToRemove->parentNode->removeChild($nodeToRemove) == null) return false;
+    // Eliminazione
+    if ($nodeToRemove->parentNode->removeChild($nodeToRemove) == null) 
+        return FALSE;
     
     echo $doc->save("../Xml/appelli.xml"); 
-    return true;
+    return TRUE;
 }
 
 

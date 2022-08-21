@@ -1,8 +1,8 @@
 <?php
 require_once('phpFunctions.php');
 
-if(isset($_POST['annulla']) && isset($_POST['idPrenotazione']) && $_POST['idPrenotazione'] != 0) {
-    if(eliminaPrenotazioneAppello($_POST['idPrenotazione']))
+if(isset($_POST['elimina']) && isset($_POST['idAppello']) && $_POST['idAppello'] != 0) {
+    if(eliminaAppello($_POST['idAppello']))
         header('Location: avvisoEliminazione.php');
     else {
         setcookie('elimina', 'ERRORE: eliminazione fallita.');
