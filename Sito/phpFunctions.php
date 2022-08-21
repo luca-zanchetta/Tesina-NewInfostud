@@ -596,7 +596,7 @@ function displayFullAppelli() {
                     <div style="display: flex; flex-direction: row; padding-top: 10%; margin-left: -10%;">
                         <div class="info-button" style="padding-left: 15%; padding-right: 15%;">
                             MODIFICA
-                            <form action="fittizia.php" method="POST">
+                            <form action="modificaAppello.php" method="POST">
                                 <input type="submit" name="modifica" value="" >
                                 <input type="hidden" name="idAppello" value="'.$appello->id.'">
                                 <input type="hidden" name="idCorso" value="'.$appello->idCorso.'">
@@ -655,7 +655,7 @@ function displayAppelliFromCorso($idCorso) {
                     <div style="display: flex; flex-direction: row; padding-top: 10%; margin-left: -10%;">
                         <div class="info-button" style="padding-left: 15%; padding-right: 15%;">
                             MODIFICA
-                            <form action="fittizia.php" method="POST">
+                            <form action="modificaAppello.php" method="POST">
                                 <input type="submit" name="modifica" value="" >
                                 <input type="hidden" name="idAppello" value="'.$appello->id.'">
                                 <input type="hidden" name="idCorso" value="'.$appello->idCorso.'">
@@ -720,7 +720,7 @@ function displayAppelliLike($nomeCorso) {
                             <div style="display: flex; flex-direction: row; padding-top: 10%; margin-left: -10%;">
                                 <div class="info-button" style="padding-left: 15%; padding-right: 15%;">
                                     MODIFICA
-                                    <form action="fittizia.php" method="POST">
+                                    <form action="modificaAppello.php" method="POST">
                                         <input type="submit" name="modifica" value="" >
                                         <input type="hidden" name="idAppello" value="'.$appello->id.'">
                                         <input type="hidden" name="idCorso" value="'.$appello->idCorso.'">
@@ -785,7 +785,7 @@ function displayAppelliAfterDate($data) {
                     <div style="display: flex; flex-direction: row; padding-top: 10%; margin-left: -10%;">
                         <div class="info-button" style="padding-left: 15%; padding-right: 15%;">
                             MODIFICA
-                            <form action="fittizia.php" method="POST">
+                            <form action="modificaAppello.php" method="POST">
                                 <input type="submit" name="modifica" value="" >
                                 <input type="hidden" name="idAppello" value="'.$appello->id.'">
                                 <input type="hidden" name="idCorso" value="'.$appello->idCorso.'">
@@ -2156,6 +2156,11 @@ function getDataFromDataora($dataora) {
 }
 
 
+function getOraFromDataora($dataora) {
+    return substr($dataora, 11, 5);
+}
+
+
 function getPrenotazioniStudente($studente) {
     /*accedo al file xml*/
     $xmlString = "";
@@ -2857,5 +2862,38 @@ function calcolaMedia_CFU($studente) {
         return FALSE;
     else
         return TRUE;
+}
+
+
+function modificaAppello($idAppello, $nuovaData, $nuovaOra, $nuovoCorso) {
+    if($idAppello == 0)
+        return FALSE;
+
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/appelli.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $appelli = simplexml_load_file('../Xml/appelli.xml');
+
+    foreach($appelli as $appello) {
+        if($appello->id == $idAppello) {
+            $appello->dataOra = $nuovaData." ".$nuovaOra;
+            $appello->idCorso = $nuovoCorso;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/appelli.xml', "w");
+    $result = fwrite($f,  $appelli->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    else{
+        return TRUE;
+    }
 }
 ?>

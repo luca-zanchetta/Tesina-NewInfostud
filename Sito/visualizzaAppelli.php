@@ -98,7 +98,7 @@ else
                     if(isset($_POST['filtro']) && $_POST['filtro'] != "")
                         displayAppelliAfterDate($_POST['filtro'], $docenteLoggato->idCorso);
                     else
-                        displayAppelliFromCorso($docenteLoggato->idCorso);
+                        displayAppelliAfterDate(date('Y-m-d'));
                 }
 
                 elseif($_SESSION['loginType'] == "Segretario" || $_SESSION['loginType'] == "Amministratore") {

@@ -101,6 +101,10 @@
                     echo "<h1>{$_COOKIE['verb']}</h1>";
                     setcookie('verb', '', time()-60);
                 }
+                elseif(isset($_COOKIE['modificaAppello'])) {
+                    echo "<h1>{$_COOKIE['modificaAppello']}</h1>";
+                    setcookie('modificaAppello', '', time()-60);
+                }
                 else
                     echo "<h1>ERRORE: Registrazione fallita.</h1>";
                 ?>
