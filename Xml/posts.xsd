@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <xsd:element name="posts">
         <xsd:complexType>
@@ -16,6 +16,7 @@
         <xsd:element ref="matricolaStudente" minOccurs="1" maxOccurs="1" />
         <xsd:element ref="utilitaTotale" minOccurs="1" maxOccurs="1" />
         <xsd:element ref="idCorso" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="data" minOccurs="1" maxOccurs="1" />
         </xsd:sequence>   
     </xsd:complexType>
     </xsd:element>
@@ -25,4 +26,5 @@
     <xsd:element name="matricolaStudente" type="xsd:integer"/>
     <xsd:element name="utilitaTotale" type="xsd:integer"/>
     <xsd:element name="idCorso" type="xsd:integer"/>
+    <xsd:element name="data" type="xsd:string"/>
 </xsd:schema>
