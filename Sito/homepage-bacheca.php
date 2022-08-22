@@ -7,6 +7,27 @@ if(!isset($_SESSION['loginType']) || (isset($_SESSION['loginType']) && $_SESSION
 
 if(isset($_SESSION['matricola']))
     $studenteLoggato = getStudenteFromMatricola($_SESSION['matricola']);
+
+switch ($_SESSION['loginType']) {
+    case 'Studente':
+         # code...
+        $utenzaLoggata = getStudenteFromMatricola($_SESSION['matricola']);
+        $listaCorsi = getCorsiByCorsoDiLaurea($utenzaLoggata->idCorsoLaurea);
+        break;
+    case 'Segretario':
+        # code...
+        $utenzaLoggata = getSegretarioFromUsername($_SESSION['username']);
+        $listaCorsi = getCorsi();
+        break;
+    case 'Amministratore':
+        # code...
+        $utenzaLoggata = getAdminFromUsername($_SESSION['username']);
+        $listaCorsi = getCorsi();
+        break;    
+    default:
+        # code...
+        break;
+    }
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -61,7 +82,14 @@ if(isset($_SESSION['matricola']))
                     <h2>Home > Bacheche</h2><!--Generato dallo script-->
                 </div>
                 <div class="infoTitle-user">
-                    <h2>Nome,Cognome, Matricola</h2><!--Generato dallo script-->
+                    <h2>
+                        <?php 
+                            if($_SESSION['loginType'] == 'Docente' || $_SESSION['loginType'] == 'Studente')
+                                echo $utenzaLoggata->nome.", ".$utenzaLoggata->cognome.", ".$utenzaLoggata->matricola;
+                            else
+                                echo $_SESSION['loginType']." : ".$utenzaLoggata->username;
+                            ?>
+                    </h2><!--Generato dallo script-->
                 </div>
             </div>    
             <hr class="redBar" />
@@ -72,12 +100,14 @@ if(isset($_SESSION['matricola']))
                     </div>
                 </div> 
                 <hr />
-                <form action="homepage-users-visualizzaBacheca.php">
+                <?php foreach($listaCorsi as $corso) { ?>
+                <form action="homepage-users-visualizzaBacheca.php" method="GET">
                     <div class="listItem">
-                        <input type="submit" value="" class="bottoneCorsi"> <!--Struttura di ogni bottone -->
-                        <input type="hidden">
+                    <input type="submit" value="" class="bottoneCorsi"> <!--Struttura di ogni bottone -->
+                                <input type="hidden" value="<?php echo $corso->id;?>" name="idCorso">
+                                <input type="hidden" value="1" name="pageNum">
                         <div class="element">
-                            <h2>Basi di dati</h2>
+                            <h2><?php echo $corso->nome;?></h2>
                         </div>
                         <div class="element">
                             
@@ -88,18 +118,7 @@ if(isset($_SESSION['matricola']))
                     </div> 
                 </form>
                 <hr />
-                <div class="listItem">
-                    <div class="element">
-                        <h2>Elettronica I</h2>
-                    </div>
-                    <div class="element">
-                        
-                    </div>
-                    <div class="lastElement">
-                        <a href="fittizia.php"><img class="arrow" width="30px" height="30px" alt="err" src="arrowBlack.png"></a>
-                    </div>
-                </div> 
-            <hr>
+                <?php } ?>
         </div>
     </div>
 </div>

@@ -1,12 +1,38 @@
 <?php
+
+function cmp($post1, $post2) {
+    if ($post1->utilitaTotale == $post2->utilitaTotale) {
+        return 0;
+    }
+    return ($post1->utilitaTotale < $post2->utilitaTotale) ? 1 : -1;
+}
+
 session_start();
 require_once('phpFunctions.php');
 
-if(!isset($_SESSION['loginType']) || (isset($_SESSION['loginType']) && $_SESSION['loginType'] == "Docente"))
+if(!isset($_SESSION['loginType']) || (isset($_SESSION['loginType']) && $_SESSION['loginType'] == "Docente") || !isset($_GET['pageNum']))
     header('Location: homepage.php');
 
-if(isset($_SESSION['matricola']))
-    $studenteLoggato = getStudenteFromMatricola($_SESSION['matricola']);
+switch ($_SESSION['loginType']) {
+    case 'Studente':
+        # code...
+        $utenzaLoggata = getStudenteFromMatricola($_SESSION['matricola']);
+        break;
+    case 'Segretario':
+        # code...
+        $utenzaLoggata = getSegretarioFromUsername($_SESSION['username']);
+        break;
+    case 'Amministratore':
+        # code...
+        $utenzaLoggata = getAdminFromUsername($_SESSION['username']);
+        break;    
+    default:
+        # code...
+        break;
+}
+$listaPost = getListaPost($_GET['idCorso']);
+
+$pageNum = $_GET['pageNum'];
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -74,176 +100,176 @@ if(isset($_SESSION['matricola']))
                     <form action="">
                         <input type="button">
                     </form>
-                    Basi di Dati
+                    <?php echo getCorsoById($_GET['idCorso'])->nome; ?>
                 </h2><!--Generato dallo script-->
                 </div>
                 <div class="infoTitle-user">
-                    <h2>Nome, Cognome, Matricola</h2><!--Generato dallo script-->
+                    <h2> 
+                        <?php 
+                            if($_SESSION['loginType'] == 'Studente')
+                                echo "{$utenzaLoggata->nome}, {$utenzaLoggata->cognome}, {$utenzaLoggata->matricola}";
+                            else
+                                echo "{$_SESSION['loginType']}: {$utenzaLoggata->username}";
+                        ?>
+                    </h2><!--Generato dallo script-->
                 </div>
             </div>    
             <hr class="redBar" />
             <div class="pageNav">
-                <div class="prev">
-                    Prev  
-                </div>
+                <form action="homepage-users-visualizzaBacheca.php">
+                    <div class="prev">
+                        Prev  
+                        <?php 
+                            if($pageNum == 1){ ?>
+                                <input type="button" onclick="window.alert('Non esistono pagine precedenti!')" class="bottoneForm"> <?php
+                            }else{ ?>
+                                <input type="submit" value="" class="bottoneForm"> <?php
+                            }
+                        ?>
+                        <input type="hidden" value="<?php echo $pageNum-1; ?>" name="pageNum">
+                        <input type="hidden" value="<?php echo $_GET["idCorso"]; ?>" name="idCorso">
+                    </div>
+                </form>
                 <div class="pageList">
-                    <div class="pageNumber">
-                        1
-                    </div>
-                    <div class="pageNumber">
-                        2
-                    </div>
-                    <div class="pageNumber">
-                        3
-                    </div>
+                    <?php 
+                        for ($i=0; $i < count($listaPost)%5; $i++) { 
+                            ?>
+                            <form action="">
+                                <div class="pageNumber" <?php if(($i+1) == $pageNum) echo "style=\"color:red;\"" ?>>
+                                    <?php echo $i+1; ?>
+                                    <input type="submit" value="" class="bottoneForm"> <!--Struttura di ogni bottone -->
+                                    <input type="hidden" value="<?php echo $i+1; ?>" name="pageNum">
+                                    <input type="hidden" value="<?php echo $_GET["idCorso"]; ?>" name="idCorso">
+                                </div>
+                            </form>
+                            <?php
+                        }
+                    ?>
                 </div>
-                <div class="next">
-                    Next
+                <form action="homepage-users-visualizzaBacheca.php">
+                    <div class="next">
+                        Next  
+                        <?php 
+                            if($pageNum == count($listaPost)%5){ ?>
+                                <input type="button" onclick="window.alert('Non esistono pagine successive!')" class="bottoneForm"> <?php
+                            }else{ ?>
+                                <input type="submit" value="" class="bottoneForm"> <?php
+                            }?>
+                        <input type="hidden" value="<?php echo $pageNum+1; ?>" name="pageNum">
+                        <input type="hidden" value="<?php echo $_GET["idCorso"]; ?>" name="idCorso">
+                    </div>
+                </form>
+                <!-- Form per creare un Post-->
+                <form action="" style="display: flex;width: -webkit-fill-available;justify-content: flex-end;">
+                    <div class="next" style="width:fit-content;padding: 0% .5% 0% .5%;">
+                        Crea post  
+                        <input type="button" onclick="toggleCreatePost()" class="bottoneForm">       
+                    </div>
+                </form>
+            </div>
+            <div style="display: flex; align-items:center;justify-content:center;display:none;" id="formCreaPost">
+                <div class="insertPost">
+                    <form action="insertPost.php" id="newPost" method="post">
+                        <div class="postFormContainer">
+                            <textarea name="titolo" placeholder="Titolo" form="newPost" cols="50" rows="1" required ></textarea>
+                            <textarea name="corpo" placeholder="Contenuto" form="newPost" cols="50" rows="5" required></textarea>
+                            <input type="hidden" value="<?php echo $pageNum; ?>" name="pageNum">
+                            <input type="hidden" value="<?php echo $_GET["idCorso"]; ?>" name="idCorso">
+                            <input type="submit" value="invia" name="insertPost">
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="postList">
                 <div class="postListHeader">
                     <h3>Filters</h3>
                 </div>
-                <div class="postContainer">
-                    <form action="homepage-users-visualizzaPost.php">
-                        <div class="postItem">
-                            <input type="submit" value="" class="bottoneForm"> <!--Struttura di ogni bottone -->
-                            <input type="hidden">
-
-                            <div class="postData">
-                                <div class="postName">
-                                    <h3>Cerco appunti basi di dati</h3>
+                <div class="postContainer"> 
+                        <!-- Stampo i due post con più utilita --> 
+                        <?php 
+                            if($pageNum == 1) {
+                                $_lista = array_merge(array(), $listaPost);
+                                uasort($_lista, 'cmp');
+                                for ($i=0; $i < min(2,count($_lista)); $i++) {
+                                    ?>
+                                        <form action="homepage-users-visualizzaPost.php">
+                                            <div <?PHP if($i%2==0) echo "class=\"postItem\""; else echo "class=\"postItemAlt\"";?>>
+                                                <input type="submit" value="" class="bottoneForm"> <!--Struttura di ogni bottone -->
+                                                <input type="hidden">
+                    
+                                                <div class="postData">
+                                                    <div class="postName">
+                                                        <h3> <?php echo $listaPost[$i]->titolo; ?></h3>
+                                                    </div>
+                                                    <div class="postAuthor">
+                                                        <h4>
+                                                            <?php
+                                                                $autore = getStudenteFromMatricola($listaPost[$i]->matricolaStudente);
+                                                                echo "{$autore->nome}, {$autore->cognome}, {$autore->matricola},";
+                                                            ?>
+                                                        </h4>       
+                                                    </div>
+                                                </div>
+                                                <div class="repliesOrUtility">
+                                                    <h3>Replies</h3>
+                                                    <h3><?php echo $listaPost[$i]->replies; ?></h3>
+                                                </div>
+                                                <div class="repliesOrUtility">
+                                                    <h3>Utility</h3>
+                                                    <h3><?php echo $listaPost[$i]->utilitaTotale; ?></h3>
+                                                </div>
+                                                <div class="postDate">
+                                                    <h3><?php echo $listaPost[$i]->data; ?></h3>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    <?php
+                                }
+                            }
+                        ?>
+                        <hr style="
+                            background-color: #aefffe94;
+                            height: 8px;
+                            margin: 0%;
+                            border:0;
+                            display: flex;"
+                        > 
+                        <!-- LISTA POST NORMALE -->
+                        <?php for ($i=($pageNum-1)*5; $i < min($pageNum*5,count($listaPost)); $i++) { ?>
+                            <form action="homepage-users-visualizzaPost.php">
+                                <div <?PHP if($i%2==0) echo "class=\"postItem\""; else echo "class=\"postItemAlt\"";?>>
+                                    <input type="submit" value="" class="bottoneForm"> <!--Struttura di ogni bottone -->
+                                    <input type="hidden">
+        
+                                    <div class="postData">
+                                        <div class="postName">
+                                            <h3> <?php echo $listaPost[$i]->titolo; ?></h3>
+                                        </div>
+                                        <div class="postAuthor">
+                                            <h4>
+                                                <?php
+                                                    $autore = getStudenteFromMatricola($listaPost[$i]->matricolaStudente);
+                                                    echo "{$autore->nome}, {$autore->cognome}, {$autore->matricola},";
+                                                ?>
+                                            </h4>       
+                                        </div>
+                                    </div>
+                                    <div class="repliesOrUtility">
+                                        <h3>Replies</h3>
+                                        <h3><?php echo $listaPost[$i]->replies; ?></h3>
+                                    </div>
+                                    <div class="repliesOrUtility">
+                                        <h3>Utility</h3>
+                                        <h3><?php echo $listaPost[$i]->utilitaTotale; ?></h3>
+                                    </div>
+                                    <div class="postDate">
+                                        <h3><?php echo $listaPost[$i]->data; ?></h3>
+                                    </div>
                                 </div>
-                                <div class="postAuthor">
-                                    <h4>Marco, Rossi, 1928342</h4>
-                                </div>
-                            </div>
-                            <div class="repliesOrUtility">
-                                <h3>Replies</h3>
-                                <h3>12</h3>
-                            </div>
-                            <div class="repliesOrUtility">
-                                <h3>Utility</h3>
-                                <h3>9</h3>
-                            </div>
-                            <div class="postDate">
-                                <h3>Jul 31,2022</h3>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="postItemAlt">
-                        <div class="postData">
-                            <div class="postName">
-                                <h3>Aiuto BD</h3>
-                            </div>
-                            <div class="postAuthor">
-                                <h4>Francesco, Totti 1293492</h4>
-                            </div>
-                        </div>
-                        <div class="repliesOrUtility">
-                            <h3>Replies</h3>
-                            <h3>3</h3>
-                        </div>
-                        <div class="repliesOrUtility">
-                            <h3>Utility</h3>
-                            <h3>2</h3>
-                        </div>
-                        <div class="postDate">
-                            <h3>Jul 1,2022</h3>
-                        </div>
-                    </div>
-                    <hr style="
-                        background-color: #aefffe94;
-                        height: 8px;
-                        margin: 0%;
-                        border:0;
-                        display: flex;"
-                    >
-                    <div class="postItem">
-                        <div class="postData">
-                            <div class="postName">
-                                <h3>Cerco appunti basi di dati</h3>
-                            </div>
-                            <div class="postAuthor">
-                                <h4>Marco, Rossi, 1928342</h4>
-                            </div>
-                        </div>
-                        <div class="repliesOrUtility">
-                            <h3>Replies</h3>
-                            <h3>12</h3>
-                        </div>
-                        <div class="repliesOrUtility">
-                            <h3>Utility</h3>
-                            <h3>9</h3>
-                        </div>
-                        <div class="postDate">
-                            <h3>Jul 31,2022</h3>
-                        </div>
-                    </div>
-                    <div class="postItemAlt">
-                        <div class="postData">
-                            <div class="postName">
-                                <h3>Aiuto BD</h3>
-                            </div>
-                            <div class="postAuthor">
-                                <h4>Francesco, Totti 1293492</h4>
-                            </div>
-                        </div>
-                        <div class="repliesOrUtility">
-                            <h3>Replies</h3>
-                            <h3>3</h3>
-                        </div>
-                        <div class="repliesOrUtility">
-                            <h3>Utility</h3>
-                            <h3>2</h3>
-                        </div>
-                        <div class="postDate">
-                            <h3>Jul 1,2022</h3>
-                        </div>
-                    </div>
-                    <div class="postItem">
-                        <div class="postData">
-                            <div class="postName">
-                                <h3>Esame troppo difficile!!!</h3>
-                            </div>
-                            <div class="postAuthor">
-                                <h4>Roberto, Fuori, 1928394</h4>
-                            </div>
-                        </div>
-                        <div class="repliesOrUtility">
-                            <h3>Replies</h3>
-                            <h3>6</h3>
-                        </div>
-                        <div class="repliesOrUtility">
-                            <h3>Utility</h3>
-                            <h3>-6</h3>
-                        </div>
-                        <div class="postDate">
-                            <h3>May 17,2022</h3>
-                        </div>
-                    </div>
-                    <div class="postItemAlt">
-                        <div class="postData">
-                            <div class="postName">
-                                <h3>Aiuto diagramma ER</h3>
-                            </div>
-                            <div class="postAuthor">
-                                <h4>Clara, Sium, 2039489</h4>
-                            </div>
-                        </div>
-                        <div class="repliesOrUtility">
-                            <h3>Replies</h3>
-                            <h3>20</h3>
-                        </div>
-                        <div class="repliesOrUtility">
-                            <h3>Utility</h3>
-                            <h3>3</h3>
-                        </div>
-                        <div class="postDate">
-                            <h3>Apr 03,2022</h3>
-                        </div>
-                    </div>
+                            </form>
+                        <?php
+                        }
+                        ?>
                 </div>
             </div>
         </div>
@@ -251,3 +277,11 @@ if(isset($_SESSION['matricola']))
 </div>
 </body>
 </html>
+<script>
+    function toggleCreatePost() {
+        if(document.getElementById("formCreaPost").style.display == "none")
+            document.getElementById("formCreaPost").style.display = "flex";
+        else
+        document.getElementById("formCreaPost").style.display = "none";
+    }
+</script>

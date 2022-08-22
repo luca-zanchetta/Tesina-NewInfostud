@@ -113,8 +113,8 @@ if(isset($_SESSION['matricola']))
             </div>
             <div class="pageNav">
                 <form action="homepage-users-visualizzaBacheca.php">
-                <div class="prev">
-                    Prev  
+                    <div class="prev">
+                        Prev  
                     <input type="submit" value="" class="bottoneForm"> <!--Struttura di ogni bottone -->
                     <input type="hidden">
                 </div>
