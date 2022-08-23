@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 session_start();
 require_once('phpFunctions.php');
 
@@ -144,7 +147,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                 </div>
                 <div class="postInfo">
                     <div class="postTitle">
-                    <?php echo $post->titolo;?>
+                        <?php echo $post->titolo;?>
                     </div>
                     <div class="postData">
                         <div class="postAuthor">
@@ -208,40 +211,44 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                 </form>
             </div>
             <!--Lista dei commenti-->
-            <?php foreach($listaCommenti as $comment){  
+            <div class="commentContainer">
+                <?php 
                 
-                if($comment->matricolaStudente > 0){
-                    $autore = getStudenteFromMatricola($comment->matricolaStudente);
-                    $voto = getVotoCommento($comment->id,$autore->matricola);
-                }
-                ?>
-                <div class="commentContainer">
+                for($i=($pageNum-1)*5; $i < min($pageNum*5,count($listaCommenti)); $i++){  
+                    $autore = null;
+                    $comment = $listaCommenti[$i];
+                    if($comment->matricolaStudente > 0){
+                        $autore = getStudenteFromMatricola($comment->matricolaStudente);
+                        if(isset($_SESSION['matricola']))
+                            $voto = getVotoCommento($comment->id,$_SESSION['matricola']);
+                    }
+                    ?>
                     <div class="comment">
                         <div class="commentAuthorData">
                             <div class="authorDataElement">
                                 <?php echo isset($autore) ? 'Nome: '.$autore->nome : 'da Moderatore'?>
                             </div>
                             <div class="authorDataElement">
-                                <?php echo isset($autore) ? 'Matricola: '.$autore->matricola : ''?>
+                                <?php echo isset($autore) ? 'Matricola: '.$autore->matricola : 'N/A'?>
                             </div>
                             <div class="authorDataElement">
-                                <?php echo isset($autore) ? 'Reputazione: '.$autore->reputazioneTotale : ''?>
+                                <?php echo isset($autore) ? 'Reputazione: '.$autore->reputazioneTotale : 'N/A'?>
                             </div>
                             <div class="authorDataElement">
-                                <?php echo isset($autore) ? 'Corso di Laurea: '.getCorsiDiLaureaById($autore->idCorsoLaurea)->nome : ''?>
+                                <?php echo isset($autore) ? 'Corso di Laurea: '.getNomeCorsoDiLaureaByID($autore->idCorsoLaurea) : 'N/A'?>
                             </div>
                         </div>
                         <div class="commentContent">
                             <div class="commentTopBar">
                                 <div class="commentTime">
-                                    <?php echo $comment->data ?> · Voto Totale :  <?php echo $comment->accordoMedio ?>
+                                    <?php echo  isset($autore) ? "{$comment->data} · Voto Totale : {$comment->accordoMedio}" : $comment->data ?> 
                                 </div>
                                 <?php if ($_SESSION['loginType'] == 'Studente' && isset($autore) && $autore->matricola != $_SESSION['matricola']) { ?>
                                     <div class="commentTime" style="justify-content: flex-end;">
                                         Il tuo voto:  
                                     </div> 
                                     <div id="vote<?php echo $comment->id?>" class="commentVoteContainer" onclick="modifyVote('',<?php echo $comment->id?>,<?php echo $autore->matricola?>)">
-                                        <?php echo isset($voto) ? $voto->accordo : 0;?>
+                                        <?php echo isset($voto) ?$voto->accordo : 0;?>
                                     </div>
                                     <div id="stars<?php echo $comment->id?>" class="commentVoteContainer" style="display:none;">
                                         <div class="stars">
@@ -261,21 +268,23 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                                     </div>
                                 <?php } ?>
                             </div>
-                            <div class="commentText" id="commentTextId">
+                            <div class="commentText" id="commentText<?php echo $comment->id?>">
                                 <?php echo $comment->corpo;?>
-                            <div class="commentText">
-                                <form action="">
-                                    <textarea id="commentInputId" form="editTextForm" required><?php echo $comment->corpo;?></textarea>
-                                </form>
+                            </div>
+                            <div class="commentText" id="editTextForm">
+                                <textarea id="commentInput<?php echo $comment->id?>" form="editTextForm<?php echo $comment->id?>" style="display:none;" required><?php echo $comment->corpo;?></textarea>
                             </div>
                             <?php if($_SESSION['loginType'] == 'Amministratore' || $_SESSION['loginType'] == 'Segretario') { ?>
                                 <div class="adminTools">
-                                    <form action="">
+                                    <form action="deleteComment.php" method="POST">
                                         <img src="bin.png" alt="err">
-                                        <input type="submit" value="">
-                                        <input type="hidden">
+                                        <input type="submit" name="deleteComment" value="">
+                                        <input type="hidden" value="<?php echo $_GET["pageNum"];?>" name="pageNum"> 
+                                        <input type="hidden" value="<?php echo $_GET["idCorso"]; ?>" name="idCorso">
+                                        <input type="hidden" value="<?php echo $_GET["idPost"]; ?>" name="idPost">
+                                        <input type="hidden" value="<?php echo $comment->id?>" name="idComment"> 
                                     </form>
-                                    <form action="" name="editTextForm">
+                                    <form action="" name="editTextForm<?php echo $comment->id?>">
                                         <img src="edit.png" alt="err">
                                         <input type="submit" value="" onclick="editComment(<?php echo $comment->id?>)">
                                     </form>
@@ -285,72 +294,27 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                     </div>
                 <?php } ?>
             </div>
-            <div class="pageNav">
-                <form action="homepage-users-visualizzaBacheca.php">
-                    <div class="prev">
-                        Prev  
-                        <?php 
-                            if($pageNum == 1){ ?>
-                                <input type="button" onclick="window.alert('Non esistono pagine precedenti!')" class="bottoneForm"> <?php
-                            }else{ ?>
-                                <input type="submit" value="" class="bottoneForm"> <?php
-                            }
-                        ?>
-                        <input type="hidden" value="<?php echo $pageNum-1; ?>" name="pageNum">
-                        <input type="hidden" value="<?php echo $_GET["idCorso"]; ?>" name="idCorso">
-                        <input type="hidden" value="<?php echo $_GET["idPost"]; ?>" name="idPost">
-                    </div>
-                </form>
-                <div class="pageList">
-                    <?php 
-                        for ($i=0; $i < $maxPageNum; $i++) { 
-                            ?>
-                            <form action="">
-                                <div class="pageNumber" <?php if(($i+1) == $pageNum) echo "style=\"color:red;\"" ?>>
-                                    <?php echo $i+1; ?>
-                                    <input type="submit" value="" class="bottoneForm"> <!--Struttura di ogni bottone -->
-                                    <input type="hidden" value="<?php echo $i+1; ?>" name="pageNum">
-                                    <input type="hidden" value="<?php echo $_GET["idCorso"]; ?>" name="idCorso">
-                                    <input type="hidden" value="<?php echo $_GET["idPost"]; ?>" name="idPost">
-                                </div>
-                            </form>
-                            <?php
-                        }
-                    ?>
-                </div>
-                <form action="homepage-users-visualizzaBacheca.php">
-                    <div class="next">
-                        Next  
-                        <?php 
-                            if($pageNum == $maxPageNum){ ?>
-                                <input type="button" onclick="window.alert('Non esistono pagine successive!')" class="bottoneForm"> <?php
-                            }else{ ?>
-                                <input type="submit" value="" class="bottoneForm"> <?php
-                            }?>
-                        <input type="hidden" value="<?php echo $pageNum+1; ?>" name="pageNum">
-                        <input type="hidden" value="<?php echo $_GET["idCorso"]; ?>" name="idCorso">
-                        <input type="hidden" value="<?php echo $_GET["idPost"]; ?>" name="idPost">
-                    </div>
-                </form>
-            </div>
             <div class="formContainer">
-                    <div class="formBorder">
-                        <div class="formTitle">
-                            Contribuisci al post
-                        </div>
-                        <form action="">
-                            <textarea name="" id="" placeholder="Testo"></textarea>
-                            <input type="submit">
-                        </form>
+                <div class="formBorder">
+                    <div class="formTitle">
+                        Contribuisci al post
                     </div>
+                    <form action="insertComment.php" method="POST" id='inserisciComm'>
+                        <textarea name="corpo" id="corpo" placeholder="Testo" form='inserisciComm' required></textarea>
+                        <input type="submit" name="insertComment">
+                        <input type="hidden" value="<?php echo $_GET["pageNum"];?>" name="pageNum"> 
+                        <input type="hidden" value="<?php echo $_GET["idCorso"]; ?>" name="idCorso">
+                        <input type="hidden" value="<?php echo $_GET["idPost"]; ?>" name="idPost">
+                    </form>
                 </div>
+            </div>   
         </div>
     </div>
 </div>
 </body>
 </html>
 <script>
-    async function modifyVote(voto,id,$idAutore) {
+    async function modifyVote(voto,id,idAutore) {
         if(document.getElementById("vote"+id).style.display == "none"){
             await delay(0.7);
             document.getElementById("stars"+id).style.display = "none";
@@ -367,7 +331,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                         data: jQuery.param({newVote: voto, id:id, autore:idAutore,richiesta: "modificaVotoPost"}), 
                         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                         success: function (response) {
-                            console.log("Success");
+                            console.log(response);
                         },
                         error: function () {
                             console.log("error");
@@ -384,31 +348,32 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
     });
     }
     function editComment(id) {
-        event.preventDefault();
-        if(document.getElementById("commentTextId").style.display == "none"){
-            document.getElementById("commentTextId").style.display = "flex";
-            document.getElementById("commentInputId").style.display = "none";
+        
+        if(document.getElementById("commentText" +id ).style.display == "none"){
+            document.getElementById("commentText"+id).style.display = "flex";
+            document.getElementById("commentInput"+id).style.display = "none";
 
             //Dobbiamo lanciarea la jquery
-            _newText = $("#commentInputId").val();
-            document.getElementById("commentTextId").textContent = _newText;
+            _newText = $("#commentInput"+id).val();
+            document.getElementById("commentText"+id).textContent = _newText;
 
-            // //Possiamo usare uno script esterno volendo
-            // jQuery.ajax({
-            //             url: 'script.php',
-            //             type: 'POST',
-            //             data: jQuery.param({newVote: voto, id:id, richiesta: "modificaContenutoPost"}), 
-            //             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            //             success: function (response) {
-            //                 console.log("Success");
-            //             },
-            //             error: function () {
-            //                 console.log("error");
-            //             }});
+            //Possiamo usare uno script esterno volendo
+            jQuery.ajax({
+                        url: 'ajaxHandler.php',
+                        type: 'POST',
+                        data: jQuery.param({newText: _newText, id:id, richiesta: "modificaContenutoPost"}), 
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        success: function (response) {
+                            console.log("Success");
+                        },
+                        error: function () {
+                            console.log("error");
+                        }});
 
         }else{
-            document.getElementById("commentTextId").style.display = "none";
-            document.getElementById("commentInputId").style.display = "flex";
+            document.getElementById("commentText"+id).style.display = "none";
+            document.getElementById("commentInput"+id).style.display = "flex";
         }
+        event.preventDefault();
     }
 </script>

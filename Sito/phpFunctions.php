@@ -193,6 +193,34 @@ function  nextCommentVoteId() {
     return $id;
 }
 
+function nextCommentId() {
+    $xmlString = "";
+    foreach ( file("../Xml/commenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaId = [];
+     
+    for ($i=0; $i<$records->length; $i++) { 
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $listaId[] = $con->textContent;
+    }
+    $id = 1;
+
+    while(in_array($id,$listaId)){
+        $id++;
+    }
+
+    return $id;
+}
+
 /* ================================= 
 ======== Display functions =========
 ==================================== */
@@ -3118,7 +3146,33 @@ function insertCommentVote($idCommento, $matricola, $vote,$idAutore) {
         return TRUE;
 }
 
+function inserisciCommento($corpo,$idAutore,$idPost,$data) {
+    $xmlString = "";
+    foreach ( file("../Xml/commenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
 
+    $xml = simplexml_load_file('../Xml/commenti.xml');
+
+
+    $newStudente = $xml->addChild('commento');
+    $tmp = $newStudente->addChild('id', nextCommentId());
+    $tmp = $newStudente->addChild('corpo', $corpo);
+    $tmp = $newStudente->addChild('matricolaStudente', $idAutore);
+    $tmp = $newStudente->addChild('accordoMedio', 0);
+    $tmp = $newStudente->addChild('idPost', $idPost);
+    $tmp = $newStudente->addChild('data', $data);
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/commenti.xml', "w");
+    $result = fwrite($f,  $xml->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    else
+        return TRUE;
+}
 /* ================================= 
 ======== Delete functions ==========
 ==================================== */
@@ -3347,6 +3401,31 @@ function deleteCommentVote($idCommento, $matricola) {
         break;         
     }
     echo $doc->save("../Xml/votoCommento.xml"); 
+    updateCommentAccordo($idCommento);
+    return true;
+}
+
+function deleteComment($idCommento) {
+    $xmlString = "";
+    foreach ( file("../Xml/commenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->getElementsByTagName("commento");
+
+    for ($i=0; $i<$records->length; $i++) {
+        $record = $records->item($i);
+
+        $con = $record->firstChild;
+        $tmp = $con->textContent; #id
+        if($tmp != $idCommento) continue;
+
+        $record->parentNode->removeChild($record);
+        break;         
+    }
+    echo $doc->save("../Xml/commenti.xml"); 
     updateCommentAccordo($idCommento);
     return true;
 }
@@ -3603,6 +3682,30 @@ function updateFaqUtility($idFaq){
         return TRUE;
 }
 
+function modifyContentText($id, $newText) {
+    $xmlString = "";
+    foreach ( file("../Xml/commenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $commenti = simplexml_load_file('../Xml/commenti.xml');
+
+    foreach($commenti as $comm)
+        if($comm->id == $id)
+            $comm->corpo = $newText;
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/commenti.xml', "w");
+    $result = fwrite($f,  $commenti->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    else
+        return TRUE;
+}
+
 function updateCommentAccordo($idCommento){
     $xmlString = "";
     foreach ( file("../Xml/votoCommento.xml") as $node ) {
@@ -3632,7 +3735,7 @@ function updateCommentAccordo($idCommento){
         $numVoti++;
     }
 
-    $media = $accordoTot/$numVoti;
+    $media =  $numVoti > 0 ? $accordoTot/$numVoti : 0;
     #modifico la FAQ
     $xmlString = "";
     foreach ( file("../Xml/commenti.xml") as $node ) {

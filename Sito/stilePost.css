@@ -84,7 +84,7 @@ div.comment {
 
 div.commentAuthorData {
     display: flex;
-    width: fit-content;
+    width: 20%;
     flex-direction: column;
     border-right: 3px solid black;
     padding: 1%;

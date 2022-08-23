@@ -379,8 +379,11 @@ $colore = [];
                         dataType: "text",
 
                         success: function (response) {
-                            console.log(response);
-                            
+                            setTimeout(
+                                        function() 
+                                        {
+                                            location.reload();
+                                        }, 0001);                          
                         },
                         
                         error: function () {
