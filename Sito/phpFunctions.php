@@ -82,7 +82,116 @@ function verificaPresenzaAppello($appello) {
 
 
 
+function nextFaqid(){
+    $xmlString = "";
+    foreach ( file("../Xml/faqs.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaId = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $listaId[] = $con->textContent;
+    }
+    $id = 1;
 
+    while(in_array($id,$listaId)){
+        $id++;
+    }
+    
+    return $id;
+}
+
+function nextFaqVoteId(){
+    $xmlString = "";
+    foreach ( file("../Xml/votoFAQ.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaId = [];
+     
+    for ($i=0; $i<$records->length; $i++) { 
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $listaId[] = $con->textContent;
+    }
+    $id = 1;
+
+    while(in_array($id,$listaId)){
+        $id++;
+    }
+    
+    return $id;
+}
+
+function  nextPostId() {
+    $xmlString = "";
+    foreach ( file("../Xml/posts.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaId = [];
+     
+    for ($i=0; $i<$records->length; $i++) { 
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $listaId[] = $con->textContent;
+    }
+    $id = 1;
+
+    while(in_array($id,$listaId)){
+        $id++;
+    }
+    
+    return $id;
+}
+function  nextCommentVoteId() {
+    $xmlString = "";
+    foreach ( file("../Xml/votoCommento.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaId = [];
+     
+    for ($i=0; $i<$records->length; $i++) { 
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $listaId[] = $con->textContent;
+    }
+    $id = 1;
+
+    while(in_array($id,$listaId)){
+        $id++;
+    }
+
+    return $id;
+}
 
 /* ================================= 
 ======== Display functions =========
