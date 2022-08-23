@@ -621,7 +621,7 @@ function displayFullAppelli() {
 
 function displayAppelliFromCorso($idCorso) {
     $appelli = [];
-    $appelli = getAppelliFromCorso($idCorso);
+    $appelli = getAppelliAfterDateFromCorso(date('Y-m-d'), $idCorso);
 
     if(!$appelli)
         echo '<h2>Nessun appello trovato.</h2>';
