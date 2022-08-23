@@ -1,15 +1,3 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <prenotazioni xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="prenotazione.xsd">
-  <prenotazione>
-    <id>1</id>
-    <matricolaStudente>1</matricolaStudente>
-    <idAppello>1</idAppello>
-    <esito>25</esito>
-  </prenotazione>
-  <prenotazione>
-    <id>2</id>
-    <matricolaStudente>1</matricolaStudente>
-    <idAppello>1</idAppello>
-    <esito>NULL</esito>
-  </prenotazione>
-</prenotazioni>
+<prenotazione><id>1</id><matricolaStudente>1</matricolaStudente><idAppello>3</idAppello><esito>24</esito></prenotazione><prenotazione><id>2</id><matricolaStudente>1</matricolaStudente><idAppello>5</idAppello><esito>29</esito></prenotazione></prenotazioni>

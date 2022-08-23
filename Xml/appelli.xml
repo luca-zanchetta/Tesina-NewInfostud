@@ -1,13 +1,28 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <appelli xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="appelli.xsd">
-    <appello>
-        <id>1</id>
-        <idCorso>1</idCorso>
-        <dataOra>2000-01-01 10:10</dataOra>
-    </appello>
-    <appello>
-        <id>2</id>
-        <idCorso>2</idCorso>
-        <dataOra>2022-07-31 12:59</dataOra>
-    </appello>
+  <appello>
+    <id>1</id>
+    <idCorso>1</idCorso>
+    <dataOra>2000-01-01 10:10</dataOra>
+  </appello>
+  <appello>
+    <id>2</id>
+    <idCorso>2</idCorso>
+    <dataOra>2022-07-31 12:59</dataOra>
+  </appello>
+  <appello>
+    <id>3</id>
+    <idCorso>8</idCorso>
+    <dataOra>2022-09-01 10:00</dataOra>
+  </appello>
+  <appello>
+    <id>4</id>
+    <idCorso>1</idCorso>
+    <dataOra>2022-08-17 12:00</dataOra>
+  </appello>
+  <appello>
+    <id>5</id>
+    <idCorso>1</idCorso>
+    <dataOra>2022-09-11 20:45</dataOra>
+  </appello>
 </appelli>

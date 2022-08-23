@@ -8,7 +8,7 @@
 <head>
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileLogin.css">
-    <title>Work in progress...</title>
+    <title>Successo :D</title>
 </head>
 <body style="background-color: white;">
     <div class="header">
@@ -84,7 +84,7 @@
     <div class="central-block">
         <div class="bodyReg">
             <div class="box">
-                <h1>Work in progress...</h1>
+                <h1>Eliminazione avvenuta con successo!</h1>
                 <br />
             </div>
             <div style="padding-bottom: 10%;">

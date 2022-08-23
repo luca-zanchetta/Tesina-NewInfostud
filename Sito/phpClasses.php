@@ -17,6 +17,20 @@ class corso {
     public $cfu;
     public $ssd;
     public $idCorsoLaurea;
+
+    public function __construct($nome, $descrizione, $matricola_prof, $anno, $semestre, $curriculum, $cfu, $ssd, $idCorsoLaurea) {
+        $this->id = calcolaIdCorso();
+        $this->nome = $nome;
+        $this->descrizione = $descrizione;
+        $this->matricola_prof = $matricola_prof;
+        $this->anno = $anno;
+        $this->semestre = $semestre;
+        $this->curriculum = $curriculum;
+        $this->cfu = $cfu;
+        $this->ssd = $ssd;
+        $this->idCorsoLaurea = $idCorsoLaurea;
+        $this->colore = 'lightblue';
+    }
 }
 
 
@@ -88,12 +102,23 @@ class appello {
     public $id;
     public $dataOra;
     public $idCorso;
+
+    public function __construct($dataOra, $idCorso) {
+        $this->id = calcolaIdAppello();
+        $this->dataOra = $dataOra;
+        $this->idCorso = $idCorso;
+    }
 }
 
 
 class corsoDiLaurea {
     public $id;
     public $nome;
+
+    public function __construct($nome) {
+        $this->id = calcolaIdCorsoDiLaurea();
+        $this->nome = $nome;
+    }
 }
 
 
@@ -102,5 +127,12 @@ class prenotazione {
     public $matricolaStudente;
     public $idAppello;
     public $esito;
+
+    public function __construct($matricolaStudente, $idAppello) {
+        $this->id = calcolaIdPrenotazione();
+        $this->matricolaStudente = $matricolaStudente;
+        $this->idAppello = $idAppello;
+        $this->esito = "NULL";
+    }
 }
 ?>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('../Sito/phpFunctions.php');
 ?>
 
@@ -112,7 +113,7 @@ require_once('../Sito/phpFunctions.php');
         </div>
         <div class="body">
             <h2 style="margin-left: 2.5%; font-size: 200%;">I NOSTRI CORSI:</h2>
-            <hr class="redBar" />
+            <div><hr class="redBar" /></div>
             <div class="listContainer">
                 <div class="listItem">
                     <div class="element">
@@ -143,7 +144,9 @@ require_once('../Sito/phpFunctions.php');
                                     <h2><?php echo $nomeCorsoDiLaurea; ?></h2>
                                 </div>
                                 <div class="lastElement">
-                                    <a href="fittizia.php"><img class="arrow" width="30px" height="30px" alt="err" src="arrowBlack.png"></a>
+                                    <form action="fittizia.php" method="POST">
+                                        <input type="image" src="arrowBlack.png" class="arrow" width="30px" height="30px" alt="err">
+                                    </form>
                                 </div>
                             </div>
                             <hr />
@@ -169,7 +172,9 @@ require_once('../Sito/phpFunctions.php');
                                     <h2><?php echo $nomeCorsoDiLaurea; ?></h2>
                                 </div>
                                 <div class="lastElement">
-                                    <a href="fittizia.php"><img class="arrow" width="30px" height="30px" alt="err" src="arrowBlack.png"></a>
+                                    <form action="fittizia.php" method="POST">
+                                        <input type="image" src="arrowBlack.png" class="arrow" width="30px" height="30px" alt="err">
+                                    </form>
                                 </div>
                             </div>
                             <hr />

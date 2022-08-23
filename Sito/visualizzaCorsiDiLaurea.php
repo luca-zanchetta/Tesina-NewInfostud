@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('../Sito/phpFunctions.php');
 ?>
 
@@ -136,7 +137,10 @@ require_once('../Sito/phpFunctions.php');
                                     <h2><?php echo $corsoDiLaurea->nome; ?></h2>
                                 </div>
                                 <div class="lastElement" style="width: 50%;">
-                                    <a href="fittizia.php"><img class="arrow" width="30px" height="30px" alt="err" src="arrowBlack.png"></a>
+                                    <form action="visualizzaCorsiDaCorsoDiLaurea.php" method="POST">
+                                        <input type="image" src="arrowBlack.png" class="arrow" width="30px" height="30px" alt="err">
+                                        <input type="hidden" name="idCorsoLaurea" value="<?php echo $corsoDiLaurea->id; ?>">
+                                    </form>
                                 </div>
                             </div>
                             <hr />
@@ -158,7 +162,10 @@ require_once('../Sito/phpFunctions.php');
                                     <h2><?php echo $corsoDiLaurea->nome; ?></h2>
                                 </div>
                                 <div class="lastElement" style="width: 50%;">
-                                    <a href="fittizia.php"><img class="arrow" width="30px" height="30px" alt="err" src="arrowBlack.png"></a>
+                                    <form action="visualizzaCorsiDaCorsoDiLaurea.php" method="POST">
+                                        <input type="image" src="arrowBlack.png" class="arrow" width="30px" height="30px" alt="err">
+                                        <input type="hidden" name="idCorsoLaurea" value="<?php echo $corsoDiLaurea->id; ?>">
+                                    </form>
                                 </div>
                             </div>
                             <hr />

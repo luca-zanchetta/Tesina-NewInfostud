@@ -119,13 +119,16 @@ else
                 if(!$prenotazioni) {
                     echo "<h3 class=\"voceElenco\">Nessuna prenotazione registrata.</h3>";
                 }
-                else {
+                else {?>
+                    <form action="verbalizza-script.php" method="POST"><?php
+                    $listaIdPrenotazioni = [];
+
                     foreach($prenotazioni as $prenotazione) {
                         $studente = getStudenteFromMatricola($prenotazione->matricolaStudente);
                         $data = getDataFromDataora($appello->dataOra);
-                    ?>
+                    ?>  
+                        <input type="hidden" name="idPrenotazioni[]" value="<?php echo $prenotazione->id; ?>">
                         <div class="listItem">
-                            <input type="hidden" name="idPrenotazione" value="<?php echo $prenotazione->id; ?>">
                             <div class="element">
                                 <h2><?php echo "{$data}" ?></h2>
                             </div>
@@ -136,7 +139,7 @@ else
                                 <h2><?php echo "{$studente->cognome} {$studente->nome}, {$studente->matricola}" ;?></h2>
                             </div>
                             <div class="lastElement">
-                                <select class="choice" name="esito" onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();' style="width: 30%;">
+                                <select class="choice" name="esito[]" onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();' style="width: 30%;">
                                     <option value="NULL">NULL</option>
                                     <option value="B">B</option>
                                     <option value="R">R</option>
@@ -159,11 +162,9 @@ else
                     <div class="element"></div>
                     <div class="element"></div>
                     <div class="element">
-                    <form action="fittizia.php" method="POST">
-                        <input class="verbalizza" type="submit" name="verbalizza" value="VERBALIZZA">
-                    </form>
+                    <input class="verbalizza" type="submit" name="verbalizza" value="VERBALIZZA">
                     </div>
-                </div><?php
+                </div></form><?php
                 }?>
             </div>
         </div>

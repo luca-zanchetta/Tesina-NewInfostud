@@ -15,33 +15,40 @@ else
     echo "<p>ERRORE</p>";
 
 
+if(isset($_POST['modifica']) && isset($_POST['idAppello']) && isset($_POST['idCorso']) && isset($_POST['dataOra'])) {
+    $corso = getCorsoById($_POST['idCorso']);
+    $nomeCorso = $corso->nome;
+
+    $data = getDataFromDataora($_POST['dataOra']);
+    $ora = getOraFromDataora($_POST['dataOra']);
+    $idAppello = $_POST['idAppello'];
+}
+
 if(isset($_POST['invio'])) {
-    $presenzaDati = FALSE;
+    $idAppello = $_POST['idAppello'];
 
     if($_SESSION['loginType'] == "Docente" && $docenteLoggato->idCorso != 0) {
         if((isset($_POST['data']) && $_POST['data'] != "") &&
            (isset($_POST['ora']) && $_POST['ora'] != "")) {
-                $presenzaDati = TRUE;
 
                 $dataOra = "".strval($_POST['data'])." ".strval($_POST['ora'])."";
-                $appello = new appello($dataOra, $docenteLoggato->idCorso);
-                $tmp = inserisciAppello($appello);
+                $tmp = modificaAppello($idAppello, $_POST['data'], $_POST['ora'], $docenteLoggato->idCorso);
         }
     }
     else {
         if((isset($_POST['data']) && $_POST['data'] != "") &&
            (isset($_POST['ora']) && $_POST['ora'] != "") &&
            (isset($_POST['corso']) && $_POST['corso'] != "seleziona")) {
-                $presenzaDati = TRUE;
 
                 $dataOra = "".strval($_POST['data'])." ".strval($_POST['ora'])."";
-                $appello = new appello($dataOra, $_POST['corso']);
-                $tmp = inserisciAppello($appello);
+                $tmp = modificaAppello($idAppello, $_POST['data'], $_POST['ora'], $_POST['corso']);
         }
     }
 
-    if(!$tmp)
+    if(!$tmp) {
+        setcookie('modificaAppello', 'ERRORE: Modifica appello fallita.');
         header('Location: avvisoErrore.php');
+    }
     else
         header('Location: avvisoOK.php');
 }
@@ -56,7 +63,7 @@ if(isset($_POST['invio'])) {
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileHomepage-users.css">
     <link rel="stylesheet" href="stile-amministrazione.css">
-    <title>Inserisci appello - Infostud</title>
+    <title>Modifica appello - Infostud</title>
 </head>
 <body>
     <div class="header">
@@ -99,7 +106,7 @@ if(isset($_POST['invio'])) {
         <div class="body">
             <div class="infoTitle">
                 <div class="infoTitle-position">
-                    <h2>Home > Inserisci appello</h2>
+                    <h2>Home > Modifica appello</h2>
                 </div>
                 <div class="infoTitle-user">
                 <?php
@@ -121,7 +128,7 @@ if(isset($_POST['invio'])) {
             else {
             ?>
             <div class="boxInsAPP">
-            <form action="inserisciAppello.php" method="POST" id="input">
+            <form action="modificaAppello.php" method="POST" id="input">
                 <div class="insContainer">
                     <div class="labels">
                         <h3>Data: </h3>
@@ -133,25 +140,23 @@ if(isset($_POST['invio'])) {
                     </div>
                     <div class="inputs">
                     <?php
-                    if(isset($_POST['data']))
-                        echo "<input class=\"textField\" type=\"date\" name=\"data\" value=\"{$_POST['data']}\">";
-                    elseif(!isset($_POST['data']))
+                    if(isset($_POST['dataOra']))
+                        echo "<input class=\"textField\" type=\"date\" name=\"data\" value=\"{$data}\">";
+                    elseif(!isset($_POST['dataOra']))
                         echo "<input class=\"textField\" type=\"date\" name=\"data\">";
                     
-                    if(isset($_POST['ora']))
-                        echo "<input class=\"textField\" type=\"time\" name=\"ora\" value=\"{$_POST['ora']}\">";
-                    elseif(!isset($_POST['ora']))
+                    if(isset($_POST['dataOra']))
+                        echo "<input class=\"textField\" type=\"time\" name=\"ora\" value=\"{$ora}\">";
+                    elseif(!isset($_POST['dataOra']))
                         echo "<input class=\"textField\" type=\"time\" name=\"ora\">";
 
                     
                     if($_SESSION['loginType'] != "Docente") {?>
                     <select class="choice" name="corso" style="width: 52%;" onfocus='this.size=3; this.style="width: 75%;";' onblur='this.size=1; this.style="width: 52%;";' onchange='this.size=1; this.blur(); this.style="width: 52%;";'>
                         <?php
-                            if(isset($_POST['corso']) && $_POST['corso'] != "seleziona") {
-                                $corso = getCorsoById($_POST['corso']);
+                            if(isset($_POST['idCorso']))
                                 echo "<option value=\"{$corso->id}\">{$corso->nome}</option>";
-                            }
-                            elseif(!isset($_POST['corso']))
+                            elseif(!isset($_POST['idCorso']))
                                 echo "<option value=\"seleziona\">Corso...</option>";
                                         
                             $corsi = [];
@@ -167,16 +172,11 @@ if(isset($_POST['invio'])) {
                 <div style="padding-top: 1%; margin-left: 45%;">
                     <input class="bottoni" type="submit" name="invio" value="INVIO">
                 </div>
+                <input type="hidden" name="idAppello" value="<?php echo $_POST['idAppello']; ?>">
             </form>
             </div>
             <?php
             }
-
-            if(isset($_POST['invio']) && !$presenzaDati)
-                echo "
-                <div style=\"margin-left: -6%; padding-bottom: 7%;\">
-                    <h2 class=\"error\">DATI MANCANTI! Riprovare.</h2>
-                </div>";
             ?>
         </div>
     </div>

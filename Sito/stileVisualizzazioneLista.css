@@ -51,6 +51,14 @@ div.lastElement {
     height: 3px;
     border-radius: 2px;
 }
+.listContainer>form>hr {
+    border: 0;
+    display:flex;
+    width: 96%;               
+    background-color:#000;
+    height: 3px;
+    border-radius: 2px;
+}
 img.arrow {
     display: flex;
     align-content: center;

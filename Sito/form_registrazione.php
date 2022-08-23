@@ -30,10 +30,10 @@ if(isset($_POST['loginType'])) {
                 break;
 
             case "Docente":
-                if((isset($_POST['nome']) && $_POST['nome'] != "") && (isset($_POST['cognome']) && $_POST['cognome'] != "") && (isset($_POST['materia']) && $_POST['materia'] != "Seleziona materia...") && (isset($_POST['password']) && $_POST['password'] != "")) {
+                if((isset($_POST['nome']) && $_POST['nome'] != "") && (isset($_POST['cognome']) && $_POST['cognome'] != "") && (isset($_POST['password']) && $_POST['password'] != "")) {
                     $presenza_dati = TRUE;
 
-                    $idCorso = cercaCorso($_POST['materia']);
+                    $idCorso = 0;
 
                     $docente = new docente (
                         $_POST['nome'],
@@ -201,7 +201,6 @@ else {
                     <div class="labels">
                         <h3>Nome: </h3>
                         <h3>Cognome: </h3>
-                        <h3>Materia: </h3>
                         <h3>Password: </h3>
                     </div>
                     <div class="inputs">
@@ -216,22 +215,7 @@ else {
                     elseif(!isset($_POST['cognome']))
                         echo "<input class=\"textField\" type=\"text\" name=\"cognome\">";
                     ?>
-                        <div class="materie">
-                            <select class="materie" name="materia">
-                                <?php
-                                if(isset($_POST['materia']) && $_POST['materia'] != "seleziona")
-                                    echo "<option value=\"{$_POST['materia']}\">{$_POST['materia']}</option>";
-                                elseif(!isset($_POST['materia']))
-                                    echo "<option value=\"seleziona\">Seleziona materia...</option>";
-                                
-                                $materie = [];
-                                $materie = getCorsi();
-                                foreach($materie as $materia) {
-                                    echo "<option value=\"{$materia->nome}\">{$materia->nome}</option>";
-                                }
-                                ?>
-                            </select>
-                        </div>
+                        
                         <input class="textField" type="password" name="password">
                     </div>
                 </div>
