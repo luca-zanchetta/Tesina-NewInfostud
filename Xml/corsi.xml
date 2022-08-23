@@ -14,19 +14,6 @@
     <idCorsoLaurea>1</idCorsoLaurea>
   </corso>
   <corso>
-    <id>2</id>
-    <nome>Linguaggi per il Web</nome>
-    <descrizione>Acquisizione di nozioni fondamentali su- presentazione di risorse web,- sviluppo di applicazioni web, mediante opportune tecniche e linguaggi di programmazione;- rappresentazione e gestione dei dati rilevanti per un'applicazione web, mediante basi di dati e tecnologia XML Messa in pratica delle nozioni sopraelencate, mediante lo svolgimento di una tesina, orientata alla progettazione ed implementazione di una non banale applicazione web.</descrizione>
-    <matricolaProf>1</matricolaProf>
-    <colore>lightpink</colore>
-    <anno>3</anno>
-    <semestre>2</semestre>
-    <curriculum>Informatica</curriculum>
-    <cfu>6</cfu>
-    <ssd>ING/INF-04</ssd>
-    <idCorsoLaurea>1</idCorsoLaurea>
-  </corso>
-  <corso>
     <id>3</id>
     <nome>Teoria dei Segnali</nome>
     <descrizione>Il corso di teoria dei segnali intende fornire al discente le basi del calcolo delle probabilità e dell’analisi frequenziale di segnali certi e aleatori, assieme alle sue pratiche applicazioni nel contesto del filtraggio, della trasmissione numerica e delle tecniche di modulazione analogica.</descrizione>
@@ -128,6 +115,19 @@
     <curriculum>Fisica</curriculum>
     <cfu>9</cfu>
     <ssd>FIS/01</ssd>
+    <idCorsoLaurea>1</idCorsoLaurea>
+  </corso>
+  <corso>
+    <id>2</id>
+    <nome>Linguaggi per il Web</nome>
+    <descrizione>Acquisizione di nozioni fondamentali su- presentazione di risorse web,- sviluppo di applicazioni web, mediante opportune tecniche e linguaggi di programmazione;- rappresentazione e gestione dei dati rilevanti per un'applicazione web, mediante basi di dati e tecnologia XML Messa in pratica delle nozioni sopraelencate, mediante lo svolgimento di una tesina, orientata alla progettazione ed implementazione di una non banale applicazione web.</descrizione>
+    <matricolaProf>2</matricolaProf>
+    <colore>lightblue</colore>
+    <anno>3</anno>
+    <semestre>2</semestre>
+    <curriculum>Informatica</curriculum>
+    <cfu>6</cfu>
+    <ssd>ING-INF/01</ssd>
     <idCorsoLaurea>1</idCorsoLaurea>
   </corso>
 </corsi>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <corsiDiLaurea xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="corsiDiLaurea.xsd">
   <corsoDiLaurea>
     <id>1</id>
@@ -8,4 +8,8 @@
     <id>2</id>
     <nome>Medicina</nome>
   </corsoDiLaurea>
-<corsoDiLaurea><id>3</id><nome>Ingegneria Gestionale</nome></corsoDiLaurea></corsiDiLaurea>
+  <corsoDiLaurea>
+    <id>3</id>
+    <nome>Ingegneria Gestionale</nome>
+  </corsoDiLaurea>
+</corsiDiLaurea>

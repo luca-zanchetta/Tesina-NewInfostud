@@ -11,4 +11,15 @@
     <media>26.5</media>
     <idCorsoDiLaurea>1</idCorsoDiLaurea>
   </studente>
+  <studente>
+    <matricola>2</matricola>
+    <nome>Luca</nome>
+    <cognome>Zanchetta</cognome>
+    <password>admin</password>
+    <dataNascita>1999-10-07</dataNascita>
+    <reputazioneTotale>0</reputazioneTotale>
+    <cfuTotale>0</cfuTotale>
+    <media>0</media>
+    <idCorsoDiLaurea>0</idCorsoDiLaurea>
+  </studente>
 </studenti>
