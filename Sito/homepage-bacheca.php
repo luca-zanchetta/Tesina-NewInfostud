@@ -12,7 +12,7 @@ switch ($_SESSION['loginType']) {
     case 'Studente':
          # code...
         $utenzaLoggata = getStudenteFromMatricola($_SESSION['matricola']);
-        $listaCorsi = getCorsiByCorsoDiLaurea($utenzaLoggata->idCorsoLaurea);
+        $listaCorsi = getCorsiFromCorsoDiLaurea($utenzaLoggata->idCorsoLaurea);
         break;
     case 'Segretario':
         # code...
