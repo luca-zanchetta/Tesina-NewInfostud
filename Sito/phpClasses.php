@@ -135,4 +135,54 @@ class prenotazione {
         $this->esito = "NULL";
     }
 }
+
+class faq {
+    public $id;
+    public $domanda;
+    public $risposta;
+    public $utilitaTotale;
+    public $idCorso;
+    public $idAutore;
+}
+
+class faqVote {
+    public $id;
+    public $matricolaStudente;
+    public $idFAQ;
+    public $utilita;
+    public function __construct($matricola, $idFAQ, $utilita) {
+        $this->matricolaStudente = $matricola;
+        $this->idFAQ = $idFAQ;
+        $this->utilita = $utilita;
+        $this->id = nextFaqVoteId();
+    }
+}
+
+class post {
+    public $id;
+    public $titolo;
+    public $corpo;
+    public $matricolaStudente;
+    public $utilitaTotale;
+    public $idCorso;
+    public $data;
+    public $replies;
+}
+
+class comment {
+    public $id;
+    public $corpo;
+    public $matricolaStudente;
+    public $accordoMedio;
+    public $idPost;
+    public $data;
+}
+
+class commentVote {
+    public $id;
+    public $matricolaStudente;
+    public $idCommento;
+    public $accordo;
+    public $idAutoreCommento;
+}
 ?>

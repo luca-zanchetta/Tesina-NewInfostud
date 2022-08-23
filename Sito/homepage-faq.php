@@ -4,11 +4,35 @@ require_once('phpFunctions.php');
 
 if(!isset($_SESSION['loginType']))
     header('Location: homepage.php');
-
-if(isset($_SESSION['matricola']))
-    $studenteLoggato = getStudenteFromMatricola($_SESSION['matricola']);
+if($_SESSION['loginType'] == 'Docente')
+    header('Location: homepage.php');
+//otteniamo l'oggetto associato all'utenza
+switch ($_SESSION['loginType']) {
+    case 'Studente':
+        # code...
+        $utenzaLoggata = getStudenteFromMatricola($_SESSION['matricola']);
+        $listaCorsi = getCorsiByCorsoDiLaurea($utenzaLoggata->idCorsoLaurea);
+        break;
+    case 'Docente':
+        # code...
+        $utenzaLoggata = getDocenteFromMatricola($_SESSION['matricola']);
+        $listaCorsi = getCorsoById($utenzaLoggata->idCorso);
+        break;
+    case 'Segretario':
+        # code...
+        $utenzaLoggata = getSegretarioFromUsername($_SESSION['username']);
+        $listaCorsi = getCorsi();
+        break;
+    case 'Amministratore':
+        # code...
+        $utenzaLoggata = getAdminFromUsername($_SESSION['username']);
+        $listaCorsi = getCorsi();
+        break;    
+    default:
+        # code...
+        break;
+}
 ?>
-
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -61,7 +85,14 @@ if(isset($_SESSION['matricola']))
                     <h2>Home > FAQ</h2><!--Generato dallo script-->
                 </div>
                 <div class="infoTitle-user">
-                    <h2>Nome,Cognome, Matricola</h2><!--Generato dallo script-->
+                    <h2>
+                        <?php 
+                            if($_SESSION['loginType'] == 'Docente' || $_SESSION['loginType'] == 'Studente')
+                                echo $utenzaLoggata->nome.", ".$utenzaLoggata->cognome.", ".$utenzaLoggata->matricola;
+                            else
+                                echo $_SESSION['loginType']." : ".$utenzaLoggata->username;
+                        ?>
+                    </h2><!--Generato dallo script-->
                 </div>
             </div>    
             <hr />
@@ -72,34 +103,29 @@ if(isset($_SESSION['matricola']))
                     </div>
                 </div> 
                 <hr class="redBar" />
-                <form action="homepage-users-visualizzaFaq.php">
-                    <div class="listItem">
-                        <input type="submit" value="" class="bottoneCorsi"> <!--Struttura di ogni bottone -->
-                        <input type="hidden">
-                        <div class="element">
-                            <h2>Basi di dati</h2>
-                        </div>
-                        <div class="element">
+                <!--Otteniamo la lista di tutti i corsi e la stampiamo-->
+                <?php 
+                    foreach($listaCorsi as $corso){
+                        ?>
+                        <form action="homepage-users-visualizzaFaq.php" method="GET">
+                            <div class="listItem">
+                                <input type="submit" value="" class="bottoneCorsi"> <!--Struttura di ogni bottone -->
+                                <input type="hidden" value="<?php echo $corso->id;?>" name="idCorso">
+                            <div class="element">
+                                <h2><?php echo $corso->nome;?></h2>
+                            </div>
+                            <div class="element">
                             
-                        </div>
-                        <div class="lastElement">
-                            <img src="arrowBlack.png" alt="err" width="30px" height="30px" style="display:flex;align-content:center">
-                        </div>
+                            </div>
+                            <div class="lastElement">
+                                <img src="arrowBlack.png" alt="err" width="30px" height="30px" style="display:flex;align-content:center">
+                            </div>
                     </div> 
                 </form>
                 <hr />
-                <div class="listItem">
-                    <div class="element">
-                        <h2>Elettronica I</h2>
-                    </div>
-                    <div class="element">
-                        
-                    </div>
-                    <div class="lastElement">
-                        <a href="fittizia.php"><img class="arrow" width="30px" height="30px" alt="err" src="arrowBlack.png"></a>
-                    </div>
-                </div> 
-            <hr>
+                <?php
+                    }
+                ?>
         </div>
     </div>
 </div>

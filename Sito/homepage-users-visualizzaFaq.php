@@ -4,10 +4,39 @@ require_once('phpFunctions.php');
 
 if(!isset($_SESSION['loginType']))
     header('Location: homepage.php');
+//otteniamo l'oggetto associato all'utenza
+if(!isset($_GET["idCorso"]) && $_SESSION['loginType']!= 'Docente')
+    header('Location: homepage.php');
 
-if(isset($_SESSION['matricola']))
-    $studenteLoggato = getStudenteFromMatricola($_SESSION['matricola']);
 
+switch ($_SESSION['loginType']) {
+    case 'Studente':
+        # code...
+        $utenzaLoggata = getStudenteFromMatricola($_SESSION['matricola']);
+        break;
+    case 'Docente':
+        # code...
+        $utenzaLoggata = getDocenteFromMatricola($_SESSION['matricola']);
+        $corso = getCorsoById($utenzaLoggata->idCorso);
+        break;
+    case 'Segretario':
+        # code...
+        $utenzaLoggata = getSegretarioFromUsername($_SESSION['username']);
+        break;
+    case 'Amministratore':
+        # code...
+        $utenzaLoggata = getAdminFromUsername($_SESSION['username']);
+        break;    
+    default:
+        # code...
+        break;
+}
+//otteniamo il corso che deve essere visualizzato
+if($_SESSION['loginType']!= 'Docente') $corso = getCorsoById($_GET["idCorso"]);
+$listaFaqComplete = getFaqComplete($corso->id);
+$listaFaqIncomplete = getFaqIncomplete($corso->id);
+$voto = [];
+$colore = [];
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -43,8 +72,8 @@ if(isset($_SESSION['matricola']))
         </div>
         <div class="nav-right">
         <h2>
-            <form action="">
-                <input type="button">
+            <form action="logout.php">
+                <input type="submit" value="">
             </form>
                 Logout
         </h2>
@@ -63,10 +92,17 @@ if(isset($_SESSION['matricola']))
             <div class="_body">
                 <div class="infoTitle">
                     <div class="infoTitle-position">
-                        <h2>Home > Bacheca > Basi di Dati</h2><!--Generato dallo script-->
+                        <h2>Home > FAQ > <?php echo $corso->nome;?></h2><!--Generato dallo script-->
                     </div>
                     <div class="infoTitle-user">
-                        <h2>Nome, Cognome, Matricola</h2><!--Generato dallo script-->
+                        <h2>
+                            <?php 
+                                if($_SESSION['loginType'] == 'Docente' || $_SESSION['loginType'] == 'Studente')
+                                    echo $utenzaLoggata->nome.", ".$utenzaLoggata->cognome.", ".$utenzaLoggata->matricola;
+                                else
+                                    echo $_SESSION['loginType']." : ".$utenzaLoggata->username;
+                            ?>
+                        </h2><!--Generato dallo script-->
                     </div>
                 </div>    
                 <hr class="redBar" />
@@ -80,145 +116,112 @@ if(isset($_SESSION['matricola']))
                             <input type="text">
                         </form>
                     </div>
-                    <div class="faqContainer">
-                        <div class="faq">
-                            <div class="upDown">
-                                <form action="">
-                                    <div>
-                                        <img src="up.png" alt="dsa">
-                                        <input type="hidden">
-                                        <input type="button" value="">      
-                                    </div>
-                                </form>
-                                <div>
-                                    0 Voti
-                                </div>
-                                <form action="">
-                                    <div>
-                                        <img src="down.png" alt="dsa">
-                                        <input type="hidden">
-                                        <input type="button" value=""> 
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="vBar"></div>
-                            <div class="faqContent">
-                                <div class="contentRow">
-                                    <div class="contentTitle">
-                                        Domanda
-                                    </div>
-                                    <div class="contentQuestion">
-                                        Serve un libro di testo in particolare per affrontare l'esame
-                                    </div>
-                                </div>
-                                <div class="contentRow">
-                                    <div class="contentTitle">
-                                        Risposta
-                                    </div>
-                                    <div class="content">
-                                        Il libro è un'aggiunta, potrà tranquillamente affrontare l'esame studiando sul materiale checkdate
-                                        metterò a disposizione durante il corso
-                                    </div>
-                                </div>
-                                <div class="faqAuthorData">
-                                    Da david in data 5 dicembre 2020
-                                </div>
-                            </div>
-                        </div>
-                        <div class="faq">
-                            <div class="upDown">
-                                <form action="">
-                                    <div>
-                                        <img src="up.png" alt="dsa">
-                                        <input type="hidden">
-                                        <input type="button" value="">      
-                                    </div>
-                                </form>
-                                <div>
-                                    0 Voti
-                                </div>
-                                <form action="">
-                                    <div>
-                                        <img src="down.png" alt="dsa">
-                                        <input type="hidden">
-                                        <input type="button" value=""> 
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="vBar"></div>
-                            <div class="faqContent">
-                                <div class="contentRow">
-                                    <div class="contentTitle">
-                                        Domanda
-                                    </div>
-                                    <div class="contentQuestion">
-                                        Serve un libro di testo in particolare per affrontare l'esame
-                                    </div>
-                                </div>
-                                <div class="contentRow">
-                                    <div class="contentTitle">
-                                        Risposta
-                                    </div>
-                                    <div class="content">
-                                        Il libro è un'aggiunta, potrà tranquillamente affrontare l'esame studiando sul materiale checkdate
-                                        metterò a disposizione durante il corso
-                                    </div>
-                                </div>
-                                <div class="faqAuthorData">
-                                    Da david in data 5 dicembre 2020
-                                </div>
-                            </div>
-                        </div>
-                        <div class="faq">
-                            <div class="upDown">
-                                <form action="">
-                                    <div>
-                                        <img src="up.png" alt="dsa">
-                                        <input type="hidden">
-                                        <input type="button" value="">      
-                                    </div>
-                                </form>
-                                <div>
-                                    0 Voti
-                                </div>
-                                <form action="">
-                                    <div>
-                                        <img src="down.png" alt="dsa">
-                                        <input type="hidden">
-                                        <input type="button" value=""> 
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="vBar"></div>
-                            <div class="faqContent">
-                                <div class="contentRow">
-                                    <div class="contentTitle">
-                                        Domanda
-                                    </div>
-                                    <div class="contentQuestion">
-                                        Serve un libro di testo in particolare per affrontare l'esame
-                                    </div>
-                                </div>
-                                <div class="contentRow">
-                                    <div class="contentTitle">
-                                        Risposta
-                                    </div>
-                                    <form action="">
-                                        <div class="content"> 
-                                            <input id="inputId" type="text" value="Il libro è un'aggiunta, potrà tranquillamente affrontare l'esame studiando sul materiale."> 
-                                            <div id="textId">Il libro è un'aggiunta, potrà tranquillamente affrontare l'esame studiando sul materiale.</div>
+                    <div class="faqContainer">      
+                        <?php
+                        
+                        foreach($listaFaqComplete as $faq){
+                            //Otteniamo i voti inviati dall'utente per la singola faq
+                            ?>
+                        
+                            <div class="faq">
+                                <?php
+                                    //Controlliamo per ogni FAQ se è stata votata dall'utente
+                                    //attualmente loggato
+                                    if($_SESSION['loginType'] == 'Studente') {
+                                        $voto[$faq->id] =  (float)getVotoFaq($_SESSION['matricola'],$faq->id);
+                                        if($voto[$faq->id] > 0)
+                                            $colore[$faq->id]  = "green";
+                                        elseif($voto[$faq->id] < 0)
+                                            $colore[$faq->id] = "red";
+                                    }
+                                ?>
+                                <div  class="upDown">
+                                    <form action="votaFaq.php" method="POST">
+                                        <div>
+                                            <img src="up.png" alt="dsa">
+                                            <input type="hidden" value="1" name="type">
+                                            <input type="hidden" value="<?php echo $faq->id?>" name="idFaq">
+                                            <input type="hidden" value="<?php echo $corso->id?>" name="idCorso">
+                                            <?php if($_SESSION['loginType'] == 'Studente') {?>
+                                                <input type="hidden" value="<?php echo $voto[$faq->id]?>" name="voto">
+                                                <input type="submit" value="">
+                                            <?php }else {?>
+                                                <input type="button" onclick="window.alert('questa utenza non può votare')">
+                                            <?php } ?>
                                         </div>
-                                        <div class="editButton">
-                                            <input type="submit" value="" onclick="toggleInput('viene passato id della faq')">
-                                            <img  src="edit.png" alt="err">
+                                    </form>
+                                    <div <?php if(isset($colore[$faq->id])) echo "style=color:{$colore[$faq->id]}"?>>
+                                        <?php echo $faq->utilitaTotale?>
+                                    </div>
+                                    <form action="votaFaq.php" method="POST">
+                                        <div>
+                                            <img src="down.png" alt="dsa">
+                                            <input type="hidden" value="-1" name="type">
+                                            <input type="hidden" value="<?php echo $faq->id?>" name="idFaq">
+                                            <input type="hidden" value="<?php echo $corso->id?>" name="idCorso">
+                                            <?php if($_SESSION['loginType'] == 'Studente') {?>
+                                                <input type="hidden" value="<?php echo $voto[$faq->id]?>" name="voto">
+                                                <input type="submit" value="">
+                                            <?php }else {?>
+                                                <input type="button" onclick="window.alert('questa utenza non può votare')">
+                                            <?php } ?>
                                         </div>
                                     </form>
                                 </div>
-                                <div class="faqAuthorData">
-                                    Da david in data 5 dicembre 2020
+                                <div class="vBar"></div>
+                                <div class="faqContent">
+                                    <div class="contentRow">
+                                        <div class="contentTitle">
+                                            Domanda
+                                        </div>
+                                        <div class="contentQuestion">
+                                            <?php echo $faq->domanda ?>
+                                        </div>
+                                    </div>
+                                    <div class="contentRow">
+                                        <div class="contentTitle">
+                                            Risposta
+                                        </div>
+                                        <form action="deleteFaq.php" method="POST">
+                                            <div class="content"> 
+                                                <input name="idCorso" type="text" value="<?php echo $corso->id?>"> 
+                                                <input id="input<?php echo $faq->id?>" type="text" value="<?php echo $faq->risposta ?>"> 
+                                                <div id="text<?php echo $faq->id?>"><?php echo $faq->risposta ?></div>
+                                            </div>
+                                            <?php
+                                                if($_SESSION['loginType'] != 'Studente') {?>
+                                                    <div class="editButton">
+                                                        <input type="submit" value="" onclick="toggleInput(<?php echo $faq->id?>)">
+                                                        <img  src="edit.png" alt="err">
+                                                    </div>
+                                                    <div class="editButton">
+                                                        <input type="submit" value="">
+                                                        <img  src="bin.png" alt="err">
+                                                        <input type="hidden" name="idFaq" value="<?php echo $faq->id?>">
+                                                        <input type="hidden" name="idCorso" value="<?php echo $_GET['idCorso']?>"> 
+                                                    </div>
+                                            <?php
+                                                }
+                                            ?>
+                                        </form>
+                                    </div>
+                                    <div class="faqAuthorData">
+                                        Da <?php
+                                                if($faq->idAutore> 0) {
+                                                    $autore = getStudenteFromMatricola($faq->idAutore);
+                                                    echo $autore->nome.','.$autore->cognome.','.$autore->matricola;
+                                                }elseif($faq->idAutore == 0)
+                                                    echo "Segretario";
+                                                else
+                                                    echo "Amministratore";
+                                        ?>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        
+                    <?php
+                        }
+                    ?>
                     </div>
                 </div>
                 <!-- Container delle domande senza risposta -->
@@ -231,144 +234,121 @@ if(isset($_SESSION['matricola']))
                             <input type="text">
                         </form>
                     </div>
-                    <div class="faqContainer">
-                        <div class="faq">
-                            <div class="upDown">
-                                <form action="">
-                                    <div>
-                                        <img src="up.png" alt="dsa">
-                                        <input type="hidden">
-                                        <input type="button" value="">      
+                        <div class="faqContainer">
+                        <?php
+                            foreach($listaFaqIncomplete as $faq){
+                                //Otteniamo i voti inviati dall'utente per la singola faq
+                            ?>
+                        
+                            <div class="faq">
+                            <?php
+                                    //Controlliamo per ogni FAQ se è stata votata dall'utente
+                                    //attualmente loggato
+                                    if($_SESSION['loginType'] == 'Studente') {
+                                        $voto[$faq->id] =  (float)getVotoFaq($_SESSION['matricola'],$faq->id);
+                                        if($voto[$faq->id] > 0)
+                                            $colore[$faq->id] = "green";
+                                        elseif($voto[$faq->id] < 0)
+                                            $colore[$faq->id] = "red";
+                                    }
+                                ?>
+                                <div  class="upDown">
+                                    <form action="votaFaq.php" method="POST">
+                                        <div>
+                                            <img src="up.png" alt="dsa">
+                                            <input type="hidden" value="1" name="type">
+                                            <input type="hidden" value="<?php echo $faq->id?>" name="idFaq">
+                                            <input type="hidden" value="<?php echo $corso->id?>" name="idCorso">
+                                            <?php if($_SESSION['loginType'] == 'Studente') {?>
+                                                <input type="hidden" value="<?php echo $voto[$faq->id]?>" name="voto">
+                                                <input type="submit" value="">
+                                            <?php }else {?>
+                                                <input type="button" onclick="window.alert('questa utenza non può votare')">
+                                            <?php } ?>
+                                        </div>
+                                    </form>
+                                    <div <?php if(isset($colore[$faq->id])) echo "style=\"color:{$colore[$faq->id]}\""?>>
+                                        <?php echo $faq->utilitaTotale?>
                                     </div>
-                                </form>
-                                <div>
-                                    0 Voti
+                                    <form action="votaFaq.php" method="POST">
+                                        <div>
+                                            <img src="down.png" alt="dsa">
+                                            <input type="hidden" value="-1" name="type">
+                                            <input type="hidden" value="<?php echo $faq->id?>" name="idFaq">
+                                            <input type="hidden" value="<?php echo $corso->id?>" name="idCorso">
+                                            <?php if($_SESSION['loginType'] == 'Studente') {?>
+                                                <input type="hidden" value="<?php echo $voto[$faq->id]?>" name="voto">
+                                                <input type="submit" value="">
+                                            <?php }else {?>
+                                                <input type="button" onclick="window.alert('questa utenza non può votare')">
+                                            <?php } ?>
+                                        </div>
+                                    </form>
                                 </div>
-                                <form action="">
-                                    <div>
-                                        <img src="down.png" alt="dsa">
-                                        <input type="hidden">
-                                        <input type="button" value=""> 
+                                <div class="vBar"></div>
+                                <div class="faqContent">
+                                    <div class="contentRow">
+                                        <div class="contentTitle">
+                                            Domanda
+                                        </div>
+                                        <div class="contentQuestion">
+                                            <?php echo $faq->domanda ?>
+                                        </div>
                                     </div>
-                                </form>
-                            </div>
-                            <div class="vBar"></div>
-                            <div class="faqContent">
-                                <div class="contentRow">
-                                    <div class="contentTitle">
-                                        Domanda
+                                    <div class="contentRow">
+                                        <div class="contentTitle">
+                                            Risposta
+                                        </div>
+                                        <form action="deleteFaq.php" method="POST">
+                                            <div class="content"> 
+                                                <input id="input<?php echo $faq->id?>" type="text" value="<?php echo $faq->risposta ?>"> 
+                                                <div id="text<?php echo $faq->id?>"><?php echo $faq->risposta ?></div>
+                                            </div>
+                                            <?php
+                                                if($_SESSION['loginType'] != 'Studente') {?>
+                                                    <div class="editButton">
+                                                        <input type="submit" value="" onclick="toggleInput(<?php echo $faq->id?>)">
+                                                        <img  src="edit.png" alt="err">
+                                                    </div>
+                                                    <div class="editButton">
+                                                        <input type="submit" value="">
+                                                        <img  src="bin.png" alt="err">
+                                                        <input type="hidden" name="idFaq" value="<?php echo $faq->id?>">
+                                                        <input type="hidden" name="idCorso" value="<?php echo $_GET['idCorso']?>"> 
+                                                    </div>
+                                            <?php
+                                                }
+                                            ?>
+                                        </form>
                                     </div>
-                                    <div class="contentQuestion">
-                                        Serve un libro di testo in particolare per affrontare l'esame
+                                    <div class="faqAuthorData">
+                                        Da <?php
+                                                if($faq->idAutore> 0) {
+                                                    $autore = getStudenteFromMatricola($faq->idAutore);
+                                                    echo $autore->nome.','.$autore->cognome.','.$autore->matricola;
+                                                }elseif($faq->idAutore == 0)
+                                                    echo "Segretario";
+                                                else
+                                                    echo "Amministratore";
+                                            ?>
                                     </div>
-                                </div>
-                                <div class="contentRow">
-                                    <div class="contentTitle">
-                                        Risposta
-                                    </div>
-                                    <div class="content">
-                                    </div>
-                                </div>
-                                <div class="faqAuthorData">
-                                    Da david in data 5 dicembre 2020
-                                </div>
-                            </div>
-                        </div>
-                        <div class="faq">
-                            <div class="upDown">
-                                <form action="">
-                                    <div>
-                                        <img src="up.png" alt="dsa">
-                                        <input type="hidden">
-                                        <input type="button" value="">      
-                                    </div>
-                                </form>
-                                <div>
-                                    0 Voti
-                                </div>
-                                <form action="">
-                                    <div>
-                                        <img src="down.png" alt="dsa">
-                                        <input type="hidden">
-                                        <input type="button" value=""> 
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="vBar"></div>
-                            <div class="faqContent">
-                                <div class="contentRow">
-                                    <div class="contentTitle">
-                                        Domanda
-                                    </div>
-                                    <div class="contentQuestion">
-                                        Serve un libro di testo in particolare per affrontare l'esame
-                                    </div>
-                                </div>
-                                <div class="contentRow">
-                                    <div class="contentTitle">
-                                        Risposta
-                                    </div>
-                                    <div class="content">
-                                    </div>
-                                </div>
-                                <div class="faqAuthorData">
-                                    Da david in data 5 dicembre 2020
-                                </div>
-                            </div>
-                        </div>
-                        <div class="faq">
-                            <div class="upDown">
-                                <form action="">
-                                    <div>
-                                        <img src="up.png" alt="dsa">
-                                        <input type="hidden">
-                                        <input type="button" value="">      
-                                    </div>
-                                </form>
-                                <div>
-                                    0 Voti
-                                </div>
-                                <form action="">
-                                    <div>
-                                        <img src="down.png" alt="dsa">
-                                        <input type="hidden">
-                                        <input type="button" value=""> 
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="vBar"></div>
-                            <div class="faqContent">
-                                <div class="contentRow">
-                                    <div class="contentTitle">
-                                        Domanda
-                                    </div>
-                                    <div class="contentQuestion">
-                                        Serve un libro di testo in particolare per affrontare l'esame
-                                    </div>
-                                </div>
-                                <div class="contentRow">
-                                    <div class="contentTitle">
-                                        Risposta
-                                    </div>
-                                    <div class="content">
-                                    </div>
-                                </div>
-                                <div class="faqAuthorData">
-                                    Da david in data 5 dicembre 2020
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        
+                    <?php
+                        }
+                    ?>
+                </div></div>
                 <!-- Container della form di input -->
                 <div class="formContainer">
                     <div class="formBorder" style="background-color: gainsboro;">
                         <div class="formTitle">
                             Proponi una nuova domanda
                         </div>
-                        <form action="">
-                            <textarea name="" id="" placeholder="Domanda"></textarea>
-                            <input type="submit">
+                        <form action="insertFaq.php" method="POST" id="newFaq">
+                            <textarea name="faqContent" placeholder="Domanda" form="newFaq"></textarea>
+                            <input type="submit" name="addFaq">
+                            <input type="hidden" name="idCorso" value="<?php echo $_GET['idCorso']?>">
                         </form>
                     </div>
                 </div>
@@ -380,34 +360,36 @@ if(isset($_SESSION['matricola']))
 </html>
 <script>
     function toggleInput(id) {
-       
-        if(document.getElementById("textId").style.display == "none"){
-            
-            document.getElementById("inputId").style.display = "none";
-            document.getElementById("textId").style.display = "flex";
+        event.preventDefault();
+        if(document.getElementById("text"+id).style.display == "none"){
+            document.getElementById("input"+id).style.display = "none";
+            document.getElementById("text"+id).style.display = "flex";
 
-            _newText = $("#inputId").val(); 
+            _newText = $("#input"+id).val(); 
 
             console.log(_newText);
-            document.getElementById("textId").textContent = _newText;
+            document.getElementById("text"+id).textContent = _newText;
 
             //Possiamo usare uno script esterno volendo
             jQuery.ajax({
-                        url: 'script.php',
+                        url: 'ajaxHandler.php',
                         type: 'POST',
                         data: jQuery.param({newText: _newText, id:id, richiesta: "modificaFaq"}), 
                         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        dataType: "text",
+
                         success: function (response) {
-                            console.log("Success");
+                            console.log(response);
+                            
                         },
+                        
                         error: function () {
-                            console.log("error");
+                            console.log(response);
                         }});
 
         }else{
-            document.getElementById("textId").style.display = "none";
-            document.getElementById("inputId").style.display = "flex";
-        }
-        event.preventDefault();
+            document.getElementById("text"+id).style.display = "none";
+            document.getElementById("input"+id).style.display = "flex";
+        }  
     }
 </script>

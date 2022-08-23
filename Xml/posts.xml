@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <posts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="posts.xsd">
     <post>
         <id>1</id>
@@ -7,5 +7,6 @@
         <matricolaStudente>1</matricolaStudente>
         <utilitaTotale>1</utilitaTotale>
         <idCorso>1</idCorso>
+        <data>2022-08-22</data>
     </post>
 </posts>
