@@ -145,4 +145,12 @@ class comment {
     public $idPost;
     public $data;
 }
+
+class commentVote {
+    public $id;
+    public $matricolaStudente;
+    public $idCommento;
+    public $accordo;
+    public $idAutoreCommento;
+}
 ?>

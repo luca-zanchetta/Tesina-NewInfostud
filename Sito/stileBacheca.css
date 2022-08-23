@@ -93,18 +93,27 @@ div.postList {
 
 div.postListHeader {
     display: flex;
+    flex-direction: column;
     background-color: #1f1f23;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     margin-bottom: 0;
 }
-.postListHeader>h3{
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 2%;
-    width: 100%;
-    color: white;  
+h3.filterName {
+    color: ghostwhite;
+    position: relative;
+    margin: 0;
+    border-radius: 2px;
 }
+.filterName:hover {
+    background-color: rgba(131, 1, 42, 0.25);
+}
+div.headerBar {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
 div.postContainer {
     display: flex;
     flex-direction: column;

@@ -1,12 +1,5 @@
 <?php
 
-function cmp($post1, $post2) {
-    if ($post1->utilitaTotale == $post2->utilitaTotale) {
-        return 0;
-    }
-    return ($post1->utilitaTotale < $post2->utilitaTotale) ? 1 : -1;
-}
-
 session_start();
 require_once('phpFunctions.php');
 
@@ -31,8 +24,41 @@ switch ($_SESSION['loginType']) {
         break;
 }
 $listaPost = getListaPost($_GET['idCorso']);
-
 $pageNum = $_GET['pageNum'];
+$order = isset($_GET['filter']) ? $_GET['filter'] : 'default';
+
+#ordiniamo la lista dei post secodno il filtro
+switch ($order) {
+    case 'repDesc':
+        # code...
+        usort($listaPost, fn($a, $b) => $b->replies <=> $a->replies);
+        break; 
+    case 'repAsc':
+        # code...
+        usort($listaPost, fn($a, $b) => $a->replies <=> $b->replies);
+        break;
+    case 'utlDesc':
+        # code...
+        usort($listaPost, fn($a, $b) => $b->utilitaTotale <=> $a->utilitaTotale);
+        break;
+    case 'utlAsc':
+        # code...
+        usort($listaPost, fn($a, $b) => $a->utilitaTotale <=> $b->utilitaTotale);
+        break;
+    case 'dataDesc':
+        # Va implementato in maniera piu particolare
+        usort($listaPost, fn($a, $b) => strcmp($a->data,$b->data));
+        break;
+    case 'dataAsc':
+        # code...
+        usort($listaPost, fn($a, $b) => strcmp($b->data,$a->data));
+        break;
+    default:
+        # code...
+        break;
+}
+#calcoliamo il numero di pagine per visualizzare tutti i post
+$maxPageNum = ((int)(count($listaPost)/5)) + (count($listaPost)%5 > 0 ? 1 : 0);
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -98,9 +124,9 @@ $pageNum = $_GET['pageNum'];
                 </h2>
                 <h2 class="hForm">
                     <form action="">
-                        <input type="button">
+                        <input type="button" value="prova" name="dsa">
                     </form>
-                    <?php echo getCorsoById($_GET['idCorso'])->nome; ?>
+                    <?php echo getCorsoById($_GET['idCorso'])->nome;?>
                 </h2><!--Generato dallo script-->
                 </div>
                 <div class="infoTitle-user">
@@ -132,7 +158,7 @@ $pageNum = $_GET['pageNum'];
                 </form>
                 <div class="pageList">
                     <?php 
-                        for ($i=0; $i < count($listaPost)%5; $i++) { 
+                        for ($i=0; $i < $maxPageNum; $i++) { 
                             ?>
                             <form action="">
                                 <div class="pageNumber" <?php if(($i+1) == $pageNum) echo "style=\"color:red;\"" ?>>
@@ -150,7 +176,7 @@ $pageNum = $_GET['pageNum'];
                     <div class="next">
                         Next  
                         <?php 
-                            if($pageNum == count($listaPost)%5){ ?>
+                            if($pageNum == $maxPageNum){ ?>
                                 <input type="button" onclick="window.alert('Non esistono pagine successive!')" class="bottoneForm"> <?php
                             }else{ ?>
                                 <input type="submit" value="" class="bottoneForm"> <?php
@@ -169,7 +195,7 @@ $pageNum = $_GET['pageNum'];
             </div>
             <div style="display: flex; align-items:center;justify-content:center;display:none;" id="formCreaPost">
                 <div class="insertPost">
-                    <form action="insertPost.php" id="newPost" method="post">
+                    <form action="insertPost.php" id="newPost" method="post" name="newPost">
                         <div class="postFormContainer">
                             <textarea name="titolo" placeholder="Titolo" form="newPost" cols="50" rows="1" required ></textarea>
                             <textarea name="corpo" placeholder="Contenuto" form="newPost" cols="50" rows="5" required></textarea>
@@ -182,65 +208,130 @@ $pageNum = $_GET['pageNum'];
             </div>
             <div class="postList">
                 <div class="postListHeader">
-                    <h3>Filters</h3>
+                    <div class="headerBar">
+                        <div class="postData">
+                            <div class="postName" style="color: white;">
+                            </div>
+                        </div>
+                        <div class="repliesOrUtility" style="color: white;">
+                            <h3 class="hForm">
+                                <?php 
+                                    if($order == 'repDesc')
+                                        echo '↓Replies↓';
+                                    elseif($order == 'repAsc')
+                                        echo '↑Replies↑';
+                                    else
+                                        echo 'Replies';
+                                    ?>
+                                <form action="homepage-users-visualizzaBacheca.php" method="GET">
+                                        <input type="submit" value="">
+                                        <input type="hidden" name="filter" value="<?php echo ($order == 'repDesc' ? 'repAsc' : 'repDesc')?>">
+                                        <input type="hidden" name="pageNum" value="<?php echo $_GET['pageNum']?>">
+                                        <input type="hidden" name="idCorso" value="<?php echo $_GET['idCorso']?>">
+                                </form> 
+                            </h3>                          
+                        </div>
+                        <div class="repliesOrUtility" style="color: white;">     
+                            <h3 class="hForm">
+                                <?php 
+                                    if($order == 'utlDesc')
+                                        echo '↓Utility↓';
+                                    elseif($order == 'utlAsc')
+                                        echo '↑Utility↑';
+                                    else
+                                        echo 'Utility';
+                                    ?>
+                                <form action="homepage-users-visualizzaBacheca.php" method="GET">
+                                    <input type="submit" value=''>
+                                    <input type="hidden" name="filter" value="<?php echo ($order == 'utlDesc' ? 'utlAsc' : 'utlDesc')?>">
+                                    <input type="hidden" name="pageNum" value="<?php echo $_GET['pageNum']?>">
+                                    <input type="hidden" name="idCorso" value="<?php echo $_GET['idCorso']?>">
+                                </form> 
+                            </h3>    
+                        </div>
+                        <div class="postDate" style="color: white;">
+                            <div style="display: flex;width: -webkit-fill-available;justify-content: flex-end;"> 
+                                <h3 class="hForm">
+                                    <?php 
+                                        if($order == 'dateDesc')
+                                            echo '↓Date↓';
+                                        elseif($order == 'dateAsc')
+                                            echo '↑Date↑';
+                                        else
+                                            echo 'Date';
+                                    ?>
+                                    <form action="homepage-users-visualizzaBacheca.php" method="GET">
+                                        <input type="submit" value=''>
+                                        <input type="hidden" name="filter" value="<?php echo ($order == 'dateDesc' ? 'dateAsc' : 'dateDesc')?>">
+                                        <input type="hidden" name="pageNum" value="<?php echo $_GET['pageNum']?>">
+                                        <input type="hidden" name="idCorso" value="<?php echo $_GET['idCorso']?>">
+                                    </form> 
+                                </h3> 
+                            </div> 
+                        </div>
+                    </div>
                 </div>
                 <div class="postContainer"> 
                         <!-- Stampo i due post con più utilita --> 
                         <?php 
                             if($pageNum == 1) {
-                                $_lista = array_merge(array(), $listaPost);
-                                uasort($_lista, 'cmp');
-                                for ($i=0; $i < min(2,count($_lista)); $i++) {
+                                $list = array_merge(array(), $listaPost);
+                                usort($list, fn($a, $b) => $b->utilitaTotale <=> $a->utilitaTotale);
+                                for ($i=0; $i < min(2,count($listaPost)); $i++) {
                                     ?>
-                                        <form action="homepage-users-visualizzaPost.php">
+                                        <form action="homepage-users-visualizzaPost.php" method="GET">
                                             <div <?PHP if($i%2==0) echo "class=\"postItem\""; else echo "class=\"postItemAlt\"";?>>
                                                 <input type="submit" value="" class="bottoneForm"> <!--Struttura di ogni bottone -->
-                                                <input type="hidden">
-                    
+                                                <input type="hidden" name="idPost" value="<?php echo $list[$i]->id;?>">
+                                                <input type="hidden" name="idCorso" value="<?php echo $_GET['idCorso']?>">
+                                                <input type="hidden" value="1" name="pageNum">
                                                 <div class="postData">
                                                     <div class="postName">
-                                                        <h3> <?php echo $listaPost[$i]->titolo; ?></h3>
+                                                        <h3><?php echo $list[$i]->titolo; ?></h3>
                                                     </div>
                                                     <div class="postAuthor">
                                                         <h4>
                                                             <?php
-                                                                $autore = getStudenteFromMatricola($listaPost[$i]->matricolaStudente);
-                                                                echo "{$autore->nome}, {$autore->cognome}, {$autore->matricola},";
+                                                                $autore = getStudenteFromMatricola($list[$i]->matricolaStudente);
+                                                                echo "{$autore->nome}, {$autore->cognome}, {$autore->matricola}";
                                                             ?>
                                                         </h4>       
                                                     </div>
                                                 </div>
                                                 <div class="repliesOrUtility">
                                                     <h3>Replies</h3>
-                                                    <h3><?php echo $listaPost[$i]->replies; ?></h3>
+                                                    <h3><?php echo $list[$i]->replies; ?></h3>
                                                 </div>
                                                 <div class="repliesOrUtility">
                                                     <h3>Utility</h3>
-                                                    <h3><?php echo $listaPost[$i]->utilitaTotale; ?></h3>
+                                                    <h3><?php echo $list[$i]->utilitaTotale; ?></h3>
                                                 </div>
                                                 <div class="postDate">
-                                                    <h3><?php echo $listaPost[$i]->data; ?></h3>
+                                                    <h3><?php echo $list[$i]->data; ?></h3>
                                                 </div>
                                             </div>
                                         </form>
+                                        
                                     <?php
                                 }
+                                ?><hr style="
+                                background-color: #aefffe94;
+                                height: 8px;
+                                margin: 0%;
+                                border:0;
+                                display: flex;"
+                                > 
+                            <?PHP
                             }
                         ?>
-                        <hr style="
-                            background-color: #aefffe94;
-                            height: 8px;
-                            margin: 0%;
-                            border:0;
-                            display: flex;"
-                        > 
                         <!-- LISTA POST NORMALE -->
                         <?php for ($i=($pageNum-1)*5; $i < min($pageNum*5,count($listaPost)); $i++) { ?>
-                            <form action="homepage-users-visualizzaPost.php">
+                            <form action="homepage-users-visualizzaPost.php" method="GET">
                                 <div <?PHP if($i%2==0) echo "class=\"postItem\""; else echo "class=\"postItemAlt\"";?>>
                                     <input type="submit" value="" class="bottoneForm"> <!--Struttura di ogni bottone -->
-                                    <input type="hidden">
-        
+                                    <input type="hidden" name="idPost" value="<?php echo $listaPost[$i]->id;?>">
+                                    <input type="hidden" name="idCorso" value="<?php echo $_GET['idCorso']?>">
+                                    <input type="hidden" value="0" name="pageNum">
                                     <div class="postData">
                                         <div class="postName">
                                             <h3> <?php echo $listaPost[$i]->titolo; ?></h3>
@@ -249,7 +340,7 @@ $pageNum = $_GET['pageNum'];
                                             <h4>
                                                 <?php
                                                     $autore = getStudenteFromMatricola($listaPost[$i]->matricolaStudente);
-                                                    echo "{$autore->nome}, {$autore->cognome}, {$autore->matricola},";
+                                                    echo "{$autore->nome}, {$autore->cognome}, {$autore->matricola}";
                                                 ?>
                                             </h4>       
                                         </div>

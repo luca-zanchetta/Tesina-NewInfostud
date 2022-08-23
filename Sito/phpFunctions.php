@@ -127,6 +127,33 @@ function  nextPostId() {
     
     return $id;
 }
+function  nextCommentVoteId() {
+    $xmlString = "";
+    foreach ( file("../Xml/votoCommento.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaId = [];
+     
+    for ($i=0; $i<$records->length; $i++) { 
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $listaId[] = $con->textContent;
+    }
+    $id = 1;
+
+    while(in_array($id,$listaId)){
+        $id++;
+    }
+
+    return $id;
+}
 /* ================================= 
 ======== Display functions =========
 ==================================== */
@@ -1343,6 +1370,34 @@ function getCorsiDiLaureaLike($_nome) {
     return $listaCorsiDiLaurea;
 }
 
+function getCorsiDiLaureaById($id) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/corsiDiLaurea.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+        
+    for ($i=0; $i<$records->length; $i++) {
+        $corsoDiLaurea = new corsoDiLaurea();
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $corsoDiLaurea->id = $con->textContent;
+        $con = $con->nextSibling;
+        $corsoDiLaurea->nome = $con->textContent;
+             
+        /*controllo sul nome*/
+        if($corsoDiLaurea->id == $id)
+            return $corsoDiLaurea;
+    }
+    return null;
+}
+
 
 function getNomeCorsoDiLaureaByID($_id) {
     /*accedo al file xml*/
@@ -2218,6 +2273,7 @@ function getPostReplies($idPost) {
         if($tmp == $idPost)
             $replies++;
     return $replies;
+    }
 }
 
 function getPostComments($idPost) {
@@ -2252,6 +2308,73 @@ function getPostComments($idPost) {
     }
 
     return $listaCommenti;//voto non dato
+}
+
+function getPostFromId($_idPost){
+    $xmlString = "";
+    foreach ( file("../Xml/posts.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+    for ($i=0; $i<$records->length; $i++) {
+        $record = $records->item($i);    
+        $post = new post();
+
+        $con = $record->firstChild;
+        $post->id = $con->textContent;
+        $con = $con->nextSibling;
+        $post->titolo = $con->textContent;
+        $con = $con->nextSibling;
+        $post->corpo = $con->textContent;
+        $con = $con->nextSibling;
+        $post->matricolaStudente = $con->textContent;
+        $con = $con->nextSibling;
+        $post->utilitaTotale = $con->textContent;
+        $con = $con->nextSibling;
+        $post->idCorso = $con->textContent;
+        $con = $con->nextSibling;
+        $post->data = $con->textContent;
+        $post->replies = getPostReplies($post->id);
+
+        if($_idPost == $post->id)
+            return $post;
+    }
+    return null;//voto non dato
+}
+
+function getVotoCommento($idCommento,$matricola) {
+    $xmlString = "";
+    foreach ( file("../Xml/votoCommento.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+    for ($i=0; $i<$records->length; $i++) {
+        $record = $records->item($i);    
+        $vote = new commentVote();
+
+        $con = $record->firstChild;
+        $vote->id = $con->textContent;
+        $con = $con->nextSibling;
+        $vote->matricolaStudente = $con->textContent;
+        $con = $con->nextSibling;
+        $vote->idCommento = $con->textContent;
+        $con = $con->nextSibling;
+        $vote->accordo = $con->textContent;
+        $con = $con->nextSibling;
+        $vote->idAutoreCommento = $con->textContent;
+    
+        if($vote->matricolaStudente == $matricola && $vote->idCommento == $idCommento)
+            return $vote;
+    }
+    return null;//voto non dato
 }
 
 /* ================================= 
@@ -2532,15 +2655,14 @@ function insertFaqVote($faqVote) {
         return TRUE;
 }
 
-function insertPost($titolo,$corpo,$idAutore,$idCorso,$data) {
+function inserisciPost($titolo,$corpo,$idAutore,$idCorso,$data) {
     $xmlString = "";
     foreach ( file("../Xml/posts.xml") as $node ) {
         $xmlString .= trim($node);
     }
 
-    $xml = simplexml_load_file('../Xml/faqs.xml');
+    $xml = simplexml_load_file('../Xml/posts.xml');
 
-    // Crea una tupla <studente> </studente>
 
     $newStudente = $xml->addChild('post');
     $tmp = $newStudente->addChild('id', nextPostId());
@@ -2555,6 +2677,33 @@ function insertPost($titolo,$corpo,$idAutore,$idCorso,$data) {
     $result = fwrite($f,  $xml->asXML());
     fclose($f);
 
+
+    if(!$result) 
+        return FALSE;
+    else
+        return TRUE;
+}
+
+function insertCommentVote($idCommento, $matricola, $vote,$idAutore) {
+    $xmlString = "";
+    foreach ( file("../Xml/votoCommento.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $xml = simplexml_load_file('../Xml/votoCommento.xml');
+
+
+    $newStudente = $xml->addChild('votoCommento');
+    $tmp = $newStudente->addChild('id', nextCommentVoteId());
+    $tmp = $newStudente->addChild('matricolaStudente', $matricola);
+    $tmp = $newStudente->addChild('idCommento', $idCommento);
+    $tmp = $newStudente->addChild('accordo', $vote);
+    $tmp = $newStudente->addChild('idAutoreCommento', $idAutore);
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/votoCommento.xml', "w");
+    $result = fwrite($f,  $xml->asXML());
+    fclose($f);
+    updateCommentAccordo($idCommento);
 
     if(!$result) 
         return FALSE;
@@ -2725,6 +2874,36 @@ function deleteFaqVote($matricola,$idFaq){
     updateFaqUtility($idFaq);
     return true;
 }
+
+function deleteCommentVote($idCommento, $matricola) {
+    $xmlString = "";
+    foreach ( file("../Xml/votoCommento.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->getElementsByTagName("votoCommento");
+
+    for ($i=0; $i<$records->length; $i++) {
+        $record = $records->item($i);
+
+        $con = $record->firstChild;
+        $tmp = $con->textContent; #id
+        $con = $con->nextSibling;
+        $tmp = $con->textContent; #matricolaStudente
+        if($tmp != $matricola) continue;
+        $con = $con->nextSibling;
+        $tmp = $con->textContent; #idCommento
+        if($tmp != $idCommento) continue;
+
+        $record->parentNode->removeChild($record);
+        break;         
+    }
+    echo $doc->save("../Xml/votoCommento.xml"); 
+    updateCommentAccordo($idCommento);
+    return true;
+}
 /* ================================= 
 ======== Modify functions ==========
 ==================================== */
@@ -2829,5 +3008,57 @@ function updateFaqUtility($idFaq){
     else
         return TRUE;
 }
+
+function updateCommentAccordo($idCommento){
+    $xmlString = "";
+    foreach ( file("../Xml/votoCommento.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+    $accordoTot = 0;
+    $numVoti = 0;
+
+    for ($i=0; $i<$records->length; $i++) {
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $tmp = $con->textContent; #id
+        $con = $con->nextSibling;
+        $tmp = $con->textContent; #matricola studente
+        $con = $con->nextSibling;
+        $tmp = $con->textContent; #idCommento
+        if($tmp != $idCommento) continue;
+        $con = $con->nextSibling;
+        $accordo = $con->textContent; #accordo
+        $accordoTot+=(int)$accordo;
+        $numVoti++;
+    }
+
+    $media = $accordoTot/$numVoti;
+    #modifico la FAQ
+    $xmlString = "";
+    foreach ( file("../Xml/commenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $commenti = simplexml_load_file('../Xml/commenti.xml');
+
+    foreach($commenti as $commento){
+        if($commento->id == $idCommento)
+            $commento->accordoMedio = bcdiv($media, 1, 2);
+    }
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/commenti.xml', "w");
+    $result = fwrite($f,  $commenti->asXML());
+    fclose($f);
+
+    if(!$result) 
+        return FALSE;
+    else
+        return TRUE;
 }
 ?>

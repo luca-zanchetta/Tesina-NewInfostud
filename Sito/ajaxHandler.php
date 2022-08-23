@@ -14,7 +14,14 @@ switch ($_POST['richiesta']) {
 
         modificaFaq($id,$newText);
         break;
-    
+    case 'modificaVotoPost': 
+        $vote = $_POST['newVote'];
+        $idCommento = $_POST['id'];
+        //sicuramente utenza è ti tipo studente
+
+        deleteCommentVote($idCommento,  $_SESSION['matricola']);
+        insertCommentVote($idCommento,  $_SESSION['matricola'], $vote,$idAutore);
+        break;
     default:
         # code...
         break;

@@ -323,13 +323,13 @@ $colore = [];
                                     </div>
                                     <div class="faqAuthorData">
                                         Da <?php
-                                                    if($faq->idAutore> 0) {
-                                                        $autore = getStudenteFromMatricola($faq->idAutore);
-                                                        echo $autore->nome.','.$autore->cognome.','.$autore->matricola;
-                                                    }elseif($faq->idAutore == 0)
-                                                        echo "Segretario";
-                                                    else
-                                                        echo "Amministratore";
+                                                if($faq->idAutore> 0) {
+                                                    $autore = getStudenteFromMatricola($faq->idAutore);
+                                                    echo $autore->nome.','.$autore->cognome.','.$autore->matricola;
+                                                }elseif($faq->idAutore == 0)
+                                                    echo "Segretario";
+                                                else
+                                                    echo "Amministratore";
                                             ?>
                                     </div>
                                 </div>

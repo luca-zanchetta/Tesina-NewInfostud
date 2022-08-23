@@ -7,6 +7,30 @@ if(!isset($_SESSION['loginType']) || (isset($_SESSION['loginType']) && $_SESSION
 
 if(isset($_SESSION['matricola']))
     $studenteLoggato = getStudenteFromMatricola($_SESSION['matricola']);
+
+switch ($_SESSION['loginType']) {
+    case 'Studente':
+        # code...
+        $utenzaLoggata = getStudenteFromMatricola($_SESSION['matricola']);
+        break;
+    case 'Segretario':
+        # code...
+        $utenzaLoggata = getSegretarioFromUsername($_SESSION['username']);
+        break;
+    case 'Amministratore':
+        # code...
+        $utenzaLoggata = getAdminFromUsername($_SESSION['username']);
+        break;    
+    default:
+        # code...
+        break;
+}
+
+$post = getPostFromId($_GET['idPost']);
+$listaCommenti = getPostComments($_GET['idPost']);
+$pageNum = $_GET['pageNum'];
+$autore = ($post->matricolaStudente>0 ? getStudenteFromMatricola($post->matricolaStudente) : 'tsk');
+$maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 1 : 0);
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -67,10 +91,34 @@ if(isset($_SESSION['matricola']))
         <div class="body">
             <div class="infoTitle">
                 <div class="infoTitle-position">
-                    <h2>Home > Bacheca > Basi di Dati</h2><!--Generato dallo script-->
+                    <h2 style="margin-left: 3%;" class="hForm"> 
+                        <form action="">
+                            <input type="button">
+                        </form>
+                        Home>
+                    </h2>
+                    <h2 class="hForm">
+                        <form action="">
+                            <input type="button">
+                        </form>
+                        Bacheca>
+                    </h2>
+                    <h2 class="hForm">
+                        <form action="">
+                            <input type="button" value="prova" name="dsa">
+                        </form>
+                        <?php echo getCorsoById($_GET['idCorso'])->nome;?>
+                    </h2>
                 </div>
                 <div class="infoTitle-user">
-                    <h2>Nome,Cognome, Matricola</h2><!--Generato dallo script-->
+                    <h2>
+                        <?php 
+                            if($_SESSION['loginType'] == 'Studente')
+                                echo "{$utenzaLoggata->nome}, {$utenzaLoggata->cognome}, {$utenzaLoggata->matricola}";
+                            else
+                                echo "{$_SESSION['loginType']}: {$utenzaLoggata->username}";
+                        ?>
+                    </h2><!--Generato dallo script-->
                 </div>
             </div>    
             <hr class="redBar" />
@@ -84,7 +132,7 @@ if(isset($_SESSION['matricola']))
                         </div>
                     </form>
                     <div>
-                        0 Voti
+                        <?php echo $post->utilitaTotale;?>
                     </div>
                     <form action="">
                         <div>
@@ -96,18 +144,18 @@ if(isset($_SESSION['matricola']))
                 </div>
                 <div class="postInfo">
                     <div class="postTitle">
-                        Cerco appunti!
+                    <?php echo $post->titolo;?>
                     </div>
                     <div class="postData">
                         <div class="postAuthor">
-                            Francesco, Totti, 1923483
+                            <?php echo $autore == 'tsk'? 'Da Moderatore' : "{$autore->nome}, {$autore->cognome}, {$autore->matricola}" ;?>
                         </div>
                         <div class="postDate">
-                        19/02/2020
+                            <?php echo $post->data;?>
                         </div>
                     </div>
                     <div class="postData">
-                        kldfklfjdlkjfskl fsdjklfjsdklfjd sfjdskljfsdklfj lksdajkldjaslk fjdaskljfdaskldj fjkasdjdaslkhfusdkhcalsdk hfsdjkaghfsdaljkghf fjdhsaklfhds aFLHJKG HDJASHDJKASHDJKASHJKD KJDHASJKDHASJKDH ASKJDHASKJDH SAKJDHAS DASKJD ASKJD ASKJ DASKJ DHASKJ H
+                        <?php echo $post->corpo;?>
                     </div>
                 </div>
             </div>
@@ -115,189 +163,174 @@ if(isset($_SESSION['matricola']))
                 <form action="homepage-users-visualizzaBacheca.php">
                     <div class="prev">
                         Prev  
-                    <input type="submit" value="" class="bottoneForm"> <!--Struttura di ogni bottone -->
-                    <input type="hidden">
-                </div>
+                        <?php 
+                            if($pageNum == 1){ ?>
+                                <input type="button" onclick="window.alert('Non esistono pagine precedenti!')" class="bottoneForm"> <?php
+                            }else{ ?>
+                                <input type="submit" value="" class="bottoneForm"> <?php
+                            }
+                        ?>
+                        <input type="hidden" value="<?php echo $pageNum-1; ?>" name="pageNum">
+                        <input type="hidden" value="<?php echo $_GET["idCorso"]; ?>" name="idCorso">
+                        <input type="hidden" value="<?php echo $_GET["idPost"]; ?>" name="idPost">
+                    </div>
                 </form>
                 <div class="pageList">
-                    <div class="pageNumber">
-                        1
-                    </div>
-                    <form action="">
-                    <div class="pageNumber">
-                        2
-                        <input type="submit" value="" class="bottoneForm"> <!--Struttura di ogni bottone -->
-                        <input type="hidden">
-                    </div>
-                    </form>
-                    <div class="pageNumber">
-                        3
-                    </div>
+                    <?php 
+                        for ($i=0; $i < $maxPageNum; $i++) { 
+                            ?>
+                            <form action="">
+                                <div class="pageNumber" <?php if(($i+1) == $pageNum) echo "style=\"color:red;\"" ?>>
+                                    <?php echo $i+1; ?>
+                                    <input type="submit" value="" class="bottoneForm"> <!--Struttura di ogni bottone -->
+                                    <input type="hidden" value="<?php echo $i+1; ?>" name="pageNum">
+                                    <input type="hidden" value="<?php echo $_GET["idCorso"]; ?>" name="idCorso">
+                                    <input type="hidden" value="<?php echo $_GET["idPost"]; ?>" name="idPost">
+                                </div>
+                            </form>
+                            <?php
+                        }
+                    ?>
                 </div>
-                <form action="">
-                <div class="next">
-                    Next
-                    <input type="submit" value="" class="bottoneForm"> <!--Struttura di ogni bottone -->
-                    <input type="hidden">
-                </div>
+                <form action="homepage-users-visualizzaBacheca.php">
+                    <div class="next">
+                        Next  
+                        <?php 
+                            if($pageNum == $maxPageNum){ ?>
+                                <input type="button" onclick="window.alert('Non esistono pagine successive!')" class="bottoneForm"> <?php
+                            }else{ ?>
+                                <input type="submit" value="" class="bottoneForm"> <?php
+                            }?>
+                        <input type="hidden" value="<?php echo $pageNum+1; ?>" name="pageNum">
+                        <input type="hidden" value="<?php echo $_GET["idCorso"]; ?>" name="idCorso">
+                        <input type="hidden" value="<?php echo $_GET["idPost"]; ?>" name="idPost">
+                    </div>
                 </form>
             </div>
-            <div class="commentContainer">
-                <div class="comment">
-                    <div class="commentAuthorData">
-                        <div class="authorDataElement">
-                            Nome: Fdada
-                        </div>
-                        <div class="authorDataElement">
-                            Matricola: 177843
-                        </div>
-                        <div class="authorDataElement">
-                            Punteggio: dsadsa
-                        </div>
-                        <div class="authorDataElement">
-                            Corso Di Laurea: Ing-Info
-                        </div>
-                    </div>
-                    <div class="commentContent">
-                        <div class="commentTopBar">
-                            <div class="commentTime">
-                                Mar 31,2022 · Voto Totale : 3,4
+            <!--Lista dei commenti-->
+            <?php foreach($listaCommenti as $comment){  
+                
+                if($comment->matricolaStudente > 0){
+                    $autore = getStudenteFromMatricola($comment->matricolaStudente);
+                    $voto = getVotoCommento($comment->id,$autore->matricola);
+                }
+                ?>
+                <div class="commentContainer">
+                    <div class="comment">
+                        <div class="commentAuthorData">
+                            <div class="authorDataElement">
+                                <?php echo isset($autore) ? 'Nome: '.$autore->nome : 'da Moderatore'?>
                             </div>
-                            <div class="commentTime" style="justify-content: flex-end;">
-                                Il tuo voto:   
-                            </div> 
-                            <div id="voteId" class="commentVoteContainer" onclick="modifyVote('id','un id')">
-                                3
+                            <div class="authorDataElement">
+                                <?php echo isset($autore) ? 'Matricola: '.$autore->matricola : ''?>
                             </div>
-                            <div id="starsId" class="commentVoteContainer">
-                                <div class="stars">
+                            <div class="authorDataElement">
+                                <?php echo isset($autore) ? 'Reputazione: '.$autore->reputazioneTotale : ''?>
+                            </div>
+                            <div class="authorDataElement">
+                                <?php echo isset($autore) ? 'Corso di Laurea: '.getCorsiDiLaureaById($autore->idCorsoLaurea)->nome : ''?>
+                            </div>
+                        </div>
+                        <div class="commentContent">
+                            <div class="commentTopBar">
+                                <div class="commentTime">
+                                    <?php echo $comment->data ?> · Voto Totale :  <?php echo $comment->accordoMedio ?>
+                                </div>
+                                <?php if ($_SESSION['loginType'] == 'Studente' && isset($autore) && $autore->matricola != $_SESSION['matricola']) { ?>
+                                    <div class="commentTime" style="justify-content: flex-end;">
+                                        Il tuo voto:  
+                                    </div> 
+                                    <div id="vote<?php echo $comment->id?>" class="commentVoteContainer" onclick="modifyVote('',<?php echo $comment->id?>,<?php echo $autore->matricola?>)">
+                                        <?php echo isset($voto) ? $voto->accordo : 0;?>
+                                    </div>
+                                    <div id="stars<?php echo $comment->id?>" class="commentVoteContainer" style="display:none;">
+                                        <div class="stars">
+                                            <form action="">
+                                                <input class="star star-5" id="star-5" type="radio" name="star" onclick="modifyVote('5',<?php echo $comment->id?>,<?php echo $autore->matricola?>)"/>
+                                                <label class="star star-5" for="star-5"></label>
+                                                <input class="star star-4" id="star-4" type="radio" name="star" onclick="modifyVote('4',<?php echo $comment->id?>,<?php echo $autore->matricola?>)"/>
+                                                <label class="star star-4" for="star-4"></label>
+                                                <input class="star star-3" id="star-3" type="radio" name="star" onclick="modifyVote('3',<?php echo $comment->id?>,<?php echo $autore->matricola?>)"/>
+                                                <label class="star star-3" for="star-3"></label>
+                                                <input class="star star-2" id="star-2" type="radio" name="star" onclick="modifyVote('2',<?php echo $comment->id?>,<?php echo $autore->matricola?>)"/>
+                                                <label class="star star-2" for="star-2"></label>
+                                                <input class="star star-1" id="star-1" type="radio" name="star" onclick="modifyVote('1',<?php echo $comment->id?>,<?php echo $autore->matricola?>)"/>
+                                                <label class="star star-1" for="star-1"></label>
+                                            </form>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                            <div class="commentText" id="commentTextId">
+                                <?php echo $comment->corpo;?>
+                            <div class="commentText">
+                                <form action="">
+                                    <textarea id="commentInputId" form="editTextForm" required><?php echo $comment->corpo;?></textarea>
+                                </form>
+                            </div>
+                            <?php if($_SESSION['loginType'] == 'Amministratore' || $_SESSION['loginType'] == 'Segretario') { ?>
+                                <div class="adminTools">
                                     <form action="">
-                                        <input class="star star-5" id="star-5" type="radio" name="star" onclick="modifyVote('5','un id')"/>
-                                        <label class="star star-5" for="star-5"></label>
-                                        <input class="star star-4" id="star-4" type="radio" name="star" onclick="modifyVote('4','un id')"/>
-                                        <label class="star star-4" for="star-4"></label>
-                                        <input class="star star-3" id="star-3" type="radio" name="star" onclick="modifyVote('3','un id')"/>
-                                        <label class="star star-3" for="star-3"></label>
-                                        <input class="star star-2" id="star-2" type="radio" name="star" onclick="modifyVote('2','un id')"/>
-                                        <label class="star star-2" for="star-2"></label>
-                                        <input class="star star-1" id="star-1" type="radio" name="star" onclick="modifyVote('1','un id')"/>
-                                        <label class="star star-1" for="star-1"></label>
+                                        <img src="bin.png" alt="err">
+                                        <input type="submit" value="">
+                                        <input type="hidden">
+                                    </form>
+                                    <form action="" name="editTextForm">
+                                        <img src="edit.png" alt="err">
+                                        <input type="submit" value="" onclick="editComment(<?php echo $comment->id?>)">
                                     </form>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="commentText" id="commentTextId">
-                            CIasdhjaskdhkaj dsajkhdsa jkhd sjk kdsaajkhd sakj dsakjh dsaakj dasskj dsakj daskj fj fdsjh fdkj fdsjak dsajk dsa kjfh
-                        </div>
-                        <div class="commentText">
-                            <form action="">
-                                <textarea id="commentInputId" form="editTextForm">CIasdhjaskdhkaj dsajkhdsa jkhd sjk kdsaajkhd sakj dsakjh dsaakj dasskj dsakj daskj fj fdsjh fdkj fdsjak dsajk dsa kjfh</textarea>
-                            </form>
-                        </div>
-                        <div class="adminTools">
-                            <form action="">
-                                <img src="bin.png" alt="err">
-                                <input type="submit" value="">
-                                <input type="hidden">
-                            </form>
-                            <form action="" name="editTextForm">
-                                <img src="edit.png" alt="err">
-                                <input type="submit" value="" onclick="editComment('id')">
-                            </form>
+                            <?php } ?>
                         </div>
                     </div>
-                </div>
-                <div class="comment">
-                    <div class="commentAuthorData">
-                        <div class="authorDataElement">
-                            Nome: Fdada
-                        </div>
-                        <div class="authorDataElement">
-                            Matricola: 177843
-                        </div>
-                        <div class="authorDataElement">
-                            Punteggio: dsadsa
-                        </div>
-                        <div class="authorDataElement">
-                            Corso Di Laurea: Ing-Info
-                        </div>
-                    </div>
-                    <div class="commentContent">
-                        <div class="commentTopBar">
-                            <div class="commentTime">
-                                Mar 31,2022
-                            </div>
-                            <div class="commentTime" style="justify-content: flex-end;">
-                                Il tuo voto:   
-                            </div> 
-                            <div class="commentVoteContainer">
-
-                            </div>
-                        </div>
-                        <div class="commentText">
-                            CIasdhjaskdhkaj dsajkhdsa jkhd sjk kdsaajkhd sakj dsakjh dsaakj dasskj dsakj daskj fj fdsjh fdkj fdsjak dsajk dsa kjfh
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <div class="commentAuthorData">
-                        <div class="authorDataElement">
-                            Nome: Fdada
-                        </div>
-                        <div class="authorDataElement">
-                            Matricola: 177843
-                        </div>
-                        <div class="authorDataElement">
-                            Punteggio: dsadsa
-                        </div>
-                        <div class="authorDataElement">
-                            Corso Di Laurea: Ing-Info
-                        </div>
-                    </div>
-                    <div class="commentContent">
-                        <div class="commentTopBar">
-                            <div class="commentTime">
-                                Mar 31,2022
-                            </div>
-                            <div class="commentVoteContainer">
-                                
-                            </div>
-                        </div>
-                        <div class="commentText">
-                            CIasdhjaskdhkaj dsajkhdsa jkhd sjk kdsaajkhd sakj dsakjh dsaakj dasskj dsakj daskj fj fdsjh fdkj fdsjak dsajk dsa kjfh
-                        </div>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
-            <div class="pageNav" style="margin-top: 0;margin-bottom:1%;">
+            <div class="pageNav">
                 <form action="homepage-users-visualizzaBacheca.php">
-                <div class="prev">
-                    Prev  
-                    <input type="submit" value="" class="bottoneForm"> <!--Struttura di ogni bottone -->
-                    <input type="hidden">
-                </div>
+                    <div class="prev">
+                        Prev  
+                        <?php 
+                            if($pageNum == 1){ ?>
+                                <input type="button" onclick="window.alert('Non esistono pagine precedenti!')" class="bottoneForm"> <?php
+                            }else{ ?>
+                                <input type="submit" value="" class="bottoneForm"> <?php
+                            }
+                        ?>
+                        <input type="hidden" value="<?php echo $pageNum-1; ?>" name="pageNum">
+                        <input type="hidden" value="<?php echo $_GET["idCorso"]; ?>" name="idCorso">
+                        <input type="hidden" value="<?php echo $_GET["idPost"]; ?>" name="idPost">
+                    </div>
                 </form>
                 <div class="pageList">
-                    <div class="pageNumber">
-                        1
-                    </div>
-                    <form action="">
-                    <div class="pageNumber">
-                        2
-                        <input type="submit" value="" class="bottoneForm"> <!--Struttura di ogni bottone -->
-                        <input type="hidden">
-                    </div>
-                    </form>
-                    <div class="pageNumber">
-                        3
-                    </div>
+                    <?php 
+                        for ($i=0; $i < $maxPageNum; $i++) { 
+                            ?>
+                            <form action="">
+                                <div class="pageNumber" <?php if(($i+1) == $pageNum) echo "style=\"color:red;\"" ?>>
+                                    <?php echo $i+1; ?>
+                                    <input type="submit" value="" class="bottoneForm"> <!--Struttura di ogni bottone -->
+                                    <input type="hidden" value="<?php echo $i+1; ?>" name="pageNum">
+                                    <input type="hidden" value="<?php echo $_GET["idCorso"]; ?>" name="idCorso">
+                                    <input type="hidden" value="<?php echo $_GET["idPost"]; ?>" name="idPost">
+                                </div>
+                            </form>
+                            <?php
+                        }
+                    ?>
                 </div>
-                <form action="">
-                <div class="next">
-                    Next
-                    <input type="submit" value="" class="bottoneForm"> <!--Struttura di ogni bottone -->
-                    <input type="hidden">
-                </div>
+                <form action="homepage-users-visualizzaBacheca.php">
+                    <div class="next">
+                        Next  
+                        <?php 
+                            if($pageNum == $maxPageNum){ ?>
+                                <input type="button" onclick="window.alert('Non esistono pagine successive!')" class="bottoneForm"> <?php
+                            }else{ ?>
+                                <input type="submit" value="" class="bottoneForm"> <?php
+                            }?>
+                        <input type="hidden" value="<?php echo $pageNum+1; ?>" name="pageNum">
+                        <input type="hidden" value="<?php echo $_GET["idCorso"]; ?>" name="idCorso">
+                        <input type="hidden" value="<?php echo $_GET["idPost"]; ?>" name="idPost">
+                    </div>
                 </form>
             </div>
             <div class="formContainer">
@@ -317,35 +350,32 @@ if(isset($_SESSION['matricola']))
 </body>
 </html>
 <script>
-    async function modifyVote(voto,id) {
-        if(document.getElementById("voteId").style.display == "none"){
+    async function modifyVote(voto,id,$idAutore) {
+        if(document.getElementById("vote"+id).style.display == "none"){
             await delay(0.7);
-            document.getElementById("starsId").style.display = "none";
-            document.getElementById("voteId").style.display = "flex";
+            document.getElementById("stars"+id).style.display = "none";
+            document.getElementById("vote"+id).style.display = "flex";
 
-            document.getElementById("voteId").textContent = voto;
+            document.getElementById("vote"+id).textContent = voto;
 
-            // _id = $("#inputId").val();  In questo id contiene il voto da sovrascrivere (ATTENZIONE, Bisogna modificare anche il voto medio!!!)
-
-            // console.log(_newText);
-            // document.getElementById("textId").textContent = _newText;
-
-            // //Possiamo usare uno script esterno volendo
-            // jQuery.ajax({
-            //             url: 'script.php',
-            //             type: 'POST',
-            //             data: jQuery.param({newVote: voto, id:id, richiesta: "modificaVotoPost"}), 
-            //             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            //             success: function (response) {
-            //                 console.log("Success");
-            //             },
-            //             error: function () {
-            //                 console.log("error");
-            //             }});
+            //In questo id contiene il voto da sovrascrivere (ATTENZIONE, Bisogna modificare anche il voto medio!!!)
+            console.log(voto +" "+id);
+            //Possiamo usare uno script esterno volendo
+            jQuery.ajax({
+                        url: 'ajaxHandler.php',
+                        type: 'POST',
+                        data: jQuery.param({newVote: voto, id:id, autore:idAutore,richiesta: "modificaVotoPost"}), 
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        success: function (response) {
+                            console.log("Success");
+                        },
+                        error: function () {
+                            console.log("error");
+                        }});
 
         }else{     
-            document.getElementById("starsId").style.display = "flex";
-            document.getElementById("voteId").style.display = "none";
+            document.getElementById("stars"+id).style.display = "flex";
+            document.getElementById("vote"+id).style.display = "none";
         }
     }
     function delay(n){

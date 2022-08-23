@@ -11,8 +11,7 @@ if(isset($_POST['insertPost'])){
     elseif($_SESSION['loginType']=='Amministratore') $idAutore = -1;
     else $idAutore = 0;
     
-    insertPost($_POST['Titolo'], $_POST['Corpo'], $idAutore, $_POST['idCorso'], date('Y-m-d'));
+    inserisciPost($_POST['titolo'], $_POST['corpo'], $idAutore, $_POST['idCorso'], date('Y-m-d'));
     header("Location: homepage-users-visualizzaBacheca.php?idCorso={$_POST['idCorso']}&pageNum={$_POST['pageNum']}");
 }
-
 ?>
