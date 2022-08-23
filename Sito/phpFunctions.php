@@ -41,119 +41,49 @@ function generaMatricola($tipoUtenza) {
         $ultimaMatricola = $con->textContent;
     }
 
-    return ($ultimaMatricola + 1);
+    return (intval($ultimaMatricola) + 1);
 }
 
-function nextFaqid(){
-    $xmlString = "";
-    foreach ( file("../Xml/faqs.xml") as $node ) {
-        $xmlString .= trim($node);
-    }
-         
-    // Creazione del documento
-    $doc = new DOMDocument();
-    $doc->loadXML($xmlString);
-    $records = $doc->documentElement->childNodes;
-     
-    $listaId = [];
-     
-    for ($i=0; $i<$records->length; $i++) {
-        $record = $records->item($i);
-             
-        $con = $record->firstChild;
-        $listaId[] = $con->textContent;
-    }
-    $id = 1;
 
-    while(in_array($id,$listaId)){
-        $id++;
-    }
+function verificaPresenzaCorsoDiLaurea($nome) {
+    $listaCorsiDiLaurea = getCorsiDiLaurea();
+
+    foreach($listaCorsiDiLaurea as $corso)
+        if(strtolower($corso->nome) == strtolower($nome))
+            return TRUE;
     
-    return $id;
+    return FALSE;
 }
 
-function nextFaqVoteId(){
-    $xmlString = "";
-    foreach ( file("../Xml/votoFAQ.xml") as $node ) {
-        $xmlString .= trim($node);
-    }
-         
-    // Creazione del documento
-    $doc = new DOMDocument();
-    $doc->loadXML($xmlString);
-    $records = $doc->documentElement->childNodes;
-     
-    $listaId = [];
-     
-    for ($i=0; $i<$records->length; $i++) { 
-        $record = $records->item($i);
-             
-        $con = $record->firstChild;
-        $listaId[] = $con->textContent;
-    }
-    $id = 1;
 
-    while(in_array($id,$listaId)){
-        $id++;
-    }
+function verificaPresenzaCorso($corso) {
+    $listaCorsi = getCorsiFromCorsoDiLaurea($corso->idCorsoLaurea);
+
+    foreach($listaCorsi as $c)
+        if($c->nome == $corso->nome)
+            return TRUE;
     
-    return $id;
+    return FALSE;
 }
 
-function  nextPostId() {
-    $xmlString = "";
-    foreach ( file("../Xml/posts.xml") as $node ) {
-        $xmlString .= trim($node);
-    }
-         
-    // Creazione del documento
-    $doc = new DOMDocument();
-    $doc->loadXML($xmlString);
-    $records = $doc->documentElement->childNodes;
-     
-    $listaId = [];
-     
-    for ($i=0; $i<$records->length; $i++) { 
-        $record = $records->item($i);
-             
-        $con = $record->firstChild;
-        $listaId[] = $con->textContent;
-    }
-    $id = 1;
 
-    while(in_array($id,$listaId)){
-        $id++;
+function verificaPresenzaAppello($appello) {
+    $listaAppelli = getAppelliFromCorso($appello->idCorso);
+    $dataAppello = getDataFromDataora($appello->dataOra);
+
+    foreach($listaAppelli as $app) {
+        $dataApp = getDataFromDataora($app->dataOra);
+        if($dataAppello == $dataApp)
+            return TRUE;
     }
-    
-    return $id;
+
+    return FALSE;
 }
-function  nextCommentVoteId() {
-    $xmlString = "";
-    foreach ( file("../Xml/votoCommento.xml") as $node ) {
-        $xmlString .= trim($node);
-    }
-         
-    // Creazione del documento
-    $doc = new DOMDocument();
-    $doc->loadXML($xmlString);
-    $records = $doc->documentElement->childNodes;
-     
-    $listaId = [];
-     
-    for ($i=0; $i<$records->length; $i++) { 
-        $record = $records->item($i);
-             
-        $con = $record->firstChild;
-        $listaId[] = $con->textContent;
-    }
-    $id = 1;
 
-    while(in_array($id,$listaId)){
-        $id++;
-    }
 
-    return $id;
-}
+
+
+
 /* ================================= 
 ======== Display functions =========
 ==================================== */
@@ -452,7 +382,7 @@ function displayFullStudente($studente) {
 
 
 function displayFullDocente($docente) {
-    $corso = getNomeCorso($docente->id_corso);
+    $corso = getNomeCorso($docente->idCorso);
     echo '
 <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
     <div style="margin-left: 2%;">
@@ -617,7 +547,7 @@ function displayAppelliPrenotabili($studente) {
                 </div> 
                 <div class="info-button">
                     PRENOTA
-                    <form action="fittizia.php" method="POST">
+                    <form action="prenotaAppello-script.php" method="POST">
                         <input type="submit" name="prenota" value="" >
                         <input type="hidden" name="matricola" value="'.$_SESSION['matricola'].'">
                         <input type="hidden" name="idAppello" value="'.$appello->id.'">
@@ -666,7 +596,7 @@ function displayFullAppelli() {
                     <div style="display: flex; flex-direction: row; padding-top: 10%; margin-left: -10%;">
                         <div class="info-button" style="padding-left: 15%; padding-right: 15%;">
                             MODIFICA
-                            <form action="fittizia.php" method="POST">
+                            <form action="modificaAppello.php" method="POST">
                                 <input type="submit" name="modifica" value="" >
                                 <input type="hidden" name="idAppello" value="'.$appello->id.'">
                                 <input type="hidden" name="idCorso" value="'.$appello->idCorso.'">
@@ -675,7 +605,7 @@ function displayFullAppelli() {
                         </div>  
                         <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
                             ELIMINA
-                            <form action="fittizia.php" method="POST">
+                            <form action="eliminaAppello-script.php" method="POST">
                                 <input type="submit" name="elimina" value="" >
                                 <input type="hidden" name="idAppello" value="'.$appello->id.'">
                             </form>
@@ -691,7 +621,7 @@ function displayFullAppelli() {
 
 function displayAppelliFromCorso($idCorso) {
     $appelli = [];
-    $appelli = getAppelliFromCorso($idCorso);
+    $appelli = getAppelliAfterDateFromCorso(date('Y-m-d'), $idCorso);
 
     if(!$appelli)
         echo '<h2>Nessun appello trovato.</h2>';
@@ -725,7 +655,7 @@ function displayAppelliFromCorso($idCorso) {
                     <div style="display: flex; flex-direction: row; padding-top: 10%; margin-left: -10%;">
                         <div class="info-button" style="padding-left: 15%; padding-right: 15%;">
                             MODIFICA
-                            <form action="fittizia.php" method="POST">
+                            <form action="modificaAppello.php" method="POST">
                                 <input type="submit" name="modifica" value="" >
                                 <input type="hidden" name="idAppello" value="'.$appello->id.'">
                                 <input type="hidden" name="idCorso" value="'.$appello->idCorso.'">
@@ -734,7 +664,7 @@ function displayAppelliFromCorso($idCorso) {
                         </div>  
                         <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
                             ELIMINA
-                            <form action="fittizia.php" method="POST">
+                            <form action="eliminaAppello-script.php" method="POST">
                                 <input type="submit" name="elimina" value="" >
                                 <input type="hidden" name="idAppello" value="'.$appello->id.'">
                             </form>
@@ -790,7 +720,7 @@ function displayAppelliLike($nomeCorso) {
                             <div style="display: flex; flex-direction: row; padding-top: 10%; margin-left: -10%;">
                                 <div class="info-button" style="padding-left: 15%; padding-right: 15%;">
                                     MODIFICA
-                                    <form action="fittizia.php" method="POST">
+                                    <form action="modificaAppello.php" method="POST">
                                         <input type="submit" name="modifica" value="" >
                                         <input type="hidden" name="idAppello" value="'.$appello->id.'">
                                         <input type="hidden" name="idCorso" value="'.$appello->idCorso.'">
@@ -799,7 +729,7 @@ function displayAppelliLike($nomeCorso) {
                                 </div>  
                                 <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
                                     ELIMINA
-                                    <form action="fittizia.php" method="POST">
+                                    <form action="eliminaAppello-script.php" method="POST">
                                         <input type="submit" name="elimina" value="" >
                                         <input type="hidden" name="idAppello" value="'.$appello->id.'">
                                     </form>
@@ -809,6 +739,69 @@ function displayAppelliLike($nomeCorso) {
                         ';
                     }
                 }
+            }
+        }
+    }
+}
+
+
+function displayAppelliAfterDate($data) {
+    if($_SESSION['loginType'] == "Docente") {
+        $docente = getDocenteFromMatricola($_SESSION['matricola']);
+        $appelli = getAppelliAfterDateFromCorso($data, $docente->idCorso);
+    }
+    else 
+        $appelli = getAppelliAfterDate($data);
+
+    if(!$appelli)
+        echo '<h2>Nessun appello corrispondente ai criteri di ricerca.</h2>';
+    else {
+        foreach($appelli as $appello) {
+            $corso = getCorsoById($appello->idCorso);
+    
+            if($_SESSION['src'] == "manage") {
+                echo '
+                <div class="blocco-esame" style="background-color:lightblue;">
+                    <div class="nome-esame">
+                        '.$corso->nome."<br />".$appello->dataOra.'
+                    </div> 
+                    <div class="info-button">
+                        INFO
+                        <form action="visualizzaPrenotazioni.php" method="POST">
+                            <input type="submit" name="info" value="" >
+                            <input type="hidden" name="idAppello" value="'.$appello->id.'">
+                        </form>
+                    </div>  
+                </div>
+                ';
+            }
+    
+            elseif($_SESSION['src'] == "edit") {
+                echo '
+                <div class="blocco-esame" style="background-color:lightblue;">
+                    <div class="nome-esame">
+                        '.$corso->nome."<br />".$appello->dataOra.'
+                    </div> 
+                    <div style="display: flex; flex-direction: row; padding-top: 10%; margin-left: -10%;">
+                        <div class="info-button" style="padding-left: 15%; padding-right: 15%;">
+                            MODIFICA
+                            <form action="modificaAppello.php" method="POST">
+                                <input type="submit" name="modifica" value="" >
+                                <input type="hidden" name="idAppello" value="'.$appello->id.'">
+                                <input type="hidden" name="idCorso" value="'.$appello->idCorso.'">
+                                <input type="hidden" name="dataOra" value="'.$appello->dataOra.'">
+                            </form>
+                        </div>  
+                        <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
+                            ELIMINA
+                            <form action="eliminaAppello-script.php" method="POST">
+                                <input type="submit" name="elimina" value="" >
+                                <input type="hidden" name="idAppello" value="'.$appello->id.'">
+                            </form>
+                        </div> 
+                    </div>
+                </div>
+                ';
             }
         }
     }
@@ -989,7 +982,7 @@ function getCorsi() {
     $listaCorsi = [];
 
     for ($i=0; $i<$records->length; $i++) {
-        $corso = new corso();
+        $corso = new corso("", "", "", "", "", "", "", "", "");
         $record = $records->item($i);
         
         $con = $record->firstChild;
@@ -1034,7 +1027,7 @@ function getCorsoById($_id) {
    $records = $doc->documentElement->childNodes;
 
    for ($i=0; $i<$records->length; $i++) {
-       $corso = new corso();
+       $corso = new corso("", "", "", "", "", "", "", "", "");
        $record = $records->item($i);
 
        $con = $record->firstChild;
@@ -1068,52 +1061,6 @@ function getCorsoById($_id) {
    return null;  
 }
 
-function getCorsiByCorsoDiLaurea($id_corso_di_Laurea) {
-     /*accedo al file xml*/
-     $xmlString = "";
-     foreach ( file("../Xml/corsi.xml") as $node ) {
-         $xmlString .= trim($node);
-     }
-     
-     // Creazione del documento
-     $doc = new DOMDocument();
-     $doc->loadXML($xmlString);
-     $records = $doc->documentElement->childNodes;
- 
-     $listaCorsi = [];
- 
-     for ($i=0; $i<$records->length; $i++) {
-         $corso = new corso();
-         $record = $records->item($i);
-         
-         $con = $record->firstChild;
-         $corso->id = $con->textContent;
-         $con = $con->nextSibling;
-         $corso->nome = $con->textContent;
-         $con = $con->nextSibling;
-         $corso->descrizione = $con->textContent;
-         $con = $con->nextSibling;
-         $corso->matricola_prof = $con->textContent;
-         $con = $con->nextSibling;
-         $corso->colore = $con->textContent;
-         $con = $con->nextSibling;
-         $corso->anno = $con->textContent;
-         $con = $con->nextSibling;
-         $corso->semstre = $con->textContent;
-         $con = $con->nextSibling;
-         $corso->curriculum = $con->textContent;
-         $con = $con->nextSibling;
-         $corso->cfu = $con->textContent;
-         $con = $con->nextSibling;
-         $corso->ssd = $con->textContent;
-         $con = $con->nextSibling;
-         $corso->idCorsoLaurea = $con->textContent;
-        
-        if($corso->idCorsoLaurea == $id_corso_di_Laurea)
-            $listaCorsi[] = $corso;
-     }
-     return $listaCorsi;  
-}
 
 function getCorsiLike($_nome){
     $xmlString = "";
@@ -1129,7 +1076,7 @@ function getCorsiLike($_nome){
     $listaCorsi = [];
 
     for ($i=0; $i<$records->length; $i++) {
-        $corso = new corso();
+        $corso = new corso("", "", "", "", "", "", "", "", "");
         $record = $records->item($i);
         
         $con = $record->firstChild;
@@ -1162,6 +1109,67 @@ function getCorsiLike($_nome){
 }
 
 
+function getCorsiFromCorsoDiLaurea($idCorsoLaurea) {
+    $listaCorsi = [];
+    $corsi = getCorsi();
+
+    foreach($corsi as $corso) {
+        if($corso->idCorsoLaurea == $idCorsoLaurea) 
+            $listaCorsi[] = $corso;
+    }
+
+    return $listaCorsi;
+}
+
+
+function getCorsiFromCorsoDiLaureaLike($idCorsoLaurea, $_nome) {
+    $xmlString = "";
+    foreach ( file("../Xml/corsi.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+    
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+
+    $listaCorsi = [];
+
+    for ($i=0; $i<$records->length; $i++) {
+        $corso = new corso("", "", "", "", "", "", "", "", "");
+        $record = $records->item($i);
+        
+        $con = $record->firstChild;
+        $corso->id = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->nome = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->descrizione = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->matricola_prof = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->colore = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->anno = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->semstre = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->curriculum = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->cfu = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->ssd = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->idCorsoLaurea = $con->textContent;
+        
+        /* Controllo sul nome e sul corso di laurea di appartenenza */
+        if(preg_match("#^{$_nome}#i", $corso->nome) && $corso->idCorsoLaurea == $idCorsoLaurea) 
+            $listaCorsi[] = $corso;
+    }
+    return $listaCorsi;
+}
+
+
 function getNomeCorso($num) {
     $xmlString = "";
     foreach ( file("../Xml/corsi.xml") as $node ) {
@@ -1173,7 +1181,7 @@ function getNomeCorso($num) {
     $doc->loadXML($xmlString);
     $records = $doc->documentElement->childNodes;
 
-    $nomeCorso = "ERRORE";
+    $nomeCorso = "N/A";
 
     if($records->length > 0) { /* C'è almeno un corso */
         for ($i=0; $i<$records->length; $i++) {
@@ -1311,6 +1319,62 @@ function calcolaIdCorsoDiLaurea() {
 }
 
 
+function calcolaIdAppello() {
+    $xmlString = "";
+    foreach ( file("../Xml/appelli.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+    
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+
+    $listaId = [];
+    for ($i=0; $i<$records->length; $i++) {
+        $record = $records->item($i);
+        
+        $con = $record->firstChild;
+        $listaId[] = $con->textContent;
+    }
+
+    $id=1;
+    while(in_array($id,$listaId)){
+        $id++;
+    }
+
+    return $id;
+}
+
+
+function calcolaIdPrenotazione() {
+    $xmlString = "";
+    foreach ( file("../Xml/prenotazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+    
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+
+    $listaId = [];
+    for ($i=0; $i<$records->length; $i++) {
+        $record = $records->item($i);
+        
+        $con = $record->firstChild;
+        $listaId[] = $con->textContent;
+    }
+
+    $id=1;
+    while(in_array($id,$listaId)){
+        $id++;
+    }
+
+    return $id;
+}
+
+
 function getCorsiDiLaurea() {
     /*accedo al file xml*/
     $xmlString = "";
@@ -1326,7 +1390,7 @@ function getCorsiDiLaurea() {
     $listaCorsiDiLaurea = [];
      
     for ($i=0; $i<$records->length; $i++) {
-        $corsoDiLaurea = new corsoDiLaurea();
+        $corsoDiLaurea = new corsoDiLaurea("");
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -1355,7 +1419,7 @@ function getCorsiDiLaureaLike($_nome) {
     $listaCorsiDiLaurea = [];
      
     for ($i=0; $i<$records->length; $i++) {
-        $corsoDiLaurea = new corsoDiLaurea();
+        $corsoDiLaurea = new corsoDiLaurea("");
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -1368,34 +1432,6 @@ function getCorsiDiLaureaLike($_nome) {
             $listaCorsiDiLaurea[] = $corsoDiLaurea;
     }
     return $listaCorsiDiLaurea;
-}
-
-function getCorsiDiLaureaById($id) {
-    /*accedo al file xml*/
-    $xmlString = "";
-    foreach ( file("../Xml/corsiDiLaurea.xml") as $node ) {
-        $xmlString .= trim($node);
-    }
-         
-    // Creazione del documento
-    $doc = new DOMDocument();
-    $doc->loadXML($xmlString);
-    $records = $doc->documentElement->childNodes;
-        
-    for ($i=0; $i<$records->length; $i++) {
-        $corsoDiLaurea = new corsoDiLaurea();
-        $record = $records->item($i);
-             
-        $con = $record->firstChild;
-        $corsoDiLaurea->id = $con->textContent;
-        $con = $con->nextSibling;
-        $corsoDiLaurea->nome = $con->textContent;
-             
-        /*controllo sul nome*/
-        if($corsoDiLaurea->id == $id)
-            return $corsoDiLaurea;
-    }
-    return null;
 }
 
 
@@ -1412,7 +1448,7 @@ function getNomeCorsoDiLaureaByID($_id) {
     $records = $doc->documentElement->childNodes;
      
     for ($i=0; $i<$records->length; $i++) {
-        $corsoDiLaurea = new corsoDiLaurea();
+        $corsoDiLaurea = new corsoDiLaurea("");
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -1453,7 +1489,7 @@ function getDocenti() {
         $con = $con->nextSibling;
         $docente->password = $con->textContent;
         $con = $con->nextSibling;
-        $docente->id_corso = $con->textContent;
+        $docente->idCorso = $con->textContent;
              
         $listaDocenti[] = $docente;
     }
@@ -1528,6 +1564,42 @@ function getDocentiLike($_nome) {
             $listaDocenti[] = $docente;
     }
     return $listaDocenti;  
+}
+
+
+function getDocentiDisponibili() {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/docenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaDocenti = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $docente = new docente("", "", "", 0);  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $docente->matricola = $con->textContent;
+        $con = $con->nextSibling;
+        $docente->nome = $con->textContent;
+        $con = $con->nextSibling;
+        $docente->cognome = $con->textContent;
+        $con = $con->nextSibling;
+        $docente->password = $con->textContent;
+        $con = $con->nextSibling;
+        $docente->idCorso = $con->textContent;
+
+        if($docente->idCorso == 0) 
+            $listaDocenti[] = $docente;
+    }
+    return $listaDocenti;
 }
 
 
@@ -1747,7 +1819,7 @@ function getAppelli() {
     $listaAppelli = [];
      
     for ($i=0; $i<$records->length; $i++) {
-        $appello = new appello();  # Default constructor
+        $appello = new appello("", 0);  # Default constructor
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -1778,7 +1850,7 @@ function getAppelliFromCorsoDiLaurea($idCorsoLaurea) {
     $listaAppelli = [];
      
     for ($i=0; $i<$records->length; $i++) {
-        $appello = new appello();  # Default constructor
+        $appello = new appello("", 0);  # Default constructor
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -1812,7 +1884,7 @@ function getAppelliFromCorso($idCorso) {
     $listaAppelli = [];
      
     for ($i=0; $i<$records->length; $i++) {
-        $appello = new appello();  # Default constructor
+        $appello = new appello("", 0);  # Default constructor
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -1843,7 +1915,7 @@ function getAppelloFromId($idAppello) {
     
      
     for ($i=0; $i<$records->length; $i++) {
-        $appello = new appello();  # Default constructor
+        $appello = new appello("", 0);  # Default constructor
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -1875,7 +1947,7 @@ function getEsamiSostenuti($studente) {
     $listaEsami = [];
      
     for ($i=0; $i<$records->length; $i++) {
-        $esame = new prenotazione();  # Default constructor
+        $esame = new prenotazione(0, 0);  # Default constructor
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -1913,7 +1985,7 @@ function getEsamiSuperati($studente) {
     $listaEsamiSuperati = [];
      
     for ($i=0; $i<$records->length; $i++) {
-        $esame = new prenotazione();  # Default constructor
+        $esame = new prenotazione(0, 0);  # Default constructor
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -1930,7 +2002,7 @@ function getEsamiSuperati($studente) {
 
         if($esame->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
             if($esame->esito != "NULL" && $esame->esito != "R" && $esame->esito != "B")
-                $listaEsamiSuperati[] = $esame;
+                $listaEsamiSuperati[] = $corso->id;
     }
     return $listaEsamiSuperati;
 }
@@ -1951,7 +2023,160 @@ function getAppelliPrenotati($studente) {
     $listaPrenotazioni = [];
      
     for ($i=0; $i<$records->length; $i++) {
-        $prenotazione = new prenotazione();  # Default constructor
+        $prenotazione = new prenotazione(0, 0);  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $prenotazione->id = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->matricolaStudente = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->idAppello = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->esito = $con->textContent;
+
+        $appello = getAppelloFromId($prenotazione->idAppello);
+        $corso = getCorsoById($appello->idCorso);
+
+        if($prenotazione->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
+            if($prenotazione->esito == "NULL")
+                $listaPrenotazioni[] = $appello;
+    }
+    return $listaPrenotazioni;
+}
+
+
+function getAppelliPrenotabili($studente) {
+    $appelli = [];
+    $appelli = getAppelliFromCorsoDiLaurea($studente->idCorsoLaurea);
+    if(!$appelli)
+        return NULL;
+
+    
+    $appelliPrenotati = [];
+    $appelliPrenotati = getAppelliPrenotati($studente);
+
+    $esamiSuperati = [];
+    $esamiSuperati = getEsamiSuperati($studente);
+
+    $appelliPrenotabili = [];
+    foreach($appelli as $appello) {
+        $dataAppello = getDataFromDataora($appello->dataOra);
+        $dataAppello = strtotime($dataAppello);
+        $dataAppello = date('Y-m-d', $dataAppello);
+
+        if($dataAppello > date('Y-m-d') && !in_array($appello, $appelliPrenotati) && !in_array($appello->idCorso, $esamiSuperati))
+            $appelliPrenotabili[] = $appello;
+    }
+
+    return $appelliPrenotabili;
+}
+
+
+function getAppelliAfterDate($data) {
+    $dataRif = strtotime($data);
+    $dataRif = date('Y-m-d', $dataRif);
+
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/appelli.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaAppelli = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $appello = new appello("", 0);  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $appello->id = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->idCorso = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->dataOra = $con->textContent;
+
+        $dataAppello = getDataFromDataora($appello->dataOra);
+        $dataAppello = strtotime($dataAppello);
+        $dataAppello = date('Y-m-d', $dataAppello);
+
+        if($dataAppello >= $dataRif)
+            $listaAppelli[] = $appello;
+    }
+    return $listaAppelli;
+}
+
+
+function getAppelliAfterDateFromCorso($data, $idCorso) {
+    $dataRif = strtotime($data);
+    $dataRif = date('Y-m-d', $dataRif);
+
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/appelli.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaAppelli = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $appello = new appello("", 0);  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $appello->id = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->idCorso = $con->textContent;
+        $con = $con->nextSibling;
+        $appello->dataOra = $con->textContent;
+
+        $dataAppello = getDataFromDataora($appello->dataOra);
+        $dataAppello = strtotime($dataAppello);
+        $dataAppello = date('Y-m-d', $dataAppello);
+
+        if($dataAppello >= $dataRif && $appello->idCorso == $idCorso)
+            $listaAppelli[] = $appello;
+    }
+    return $listaAppelli;
+}
+
+
+function getDataFromDataora($dataora) {
+    return substr($dataora, 0, 10);
+}
+
+
+function getOraFromDataora($dataora) {
+    return substr($dataora, 11, 5);
+}
+
+
+function getPrenotazioniStudente($studente) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/prenotazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaPrenotazioni = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $prenotazione = new prenotazione(0, 0);  # Default constructor
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -1974,72 +2199,6 @@ function getAppelliPrenotati($studente) {
 }
 
 
-function getAppelliPrenotabili($studente) {
-    $appelli = [];
-    $appelli = getAppelliFromCorsoDiLaurea($studente->idCorsoLaurea);
-    if(!$appelli)
-        return NULL;
-
-
-    $appelliPrenotati = [];
-    $appelliPrenotati = getAppelliPrenotati($studente);
-
-    $esamiSuperati = [];
-    $esamiSuperati = getEsamiSuperati($studente);
-
-
-    if(!$appelliPrenotati && !$esamiSuperati)
-        // Prendo tutti gli appelli
-        return $appelli;
-
-    elseif($appelliPrenotati && !$esamiSuperati) {
-        // Prendo gli appelli non prenotati
-        $listaAppelliNonPrenotati = [];
-        foreach($appelli as $appello)
-            foreach($appelliPrenotati as $appelloPrenotato)
-                if($appello->id != $appelloPrenotato->idAppello)
-                    $listaAppelliNonPrenotati[] = $appello;
-        
-        return $listaAppelliNonPrenotati;
-    }
-
-    elseif(!$appelliPrenotati && $esamiSuperati) {
-        // Prendo gli appelli degli esami non superati
-        $listaEsamiNonSuperati = [];
-        foreach($appelli as $appello)
-            foreach($esamiSuperati as $esameSuperato)
-                if($appello->id != $esameSuperato->idAppello)
-                    $listaEsamiNonSuperati[] = $appello;
-        
-        return $listaEsamiNonSuperati;
-    }
-
-    elseif($appelliPrenotati && $esamiSuperati) {
-        // Tra gli appelli non prenotati, prendo quelli di esami NON superati
-        $listaAppelliNonPrenotati = [];
-        foreach($appelli as $appello)
-            foreach($appelliPrenotati as $appelloPrenotato)
-                if($appello->id != $appelloPrenotato->idAppello)
-                    $listaAppelliNonPrenotati[] = $appello;
-        
-        $listaAppelliPrenotabili = [];
-        foreach($listaAppelliNonPrenotati as $appelloNonPrenotato)
-            foreach($esamiSuperati as $esameSuperato)
-                if($appelloNonPrenotato->id != $esameSuperato->idAppello)
-                    $listaAppelliPrenotabili[] = $appelloNonPrenotato;
-
-        return $listaAppelliPrenotabili;
-    }
-
-    return NULL;    // Nel dubbio è vuota
-}
-
-
-function getDataFromDataora($dataora) {
-    return substr($dataora, 0, 10);
-}
-
-
 function getPrenotazioniFromAppello($idAppello) {
     /*accedo al file xml*/
     $xmlString = "";
@@ -2055,7 +2214,7 @@ function getPrenotazioniFromAppello($idAppello) {
     $listaPrenotazioni = [];
      
     for ($i=0; $i<$records->length; $i++) {
-        $prenotazione = new prenotazione();  # Default constructor
+        $prenotazione = new prenotazione(0, 0);  # Default constructor
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -2089,7 +2248,7 @@ function getFullPrenotazioni() {
     $listaPrenotazioni = [];
      
     for ($i=0; $i<$records->length; $i++) {
-        $prenotazione = new prenotazione();  # Default constructor
+        $prenotazione = new prenotazione(0, 0);  # Default constructor
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -2106,6 +2265,74 @@ function getFullPrenotazioni() {
     return $listaPrenotazioni;
 }
 
+
+function getPrenotazioneFromId($idPrenotazione) {
+    if($idPrenotazione == 0)
+        return NULL;
+
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/prenotazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $prenotazione = new prenotazione(0, 0);  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $prenotazione->id = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->matricolaStudente = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->idAppello = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->esito = $con->textContent;
+
+        if($prenotazione->id == $idPrenotazione)
+            return $prenotazione;
+    }
+    return NULL;
+}
+
+
+function getVerbalizzazioniPositive($studente) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/prenotazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaPrenotazioni = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $prenotazione = new prenotazione(0, 0);  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $prenotazione->id = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->matricolaStudente = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->idAppello = $con->textContent;
+        $con = $con->nextSibling;
+        $prenotazione->esito = $con->textContent;
+
+        if($prenotazione->matricolaStudente == $studente->matricola && $prenotazione->esito != "NULL" && $prenotazione->esito != "R" && $prenotazione->esito != "B")
+            $listaPrenotazioni[] = $prenotazione;
+    }
+    return $listaPrenotazioni;
+}
 
 
 function getFaqComplete($idCorso){
@@ -2377,71 +2604,46 @@ function getVotoCommento($idCommento,$matricola) {
     return null;//voto non dato
 }
 
+
+
 /* ================================= 
 ======== Insert functions ==========
 ==================================== */
 
 function inserisciCorso($nuovoCorso) {
-       
+    $xmlString = "";
+    foreach ( file("../Xml/docenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+    
+    if(verificaPresenzaCorso($nuovoCorso)) {
+        setcookie('corso', "ERRORE: Il corso \"{$nuovoCorso->nome}\" esiste già!");
+        return FALSE;
+    }
+
     $xml = simplexml_load_file('../Xml/corsi.xml');
 
-    $newcorso = $xml->addChild('corso'); //crea una tupla<corso> </corso>
+    // Crea una tupla <corso> </corso>
+    $newcorso = $xml->addChild('corso');
     $asd = $newcorso->addChild('id', $nuovoCorso->id);
     $asd = $newcorso->addChild('nome', $nuovoCorso->nome);
     $asd = $newcorso->addChild('descrizione', $nuovoCorso->descrizione);
-    $asd = $newcorso->addChild('info_prof', $nuovoCorso->info_prof);
-    $asd = $newcorso->addChild('id_colore', $nuovoCorso->id_colore);
+    $asd = $newcorso->addChild('matricolaProf', $nuovoCorso->matricola_prof);
+    $asd = $newcorso->addChild('colore', 'lightblue');
     $asd = $newcorso->addChild('anno', $nuovoCorso->anno);
     $asd = $newcorso->addChild('semestre', $nuovoCorso->semestre);
     $asd = $newcorso->addChild('curriculum', $nuovoCorso->curriculum);
     $asd = $newcorso->addChild('cfu', $nuovoCorso->cfu);
     $asd = $newcorso->addChild('ssd', $nuovoCorso->ssd);
-    
+    $asd = $newcorso->addChild('idCorsoLaurea', $nuovoCorso->idCorsoLaurea);
+
     //sovrascrive il vecchio file con i nuovi dati
     $f = fopen('../Xml/corsi.xml', "w");
     $result = fwrite($f,  $xml->asXML());
     fclose($f);
-    if(!$result) return FALSE;
-    else
-        return TRUE;
-}
 
-
-function inserisciAppello($nuovoAppello) {
-    $xmlString = "";
-    foreach ( file("../Xml/appelli.xml") as $node ) {
-        $xmlString .= trim($node);
-    }
-    
-    // Creazione del documento
-    $doc = new DOMDocument();
-    $doc->loadXML($xmlString);
-    $records = $doc->documentElement->childNodes;
-
-    for ($i=0; $i<$records->length; $i++) {
-        $record = $records->item($i);
-        
-        $con = $record->firstChild;
-        $codice = $con->textContent;
-
-        if($codice == $nuovoAppello->codice) return false;
-    }
-
-    //il codice inserito non è duplicato
-
-    $xml = simplexml_load_file('../Xml/appelli.xml');
-
-    $newcorso = $xml->addChild('appello'); //crea una tupla <appello> </appello>
-    $asd = $newcorso->addChild('codice', $nuovoAppello->codice);
-    $asd = $newcorso->addChild('data_appello', $nuovoAppello->data_appello);
-    $asd = $newcorso->addChild('data_scadenza', $nuovoAppello->data_scadenza);
-    $asd = $newcorso->addChild('id_corso', $nuovoAppello->id_corso);
-
-    //sovrascrive il vecchio file con i nuovi dati
-    $f = fopen('../Xml/appelli.xml', "w");
-    $result = fwrite($f,  $xml->asXML());
-    fclose($f);
-    if(!$result) return FALSE;
+    if(!$result) 
+        return FALSE;
     else
         return TRUE;
 }
@@ -2596,6 +2798,102 @@ function inserisciAmministratore($amministratore) {
 }
 
 
+function inserisciCorsoDiLaurea($corsoDiLaurea) {
+    $xmlString = "";
+    foreach ( file("../Xml/docenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+    
+    if(verificaPresenzaCorsoDiLaurea($corsoDiLaurea->nome))  {
+        setcookie('cdl', "ERRORE: Il corso di laurea \"{$corsoDiLaurea->nome}\" esiste già!");
+        return FALSE;
+    }
+
+    $xml = simplexml_load_file('../Xml/corsiDiLaurea.xml');
+
+    // Crea una tupla <corsoDiLaurea> </corsoDiLaurea>
+    $newcorsoDiLaurea = $xml->addChild('corsoDiLaurea'); 
+    $tmp = $newcorsoDiLaurea->addChild('id', $corsoDiLaurea->id);
+    $tmp = $newcorsoDiLaurea->addChild('nome', $corsoDiLaurea->nome);
+    
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/corsiDiLaurea.xml', "w");
+    $result = fwrite($f,  $xml->asXML());
+    fclose($f);
+
+    if(!$result) 
+        return FALSE;
+    else
+        return TRUE;
+}
+
+
+function inserisciAppello($appello) {
+    $xmlString = "";
+    foreach ( file("../Xml/appelli.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+    
+    $corso = getCorsoById($appello->idCorso);
+    $data = getDataFromDataora($appello->dataOra);
+
+    if(verificaPresenzaAppello($appello))  {
+        setcookie('appello', "ERRORE: Esiste già un appello di {$corso->nome} nel giorno {$data}!");
+        return FALSE;
+    }
+
+    $xml = simplexml_load_file('../Xml/appelli.xml');
+
+    // Crea una tupla <appello> </appello>
+    $newAppello = $xml->addChild('appello'); 
+    $tmp = $newAppello->addChild('id', $appello->id);
+    $tmp = $newAppello->addChild('idCorso', $appello->idCorso);
+    $tmp = $newAppello->addChild('dataOra', $appello->dataOra);
+    
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/appelli.xml', "w");
+    $result = fwrite($f,  $xml->asXML());
+    fclose($f);
+
+    if(!$result) 
+        return FALSE;
+    else
+        return TRUE;
+}
+
+
+function inserisciPrenotazioneAppello($matricolaStudente, $idAppello) {
+    if($matricolaStudente == 0 || $idAppello == 0)
+        return FALSE;
+    
+    $prenotazione = new prenotazione($matricolaStudente, $idAppello);
+    
+    $xmlString = "";
+    foreach ( file("../Xml/prenotazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $xml = simplexml_load_file('../Xml/prenotazione.xml');
+
+    // Crea una tupla <prenotazione> </prenotazione>
+    $newPrenotazione = $xml->addChild('prenotazione'); 
+    $tmp = $newPrenotazione->addChild('id', $prenotazione->id);
+    $tmp = $newPrenotazione->addChild('matricolaStudente', $prenotazione->matricolaStudente);
+    $tmp = $newPrenotazione->addChild('idAppello', $prenotazione->idAppello);
+    $tmp = $newPrenotazione->addChild('esito', $prenotazione->esito);
+    
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/prenotazione.xml', "w");
+    $result = fwrite($f,  $xml->asXML());
+    fclose($f);
+
+    if(!$result) 
+        return FALSE;
+    else
+        return TRUE;
+}
+
+
 function insertFaq($idCorso,$domanda,$idAutore) {
     $xmlString = "";
     foreach ( file("../Xml/faqs.xml") as $node ) {
@@ -2710,11 +3008,17 @@ function insertCommentVote($idCommento, $matricola, $vote,$idAutore) {
     else
         return TRUE;
 }
+
+
 /* ================================= 
 ======== Delete functions ==========
 ==================================== */
 
-function eliminaAppello($codice){
+function eliminaAppello($idAppello) {
+    if($idAppello == 0)
+        return FALSE;
+    
+
     $xmlString = "";
     foreach ( file("../Xml/appelli.xml") as $node ) {
         $xmlString .= trim($node);
@@ -2724,21 +3028,25 @@ function eliminaAppello($codice){
     $doc = new DOMDocument();
     $doc->loadXML($xmlString);
     $records = $doc->documentElement->getElementsByTagName("appello");
+
     for ($i=0; $i<$records->length; $i++) {
         $record = $records->item($i);
 
         $con = $record->firstChild;
-        $_codice = $con->textContent;
+        $id = $con->textContent;
 
-        if($codice == $_codice)
+        if($idAppello == $id) {
             $nodeToRemove=$record;
+            break;
+        }
     }
 
-    //Now remove it.
-    if ($nodeToRemove->parentNode->removeChild($nodeToRemove) == null) return false;
+    // Eliminazione
+    if ($nodeToRemove->parentNode->removeChild($nodeToRemove) == null) 
+        return FALSE;
     
     echo $doc->save("../Xml/appelli.xml"); 
-    return true;
+    return TRUE;
 }
 
 
@@ -2795,6 +3103,35 @@ function eliminaCorso($_id) {
     echo $doc->save("../Xml/corsi.xml"); 
     return true;
 }
+
+
+function eliminaPrenotazioneAppello($idPrenotazione) {
+    $xmlString = "";
+    foreach ( file("../Xml/prenotazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->getElementsByTagName("prenotazione");
+    for ($i=0; $i<$records->length; $i++) {
+        $record = $records->item($i);
+
+        $con = $record->firstChild;
+        $id = $con->textContent;
+
+        if($id == $idPrenotazione){
+            $record->parentNode->removeChild($record);
+            break;
+        }
+            
+    }
+
+    echo $doc->save("../Xml/prenotazione.xml"); 
+    return TRUE;
+}
+
+
 function deleteFaq($idFaq) {
     $xmlString = "";
     foreach ( file("../Xml/faqs.xml") as $node ) {
@@ -2904,10 +3241,158 @@ function deleteCommentVote($idCommento, $matricola) {
     updateCommentAccordo($idCommento);
     return true;
 }
+
+
 /* ================================= 
 ======== Modify functions ==========
 ==================================== */
 
+function assegnaCorso($corso, $matricola_prof) {
+    $xmlString = "";
+    foreach ( file("../Xml/docenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $docenti = simplexml_load_file('../Xml/docenti.xml');
+
+    foreach($docenti as $docente)
+        if($docente->matricola == $matricola_prof)
+            $docente->idCorso = $corso->id;
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/docenti.xml', "w");
+    $result = fwrite($f,  $docenti->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    else
+        return TRUE;
+}
+
+
+function modificaEsitoPrenotazione($idPrenotazione, $nuovoEsito) {
+    if($idPrenotazione == 0)
+        return FALSE;
+
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/prenotazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $prenotazioni = simplexml_load_file('../Xml/prenotazione.xml');
+
+    foreach($prenotazioni as $prenotazione) {
+        if($prenotazione->id == $idPrenotazione)
+            $prenotazione->esito = $nuovoEsito;
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/prenotazione.xml', "w");
+    $result = fwrite($f,  $prenotazioni->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    else{
+        $prenotazione = getPrenotazioneFromId($idPrenotazione);
+        $studente = getStudenteFromMatricola($prenotazione->matricolaStudente);
+        if(calcolaMedia_CFU($studente))
+            return TRUE;
+    }
+}
+
+
+function calcolaMedia_CFU($studente) {
+    if(!$studente)
+        return FALSE;
+    
+    $esamiSuperati = getVerbalizzazioniPositive($studente);
+
+    $numeroEsamiSuperati = sizeof($esamiSuperati);
+    $cfuTot = 0;
+    $sommaVoti = 0;
+    $media = 0.0;
+
+    // Calcolo dei cfu e della media
+
+    foreach($esamiSuperati as $esameSuperato) {
+        $appello = getAppelloFromId($esameSuperato->idAppello);
+        $corso = getCorsoById($appello->idCorso);
+        
+        $cfuTot += $corso->cfu;
+        $sommaVoti += intval($esameSuperato->esito);
+    }
+
+    $media = $sommaVoti/$numeroEsamiSuperati;
+
+
+    // Modifica dei dati dello studente
+
+
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/studenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $studenti = simplexml_load_file('../Xml/studenti.xml');
+
+    foreach($studenti as $stud) {
+        if($stud->matricola == $studente->matricola) {
+            $stud->cfuTotale = $cfuTot;
+            $stud->media = $media;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/studenti.xml', "w");
+    $result = fwrite($f,  $studenti->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    else
+        return TRUE;
+}
+
+
+function modificaAppello($idAppello, $nuovaData, $nuovaOra, $nuovoCorso) {
+    if($idAppello == 0)
+        return FALSE;
+
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/appelli.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $appelli = simplexml_load_file('../Xml/appelli.xml');
+
+    foreach($appelli as $appello) {
+        if($appello->id == $idAppello) {
+            $appello->dataOra = $nuovaData." ".$nuovaOra;
+            $appello->idCorso = $nuovoCorso;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/appelli.xml', "w");
+    $result = fwrite($f,  $appelli->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    else{
+        return TRUE;
+    }
+}
 function modificaFaq($id, $newText) {
     $xmlString = "";
     foreach ( file("../Xml/faqs.xml") as $node ) {
