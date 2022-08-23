@@ -4,7 +4,8 @@
        <id>1</id>
        <corpo>Te li invio subito!</corpo>
        <matricolaStudente>1</matricolaStudente>
-       <accordoMedio>2</accordoMedio>
+       <accordoMedio>0</accordoMedio>
        <idPost>1</idPost>
+       <data>21/02/21</data>
     </commento>
 </commenti>

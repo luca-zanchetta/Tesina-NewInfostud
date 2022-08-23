@@ -1,10 +1,2 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<votiCommento xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="votoCommento.xsd">
-  <votoCommento>
-    <id>1</id>
-    <matricolaStudente>1</matricolaStudente>
-    <idCommento>1</idCommento>
-    <accordo>2</accordo>
-    <idAutoreCommento>1</idAutoreCommento>
-  </votoCommento>
-</votiCommento>
+<?xml version="1.0" encoding="UTF-8"?>
+<votiCommento xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="votoCommento.xsd"/>

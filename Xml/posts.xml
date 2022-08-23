@@ -1,11 +1,56 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<posts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="posts.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<posts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="faqs.xsd">
     <post>
         <id>1</id>
-        <titolo>Ricerca Appunti!!!</titolo>
-        <corpo>Cerco appunti di basi di dati. Ringrazio in anticipo.</corpo>
+        <titolo>Appunti BD</titolo>
+        <corpo>Cerco appunti su diagrammi ER!</corpo>
         <matricolaStudente>1</matricolaStudente>
-        <utilitaTotale>1</utilitaTotale>
+        <utilitaTotale>5</utilitaTotale>
+        <idCorso>1</idCorso>
+        <data>2022-08-22</data>
+    </post>
+    <post>
+        <id>2</id>
+        <titolo>caca</titolo>
+        <corpo>caca</corpo>
+        <matricolaStudente>1</matricolaStudente>
+        <utilitaTotale>5</utilitaTotale>
+        <idCorso>1</idCorso>
+        <data>2022-08-22</data>
+    </post>
+    <post>
+        <id>3</id>
+        <titolo>saDASDAS</titolo>
+        <corpo>DASDASDAS</corpo>
+        <matricolaStudente>1</matricolaStudente>
+        <utilitaTotale>3</utilitaTotale>
+        <idCorso>1</idCorso>
+        <data>2022-08-22</data>
+    </post>
+    <post>
+        <id>4</id>
+        <titolo>SADSADASDAS</titolo>
+        <corpo>DSADSAD</corpo>
+        <matricolaStudente>1</matricolaStudente>
+        <utilitaTotale>4</utilitaTotale>
+        <idCorso>1</idCorso>
+        <data>2022-08-22</data>
+    </post>
+    <post>
+        <id>5</id>
+        <titolo>DSADADSA</titolo>
+        <corpo>DADADADADSA</corpo>
+        <matricolaStudente>1</matricolaStudente>
+        <utilitaTotale>2</utilitaTotale>
+        <idCorso>1</idCorso>
+        <data>2022-08-22</data>
+    </post>
+    <post>
+        <id>6</id>
+        <titolo>EEEEEEEEEE</titolo>
+        <corpo>E</corpo>
+        <matricolaStudente>1</matricolaStudente>
+        <utilitaTotale>123</utilitaTotale>
         <idCorso>1</idCorso>
         <data>2022-08-22</data>
     </post>
