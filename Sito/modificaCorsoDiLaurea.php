@@ -11,15 +11,11 @@ else
     echo "<p>ERRORE</p>";
 
 if(isset($_POST['invio'])) {
-    $presenzaDati = FALSE;
+    if(isset($_POST['idCorsoDiLaurea']) && $_POST['idCorsoDiLaurea'] != 0 &&
+       isset($_POST['nomeCorsoDiLaurea']) && $_POST['nomeCorsoDiLaurea'] != "") {
 
-    if(isset($_POST['nome']) && $_POST['nome'] != "") {
-        $presenzaDati = TRUE;
-
-        $corsoDiLaurea = new corsoDiLaurea($_POST['nome']);
-
-        if(!inserisciCorsoDiLaurea($corsoDiLaurea)) {
-            setcookie('cdl', "ERRORE: Inserimento del corso di laurea non riuscito.");
+        if(!modificaCorsoDiLaurea($_POST['idCorsoDiLaurea'], $_POST['nome'])) {
+            setcookie('modificaCorsoDiLaurea', "ERRORE: Modifica del corso di laurea in {$corsoDiLaurea->nome} non riuscita.");
             header('Location: avvisoErrore.php');
         }
         else
@@ -37,7 +33,7 @@ if(isset($_POST['invio'])) {
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileHomepage-users.css">
     <link rel="stylesheet" href="stile-amministrazione.css">
-    <title>Inserisci corso di laurea - Infostud</title>
+    <title>Modifica corso di laurea - Infostud</title>
 </head>
 <body>
     <div class="header">
@@ -80,7 +76,7 @@ if(isset($_POST['invio'])) {
         <div class="body">
             <div class="infoTitle">
                 <div class="infoTitle-position">
-                    <h2>Home > Inserisci corso di laurea</h2>
+                    <h2>Home > Gestisci corsi di laurea > Modifica</h2>
                 </div>
                 <div class="infoTitle-user">
                 <?php
@@ -90,32 +86,27 @@ if(isset($_POST['invio'])) {
             </div>    
             <hr />
             <div class="boxInsCDL">
-            <form action="inserisciCorsoDiLaurea.php" method="POST">
+            <form action="modificaCorsoDiLaurea.php" method="POST">
                 <div class="insContainer">
                     <div class="labels">
                         <h3>Nome: </h3>
                     </div>
                     <div class="inputs">
                     <?php
-                    if(isset($_POST['nome']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"nome\" value=\"{$_POST['nome']}\">";
-                    elseif(!isset($_POST['nome']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"nome\">";
+                    if(isset($_POST['nomeCorsoDiLaurea']))
+                        echo "<input class=\"textField\" type=\"text\" name=\"nome\" value=\"{$_POST['nomeCorsoDiLaurea']}\" required>";
+                    elseif(!isset($_POST['nomeCorsoDiLaurea']))
+                        echo "<input class=\"textField\" type=\"text\" name=\"nome\" required>";
                     ?>
                     </div>
                 </div>
                 <div style="padding-top: 1%; margin-left: 50%;">
                     <input class="bottoni" type="submit" name="invio" value="INVIO">
+                    <input type="hidden" name="idCorsoDiLaurea" value="<?php echo $_POST['idCorsoDiLaurea']; ?>">
+                    <input type="hidden" name="nomeCorsoDiLaurea" value="<?php echo $_POST['nomeCorsoDiLaurea']; ?>">
                 </div>
             </form>
             </div>
-            <?php
-            if(isset($_POST['invio']) && !$presenzaDati)
-                echo "
-                <div style=\"margin-left: -6%; padding-bottom: 7%;\">
-                    <h2 class=\"error\">DATI MANCANTI! Riprovare.</h2>
-                </div>";
-            ?>
         </div>
     </div>
 </div>

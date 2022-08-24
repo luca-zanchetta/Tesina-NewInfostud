@@ -109,6 +109,10 @@
                     echo "<h1>{$_COOKIE['elimina']}</h1>";
                     setcookie('elimina', '', time()-60);
                 }
+                elseif(isset($_COOKIE['modificaCorsoDiLaurea'])) {
+                    echo "<h1>{$_COOKIE['modificaCorsoDiLaurea']}</h1>";
+                    setcookie('modificaCorsoDiLaurea', '', time()-60);
+                }
                 else
                     echo "<h1>ERRORE: Registrazione fallita.</h1>";
                 ?>

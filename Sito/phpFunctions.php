@@ -387,7 +387,7 @@ function creaSidebar($loginType) {
 
         case "Amministratore":
             echo '
-            <div class="sidebar">
+            <div class="sidebar" style="">
                 <h5>
                     Informazioni
                 </h5>
@@ -467,6 +467,18 @@ function creaSidebar($loginType) {
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="inserisciCorso.php" style="display: flex; margin: 0px;">Inserisci corso</a>
+                    </h5>
+                </div>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="gestisciCorsiDiLaurea.php" style="display: flex; margin: 0px;">Gestisci corsi di laurea</a>
+                    </h5>
+                </div>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Gestisci corsi</a>
                     </h5>
                 </div>
                 <hr style="width: 90%; margin-left: -2%;" />
@@ -934,6 +946,84 @@ function displayAppelliAfterDate($data) {
                             <form action="eliminaAppello-script.php" method="POST">
                                 <input type="submit" name="elimina" value="" >
                                 <input type="hidden" name="idAppello" value="'.$appello->id.'">
+                            </form>
+                        </div> 
+                    </div>
+                </div>
+                ';
+            }
+        }
+    }
+}
+
+
+function displayCorsiDiLaurea() {
+    $corsiDiLaurea = [];
+    $corsiDiLaurea = getCorsiDiLaurea();
+
+    if(!$corsiDiLaurea)
+        echo '<h2>Nessun corso di laurea trovato.</h2>';
+    else {
+        foreach($corsiDiLaurea as $corsoDiLaurea) {
+            if($_SESSION['src'] == "edit") {
+                echo '
+                <div class="blocco-esame" style="background-color:lightblue;">
+                    <div class="nome-esame">
+                        '.$corsoDiLaurea->nome.'
+                    </div> 
+                    <div style="display: flex; flex-direction: row; padding-top: 10%; margin-left: -10%;">
+                        <div class="info-button" style="padding-left: 15%; padding-right: 15%;">
+                            MODIFICA
+                            <form action="modificaCorsoDiLaurea.php" method="POST">
+                                <input type="submit" name="modifica" value="" >
+                                <input type="hidden" name="idCorsoDiLaurea" value="'.$corsoDiLaurea->id.'">
+                                <input type="hidden" name="nomeCorsoDiLaurea" value="'.$corsoDiLaurea->nome.'">
+                            </form>
+                        </div>  
+                        <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
+                            ELIMINA
+                            <form action="fittizia.php" method="POST">
+                                <input type="submit" name="elimina" value="" >
+                                <input type="hidden" name="idCorsoDiLaurea" value="'.$corsoDiLaurea->id.'">
+                            </form>
+                        </div> 
+                    </div>
+                </div>
+                ';
+            }
+        }
+    }
+}
+
+
+function displayCorsiDiLaureaLike($nome) {
+    $corsiDiLaurea = [];
+    $corsiDiLaurea = getCorsiDiLaureaLike($nome);
+
+    if(!$corsiDiLaurea)
+        echo '<h2>Nessun corso di laurea trovato.</h2>';
+    else {
+        foreach($corsiDiLaurea as $corsoDiLaurea) {
+            if($_SESSION['src'] == "edit") {
+                echo '
+                <div class="blocco-esame" style="background-color:lightblue;">
+                    <div class="nome-esame">
+                        '.$corsoDiLaurea->nome.'
+                    </div> 
+                    <div style="display: flex; flex-direction: row; padding-top: 10%; margin-left: -10%;">
+                        <div class="info-button" style="padding-left: 15%; padding-right: 15%;">
+                            MODIFICA
+                            <form action="modificaCorsoDiLaurea.php" method="POST">
+                                <input type="submit" name="modifica" value="" >
+                                <input type="hidden" name="idCorsoDiLaurea" value="'.$corsoDiLaurea->id.'">
+                                <input type="hidden" name="nomeCorsoDiLaurea" value="'.$corsoDiLaurea->nome.'">
+                            </form>
+                        </div>  
+                        <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
+                            ELIMINA
+                            <form action="fittizia.php" method="POST">
+                                <input type="submit" name="elimina" value="" >
+                                <input type="hidden" name="idCorsoDiLaurea" value="'.$corsoDiLaurea->id.'">
                             </form>
                         </div> 
                     </div>
@@ -1569,6 +1659,33 @@ function getCorsiDiLaureaLike($_nome) {
             $listaCorsiDiLaurea[] = $corsoDiLaurea;
     }
     return $listaCorsiDiLaurea;
+}
+
+
+function getCorsoDiLaureaFromId($idCorsoDiLaurea) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/corsiDiLaurea.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $corsoDiLaurea = new corsoDiLaurea("");
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $corsoDiLaurea->id = $con->textContent;
+        $con = $con->nextSibling;
+        $corsoDiLaurea->nome = $con->textContent;
+        if($corsoDiLaurea->id == $_id)
+            return $corsoDiLaurea;
+    }
+    return NULL;
 }
 
 
@@ -3583,6 +3700,8 @@ function modificaAppello($idAppello, $nuovaData, $nuovaOra, $nuovoCorso) {
         return TRUE;
     }
 }
+
+
 function modificaFaq($id, $newText) {
     $xmlString = "";
     foreach ( file("../Xml/faqs.xml") as $node ) {
@@ -3606,6 +3725,7 @@ function modificaFaq($id, $newText) {
     else
         return TRUE;
 }
+
 
 function modifyFaqVote($matricola,$idFaq,$voto){
     $xmlString = "";
@@ -3631,6 +3751,7 @@ function modifyFaqVote($matricola,$idFaq,$voto){
     else
         return TRUE;
 }
+
 
 function updateFaqUtility($idFaq){
     #aggiorniamo il campo utilitaTotale della faq passata
@@ -3684,6 +3805,7 @@ function updateFaqUtility($idFaq){
         return TRUE;
 }
 
+
 function modifyContentText($id, $newText) {
     $xmlString = "";
     foreach ( file("../Xml/commenti.xml") as $node ) {
@@ -3707,6 +3829,7 @@ function modifyContentText($id, $newText) {
     else
         return TRUE;
 }
+
 
 function updateCommentAccordo($idCommento){
     $xmlString = "";
@@ -3758,6 +3881,41 @@ function updateCommentAccordo($idCommento){
     if(!$result) 
         return FALSE;
     else
+        return TRUE;
+}
+
+
+function modificaCorsoDiLaurea($idCorsoDiLaurea, $nome) {
+    if($idCorsoDiLaurea == 0)
+        return FALSE;
+
+    $modificato = FALSE;
+
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/corsiDiLaurea.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $corsiDiLaurea = simplexml_load_file('../Xml/corsiDiLaurea.xml');
+
+    foreach($corsiDiLaurea as $corsoDiLaurea) {
+        if($corsoDiLaurea->id == $idCorsoDiLaurea && !verificaPresenzaCorsoDiLaurea($nome)) {
+            $corsoDiLaurea->nome = $nome;
+            $modificato = TRUE;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/corsiDiLaurea.xml', "w");
+    $result = fwrite($f,  $corsiDiLaurea->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    elseif($result && $modificato)
         return TRUE;
 }
 ?>
