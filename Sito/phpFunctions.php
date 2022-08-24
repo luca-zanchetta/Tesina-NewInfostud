@@ -982,7 +982,7 @@ function displayCorsiDiLaurea() {
                         </div>  
                         <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
                             ELIMINA
-                            <form action="fittizia.php" method="POST">
+                            <form action="eliminaCorsoDiLaurea-script.php" method="POST">
                                 <input type="submit" name="elimina" value="" >
                                 <input type="hidden" name="idCorsoDiLaurea" value="'.$corsoDiLaurea->id.'">
                             </form>
@@ -1021,7 +1021,7 @@ function displayCorsiDiLaureaLike($nome) {
                         </div>  
                         <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
                             ELIMINA
-                            <form action="fittizia.php" method="POST">
+                            <form action="eliminaCorsoDiLaurea-script.php" method="POST">
                                 <input type="submit" name="elimina" value="" >
                                 <input type="hidden" name="idCorsoDiLaurea" value="'.$corsoDiLaurea->id.'">
                             </form>
@@ -3292,6 +3292,11 @@ function inserisciCommento($corpo,$idAutore,$idPost,$data) {
     else
         return TRUE;
 }
+
+
+
+
+
 /* ================================= 
 ======== Delete functions ==========
 ==================================== */
@@ -3548,6 +3553,35 @@ function deleteComment($idCommento) {
     updateCommentAccordo($idCommento);
     return true;
 }
+
+
+function eliminaCorsoDiLaurea($idCorsoDiLaurea) {
+    $xmlString = "";
+    foreach ( file("../Xml/corsiDiLaurea.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->getElementsByTagName("corsoDiLaurea");
+    for ($i=0; $i<$records->length; $i++) {
+        $record = $records->item($i);
+
+        $con = $record->firstChild;
+        $id = $con->textContent;
+
+        if($id == $idCorsoDiLaurea){
+            $record->parentNode->removeChild($record);
+            break;
+        }            
+    }
+
+    echo $doc->save("../Xml/corsiDiLaurea.xml"); 
+    return TRUE;
+}
+
+
+
 
 
 /* ================================= 
