@@ -144,8 +144,9 @@ require_once('../Sito/phpFunctions.php');
                                     <h2><?php echo $nomeCorsoDiLaurea; ?></h2>
                                 </div>
                                 <div class="lastElement">
-                                    <form action="fittizia.php" method="POST">
+                                    <form action="visualizzaInfoCorso.php" method="POST">
                                         <input type="image" src="arrowBlack.png" class="arrow" width="30px" height="30px" alt="err">
+                                        <input type="hidden" name="idCorso" value="<?php echo $corso->id; ?>">
                                     </form>
                                 </div>
                             </div>
@@ -172,8 +173,9 @@ require_once('../Sito/phpFunctions.php');
                                     <h2><?php echo $nomeCorsoDiLaurea; ?></h2>
                                 </div>
                                 <div class="lastElement">
-                                    <form action="fittizia.php" method="POST">
+                                    <form action="visualizzaInfoCorso.php" method="POST">
                                         <input type="image" src="arrowBlack.png" class="arrow" width="30px" height="30px" alt="err">
+                                        <input type="hidden" name="idCorso" value="<?php echo $corso->id; ?>">
                                     </form>
                                 </div>
                             </div>

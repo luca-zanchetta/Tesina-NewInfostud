@@ -1177,9 +1177,9 @@ function getCorsoById($_id) {
        $con = $con->nextSibling;
        $corso->descrizione = $con->textContent;
        $con = $con->nextSibling;
-       $corso->info_prof = $con->textContent;
+       $corso->matricolaProf = $con->textContent;
        $con = $con->nextSibling;
-       $corso->id_colore = $con->textContent;
+       $corso->colore = $con->textContent;
        $con = $con->nextSibling;
        $corso->anno = $con->textContent;
        $con = $con->nextSibling;
@@ -2740,6 +2740,8 @@ function getVotoCommento($idCommento,$matricola) {
     }
     return null;//voto non dato
 }
+
+
 
 
 
