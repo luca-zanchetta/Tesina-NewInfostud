@@ -478,7 +478,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="fittizia.php" style="display: flex; margin: 0px;">Gestisci corsi</a>
+                        <a class="opzionetab" href="gestisciCorsi.php" style="display: flex; margin: 0px;">Gestisci corsi</a>
                     </h5>
                 </div>
                 <hr style="width: 90%; margin-left: -2%;" />
@@ -1024,6 +1024,82 @@ function displayCorsiDiLaureaLike($nome) {
                             <form action="eliminaCorsoDiLaurea-script.php" method="POST">
                                 <input type="submit" name="elimina" value="" >
                                 <input type="hidden" name="idCorsoDiLaurea" value="'.$corsoDiLaurea->id.'">
+                            </form>
+                        </div> 
+                    </div>
+                </div>
+                ';
+            }
+        }
+    }
+}
+
+
+function displayCorsi() {
+    $corsi = [];
+    $corsi = getCorsi();
+
+    if(!$corsi)
+        echo '<h2>Nessun corso trovato.</h2>';
+    else {
+        foreach($corsi as $corso) {
+            if($_SESSION['src'] == "edit") {
+                echo '
+                <div class="blocco-esame" style="background-color:lightblue;">
+                    <div class="nome-esame">
+                        '.$corso->nome.'
+                    </div> 
+                    <div style="display: flex; flex-direction: row; padding-top: 10%; margin-left: -10%;">
+                        <div class="info-button" style="padding-left: 15%; padding-right: 15%;">
+                            MODIFICA
+                            <form action="modificaCorso.php" method="POST">
+                                <input type="submit" name="modifica" value="" >
+                                <input type="hidden" name="idCorso" value="'.$corso->id.'">
+                            </form>
+                        </div>  
+                        <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
+                            ELIMINA
+                            <form action="fittizia.php" method="POST">
+                                <input type="submit" name="elimina" value="" >
+                                <input type="hidden" name="idCorso" value="'.$corso->id.'">
+                            </form>
+                        </div> 
+                    </div>
+                </div>
+                ';
+            }
+        }
+    }
+}
+
+
+function displayCorsiLike($nome) {
+    $corsi = [];
+    $corsi = getCorsiLike($nome);
+
+    if(!$corsi)
+        echo '<h2>Nessun corso trovato.</h2>';
+    else {
+        foreach($corsi as $corso) {
+            if($_SESSION['src'] == "edit") {
+                echo '
+                <div class="blocco-esame" style="background-color:lightblue;">
+                    <div class="nome-esame">
+                        '.$corso->nome.'
+                    </div> 
+                    <div style="display: flex; flex-direction: row; padding-top: 10%; margin-left: -10%;">
+                        <div class="info-button" style="padding-left: 15%; padding-right: 15%;">
+                            MODIFICA
+                            <form action="modificaCorso.php" method="POST">
+                                <input type="submit" name="modifica" value="" >
+                                <input type="hidden" name="idCorso" value="'.$corso->id.'">
+                            </form>
+                        </div>  
+                        <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
+                            ELIMINA
+                            <form action="fittizia.php" method="POST">
+                                <input type="submit" name="elimina" value="" >
+                                <input type="hidden" name="idCorso" value="'.$corso->id.'">
                             </form>
                         </div> 
                     </div>
@@ -3944,6 +4020,50 @@ function modificaCorsoDiLaurea($idCorsoDiLaurea, $nome) {
     // Sovrascrive il vecchio file con i nuovi dati
     $f = fopen('../Xml/corsiDiLaurea.xml', "w");
     $result = fwrite($f,  $corsiDiLaurea->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    elseif($result && $modificato)
+        return TRUE;
+}
+
+
+function modificaCorso($idCorso, $nome, $descrizione, $matricolaProf, $anno, $semestre, $curriculum, $cfu, $ssd, $idCorsoLaurea) {
+    if($idCorso == 0)
+        return FALSE;
+
+    $modificato = FALSE;
+
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/corsi.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $corsi = simplexml_load_file('../Xml/corsi.xml');
+
+    foreach($corsi as $corso) {
+        if($corso->id == $idCorso) {
+            $corso->nome = $nome;
+            $corso->descrizione = $descrizione;
+            $corso->matricolaProf = $matricolaProf;
+            $corso->anno = $anno;
+            $corso->semestre = $semestre;
+            $corso->curriculum = $curriculum;
+            $corso->cfu = $cfu;
+            $corso->ssd = $ssd;
+            $corso->idCorsoLaurea = $idCorsoLaurea;
+
+            $modificato = TRUE;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/corsi.xml', "w");
+    $result = fwrite($f,  $corsi->asXML());
     fclose($f);
 
 
