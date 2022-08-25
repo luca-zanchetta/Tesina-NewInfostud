@@ -95,7 +95,7 @@ switch ($_SESSION['loginType']) {
                     </h2><!--Generato dallo script-->
                 </div>
             </div>    
-            <hr />
+            <div><hr class="redBar" /></div>
         <div class="listContainer">
                 <div class="listItem">
                     <div class="element">

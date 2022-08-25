@@ -131,7 +131,7 @@ if(!isset($_POST['gestisciStudente']) && !isset($_POST['gestisciDocente']) && !i
                     }?>
                 </div>
             </div>    
-            <hr class="redBar"/>
+            <div><hr class="redBar" /></div>
             <?php
             if(isset($_POST['gestisciStudente'])) 
                 displayFullStudente($studente);

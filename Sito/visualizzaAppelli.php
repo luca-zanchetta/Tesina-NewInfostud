@@ -87,7 +87,7 @@ else
                 ?>
                 </div>
             </div>    
-            <hr />
+            <div><hr class="redBar" /></div>
             <div class="container-esami">
                 <?php
                 if($_SESSION['loginType'] == "Docente" && $docenteLoggato->idCorso == 0)

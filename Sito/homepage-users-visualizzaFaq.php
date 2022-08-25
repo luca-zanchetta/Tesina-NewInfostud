@@ -105,7 +105,7 @@ $colore = [];
                         </h2><!--Generato dallo script-->
                     </div>
                 </div>    
-                <hr class="redBar" />
+                <div><hr class="redBar" /></div>
                 <!-- Container delle domande con risposta -->
                 <div class="container">
                     <div class="title">

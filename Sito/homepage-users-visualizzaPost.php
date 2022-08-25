@@ -107,9 +107,6 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                         Bacheca>
                     </h2>
                     <h2 class="hForm">
-                        <form action="">
-                            <input type="button" value="prova" name="dsa">
-                        </form>
                         <?php echo getCorsoById($_GET['idCorso'])->nome;?>
                     </h2>
                 </div>
@@ -124,7 +121,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                     </h2><!--Generato dallo script-->
                 </div>
             </div>    
-            <hr class="redBar" />
+            <div><hr class="redBar" /></div>
             <div class="postHeader">
                 <div class="upDown">
                     <form action="">

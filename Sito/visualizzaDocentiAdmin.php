@@ -101,7 +101,7 @@ session_start();
         ?>
         <div class="body">
             <h2 style="margin-left: 2.5%; font-size: 200%;">DOCENTI ISCRITTI:</h2>
-            <hr class="redBar" />
+            <div><hr class="redBar" /></div>
             <div class="listContainer">
                 <div class="listItem">
                     <div class="element">
