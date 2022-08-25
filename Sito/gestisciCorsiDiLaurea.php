@@ -42,7 +42,7 @@ else
             <div class="vertical-bar"></div>
         </div>
         <div class="nav-central">
-            <form action="visualizzaAppelli.php" method="POST">
+            <form action="gestisciCorsiDiLaurea.php" method="POST">
                 <div class="nav-logo">
                     <input type="submit" name="ricerca" value="">
                     <img src="search.png" alt="err" width="20px" style="display: inline-flex;">

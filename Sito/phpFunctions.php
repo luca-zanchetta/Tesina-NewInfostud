@@ -1059,7 +1059,7 @@ function displayCorsi() {
                         </div>  
                         <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
                             ELIMINA
-                            <form action="fittizia.php" method="POST">
+                            <form action="eliminaCorso-script.php" method="POST">
                                 <input type="submit" name="elimina" value="" >
                                 <input type="hidden" name="idCorso" value="'.$corso->id.'">
                             </form>
@@ -1097,7 +1097,7 @@ function displayCorsiLike($nome) {
                         </div>  
                         <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
                             ELIMINA
-                            <form action="fittizia.php" method="POST">
+                            <form action="eliminaCorso-script.php" method="POST">
                                 <input type="submit" name="elimina" value="" >
                                 <input type="hidden" name="idCorso" value="'.$corso->id.'">
                             </form>
@@ -3413,7 +3413,10 @@ function eliminaAppello($idAppello) {
 }
 
 
-function eliminaAppelliCorso($id_corso){
+function eliminaAppelliCorso($id_corso) {
+    if($id_corso == 0)
+        return FALSE;
+    
     $xmlString = "";
     foreach ( file("../Xml/appelli.xml") as $node ) {
         $xmlString .= trim($node);
@@ -3437,11 +3440,17 @@ function eliminaAppelliCorso($id_corso){
     }
 
     echo $doc->save("../Xml/appelli.xml"); 
-    return true;
+    return TRUE;
 }
 
 
 function eliminaCorso($_id) {
+    if($_id == 0)
+        return FALSE;
+    
+    if(!eliminaAppelliCorso($_id))
+        return FALSE;
+
     $xmlString = "";
     foreach ( file("../Xml/corsi.xml") as $node ) {
         $xmlString .= trim($node);
