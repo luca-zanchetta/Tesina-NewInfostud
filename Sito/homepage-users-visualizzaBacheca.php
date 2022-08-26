@@ -123,6 +123,9 @@ $maxPageNum = ((int)(count($listaPost)/5)) + (count($listaPost)%5 > 0 ? 1 : 0);
                     Bacheca>
                 </h2>
                 <h2 class="hForm">
+                    <form action="">
+                        <input type="button" value="prova" name="dsa">
+                    </form>
                     <?php echo getCorsoById($_GET['idCorso'])->nome;?>
                 </h2><!--Generato dallo script-->
                 </div>
@@ -137,7 +140,7 @@ $maxPageNum = ((int)(count($listaPost)/5)) + (count($listaPost)%5 > 0 ? 1 : 0);
                     </h2><!--Generato dallo script-->
                 </div>
             </div>    
-            <div><hr class="redBar" /></div>
+            <hr class="redBar" />
             <div class="pageNav">
                 <form action="homepage-users-visualizzaBacheca.php">
                     <div class="prev">
@@ -328,7 +331,7 @@ $maxPageNum = ((int)(count($listaPost)/5)) + (count($listaPost)%5 > 0 ? 1 : 0);
                                     <input type="submit" value="" class="bottoneForm"> <!--Struttura di ogni bottone -->
                                     <input type="hidden" name="idPost" value="<?php echo $listaPost[$i]->id;?>">
                                     <input type="hidden" name="idCorso" value="<?php echo $_GET['idCorso']?>">
-                                    <input type="hidden" value="0" name="pageNum">
+                                    <input type="hidden" value="1" name="pageNum">
                                     <div class="postData">
                                         <div class="postName">
                                             <h3> <?php echo $listaPost[$i]->titolo; ?></h3>

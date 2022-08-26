@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 session_start();
 require_once('phpFunctions.php');
 
@@ -75,8 +72,8 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
         </div>
         <div class="nav-right">
         <h2>
-            <form action="">
-                <input type="button">
+            <form action="logout.php">
+                <input type="submit" value="">
             </form>
                 Logout
         </h2>
@@ -107,6 +104,9 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                         Bacheca>
                     </h2>
                     <h2 class="hForm">
+                        <form action="">
+                            <input type="button" value="prova" name="dsa">
+                        </form>
                         <?php echo getCorsoById($_GET['idCorso'])->nome;?>
                     </h2>
                 </div>
@@ -121,7 +121,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                     </h2><!--Generato dallo script-->
                 </div>
             </div>    
-            <div><hr class="redBar" /></div>
+            <hr class="redBar" />
             <div class="postHeader">
                 <div class="upDown">
                     <form action="">
@@ -144,7 +144,22 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                 </div>
                 <div class="postInfo">
                     <div class="postTitle">
-                        <?php echo $post->titolo;?>
+                        <div class="titleContainer"><?php echo $post->titolo;?></div>
+                        <?php if($_SESSION['loginType'] == 'Amministratore' || $_SESSION['loginType'] == 'Segretario') { ?>
+                            <div class="adminTools">
+                                <form action="deletePost.php" method="POST">
+                                    <img src="bin.png" alt="err">
+                                    <input type="submit" name="deletePost" value="">
+                                    <input type="hidden" value="<?php echo $_GET["pageNum"];?>" name="pageNum"> 
+                                    <input type="hidden" value="<?php echo $_GET["idCorso"]; ?>" name="idCorso">
+                                    <input type="hidden" value="<?php echo $_GET["idPost"]; ?>" name="idPost">
+                                </form>
+                                <form action="" name="editPostForm">
+                                    <img src="edit.png" alt="err">
+                                    <input type="submit" value="" onclick="editPost(<?php echo $post->id?>)">
+                                </form>
+                            </div>
+                        <?php } ?>
                     </div>
                     <div class="postData">
                         <div class="postAuthor">
@@ -155,7 +170,10 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                         </div>
                     </div>
                     <div class="postData">
-                        <?php echo $post->corpo;?>
+                        <div id="postText"><?php echo $post->corpo;?></div>
+                        <form action="">
+                            <textarea id="postInput" form="editPostForm" style="display:none;" required><?php echo $post->corpo;?></textarea>
+                        </form>   
                     </div>
                 </div>
             </div>
@@ -372,5 +390,33 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
             document.getElementById("commentInput"+id).style.display = "flex";
         }
         event.preventDefault();
+    }
+    function editPost(id){
+        event.preventDefault();
+        if(document.getElementById("postText").style.display != "none"){
+            document.getElementById("postText").style.display = "none";
+            document.getElementById("postInput").style.display = "flex";
+        }else{
+            document.getElementById("postText").style.display = "flex";
+            document.getElementById("postInput").style.display = "none";
+
+            //Eseguiamo la modifica
+
+            _newText = $("#postInput").val();
+            document.getElementById("postText").textContent = _newText;
+
+            //Possiamo usare uno script esterno volendo
+            jQuery.ajax({
+                        url: 'ajaxHandler.php',
+                        type: 'POST',
+                        data: jQuery.param({newText: _newText, id:id, richiesta: "modificaPost"}), 
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        success: function (response) {
+                            console.log("Success");
+                        },
+                        error: function () {
+                            console.log("error");
+                        }});
+        }
     }
 </script>

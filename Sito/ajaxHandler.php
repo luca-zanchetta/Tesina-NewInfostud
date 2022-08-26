@@ -33,6 +33,13 @@ switch ($_POST['richiesta']) {
 
         echo modifyContentText($idCommento,$text);
         break;
+    case 'modificaPost': 
+        $text = $_POST['newText'];
+        $idCommento = $_POST['id'];
+        //sicuramente utenza è ti tipo studente
+
+        echo modifyPostContent($idCommento,$text);
+        break;
     default:
         # code...
         break;

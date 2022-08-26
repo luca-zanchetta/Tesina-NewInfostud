@@ -43,15 +43,28 @@ div.postInfo {
 }
 
 div.postTitle {
+    flex-direction: row;
     color: black;
     display: flex;
     font-size: large;
 }
-
+div.titleContainer {
+    color: black;
+    display: flex;
+    font-size: large;
+    width: -webkit-fill-available;
+}
 div.postData {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: -webkit-fill-available;
+}
+
+.postData>form>textarea {
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    display: none;
+    resize: none;
 }
 
 div.postAuthor {
