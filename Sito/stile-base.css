@@ -131,6 +131,8 @@ div.vertical-bar {
     background-color: #1f1f23;
     display: flex;
     flex-direction: column;
+    overflow: auto; 
+    height: 525px;
 }
 .sidebar>h5{
     margin-top: 1%;

@@ -113,7 +113,7 @@ require_once('../Sito/phpFunctions.php');
         </div>
         <div class="body">
             <h2 style="margin-left: 2.5%; font-size: 200%;">I NOSTRI DOCENTI:</h2>
-            <hr class="redBar" />
+            <div><hr class="redBar" /></div>
             <div class="listContainer">
                 <div class="listItem">
                     <div class="element" style="width: 25%;">
@@ -130,14 +130,14 @@ require_once('../Sito/phpFunctions.php');
             <?php
                 $corsi = [];
                 if(isset($_POST['filtro']) && $_POST['filtro'] != "") {
-                    $corsi = getDocentiLike($_POST['filtro']);
+                    $docenti = getDocentiLike($_POST['filtro']);
 
-                    if(!$corsi) {
+                    if(!$docenti) {
                         echo "<h3 class=\"voceElenco\">Nessun docente corrispondente ai criteri di ricerca.</h3>";
                     }
                     else {
                         foreach($docenti as $docente) {
-                            $nomeCorso = getNomeCorso($docente->id_corso);
+                            $nomeCorso = getNomeCorso($docente->idCorso);
                         ?>
                             <div class="listItem">
                                 <div class="element" style="width: 25%;">

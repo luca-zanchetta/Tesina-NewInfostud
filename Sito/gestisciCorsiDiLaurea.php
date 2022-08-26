@@ -4,16 +4,12 @@ $_SESSION['src'] = "edit";
 require_once("../Sito/phpFunctions.php");
 
 
-if(!isset($_SESSION['loginType']) || $_SESSION['loginType'] == "Studente")
+if(!isset($_SESSION['loginType']) || $_SESSION['loginType'] != "Amministratore")
     header('Location: homepage-users.php');
 
 
 if(isset($_SESSION['username']) && $_SESSION['loginType'] == "Amministratore")
     $adminLoggato = getAdminFromUsername($_SESSION['username']);
-elseif(isset($_SESSION['username']) && $_SESSION['loginType'] == "Segretario")
-    $segretarioLoggato = getSegretarioFromUsername($_SESSION['username']);
-elseif(isset($_SESSION['matricola']) && $_SESSION['loginType'] == "Docente")
-    $docenteLoggato = getDocenteFromMatricola($_SESSION['matricola']);
 else
     echo "<p>ERRORE</p>";
 ?>
@@ -26,7 +22,7 @@ else
 <head>
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileHomepage-users.css">
-    <title>Visualizza appelli - Infostud</title>
+    <title>Gestisci corsi di laurea - Infostud</title>
 </head>
 <body>
     <div class="header">
@@ -46,12 +42,12 @@ else
             <div class="vertical-bar"></div>
         </div>
         <div class="nav-central">
-            <form action="visualizzaAppelli.php" method="POST">
+            <form action="gestisciCorsiDiLaurea.php" method="POST">
                 <div class="nav-logo">
                     <input type="submit" name="ricerca" value="">
                     <img src="search.png" alt="err" width="20px" style="display: inline-flex;">
                 </div>    
-                    <input type="date" name="filtro">              
+                    <input type="text" name="filtro">              
             </form>
         </div>
         <div class="nav-right">
@@ -74,40 +70,22 @@ else
         <div class="body">
             <div class="infoTitle">
                 <div class="infoTitle-position">
-                    <h2>Home > Visualizza appelli</h2>
+                    <h2>Home > Gestisci corsi di laurea</h2>
                 </div>
                 <div class="infoTitle-user">
                 <?php
                 if(isset($_SESSION['username']) && $_SESSION['loginType'] == "Amministratore")
-                    echo "<h2>{$adminLoggato->username}</h2>";
-                elseif(isset($_SESSION['username']) && $_SESSION['loginType'] == "Segretario")
-                    echo "<h2>{$segretarioLoggato->username}</h2>";
-                elseif(isset($_SESSION['matricola']) && $_SESSION['loginType'] == "Docente")
-                    echo "<h2>{$docenteLoggato->nome} {$docenteLoggato->cognome}, {$docenteLoggato->matricola}</h2>";                   
+                    echo "<h2>{$adminLoggato->username}</h2>";               
                 ?>
                 </div>
             </div>    
             <div><hr class="redBar" /></div>
             <div class="container-esami">
                 <?php
-                if($_SESSION['loginType'] == "Docente" && $docenteLoggato->idCorso == 0)
-                    echo '<h2 style="text-align: center;">ERRORE: il docente non ha un corso assegnato.</h2>';
-                
-                elseif($_SESSION['loginType'] == "Docente" && $docenteLoggato->idCorso != 0) {
-                    
-                    if(isset($_POST['filtro']) && $_POST['filtro'] != "")
-                        displayAppelliAfterDate($_POST['filtro'], $docenteLoggato->idCorso);
-                    else
-                        displayAppelliAfterDate(date('Y-m-d'));
-                }
-
-                elseif($_SESSION['loginType'] == "Segretario" || $_SESSION['loginType'] == "Amministratore") {
-                    
-                    if(isset($_POST['filtro']) && $_POST['filtro'] != "")
-                        displayAppelliAfterDate($_POST['filtro']);
-                    else
-                        displayFullAppelli();
-                } 
+                if(isset($_POST['filtro']) && $_POST['filtro'] != "")
+                    displayCorsiDiLaureaLike($_POST['filtro']);
+                else
+                    displayCorsiDiLaurea();
                 ?>           
             </div>
         </div>

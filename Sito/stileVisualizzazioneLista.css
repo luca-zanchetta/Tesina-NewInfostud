@@ -55,6 +55,14 @@ img.arrow {
     display: flex;
     align-content: center;
 }
+hr.blackBar {
+    border: 0;
+    display:flex;
+    width: 96%;               
+    background-color:#000;
+    height: 3px;
+    border-radius: 2px;
+}
 
 /* input {
     height: 100%;

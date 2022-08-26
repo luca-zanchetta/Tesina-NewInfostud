@@ -10,11 +10,12 @@ if(isset($_SESSION['username']))
 else
     echo "<p>ERRORE</p>";
 
+if(isset($_POST['idCorso']) && $_POST['idCorso'] != 0)
+    $corso = getCorsoById($_POST['idCorso']);
 
 if(isset($_POST['invio'])) {
-    $presenzaDati = FALSE;
-
-    if((isset($_POST['nome']) && $_POST['nome'] != "") && 
+    if((isset($_POST['idCorso']) && $_POST['idCorso'] != "") &&
+       (isset($_POST['nome']) && $_POST['nome'] != "") && 
        (isset($_POST['docente']) && $_POST['docente'] != "seleziona") && 
        (isset($_POST['anno']) && $_POST['anno'] != "seleziona") && 
        (isset($_POST['semestre']) && $_POST['semestre'] != "seleziona") &&
@@ -23,20 +24,19 @@ if(isset($_POST['invio'])) {
        (isset($_POST['ssd']) && $_POST['ssd'] != "") &&
        (isset($_POST['corsoLaurea']) && $_POST['corsoLaurea'] != "seleziona") &&
        (isset($_POST['descrizione']) && $_POST['descrizione'] != "")) {
-            $presenzaDati = TRUE;
-
-            $corso = new corso($_POST['nome'], $_POST['descrizione'], $_POST['docente'], 
-                               $_POST['anno'], $_POST['semestre'], $_POST['curriculum'],
-                               $_POST['cfu'], $_POST['ssd'], $_POST['corsoLaurea']);
-
-                               
-            $tmp = inserisciCorso($corso);
-            if(!$tmp)
+                  
+            $tmp = modificaCorso($_POST['idCorso'], $_POST['nome'], $_POST['descrizione'], $_POST['docente'], $_POST['anno'], $_POST['semestre'], $_POST['curriculum'], $_POST['cfu'], $_POST['ssd'], $_POST['corsoLaurea']);
+            if(!$tmp) {
+                setcookie('modificaCorso', 'ERRORE: Modifica del corso non riuscita.');
                 header('Location: avvisoErrore.php');
+            }
             else {
+                $corso = getCorsoById($_POST['idCorso']);
                 $tmp = assegnaCorso($corso, $_POST['docente']);
                 if($tmp)
                     header('Location: avvisoOK.php');
+                else
+                    header('Location: avvisoErrore.php'); 
             }
        }
 }
@@ -51,7 +51,7 @@ if(isset($_POST['invio'])) {
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileHomepage-users.css">
     <link rel="stylesheet" href="stile-amministrazione.css">
-    <title>Inserisci corso - Infostud</title>
+    <title>Modifica corso - Infostud</title>
 </head>
 <body>
     <div class="header">
@@ -94,7 +94,7 @@ if(isset($_POST['invio'])) {
         <div class="body">
             <div class="infoTitle">
                 <div class="infoTitle-position">
-                    <h2>Home > Inserisci corso</h2>
+                    <h2>Home > Modifica corso</h2>
                 </div>
                 <div class="infoTitle-user">
                 <?php
@@ -106,7 +106,7 @@ if(isset($_POST['invio'])) {
                 <hr class="redBar" />
             </div>
             <div class="boxInsC">
-            <form action="inserisciCorso.php" method="POST" id="input">
+            <form action="modificaCorso.php" method="POST" id="input">
                 <div class="insContainer">
                     <div class="labels">
                         <h3>Nome: </h3>
@@ -120,20 +120,13 @@ if(isset($_POST['invio'])) {
                     </div>
                     <div class="inputs">
                     <?php
-                    if(isset($_POST['nome']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"nome\" value=\"{$_POST['nome']}\">";
-                    elseif(!isset($_POST['nome']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"nome\">";
+                    echo "<input class=\"textField\" type=\"text\" name=\"nome\" value=\"{$corso->nome}\" required>";
                     ?>
                     <select class="choice" name="docente">
                         <?php
-                            if(isset($_POST['docente']) && $_POST['docente'] != "seleziona") {
-                                $docente = getDocenteFromMatricola($_POST['docente']);
-                                echo "<option value=\"{$docente->matricola}\">{$docente->nome} {$docente->cognome}</option>";
-                            }
-                            elseif(!isset($_POST['docente']))
-                                echo "<option value=\"seleziona\">Docente...</option>";
-                                        
+                            $docente = getDocenteFromMatricola($corso->matricolaProf);
+                            echo "<option value=\"{$docente->matricola}\">{$docente->nome} {$docente->cognome}</option>";
+
                             $docenti = [];
                             $docenti = getDocentiDisponibili();
                             foreach($docenti as $docente) {
@@ -143,74 +136,43 @@ if(isset($_POST['invio'])) {
                     </select>
                     <select class="choice" name="anno">
                         <?php
-                            if(isset($_POST['anno']) && $_POST['anno'] != "seleziona")
-                                echo "<option value=\"{$_POST['anno']}\">{$_POST['anno']}</option>";
-                            elseif(!isset($_POST['anno']))
-                                echo "
-                                <option value=\"seleziona\">Anno...</option>
+                            echo "<option value=\"{$corso->anno}\">{$corso->anno}</option>
                                 <option value=\"1\">1</option>
                                 <option value=\"2\">2</option>
-                                <option value=\"3\">3</option>
-                                ";
+                                <option value=\"3\">3</option>";
                         ?>
                     </select>
                     <select class="choice" name="semestre">
                         <?php
-                            if(isset($_POST['semestre']) && $_POST['semestre'] != "seleziona")
-                                echo "<option value=\"{$_POST['semestre']}\">{$_POST['semestre']}</option>
-                                <option value=\"1\">1</option>
-                                <option value=\"2\">2</option>";
-                            elseif(!isset($_POST['semestre']))
-                                echo "
-                                <option value=\"seleziona\">Semestre...</option>
-                                <option value=\"1\">1</option>
-                                <option value=\"2\">2</option>
-                                ";
+                        echo "<option value=\"{$corso->semestre}\">{$corso->semestre}</option>
+                            <option value=\"1\">1</option>
+                            <option value=\"2\">2</option>";
                         ?>
                     </select>
                     <?php
-                    if(isset($_POST['curriculum']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"curriculum\" value=\"{$_POST['curriculum']}\">";
-                    elseif(!isset($_POST['curriculum']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"curriculum\">";
+                    echo "<input class=\"textField\" type=\"text\" name=\"curriculum\" value=\"{$corso->curriculum}\" required>";
                     ?>
                     <select class="choice" name="cfu">
                         <?php
-                            if(isset($_POST['cfu']) && $_POST['cfu'] != "seleziona")
-                                echo "<option value=\"{$_POST['cfu']}\">{$_POST['cfu']}</option>
-                                <option value=\"3\">3</option>
-                                <option value=\"6\">6</option>
-                                <option value=\"9\">9</option>
-                                <option value=\"12\">12</option>";
-                            elseif(!isset($_POST['cfu']))
-                                echo "
-                                <option value=\"seleziona\">CFU...</option>
-                                <option value=\"3\">3</option>
-                                <option value=\"6\">6</option>
-                                <option value=\"9\">9</option>
-                                <option value=\"12\">12</option>
-                                ";
+                        echo "<option value=\"{$corso->cfu}\">{$corso->cfu}</option>
+                            <option value=\"3\">3</option>
+                            <option value=\"6\">6</option>
+                            <option value=\"9\">9</option>
+                            <option value=\"12\">12</option>";
                         ?>
                     </select>
                     <?php
-                    if(isset($_POST['ssd']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"ssd\" value=\"{$_POST['ssd']}\">";
-                    elseif(!isset($_POST['ssd']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"ssd\">";
+                    echo "<input class=\"textField\" type=\"text\" name=\"ssd\" value=\"{$corso->ssd}\" required>";
                     ?>
                     <select class="choice" name="corsoLaurea">
                         <?php
-                            if(isset($_POST['corsoLaurea']) && $_POST['corsoLaurea'] != "seleziona") {
-                                $nomeCDL = getNomeCorsoDiLaureaByID($_POST['corsoLaurea']);
-                                echo "<option value=\"{$_POST['corsoLaurea']}\">{$nomeCDL}</option>";
-                            }
-                            elseif(!isset($_POST['corsoLaurea']))
-                                echo "<option value=\"seleziona\">Corso di laurea...</option>";
+                            $nomeCDL = getNomeCorsoDiLaureaByID($corso->idCorsoLaurea);
+                            echo "<option value=\"{$corso->idCorsoLaurea}\">{$nomeCDL}</option>";
                                         
                             $corsiLaurea = [];
                             $corsiLaurea = getCorsiDiLaurea();
-                            foreach($corsiLaurea as $corso) {
-                                echo "<option value=\"{$corso->id}\">{$corso->nome}</option>";
+                            foreach($corsiLaurea as $corsoDiLaurea) {
+                                echo "<option value=\"{$corsoDiLaurea->id}\">{$corsoDiLaurea->nome}</option>";
                             }
                         ?>
                     </select>
@@ -218,20 +180,16 @@ if(isset($_POST['invio'])) {
                 </div>
                 <div style="text-align:center;">
                     <h3>Descrizione: </h3>
-                    <textarea form="input" name="descrizione"></textarea>
+                    <?php
+                    echo "<textarea form=\"input\" name=\"descrizione\">{$corso->descrizione}</textarea>";
+                    ?>
                 </div>
                 <div style="padding-top: 1%; margin-left: 50%;">
                     <input class="bottoni" type="submit" name="invio" value="INVIO">
+                    <input type="hidden" name="idCorso" value="<?php echo $_POST['idCorso']; ?>">
                 </div>
             </form>
             </div>
-            <?php
-            if(isset($_POST['invio']) && !$presenzaDati)
-                echo "
-                <div style=\"margin-left: -6%; padding-bottom: 7%;\">
-                    <h2 class=\"error\">DATI MANCANTI! Riprovare.</h2>
-                </div>";
-            ?>
         </div>
     </div>
 </div>

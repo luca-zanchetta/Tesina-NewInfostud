@@ -387,7 +387,7 @@ function creaSidebar($loginType) {
 
         case "Amministratore":
             echo '
-            <div class="sidebar">
+            <div class="sidebar" style="">
                 <h5>
                     Informazioni
                 </h5>
@@ -467,6 +467,18 @@ function creaSidebar($loginType) {
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
                         <a class="opzionetab" href="inserisciCorso.php" style="display: flex; margin: 0px;">Inserisci corso</a>
+                    </h5>
+                </div>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="gestisciCorsiDiLaurea.php" style="display: flex; margin: 0px;">Gestisci corsi di laurea</a>
+                    </h5>
+                </div>
+                <div style="display: flex;">
+                    <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
+                    <h5 style="display: flex; margin: 0px;">
+                        <a class="opzionetab" href="gestisciCorsi.php" style="display: flex; margin: 0px;">Gestisci corsi</a>
                     </h5>
                 </div>
                 <hr style="width: 90%; margin-left: -2%;" />
@@ -945,6 +957,160 @@ function displayAppelliAfterDate($data) {
 }
 
 
+function displayCorsiDiLaurea() {
+    $corsiDiLaurea = [];
+    $corsiDiLaurea = getCorsiDiLaurea();
+
+    if(!$corsiDiLaurea)
+        echo '<h2>Nessun corso di laurea trovato.</h2>';
+    else {
+        foreach($corsiDiLaurea as $corsoDiLaurea) {
+            if($_SESSION['src'] == "edit") {
+                echo '
+                <div class="blocco-esame" style="background-color:lightblue;">
+                    <div class="nome-esame">
+                        '.$corsoDiLaurea->nome.'
+                    </div> 
+                    <div style="display: flex; flex-direction: row; padding-top: 10%; margin-left: -10%;">
+                        <div class="info-button" style="padding-left: 15%; padding-right: 15%;">
+                            MODIFICA
+                            <form action="modificaCorsoDiLaurea.php" method="POST">
+                                <input type="submit" name="modifica" value="" >
+                                <input type="hidden" name="idCorsoDiLaurea" value="'.$corsoDiLaurea->id.'">
+                                <input type="hidden" name="nomeCorsoDiLaurea" value="'.$corsoDiLaurea->nome.'">
+                            </form>
+                        </div>  
+                        <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
+                            ELIMINA
+                            <form action="eliminaCorsoDiLaurea-script.php" method="POST">
+                                <input type="submit" name="elimina" value="" >
+                                <input type="hidden" name="idCorsoDiLaurea" value="'.$corsoDiLaurea->id.'">
+                            </form>
+                        </div> 
+                    </div>
+                </div>
+                ';
+            }
+        }
+    }
+}
+
+
+function displayCorsiDiLaureaLike($nome) {
+    $corsiDiLaurea = [];
+    $corsiDiLaurea = getCorsiDiLaureaLike($nome);
+
+    if(!$corsiDiLaurea)
+        echo '<h2>Nessun corso di laurea trovato.</h2>';
+    else {
+        foreach($corsiDiLaurea as $corsoDiLaurea) {
+            if($_SESSION['src'] == "edit") {
+                echo '
+                <div class="blocco-esame" style="background-color:lightblue;">
+                    <div class="nome-esame">
+                        '.$corsoDiLaurea->nome.'
+                    </div> 
+                    <div style="display: flex; flex-direction: row; padding-top: 10%; margin-left: -10%;">
+                        <div class="info-button" style="padding-left: 15%; padding-right: 15%;">
+                            MODIFICA
+                            <form action="modificaCorsoDiLaurea.php" method="POST">
+                                <input type="submit" name="modifica" value="" >
+                                <input type="hidden" name="idCorsoDiLaurea" value="'.$corsoDiLaurea->id.'">
+                                <input type="hidden" name="nomeCorsoDiLaurea" value="'.$corsoDiLaurea->nome.'">
+                            </form>
+                        </div>  
+                        <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
+                            ELIMINA
+                            <form action="eliminaCorsoDiLaurea-script.php" method="POST">
+                                <input type="submit" name="elimina" value="" >
+                                <input type="hidden" name="idCorsoDiLaurea" value="'.$corsoDiLaurea->id.'">
+                            </form>
+                        </div> 
+                    </div>
+                </div>
+                ';
+            }
+        }
+    }
+}
+
+
+function displayCorsi() {
+    $corsi = [];
+    $corsi = getCorsi();
+
+    if(!$corsi)
+        echo '<h2>Nessun corso trovato.</h2>';
+    else {
+        foreach($corsi as $corso) {
+            if($_SESSION['src'] == "edit") {
+                echo '
+                <div class="blocco-esame" style="background-color:lightblue;">
+                    <div class="nome-esame">
+                        '.$corso->nome.'
+                    </div> 
+                    <div style="display: flex; flex-direction: row; padding-top: 10%; margin-left: -10%;">
+                        <div class="info-button" style="padding-left: 15%; padding-right: 15%;">
+                            MODIFICA
+                            <form action="modificaCorso.php" method="POST">
+                                <input type="submit" name="modifica" value="" >
+                                <input type="hidden" name="idCorso" value="'.$corso->id.'">
+                            </form>
+                        </div>  
+                        <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
+                            ELIMINA
+                            <form action="eliminaCorso-script.php" method="POST">
+                                <input type="submit" name="elimina" value="" >
+                                <input type="hidden" name="idCorso" value="'.$corso->id.'">
+                            </form>
+                        </div> 
+                    </div>
+                </div>
+                ';
+            }
+        }
+    }
+}
+
+
+function displayCorsiLike($nome) {
+    $corsi = [];
+    $corsi = getCorsiLike($nome);
+
+    if(!$corsi)
+        echo '<h2>Nessun corso trovato.</h2>';
+    else {
+        foreach($corsi as $corso) {
+            if($_SESSION['src'] == "edit") {
+                echo '
+                <div class="blocco-esame" style="background-color:lightblue;">
+                    <div class="nome-esame">
+                        '.$corso->nome.'
+                    </div> 
+                    <div style="display: flex; flex-direction: row; padding-top: 10%; margin-left: -10%;">
+                        <div class="info-button" style="padding-left: 15%; padding-right: 15%;">
+                            MODIFICA
+                            <form action="modificaCorso.php" method="POST">
+                                <input type="submit" name="modifica" value="" >
+                                <input type="hidden" name="idCorso" value="'.$corso->id.'">
+                            </form>
+                        </div>  
+                        <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
+                            ELIMINA
+                            <form action="eliminaCorso-script.php" method="POST">
+                                <input type="submit" name="elimina" value="" >
+                                <input type="hidden" name="idCorso" value="'.$corso->id.'">
+                            </form>
+                        </div> 
+                    </div>
+                </div>
+                ';
+            }
+        }
+    }
+}
+
+
 
 
 
@@ -1177,9 +1343,9 @@ function getCorsoById($_id) {
        $con = $con->nextSibling;
        $corso->descrizione = $con->textContent;
        $con = $con->nextSibling;
-       $corso->info_prof = $con->textContent;
+       $corso->matricolaProf = $con->textContent;
        $con = $con->nextSibling;
-       $corso->id_colore = $con->textContent;
+       $corso->colore = $con->textContent;
        $con = $con->nextSibling;
        $corso->anno = $con->textContent;
        $con = $con->nextSibling;
@@ -1569,6 +1735,33 @@ function getCorsiDiLaureaLike($_nome) {
             $listaCorsiDiLaurea[] = $corsoDiLaurea;
     }
     return $listaCorsiDiLaurea;
+}
+
+
+function getCorsoDiLaureaFromId($idCorsoDiLaurea) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/corsiDiLaurea.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $corsoDiLaurea = new corsoDiLaurea("");
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $corsoDiLaurea->id = $con->textContent;
+        $con = $con->nextSibling;
+        $corsoDiLaurea->nome = $con->textContent;
+        if($corsoDiLaurea->id == $_id)
+            return $corsoDiLaurea;
+    }
+    return NULL;
 }
 
 
@@ -2743,6 +2936,8 @@ function getVotoCommento($idCommento,$matricola) {
 
 
 
+
+
 /* ================================= 
 ======== Insert functions ==========
 ==================================== */
@@ -3173,6 +3368,11 @@ function inserisciCommento($corpo,$idAutore,$idPost,$data) {
     else
         return TRUE;
 }
+
+
+
+
+
 /* ================================= 
 ======== Delete functions ==========
 ==================================== */
@@ -3213,7 +3413,10 @@ function eliminaAppello($idAppello) {
 }
 
 
-function eliminaAppelliCorso($id_corso){
+function eliminaAppelliCorso($id_corso) {
+    if($id_corso == 0)
+        return FALSE;
+    
     $xmlString = "";
     foreach ( file("../Xml/appelli.xml") as $node ) {
         $xmlString .= trim($node);
@@ -3237,11 +3440,17 @@ function eliminaAppelliCorso($id_corso){
     }
 
     echo $doc->save("../Xml/appelli.xml"); 
-    return true;
+    return TRUE;
 }
 
 
 function eliminaCorso($_id) {
+    if($_id == 0)
+        return FALSE;
+    
+    if(!eliminaAppelliCorso($_id))
+        return FALSE;
+
     $xmlString = "";
     foreach ( file("../Xml/corsi.xml") as $node ) {
         $xmlString .= trim($node);
@@ -3431,6 +3640,35 @@ function deleteComment($idCommento) {
 }
 
 
+function eliminaCorsoDiLaurea($idCorsoDiLaurea) {
+    $xmlString = "";
+    foreach ( file("../Xml/corsiDiLaurea.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->getElementsByTagName("corsoDiLaurea");
+    for ($i=0; $i<$records->length; $i++) {
+        $record = $records->item($i);
+
+        $con = $record->firstChild;
+        $id = $con->textContent;
+
+        if($id == $idCorsoDiLaurea){
+            $record->parentNode->removeChild($record);
+            break;
+        }            
+    }
+
+    echo $doc->save("../Xml/corsiDiLaurea.xml"); 
+    return TRUE;
+}
+
+
+
+
+
 /* ================================= 
 ======== Modify functions ==========
 ==================================== */
@@ -3581,6 +3819,8 @@ function modificaAppello($idAppello, $nuovaData, $nuovaOra, $nuovoCorso) {
         return TRUE;
     }
 }
+
+
 function modificaFaq($id, $newText) {
     $xmlString = "";
     foreach ( file("../Xml/faqs.xml") as $node ) {
@@ -3604,6 +3844,7 @@ function modificaFaq($id, $newText) {
     else
         return TRUE;
 }
+
 
 function modifyFaqVote($matricola,$idFaq,$voto){
     $xmlString = "";
@@ -3629,6 +3870,7 @@ function modifyFaqVote($matricola,$idFaq,$voto){
     else
         return TRUE;
 }
+
 
 function updateFaqUtility($idFaq){
     #aggiorniamo il campo utilitaTotale della faq passata
@@ -3682,6 +3924,7 @@ function updateFaqUtility($idFaq){
         return TRUE;
 }
 
+
 function modifyContentText($id, $newText) {
     $xmlString = "";
     foreach ( file("../Xml/commenti.xml") as $node ) {
@@ -3705,6 +3948,7 @@ function modifyContentText($id, $newText) {
     else
         return TRUE;
 }
+
 
 function updateCommentAccordo($idCommento){
     $xmlString = "";
@@ -3756,6 +4000,85 @@ function updateCommentAccordo($idCommento){
     if(!$result) 
         return FALSE;
     else
+        return TRUE;
+}
+
+
+function modificaCorsoDiLaurea($idCorsoDiLaurea, $nome) {
+    if($idCorsoDiLaurea == 0)
+        return FALSE;
+
+    $modificato = FALSE;
+
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/corsiDiLaurea.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $corsiDiLaurea = simplexml_load_file('../Xml/corsiDiLaurea.xml');
+
+    foreach($corsiDiLaurea as $corsoDiLaurea) {
+        if($corsoDiLaurea->id == $idCorsoDiLaurea && !verificaPresenzaCorsoDiLaurea($nome)) {
+            $corsoDiLaurea->nome = $nome;
+            $modificato = TRUE;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/corsiDiLaurea.xml', "w");
+    $result = fwrite($f,  $corsiDiLaurea->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    elseif($result && $modificato)
+        return TRUE;
+}
+
+
+function modificaCorso($idCorso, $nome, $descrizione, $matricolaProf, $anno, $semestre, $curriculum, $cfu, $ssd, $idCorsoLaurea) {
+    if($idCorso == 0)
+        return FALSE;
+
+    $modificato = FALSE;
+
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/corsi.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $corsi = simplexml_load_file('../Xml/corsi.xml');
+
+    foreach($corsi as $corso) {
+        if($corso->id == $idCorso) {
+            $corso->nome = $nome;
+            $corso->descrizione = $descrizione;
+            $corso->matricolaProf = $matricolaProf;
+            $corso->anno = $anno;
+            $corso->semestre = $semestre;
+            $corso->curriculum = $curriculum;
+            $corso->cfu = $cfu;
+            $corso->ssd = $ssd;
+            $corso->idCorsoLaurea = $idCorsoLaurea;
+
+            $modificato = TRUE;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/corsi.xml', "w");
+    $result = fwrite($f,  $corsi->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    elseif($result && $modificato)
         return TRUE;
 }
 ?>

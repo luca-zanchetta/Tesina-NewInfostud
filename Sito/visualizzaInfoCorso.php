@@ -1,6 +1,6 @@
 <?php
+require_once("phpFunctions.php");
 session_start();
-require_once('../Sito/phpFunctions.php');
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -10,8 +10,9 @@ require_once('../Sito/phpFunctions.php');
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <link rel="stylesheet" href="stile-base.css">
+    <link rel="stylesheet" href="stile-visualizza-esame.css">
     <link rel="stylesheet" href="stileVisualizzazioneLista.css">
-    <title>Corsi di Laurea - Infostud</title>
+    <title>Info corso - Infostud</title>
 </head>
 <body style="background-color: gainsboro;">
     <div class="header">
@@ -28,15 +29,6 @@ require_once('../Sito/phpFunctions.php');
                 </form>
                 Infostud
             </h2>  
-        </div>
-        <div class="nav-central">
-            <form action="visualizzaCorsiDiLaurea.php" method="POST">
-                <div class="nav-logo">
-                    <input type="submit" name="ricerca" value="">
-                    <img src="search.png" alt="err" width="20px" style="display: inline-flex;">
-                </div>    
-                    <input type="text" name="filtro">              
-            </form>
         </div>
         <div class="nav-right">
         <?php
@@ -112,68 +104,49 @@ require_once('../Sito/phpFunctions.php');
             </div>
         </div>
         <div class="body">
-            <h2 style="margin-left: 2.5%; font-size: 200%;">I NOSTRI CORSI DI LAUREA:</h2>
-            <div><hr class="redBar" /></div>
-            <div class="listContainer">
-                <div class="listItem">
-                    <div class="element">
-                        <h2>Corso di Laurea</h2>
+            <div class="info-section">
+                <div class="exam-block">
+                    <?php
+                        //Otteniamo le informazioni da stampare
+                        $idCorso = $_POST['idCorso'];
+
+                        $corso = getCorsoById($idCorso);       
+                    ?>
+                    <div class="exam-title">
+                        <h2 style="margin-left: 2%;"><?php echo $corso->nome?></h2>
+                    </div>   
+                    <div><hr class="blackBar" /></div>   
+                    <div class="sub-titles ">
+                        <h3 style="margin-left: 2%;">Obiettivi</h3>
+                    </div>
+                    <div class="text-container">
+                        <?php echo $corso->descrizione?>
+                    </div> 
+                    <div><hr class="blackBar" /></div>
+                    <div class="sub-titles ">
+                        <h3 style="margin-left: 2%;">Professore: <?php
+                        $prof = getDocenteFromMatricola($corso->matricolaProf);
+                        echo "{$prof->nome} {$prof->cognome}"; ?></h3>
                     </div>
                 </div>
-                <hr />
-            <?php
-                $corsiDiLaurea = [];
-                if(isset($_POST['filtro']) && $_POST['filtro'] != "") {
-                    $corsiDiLaurea = getCorsiDiLaureaLike($_POST['filtro']);
-
-                    if(!$corsiDiLaurea) {
-                        echo "<h3 class=\"voceElenco\">Non sono disponibili corsi di laurea corrispondenti ai criteri di ricerca.</h3>";
-                    }
-                    else {
-                        foreach($corsiDiLaurea as $corsoDiLaurea) {
-                        ?>
-                            <div class="listItem">
-                                <div class="element" style="width: 50%;">
-                                    <h2><?php echo $corsoDiLaurea->nome; ?></h2>
-                                </div>
-                                <div class="lastElement" style="width: 50%;">
-                                    <form action="visualizzaCorsiDaCorsoDiLaurea.php" method="POST">
-                                        <input type="image" src="arrowBlack.png" class="arrow" width="30px" height="30px" alt="err">
-                                        <input type="hidden" name="idCorsoLaurea" value="<?php echo $corsoDiLaurea->id; ?>">
-                                    </form>
-                                </div>
-                            </div>
-                            <hr />
-                        <?php
-                        }
-                    }
-                }
-                else {
-                    $corsiDiLaurea = getCorsiDiLaurea();
-
-                    if(!$corsiDiLaurea) {
-                        echo "<h3 class=\"voceElenco\">Al momento non sono disponibili corsi di laurea.</h3>";
-                    }
-                    else {
-                        foreach($corsiDiLaurea as $corsoDiLaurea) {
-                        ?>
-                            <div class="listItem">
-                                <div class="element" style="width: 50%;">
-                                    <h2><?php echo $corsoDiLaurea->nome; ?></h2>
-                                </div>
-                                <div class="lastElement" style="width: 50%;">
-                                    <form action="visualizzaCorsiDaCorsoDiLaurea.php" method="POST">
-                                        <input type="image" src="arrowBlack.png" class="arrow" width="30px" height="30px" alt="err">
-                                        <input type="hidden" name="idCorsoLaurea" value="<?php echo $corsoDiLaurea->id; ?>">
-                                    </form>
-                                </div>
-                            </div>
-                            <hr />
-                        <?php
-                        }
-                    }
-                }
-            ?>
+                <div class="info-block">
+                    <div class="box-title">
+                        <h3 style="margin-left: 3%;">Scheda Insegnamento</h3>
+                    </div>
+                    <div class="box-list">
+                        <ul>
+                            <li>Curriculum: <?php echo $corso->curriculum; ?></li>
+                            <li>Anno: <?php echo $corso->anno; ?></li>
+                            <li>Semestre: <?php echo $corso->semestre; ?></li>
+                            <li>SSD: <?php echo $corso->ssd; ?></li>
+                            <li>CFU: <?php echo $corso->cfu; ?></li>
+                            <li>Corso di laurea: <?php
+                                $corsoDiLaurea = getNomeCorsoDiLaureaByID($corso->idCorsoLaurea);
+                                echo $corsoDiLaurea; ?></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
     </div>
