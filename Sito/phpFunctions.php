@@ -3552,6 +3552,60 @@ function deleteFaq($idFaq) {
     }
 }
 
+function deletePost($idPost) {
+    $xmlString = "";
+    foreach ( file("../Xml/posts.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->getElementsByTagName("post");
+
+    for ($i=0; $i<$records->length; $i++) {
+        $record = $records->item($i);
+
+        $con = $record->firstChild;
+        $id = $con->textContent;
+
+        if($id == $idPost){
+            $record->parentNode->removeChild($record);
+            break;
+        }
+            
+    }
+
+    $doc->save("../Xml/posts.xml"); 
+    #rimuoviamo tutti i commenti associati al post
+    $xmlString = "";
+    foreach ( file("../Xml/commenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->getElementsByTagName("commento");
+    for ($i=0; $i<$records->length; $i++) {
+        $record = $records->item($i);
+
+        $con = $record->firstChild;
+        $id = $con->textContent; #id
+        $con = $con->nextSibling;
+        $tmp = $con->textContent; #corpo
+        $con = $con->nextSibling;
+        $tmp = $con->textContent; #matricolaStudente
+        $con = $con->nextSibling;
+        $tmp = $con->textContent; #accordoMedio
+        $con = $con->nextSibling;
+        $idP = $con->textContent; #idPost
+        if($idP == $idPost)
+            $record->parentNode->removeChild($record);         
+    }
+    echo $doc->save("../Xml/commenti.xml"); 
+    return true;
+}
+
+
 function deleteFaqVote($matricola,$idFaq){
     $xmlString = "";
     foreach ( file("../Xml/votoFAQ.xml") as $node ) {
@@ -3635,7 +3689,6 @@ function deleteComment($idCommento) {
         break;         
     }
     echo $doc->save("../Xml/commenti.xml"); 
-    updateCommentAccordo($idCommento);
     return true;
 }
 
@@ -3949,6 +4002,29 @@ function modifyContentText($id, $newText) {
         return TRUE;
 }
 
+function modifyPostContent($id, $newText) {
+    $xmlString = "";
+    foreach ( file("../Xml/posts.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $posts = simplexml_load_file('../Xml/posts.xml');
+
+    foreach($posts as $post)
+        if($post->id == $id)
+            $post->corpo = $newText;
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/posts.xml', "w");
+    $result = fwrite($f,  $posts->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    else
+        return TRUE;
+}
 
 function updateCommentAccordo($idCommento){
     $xmlString = "";
