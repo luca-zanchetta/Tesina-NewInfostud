@@ -1,5 +1,5 @@
 <?php
-
+require_once('phpClasses.php');
 function inserisciCorso($nuovoCorso) {
     $xmlString = "";
     foreach ( file("../Xml/docenti.xml") as $node ) {
