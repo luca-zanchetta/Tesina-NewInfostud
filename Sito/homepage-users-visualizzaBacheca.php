@@ -1,7 +1,12 @@
 <?php
 
 session_start();
-require_once('phpFunctions.php');
+require_once('../Sito/phpFunctions-get.php');
+require_once('../Sito/phpFunctions-insert.php');
+require_once('../Sito/phpFunctions-misc.php');
+require_once('phpClasses.php');
+require_once('phpFunctions-login.php');
+require_once('phpFunctions-display.php');
 
 if(!isset($_SESSION['loginType']) || (isset($_SESSION['loginType']) && $_SESSION['loginType'] == "Docente") || !isset($_GET['pageNum']))
     header('Location: homepage.php');

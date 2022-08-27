@@ -1,5 +1,9 @@
 <?php
-require_once('../Sito/phpFunctions.php');
+require_once('../Sito/phpFunctions-get.php');
+require_once('../Sito/phpFunctions-insert.php');
+require_once('../Sito/phpFunctions-misc.php');
+require_once('phpClasses.php');
+require_once('phpFunctions-login.php');
 
 if(isset($_POST['loginType'])) {
     $login = $_POST['loginType'];
