@@ -17,6 +17,7 @@
                 <xsd:element ref="utilitaTotale" minOccurs="1" maxOccurs="1"/>
                 <xsd:element ref="idCorso" minOccurs="1" maxOccurs="1"/>
                 <xsd:element ref="idAutore" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="stato" minOccurs="1" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -26,4 +27,5 @@
     <xsd:element name="utilitaTotale" type="xsd:string"/>
     <xsd:element name="idCorso" type="xsd:integer"/>
     <xsd:element name="idAutore" type="xsd:integer"/>
+    <xsd:element name="stato" type="xsd:integer"/>
 </xsd:schema>

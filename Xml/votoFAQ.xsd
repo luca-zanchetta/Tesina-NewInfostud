@@ -16,6 +16,7 @@
         <xsd:element ref="matricolaStudente" minOccurs="1" maxOccurs="1" />
         <xsd:element ref="idFAQ" minOccurs="1" maxOccurs="1" /> 
         <xsd:element ref="utilita" minOccurs="1" maxOccurs="1" /> 
+        <xsd:element ref="stato" minOccurs="1" maxOccurs="1"/>
       </xsd:sequence>
    </xsd:complexType>
 </xsd:element>
@@ -24,5 +25,5 @@
 <xsd:element name="matricolaStudente" type="xsd:integer" />
 <xsd:element name="idFAQ" type="xsd:short" />
 <xsd:element name="utilita" type="xsd:short" />
-
+<xsd:element name="stato" type="xsd:integer"/>
 </xsd:schema>

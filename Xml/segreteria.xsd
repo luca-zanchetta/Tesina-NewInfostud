@@ -13,9 +13,11 @@
             <xsd:sequence>
                 <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
                 <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="stato" minOccurs="1" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="username" type="xsd:string"/>
     <xsd:element name="password" type="xsd:string"/>
+    <xsd:element name="stato" type="xsd:integer"/>
 </xsd:schema>

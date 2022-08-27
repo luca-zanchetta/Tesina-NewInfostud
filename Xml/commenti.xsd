@@ -16,6 +16,7 @@
         <xsd:element ref="accordoMedio" minOccurs="1" maxOccurs="1" />
         <xsd:element ref="idPost" minOccurs="1" maxOccurs="1" />
         <xsd:element ref="data" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="stato" minOccurs="1" maxOccurs="1"/>
         </xsd:sequence>   
     </xsd:complexType>
     </xsd:element>
@@ -25,4 +26,5 @@
     <xsd:element name="accordoMedio" type="xsd:float"/>
     <xsd:element name="idPost" type="xsd:integer"/>
     <xsd:element name="data" type="xsd:string"/>
+    <xsd:element name="stato" type="xsd:string"/>
 </xsd:schema>

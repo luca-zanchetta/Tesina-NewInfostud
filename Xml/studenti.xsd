@@ -20,6 +20,7 @@
                 <xsd:element ref="cfuTotale" minOccurs="1" maxOccurs="1"/>
                 <xsd:element ref="media" minOccurs="1" maxOccurs="1"/>
                 <xsd:element ref="idCorsoDiLaurea" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="stato" minOccurs="1" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -32,4 +33,5 @@
     <xsd:element name="cfuTotale" type="xsd:integer"/>
     <xsd:element name="media" type="xsd:float"/>
     <xsd:element name="idCorsoDiLaurea" type="xsd:integer"/>
+    <xsd:element name="stato" type="xsd:integer"/>
 </xsd:schema>

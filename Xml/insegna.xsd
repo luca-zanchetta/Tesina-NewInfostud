@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:element name="insegnamenti">  <!-- Tabella dei voti sulle FAQ -->
+   <xsd:complexType> 
+      <xsd:sequence>
+	      <xsd:element ref="insegnamento" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:sequence>
+   </xsd:complexType>
+</xsd:element>
+
+<xsd:element name="insegnamento">  <!-- Singolo voto -->
+   <xsd:complexType> 
+      <xsd:sequence>
+        <xsd:element ref="matricolaProf" minOccurs="1" maxOccurs="1" /> 
+        <xsd:element ref="idCorso" minOccurs="1" maxOccurs="1" />
+      </xsd:sequence>
+   </xsd:complexType>
+</xsd:element>
+
+<xsd:element name="matricolaProf" type="xsd:short" />
+<xsd:element name="idCorso" type="xsd:short" />
+</xsd:schema>

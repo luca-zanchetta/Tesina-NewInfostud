@@ -17,6 +17,7 @@
         <xsd:element ref="idCommento" minOccurs="1" maxOccurs="1" /> 
         <xsd:element ref="accordo" minOccurs="1" maxOccurs="1" /> 
 	     <xsd:element ref="idAutoreCommento" minOccurs="1" maxOccurs="1" /> 
+        <xsd:element ref="stato" minOccurs="1" maxOccurs="1"/>
       </xsd:sequence>
    </xsd:complexType>
 </xsd:element>
@@ -26,4 +27,5 @@
 <xsd:element name="idCommento" type="xsd:short" />
 <xsd:element name="accordo" type="xsd:short" />
 <xsd:element name="idAutoreCommento" type="xsd:integer" /> 
+<xsd:element name="stato" type="xsd:integer"/>
 </xsd:schema>
