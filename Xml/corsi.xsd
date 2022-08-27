@@ -12,6 +12,8 @@
         <xsd:sequence>
         <xsd:element ref="id" minOccurs="1" maxOccurs="1" /> <!-- forse è un attributo? -->
         <xsd:element ref="nome" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="matricolaDocente" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="matricolaCoDocente" minOccurs="1" maxOccurs="1" />
         <xsd:element ref="descrizione"  minOccurs="1" maxOccurs="1" />
         <xsd:element ref="colore" minOccurs="1" maxOccurs="1" />
         <xsd:element ref="anno" minOccurs="1" maxOccurs="1" />
@@ -26,6 +28,8 @@
     </xsd:element>
     <xsd:element name="id" type="xsd:integer"/>
     <xsd:element name="nome" type="xsd:string"/>
+    <xsd:element name="matricolaDocente" type="xsd:short"/>
+    <xsd:element name="matricolaCoDocente" type="xsd:short"/>
     <xsd:element name="descrizione" type="xsd:string"/>
     <xsd:element name="colore" type="xsd:string"/>
     <xsd:element name="anno" type="xsd:short"/>

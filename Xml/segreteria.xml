@@ -3,5 +3,6 @@
     <segretario>
         <username>segretario1</username>
         <password>segretario1</password>
+        <stato>1</stato>
     </segretario>
 </segreteria>

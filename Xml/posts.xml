@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<posts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="faqs.xsd"><post><id>1</id><titolo>Cerco appunti BD</titolo><corpo>Ragazzi cerco DISPERATAMENTE appunti sul modello logico</corpo><matricolaStudente>1</matricolaStudente><utilitaTotale>0</utilitaTotale><idCorso>1</idCorso><data>2022-08-26</data></post></posts>
+<posts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="posts.xsd">
+    <post>
+        <id>1</id>
+        <titolo>Appunti DB!</titolo>
+        <corpo>Ciao ragazzi! Mi servono appunti di Basi Di Dati. Grazie in anticipo</corpo>
+        <matricolaStudente>1</matricolaStudente>
+        <utilitaTotale>0</utilitaTotale>
+        <idCorso>1</idCorso>
+        <data>2022-08-26</data>
+        <stato>1</stato>
+    </post>
+</posts>

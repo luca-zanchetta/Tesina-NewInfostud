@@ -1,3 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <commenti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="commenti.xsd">
-<commento><id>1</id><corpo>Te li posso inviare io!</corpo><matricolaStudente>3</matricolaStudente><accordoMedio>4.00</accordoMedio><idPost>1</idPost><data>2022-08-26</data></commento></commenti>
+    <commento>
+        <id>3</id>
+        <corpo>Te li giro per email!</corpo>
+        <matricolaStudente>3</matricolaStudente>
+        <accordoMedio>4.00</accordoMedio>
+        <idPost>1</idPost>
+        <data>2022-08-26</data>
+        <stato>1</stato>
+    </commento>
+    <commento>
+        <id>4</id>
+        <corpo>Grazie a tutti e due!!</corpo>
+        <matricolaStudente>1</matricolaStudente>
+        <accordoMedio>0</accordoMedio>
+        <idPost>1</idPost>
+        <data>2022-08-26</data>
+        <stato>1</stato>
+    </commento>
+</commenti>

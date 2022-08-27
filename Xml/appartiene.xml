@@ -4,5 +4,6 @@
     <id>1</id>
     <idCorso>1</idCorso>
     <idCorsoDiLaurea>1</idCorsoDiLaurea>
+    <stato>1</stato>
   </appartenenza>
 </appartenenze>

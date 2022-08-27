@@ -3,5 +3,6 @@
     <amministratore>
         <username>admin</username>
         <password>admin</password>
+        <stato>1</stato>
     </amministratore>
 </amministrazione>

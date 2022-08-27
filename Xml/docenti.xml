@@ -5,69 +5,83 @@
     <nome>Umberto</nome>
     <cognome>Nanni</cognome>
     <password>meglio che niente</password>
-    <idCorso>1</idCorso>
+    <stato>1</stato>
   </docente>
   <docente>
     <matricola>2</matricola>
     <nome>Marco</nome>
     <cognome>Temperini</cognome>
     <password>marte</password>
-    <idCorso>2</idCorso>
+    <stato>1</stato>
   </docente>
   <docente>
     <matricola>3</matricola>
     <nome>Massimo</nome>
     <cognome>Petrarca</cognome>
     <password>corporigido</password>
-    <idCorso>8</idCorso>
+    <stato>1</stato>
   </docente>
   <docente>
     <matricola>4</matricola>
     <nome>Paolo</nome>
     <cognome>Di Lorenzo</cognome>
     <password>segnali</password>
-    <idCorso>0</idCorso>
+    <stato>1</stato>
   </docente>
   <docente>
     <matricola>5</matricola>
     <nome>Alberto</nome>
     <cognome>Bersani</cognome>
     <password>congiuntivo</password>
-    <idCorso>0</idCorso>
+    <stato>1</stato>
   </docente>
   <docente>
     <matricola>6</matricola>
     <nome>Bruno</nome>
     <cognome>Cifra</cognome>
     <password>rettesghembe</password>
-    <idCorso>0</idCorso>
+    <stato>1</stato>
   </docente>
   <docente>
     <matricola>7</matricola>
     <nome>Giuseppe</nome>
     <cognome>Scotti</cognome>
     <password>peppe75</password>
-    <idCorso>0</idCorso>
+    <stato>1</stato>
   </docente>
   <docente>
     <matricola>8</matricola>
     <nome>Paolo</nome>
     <cognome>Di Giamberardino</cognome>
     <password>salute</password>
-    <idCorso>0</idCorso>
+    <stato>1</stato>
   </docente>
   <docente>
     <matricola>9</matricola>
     <nome>Gianluca</nome>
     <cognome>Cima</cognome>
     <password>paint</password>
-    <idCorso>0</idCorso>
+    <stato>1</stato>
   </docente>
   <docente>
     <matricola>10</matricola>
     <nome>Fulvio</nome>
     <cognome>Schettino</cognome>
     <password>economiediscala</password>
-    <idCorso>0</idCorso>
+    <stato>1</stato>
   </docente>
-<docente><matricola>11</matricola><nome>Marco</nome><cognome>Toppi</cognome><password>campo</password><idCorso>0</idCorso></docente><docente><matricola>12</matricola><nome>Roberto</nome><cognome>Beraldi</cognome><password>you86</password><idCorso>0</idCorso></docente></docenti>
+  <docente>
+    <matricola>11</matricola>
+    <nome>Marco</nome>
+    <cognome>Toppi</cognome>
+    <password>campo</password>
+    <stato>1</stato>
+  </docente>
+  <docente>
+    <matricola>12</matricola>
+    <nome>Roberto</nome>
+    <cognome>Beraldi</cognome>
+    <password>you86</password>
+    <stato>1</stato>
+  </docente>
+</docenti>
