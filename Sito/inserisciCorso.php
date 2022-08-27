@@ -34,7 +34,7 @@ if(isset($_POST['invio'])) {
             if(!$tmp)
                 header('Location: avvisoErrore.php');
             else {
-                $tmp = assegnaCorso($corso, $_POST['docente']);
+                $tmp = assegnaCorso($corso->id, $_POST['docente'], $_POST['codocente']);
                 if($tmp)
                     header('Location: avvisoOK.php');
             }

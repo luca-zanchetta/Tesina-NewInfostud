@@ -25,14 +25,14 @@ if(isset($_POST['invio'])) {
        (isset($_POST['corsoLaurea']) && $_POST['corsoLaurea'] != "seleziona") &&
        (isset($_POST['descrizione']) && $_POST['descrizione'] != "")) {
                   
-            $tmp = modificaCorso($_POST['idCorso'], $_POST['nome'], $_POST['descrizione'], $_POST['docente'], $_POST['anno'], $_POST['semestre'], $_POST['curriculum'], $_POST['cfu'], $_POST['ssd'], $_POST['corsoLaurea']);
+            $tmp = modificaCorso($_POST['idCorso'], $_POST['nome'], $_POST['descrizione'], $_POST['docente'], $_POST['codocente'], $_POST['anno'], $_POST['semestre'], $_POST['curriculum'], $_POST['cfu'], $_POST['ssd'], $_POST['corsoLaurea']);
             if(!$tmp) {
                 setcookie('modificaCorso', 'ERRORE: Modifica del corso non riuscita.');
                 header('Location: avvisoErrore.php');
             }
             else {
                 $corso = getCorsoById($_POST['idCorso']);
-                $tmp = assegnaCorso($corso, $_POST['docente']);
+                $tmp = assegnaCorso($corso, $_POST['docente'], $_POST['codocente']);
                 if($tmp)
                     header('Location: avvisoOK.php');
                 else
