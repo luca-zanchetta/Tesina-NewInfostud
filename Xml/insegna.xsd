@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-<xsd:element name="insegnamenti">  <!-- Tabella dei voti sulle FAQ -->
+<xsd:element name="insegnamenti">  <!-- Tabella degli insegnamenti -->
    <xsd:complexType> 
       <xsd:sequence>
 	      <xsd:element ref="insegnamento" minOccurs="0" maxOccurs="unbounded" />
@@ -9,7 +9,7 @@
    </xsd:complexType>
 </xsd:element>
 
-<xsd:element name="insegnamento">  <!-- Singolo voto -->
+<xsd:element name="insegnamento">  <!-- Singolo insegnamento -->
    <xsd:complexType> 
       <xsd:sequence>
         <xsd:element ref="matricolaProf" minOccurs="1" maxOccurs="1" /> 
