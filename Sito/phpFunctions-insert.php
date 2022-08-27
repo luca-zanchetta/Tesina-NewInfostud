@@ -1,5 +1,6 @@
 <?php
 require_once('phpClasses.php');
+
 function inserisciCorso($nuovoCorso) {
     $xmlString = "";
     foreach ( file("../Xml/docenti.xml") as $node ) {
@@ -393,7 +394,7 @@ function insertCommentVote($idCommento, $matricola, $vote,$idAutore) {
     $tmp = $newStudente->addChild('idCommento', $idCommento);
     $tmp = $newStudente->addChild('accordo', $vote);
     $tmp = $newStudente->addChild('idAutoreCommento', $idAutore);
-    $tmp = $newStudente->addChild('stato', $idAutore);
+    $tmp = $newStudente->addChild('stato', 1);
 
     // Sovrascrive il vecchio file con i nuovi dati
     $f = fopen('../Xml/votoCommento.xml', "w");
@@ -423,7 +424,7 @@ function inserisciCommento($corpo,$idAutore,$idPost,$data) {
     $tmp = $newStudente->addChild('accordoMedio', 0);
     $tmp = $newStudente->addChild('idPost', $idPost);
     $tmp = $newStudente->addChild('data', $data);
-    $tmp = $newStudente->addChild('stato', $data);
+    $tmp = $newStudente->addChild('stato', 1);
 
     // Sovrascrive il vecchio file con i nuovi dati
     $f = fopen('../Xml/commenti.xml', "w");
