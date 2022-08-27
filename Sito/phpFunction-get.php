@@ -1,5 +1,5 @@
 <?php
-
+require_once('phpClasses.php');
 function getCorsi() {
     /*accedo al file xml*/
    $xmlString = "";
