@@ -1,5 +1,7 @@
 <?php
-require_once("phpFunctions.php");
+require_once('../Sito/phpFunctions-get.php');
+require_once('../Sito/phpFunctions-insert.php');
+require_once('../Sito/phpFunctions-misc.php');
 session_start();
 ?>
 
@@ -125,9 +127,17 @@ session_start();
                     <div><hr class="blackBar" /></div>
                     <div class="sub-titles ">
                         <h3 style="margin-left: 2%;">Professore: <?php
-                        $prof = getDocenteFromMatricola($corso->matricolaProf);
+                        $prof = getDocenteFromMatricola($corso->matricolaDocente);
                         echo "{$prof->nome} {$prof->cognome}"; ?></h3>
                     </div>
+                    <?php
+                        if($corso->matricolaCoDocente != 0) { ?>
+                            <div class="sub-titles ">
+                                <h3 style="margin-left: 2%;">Co-Docente: <?php
+                                $prof = getDocenteFromMatricola($corso->matricolaDocente);
+                                echo "{$prof->nome} {$prof->cognome}"; ?></h3>
+                            </div>
+                   <?php }?>
                 </div>
                 <div class="info-block">
                     <div class="box-title">
