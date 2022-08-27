@@ -372,7 +372,7 @@ function getCorsiDiLaureaLike($_nome) {
         $stato = $con->textContent;
 
         /*controllo sul nome*/
-        if(preg_match("/{$_nome}/i", $corsoDiLaurea->nome) $$ $stato)
+        if(preg_match("/{$_nome}/i", $corsoDiLaurea->nome) && $stato)
             $listaCorsiDiLaurea[] = $corsoDiLaurea;
     }
     return $listaCorsiDiLaurea;
