@@ -8,8 +8,9 @@ require_once('phpFunctions.php');
 class corso {
     public $id;
     public $nome;
+    public $matricolaDocente;
+    public $matricolaCoDocente;
     public $descrizione;
-    public $matricola_prof;
     public $colore;
     public $anno;
     public $semestre;
@@ -18,11 +19,12 @@ class corso {
     public $ssd;
     public $idCorsoLaurea;
 
-    public function __construct($nome, $descrizione, $matricola_prof, $anno, $semestre, $curriculum, $cfu, $ssd, $idCorsoLaurea) {
+    public function __construct($nome, $descrizione, $matricolaDocente, $matricolaCoDocente, $anno, $semestre, $curriculum, $cfu, $ssd, $idCorsoLaurea) {
         $this->id = calcolaIdCorso();
         $this->nome = $nome;
         $this->descrizione = $descrizione;
-        $this->matricola_prof = $matricola_prof;
+        $this->matricolaDocente = $matricolaDocente;
+        $this->matricolaDocente = $matricolaCoDocente;
         $this->anno = $anno;
         $this->semestre = $semestre;
         $this->curriculum = $curriculum;
@@ -64,14 +66,12 @@ class docente {
     public $nome;
     public $cognome;
     public $password;
-    public $idCorso;
 
-    public function __construct($nome, $cognome, $password, $idCorso) {
+    public function __construct($nome, $cognome, $password) {
         $this->matricola = generaMatricola("Docente");
         $this->nome = $nome;
         $this->cognome = $cognome;
         $this->password = $password;
-        $this->idCorso = $idCorso;
     }
 }
 
