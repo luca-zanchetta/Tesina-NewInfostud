@@ -1,5 +1,6 @@
 <?php
-require_once('phpFunctions.php');
+require_once('phpFunctions-insert.php');
+require_once('phpFunctions-get.php');
 require_once('phpClasses.php');
 
 if(isset($_POST['loginType'])) {
@@ -10,18 +11,19 @@ if(isset($_POST['loginType'])) {
 
         switch($login) {
             case "Studente":
-                if((isset($_POST['nome']) && $_POST['nome'] != "") && (isset($_POST['cognome']) && $_POST['cognome'] != "") && (isset($_POST['dataNascita']) && $_POST['dataNascita'] != "") && (isset($_POST['password']) && $_POST['password'] != "")) {
+                if((isset($_POST['nome']) && $_POST['nome'] != "") && (isset($_POST['cognome']) && $_POST['cognome'] != "") && (isset($_POST['dataNascita']) && $_POST['dataNascita'] != "") && (isset($_POST['password']) && $_POST['password'] != "") && (isset($_POST['corsoLaurea']) && $_POST['corsoLaurea'] != "seleziona")) {
                     $presenza_dati = TRUE;
                     
                     $studente = new studente (
                         $_POST['nome'], 
                         $_POST['cognome'], 
                         $_POST['password'], 
-                        $_POST['dataNascita']
+                        $_POST['dataNascita'],
+                        $_POST['corsoLaurea']
                     );             
 
                     if(!inserisciStudente($studente))
-                        header('Location: avvisoErrore.html');
+                        header('Location: avvisoErrore.php');
                     else {
                         setcookie('matricola', $studente->matricola);
                         header('Location: avvisoOK.php');
@@ -43,7 +45,7 @@ if(isset($_POST['loginType'])) {
                     );
 
                     if(!inserisciDocente($docente))
-                        header('Location: avvisoErrore.html');
+                        header('Location: avvisoErrore.php');
                     else {
                         setcookie('matricola', $docente->matricola);
                         header('Location: avvisoOK.php');
@@ -61,7 +63,7 @@ if(isset($_POST['loginType'])) {
                     );
 
                     if(!inserisciSegretario($segretario))
-                        header('Location: avvisoErrore.html');
+                        header('Location: avvisoErrore.php');
                     else
                         header('Location: avvisoOK.php');
                 }
@@ -77,7 +79,7 @@ if(isset($_POST['loginType'])) {
                     );
 
                     if(!inserisciAmministratore($amministratore))
-                        header('Location: avvisoErrore.html');
+                        header('Location: avvisoErrore.php');
                     else
                         header('Location: avvisoOK.php');
                 }
@@ -98,6 +100,7 @@ else {
 <head>
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileLogin.css">
+    <link rel="stylesheet" href="stile-amministrazione.css">
     <title>Registrazione - Infostud</title>
 </head>
 <body class="bodyLogin">
@@ -164,26 +167,43 @@ else {
                         <h3>Nome: </h3>
                         <h3>Cognome: </h3>
                         <h3>Data di nascita: </h3>
+                        <h3>Corso di laurea: </h3>
                         <h3>Password: </h3>
                     </div>
                     <div class="inputs">
                     <?php
                     if(isset($_POST['nome']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"nome\" value=\"{$_POST['nome']}\">";
+                        echo "<input class=\"textField\" type=\"text\" name=\"nome\" value=\"{$_POST['nome']}\" required>";
                     elseif(!isset($_POST['nome']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"nome\">";
+                        echo "<input class=\"textField\" type=\"text\" name=\"nome\" required>";
                     
                     if(isset($_POST['cognome']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"cognome\" value=\"{$_POST['cognome']}\">";
+                        echo "<input class=\"textField\" type=\"text\" name=\"cognome\" value=\"{$_POST['cognome']}\" required>";
                     elseif(!isset($_POST['cognome']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"cognome\">";
+                        echo "<input class=\"textField\" type=\"text\" name=\"cognome\" required>";
                     
                     if(isset($_POST['dataNascita']))
-                        echo "<input class=\"textField\" type=\"date\" name=\"dataNascita\" value=\"{$_POST['dataNascita']}\">";
+                        echo "<input class=\"textField\" type=\"date\" name=\"dataNascita\" value=\"{$_POST['dataNascita']}\" required>";
                     elseif(!isset($_POST['dataNascita']))
-                        echo "<input class=\"textField\" type=\"date\" name=\"dataNascita\">";
+                        echo "<input class=\"textField\" type=\"date\" name=\"dataNascita\" required>";
                     ?>
-                        <input class="textField" type="password" name="password">
+                    <select class="choice" name="corsoLaurea" onfocus='this.size=3; this.style="width: 100%;";' onblur='this.size=1; this.style="width: 68%;";' onchange='this.size=1; this.blur(); this.style="width: 68%;";'>
+                        <?php
+                            if(isset($_POST['corsoLaurea']) && $_POST['corsoLaurea'] != "seleziona") {
+                                $nomeCDL = getNomeCorsoDiLaureaByID($_POST['corsoLaurea']);
+                                echo "<option value=\"{$_POST['corsoLaurea']}\">{$nomeCDL}</option>";
+                            }
+                            elseif(!isset($_POST['corsoLaurea']))
+                                echo "<option value=\"seleziona\">Corso di laurea...</option>";
+                                        
+                            $corsiLaurea = [];
+                            $corsiLaurea = getCorsiDiLaurea();
+                            foreach($corsiLaurea as $corso) {
+                                echo "<option value=\"{$corso->id}\">{$corso->nome}</option>";
+                            }
+                        ?>
+                    </select>
+                        <input class="textField" type="password" name="password" required>
                     </div>
                 </div>
                 <div style="padding-top: 1%; margin-left: 30%;">
@@ -206,17 +226,17 @@ else {
                     <div class="inputs">
                     <?php
                     if(isset($_POST['nome']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"nome\" value=\"{$_POST['nome']}\">";
+                        echo "<input class=\"textField\" type=\"text\" name=\"nome\" value=\"{$_POST['nome']}\" required>";
                     elseif(!isset($_POST['nome']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"nome\">";
+                        echo "<input class=\"textField\" type=\"text\" name=\"nome\" required>";
                     
                     if(isset($_POST['cognome']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"cognome\" value=\"{$_POST['cognome']}\">";
+                        echo "<input class=\"textField\" type=\"text\" name=\"cognome\" value=\"{$_POST['cognome']}\" required>";
                     elseif(!isset($_POST['cognome']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"cognome\">";
+                        echo "<input class=\"textField\" type=\"text\" name=\"cognome\" required>";
                     ?>
                         
-                        <input class="textField" type="password" name="password">
+                        <input class="textField" type="password" name="password" required>
                     </div>
                 </div>
                 <div style="padding-top: 1%; margin-left: 30%;">
@@ -238,11 +258,11 @@ else {
                     <div class="inputs">
                     <?php
                     if(isset($_POST['username']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"username\" value=\"{$_POST['username']}\">";
+                        echo "<input class=\"textField\" type=\"text\" name=\"username\" value=\"{$_POST['username']}\" required>";
                     elseif(!isset($_POST['username']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"username\">";
+                        echo "<input class=\"textField\" type=\"text\" name=\"username\" required>";
                     ?>
-                        <input class="textField" type="password" name="password">
+                        <input class="textField" type="password" name="password" required>
                     </div>
                 </div>
                 <div style="padding-top: 1%; margin-left: 30%;">
@@ -264,11 +284,11 @@ else {
                     <div class="inputs">
                     <?php
                     if(isset($_POST['username']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"username\" value=\"{$_POST['username']}\">";
+                        echo "<input class=\"textField\" type=\"text\" name=\"username\" value=\"{$_POST['username']}\" required>";
                     elseif(!isset($_POST['username']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"username\">";
+                        echo "<input class=\"textField\" type=\"text\" name=\"username\" required>";
                     ?>
-                        <input class="textField" type="password" name="password">
+                        <input class="textField" type="password" name="password" required>
                     </div>
                 </div>
                 <div style="padding-top: 1%; margin-left: 30%;">
@@ -279,13 +299,12 @@ else {
             </div>
             <?php
             }
-            if(isset($_POST['invio']) && !$presenza_dati) { // Manca qualche dato
-                echo '
-                    <div class="box4">
-                        <h2 class="error">DATI MANCANTI! Riprovare.</h2>
-                    </div>';
-                if(isset($_POST['materia']))
-                    echo "<h3>{$_POST['materia']}</h3>";
+            if(isset($_POST['invio']) && !$presenza_dati) {
+                // Manca qualche dato
+            echo "
+                <div class=\"box4\">
+                    <h2 class=\"error\">DATI MANCANTI! Riprovare.</h2>
+                </div>";
             }
             ?>
         </div>

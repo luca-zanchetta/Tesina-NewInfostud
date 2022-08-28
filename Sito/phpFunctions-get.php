@@ -645,7 +645,7 @@ function getStudenti() {
     $listaStudenti = [];
      
     for ($i=0; $i<$records->length; $i++) {
-        $studente = new studente("", "", "", "");  # Default constructor
+        $studente = new studente("", "", "", "", 0);  # Default constructor
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -668,7 +668,7 @@ function getStudenti() {
         $studente->idCorsoLaurea = $con->textContent;
         $con = $con->nextSibling;
         $stato = $con->textContent;
-        if($stato) 
+        if($stato != 0) 
             $listaStudenti[] = $studente;
     }
     return $listaStudenti;
@@ -688,7 +688,7 @@ function getStudenteFromMatricola($matr) {
     $records = $doc->documentElement->childNodes;
      
     for ($i=0; $i<$records->length; $i++) {
-        $studente = new studente("", "", "", "");  # Default constructor
+        $studente = new studente("", "", "", "", 0);  # Default constructor
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -812,6 +812,37 @@ function getSegretarioFromUsername($uname) {
 }
 
 
+function getAmministratori() {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/amministrazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+
+    $listaAdmin = [];
+    for ($i=0; $i<$records->length; $i++) {
+        $admin = new amministratore("", "");  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $admin->username = $con->textContent;
+        $con = $con->nextSibling;
+        $admin->password = $con->textContent;
+        $con = $con->nextSibling;
+        $stato = $con->textContent;
+
+        if($stato != 0)
+            $listaAdmin[] = $admin;
+    }
+    return $listaAdmin;
+}
+
+
 function getAdminFromUsername($uname) {
     /*accedo al file xml*/
     $xmlString = "";
@@ -836,7 +867,7 @@ function getAdminFromUsername($uname) {
         $con = $con->nextSibling;
         $stato = $con->textContent;
 
-        if($admin->username == $uname && !$stato)
+        if($admin->username == $uname && $stato != 0)
             return $admin;
     }
     return NULL;

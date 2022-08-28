@@ -1,5 +1,8 @@
 <?php
 require_once('phpClasses.php');
+require_once('phpFunctions-get.php');
+require_once('phpFunctions-misc.php');
+require_once('phpFunctions-modify.php');
 
 function inserisciCorso($nuovoCorso) {
     $xmlString = "";
@@ -43,6 +46,12 @@ function inserisciCorso($nuovoCorso) {
 
 
 function inserisciStudente($studente) {
+    if($studente == NULL)
+        return FALSE;
+
+    if(verificaPresenzaStudente($studente))
+        return FALSE;
+    
     $xmlString = "";
     foreach ( file("../Xml/studenti.xml") as $node ) {
         $xmlString .= trim($node);
@@ -78,6 +87,12 @@ function inserisciStudente($studente) {
 
 
 function inserisciDocente($docente) {
+    if($docente == NULL)
+        return FALSE;
+
+    if(verificaPresenzaDocente($docente))
+        return FALSE;
+
     $xmlString = "";
     foreach ( file("../Xml/docenti.xml") as $node ) {
         $xmlString .= trim($node);
@@ -107,25 +122,16 @@ function inserisciDocente($docente) {
 }
 
 function inserisciSegretario($segretario) {
+    if($segretario == NULL)
+        return FALSE;
+
+    if(verificaPresenzaSegretario($segretario))
+        return FALSE;
+    
     $xmlString = "";
     foreach ( file("../Xml/segreteria.xml") as $node ) {
         $xmlString .= trim($node);
     }
-    
-    $doc = new DOMDocument();
-    $doc->loadXML($xmlString);
-    $records = $doc->documentElement->childNodes;
-
-    for ($i=0; $i<$records->length; $i++) {
-        $record = $records->item($i);
-        
-        $con = $record->firstChild;
-        $username = $con->textContent;
-
-        if($username == $segretario->username) 
-            return false;   /* Lo username non può essere duplicato! */
-    }
-
 
     $xml = simplexml_load_file('../Xml/segreteria.xml');
 
@@ -149,25 +155,16 @@ function inserisciSegretario($segretario) {
 
 
 function inserisciAmministratore($amministratore) {
+    if($amministratore == NULL)
+        return FALSE;
+
+    if(verificaPresenzaAmministratore($amministratore))
+        return FALSE;
+    
     $xmlString = "";
     foreach ( file("../Xml/amministrazione.xml") as $node ) {
         $xmlString .= trim($node);
     }
-    
-    $doc = new DOMDocument();
-    $doc->loadXML($xmlString);
-    $records = $doc->documentElement->childNodes;
-
-    for ($i=0; $i<$records->length; $i++) {
-        $record = $records->item($i);
-        
-        $con = $record->firstChild;
-        $username = $con->textContent;
-
-        if($username == $amministratore->username) 
-            return false;   /* Lo username non può essere duplicato! */
-    }
-
 
     $xml = simplexml_load_file('../Xml/amministrazione.xml');
 
