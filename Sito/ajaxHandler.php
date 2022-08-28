@@ -24,8 +24,10 @@ switch ($_POST['richiesta']) {
         $idAutore = $_POST['autore'];
         //sicuramente utenza è ti tipo studente
 
-        echo deleteCommentVote($idCommento,  $_SESSION['matricola']);
-        echo insertCommentVote($idCommento,  $_SESSION['matricola'], $vote,$idAutore);
+        deleteCommentVote($idCommento,  $_SESSION['matricola']); 
+        insertCommentVote($idCommento,  $_SESSION['matricola'], $vote,$idAutore);
+        $commento = getCommentFromId($idCommento);
+        echo "{$commento->id}-{$commento->accordoMedio}";
         break;
 
     case 'modificaContenutoPost': 

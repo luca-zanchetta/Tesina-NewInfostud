@@ -81,7 +81,7 @@ require_once('../Sito/phpFunctions-get.php');
                 <form action="logout.php">
                     <input type="submit" value="">
                 </form>
-                    Logout
+                    Logot
             </h2>
             <div class="vertical-bar"></div>
             <div class="nav-logo">
@@ -137,7 +137,7 @@ require_once('../Sito/phpFunctions-get.php');
                     }
                     else {
                         foreach($docenti as $docente) {
-                            $nomeCorso = getNomeCorso($docente->idCorso);
+                            $nomeCorsi = getCorsoFormDocente($docente->matricola);
                         ?>
                             <div class="listItem">
                                 <div class="element" style="width: 25%;">
@@ -147,7 +147,15 @@ require_once('../Sito/phpFunctions-get.php');
                                     <h2><?php echo $docente->nome ?></h2>
                                 </div>
                                 <div class="element" style="width: 25%;">
-                                    <h2><?php echo $nomeCorso ?></h2>
+                                    <h2>
+                                        <?php
+                                            for ($i=0; $i < min(count($nomeCorsi),3); $i++) { 
+                                                # code...
+                                                echo $nomeCorsi[$i]->nome. ", "; 
+                                            }
+                                            if(count($nomeCorsi) > 3) echo "..."
+                                         ?>
+                                    </h2>
                                 </div>
                             </div>
                             <hr />
@@ -163,7 +171,7 @@ require_once('../Sito/phpFunctions-get.php');
                     }
                     else {
                         foreach($docenti as $docente) {
-                            $nomeCorso = getNomeCorso($docente->idCorso);
+                            $nomeCorsi = getCorsoFormDocente($docente->matricola);
                         ?>
                             <div class="listItem">
                                 <div class="element" style="width: 25%;">
@@ -173,7 +181,15 @@ require_once('../Sito/phpFunctions-get.php');
                                     <h2><?php echo $docente->nome ?></h2>
                                 </div>
                                 <div class="element" style="width: 25%;">
-                                    <h2><?php echo $nomeCorso ?></h2>
+                                    <h2>
+                                        <?php
+                                            for ($i=0; $i < min(count($nomeCorsi),3); $i++) { 
+                                                # code...
+                                                echo $nomeCorsi[$i]->nome. ", "; 
+                                            }
+                                            if(count($nomeCorsi) > 3) echo "..."
+                                         ?>
+                                    </h2>
                                 </div>
                             </div>
                             <hr />

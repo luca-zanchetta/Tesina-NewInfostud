@@ -345,9 +345,10 @@ function updateCommentAccordo($idCommento){
         $tmp = $con->textContent; #idAutoreCommento
         $con = $con->nextSibling;
         $stato = $con->textContent; #stato
+        
         if(!$stato) continue;
         
-        $accordoTot+=(int)$accordo;
+        $accordoTot+=$accordo;
         $numVoti++;
     }
 

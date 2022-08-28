@@ -144,7 +144,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                 <div class="postInfo">
                     <div class="postTitle">
                         <div class="titleContainer"><?php echo $post->titolo;?></div>
-                        <?php if($_SESSION['loginType'] == 'Amministratore' || $_SESSION['loginType'] == 'Segretario') { ?>
+                        <?php if($_SESSION['loginType'] == 'Amministratore' || $_SESSION['loginType'] == 'Segretario' || $post->matricolaStudente == $_SESSION['matricola']) { ?>
                             <div class="adminTools">
                                 <form action="deletePost.php" method="POST">
                                     <img src="bin.png" alt="err">
@@ -255,7 +255,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                         <div class="commentContent">
                             <div class="commentTopBar">
                                 <div class="commentTime">
-                                    <?php echo  isset($autore) ? "{$comment->data} · Voto Totale : {$comment->accordoMedio}" : $comment->data ?> 
+                                    <?php echo  isset($autore) ? "{$comment->data} · Voto Totale : <span id=\"votoTot{$comment->id}\">{$comment->accordoMedio}</span>" : $comment->data ?> 
                                 </div>
                                 <?php if ($_SESSION['loginType'] == 'Studente' && isset($autore) && $autore->matricola != $_SESSION['matricola']) { ?>
                                     <div class="commentTime" style="justify-content: flex-end;">
@@ -288,7 +288,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                             <div class="commentText" id="editTextForm">
                                 <textarea id="commentInput<?php echo $comment->id?>" form="editTextForm<?php echo $comment->id?>" style="display:none;" required><?php echo $comment->corpo;?></textarea>
                             </div>
-                            <?php if($_SESSION['loginType'] == 'Amministratore' || $_SESSION['loginType'] == 'Segretario') { ?>
+                            <?php if($_SESSION['loginType'] == 'Amministratore' || $_SESSION['loginType'] == 'Segretario' || $post->matricolaStudente == $_SESSION['matricola']) { ?>
                                 <div class="adminTools">
                                     <form action="deleteComment.php" method="POST">
                                         <img src="bin.png" alt="err">
@@ -345,7 +345,9 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                         data: jQuery.param({newVote: voto, id:id, autore:idAutore,richiesta: "modificaVotoPost"}), 
                         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                         success: function (response) {
-                            console.log(response);
+                            let text = response.split("-");
+                            console.log(text);
+                            document.getElementById("votoTot"+text[0]).textContent = text[1];
                         },
                         error: function () {
                             console.log("error");
@@ -379,6 +381,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                         success: function (response) {
                             console.log("Success");
+                            document.getElementById("votoTot"+id).textContent = "prova";
                         },
                         error: function () {
                             console.log("error");

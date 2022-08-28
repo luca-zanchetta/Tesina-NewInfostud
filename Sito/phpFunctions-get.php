@@ -555,7 +555,7 @@ function getDocentiLike($_nome) {
         $stato = $con->textContent;
 
         /*controllo sul nome*/
-        if(preg_match("\{$_nome}\i", ($docente->cognome." ".$docente->nome)) && $stato != 0)
+        if(preg_match("/{$_nome}/i", ($docente->cognome." ".$docente->nome)) && $stato != 0)
             $listaDocenti[] = $docente;
     }
     return $listaDocenti;  
@@ -1049,7 +1049,7 @@ function getEsamiSuperati($studente) {
         $esame->esito = $con->textContent;
         $con = $con->nextSibling;
         $stato = $con->textContent;
-        if($stato != 1) return;
+        if($stato != 1) continue;
 
         $appello = getAppelloFromId($esame->idAppello);
         $corso = getCorsoById($appello->idCorso);
@@ -1091,13 +1091,16 @@ function getAppelliPrenotati($studente) {
         $con = $con->nextSibling;
         $stato = $con->textContent;
         
-        if($stato != 0) {
+        if($stato == 0) continue;
+
+        if($prenotazione->matricolaStudente == $studente->matricola) {
             $appello = getAppelloFromId($prenotazione->idAppello);
             $corso = getCorsoById($appello->idCorso);
     
-            if($prenotazione->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
+            if($corso->idCorsoLaurea == $studente->idCorsoLaurea){
                 if($prenotazione->esito == "NULL")
                     $listaPrenotazioni[] = $appello;
+            }
         }
     }
     return $listaPrenotazioni;
@@ -1253,7 +1256,7 @@ function getPrenotazioniStudente($studente) {
         $prenotazione->esito = $con->textContent;
         $con = $con->nextSibling;
         $stato = $con->textContent;
-        if($stato != 1) return;
+        if($stato != 1) continue;
 
         $appello = getAppelloFromId($prenotazione->idAppello);
         $corso = getCorsoById($appello->idCorso);
@@ -1629,6 +1632,41 @@ function getPostComments($idPost) {
     return $listaCommenti;//voto non dato
 }
 
+function getCommentFromId($idCommento) {
+    $xmlString = "";
+    foreach ( file("../Xml/commenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+    for ($i=0; $i<$records->length; $i++) {
+        $commento = new comment();
+        $record = $records->item($i);    
+
+        $con = $record->firstChild;
+        $commento->id = $con->textContent; #id
+        $con = $con->nextSibling;
+        $commento->corpo = $con->textContent; #corpo
+        $con = $con->nextSibling;
+        $commento->matricolaStudente = $con->textContent; #matricola studente
+        $con = $con->nextSibling;
+        $commento->accordoMedio = $con->textContent; #accordoMedio
+        $con = $con->nextSibling;
+        $commento->idPost = $con->textContent; #idPost
+        $con = $con->nextSibling;
+        $commento->data = $con->textContent; #data
+        $con = $con->nextSibling;
+        $stato = $con->textContent;
+
+        if($commento->id == $idCommento && $stato)
+            return $commento;
+    }
+
+    return null;//voto non dato
+}
 
 function getPostFromId($_idPost){
     $xmlString = "";
