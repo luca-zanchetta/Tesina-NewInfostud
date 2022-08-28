@@ -1,7 +1,9 @@
 <?php
 //implenentazione del pattern Post/Redirect/Get per 
 //l'inserimento di una nuova faq
-require_once('phpFunctions.php');
+require_once('phpFunctions-modify.php');
+require_once('phpFunctions-delete.php');
+require_once('phpFunctions-insert.php');
 session_start();
 
 if(!isset($_POST['richiesta'])) header('Location: homepage.php');

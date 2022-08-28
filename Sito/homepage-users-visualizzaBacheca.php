@@ -1,12 +1,8 @@
 <?php
-
 session_start();
-require_once('../Sito/phpFunctions-get.php');
-require_once('../Sito/phpFunctions-insert.php');
-require_once('../Sito/phpFunctions-misc.php');
-require_once('phpClasses.php');
-require_once('phpFunctions-login.php');
-require_once('phpFunctions-display.php');
+require_once("../Sito/phpFunctions-get.php");
+require_once("../Sito/phpFunctions-display.php");
+
 
 if(!isset($_SESSION['loginType']) || (isset($_SESSION['loginType']) && $_SESSION['loginType'] == "Docente") || !isset($_GET['pageNum']))
     header('Location: homepage.php');
@@ -35,19 +31,15 @@ $order = isset($_GET['filter']) ? $_GET['filter'] : 'default';
 #ordiniamo la lista dei post secodno il filtro
 switch ($order) {
     case 'repDesc':
-        # code...
         usort($listaPost, fn($a, $b) => $b->replies <=> $a->replies);
         break; 
     case 'repAsc':
-        # code...
         usort($listaPost, fn($a, $b) => $a->replies <=> $b->replies);
         break;
     case 'utlDesc':
-        # code...
         usort($listaPost, fn($a, $b) => $b->utilitaTotale <=> $a->utilitaTotale);
         break;
     case 'utlAsc':
-        # code...
         usort($listaPost, fn($a, $b) => $a->utilitaTotale <=> $b->utilitaTotale);
         break;
     case 'dataDesc':
@@ -55,11 +47,9 @@ switch ($order) {
         usort($listaPost, fn($a, $b) => strcmp($a->data,$b->data));
         break;
     case 'dataAsc':
-        # code...
         usort($listaPost, fn($a, $b) => strcmp($b->data,$a->data));
         break;
     default:
-        # code...
         break;
 }
 #calcoliamo il numero di pagine per visualizzare tutti i post

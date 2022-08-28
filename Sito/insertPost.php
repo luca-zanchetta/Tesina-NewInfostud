@@ -2,7 +2,10 @@
 //implenentazione del pattern Post/Redirect/Get per 
 //l'inserimento di una nuova faq
 session_start();
-require_once('phpFunctions.php');
+require_once('phpFunctions-get.php');
+require_once('phpFunctions-insert.php');
+
+
 if(!isset($_SESSION['loginType']))
     header('Location: homepage.php');
 

@@ -1,5 +1,5 @@
 <?php
-require_once('phpFunctions.php');
+require_once('phpFunctions-delete.php');
 
 if(isset($_POST['elimina']) && isset($_POST['idAppello']) && $_POST['idAppello'] != 0) {
     if(eliminaAppello($_POST['idAppello']))

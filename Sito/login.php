@@ -1,9 +1,6 @@
 <?php
-require_once('../Sito/phpFunctions-get.php');
-require_once('../Sito/phpFunctions-insert.php');
-require_once('../Sito/phpFunctions-misc.php');
-require_once('../Sito/phpClasses.php');
 require_once('../Sito/phpFunctions-login.php');
+
 
 if(isset($_POST['loginType'])) {
     $login = $_POST['loginType'];
@@ -172,25 +169,25 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                 }
 
                 if(isset($_POST['matricola']) && ($login == "Studente" || $login == "Docente")) {
-                    echo "<input class=\"textField\" type=\"text\" name=\"matricola\" value=\"{$_POST['matricola']}\">";
+                    echo "<input class=\"textField\" type=\"text\" name=\"matricola\" value=\"{$_POST['matricola']}\" required>";
                 }
                 elseif(!isset($_POST['matricola']) && ($login == "Studente" || $login == "Docente")) {
                 ?>
-                    <input class="textField" type="text" name="matricola">
+                    <input class="textField" type="text" name="matricola" required>
                 <?php
                 }
                 elseif(isset($_POST['username']) && ($login == "Segretario" || $login == "Amministratore")) {
-                    echo "<input class=\"textField\" type=\"text\" name=\"matricola\" value=\"{$_POST['username']}\">";
+                    echo "<input class=\"textField\" type=\"text\" name=\"matricola\" value=\"{$_POST['username']}\" required>";
                 }
                 elseif(!isset($_POST['username']) && ($login == "Segretario" || $login == "Amministratore")) {
                 ?>
-                    <input class="textField" type="text" name="username">
+                    <input class="textField" type="text" name="username" required>
                 <?php
                 }
             ?>
             <br />
             <h2>Password:</h2>
-            <input class="textField" type="password" name="password">
+            <input class="textField" type="password" name="password" required>
             <br />
             <input class="bottoni" type="submit" name="login" value="LOGIN">
             <input name="loginType" type="hidden" value="<?php echo $login; ?>">

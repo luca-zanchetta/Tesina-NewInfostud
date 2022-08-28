@@ -1,7 +1,8 @@
 <?php
 session_start();
 $_SESSION['src'] = "edit";
-require_once("../Sito/phpFunctions.php");
+require_once("../Sito/phpFunctions-get.php");
+require_once("../Sito/phpFunctions-display.php");
 
 
 if(!isset($_SESSION['loginType']) || $_SESSION['loginType'] != "Amministratore")

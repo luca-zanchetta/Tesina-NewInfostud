@@ -1,5 +1,8 @@
 <?php
 require_once('phpClasses.php');
+require_once('phpFunctions-get.php');
+require_once('phpFunctions-misc.php');
+
 
 /* ================================= 
 ======== Modify functions ==========

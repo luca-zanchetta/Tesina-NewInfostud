@@ -1,7 +1,6 @@
 <?php
-require_once('phpClasses.php');
 require_once('phpFunctions-get.php');
-require_once('phpFunctions-insert.php');
+
 
 function generaMatricola($tipoUtenza) {
     $file = "";
@@ -373,6 +372,4 @@ function calcolaIdPrenotazione() {
 
     return $id;
 }
-
-
 ?>

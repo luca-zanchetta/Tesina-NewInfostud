@@ -4,6 +4,7 @@ require_once('phpFunctions-get.php');
 require_once('phpFunctions-misc.php');
 require_once('phpFunctions-modify.php');
 
+
 function inserisciCorso($nuovoCorso) {
     $xmlString = "";
     foreach ( file("../Xml/docenti.xml") as $node ) {

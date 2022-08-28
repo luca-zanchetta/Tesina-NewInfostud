@@ -1,5 +1,6 @@
 <?php
-require_once('../Sito/phpFunctions.php');
+require_once('../Sito/phpFunctions-display.php');
+require_once('../Sito/phpFunctions-get.php');
 session_start();
 
 if(!isset($_POST['gestisciStudente']) && !isset($_POST['gestisciDocente']) && !isset($_POST['gestisciSegretario'])) {
@@ -34,15 +35,6 @@ if(!isset($_POST['gestisciStudente']) && !isset($_POST['gestisciDocente']) && !i
                 Infostud
             </h2>  
         </div>
-        <!-- <div class="nav-central">
-            <form action="visualizzaStudentiAdmin.php" method="POST">
-                <div class="nav-logo">
-                    <input type="submit" name="ricerca" value="">
-                    <img src="search.png" alt="err" width="20px" style="display: inline-flex;">
-                </div>    
-                    <input type="text" name="filtro">              
-            </form>
-        </div> -->
         <div class="nav-right">
         <?php
         if(!isset($_SESSION['loginType'])) {?>

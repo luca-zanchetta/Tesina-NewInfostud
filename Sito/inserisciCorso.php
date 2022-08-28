@@ -1,6 +1,11 @@
 <?php
 session_start();
-require_once('phpFunctions.php');
+require_once("../Sito/phpFunctions-get.php");
+require_once("../Sito/phpFunctions-display.php");
+require_once("../Sito/phpFunctions-insert.php");
+require_once("../Sito/phpFunctions-modify.php");
+require_once("../Sito/phpClasses.php");
+
 
 if(!isset($_SESSION['loginType']) || $_SESSION['loginType'] != "Amministratore")
     header('Location: homepage.php');
@@ -121,9 +126,9 @@ if(isset($_POST['invio'])) {
                     <div class="inputs">
                     <?php
                     if(isset($_POST['nome']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"nome\" value=\"{$_POST['nome']}\">";
+                        echo "<input class=\"textField\" type=\"text\" name=\"nome\" value=\"{$_POST['nome']}\" required>";
                     elseif(!isset($_POST['nome']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"nome\">";
+                        echo "<input class=\"textField\" type=\"text\" name=\"nome\" required>";
                     ?>
                     <select class="choice" name="docente">
                         <?php
@@ -170,9 +175,9 @@ if(isset($_POST['invio'])) {
                     </select>
                     <?php
                     if(isset($_POST['curriculum']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"curriculum\" value=\"{$_POST['curriculum']}\">";
+                        echo "<input class=\"textField\" type=\"text\" name=\"curriculum\" value=\"{$_POST['curriculum']}\" required>";
                     elseif(!isset($_POST['curriculum']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"curriculum\">";
+                        echo "<input class=\"textField\" type=\"text\" name=\"curriculum\" required>";
                     ?>
                     <select class="choice" name="cfu">
                         <?php
@@ -194,9 +199,9 @@ if(isset($_POST['invio'])) {
                     </select>
                     <?php
                     if(isset($_POST['ssd']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"ssd\" value=\"{$_POST['ssd']}\">";
+                        echo "<input class=\"textField\" type=\"text\" name=\"ssd\" value=\"{$_POST['ssd']}\" required>";
                     elseif(!isset($_POST['ssd']))
-                        echo "<input class=\"textField\" type=\"text\" name=\"ssd\">";
+                        echo "<input class=\"textField\" type=\"text\" name=\"ssd\" required>";
                     ?>
                     <select class="choice" name="corsoLaurea">
                         <?php

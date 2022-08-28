@@ -1,6 +1,9 @@
 <?php
 session_start();
-require_once('phpFunctions.php');
+require_once('phpFunctions-modify.php');
+require_once('phpFunctions-get.php');
+require_once('phpFunctions-display.php');
+
 
 if(!isset($_SESSION['loginType']) || $_SESSION['loginType'] == "Studente")
     header('Location: homepage.php');
@@ -141,14 +144,14 @@ if(isset($_POST['invio'])) {
                     <div class="inputs">
                     <?php
                     if(isset($_POST['dataOra']))
-                        echo "<input class=\"textField\" type=\"date\" name=\"data\" value=\"{$data}\">";
+                        echo "<input class=\"textField\" type=\"date\" name=\"data\" value=\"{$data}\" required>";
                     elseif(!isset($_POST['dataOra']))
-                        echo "<input class=\"textField\" type=\"date\" name=\"data\">";
+                        echo "<input class=\"textField\" type=\"date\" name=\"data\" required>";
                     
                     if(isset($_POST['dataOra']))
-                        echo "<input class=\"textField\" type=\"time\" name=\"ora\" value=\"{$ora}\">";
+                        echo "<input class=\"textField\" type=\"time\" name=\"ora\" value=\"{$ora}\" required>";
                     elseif(!isset($_POST['dataOra']))
-                        echo "<input class=\"textField\" type=\"time\" name=\"ora\">";
+                        echo "<input class=\"textField\" type=\"time\" name=\"ora\" required>";
 
                     
                     if($_SESSION['loginType'] != "Docente") {?>
