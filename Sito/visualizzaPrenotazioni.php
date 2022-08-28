@@ -153,7 +153,7 @@ else
                                 </select>
                             </div>
                         </div>
-                        <hr />
+                        <hr class="blackBar" />
                     <?php
                     }
                 }

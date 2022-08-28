@@ -684,7 +684,12 @@ function displayAppelliLike($nomeCorso) {
 function displayAppelliAfterDate($data) {
     if($_SESSION['loginType'] == "Docente") {
         $docente = getDocenteFromMatricola($_SESSION['matricola']);
-        $appelli = getAppelliAfterDateFromCorso($data, $docente->idCorso);
+        $insegnamenti = getCorsiFromDocente($docente->matricola);
+
+        $appelli = [];
+        foreach($insegnamenti as $insegnamento) {
+            $appelli = array_merge($appelli, getAppelliAfterDateFromCorso($data, $insegnamento->id));
+        }
     }
     else 
         $appelli = getAppelliAfterDate($data);

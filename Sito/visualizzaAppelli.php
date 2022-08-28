@@ -13,8 +13,10 @@ if(isset($_SESSION['username']) && $_SESSION['loginType'] == "Amministratore")
     $adminLoggato = getAdminFromUsername($_SESSION['username']);
 elseif(isset($_SESSION['username']) && $_SESSION['loginType'] == "Segretario")
     $segretarioLoggato = getSegretarioFromUsername($_SESSION['username']);
-elseif(isset($_SESSION['matricola']) && $_SESSION['loginType'] == "Docente")
+elseif(isset($_SESSION['matricola']) && $_SESSION['loginType'] == "Docente") {
     $docenteLoggato = getDocenteFromMatricola($_SESSION['matricola']);
+    $corsi = getCorsiFromDocente($docenteLoggato->matricola);
+}
 else
     echo "<p>ERRORE</p>";
 ?>
@@ -91,15 +93,18 @@ else
             <div><hr class="redBar" /></div>
             <div class="container-esami">
                 <?php
-                if($_SESSION['loginType'] == "Docente" && $docenteLoggato->idCorso == 0)
+                if($_SESSION['loginType'] == "Docente" && !$corsi)
                     echo '<h2 style="text-align: center;">ERRORE: il docente non ha un corso assegnato.</h2>';
                 
-                elseif($_SESSION['loginType'] == "Docente" && $docenteLoggato->idCorso != 0) {
+                elseif($_SESSION['loginType'] == "Docente" && $corsi) {
                     
-                    if(isset($_POST['filtro']) && $_POST['filtro'] != "")
-                        displayAppelliAfterDate($_POST['filtro'], $docenteLoggato->idCorso);
-                    else
-                        displayAppelliAfterDate(date('Y-m-d'));
+                    foreach($corsi as $corso) {
+                        if(isset($_POST['filtro']) && $_POST['filtro'] != "")
+                            displayAppelliAfterDate($_POST['filtro'], $corso->id);
+                        else
+                            displayAppelliAfterDate(date('Y-m-d'));
+                    }
+
                 }
 
                 elseif($_SESSION['loginType'] == "Segretario" || $_SESSION['loginType'] == "Amministratore") {

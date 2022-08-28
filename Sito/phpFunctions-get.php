@@ -151,14 +151,17 @@ function getCorsiLike($_nome){
         $corso->idCorsoLaurea = $con->textContent;
         $con = $con->nextSibling;
         $stato = $con->textContent;
-        if(!$stato) continue;
+        if($stato != 1) continue;
+
         /*controllo sul nome*/
-        if(preg_match("/{$_nome}/i", $corso->nome) && $stato) $listaCorsi[] = $corso;
+        if(preg_match("/{$_nome}/i", $corso->nome) && $stato) 
+            $listaCorsi[] = $corso;
     }
     return $listaCorsi;
     }
 
-function getCorsoFormDocente($idDocente) {
+
+function getCorsiFromDocente($idDocente) {
     $xmlString = "";
     foreach ( file("../Xml/corsi.xml") as $node ) {
         $xmlString .= trim($node);
@@ -201,10 +204,11 @@ function getCorsoFormDocente($idDocente) {
         $corso->idCorsoLaurea = $con->textContent;
         $con = $con->nextSibling;
         $stato = $con->textContent;
-        if(!$stato) continue;
+        if($stato != 1) continue;
         
-        /*controllo sul nome*/
-        if($corso->matricolaDocente == $idDocente || $corso->matricolaDocente == $idDocente) $listaCorsi[] = $corso;
+        /*controllo sulla matricola*/
+        if($corso->matricolaDocente == $idDocente || $corso->matricolaCoDocente == $idDocente) 
+            $listaCorsi[] = $corso;
     }
     return $listaCorsi;
 }
@@ -265,7 +269,7 @@ function getCorsiFromCorsoDiLaureaLike($idCorsoLaurea, $_nome) {
         $corso->idCorsoLaurea = $con->textContent;
         $con = $con->nextSibling;
         $stato = $con->textContent;
-        if(!$stato) continue;
+        if($stato != 1) continue;
         
         /* Controllo sul nome e sul corso di laurea di appartenenza */
         if(preg_match("/{$_nome}/i", $corso->nome) && $corso->idCorsoLaurea == $idCorsoLaurea) 

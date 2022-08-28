@@ -394,7 +394,7 @@ function verificaEsameSostenuto($studente, $idCorso) {
         return FALSE;
     
     foreach($esamiSuperati as $esameSuperato)
-        if($esameSuperato->id == $idCorso)
+        if($esameSuperato == $idCorso)
             return TRUE;
     
     return FALSE;
