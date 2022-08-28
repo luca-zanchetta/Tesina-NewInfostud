@@ -1,5 +1,5 @@
 <?php
-require_once('phpFunctions.php');
+require_once('phpFunctions-insert.php');
 
 if(isset($_POST['prenota']) && isset($_POST['matricola']) && isset($_POST['idAppello'])) {
     if(inserisciPrenotazioneAppello($_POST['matricola'], $_POST['idAppello']))

@@ -1,7 +1,6 @@
 <?php
 require_once('phpClasses.php');
 require_once('phpFunctions-misc.php');
-require_once('phpFunctions-get.php');
 require_once('phpFunctions-insert.php');
 
 function getCorsi() {
@@ -1092,14 +1091,15 @@ function getAppelliPrenotati($studente) {
         $prenotazione->esito = $con->textContent;
         $con = $con->nextSibling;
         $stato = $con->textContent;
-        if($stato != 1) continue;
-
-        $appello = getAppelloFromId($prenotazione->idAppello);
-        $corso = getCorsoById($appello->idCorso);
-
-        if($prenotazione->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
-            if($prenotazione->esito == "NULL")
-                $listaPrenotazioni[] = $appello;
+        
+        if($stato != 0) {
+            $appello = getAppelloFromId($prenotazione->idAppello);
+            $corso = getCorsoById($appello->idCorso);
+    
+            if($prenotazione->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
+                if($prenotazione->esito == "NULL")
+                    $listaPrenotazioni[] = $appello;
+        }
     }
     return $listaPrenotazioni;
 }
