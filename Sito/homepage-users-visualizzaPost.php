@@ -1,11 +1,9 @@
 <?php
 session_start();
-require_once('../Sito/phpFunctions-get.php');
-require_once('../Sito/phpFunctions-insert.php');
-require_once('../Sito/phpFunctions-misc.php');
-require_once('phpClasses.php');
-require_once('phpFunctions-login.php');
-require_once('phpFunctions-display.php');
+require_once("../Sito/phpFunctions-get.php");
+require_once("../Sito/phpFunctions-display.php");
+require_once("../Sito/phpFunctions-modify.php");
+
 
 if(!isset($_SESSION['loginType']) || (isset($_SESSION['loginType']) && $_SESSION['loginType'] == "Docente"))
     header('Location: homepage.php');
@@ -15,19 +13,15 @@ if(isset($_SESSION['matricola']))
 
 switch ($_SESSION['loginType']) {
     case 'Studente':
-        # code...
         $utenzaLoggata = getStudenteFromMatricola($_SESSION['matricola']);
         break;
     case 'Segretario':
-        # code...
         $utenzaLoggata = getSegretarioFromUsername($_SESSION['username']);
         break;
     case 'Amministratore':
-        # code...
         $utenzaLoggata = getAdminFromUsername($_SESSION['username']);
         break;    
     default:
-        # code...
         break;
 }
 

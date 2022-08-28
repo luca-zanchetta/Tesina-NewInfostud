@@ -1,7 +1,6 @@
 <?php
 require_once('phpClasses.php');
-require_once('phpFunctions-misc.php');
-require_once('phpFunctions-insert.php');
+
 
 function getCorsi() {
     /*accedo al file xml*/
@@ -158,70 +157,71 @@ function getCorsiLike($_nome){
     return $listaCorsi;
     }
 
-    function getCorsoFormDocente($idDocente) {
-        $xmlString = "";
-        foreach ( file("../Xml/corsi.xml") as $node ) {
-            $xmlString .= trim($node);
-        }
+function getCorsoFormDocente($idDocente) {
+    $xmlString = "";
+    foreach ( file("../Xml/corsi.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
         
-        // Creazione del documento
-        $doc = new DOMDocument();
-        $doc->loadXML($xmlString);
-        $records = $doc->documentElement->childNodes;
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
      
-        $listaCorsi = [];
+    $listaCorsi = [];
      
-        for ($i=0; $i<$records->length; $i++) {
-             $corso = new corso("", "", "", "", "", "", "", "", "","");
-             $record = $records->item($i);
+    for ($i=0; $i<$records->length; $i++) {
+        $corso = new corso("", "", "", "", "", "", "", "", "","");
+        $record = $records->item($i);
              
-             $con = $record->firstChild;
-             $corso->id = $con->textContent;
-             $con = $con->nextSibling;
-             $corso->nome = $con->textContent;
-             $con = $con->nextSibling;
-             $corso->matricolaDocente = $con->textContent;
-             $con = $con->nextSibling;
-             $corso->matricolaCoDocente = $con->textContent;
-             $con = $con->nextSibling;
-             $corso->descrizione = $con->textContent;
-             $con = $con->nextSibling;
-             $corso->colore = $con->textContent;
-             $con = $con->nextSibling;
-             $corso->anno = $con->textContent;
-             $con = $con->nextSibling;
-             $corso->semstre = $con->textContent;
-             $con = $con->nextSibling;
-             $corso->curriculum = $con->textContent;
-             $con = $con->nextSibling;
-             $corso->cfu = $con->textContent;
-             $con = $con->nextSibling;
-             $corso->ssd = $con->textContent;
-             $con = $con->nextSibling;
-             $corso->idCorsoLaurea = $con->textContent;
-             $con = $con->nextSibling;
-             $stato = $con->textContent;
-             if(!$stato) continue;
-             /*controllo sul nome*/
-             if($corso->matricolaDocente == $idDocente || $corso->matricolaDocente == $idDocente) $listaCorsi[] = $corso;
-         }
-         return $listaCorsi;
+        $con = $record->firstChild;
+        $corso->id = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->nome = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->matricolaDocente = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->matricolaCoDocente = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->descrizione = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->colore = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->anno = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->semstre = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->curriculum = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->cfu = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->ssd = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->idCorsoLaurea = $con->textContent;
+        $con = $con->nextSibling;
+        $stato = $con->textContent;
+        if(!$stato) continue;
+        
+        /*controllo sul nome*/
+        if($corso->matricolaDocente == $idDocente || $corso->matricolaDocente == $idDocente) $listaCorsi[] = $corso;
+    }
+    return $listaCorsi;
+}
+
+function getCorsiFromCorsoDiLaurea($idCorsoLaurea) {
+    $listaCorsi = [];
+    $corsi = getCorsi();
+
+    foreach($corsi as $corso) {
+        if($corso->idCorsoLaurea == $idCorsoLaurea) 
+            $listaCorsi[] = $corso;
     }
 
-    function getCorsiFromCorsoDiLaurea($idCorsoLaurea) {
-        $listaCorsi = [];
-        $corsi = getCorsi();
-
-        foreach($corsi as $corso) {
-            if($corso->idCorsoLaurea == $idCorsoLaurea) 
-                $listaCorsi[] = $corso;
-        }
-
-        return $listaCorsi;
-    }
+    return $listaCorsi;
+}
 
 
-    function getCorsiFromCorsoDiLaureaLike($idCorsoLaurea, $_nome) {
+function getCorsiFromCorsoDiLaureaLike($idCorsoLaurea, $_nome) {
     $xmlString = "";
     foreach ( file("../Xml/corsi.xml") as $node ) {
         $xmlString .= trim($node);
@@ -239,31 +239,31 @@ function getCorsiLike($_nome){
         $record = $records->item($i);
         
         $con = $record->firstChild;
-       $corso->id = $con->textContent;
-       $con = $con->nextSibling;
-       $corso->nome = $con->textContent;
-       $con = $con->nextSibling;
-       $corso->matricolaDocente = $con->textContent;
-       $con = $con->nextSibling;
-       $corso->matricolaCoDocente = $con->textContent;
-       $con = $con->nextSibling;
-       $corso->descrizione = $con->textContent;
-       $con = $con->nextSibling;
-       $corso->colore = $con->textContent;
-       $con = $con->nextSibling;
-       $corso->anno = $con->textContent;
-       $con = $con->nextSibling;
-       $corso->semstre = $con->textContent;
-       $con = $con->nextSibling;
-       $corso->curriculum = $con->textContent;
-       $con = $con->nextSibling;
-       $corso->cfu = $con->textContent;
-       $con = $con->nextSibling;
-       $corso->ssd = $con->textContent;
-       $con = $con->nextSibling;
-       $corso->idCorsoLaurea = $con->textContent;
-       $con = $con->nextSibling;
-       $stato = $con->textContent;
+        $corso->id = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->nome = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->matricolaDocente = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->matricolaCoDocente = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->descrizione = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->colore = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->anno = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->semstre = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->curriculum = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->cfu = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->ssd = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->idCorsoLaurea = $con->textContent;
+        $con = $con->nextSibling;
+        $stato = $con->textContent;
         if(!$stato) continue;
         
         /* Controllo sul nome e sul corso di laurea di appartenenza */
@@ -303,38 +303,6 @@ function getNomeCorso($num) {
    return $nomeCorso;
 }
 
-
-// function getColoreCorso($num) {
-//    $xmlString = "";
-//    foreach ( file("../Xml/corsi.xml") as $node ) {
-//        $xmlString .= trim($node);
-//    }
-   
-//    // Creazione del documento
-//    $doc = new DOMDocument();
-//    $doc->loadXML($xmlString);
-//    $records = $doc->documentElement->childNodes;
-
-//    if($records->length > 0) { /* C'è almeno un corso */
-//        for ($i=0; $i<$records->length; $i++) {
-//            $record = $records->item($i); // i-esimo corso
-
-//            $idElement = $record->firstChild;   // Id
-//            $id = $idElement->textContent;
-//            if($id == $num) {
-//                $nomeCorsoElement = $idElement->nextSibling;
-//                $descrizioneElement = $nomeCorsoElement->nextSibling;
-//                $infoProfElement = $descrizioneElement->nextSibling;
-
-//                $coloreCorsoElement = $infoProfElement->nextSibling;
-//                $coloreCorso = $coloreCorsoElement->textContent;
-//            }
-//        }
-//    }
-//    else $coloreCorso = "white";
-
-//    return $coloreCorso;
-// }
 
 function cercaCorso($nomeCorsoDaCercare) {
     $xmlString = "";
@@ -645,7 +613,7 @@ function getStudenti() {
     $listaStudenti = [];
      
     for ($i=0; $i<$records->length; $i++) {
-        $studente = new studente("", "", "", "");  # Default constructor
+        $studente = new studente("", "", "", "", 0);  # Default constructor
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -668,7 +636,7 @@ function getStudenti() {
         $studente->idCorsoLaurea = $con->textContent;
         $con = $con->nextSibling;
         $stato = $con->textContent;
-        if($stato) 
+        if($stato != 0) 
             $listaStudenti[] = $studente;
     }
     return $listaStudenti;
@@ -688,7 +656,7 @@ function getStudenteFromMatricola($matr) {
     $records = $doc->documentElement->childNodes;
      
     for ($i=0; $i<$records->length; $i++) {
-        $studente = new studente("", "", "", "");  # Default constructor
+        $studente = new studente("", "", "", "", 0);  # Default constructor
         $record = $records->item($i);
              
         $con = $record->firstChild;
@@ -812,6 +780,37 @@ function getSegretarioFromUsername($uname) {
 }
 
 
+function getAmministratori() {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/amministrazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+
+    $listaAdmin = [];
+    for ($i=0; $i<$records->length; $i++) {
+        $admin = new amministratore("", "");  # Default constructor
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $admin->username = $con->textContent;
+        $con = $con->nextSibling;
+        $admin->password = $con->textContent;
+        $con = $con->nextSibling;
+        $stato = $con->textContent;
+
+        if($stato != 0)
+            $listaAdmin[] = $admin;
+    }
+    return $listaAdmin;
+}
+
+
 function getAdminFromUsername($uname) {
     /*accedo al file xml*/
     $xmlString = "";
@@ -836,7 +835,7 @@ function getAdminFromUsername($uname) {
         $con = $con->nextSibling;
         $stato = $con->textContent;
 
-        if($admin->username == $uname && !$stato)
+        if($admin->username == $uname && $stato != 0)
             return $admin;
     }
     return NULL;
@@ -1588,9 +1587,10 @@ function getPostReplies($idPost) {
 
         if($tmp == $idPost && $stato)
             $replies++;
-    return $replies;
     }
+    return $replies;
 }
+
 
 function getPostComments($idPost) {
     $xmlString = "";
@@ -1628,6 +1628,7 @@ function getPostComments($idPost) {
 
     return $listaCommenti;//voto non dato
 }
+
 
 function getPostFromId($_idPost){
     $xmlString = "";
@@ -1668,6 +1669,7 @@ function getPostFromId($_idPost){
     return null;//voto non dato
 }
 
+
 function getVotoCommento($idCommento,$matricola) {
     $xmlString = "";
     foreach ( file("../Xml/votoCommento.xml") as $node ) {
@@ -1700,5 +1702,4 @@ function getVotoCommento($idCommento,$matricola) {
     }
     return null;//voto non dato
 }
-
 ?>

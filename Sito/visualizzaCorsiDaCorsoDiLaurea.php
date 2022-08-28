@@ -1,8 +1,7 @@
 <?php
 session_start();
 require_once('../Sito/phpFunctions-get.php');
-require_once('../Sito/phpFunctions-insert.php');
-require_once('../Sito/phpFunctions-misc.php');
+
 
 if(!isset($_POST['idCorsoLaurea'])) {
     if(isset($_SESSION['loginType']))

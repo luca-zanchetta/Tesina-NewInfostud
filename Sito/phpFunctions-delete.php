@@ -1,5 +1,6 @@
 <?php
-require_once('phpClasses.php');
+require_once('phpFunctions-modify.php');
+
 
 /* ================================= 
 ======== Delete functions ==========

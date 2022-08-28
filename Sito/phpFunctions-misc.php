@@ -1,7 +1,6 @@
 <?php
-require_once('phpClasses.php');
 require_once('phpFunctions-get.php');
-require_once('phpFunctions-insert.php');
+
 
 function generaMatricola($tipoUtenza) {
     $file = "";
@@ -71,6 +70,57 @@ function verificaPresenzaAppello($appello) {
     return FALSE;
 }
 
+
+function verificaPresenzaStudente($studente) {
+    if($studente == NULL)
+        return FALSE;
+
+    $studenti = getStudenti();
+    foreach($studenti as $stud)
+        if($stud->nome == $studente->nome && $stud->cognome == $studente->cognome)
+            return TRUE;
+    
+    return FALSE;
+}
+
+
+function verificaPresenzaDocente($docente) {
+    if($docente == NULL)
+        return FALSE;
+
+    $docenti = getDocenti();
+    foreach($docenti as $doc)
+        if($doc->nome == $docente->nome && $doc->cognome == $docente->cognome)
+            return TRUE;
+    
+    return FALSE;
+}
+
+
+function verificaPresenzaSegretario($segretario) {
+    if($segretario == NULL)
+        return FALSE;
+
+    $segretari = getSegretari();
+    foreach($segretari as $seg)
+        if($seg->username == $segretario->username)
+            return TRUE;
+    
+    return FALSE;
+}
+
+
+function verificaPresenzaAmministratore($admin) {
+    if($admin == NULL)
+        return FALSE;
+
+    $admins = getAmministratori();
+    foreach($admins as $amm)
+        if($amm->username == $admin->username)
+            return TRUE;
+    
+    return FALSE;
+}
 
 
 function nextFaqid(){
@@ -322,6 +372,4 @@ function calcolaIdPrenotazione() {
 
     return $id;
 }
-
-
 ?>

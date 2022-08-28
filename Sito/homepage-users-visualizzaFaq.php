@@ -1,14 +1,12 @@
 <?php
 session_start();
-require_once('../Sito/phpFunctions-get.php');
-require_once('../Sito/phpFunctions-insert.php');
-require_once('../Sito/phpFunctions-misc.php');
-require_once('phpClasses.php');
-require_once('phpFunctions-login.php');
-require_once('phpFunctions-display.php');
+require_once("../Sito/phpFunctions-get.php");
+require_once("../Sito/phpFunctions-display.php");
+
 
 if(!isset($_SESSION['loginType']))
     header('Location: homepage.php');
+
 //otteniamo l'oggetto associato all'utenza
 if(!isset($_GET["idCorso"]) && $_SESSION['loginType']!= 'Docente')
     header('Location: homepage.php');
@@ -16,26 +14,22 @@ if(!isset($_GET["idCorso"]) && $_SESSION['loginType']!= 'Docente')
 
 switch ($_SESSION['loginType']) {
     case 'Studente':
-        # code...
         $utenzaLoggata = getStudenteFromMatricola($_SESSION['matricola']);
         break;
     case 'Docente':
-        # code...
         $utenzaLoggata = getDocenteFromMatricola($_SESSION['matricola']);
         $corso = getCorsoById($utenzaLoggata->idCorso);
         break;
     case 'Segretario':
-        # code...
         $utenzaLoggata = getSegretarioFromUsername($_SESSION['username']);
         break;
     case 'Amministratore':
-        # code...
         $utenzaLoggata = getAdminFromUsername($_SESSION['username']);
         break;    
     default:
-        # code...
         break;
 }
+
 //otteniamo il corso che deve essere visualizzato
 if($_SESSION['loginType']!= 'Docente') $corso = getCorsoById($_GET["idCorso"]);
 $listaFaqComplete = getFaqComplete($corso->id);

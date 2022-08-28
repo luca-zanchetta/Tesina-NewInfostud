@@ -1,9 +1,13 @@
 <?php
 //implenentazione del pattern Post/Redirect/Get per 
 //l'eliminazione di una nuova faq
-require_once('phpFunctions.php');
-require_once('phpClasses.php');
 session_start();
+require_once('phpFunctions-insert.php');
+require_once('phpFunctions-delete.php');
+#require_once('phpFunctions-modify.php');
+require_once('phpClasses.php');
+
+
 if(!isset($_SESSION['loginType']))
     header('Location: homepage.php');
 

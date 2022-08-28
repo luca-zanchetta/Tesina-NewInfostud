@@ -1,5 +1,8 @@
 <?php
 require_once('phpClasses.php');
+require_once('phpFunctions-get.php');
+require_once('phpFunctions-misc.php');
+
 
 /* ================================= 
 ======== Modify functions ==========
@@ -90,6 +93,7 @@ function calcolaMedia_CFU($studente) {
     }
 
     $media = $sommaVoti/$numeroEsamiSuperati;
+    round($media, 2);   # La media ha due cifre significative
 
 
     // Modifica dei dati dello studente
@@ -426,7 +430,7 @@ function modificaCorso($idCorso, $nome, $descrizione, $matricolaDocente, $matric
             $corso->nome = $nome;
             $corso->descrizione = $descrizione;
             $corso->matricolaDocente = $matricolaDocente;
-            $corso->matricolaCoDocente = $matricolaCodocente
+            $corso->matricolaCoDocente = $matricolaCodocente;
             $corso->anno = $anno;
             $corso->semestre = $semestre;
             $corso->curriculum = $curriculum;

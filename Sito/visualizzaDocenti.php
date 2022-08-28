@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('../Sito/phpFunctions.php');
+require_once('../Sito/phpFunctions-get.php');
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>

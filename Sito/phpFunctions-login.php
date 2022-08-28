@@ -1,8 +1,4 @@
 <?php
-require_once('../Sito/phpFunctions-get.php');
-require_once('../Sito/phpFunctions-insert.php');
-require_once('../Sito/phpFunctions-misc.php');
-
 /* ================================= 
 ========= Login functions ==========
 ==================================== */
@@ -150,5 +146,4 @@ function verificaPasswordSegretarioAmministratore($password, $loginType) {
 
     return FALSE;
 }
-
 ?>

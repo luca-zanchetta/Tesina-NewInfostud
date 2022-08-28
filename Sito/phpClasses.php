@@ -47,7 +47,7 @@ class studente {
     public $media;
     public $idCorsoLaurea;
 
-    public function __construct($nome, $cognome, $password, $dataNascita) {
+    public function __construct($nome, $cognome, $password, $dataNascita, $idCorsoLaurea) {
         $this->matricola = generaMatricola("Studente");
         $this->nome = $nome;
         $this->cognome = $cognome;
@@ -56,7 +56,7 @@ class studente {
         $this->reputazioneTotale = 0;
         $this->cfuTotale = 0;
         $this->media = 0;
-        $this->idCorsoLaurea = 0;   /* stato intermedio? */  
+        $this->idCorsoLaurea = $idCorsoLaurea;  
     }
 }
 

@@ -1,6 +1,9 @@
 <?php
 session_start();
-require_once('phpFunctions.php');
+require_once('phpFunctions-modify.php');
+require_once('phpFunctions-get.php');
+require_once('phpFunctions-display.php');
+
 
 if(!isset($_SESSION['loginType']) || $_SESSION['loginType'] != "Amministratore")
     header('Location: homepage.php');
