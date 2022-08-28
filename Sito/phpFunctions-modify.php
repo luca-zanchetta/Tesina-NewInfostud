@@ -91,9 +91,15 @@ function calcolaMedia_CFU($studente) {
         $cfuTot += $corso->cfu;
         $sommaVoti += intval($esameSuperato->esito);
     }
-
-    $media = $sommaVoti/$numeroEsamiSuperati;
-    round($media, 2);   # La media ha due cifre significative
+    
+    if($numeroEsamiSuperati == 0) {
+        $cfuTot = 0;
+        $media = 0.0;
+    }
+    else {
+        $media = $sommaVoti/$numeroEsamiSuperati;
+        round($media, 2);   # La media ha due cifre significative
+    }   
 
 
     // Modifica dei dati dello studente

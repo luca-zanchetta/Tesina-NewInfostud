@@ -372,4 +372,31 @@ function calcolaIdPrenotazione() {
 
     return $id;
 }
+
+
+function verificaAppelloPrenotato($studente, $appello) {
+    $appelliPrenotati = getAppelliPrenotati($studente);
+
+    if(!$appelliPrenotati)
+        return FALSE;
+    
+    foreach($appelliPrenotati as $appelloPrenotato)
+        if($appello->id == $appelloPrenotato->id)
+            return TRUE;
+    
+    return FALSE;
+}
+
+function verificaEsameSostenuto($studente, $idCorso) {
+    $esamiSuperati = getEsamiSuperati($studente);
+
+    if(!$esamiSuperati)
+        return FALSE;
+    
+    foreach($esamiSuperati as $esameSuperato)
+        if($esameSuperato->id == $idCorso)
+            return TRUE;
+    
+    return FALSE;
+}
 ?>

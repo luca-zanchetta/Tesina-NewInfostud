@@ -1,5 +1,6 @@
 <?php
 require_once('phpClasses.php');
+require_once('phpFunctions-misc.php');
 
 
 function getCorsi() {
@@ -1008,14 +1009,14 @@ function getEsamiSostenuti($studente) {
         $esame->esito = $con->textContent;
         $con = $con->nextSibling;
         $stato = $con->textContent;
-        if($stato != 1) continue;
-
-        $appello = getAppelloFromId($esame->idAppello);
-        $corso = getCorsoById($appello->idCorso);
-
-        if($esame->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
-            if($esame->esito != "NULL")
-                $listaEsami[] = $esame;
+        if($stato == 1) {
+            $appello = getAppelloFromId($esame->idAppello);
+            $corso = getCorsoById($appello->idCorso);
+    
+            if($esame->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
+                if($esame->esito != "NULL")
+                    $listaEsami[] = $esame;
+        }
     }
     return $listaEsami;
 }
@@ -1049,14 +1050,14 @@ function getEsamiSuperati($studente) {
         $esame->esito = $con->textContent;
         $con = $con->nextSibling;
         $stato = $con->textContent;
-        if($stato != 1) return;
-
-        $appello = getAppelloFromId($esame->idAppello);
-        $corso = getCorsoById($appello->idCorso);
-
-        if($esame->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
-            if($esame->esito != "NULL" && $esame->esito != "R" && $esame->esito != "B")
-                $listaEsamiSuperati[] = $corso->id;
+        if($stato == 1) {
+            $appello = getAppelloFromId($esame->idAppello);
+            $corso = getCorsoById($appello->idCorso);
+    
+            if($esame->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
+                if($esame->esito != "NULL" && $esame->esito != "R" && $esame->esito != "B")
+                    $listaEsamiSuperati[] = $corso->id;
+        }
     }
     return $listaEsamiSuperati;
 }
@@ -1091,7 +1092,7 @@ function getAppelliPrenotati($studente) {
         $con = $con->nextSibling;
         $stato = $con->textContent;
         
-        if($stato != 0) {
+        if($stato == 1) {
             $appello = getAppelloFromId($prenotazione->idAppello);
             $corso = getCorsoById($appello->idCorso);
     
@@ -1110,20 +1111,13 @@ function getAppelliPrenotabili($studente) {
     if(!$appelli)
         return NULL;
 
-    
-    $appelliPrenotati = [];
-    $appelliPrenotati = getAppelliPrenotati($studente);
-
-    $esamiSuperati = [];
-    $esamiSuperati = getEsamiSuperati($studente);
-
     $appelliPrenotabili = [];
     foreach($appelli as $appello) {
         $dataAppello = getDataFromDataora($appello->dataOra);
         $dataAppello = strtotime($dataAppello);
         $dataAppello = date('Y-m-d', $dataAppello);
 
-        if($dataAppello > date('Y-m-d') && !in_array($appello, $appelliPrenotati) && !in_array($appello->idCorso, $esamiSuperati))
+        if($dataAppello > date('Y-m-d') && !verificaAppelloPrenotato($studente, $appello) && !verificaEsameSostenuto($studente, $appello->idCorso))
             $appelliPrenotabili[] = $appello;
     }
 
@@ -1160,14 +1154,14 @@ function getAppelliAfterDate($data) {
         $appello->dataOra = $con->textContent;
         $con = $con->nextSibling;
         $stato = $con->textContent;
-        if($stato != 1) continue;
-
-        $dataAppello = getDataFromDataora($appello->dataOra);
-        $dataAppello = strtotime($dataAppello);
-        $dataAppello = date('Y-m-d', $dataAppello);
-
-        if($dataAppello >= $dataRif)
-            $listaAppelli[] = $appello;
+        if($stato == 1) {
+            $dataAppello = getDataFromDataora($appello->dataOra);
+            $dataAppello = strtotime($dataAppello);
+            $dataAppello = date('Y-m-d', $dataAppello);
+    
+            if($dataAppello >= $dataRif)
+                $listaAppelli[] = $appello;
+        }
     }
     return $listaAppelli;
 }
@@ -1202,14 +1196,14 @@ function getAppelliAfterDateFromCorso($data, $idCorso) {
         $appello->dataOra = $con->textContent;
         $con = $con->nextSibling;
         $stato = $con->textContent;
-        if($stato != 1) continue;
-
-        $dataAppello = getDataFromDataora($appello->dataOra);
-        $dataAppello = strtotime($dataAppello);
-        $dataAppello = date('Y-m-d', $dataAppello);
-
-        if($dataAppello >= $dataRif && $appello->idCorso == $idCorso)
-            $listaAppelli[] = $appello;
+        if($stato == 1) {
+            $dataAppello = getDataFromDataora($appello->dataOra);
+            $dataAppello = strtotime($dataAppello);
+            $dataAppello = date('Y-m-d', $dataAppello);
+    
+            if($dataAppello >= $dataRif && $appello->idCorso == $idCorso)
+                $listaAppelli[] = $appello;
+        }
     }
     return $listaAppelli;
 }
@@ -1253,14 +1247,14 @@ function getPrenotazioniStudente($studente) {
         $prenotazione->esito = $con->textContent;
         $con = $con->nextSibling;
         $stato = $con->textContent;
-        if($stato != 1) return;
-
-        $appello = getAppelloFromId($prenotazione->idAppello);
-        $corso = getCorsoById($appello->idCorso);
-
-        if($prenotazione->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
-            if($prenotazione->esito == "NULL")
-                $listaPrenotazioni[] = $prenotazione;
+        if($stato == 1) {
+            $appello = getAppelloFromId($prenotazione->idAppello);
+            $corso = getCorsoById($appello->idCorso);
+    
+            if($prenotazione->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
+                if($prenotazione->esito == "NULL")
+                    $listaPrenotazioni[] = $prenotazione;
+        }
     }
     return $listaPrenotazioni;
 }
@@ -1295,7 +1289,7 @@ function getPrenotazioniFromAppello($idAppello) {
         $con = $con->nextSibling;
         $stato = $con->textContent;
 
-        if($prenotazione->idAppello == $idAppello && $prenotazione->esito == "NULL" && $stato)
+        if($prenotazione->idAppello == $idAppello && $prenotazione->esito == "NULL" && $stato == 1)
             $listaPrenotazioni[] = $prenotazione;
     }
     return $listaPrenotazioni;
@@ -1331,7 +1325,7 @@ function getFullPrenotazioni() {
         $con = $con->nextSibling;
         $stato = $con->textContent;
 
-        if($stato)
+        if($stato == 1)
             $listaPrenotazioni[] = $prenotazione;
     }
     return $listaPrenotazioni;
@@ -1368,7 +1362,7 @@ function getPrenotazioneFromId($idPrenotazione) {
         $con = $con->nextSibling;
         $stato = $con->textContent;
 
-        if($prenotazione->id == $idPrenotazione && $stato)
+        if($prenotazione->id == $idPrenotazione && $stato == 1)
             return $prenotazione;
     }
     return NULL;
@@ -1404,7 +1398,7 @@ function getVerbalizzazioniPositive($studente) {
         $con = $con->nextSibling;
         $stato = $con->textContent;
 
-        if($prenotazione->matricolaStudente == $studente->matricola && $prenotazione->esito != "NULL" && $prenotazione->esito != "R" && $prenotazione->esito != "B" && $stato)
+        if($prenotazione->matricolaStudente == $studente->matricola && $prenotazione->esito != "NULL" && $prenotazione->esito != "R" && $prenotazione->esito != "B" && $stato == 1)
             $listaPrenotazioni[] = $prenotazione;
     }
     return $listaPrenotazioni;

@@ -1,5 +1,6 @@
 <?php
 require_once('phpFunctions-get.php');
+require_once('phpFunctions-modify.php');
 
 
 function creaSidebar($loginType) {
@@ -441,7 +442,10 @@ function displayAnagraficaAmministratore($amministratore) {
 
 
 function displayCarrieraStudente($studente) {
-    $corsoDiLaurea = getNomeCorsoDiLaureaByID($studente->idCorsoLaurea);
+    $tmp = calcolaMedia_CFU($studente);
+    $stud = getStudenteFromMatricola($studente->matricola);
+    
+    $corsoDiLaurea = getNomeCorsoDiLaureaByID($stud->idCorsoLaurea);
     echo '
     <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
         <div style="margin-left: 2%;"> 
@@ -449,13 +453,13 @@ function displayCarrieraStudente($studente) {
                 <h2>Corso di laurea: '.$corsoDiLaurea.'</h2>
             </div>  
             <div class="infoVoice">
-                <h2>Reputazione totale: '.$studente->reputazioneTotale.'</h2>
+                <h2>Reputazione totale: '.$stud->reputazioneTotale.'</h2>
             </div>  
             <div class="infoVoice">
-                <h2>CFU totali: '.$studente->cfuTotale.'</h2>
+                <h2>CFU totali: '.$stud->cfuTotale.'</h2>
             </div>
             <div class="infoVoice">
-                <h2>Media voti: '.$studente->media.'</h2>
+                <h2>Media voti: '.$stud->media.'</h2>
             </div>
         </div>
     </div>
