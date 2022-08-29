@@ -12,8 +12,10 @@ if(isset($_SESSION['username']) && $_SESSION['loginType'] == "Amministratore")
     $adminLoggato = getAdminFromUsername($_SESSION['username']);
 elseif(isset($_SESSION['username']) && $_SESSION['loginType'] == "Segretario")
     $segretarioLoggato = getSegretarioFromUsername($_SESSION['username']);
-elseif(isset($_SESSION['matricola']) && $_SESSION['loginType'] == "Docente")
+elseif(isset($_SESSION['matricola']) && $_SESSION['loginType'] == "Docente") {
     $docenteLoggato = getDocenteFromMatricola($_SESSION['matricola']);
+    $insegnamenti = getCorsiFromDocente($docenteLoggato->matricola);
+}
 else
     echo "<p>ERRORE</p>";
 
@@ -30,23 +32,14 @@ if(isset($_POST['modifica']) && isset($_POST['idAppello']) && isset($_POST['idCo
 if(isset($_POST['invio'])) {
     $idAppello = $_POST['idAppello'];
 
-    if($_SESSION['loginType'] == "Docente" && $docenteLoggato->idCorso != 0) {
-        if((isset($_POST['data']) && $_POST['data'] != "") &&
-           (isset($_POST['ora']) && $_POST['ora'] != "")) {
+    if((isset($_POST['data']) && $_POST['data'] != "") &&
+       (isset($_POST['ora']) && $_POST['ora'] != "") &&
+       (isset($_POST['corso']) && $_POST['corso'] != "seleziona")) {
 
-                $dataOra = "".strval($_POST['data'])." ".strval($_POST['ora'])."";
-                $tmp = modificaAppello($idAppello, $_POST['data'], $_POST['ora'], $docenteLoggato->idCorso);
-        }
+        $dataOra = "".strval($_POST['data'])." ".strval($_POST['ora'])."";
+        $tmp = modificaAppello($idAppello, $_POST['data'], $_POST['ora'], $_POST['corso']);
     }
-    else {
-        if((isset($_POST['data']) && $_POST['data'] != "") &&
-           (isset($_POST['ora']) && $_POST['ora'] != "") &&
-           (isset($_POST['corso']) && $_POST['corso'] != "seleziona")) {
 
-                $dataOra = "".strval($_POST['data'])." ".strval($_POST['ora'])."";
-                $tmp = modificaAppello($idAppello, $_POST['data'], $_POST['ora'], $_POST['corso']);
-        }
-    }
 
     if(!$tmp) {
         setcookie('modificaAppello', 'ERRORE: Modifica appello fallita.');
@@ -126,7 +119,7 @@ if(isset($_POST['invio'])) {
                 <hr class="redBar" />
             </div>
             <?php
-            if($_SESSION['loginType'] == "Docente" && $docenteLoggato->idCorso == 0)
+            if($_SESSION['loginType'] == "Docente" && !$insegnamenti)
                 echo '<h2 style="text-align: center;">ERRORE: il docente non ha un corso assegnato.</h2>';
             else {
             ?>
@@ -136,10 +129,7 @@ if(isset($_POST['invio'])) {
                     <div class="labels">
                         <h3>Data: </h3>
                         <h3>Ora: </h3>
-                        <?php
-                        if($_SESSION['loginType'] != "Docente")
-                            echo "<h3>Corso: </h3>";
-                        ?>
+                        <h3>Corso: </h3>
                     </div>
                     <div class="inputs">
                     <?php
@@ -152,20 +142,27 @@ if(isset($_POST['invio'])) {
                         echo "<input class=\"textField\" type=\"time\" name=\"ora\" value=\"{$ora}\" required>";
                     elseif(!isset($_POST['dataOra']))
                         echo "<input class=\"textField\" type=\"time\" name=\"ora\" required>";
-
-                    
-                    if($_SESSION['loginType'] != "Docente") {?>
-                    <select class="choice" name="corso" style="width: 52%;" onfocus='this.size=3; this.style="width: 75%;";' onblur='this.size=1; this.style="width: 52%;";' onchange='this.size=1; this.blur(); this.style="width: 52%;";'>
+                    ?>
+                    <select class="choice" name="corso" style="width: 60%;" onfocus='this.size=3; this.style="width: 90%;";' onblur='this.size=1; this.style="width: 60%;";' onchange='this.size=1; this.blur(); this.style="width: 60%;";'>
                         <?php
                             if(isset($_POST['idCorso']))
                                 echo "<option value=\"{$corso->id}\">{$corso->nome}</option>";
                             elseif(!isset($_POST['idCorso']))
                                 echo "<option value=\"seleziona\">Corso...</option>";
                                         
-                            $corsi = [];
-                            $corsi = getCorsi();
-                            foreach($corsi as $corso) {
-                                echo "<option value=\"{$corso->id}\">{$corso->nome}</option>";
+                            if($_SESSION['loginType'] == "Docente") {
+                                $corsi = [];
+                                $corsi = getCorsiFromDocente($docenteLoggato->matricola);
+                                foreach($corsi as $corso) {
+                                    echo "<option value=\"{$corso->id}\">{$corso->nome}</option>";
+                                }
+                            }
+                            else {
+                                $corsi = [];
+                                $corsi = getCorsi();
+                                foreach($corsi as $corso) {
+                                    echo "<option value=\"{$corso->id}\">{$corso->nome}</option>";
+                                }
                             }
                         ?>
                     </select><?php
@@ -178,9 +175,6 @@ if(isset($_POST['invio'])) {
                 <input type="hidden" name="idAppello" value="<?php echo $_POST['idAppello']; ?>">
             </form>
             </div>
-            <?php
-            }
-            ?>
         </div>
     </div>
 </div>

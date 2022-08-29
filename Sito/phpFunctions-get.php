@@ -18,7 +18,7 @@ function getCorsi() {
    $listaCorsi = [];
 
    for ($i=0; $i<$records->length; $i++) {
-       $corso = new corso("", "", "", "", "", "", "", "", "","");
+       $corso = new corso("", "", 0, 0, 0, 0, "", 0, "", 0);
        $record = $records->item($i);
        
        $con = $record->firstChild;
@@ -36,7 +36,7 @@ function getCorsi() {
        $con = $con->nextSibling;
        $corso->anno = $con->textContent;
        $con = $con->nextSibling;
-       $corso->semstre = $con->textContent;
+       $corso->semestre = $con->textContent;
        $con = $con->nextSibling;
        $corso->curriculum = $con->textContent;
        $con = $con->nextSibling;
@@ -89,7 +89,7 @@ function getCorsoById($_id) {
        $con = $con->nextSibling;
        $corso->anno = $con->textContent;
        $con = $con->nextSibling;
-       $corso->semstre = $con->textContent;
+       $corso->semestre = $con->textContent;
        $con = $con->nextSibling;
        $corso->curriculum = $con->textContent;
        $con = $con->nextSibling;
@@ -140,7 +140,7 @@ function getCorsiLike($_nome){
         $con = $con->nextSibling;
         $corso->anno = $con->textContent;
         $con = $con->nextSibling;
-        $corso->semstre = $con->textContent;
+        $corso->semestre = $con->textContent;
         $con = $con->nextSibling;
         $corso->curriculum = $con->textContent;
         $con = $con->nextSibling;
@@ -193,7 +193,7 @@ function getCorsiFromDocente($idDocente) {
         $con = $con->nextSibling;
         $corso->anno = $con->textContent;
         $con = $con->nextSibling;
-        $corso->semstre = $con->textContent;
+        $corso->semestre = $con->textContent;
         $con = $con->nextSibling;
         $corso->curriculum = $con->textContent;
         $con = $con->nextSibling;
@@ -258,7 +258,7 @@ function getCorsiFromCorsoDiLaureaLike($idCorsoLaurea, $_nome) {
         $con = $con->nextSibling;
         $corso->anno = $con->textContent;
         $con = $con->nextSibling;
-        $corso->semstre = $con->textContent;
+        $corso->semestre = $con->textContent;
         $con = $con->nextSibling;
         $corso->curriculum = $con->textContent;
         $con = $con->nextSibling;
@@ -567,40 +567,40 @@ function getDocentiLike($_nome) {
 }
 
 
-function getDocentiDisponibili() {
-    /*accedo al file xml*/
-    $xmlString = "";
-    foreach ( file("../Xml/docenti.xml") as $node ) {
-        $xmlString .= trim($node);
-    }
+// function getDocentiDisponibili() {
+//     /*accedo al file xml*/
+//     $xmlString = "";
+//     foreach ( file("../Xml/docenti.xml") as $node ) {
+//         $xmlString .= trim($node);
+//     }
          
-    // Creazione del documento
-    $doc = new DOMDocument();
-    $doc->loadXML($xmlString);
-    $records = $doc->documentElement->childNodes;
+//     // Creazione del documento
+//     $doc = new DOMDocument();
+//     $doc->loadXML($xmlString);
+//     $records = $doc->documentElement->childNodes;
      
-    $listaDocenti = [];
+//     $listaDocenti = [];
      
-    for ($i=0; $i<$records->length; $i++) {
-        $docente = new docente("", "", "", 0);  # Default constructor
-        $record = $records->item($i);
+//     for ($i=0; $i<$records->length; $i++) {
+//         $docente = new docente("", "", "", 0);  # Default constructor
+//         $record = $records->item($i);
              
-        $con = $record->firstChild;
-        $docente->matricola = $con->textContent;
-        $con = $con->nextSibling;
-        $docente->nome = $con->textContent;
-        $con = $con->nextSibling;
-        $docente->cognome = $con->textContent;
-        $con = $con->nextSibling;
-        $docente->password = $con->textContent;
-        $con = $con->nextSibling;
-        $stato = $con->textContent;
+//         $con = $record->firstChild;
+//         $docente->matricola = $con->textContent;
+//         $con = $con->nextSibling;
+//         $docente->nome = $con->textContent;
+//         $con = $con->nextSibling;
+//         $docente->cognome = $con->textContent;
+//         $con = $con->nextSibling;
+//         $docente->password = $con->textContent;
+//         $con = $con->nextSibling;
+//         $stato = $con->textContent;
 
-        if($docente->idCorso == 0 && $stato != 0) 
-            $listaDocenti[] = $docente;
-    }
-    return $listaDocenti;
-}
+//         if($docente->idCorso == 0 && $stato != 0) 
+//             $listaDocenti[] = $docente;
+//     }
+//     return $listaDocenti;
+// }
 
 
 function getStudenti() {

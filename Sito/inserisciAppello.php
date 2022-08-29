@@ -13,8 +13,10 @@ if(isset($_SESSION['username']) && $_SESSION['loginType'] == "Amministratore")
     $adminLoggato = getAdminFromUsername($_SESSION['username']);
 elseif(isset($_SESSION['username']) && $_SESSION['loginType'] == "Segretario")
     $segretarioLoggato = getSegretarioFromUsername($_SESSION['username']);
-elseif(isset($_SESSION['matricola']) && $_SESSION['loginType'] == "Docente")
+elseif(isset($_SESSION['matricola']) && $_SESSION['loginType'] == "Docente") {
     $docenteLoggato = getDocenteFromMatricola($_SESSION['matricola']);
+    $insegnamenti = getCorsiFromDocente($docenteLoggato->matricola);
+}
 else
     echo "<p>ERRORE</p>";
 
@@ -120,7 +122,7 @@ if(isset($_POST['invio'])) {
                 <hr class="redBar" />
             </div>
             <?php
-            if($_SESSION['loginType'] == "Docente" && $docenteLoggato->idCorso == 0)
+            if($_SESSION['loginType'] == "Docente" && !$insegnamenti)
                 echo '<h2 style="text-align: center;">ERRORE: il docente non ha un corso assegnato.</h2>';
             else {
             ?>
@@ -130,10 +132,7 @@ if(isset($_POST['invio'])) {
                     <div class="labels">
                         <h3>Data: </h3>
                         <h3>Ora: </h3>
-                        <?php
-                        if($_SESSION['loginType'] != "Docente")
-                            echo "<h3>Corso: </h3>";
-                        ?>
+                        <h3>Corso: </h3>
                     </div>
                     <div class="inputs">
                     <?php
@@ -146,10 +145,8 @@ if(isset($_POST['invio'])) {
                         echo "<input class=\"textField\" type=\"time\" name=\"ora\" value=\"{$_POST['ora']}\" required>";
                     elseif(!isset($_POST['ora']))
                         echo "<input class=\"textField\" type=\"time\" name=\"ora\" required>";
-
-                    
-                    if($_SESSION['loginType'] != "Docente") {?>
-                    <select class="choice" name="corso" style="width: 52%;" onfocus='this.size=3; this.style="width: 75%;";' onblur='this.size=1; this.style="width: 52%;";' onchange='this.size=1; this.blur(); this.style="width: 52%;";'>
+                    ?>
+                    <select class="choice" name="corso" style="width: 60%;" onfocus='this.size=3; this.style="width: 90%;";' onblur='this.size=1; this.style="width: 60%;";' onchange='this.size=1; this.blur(); this.style="width: 60%;";'>
                         <?php
                             if(isset($_POST['corso']) && $_POST['corso'] != "seleziona") {
                                 $corso = getCorsoById($_POST['corso']);
@@ -157,11 +154,20 @@ if(isset($_POST['invio'])) {
                             }
                             elseif(!isset($_POST['corso']))
                                 echo "<option value=\"seleziona\">Corso...</option>";
-                                        
-                            $corsi = [];
-                            $corsi = getCorsi();
-                            foreach($corsi as $corso) {
-                                echo "<option value=\"{$corso->id}\">{$corso->nome}</option>";
+
+                            if($_SESSION['loginType'] == "Docente") {
+                                $corsi = [];
+                                $corsi = getCorsiFromDocente($docenteLoggato->matricola);
+                                foreach($corsi as $corso) {
+                                    echo "<option value=\"{$corso->id}\">{$corso->nome}</option>";
+                                }
+                            }
+                            else {
+                                $corsi = [];
+                                $corsi = getCorsi();
+                                foreach($corsi as $corso) {
+                                    echo "<option value=\"{$corso->id}\">{$corso->nome}</option>";
+                                }
                             }
                         ?>
                     </select><?php
@@ -174,8 +180,6 @@ if(isset($_POST['invio'])) {
             </form>
             </div>
             <?php
-            }
-
             if(isset($_POST['invio']) && !$presenzaDati)
                 echo "
                 <div style=\"margin-left: -6%; padding-bottom: 7%;\">

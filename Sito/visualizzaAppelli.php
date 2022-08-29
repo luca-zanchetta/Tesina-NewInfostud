@@ -96,14 +96,11 @@ else
                 if($_SESSION['loginType'] == "Docente" && !$corsi)
                     echo '<h2 style="text-align: center;">ERRORE: il docente non ha un corso assegnato.</h2>';
                 
-                elseif($_SESSION['loginType'] == "Docente" && $corsi) {
-                    
-                    foreach($corsi as $corso) {
-                        if(isset($_POST['filtro']) && $_POST['filtro'] != "")
-                            displayAppelliAfterDate($_POST['filtro'], $corso->id);
-                        else
-                            displayAppelliAfterDate(date('Y-m-d'));
-                    }
+                elseif($_SESSION['loginType'] == "Docente" && $corsi) { 
+                    if(isset($_POST['filtro']) && $_POST['filtro'] != "")
+                        displayAppelliAfterDate($_POST['filtro']);
+                    else
+                        displayAppelliAfterDate(date('Y-m-d'));
 
                 }
 
