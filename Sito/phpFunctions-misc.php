@@ -151,6 +151,7 @@ function nextFaqid(){
     return $id;
 }
 
+
 function nextFaqVoteId(){
     $xmlString = "";
     foreach ( file("../Xml/votoFAQ.xml") as $node ) {
@@ -179,6 +180,7 @@ function nextFaqVoteId(){
     return $id;
 }
 
+
 function  nextPostId() {
     $xmlString = "";
     foreach ( file("../Xml/posts.xml") as $node ) {
@@ -206,6 +208,8 @@ function  nextPostId() {
     
     return $id;
 }
+
+
 function  nextCommentVoteId() {
     $xmlString = "";
     foreach ( file("../Xml/votoCommento.xml") as $node ) {
@@ -234,6 +238,7 @@ function  nextCommentVoteId() {
     return $id;
 }
 
+
 function nextCommentId() {
     $xmlString = "";
     foreach ( file("../Xml/commenti.xml") as $node ) {
@@ -261,6 +266,7 @@ function nextCommentId() {
 
     return $id;
 }
+
 
 function calcolaIdCorso() {
     $xmlString = "";
@@ -387,6 +393,7 @@ function verificaAppelloPrenotato($studente, $appello) {
     return FALSE;
 }
 
+
 function verificaEsameSostenuto($studente, $idCorso) {
     $esamiSuperati = getEsamiSuperati($studente);
 
@@ -398,5 +405,38 @@ function verificaEsameSostenuto($studente, $idCorso) {
             return TRUE;
     
     return FALSE;
+}
+
+
+function verificaProssimita($appello) {
+    if(!$appello) 
+        return NULL;
+
+    $dataAppello = date_create(getDataFromDataora($appello->dataOra));
+
+    $corso = getCorsoById($appello->idCorso);
+    $anno = $corso->anno;
+    $corsi = getCorsiFromAnnoAndCorsoDiLaurea($anno, $corso->idCorsoLaurea);
+    if(!$corsi) 
+        return NULL;
+
+    $appelli = [];
+    foreach($corsi as $c)
+        $appelli = array_merge($appelli, getAppelliFromCorso($c->id));
+
+    if(!$appelli) 
+        return NULL;
+
+    
+    $corrispondenze = [];
+    foreach($appelli as $app) {
+        $data = date_create(getDataFromDataora($app->dataOra));
+        $diff = date_diff($dataAppello, $data);
+
+        if(strval($diff->format("%a")) == "0" || strval($diff->format("%a")) == "1")
+            $corrispondenze[] = $app;
+    }
+
+    return $corrispondenze;
 }
 ?>

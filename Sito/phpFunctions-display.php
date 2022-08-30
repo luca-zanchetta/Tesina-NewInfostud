@@ -749,6 +749,21 @@ function displayAppelliAfterDate($data) {
 }
 
 
+function displayCorrispondenze($corrispondenze) {
+    foreach($corrispondenze as $appello) {
+        $corso = getCorsoById($appello->idCorso);
+            
+        echo '
+        <div class="blocco-esame" style="background-color:lightblue;">
+            <div class="nome-esame">
+                '.$corso->nome."<br />".$appello->dataOra.'
+            </div>
+        </div>
+        ';
+    }
+}
+
+
 function displayCorsiDiLaurea() {
     $corsiDiLaurea = [];
     $corsiDiLaurea = getCorsiDiLaurea();

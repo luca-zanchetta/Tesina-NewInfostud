@@ -3,6 +3,7 @@ session_start();
 require_once("../Sito/phpFunctions-get.php");
 require_once("../Sito/phpFunctions-display.php");
 require_once("../Sito/phpFunctions-insert.php");
+require_once("../Sito/phpFunctions-misc.php");
 require_once("../Sito/phpClasses.php");
 
 
@@ -19,38 +20,6 @@ elseif(isset($_SESSION['matricola']) && $_SESSION['loginType'] == "Docente") {
 }
 else
     echo "<p>ERRORE</p>";
-
-
-if(isset($_POST['invio'])) {
-    $presenzaDati = FALSE;
-
-    if($_SESSION['loginType'] == "Docente" && $docenteLoggato->idCorso != 0) {
-        if((isset($_POST['data']) && $_POST['data'] != "") &&
-           (isset($_POST['ora']) && $_POST['ora'] != "")) {
-                $presenzaDati = TRUE;
-
-                $dataOra = "".strval($_POST['data'])." ".strval($_POST['ora'])."";
-                $appello = new appello($dataOra, $docenteLoggato->idCorso);
-                $tmp = inserisciAppello($appello);
-        }
-    }
-    else {
-        if((isset($_POST['data']) && $_POST['data'] != "") &&
-           (isset($_POST['ora']) && $_POST['ora'] != "") &&
-           (isset($_POST['corso']) && $_POST['corso'] != "seleziona")) {
-                $presenzaDati = TRUE;
-
-                $dataOra = "".strval($_POST['data'])." ".strval($_POST['ora'])."";
-                $appello = new appello($dataOra, $_POST['corso']);
-                $tmp = inserisciAppello($appello);
-        }
-    }
-
-    if(!$tmp)
-        header('Location: avvisoErrore.php');
-    else
-        header('Location: avvisoOK.php');
-}
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -127,7 +96,7 @@ if(isset($_POST['invio'])) {
             else {
             ?>
             <div class="boxInsAPP">
-            <form action="inserisciAppello.php" method="POST" id="input">
+            <form action="avvisoCorrispondenze.php" method="POST" id="input">
                 <div class="insContainer">
                     <div class="labels">
                         <h3>Data: </h3>

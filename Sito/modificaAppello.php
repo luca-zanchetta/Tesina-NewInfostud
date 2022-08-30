@@ -28,26 +28,6 @@ if(isset($_POST['modifica']) && isset($_POST['idAppello']) && isset($_POST['idCo
     $ora = getOraFromDataora($_POST['dataOra']);
     $idAppello = $_POST['idAppello'];
 }
-
-if(isset($_POST['invio'])) {
-    $idAppello = $_POST['idAppello'];
-
-    if((isset($_POST['data']) && $_POST['data'] != "") &&
-       (isset($_POST['ora']) && $_POST['ora'] != "") &&
-       (isset($_POST['corso']) && $_POST['corso'] != "seleziona")) {
-
-        $dataOra = "".strval($_POST['data'])." ".strval($_POST['ora'])."";
-        $tmp = modificaAppello($idAppello, $_POST['data'], $_POST['ora'], $_POST['corso']);
-    }
-
-
-    if(!$tmp) {
-        setcookie('modificaAppello', 'ERRORE: Modifica appello fallita.');
-        header('Location: avvisoErrore.php');
-    }
-    else
-        header('Location: avvisoOK.php');
-}
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -124,7 +104,7 @@ if(isset($_POST['invio'])) {
             else {
             ?>
             <div class="boxInsAPP">
-            <form action="modificaAppello.php" method="POST" id="input">
+            <form action="avvisoCorrispondenze.php" method="POST" id="input">
                 <div class="insContainer">
                     <div class="labels">
                         <h3>Data: </h3>
@@ -170,7 +150,7 @@ if(isset($_POST['invio'])) {
                     </div>
                 </div>
                 <div style="padding-top: 1%; margin-left: 45%;">
-                    <input class="bottoni" type="submit" name="invio" value="INVIO">
+                    <input class="bottoni" type="submit" name="invioModifica" value="INVIO">
                 </div>
                 <input type="hidden" name="idAppello" value="<?php echo $_POST['idAppello']; ?>">
             </form>
