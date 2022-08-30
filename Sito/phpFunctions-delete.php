@@ -381,4 +381,37 @@ function eliminaCorsoDiLaurea($idCorsoDiLaurea) {
     elseif($result && $eliminato)
         return TRUE;
 }
+
+function deletePostVote($matricola, $idPost) {
+    if($idPost == 0 || $matricola == 0)
+        return FALSE;
+    
+    $xmlString = "";
+    foreach ( file("../Xml/votoPost.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $votiPost = simplexml_load_file('../Xml/votoPost.xml');
+
+    foreach($votiPost as $voto) {
+        if($voto->matricolaStudente == $matricola && $voto->idPost == $idPost && $voto->stato != 0) {
+            $voto->stato = 0;
+            break;
+        }
+    }
+
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/votoPost.xml', "w");
+    $result = fwrite($f,  $votiPost->asXML());
+    fclose($f);
+
+    $updateAccordo = updatePostUtility($idPost);
+
+    if(!$result) 
+        return FALSE;
+    elseif($result && $updateAccordo)
+        return TRUE;
+}
+
 ?>

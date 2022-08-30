@@ -360,15 +360,18 @@ function updateCommentAccordo($idCommento){
     }
 
     $commenti = simplexml_load_file('../Xml/commenti.xml');
-
+    $autoreCommento = null;
     foreach($commenti as $commento){
-        if($commento->id == $idCommento)
+        if($commento->id == $idCommento) {
             $commento->accordoMedio = bcdiv($media, 1, 2);
+            $autoreCommento = $commento->matricolaStudente;
+        }
     }
     // Sovrascrive il vecchio file con i nuovi dati
     $f = fopen('../Xml/commenti.xml', "w");
     $result = fwrite($f,  $commenti->asXML());
     fclose($f);
+    calcolaReputazioneStudente($autoreCommento);
 
     if(!$result) 
         return FALSE;
@@ -455,4 +458,44 @@ function modificaCorso($idCorso, $nome, $descrizione, $matricolaDocente, $matric
     elseif($result && $modificato)
         return TRUE;
 }
+function updatePostUtility($idPost){
+    $xmlString = "";
+    foreach ( file("../Xml/votoPost.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $voti = simplexml_load_file('../Xml/votoPost.xml');
+    $utilitaTot = 0;
+
+    foreach($voti as $voto){
+        if($voto->idPost == $idPost && $voto->stato == 1)
+            $utilitaTot += $voto->utilita;
+    }
+
+    #modifico il post
+    $xmlString = "";
+    foreach ( file("../Xml/posts.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $posts = simplexml_load_file('../Xml/posts.xml');
+
+    foreach($posts as $post){
+        if($post->id == $idPost && $post->stato == 1) {
+            $post->utilitaTotale = $utilitaTot;
+            $autorePost = $post->matricolaStudente;
+        }
+    }
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/posts.xml', "w");
+    $result = fwrite($f,  $posts->asXML());
+    fclose($f);
+    calcolaReputazioneStudente($autorePost);
+
+    if(!$result) 
+        return FALSE;
+    else
+        return TRUE;
+}
+
 ?>

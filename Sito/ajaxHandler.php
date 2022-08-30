@@ -4,6 +4,7 @@
 require_once('phpFunctions-modify.php');
 require_once('phpFunctions-delete.php');
 require_once('phpFunctions-insert.php');
+require_once('phpFunctions-misc.php');
 session_start();
 
 if(!isset($_POST['richiesta'])) header('Location: homepage.php');
@@ -26,8 +27,11 @@ switch ($_POST['richiesta']) {
 
         deleteCommentVote($idCommento,  $_SESSION['matricola']); 
         insertCommentVote($idCommento,  $_SESSION['matricola'], $vote,$idAutore);
+        $newRep = calcolaReputazioneStudente($idAutore);
+
         $commento = getCommentFromId($idCommento);
-        echo "{$commento->id}-{$commento->accordoMedio}";
+
+        echo "{$commento->id}-{$commento->accordoMedio}-{$newRep}";
         break;
 
     case 'modificaContenutoPost': 

@@ -1740,4 +1740,19 @@ function getVotoCommento($idCommento,$matricola) {
     }
     return null;//voto non dato
 }
+function getVotoPostFromStudente($idPost, $matricola){
+    $xmlString = "";
+    foreach ( file("../Xml/votoPost.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $votiPost = simplexml_load_file('../Xml/votoPost.xml');
+    $numVoti = 0;
+    foreach($votiPost as $voto){
+        if($voto->idPost == $idPost && $voto->matricolaStudente == $matricola && $voto->stato == 1)
+           return $voto->utilita;
+    }
+    return 0;
+}
+
 ?>

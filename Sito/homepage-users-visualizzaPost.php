@@ -26,6 +26,7 @@ switch ($_SESSION['loginType']) {
 }
 
 $post = getPostFromId($_GET['idPost']);
+$votoPost = isset($_SESSION['matricola']) ? getVotoPostFromStudente($post->id,$_SESSION['matricola']) : "N/A";
 $listaCommenti = getPostComments($_GET['idPost']);
 $pageNum = $_GET['pageNum'];
 $autore = ($post->matricolaStudente>0 ? getStudenteFromMatricola($post->matricolaStudente) : 'tsk');
@@ -62,10 +63,10 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
             </div>
             <div class="vertical-bar"></div>
                 <h2>
+                    Infostud
                     <form action="">
                         <input type="button">
                     </form>
-                    Infostud
                 </h2>
             <div class="vertical-bar"></div>
         </div>
@@ -123,21 +124,43 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
             <hr class="redBar" />
             <div class="postHeader">
                 <div class="upDown">
-                    <form action="">
+                    <form action="votaPost.php" method="POST">
                         <div>
                             <img src="up.png" alt="dsa">
-                            <input type="hidden">
-                            <input type="button" value="">      
+                            <?php 
+                                if(!isset($_SESSION['matricola']) || $post->matricolaStudente == $_SESSION['matricola']) { ?>
+                                    <input type="button" onclick="window.alert('Non puoi votare questo post!')"> <?php
+                                }else{ ?>
+                                    <input type="submit" value="" name="votaPost">
+                                    <input type="hidden" name="idPost" value="<?php echo $post->id?>">
+                                    <input type="hidden" name="voto" value="<?php echo $votoPost?>">
+                                    <input type="hidden" name="autorePost" value="<?php echo $post->matricolaStudente?>">
+                                    <input type="hidden" name="tipoVoto" value="1">
+
+                                    <input type="hidden" value="<?php echo $_GET["pageNum"];?>" name="pageNum"> 
+                                    <input type="hidden" value="<?php echo $_GET["idCorso"]; ?>" name="idCorso">
+                                <?php } ?>
                         </div>
                     </form>
-                    <div>
+                    <div <?php if($votoPost != "N/A" && $votoPost != 0) { echo "style=\"color:".($votoPost >0 ? 'green': 'red').";\""; }?>>
                         <?php echo $post->utilitaTotale;?>
                     </div>
-                    <form action="">
+                    <form action="votaPost.php" method="POST">
                         <div>
                             <img src="down.png" alt="dsa">
-                            <input type="hidden">
-                            <input type="button" value=""> 
+                            <?php 
+                                if(!isset($_SESSION['matricola']) || $post->matricolaStudente == $_SESSION['matricola']) { ?>
+                                    <input type="button" onclick="window.alert('Non puoi votare questo post!')"> <?php
+                                }else{ ?>
+                                    <input type="submit" value="" name="votaPost">
+                                    <input type="hidden" name="idPost" value="<?php echo $post->id?>">
+                                    <input type="hidden" name="voto" value="<?php echo $votoPost?>">
+                                    <input type="hidden" name="autorePost" value="<?php echo $post->matricolaStudente?>">
+                                    <input type="hidden" name="tipoVoto" value="-1">
+
+                                    <input type="hidden" value="<?php echo $_GET["pageNum"];?>" name="pageNum"> 
+                                    <input type="hidden" value="<?php echo $_GET["idCorso"]; ?>" name="idCorso">
+                                <?php } ?>
                         </div>
                     </form>
                 </div>
@@ -246,7 +269,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                                 <?php echo isset($autore) ? 'Matricola: '.$autore->matricola : 'N/A'?>
                             </div>
                             <div class="authorDataElement">
-                                <?php echo isset($autore) ? 'Reputazione: '.$autore->reputazioneTotale : 'N/A'?>
+                                <?php echo isset($autore) ? 'Reputazione: <span id="repTot'.$comment->id.'">'.$autore->reputazioneTotale.'</span>' : 'N/A'?>
                             </div>
                             <div class="authorDataElement">
                                 <?php echo isset($autore) ? 'Corso di Laurea: '.getNomeCorsoDiLaureaByID($autore->idCorsoLaurea) : 'N/A'?>
@@ -348,6 +371,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                             let text = response.split("-");
                             console.log(text);
                             document.getElementById("votoTot"+text[0]).textContent = text[1];
+                            document.getElementById("repTot"+text[0]).textContent = text[2];
                         },
                         error: function () {
                             console.log("error");
@@ -381,7 +405,8 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                         success: function (response) {
                             console.log("Success");
-                            document.getElementById("votoTot"+id).textContent = "prova";
+                            //document.getElementById("votoTot"+id).textContent = "prova";
+                            
                         },
                         error: function () {
                             console.log("error");

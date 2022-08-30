@@ -435,5 +435,33 @@ function inserisciCommento($corpo,$idAutore,$idPost,$data) {
     else
         return TRUE;
 }
+function insertPostVote($idPost, $tipoVoto, $matricola) {
+    $xmlString = "";
+    foreach ( file("../Xml/votoPost.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
 
+    $xml = simplexml_load_file('../Xml/votoPost.xml');
+
+    // Crea una tupla <studente> </studente>
+
+    $newStudente = $xml->addChild('votoPost');
+    $tmp = $newStudente->addChild('id', nextVotoPostId());
+    $tmp = $newStudente->addChild('matricolaStudente', $matricola);
+    $tmp = $newStudente->addChild('idPost', $idPost);
+    $tmp = $newStudente->addChild('utilita', $tipoVoto);
+    $tmp = $newStudente->addChild('stato', 1);
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/votoPost.xml', "w");
+    $result = fwrite($f,  $xml->asXML());
+    fclose($f);
+
+    updatePostUtility($idPost);
+
+    if(!$result) 
+        return FALSE;
+    else
+        return TRUE;
+}
 ?>
