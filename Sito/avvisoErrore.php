@@ -121,6 +121,10 @@
                     echo "<h1>{$_COOKIE['prossimita']}</h1>";
                     setcookie('prossimita', '', time()-60);
                 }
+                elseif(isset($_COOKIE['pwd'])) {
+                    echo "<h1>{$_COOKIE['pwd']}</h1>";
+                    setcookie('pwd', '', time()-60);
+                }
                 else
                     echo "<h1>ERRORE: Registrazione fallita.</h1>";
                 ?>

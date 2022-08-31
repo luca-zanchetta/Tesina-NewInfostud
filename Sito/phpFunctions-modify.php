@@ -460,4 +460,144 @@ function modificaCorso($idCorso, $nome, $descrizione, $matricolaDocente, $matric
     elseif($result && $modificato)
         return TRUE;
 }
+
+
+function modificaPasswordStudente($matricola, $nuovaPassword) {
+    if($matricola == 0 || $nuovaPassword == "")
+        return FALSE;
+
+    $modificata = FALSE;
+
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/studenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $studenti = simplexml_load_file('../Xml/studenti.xml');
+
+    foreach($studenti as $studente) {
+        if($studente->matricola == $matricola && $studente->stato != 0) {
+            $studente->password = $nuovaPassword;
+            $modificata = TRUE;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/studenti.xml', "w");
+    $result = fwrite($f,  $studenti->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    elseif($result && $modificata)
+        return TRUE;
+}
+
+
+function modificaPasswordDocente($matricola, $nuovaPassword) {
+    if($matricola == 0 || $nuovaPassword == "")
+        return FALSE;
+
+    $modificata = FALSE;
+
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/docenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $docenti = simplexml_load_file('../Xml/docenti.xml');
+
+    foreach($docenti as $docente) {
+        if($docente->matricola == $matricola && $docente->stato != 0) {
+            $docente->password = $nuovaPassword;
+            $modificata = TRUE;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/docenti.xml', "w");
+    $result = fwrite($f,  $docenti->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    elseif($result && $modificata)
+        return TRUE;
+}
+
+
+function modificaPasswordSegretario($username, $nuovaPassword) {
+    if($username == 0 || $nuovaPassword == "")
+        return FALSE;
+
+    $modificata = FALSE;
+
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/segreteria.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $segretari = simplexml_load_file('../Xml/segreteria.xml');
+
+    foreach($segretari as $segretario) {
+        if($segretario->username == $username && $segretario->stato != 0) {
+            $segretario->password = $nuovaPassword;
+            $modificata = TRUE;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/segreteria.xml', "w");
+    $result = fwrite($f,  $segretari->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    elseif($result && $modificata)
+        return TRUE;
+}
+
+
+function modificaPasswordAmministratore($username, $nuovaPassword) {
+    if($username == 0 || $nuovaPassword == "")
+        return FALSE;
+
+    $modificata = FALSE;
+
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/amministrazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $amministratori = simplexml_load_file('../Xml/amministrazione.xml');
+
+    foreach($amministratori as $amministratore) {
+        if($amministratore->username == $username && $amministratore->stato != 0) {
+            $amministratore->password = $nuovaPassword;
+            $modificata = TRUE;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/amministrazione.xml', "w");
+    $result = fwrite($f,  $amministratori->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    elseif($result && $modificata)
+        return TRUE;
+}
 ?>

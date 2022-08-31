@@ -379,7 +379,12 @@ function displayAnagraficaStudente($studente) {
                 <h2>Data di nascita: '.$studente->dataNascita.'</h2>
             </div>  
             <div class="infoVoice">
-                <h2>Password: '.$studente->password.'</h2>
+                <div><h2>Password: '.$studente->password.'</h2></div>
+                <div style="margin-left: 5%; margin-top: 3%;">
+                    <form action="modificaPassword.php">
+                        <input type="image" src="edit.png" name="pwdStudente" width=30px; heigth=30px;>
+                    </form>
+                </div>
             </div>  
         </div>
     </div>
@@ -401,7 +406,12 @@ function displayAnagraficaDocente($docente) {
                 <h2>Cognome: '.$docente->cognome.'</h2>
             </div>  
             <div class="infoVoice">
-                <h2>Password: '.$docente->password.'</h2>
+                <div><h2>Password: '.$docente->password.'</h2></div>
+                <div style="margin-left: 5%; margin-top: 3%;">
+                    <form action="modificaPassword.php">
+                        <input type="image" src="edit.png" name="pwdDocente" width=30px; heigth=30px;>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -417,7 +427,12 @@ function displayAnagraficaSegretario($segretario) {
                 <h2>Username: '.$segretario->username.'</h2>
             </div>  
             <div class="infoVoice">
-                <h2>Password: '.$segretario->password.'</h2>
+                <div><h2>Password: '.$segretario->password.'</h2></div>
+                <div style="margin-left: 5%; margin-top: 3%;">
+                    <form action="modificaPassword.php">
+                        <input type="image" src="edit.png" name="pwdSegretario" width=30px; heigth=30px;>
+                    </form>
+                </div>
             </div>  
         </div>
     </div>
@@ -433,7 +448,12 @@ function displayAnagraficaAmministratore($amministratore) {
                 <h2>Username: '.$amministratore->username.'</h2>
             </div>  
             <div class="infoVoice">
-                <h2>Password: '.$amministratore->password.'</h2>
+                <div><h2>Password: '.$amministratore->password.'</h2></div>
+                <div style="margin-left: 5%; margin-top: 3%;">
+                    <form action="modificaPassword.php">
+                        <input type="image" src="edit.png" name="pwdAdmin" width=30px; heigth=30px;>
+                    </form>
+                </div>
             </div>  
         </div>
     </div>
