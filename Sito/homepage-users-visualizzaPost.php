@@ -254,6 +254,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                 for($i=($pageNum-1)*5; $i < min($pageNum*5,count($listaCommenti)); $i++){  
                     $autore = null;
                     $comment = $listaCommenti[$i];
+                    $idC = $comment->id;
                     if($comment->matricolaStudente > 0){
                         $autore = getStudenteFromMatricola($comment->matricolaStudente);
                         if(isset($_SESSION['matricola']))
@@ -284,22 +285,22 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                                     <div class="commentTime" style="justify-content: flex-end;">
                                         Il tuo voto:  
                                     </div> 
-                                    <div id="vote<?php echo $comment->id?>" class="commentVoteContainer" onclick="modifyVote('',<?php echo $comment->id?>,<?php echo $autore->matricola?>)">
+                                    <div id="vote<?php echo $idC?>" class="commentVoteContainer" onclick="modifyVote('',<?php echo $idC?>,<?php echo $autore->matricola?>)">
                                         <?php echo isset($voto) ?$voto->accordo : 0;?>
                                     </div>
-                                    <div id="stars<?php echo $comment->id?>" class="commentVoteContainer" style="display:none;">
+                                    <div id="stars<?php echo $idC?>" class="commentVoteContainer" style="display:none;">
                                         <div class="stars">
                                             <form action="">
-                                                <input class="star star-5" id="star-5" type="radio" name="star" onclick="modifyVote('5',<?php echo $comment->id?>,<?php echo $autore->matricola?>)"/>
-                                                <label class="star star-5" for="star-5"></label>
-                                                <input class="star star-4" id="star-4" type="radio" name="star" onclick="modifyVote('4',<?php echo $comment->id?>,<?php echo $autore->matricola?>)"/>
-                                                <label class="star star-4" for="star-4"></label>
-                                                <input class="star star-3" id="star-3" type="radio" name="star" onclick="modifyVote('3',<?php echo $comment->id?>,<?php echo $autore->matricola?>)"/>
-                                                <label class="star star-3" for="star-3"></label>
-                                                <input class="star star-2" id="star-2" type="radio" name="star" onclick="modifyVote('2',<?php echo $comment->id?>,<?php echo $autore->matricola?>)"/>
-                                                <label class="star star-2" for="star-2"></label>
-                                                <input class="star star-1" id="star-1" type="radio" name="star" onclick="modifyVote('1',<?php echo $comment->id?>,<?php echo $autore->matricola?>)"/>
-                                                <label class="star star-1" for="star-1"></label>
+                                                <input class="star star-5" id="star-5<?php echo $idC?>" type="radio" name="star" onclick="modifyVote('5',<?php echo $idC?>,<?php echo $autore->matricola?>)"/>
+                                                <label class="star star-5" for="star-5<?php echo $idC?>"></label>
+                                                <input class="star star-4" id="star-4<?php echo $idC?>" type="radio" name="star" onclick="modifyVote('4',<?php echo $idC?>,<?php echo $autore->matricola?>)"/>
+                                                <label class="star star-4" for="star-4<?php echo $idC?>"></label>
+                                                <input class="star star-3" id="star-3<?php echo $idC?>" type="radio" name="star" onclick="modifyVote('3',<?php echo $idC?>,<?php echo $autore->matricola?>)"/>
+                                                <label class="star star-3" for="star-3<?php echo $idC?>"></label>
+                                                <input class="star star-2" id="star-2<?php echo $idC?>" type="radio" name="star" onclick="modifyVote('2',<?php echo $idC?>,<?php echo $autore->matricola?>)"/>
+                                                <label class="star star-2" for="star-2<?php echo $idC?>"></label>
+                                                <input class="star star-1" id="star-1<?php echo $idC?>" type="radio" name="star" onclick="modifyVote('1',<?php echo $idC?>,<?php echo $autore->matricola?>)"/>
+                                                <label class="star star-1" for="star-1<?php echo $idC?>"></label>
                                             </form>
                                         </div>
                                     </div>
@@ -352,6 +353,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
 </html>
 <script>
     async function modifyVote(voto,id,idAutore) {
+        console.log(id);
         if(document.getElementById("vote"+id).style.display == "none"){
             await delay(0.7);
             document.getElementById("stars"+id).style.display = "none";
