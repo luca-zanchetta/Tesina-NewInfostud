@@ -478,14 +478,16 @@ function calcolaReputazioneStudente($idStudente) {
     $listaVotiPost = calcolaReputazionePosts($idStudente);
     $listaVotiCommenti = calcolaReputazioneCommenti($idStudente);
     $listaVoti = array_merge($listaVotiPost,$listaVotiCommenti);
-    echo implode(",",$listaVoti);
+    // echo implode(",",$listaVoti);
     $totVoti = 0;
+    $numeroVotiUtili = 0;
     foreach($listaVoti as $voto){
         if($voto == -1) continue;
             $totVoti += $voto;
+            $numeroVotiUtili += 1;
     }
 
-    $reputazione = count($listaVoti) > 0 ? $totVoti/count($listaVoti) : 0;
+    $reputazione = $numeroVotiUtili > 0 ? $totVoti/$numeroVotiUtili : 0;
 
     $xmlString = "";
     foreach ( file("../Xml/studenti.xml") as $node ) {
@@ -522,7 +524,7 @@ function calcolaReputazionePosts($idStudente) {
     foreach($posts as $post){
         if($post->matricolaStudente == $idStudente && $post->stato == 1) {
             $voto = calcolaReputazionePost($post->id, $post->utilitaTotale);
-            $votiPost[] = $voto;
+            $votiPosts[] = $voto;
         }
     }
 

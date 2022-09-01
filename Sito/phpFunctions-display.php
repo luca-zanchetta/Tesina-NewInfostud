@@ -463,7 +463,9 @@ function displayAnagraficaAmministratore($amministratore) {
 
 function displayCarrieraStudente($studente) {
     $tmp = calcolaMedia_CFU($studente);
-    $stud = getStudenteFromMatricola($studente->matricola);
+    $studTMP = getStudenteFromMatricola($studente->matricola);
+    $tmp = calcolaReputazioneStudente($studTMP->matricola);
+    $stud = getStudenteFromMatricola($studTMP->matricola);
     
     $corsoDiLaurea = getNomeCorsoDiLaureaByID($stud->idCorsoLaurea);
     echo '

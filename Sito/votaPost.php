@@ -33,6 +33,6 @@ if(isset($_POST['votaPost'])){
     }
 
     calcolaReputazioneStudente($_POST['autorePost']);
-    //header("Location: homepage-users-visualizzaPost.php?idPost={$_POST['idPost']}&idCorso={$_POST['idCorso']}&pageNum={$_POST['pageNum']}");
+    header("Location: homepage-users-visualizzaPost.php?idPost={$_POST['idPost']}&idCorso={$_POST['idCorso']}&pageNum={$_POST['pageNum']}");
 }
 ?>
