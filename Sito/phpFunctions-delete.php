@@ -19,7 +19,7 @@ function eliminaAppello($idAppello) {
     $eliminato = FALSE;
 
     foreach($appelli as $appello) {
-        if($appello->id == $idAppello) {
+        if($appello->id == $idAppello && $appello->stato == 1) {
             $appello->stato = 0;
             $eliminato = TRUE;
             break;
@@ -51,7 +51,7 @@ function eliminaAppelliCorso($id_corso) {
     $appelli = simplexml_load_file('../Xml/appelli.xml');
 
     foreach($appelli as $appello)
-        if($appello->idCorso == $id_corso)
+        if($appello->idCorso == $id_corso && $appello->stato == 1)
             $appello->stato = 0;
 
     // Sovrascrive il vecchio file con i nuovi dati
@@ -83,7 +83,7 @@ function eliminaCorso($_id) {
     $eliminato = FALSE;
 
     foreach($corsi as $corso) {
-        if($corso->id == $_id) {
+        if($corso->id == $_id && $corso->stato == 1) {
             $corso->stato = 0;
             $eliminato = TRUE;
             break;
@@ -117,7 +117,7 @@ function eliminaPrenotazioneAppello($idPrenotazione) {
     $eliminato = FALSE;
 
     foreach($prenotazioni as $prenotazione) {
-        if($prenotazione->id == $idPrenotazione) {
+        if($prenotazione->id == $idPrenotazione && $prenotazione->stato == 1) {
             $prenotazione->stato = 0;
             $eliminato = TRUE;
             break;
@@ -151,7 +151,7 @@ function deleteFaq($idFaq) {
     $eliminato = FALSE;
 
     foreach($faqs as $faq) {
-        if($faq->id == $idFaq) {
+        if($faq->id == $idFaq && $faq->stato == 1) {
             $faq->stato = 0;
             $eliminato = TRUE;
             break;
@@ -178,7 +178,7 @@ function deleteFaq($idFaq) {
         $votiFAQ = simplexml_load_file('../Xml/votoFAQ.xml');
 
         foreach($votiFAQ as $voto)
-            if($voto->idFAQ == $idFaq)
+            if($voto->idFAQ == $idFaq && $voto->stato == 1)
                 $voto->stato = 0;
         
         // Sovrascrive il vecchio file con i nuovi dati
@@ -207,7 +207,7 @@ function deletePost($idPost) {
     $eliminato = FALSE;
 
     foreach($posts as $post) {
-        if($post->id == $idPost) {
+        if($post->id == $idPost && $post->stato == 1) {
             $post->stato = 0;
             $eliminato = TRUE;
             break;
@@ -234,7 +234,7 @@ function deletePost($idPost) {
         $commenti = simplexml_load_file('../Xml/commenti.xml');
 
         foreach($commenti as $commento)
-            if($commento->idPost == $idPost)
+            if($commento->idPost == $idPost && $commento->stato == 1)
                 $commento->stato = 0;
         
         // Sovrascrive il vecchio file con i nuovi dati
@@ -263,7 +263,7 @@ function deleteFaqVote($matricola, $idFaq) {
     $eliminato = FALSE;
 
     foreach($votiFAQ as $voto) {
-        if($voto->idFAQ == $idFaq && $voto->matricola = $matricola) {
+        if($voto->idFAQ == $idFaq && $voto->matricola = $matricola && $voto->stato == 1) {
             $voto->stato = 0;
             $eliminato = TRUE;
             break;
@@ -298,7 +298,7 @@ function deleteCommentVote($idCommento, $matricola) {
     $eliminato = FALSE;
 
     foreach($votiCommento as $voto) {
-        if($voto->matricolaStudente == $matricola && $voto->idCommento == $idCommento) {
+        if($voto->matricolaStudente == $matricola && $voto->idCommento == $idCommento && $voto->stato != 0) {
             $voto->stato = 0;
             $eliminato = TRUE;
             break;
@@ -332,7 +332,7 @@ function deleteComment($idCommento) {
     $eliminato = FALSE;
 
     foreach($commenti as $commento) {
-        if($commento->id == $idCommento) {
+        if($commento->id == $idCommento && $commento->stato == 1) {
             $commento->stato = 0;
             $eliminato = TRUE;
             break;
@@ -364,7 +364,7 @@ function eliminaCorsoDiLaurea($idCorsoDiLaurea) {
     $eliminato = FALSE;
 
     foreach($corsiDiLaurea as $corsoDiLaurea) {
-        if($corsoDiLaurea->id == $idCorsoDiLaurea) {
+        if($corsoDiLaurea->id == $idCorsoDiLaurea && $corsoDiLaurea->stato == 1) {
             $corsoDiLaurea->stato = 0;
             $eliminato = TRUE;
             break;
@@ -381,4 +381,37 @@ function eliminaCorsoDiLaurea($idCorsoDiLaurea) {
     elseif($result && $eliminato)
         return TRUE;
 }
+
+function deletePostVote($matricola, $idPost) {
+    if($idPost == 0 || $matricola == 0)
+        return FALSE;
+    
+    $xmlString = "";
+    foreach ( file("../Xml/votoPost.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $votiPost = simplexml_load_file('../Xml/votoPost.xml');
+
+    foreach($votiPost as $voto) {
+        if($voto->matricolaStudente == $matricola && $voto->idPost == $idPost && $voto->stato != 0) {
+            $voto->stato = 0;
+            break;
+        }
+    }
+
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/votoPost.xml', "w");
+    $result = fwrite($f,  $votiPost->asXML());
+    fclose($f);
+
+    $updateAccordo = updatePostUtility($idPost);
+
+    if(!$result) 
+        return FALSE;
+    elseif($result && $updateAccordo)
+        return TRUE;
+}
+
 ?>

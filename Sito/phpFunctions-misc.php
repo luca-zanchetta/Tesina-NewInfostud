@@ -439,4 +439,128 @@ function verificaProssimita($appello) {
 
     return $corrispondenze;
 }
+
+function nextVotoPostId() {
+    $xmlString = "";
+    foreach ( file("../Xml/votoPost.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaId = [];
+     
+    for ($i=0; $i<$records->length; $i++) { 
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $listaId[] = $con->textContent;
+    }
+    $id = 1;
+
+    while(in_array($id,$listaId)){
+        $id++;
+    }
+
+    return $id;
+}
+
+function calcolaReputazioneStudente($idStudente) {
+    /*
+    Il calcolo si divide in due parti:-Calcolo della reputazione proveniente dai post,-Calcolo della reputazione proveniente dai commenti.
+    Il risultato finale è un voto che va da 1 a 10(decimale).
+    */
+
+    /*Calcolo reputazione proveniente da post */
+    $listaVotiPost = calcolaReputazionePosts($idStudente);
+    $listaVotiCommenti = calcolaReputazioneCommenti($idStudente);
+    $listaVoti = array_merge($listaVotiPost,$listaVotiCommenti);
+    echo implode(",",$listaVoti);
+    $totVoti = 0;
+    foreach($listaVoti as $voto){
+        if($voto == -1) continue;
+            $totVoti += $voto;
+    }
+
+    $reputazione = count($listaVoti) > 0 ? $totVoti/count($listaVoti) : 0;
+
+    $xmlString = "";
+    foreach ( file("../Xml/studenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $studenti = simplexml_load_file('../Xml/studenti.xml');
+
+    foreach($studenti as $studente){
+        if($studente->matricola == $idStudente && $studente->stato == 1){
+            $studente->reputazioneTotale = round($reputazione, 2);
+            break;
+        }       
+    }
+
+    $f = fopen('../Xml/studenti.xml', "w");
+    $result = fwrite($f,  $studenti->asXML());
+    fclose($f);
+
+    if(!$result) 
+        return FALSE;
+    else
+        return round($reputazione, 2);
+}
+
+function calcolaReputazionePosts($idStudente) {
+    $xmlString = "";
+    foreach ( file("../Xml/posts.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $posts = simplexml_load_file('../Xml/posts.xml');
+    $votiPosts = [];
+    foreach($posts as $post){
+        if($post->matricolaStudente == $idStudente && $post->stato == 1) {
+            $voto = calcolaReputazionePost($post->id, $post->utilitaTotale);
+            $votiPost[] = $voto;
+        }
+    }
+
+    return $votiPosts;
+}
+
+function calcolaReputazionePost($idPost,$utilitaTotale){
+    $xmlString = "";
+    foreach ( file("../Xml/votoPost.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $votiPost = simplexml_load_file('../Xml/votoPost.xml');
+    $numVoti = 0;
+    foreach($votiPost as $voto){
+        if($voto->idPost == (int)$idPost && $voto->stato == 1){
+           $numVoti+= 1;
+        }
+    }
+    #otteniamo un voto che varia tra 0 e 10; In caso di assenza di numero voti il voto 
+    #non viene marchiato con un -1
+    return $numVoti > 0 ? (($utilitaTotale/$numVoti) + 1)*5 : -1; 
+}
+
+function calcolaReputazioneCommenti($idStudente) {
+    $xmlString = "";
+    foreach ( file("../Xml/votoCommento.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $votiCommento = simplexml_load_file('../Xml/votoCommento.xml');
+    $listaVoti = [];
+    foreach($votiCommento as $voto){
+        if($voto->idAutoreCommento == $idStudente && $voto->stato == 1)
+            $listaVoti[] = $voto->accordo*2; 
+    }
+
+    return $listaVoti;
+
+}
 ?>
