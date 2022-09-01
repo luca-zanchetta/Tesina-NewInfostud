@@ -150,10 +150,12 @@ require_once('../Sito/phpFunctions-get.php');
                                     <h2>
                                         <?php
                                             for ($i=0; $i < min(count($nomeCorsi),3); $i++) { 
-                                                # code...
-                                                echo $nomeCorsi[$i]->nome. ", "; 
+                                                if(min(count($nomeCorsi), 3) == 1)
+                                                    echo $nomeCorsi[$i]->nome;
+                                                else
+                                                    echo "{$nomeCorsi[$i]->nome}<br />";
                                             }
-                                            if(count($nomeCorsi) > 3) echo "..."
+                                            if(count($nomeCorsi) > 3) echo "...";
                                          ?>
                                     </h2>
                                 </div>
@@ -182,12 +184,18 @@ require_once('../Sito/phpFunctions-get.php');
                                 </div>
                                 <div class="element" style="width: 25%;">
                                     <h2>
-                                        <?php
+                                    <?php
                                             for ($i=0; $i < min(count($nomeCorsi),3); $i++) { 
-                                                # code...
-                                                echo $nomeCorsi[$i]->nome. ", "; 
+                                                if(min(count($nomeCorsi), 3) == 1)
+                                                    echo $nomeCorsi[$i]->nome;
+                                                else {
+                                                    if($i+1 == min(count($nomeCorsi),3))
+                                                        echo $nomeCorsi[$i]->nome;
+                                                    else
+                                                        echo "{$nomeCorsi[$i]->nome}, ";
+                                                }
                                             }
-                                            if(count($nomeCorsi) > 3) echo "..."
+                                            if(count($nomeCorsi) > 3) echo "...";
                                          ?>
                                     </h2>
                                 </div>
