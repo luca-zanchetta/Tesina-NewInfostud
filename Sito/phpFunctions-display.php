@@ -1,5 +1,6 @@
 <?php
 require_once('phpFunctions-get.php');
+require_once('phpFunctions-modify.php');
 
 
 function creaSidebar($loginType) {
@@ -378,7 +379,12 @@ function displayAnagraficaStudente($studente) {
                 <h2>Data di nascita: '.$studente->dataNascita.'</h2>
             </div>  
             <div class="infoVoice">
-                <h2>Password: '.$studente->password.'</h2>
+                <div><h2>Password: '.$studente->password.'</h2></div>
+                <div style="margin-left: 5%; margin-top: 3%;">
+                    <form action="modificaPassword.php">
+                        <input type="image" src="edit.png" name="pwdStudente" width=30px; heigth=30px;>
+                    </form>
+                </div>
             </div>  
         </div>
     </div>
@@ -400,7 +406,12 @@ function displayAnagraficaDocente($docente) {
                 <h2>Cognome: '.$docente->cognome.'</h2>
             </div>  
             <div class="infoVoice">
-                <h2>Password: '.$docente->password.'</h2>
+                <div><h2>Password: '.$docente->password.'</h2></div>
+                <div style="margin-left: 5%; margin-top: 3%;">
+                    <form action="modificaPassword.php">
+                        <input type="image" src="edit.png" name="pwdDocente" width=30px; heigth=30px;>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -416,7 +427,12 @@ function displayAnagraficaSegretario($segretario) {
                 <h2>Username: '.$segretario->username.'</h2>
             </div>  
             <div class="infoVoice">
-                <h2>Password: '.$segretario->password.'</h2>
+                <div><h2>Password: '.$segretario->password.'</h2></div>
+                <div style="margin-left: 5%; margin-top: 3%;">
+                    <form action="modificaPassword.php">
+                        <input type="image" src="edit.png" name="pwdSegretario" width=30px; heigth=30px;>
+                    </form>
+                </div>
             </div>  
         </div>
     </div>
@@ -432,7 +448,12 @@ function displayAnagraficaAmministratore($amministratore) {
                 <h2>Username: '.$amministratore->username.'</h2>
             </div>  
             <div class="infoVoice">
-                <h2>Password: '.$amministratore->password.'</h2>
+                <div><h2>Password: '.$amministratore->password.'</h2></div>
+                <div style="margin-left: 5%; margin-top: 3%;">
+                    <form action="modificaPassword.php">
+                        <input type="image" src="edit.png" name="pwdAdmin" width=30px; heigth=30px;>
+                    </form>
+                </div>
             </div>  
         </div>
     </div>
@@ -441,7 +462,10 @@ function displayAnagraficaAmministratore($amministratore) {
 
 
 function displayCarrieraStudente($studente) {
-    $corsoDiLaurea = getNomeCorsoDiLaureaByID($studente->idCorsoLaurea);
+    $tmp = calcolaMedia_CFU($studente);
+    $stud = getStudenteFromMatricola($studente->matricola);
+    
+    $corsoDiLaurea = getNomeCorsoDiLaureaByID($stud->idCorsoLaurea);
     echo '
     <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
         <div style="margin-left: 2%;"> 
@@ -449,13 +473,13 @@ function displayCarrieraStudente($studente) {
                 <h2>Corso di laurea: '.$corsoDiLaurea.'</h2>
             </div>  
             <div class="infoVoice">
-                <h2>Reputazione totale: '.$studente->reputazioneTotale.'</h2>
+                <h2>Reputazione totale: '.$stud->reputazioneTotale.'</h2>
             </div>  
             <div class="infoVoice">
-                <h2>CFU totali: '.$studente->cfuTotale.'</h2>
+                <h2>CFU totali: '.$stud->cfuTotale.'</h2>
             </div>
             <div class="infoVoice">
-                <h2>Media voti: '.$studente->media.'</h2>
+                <h2>Media voti: '.$stud->media.'</h2>
             </div>
         </div>
     </div>
@@ -680,7 +704,12 @@ function displayAppelliLike($nomeCorso) {
 function displayAppelliAfterDate($data) {
     if($_SESSION['loginType'] == "Docente") {
         $docente = getDocenteFromMatricola($_SESSION['matricola']);
-        $appelli = getAppelliAfterDateFromCorso($data, $docente->idCorso);
+        $insegnamenti = getCorsiFromDocente($docente->matricola);
+
+        $appelli = [];
+        foreach($insegnamenti as $insegnamento) {
+            $appelli = array_merge($appelli, getAppelliAfterDateFromCorso($data, $insegnamento->id));
+        }
     }
     else 
         $appelli = getAppelliAfterDate($data);
@@ -736,6 +765,21 @@ function displayAppelliAfterDate($data) {
                 ';
             }
         }
+    }
+}
+
+
+function displayCorrispondenze($corrispondenze) {
+    foreach($corrispondenze as $appello) {
+        $corso = getCorsoById($appello->idCorso);
+            
+        echo '
+        <div class="blocco-esame" style="background-color:lightblue;">
+            <div class="nome-esame">
+                '.$corso->nome."<br />".$appello->dataOra.'
+            </div>
+        </div>
+        ';
     }
 }
 

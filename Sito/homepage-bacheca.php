@@ -62,8 +62,8 @@ switch ($_SESSION['loginType']) {
         </div>
         <div class="nav-right">
         <h2>
-            <form action="">
-                <input type="button">
+            <form action="logout.php">
+                <input type="submit" value="">
             </form>
                 Logout
         </h2>

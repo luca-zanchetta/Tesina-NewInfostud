@@ -3,6 +3,7 @@ session_start();
 require_once("../Sito/phpFunctions-get.php");
 require_once("../Sito/phpFunctions-display.php");
 require_once("../Sito/phpFunctions-insert.php");
+require_once("../Sito/phpFunctions-misc.php");
 require_once("../Sito/phpClasses.php");
 
 
@@ -13,42 +14,12 @@ if(isset($_SESSION['username']) && $_SESSION['loginType'] == "Amministratore")
     $adminLoggato = getAdminFromUsername($_SESSION['username']);
 elseif(isset($_SESSION['username']) && $_SESSION['loginType'] == "Segretario")
     $segretarioLoggato = getSegretarioFromUsername($_SESSION['username']);
-elseif(isset($_SESSION['matricola']) && $_SESSION['loginType'] == "Docente")
+elseif(isset($_SESSION['matricola']) && $_SESSION['loginType'] == "Docente") {
     $docenteLoggato = getDocenteFromMatricola($_SESSION['matricola']);
+    $insegnamenti = getCorsiFromDocente($docenteLoggato->matricola);
+}
 else
     echo "<p>ERRORE</p>";
-
-
-if(isset($_POST['invio'])) {
-    $presenzaDati = FALSE;
-
-    if($_SESSION['loginType'] == "Docente" && $docenteLoggato->idCorso != 0) {
-        if((isset($_POST['data']) && $_POST['data'] != "") &&
-           (isset($_POST['ora']) && $_POST['ora'] != "")) {
-                $presenzaDati = TRUE;
-
-                $dataOra = "".strval($_POST['data'])." ".strval($_POST['ora'])."";
-                $appello = new appello($dataOra, $docenteLoggato->idCorso);
-                $tmp = inserisciAppello($appello);
-        }
-    }
-    else {
-        if((isset($_POST['data']) && $_POST['data'] != "") &&
-           (isset($_POST['ora']) && $_POST['ora'] != "") &&
-           (isset($_POST['corso']) && $_POST['corso'] != "seleziona")) {
-                $presenzaDati = TRUE;
-
-                $dataOra = "".strval($_POST['data'])." ".strval($_POST['ora'])."";
-                $appello = new appello($dataOra, $_POST['corso']);
-                $tmp = inserisciAppello($appello);
-        }
-    }
-
-    if(!$tmp)
-        header('Location: avvisoErrore.php');
-    else
-        header('Location: avvisoOK.php');
-}
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -120,20 +91,17 @@ if(isset($_POST['invio'])) {
                 <hr class="redBar" />
             </div>
             <?php
-            if($_SESSION['loginType'] == "Docente" && $docenteLoggato->idCorso == 0)
+            if($_SESSION['loginType'] == "Docente" && !$insegnamenti)
                 echo '<h2 style="text-align: center;">ERRORE: il docente non ha un corso assegnato.</h2>';
             else {
             ?>
             <div class="boxInsAPP">
-            <form action="inserisciAppello.php" method="POST" id="input">
+            <form action="avvisoCorrispondenze.php" method="POST" id="input">
                 <div class="insContainer">
                     <div class="labels">
                         <h3>Data: </h3>
                         <h3>Ora: </h3>
-                        <?php
-                        if($_SESSION['loginType'] != "Docente")
-                            echo "<h3>Corso: </h3>";
-                        ?>
+                        <h3>Corso: </h3>
                     </div>
                     <div class="inputs">
                     <?php
@@ -146,10 +114,8 @@ if(isset($_POST['invio'])) {
                         echo "<input class=\"textField\" type=\"time\" name=\"ora\" value=\"{$_POST['ora']}\" required>";
                     elseif(!isset($_POST['ora']))
                         echo "<input class=\"textField\" type=\"time\" name=\"ora\" required>";
-
-                    
-                    if($_SESSION['loginType'] != "Docente") {?>
-                    <select class="choice" name="corso" style="width: 52%;" onfocus='this.size=3; this.style="width: 75%;";' onblur='this.size=1; this.style="width: 52%;";' onchange='this.size=1; this.blur(); this.style="width: 52%;";'>
+                    ?>
+                    <select class="choice" name="corso" style="width: 60%;" onfocus='this.size=3; this.style="width: 90%;";' onblur='this.size=1; this.style="width: 60%;";' onchange='this.size=1; this.blur(); this.style="width: 60%;";'>
                         <?php
                             if(isset($_POST['corso']) && $_POST['corso'] != "seleziona") {
                                 $corso = getCorsoById($_POST['corso']);
@@ -157,11 +123,20 @@ if(isset($_POST['invio'])) {
                             }
                             elseif(!isset($_POST['corso']))
                                 echo "<option value=\"seleziona\">Corso...</option>";
-                                        
-                            $corsi = [];
-                            $corsi = getCorsi();
-                            foreach($corsi as $corso) {
-                                echo "<option value=\"{$corso->id}\">{$corso->nome}</option>";
+
+                            if($_SESSION['loginType'] == "Docente") {
+                                $corsi = [];
+                                $corsi = getCorsiFromDocente($docenteLoggato->matricola);
+                                foreach($corsi as $corso) {
+                                    echo "<option value=\"{$corso->id}\">{$corso->nome}</option>";
+                                }
+                            }
+                            else {
+                                $corsi = [];
+                                $corsi = getCorsi();
+                                foreach($corsi as $corso) {
+                                    echo "<option value=\"{$corso->id}\">{$corso->nome}</option>";
+                                }
                             }
                         ?>
                     </select><?php
@@ -174,8 +149,6 @@ if(isset($_POST['invio'])) {
             </form>
             </div>
             <?php
-            }
-
             if(isset($_POST['invio']) && !$presenzaDati)
                 echo "
                 <div style=\"margin-left: -6%; padding-bottom: 7%;\">

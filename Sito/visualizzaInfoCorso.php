@@ -132,7 +132,7 @@ require_once('../Sito/phpFunctions-get.php');
                         if($corso->matricolaCoDocente != 0) { ?>
                             <div class="sub-titles ">
                                 <h3 style="margin-left: 2%;">Co-Docente: <?php
-                                $prof = getDocenteFromMatricola($corso->matricolaDocente);
+                                $prof = getDocenteFromMatricola($corso->matricolaCoDocente);
                                 echo "{$prof->nome} {$prof->cognome}"; ?></h3>
                             </div>
                    <?php }?>

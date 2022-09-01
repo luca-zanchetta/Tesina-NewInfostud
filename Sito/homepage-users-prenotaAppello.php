@@ -66,7 +66,7 @@ if(isset($_SESSION['matricola']) && ($_SESSION['loginType'] == "Studente"))
                 ?>
                 </div>
             </div>    
-            <hr />
+            <div><hr class="redBar" /></div>
             <div class="container-esami">
                 <?php displayAppelliPrenotabili($studenteLoggato); ?>           
             </div>

@@ -21,6 +21,7 @@ if(isset($_POST['invio'])) {
 
     if((isset($_POST['nome']) && $_POST['nome'] != "") && 
        (isset($_POST['docente']) && $_POST['docente'] != "seleziona") && 
+       (isset($_POST['codocente']) && $_POST['codocente'] != "seleziona") && 
        (isset($_POST['anno']) && $_POST['anno'] != "seleziona") && 
        (isset($_POST['semestre']) && $_POST['semestre'] != "seleziona") &&
        (isset($_POST['curriculum']) && $_POST['curriculum'] != "") &&
@@ -31,8 +32,9 @@ if(isset($_POST['invio'])) {
             $presenzaDati = TRUE;
 
             $corso = new corso($_POST['nome'], $_POST['descrizione'], $_POST['docente'], 
-                               $_POST['anno'], $_POST['semestre'], $_POST['curriculum'],
-                               $_POST['cfu'], $_POST['ssd'], $_POST['corsoLaurea']);
+                               $_POST['codocente'], $_POST['anno'], $_POST['semestre'], 
+                               $_POST['curriculum'], $_POST['cfu'], $_POST['ssd'], 
+                               $_POST['corsoLaurea']);
 
                                
             $tmp = inserisciCorso($corso);
@@ -116,6 +118,7 @@ if(isset($_POST['invio'])) {
                     <div class="labels">
                         <h3>Nome: </h3>
                         <h3>Docente: </h3>
+                        <h3>Co-Docente: </h3>
                         <h3>Anno: </h3>
                         <h3>Semestre: </h3>
                         <h3>Curriculum: </h3>
@@ -130,7 +133,7 @@ if(isset($_POST['invio'])) {
                     elseif(!isset($_POST['nome']))
                         echo "<input class=\"textField\" type=\"text\" name=\"nome\" required>";
                     ?>
-                    <select class="choice" name="docente">
+                    <select class="choice" name="docente" onfocus='this.size=3; this.style="width: 95%;";' onblur='this.size=1; this.style="width: 68%;";' onchange='this.size=1; this.blur(); this.style="width: 68%;";'>
                         <?php
                             if(isset($_POST['docente']) && $_POST['docente'] != "seleziona") {
                                 $docente = getDocenteFromMatricola($_POST['docente']);
@@ -140,7 +143,24 @@ if(isset($_POST['invio'])) {
                                 echo "<option value=\"seleziona\">Docente...</option>";
                                         
                             $docenti = [];
-                            $docenti = getDocentiDisponibili();
+                            $docenti = getDocenti();
+                            foreach($docenti as $docente) {
+                                echo "<option value=\"{$docente->matricola}\">{$docente->nome} {$docente->cognome}</option>";
+                            }
+                        ?>
+                    </select>
+                    <select class="choice" name="codocente" onfocus='this.size=3; this.style="width: 95%;";' onblur='this.size=1; this.style="width: 68%;";' onchange='this.size=1; this.blur(); this.style="width: 68%;";'>
+                        <?php
+                            if(isset($_POST['docente']) && $_POST['docente'] != "seleziona") {
+                                $docente = getDocenteFromMatricola($_POST['docente']);
+                                echo "<option value=\"{$docente->matricola}\">{$docente->nome} {$docente->cognome}</option>";
+                            }
+                            elseif(!isset($_POST['docente']))
+                                echo "<option value=\"seleziona\">Co-Docente...</option>";
+
+                            echo "<option value=\"0\">Nessuno</option>";                                        
+                            $docenti = [];
+                            $docenti = getDocenti();
                             foreach($docenti as $docente) {
                                 echo "<option value=\"{$docente->matricola}\">{$docente->nome} {$docente->cognome}</option>";
                             }
@@ -203,7 +223,7 @@ if(isset($_POST['invio'])) {
                     elseif(!isset($_POST['ssd']))
                         echo "<input class=\"textField\" type=\"text\" name=\"ssd\" required>";
                     ?>
-                    <select class="choice" name="corsoLaurea">
+                    <select class="choice" name="corsoLaurea" onfocus='this.size=3; this.style="width: 95%;";' onblur='this.size=1; this.style="width: 68%;";' onchange='this.size=1; this.blur(); this.style="width: 68%;";'>
                         <?php
                             if(isset($_POST['corsoLaurea']) && $_POST['corsoLaurea'] != "seleziona") {
                                 $nomeCDL = getNomeCorsoDiLaureaByID($_POST['corsoLaurea']);

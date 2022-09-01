@@ -1,5 +1,6 @@
 <?php
 require_once('phpClasses.php');
+require_once('phpFunctions-misc.php');
 
 
 function getCorsi() {
@@ -17,7 +18,7 @@ function getCorsi() {
    $listaCorsi = [];
 
    for ($i=0; $i<$records->length; $i++) {
-       $corso = new corso("", "", "", "", "", "", "", "", "","");
+       $corso = new corso("", "", 0, 0, 0, 0, "", 0, "", 0);
        $record = $records->item($i);
        
        $con = $record->firstChild;
@@ -35,7 +36,7 @@ function getCorsi() {
        $con = $con->nextSibling;
        $corso->anno = $con->textContent;
        $con = $con->nextSibling;
-       $corso->semstre = $con->textContent;
+       $corso->semestre = $con->textContent;
        $con = $con->nextSibling;
        $corso->curriculum = $con->textContent;
        $con = $con->nextSibling;
@@ -88,7 +89,7 @@ function getCorsoById($_id) {
        $con = $con->nextSibling;
        $corso->anno = $con->textContent;
        $con = $con->nextSibling;
-       $corso->semstre = $con->textContent;
+       $corso->semestre = $con->textContent;
        $con = $con->nextSibling;
        $corso->curriculum = $con->textContent;
        $con = $con->nextSibling;
@@ -139,7 +140,7 @@ function getCorsiLike($_nome){
         $con = $con->nextSibling;
         $corso->anno = $con->textContent;
         $con = $con->nextSibling;
-        $corso->semstre = $con->textContent;
+        $corso->semestre = $con->textContent;
         $con = $con->nextSibling;
         $corso->curriculum = $con->textContent;
         $con = $con->nextSibling;
@@ -150,14 +151,17 @@ function getCorsiLike($_nome){
         $corso->idCorsoLaurea = $con->textContent;
         $con = $con->nextSibling;
         $stato = $con->textContent;
-        if(!$stato) continue;
+        if($stato != 1) continue;
+
         /*controllo sul nome*/
-        if(preg_match("/{$_nome}/i", $corso->nome) && $stato) $listaCorsi[] = $corso;
+        if(preg_match("/{$_nome}/i", $corso->nome) && $stato) 
+            $listaCorsi[] = $corso;
     }
     return $listaCorsi;
     }
 
-function getCorsoFormDocente($idDocente) {
+
+function getCorsiFromDocente($idDocente) {
     $xmlString = "";
     foreach ( file("../Xml/corsi.xml") as $node ) {
         $xmlString .= trim($node);
@@ -189,7 +193,7 @@ function getCorsoFormDocente($idDocente) {
         $con = $con->nextSibling;
         $corso->anno = $con->textContent;
         $con = $con->nextSibling;
-        $corso->semstre = $con->textContent;
+        $corso->semestre = $con->textContent;
         $con = $con->nextSibling;
         $corso->curriculum = $con->textContent;
         $con = $con->nextSibling;
@@ -200,10 +204,11 @@ function getCorsoFormDocente($idDocente) {
         $corso->idCorsoLaurea = $con->textContent;
         $con = $con->nextSibling;
         $stato = $con->textContent;
-        if(!$stato) continue;
+        if($stato != 1) continue;
         
-        /*controllo sul nome*/
-        if($corso->matricolaDocente == $idDocente || $corso->matricolaDocente == $idDocente) $listaCorsi[] = $corso;
+        /*controllo sulla matricola*/
+        if($corso->matricolaDocente == $idDocente || $corso->matricolaCoDocente == $idDocente) 
+            $listaCorsi[] = $corso;
     }
     return $listaCorsi;
 }
@@ -253,7 +258,7 @@ function getCorsiFromCorsoDiLaureaLike($idCorsoLaurea, $_nome) {
         $con = $con->nextSibling;
         $corso->anno = $con->textContent;
         $con = $con->nextSibling;
-        $corso->semstre = $con->textContent;
+        $corso->semestre = $con->textContent;
         $con = $con->nextSibling;
         $corso->curriculum = $con->textContent;
         $con = $con->nextSibling;
@@ -264,13 +269,64 @@ function getCorsiFromCorsoDiLaureaLike($idCorsoLaurea, $_nome) {
         $corso->idCorsoLaurea = $con->textContent;
         $con = $con->nextSibling;
         $stato = $con->textContent;
-        if(!$stato) continue;
+        if($stato != 1) continue;
         
         /* Controllo sul nome e sul corso di laurea di appartenenza */
         if(preg_match("/{$_nome}/i", $corso->nome) && $corso->idCorsoLaurea == $idCorsoLaurea) 
             $listaCorsi[] = $corso;
    }
    return $listaCorsi;
+}
+
+
+function getCorsiFromAnnoAndCorsoDiLaurea($anno, $idCorsoLaurea) {
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/corsi.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+    
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+ 
+    $listaCorsi = [];
+ 
+    for ($i=0; $i<$records->length; $i++) {
+        $corso = new corso("", "", 0, 0, 0, 0, "", 0, "", 0);
+        $record = $records->item($i);
+        
+        $con = $record->firstChild;
+        $corso->id = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->nome = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->matricolaDocente = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->matricolaCoDocente = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->descrizione = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->colore = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->anno = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->semestre = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->curriculum = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->cfu = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->ssd = $con->textContent;
+        $con = $con->nextSibling;
+        $corso->idCorsoLaurea = $con->textContent;
+        $con = $con->nextSibling;
+        $stato = $con->textContent;
+        if($stato == 1 && $anno == $corso->anno && $idCorsoLaurea == $corso->idCorsoLaurea)
+            $listaCorsi[] = $corso;
+    }
+    return $listaCorsi;
 }
 
 
@@ -562,40 +618,40 @@ function getDocentiLike($_nome) {
 }
 
 
-function getDocentiDisponibili() {
-    /*accedo al file xml*/
-    $xmlString = "";
-    foreach ( file("../Xml/docenti.xml") as $node ) {
-        $xmlString .= trim($node);
-    }
+// function getDocentiDisponibili() {
+//     /*accedo al file xml*/
+//     $xmlString = "";
+//     foreach ( file("../Xml/docenti.xml") as $node ) {
+//         $xmlString .= trim($node);
+//     }
          
-    // Creazione del documento
-    $doc = new DOMDocument();
-    $doc->loadXML($xmlString);
-    $records = $doc->documentElement->childNodes;
+//     // Creazione del documento
+//     $doc = new DOMDocument();
+//     $doc->loadXML($xmlString);
+//     $records = $doc->documentElement->childNodes;
      
-    $listaDocenti = [];
+//     $listaDocenti = [];
      
-    for ($i=0; $i<$records->length; $i++) {
-        $docente = new docente("", "", "", 0);  # Default constructor
-        $record = $records->item($i);
+//     for ($i=0; $i<$records->length; $i++) {
+//         $docente = new docente("", "", "", 0);  # Default constructor
+//         $record = $records->item($i);
              
-        $con = $record->firstChild;
-        $docente->matricola = $con->textContent;
-        $con = $con->nextSibling;
-        $docente->nome = $con->textContent;
-        $con = $con->nextSibling;
-        $docente->cognome = $con->textContent;
-        $con = $con->nextSibling;
-        $docente->password = $con->textContent;
-        $con = $con->nextSibling;
-        $stato = $con->textContent;
+//         $con = $record->firstChild;
+//         $docente->matricola = $con->textContent;
+//         $con = $con->nextSibling;
+//         $docente->nome = $con->textContent;
+//         $con = $con->nextSibling;
+//         $docente->cognome = $con->textContent;
+//         $con = $con->nextSibling;
+//         $docente->password = $con->textContent;
+//         $con = $con->nextSibling;
+//         $stato = $con->textContent;
 
-        if($docente->idCorso == 0 && $stato != 0) 
-            $listaDocenti[] = $docente;
-    }
-    return $listaDocenti;
-}
+//         if($docente->idCorso == 0 && $stato != 0) 
+//             $listaDocenti[] = $docente;
+//     }
+//     return $listaDocenti;
+// }
 
 
 function getStudenti() {
@@ -1008,14 +1064,14 @@ function getEsamiSostenuti($studente) {
         $esame->esito = $con->textContent;
         $con = $con->nextSibling;
         $stato = $con->textContent;
-        if($stato != 1) continue;
-
-        $appello = getAppelloFromId($esame->idAppello);
-        $corso = getCorsoById($appello->idCorso);
-
-        if($esame->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
-            if($esame->esito != "NULL")
-                $listaEsami[] = $esame;
+        if($stato == 1) {
+            $appello = getAppelloFromId($esame->idAppello);
+            $corso = getCorsoById($appello->idCorso);
+    
+            if($esame->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
+                if($esame->esito != "NULL")
+                    $listaEsami[] = $esame;
+        }
     }
     return $listaEsami;
 }
@@ -1049,14 +1105,14 @@ function getEsamiSuperati($studente) {
         $esame->esito = $con->textContent;
         $con = $con->nextSibling;
         $stato = $con->textContent;
-        if($stato != 1) continue;
-
-        $appello = getAppelloFromId($esame->idAppello);
-        $corso = getCorsoById($appello->idCorso);
-
-        if($esame->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
-            if($esame->esito != "NULL" && $esame->esito != "R" && $esame->esito != "B")
-                $listaEsamiSuperati[] = $corso->id;
+        if($stato == 1) {
+            $appello = getAppelloFromId($esame->idAppello);
+            $corso = getCorsoById($appello->idCorso);
+    
+            if($esame->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
+                if($esame->esito != "NULL" && $esame->esito != "R" && $esame->esito != "B")
+                    $listaEsamiSuperati[] = $corso->id;
+        }
     }
     return $listaEsamiSuperati;
 }
@@ -1091,17 +1147,18 @@ function getAppelliPrenotati($studente) {
         $con = $con->nextSibling;
         $stato = $con->textContent;
         
-        if($stato == 0) continue;
+        if($stato == 1) {
 
-        if($prenotazione->matricolaStudente == $studente->matricola) {
-            $appello = getAppelloFromId($prenotazione->idAppello);
-            $corso = getCorsoById($appello->idCorso);
-    
-            if($corso->idCorsoLaurea == $studente->idCorsoLaurea){
-                if($prenotazione->esito == "NULL")
-                    $listaPrenotazioni[] = $appello;
-            }
-        }
+          if($prenotazione->matricolaStudente == $studente->matricola) {
+              $appello = getAppelloFromId($prenotazione->idAppello);
+              $corso = getCorsoById($appello->idCorso);
+
+              if($corso->idCorsoLaurea == $studente->idCorsoLaurea){
+                  if($prenotazione->esito == "NULL")
+                      $listaPrenotazioni[] = $appello;
+              }
+          }
+       }
     }
     return $listaPrenotazioni;
 }
@@ -1113,20 +1170,13 @@ function getAppelliPrenotabili($studente) {
     if(!$appelli)
         return NULL;
 
-    
-    $appelliPrenotati = [];
-    $appelliPrenotati = getAppelliPrenotati($studente);
-
-    $esamiSuperati = [];
-    $esamiSuperati = getEsamiSuperati($studente);
-
     $appelliPrenotabili = [];
     foreach($appelli as $appello) {
         $dataAppello = getDataFromDataora($appello->dataOra);
         $dataAppello = strtotime($dataAppello);
         $dataAppello = date('Y-m-d', $dataAppello);
 
-        if($dataAppello > date('Y-m-d') && !in_array($appello, $appelliPrenotati) && !in_array($appello->idCorso, $esamiSuperati))
+        if($dataAppello > date('Y-m-d') && !verificaAppelloPrenotato($studente, $appello) && !verificaEsameSostenuto($studente, $appello->idCorso))
             $appelliPrenotabili[] = $appello;
     }
 
@@ -1163,14 +1213,14 @@ function getAppelliAfterDate($data) {
         $appello->dataOra = $con->textContent;
         $con = $con->nextSibling;
         $stato = $con->textContent;
-        if($stato != 1) continue;
-
-        $dataAppello = getDataFromDataora($appello->dataOra);
-        $dataAppello = strtotime($dataAppello);
-        $dataAppello = date('Y-m-d', $dataAppello);
-
-        if($dataAppello >= $dataRif)
-            $listaAppelli[] = $appello;
+        if($stato == 1) {
+            $dataAppello = getDataFromDataora($appello->dataOra);
+            $dataAppello = strtotime($dataAppello);
+            $dataAppello = date('Y-m-d', $dataAppello);
+    
+            if($dataAppello >= $dataRif)
+                $listaAppelli[] = $appello;
+        }
     }
     return $listaAppelli;
 }
@@ -1205,14 +1255,14 @@ function getAppelliAfterDateFromCorso($data, $idCorso) {
         $appello->dataOra = $con->textContent;
         $con = $con->nextSibling;
         $stato = $con->textContent;
-        if($stato != 1) continue;
-
-        $dataAppello = getDataFromDataora($appello->dataOra);
-        $dataAppello = strtotime($dataAppello);
-        $dataAppello = date('Y-m-d', $dataAppello);
-
-        if($dataAppello >= $dataRif && $appello->idCorso == $idCorso)
-            $listaAppelli[] = $appello;
+        if($stato == 1) {
+            $dataAppello = getDataFromDataora($appello->dataOra);
+            $dataAppello = strtotime($dataAppello);
+            $dataAppello = date('Y-m-d', $dataAppello);
+    
+            if($dataAppello >= $dataRif && $appello->idCorso == $idCorso)
+                $listaAppelli[] = $appello;
+        }
     }
     return $listaAppelli;
 }
@@ -1256,14 +1306,15 @@ function getPrenotazioniStudente($studente) {
         $prenotazione->esito = $con->textContent;
         $con = $con->nextSibling;
         $stato = $con->textContent;
-        if($stato != 1) continue;
 
-        $appello = getAppelloFromId($prenotazione->idAppello);
-        $corso = getCorsoById($appello->idCorso);
-
-        if($prenotazione->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
-            if($prenotazione->esito == "NULL")
-                $listaPrenotazioni[] = $prenotazione;
+        if($stato == 1) {
+            $appello = getAppelloFromId($prenotazione->idAppello);
+            $corso = getCorsoById($appello->idCorso);
+    
+            if($prenotazione->matricolaStudente == $studente->matricola && $corso->idCorsoLaurea == $studente->idCorsoLaurea) 
+                if($prenotazione->esito == "NULL")
+                    $listaPrenotazioni[] = $prenotazione;
+        }
     }
     return $listaPrenotazioni;
 }
@@ -1298,7 +1349,7 @@ function getPrenotazioniFromAppello($idAppello) {
         $con = $con->nextSibling;
         $stato = $con->textContent;
 
-        if($prenotazione->idAppello == $idAppello && $prenotazione->esito == "NULL" && $stato)
+        if($prenotazione->idAppello == $idAppello && $prenotazione->esito == "NULL" && $stato == 1)
             $listaPrenotazioni[] = $prenotazione;
     }
     return $listaPrenotazioni;
@@ -1334,7 +1385,7 @@ function getFullPrenotazioni() {
         $con = $con->nextSibling;
         $stato = $con->textContent;
 
-        if($stato)
+        if($stato == 1)
             $listaPrenotazioni[] = $prenotazione;
     }
     return $listaPrenotazioni;
@@ -1371,7 +1422,7 @@ function getPrenotazioneFromId($idPrenotazione) {
         $con = $con->nextSibling;
         $stato = $con->textContent;
 
-        if($prenotazione->id == $idPrenotazione && $stato)
+        if($prenotazione->id == $idPrenotazione && $stato == 1)
             return $prenotazione;
     }
     return NULL;
@@ -1407,7 +1458,7 @@ function getVerbalizzazioniPositive($studente) {
         $con = $con->nextSibling;
         $stato = $con->textContent;
 
-        if($prenotazione->matricolaStudente == $studente->matricola && $prenotazione->esito != "NULL" && $prenotazione->esito != "R" && $prenotazione->esito != "B" && $stato)
+        if($prenotazione->matricolaStudente == $studente->matricola && $prenotazione->esito != "NULL" && $prenotazione->esito != "R" && $prenotazione->esito != "B" && $stato == 1)
             $listaPrenotazioni[] = $prenotazione;
     }
     return $listaPrenotazioni;
