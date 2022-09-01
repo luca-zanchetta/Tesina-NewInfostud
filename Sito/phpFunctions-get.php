@@ -158,7 +158,7 @@ function getCorsiLike($_nome){
             $listaCorsi[] = $corso;
     }
     return $listaCorsi;
-    }
+}
 
 
 function getCorsiFromDocente($idDocente) {

@@ -81,7 +81,7 @@ require_once('../Sito/phpFunctions-get.php');
                 <form action="logout.php">
                     <input type="submit" value="">
                 </form>
-                    Logot
+                    Logout
             </h2>
             <div class="vertical-bar"></div>
             <div class="nav-logo">
@@ -171,7 +171,7 @@ require_once('../Sito/phpFunctions-get.php');
                     }
                     else {
                         foreach($docenti as $docente) {
-                            $nomeCorsi = getCorsoFormDocente($docente->matricola);
+                            $nomeCorsi = getCorsiFromDocente($docente->matricola);
                         ?>
                             <div class="listItem">
                                 <div class="element" style="width: 25%;">
