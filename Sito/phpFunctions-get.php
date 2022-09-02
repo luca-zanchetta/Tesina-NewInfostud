@@ -1791,6 +1791,8 @@ function getVotoCommento($idCommento,$matricola) {
     }
     return null;//voto non dato
 }
+
+
 function getVotoPostFromStudente($idPost, $matricola){
     $xmlString = "";
     foreach ( file("../Xml/votoPost.xml") as $node ) {
@@ -1806,4 +1808,75 @@ function getVotoPostFromStudente($idPost, $matricola){
     return 0;
 }
 
+
+function getPasswordStudente($matricola) {
+    if($matricola == 0)
+        return "";
+    
+    $xmlString = "";
+    foreach ( file("../Xml/studenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $studenti = simplexml_load_file('../Xml/studenti.xml');
+    foreach($studenti as $studente)
+        if($studente->matricola == $matricola && $studente->stato != 0)
+            return $studente->password;
+
+    return "";
+}
+
+
+function getPasswordDocente($matricola) {
+    if($matricola == 0)
+        return "";
+
+    $xmlString = "";
+    foreach ( file("../Xml/docenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $docenti = simplexml_load_file('../Xml/docenti.xml');
+    foreach($docenti as $docente)
+        if($docente->matricola == $matricola && $docente->stato != 0)
+            return $docente->password;
+
+    return "";
+}
+
+
+function getPasswordSegretario($username) {
+    if($username == "")
+        return "";
+
+    $xmlString = "";
+    foreach ( file("../Xml/segreteria.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $segretari = simplexml_load_file('../Xml/segreteria.xml');
+    foreach($segretari as $segretario)
+        if($segretario->username == $username && $segretario->stato != 0)
+            return $segretario->password;
+
+    return "";
+}
+
+
+function getPasswordAmministratore($username) {
+    if($username == "")
+        return "";
+        
+    $xmlString = "";
+    foreach ( file("../Xml/amministrazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $amministratori = simplexml_load_file('../Xml/amministrazione.xml');
+    foreach($amministratori as $admin)
+        if($admin->username == $username && $admin->stato != 0)
+            return $admin->password;
+
+    return "";
+}
 ?>
