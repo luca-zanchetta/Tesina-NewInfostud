@@ -1879,4 +1879,43 @@ function getPasswordAmministratore($username) {
 
     return "";
 }
+
+
+function getStatoStudente($studente) {
+    if(!$studente)
+        return 0;
+
+    $studenti = simplexml_load_file('../Xml/studenti.xml');
+    foreach($studenti as $stud)
+        if($studente->matricola == $stud->matricola)
+            return $stud->stato;
+
+    return 0;
+}
+
+
+function getStatoDocente($docente) {
+    if(!$docente)
+        return 0;
+
+    $docenti = simplexml_load_file('../Xml/docenti.xml');
+    foreach($docenti as $doc)
+        if($docente->matricola == $doc->matricola)
+            return $doc->stato;
+
+    return 0;
+}
+
+
+function getStatoSegretario($segretario) {
+    if(!$segretario)
+        return 0;
+
+    $segretari = simplexml_load_file('../Xml/segreteria.xml');
+    foreach($segretari as $sgrt)
+        if($segretario->username == $sgrt->username)
+            return $sgrt->stato;
+
+    return 0;
+}
 ?>

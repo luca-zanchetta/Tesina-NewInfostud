@@ -135,7 +135,26 @@ if(!isset($_POST['gestisciStudente']) && !isset($_POST['gestisciDocente']) && !i
                 displayFullSegretario($segretario);
             ?>
             <div class="menuAdmin" style="margin-left: 30%; margin-top: 5%;">
-                <form action="fittizia.php" style=""><input class="admin" type="submit" value="MODIFICA"></form>
+                <form action="modificaUtenza.php" style="" method="POST">
+                    <input class="admin" type="submit" value="MODIFICA">
+                <?php
+                    if(isset($_POST['gestisciStudente'])) {
+                        echo '
+                        <input type="hidden" name="matricola" value="'.$_POST['matricola'].'">
+                        <input type="hidden" name="utenza" value="studente">';
+                    }
+                    elseif(isset($_POST['gestisciDocente'])) {
+                        echo '
+                        <input type="hidden" name="matricola" value="'.$_POST['matricola'].'">
+                        <input type="hidden" name="utenza" value="docente">';
+                    }
+                    elseif(isset($_POST['gestisciSegretario'])) {
+                        echo '
+                        <input type="hidden" name="username" value="'.$_POST['username'].'">
+                        <input type="hidden" name="utenza" value="segretario">';
+                    }
+                ?>
+                </form>
                 <form action="fittizia.php" style="margin-left: 20%;"><input class="admin" type="submit" value="SOSPENDI"></form>
                 <form action="fittizia.php" style="margin-left: 20%;"><input class="admin" type="submit" value="ELIMINA"></form>
             </div>

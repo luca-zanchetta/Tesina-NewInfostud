@@ -440,6 +440,40 @@ function verificaProssimita($appello) {
     return $corrispondenze;
 }
 
+
+function verificaPresenzaMatricolaStudente($matricola) {
+    $studenti = simplexml_load_file('../Xml/studenti.xml');
+
+    foreach($studenti as $studente)
+        if($studente->matricola == $matricola)
+            return TRUE;
+        
+    return FALSE;
+}
+
+
+function verificaPresenzaMatricolaDocente($matricola) {
+    $docenti = simplexml_load_file('../Xml/docenti.xml');
+
+    foreach($docenti as $docente)
+        if($docente->matricola == $matricola)
+            return TRUE;
+        
+    return FALSE;
+}
+
+
+function verificaPresenzaUsernameSegretario($username) {
+    $segretari = simplexml_load_file('../Xml/segreteria.xml');
+
+    foreach($segretari as $segretario)
+        if($segretario->username == $username)
+            return TRUE;
+
+    return FALSE;
+}
+
+
 function nextVotoPostId() {
     $xmlString = "";
     foreach ( file("../Xml/votoPost.xml") as $node ) {
@@ -467,6 +501,7 @@ function nextVotoPostId() {
 
     return $id;
 }
+
 
 function calcolaReputazioneStudente($idStudente) {
     /*
@@ -513,6 +548,7 @@ function calcolaReputazioneStudente($idStudente) {
         return round($reputazione, 2);
 }
 
+
 function calcolaReputazionePosts($idStudente) {
     $xmlString = "";
     foreach ( file("../Xml/posts.xml") as $node ) {
@@ -531,6 +567,7 @@ function calcolaReputazionePosts($idStudente) {
     return $votiPosts;
 }
 
+
 function calcolaReputazionePost($idPost,$utilitaTotale){
     $xmlString = "";
     foreach ( file("../Xml/votoPost.xml") as $node ) {
@@ -548,6 +585,7 @@ function calcolaReputazionePost($idPost,$utilitaTotale){
     #non viene marchiato con un -1
     return $numVoti > 0 ? (($utilitaTotale/$numVoti) + 1)*5 : -1; 
 }
+
 
 function calcolaReputazioneCommenti($idStudente) {
     $xmlString = "";
