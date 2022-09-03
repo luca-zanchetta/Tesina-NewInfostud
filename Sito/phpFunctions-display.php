@@ -101,7 +101,7 @@ function creaSidebar($loginType) {
                 <hr style="width: 90%; margin-left: -2%;" />
                 <div style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzione" href="homepage-users-visualizzaFaq.php">FAQ</a>
+                        <a class="opzione" href="homepage-faq.php">FAQ</a>
                     </h5>
                 </div>
                 <hr style="width: 90%; margin-left: -2%;" />
@@ -618,9 +618,7 @@ function displayAppelliFromCorso($idCorso) {
     $appelli = [];
     $appelli = getAppelliAfterDateFromCorso(date('Y-m-d'), $idCorso);
 
-    if(!$appelli)
-        echo '<h2>Nessun appello trovato.</h2>';
-    else {
+    if($appelli) {
         foreach($appelli as $appello) {
             $corso = getCorsoById($appello->idCorso);
                 

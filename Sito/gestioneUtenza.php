@@ -3,7 +3,7 @@ require_once('../Sito/phpFunctions-display.php');
 require_once('../Sito/phpFunctions-get.php');
 session_start();
 
-if(!isset($_POST['gestisciStudente']) && !isset($_POST['gestisciDocente']) && !isset($_POST['gestisciSegretario'])) {
+if(!isset($_GET['gestisciStudente']) && !isset($_GET['gestisciDocente']) && !isset($_GET['gestisciSegretario'])) {
     header('Location: homepage-users.php');
 }
 ?>
@@ -99,40 +99,49 @@ if(!isset($_POST['gestisciStudente']) && !isset($_POST['gestisciDocente']) && !i
             <div class="infoTitle">
                 <div class="infoTitle-position">
                     <?php
-                    if(isset($_POST['gestisciStudente']))
+                    if(isset($_GET['gestisciStudente']))
                         echo '<h2 style="margin-left: 3%;">GESTIONE STUDENTE</h2>';
-                    elseif(isset($_POST['gestisciDocente']))
+                    elseif(isset($_GET['gestisciDocente']))
                         echo '<h2 style="margin-left: 3%;">GESTIONE DOCENTE</h2>';
-                    elseif(isset($_POST['gestisciSegretario']))
+                    elseif(isset($_GET['gestisciSegretario']))
                         echo '<h2 style="margin-left: 3%;">GESTIONE SEGRETARIO</h2>';
                     ?>
                 </div>
                 <div class="infoTitle-user">
                 <?php
-                    if(isset($_POST['gestisciStudente'])) {
-                        $studente = getStudenteFromMatricola($_POST['matricola']);
+                    if(isset($_GET['gestisciStudente'])) {
+                        $studente = getStudenteFromMatricola($_GET['matricola']);
                         echo "<h2 style=\"margin-right: 3%;\">{$studente->nome} {$studente->cognome}, {$studente->matricola}</h2>";
+                        $utenza = 'studente';
+                        $id = $studente->matricola;
+                        $stato = $studente->stato;
                     }
-                    elseif(isset($_POST['gestisciDocente'])) {
-                        $docente = getDocenteFromMatricola($_POST['matricola']);
+                    elseif(isset($_GET['gestisciDocente'])) {
+                        $docente = getDocenteFromMatricola($_GET['matricola']);
                         echo "<h2 style=\"margin-right: 3%;\">{$docente->nome} {$docente->cognome}, {$docente->matricola}</h2>";
+                        $utenza = 'docente';
+                        $id = $docente->matricola;
+                        $stato = $docente->stato;
                     }
-                    elseif(isset($_POST['gestisciSegretario'])) {       
-                        $segretario = getSegretarioFromUsername($_POST['username']);
+                    elseif(isset($_GET['gestisciSegretario'])) {       
+                        $segretario = getSegretarioFromUsername($_GET['username']);
                         echo "<h2 style=\"margin-right: 3%;\">{$segretario->username}</h2>";
+                        $utenza = 'segretario';
+                        $id = $segretario->username;
+                        $stato = $segretario->stato;
                     }?>
                 </div>
             </div>    
             <div><hr class="redBar" /></div>
             <?php
-            if(isset($_POST['gestisciStudente'])) 
-                displayFullStudente($studente);
+                if(isset($_GET['gestisciStudente'])) 
+                    displayFullStudente($studente);
 
-            elseif(isset($_POST['gestisciDocente'])) 
-                displayFullDocente($docente);
-                
-            elseif(isset($_POST['gestisciSegretario']))
-                displayFullSegretario($segretario);
+                elseif(isset($_GET['gestisciDocente'])) 
+                    displayFullDocente($docente);
+                    
+                elseif(isset($_GET['gestisciSegretario']))
+                    displayFullSegretario($segretario);
             ?>
             <div class="menuAdmin" style="margin-left: 30%; margin-top: 5%;">
                 <form action="modificaUtenza.php" style="" method="POST">
@@ -155,7 +164,20 @@ if(!isset($_POST['gestisciStudente']) && !isset($_POST['gestisciDocente']) && !i
                     }
                 ?>
                 </form>
-                <form action="fittizia.php" style="margin-left: 20%;"><input class="admin" type="submit" value="SOSPENDI"></form>
+                <?php
+                    if($stato == 1) { ?>
+                        <form action="sospendiUtente.php" style="margin-left: 20%;" method="POST">
+                            <input class="admin" type="submit" value="SOSPENDI" name="sospendi">
+                            <input type="hidden" name="utenza" value="<?php echo $utenza ?>">
+                            <input type="hidden" name="id" value="<?php echo $id ?>">
+                        </form>
+                <?php } else { ?> 
+                        <form action="riabilitaUtente.php" style="margin-left: 20%;" method="POST">
+                            <input class="admin" type="submit" value="RIABILITA" name="riabilita">
+                            <input type="hidden" name="utenza" value="<?php echo $utenza ?>">
+                            <input type="hidden" name="id" value="<?php echo $id ?>">
+                        </form>
+                <?php } ?>
                 <form action="eliminaUtenza-script.php" style="margin-left: 20%;" method="POST">
                     <input class="admin" type="submit" name="elimina" value="ELIMINA">
                 <?php

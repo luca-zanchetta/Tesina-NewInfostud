@@ -573,9 +573,9 @@ function getDocenteFromMatricola($matr) {
         $con = $con->nextSibling;
         $docente->password = $con->textContent;
         $con = $con->nextSibling;
-        $stato = $con->textContent;
+        $docente->stato = $con->textContent;
 
-        if($docente->matricola == $matr && $stato != 0) return $docente;
+        if($docente->matricola == $matr && $docente->stato != 0) return $docente;
     }
     return NULL;
 }
@@ -734,9 +734,9 @@ function getStudenteFromMatricola($matr) {
         $con = $con->nextSibling;
         $studente->idCorsoLaurea = $con->textContent;
         $con = $con->nextSibling;
-        $stato = $con->textContent;
+        $studente->stato = $con->textContent;
 
-        if($studente->matricola == $matr && $stato != 0) return $studente;
+        if($studente->matricola == $matr && $studente->stato != 0) return $studente;
     }
     return NULL;
 }
@@ -827,9 +827,9 @@ function getSegretarioFromUsername($uname) {
         $con = $con->nextSibling;
         $segretario->password = $con->textContent;
         $con = $con->nextSibling;
-        $stato = $con->textContent;
+        $segretario->stato = $con->textContent;
 
-        if($segretario->username == $uname && $stato != 0)
+        if($segretario->username == $uname && $segretario->stato != 0)
             return $segretario;
     }
     return NULL;

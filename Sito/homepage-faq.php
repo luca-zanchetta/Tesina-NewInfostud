@@ -6,8 +6,6 @@ require_once("../Sito/phpFunctions-display.php");
 
 if(!isset($_SESSION['loginType']))
     header('Location: homepage.php');
-if($_SESSION['loginType'] == 'Docente')
-    header('Location: homepage.php');
 
 //otteniamo l'oggetto associato all'utenza
 switch ($_SESSION['loginType']) {
@@ -19,7 +17,7 @@ switch ($_SESSION['loginType']) {
     case 'Docente':
         # code...
         $utenzaLoggata = getDocenteFromMatricola($_SESSION['matricola']);
-        $listaCorsi = getCorsoById($utenzaLoggata->idCorso);
+        $listaCorsi = getCorsiFromDocente($_SESSION['matricola']);
         break;
     case 'Segretario':
         # code...

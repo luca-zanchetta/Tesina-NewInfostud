@@ -24,14 +24,14 @@ switch ($_POST['richiesta']) {
         $idCommento = $_POST['id'];
         $idAutore = $_POST['autore'];
         //sicuramente utenza è ti tipo studente
-
+        $commentoDaVotare = getCommentFromId($idCommento);
         deleteCommentVote($idCommento,  $_SESSION['matricola']); 
         insertCommentVote($idCommento,  $_SESSION['matricola'], $vote,$idAutore);
         $newRep = calcolaReputazioneStudente($idAutore);
 
         $commento = getCommentFromId($idCommento);
 
-        echo "{$commento->id}-{$commento->accordoMedio}-{$newRep}";
+        echo "{$commento->id}-{$commento->accordoMedio}-{$newRep}-{$commentoDaVotare->matricolaStudente}";
         break;
 
     case 'modificaContenutoPost': 

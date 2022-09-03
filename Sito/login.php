@@ -23,7 +23,7 @@ if(isset($_POST['loginType'])) {
                         session_start();
                         $_SESSION['loginType'] = $login;
                         $_SESSION['matricola'] = $_POST['matricola'];
-                        header('Location: homepage-users.php');
+                        header('Location: homepage-users.php'); 
                     }
                 }
                 break;

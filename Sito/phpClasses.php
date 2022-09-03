@@ -46,7 +46,7 @@ class studente {
     public $cfuTotale;
     public $media;
     public $idCorsoLaurea;
-
+    public $stato;
     public function __construct($nome, $cognome, $password, $dataNascita, $idCorsoLaurea) {
         $this->matricola = generaMatricola("Studente");
         $this->nome = $nome;
@@ -66,7 +66,7 @@ class docente {
     public $nome;
     public $cognome;
     public $password;
-
+    public $stato;
     public function __construct($nome, $cognome, $password) {
         $this->matricola = generaMatricola("Docente");
         $this->nome = $nome;
@@ -79,7 +79,7 @@ class docente {
 class segretario {
     public $username;
     public $password;
-
+    public $stato;
     public function __construct($username, $password) {
         $this->username = $username;
         $this->password = $password;

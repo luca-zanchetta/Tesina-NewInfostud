@@ -159,7 +159,7 @@ require_once('../Sito/phpFunctions-get.php');
                                 <div class="element">
                                 </div>
                                 <div class="element">
-                                    <form action="gestioneUtenza.php" method="POST">
+                                    <form action="gestioneUtenza.php" method="GET">
                                         <input class="admin" type="submit" name="gestisciSegretario" value="GESTISCI">
                                         <input type="hidden" name="username" value="<?php echo $segretario->username; ?>">
                                     </form>
