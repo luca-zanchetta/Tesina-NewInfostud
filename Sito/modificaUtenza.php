@@ -35,8 +35,10 @@ if(isset($_POST['invioStudente'])) {
             header('Location: avvisoErrore.php');
         }
         else {
-            if(modificaStudente($_POST['matricola'], $_POST['nome'], $_POST['cognome'], $_POST['nuovaMatricola'], $_POST['corsoLaurea'], $_POST['dataNascita'], $_POST['password']))
-                header('Location: avvisoOK.php');
+            if(modificaStudente($_POST['matricola'], $_POST['nome'], $_POST['cognome'], $_POST['nuovaMatricola'], $_POST['corsoLaurea'], $_POST['dataNascita'], $_POST['password'])) {
+                if(modificaAffiniStudente($_POST['matricola'], $_POST['nuovaMatricola']))
+                    header('Location: avvisoOK.php');
+            }
             else {
                 setcookie('modificaUtenza', "ERRORE: Modifica studente fallita.");
                 header('Location: avvisoErrore.php');
@@ -64,8 +66,10 @@ elseif(isset($_POST['invioDocente'])) {
             header('Location: avvisoErrore.php');
         }
         else {
-            if(modificaDocente($_POST['matricola'], $_POST['nome'], $_POST['cognome'], $_POST['nuovaMatricola'], $_POST['password']))
-                header('Location: avvisoOK.php');
+            if(modificaDocente($_POST['matricola'], $_POST['nome'], $_POST['cognome'], $_POST['nuovaMatricola'], $_POST['password'])) {
+                if(modificaAffiniDocente($_POST['matricola'], $_POST['nuovaMatricola']))
+                    header('Location: avvisoOK.php');
+            }
             else {
                 setcookie('modificaUtenza', "ERRORE: Modifica docente fallita.");
                 header('Location: avvisoErrore.php');
