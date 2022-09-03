@@ -17,7 +17,7 @@ if(isset($_POST['loginType'])) {
                         
                     $registrato = verificaPresenzaMatricola($_POST['matricola'], $login);
                     if($registrato)
-                        $autenticato = verificaPasswordStudentiDocenti($_POST['password'], $login);
+                        $autenticato = verificaPasswordStudentiDocenti($_POST['matricola'], $_POST['password'], $login);
                         
                     if($autenticato) {
                         session_start();
@@ -34,7 +34,7 @@ if(isset($_POST['loginType'])) {
 
                     $registrato = verificaPresenzaMatricola($_POST['matricola'], $login);
                     if($registrato)
-                        $autenticato = verificaPasswordStudentiDocenti($_POST['password'], $login);
+                        $autenticato = verificaPasswordStudentiDocenti($_POST['matricola'], $_POST['password'], $login);
                         
                     if($autenticato) {
                         session_start();
@@ -51,7 +51,7 @@ if(isset($_POST['loginType'])) {
 
                     $registrato = verificaPresenzaUsername($_POST['username'], $login);
                     if($registrato)
-                        $autenticato = verificaPasswordSegretarioAmministratore($_POST['password'], $login);
+                        $autenticato = verificaPasswordSegretarioAmministratore($_POST['username'], $_POST['password'], $login);
                         
                     if($autenticato) {
                         session_start();
@@ -68,7 +68,7 @@ if(isset($_POST['loginType'])) {
 
                     $registrato = verificaPresenzaUsername($_POST['username'], $login);
                     if($registrato)
-                        $autenticato = verificaPasswordSegretarioAmministratore($_POST['password'], $login);
+                        $autenticato = verificaPasswordSegretarioAmministratore($_POST['username'], $_POST['password'], $login);
                         
                     if($autenticato) {
                         session_start();
