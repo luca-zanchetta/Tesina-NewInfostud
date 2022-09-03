@@ -11,7 +11,7 @@ if(!isset($_SESSION['loginType']))
 
 if(isset($_POST['insertComment'])){
     if($_SESSION['loginType']=='Studente') $idAutore = getStudenteFromMatricola($_SESSION['matricola'])->matricola;
-    elseif($_SESSION['loginType']=='Amministratore') $idAutore = -1;
+    elseif($_SESSION['loginType']=='Amministratore') $idAutore = -2;
     else $idAutore = 0;
     
     inserisciCommento( $_POST['corpo'], $idAutore, $_POST['idPost'], date('Y-m-d'));

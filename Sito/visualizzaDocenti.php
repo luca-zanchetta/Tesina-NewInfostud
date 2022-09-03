@@ -137,7 +137,7 @@ require_once('../Sito/phpFunctions-get.php');
                     }
                     else {
                         foreach($docenti as $docente) {
-                            $nomeCorsi = getCorsoFormDocente($docente->matricola);
+                            $nomeCorsi = getCorsiFromDocente($docente->matricola);
                         ?>
                             <div class="listItem">
                                 <div class="element" style="width: 25%;">

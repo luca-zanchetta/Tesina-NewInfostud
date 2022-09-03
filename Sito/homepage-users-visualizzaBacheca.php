@@ -119,7 +119,7 @@ $maxPageNum = ((int)(count($listaPost)/5)) + (count($listaPost)%5 > 0 ? 1 : 0);
                 </h2>
                 <h2 class="hForm">
                     <form action="">
-                        <input type="button" value="prova" name="dsa">
+                        <input type="button" value="" name="dsa">
                     </form>
                     <?php echo getCorsoById($_GET['idCorso'])->nome;?>
                 </h2><!--Generato dallo script-->
@@ -128,7 +128,7 @@ $maxPageNum = ((int)(count($listaPost)/5)) + (count($listaPost)%5 > 0 ? 1 : 0);
                     <h2> 
                         <?php 
                             if($_SESSION['loginType'] == 'Studente')
-                                echo "{$utenzaLoggata->nome}, {$utenzaLoggata->cognome}, {$utenzaLoggata->matricola}";
+                                echo "{$utenzaLoggata->nome} {$utenzaLoggata->cognome}, {$utenzaLoggata->matricola}";
                             else
                                 echo "{$_SESSION['loginType']}: {$utenzaLoggata->username}";
                         ?>

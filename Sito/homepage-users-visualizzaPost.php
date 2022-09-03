@@ -105,7 +105,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                     </h2>
                     <h2 class="hForm">
                         <form action="">
-                            <input type="button" value="prova" name="dsa">
+                            <input type="button" value="" name="dsa">
                         </form>
                         <?php echo getCorsoById($_GET['idCorso'])->nome;?>
                     </h2>
@@ -114,7 +114,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                     <h2>
                         <?php 
                             if($_SESSION['loginType'] == 'Studente')
-                                echo "{$utenzaLoggata->nome}, {$utenzaLoggata->cognome}, {$utenzaLoggata->matricola}";
+                                echo "{$utenzaLoggata->nome} {$utenzaLoggata->cognome}, {$utenzaLoggata->matricola}";
                             else
                                 echo "{$_SESSION['loginType']}: {$utenzaLoggata->username}";
                         ?>
@@ -200,7 +200,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                 </div>
             </div>
             <div class="pageNav">
-                <form action="homepage-users-visualizzaBacheca.php">
+                <form action="homepage-users-visualizzaPost.php" method="GET">
                     <div class="prev">
                         Prev  
                         <?php 
@@ -219,7 +219,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                     <?php 
                         for ($i=0; $i < $maxPageNum; $i++) { 
                             ?>
-                            <form action="">
+                            <form action="homepage-users-visualizzaPost.php" method="GET">
                                 <div class="pageNumber" <?php if(($i+1) == $pageNum) echo "style=\"color:red;\"" ?>>
                                     <?php echo $i+1; ?>
                                     <input type="submit" value="" class="bottoneForm"> <!--Struttura di ogni bottone -->
@@ -232,7 +232,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                         }
                     ?>
                 </div>
-                <form action="homepage-users-visualizzaBacheca.php">
+                <form action="homepage-users-visualizzaPost.php" method="GET">
                     <div class="next">
                         Next  
                         <?php 

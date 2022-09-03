@@ -97,7 +97,7 @@ $colore = [];
                         <h2>
                             <?php 
                                 if($_SESSION['loginType'] == 'Docente' || $_SESSION['loginType'] == 'Studente')
-                                    echo $utenzaLoggata->nome.", ".$utenzaLoggata->cognome.", ".$utenzaLoggata->matricola;
+                                    echo $utenzaLoggata->nome." ".$utenzaLoggata->cognome.", ".$utenzaLoggata->matricola;
                                 else
                                     echo $_SESSION['loginType']." : ".$utenzaLoggata->username;
                             ?>
