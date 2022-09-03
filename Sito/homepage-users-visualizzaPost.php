@@ -270,7 +270,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                                 <?php echo isset($autore) ? 'Matricola: '.$autore->matricola : 'N/A'?>
                             </div>
                             <div class="authorDataElement">
-                                <?php echo isset($autore) ? 'Reputazione: <span id="repTot'.$comment->id.'">'.$autore->reputazioneTotale.'</span>' : 'N/A'?>
+                                <?php echo isset($autore) ? 'Reputazione: <span class="repTot'.$autore->matricola.'">'.$autore->reputazioneTotale.'</span>' : 'N/A'?>
                             </div>
                             <div class="authorDataElement">
                                 <?php echo isset($autore) ? 'Corso di Laurea: '.getNomeCorsoDiLaureaByID($autore->idCorsoLaurea) : 'N/A'?>
@@ -312,7 +312,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                             <div class="commentText" id="editTextForm">
                                 <textarea id="commentInput<?php echo $comment->id?>" form="editTextForm<?php echo $comment->id?>" style="display:none;" required><?php echo $comment->corpo;?></textarea>
                             </div>
-                            <?php if($_SESSION['loginType'] == 'Amministratore' || $_SESSION['loginType'] == 'Segretario' || $post->matricolaStudente == $_SESSION['matricola']) { ?>
+                            <?php if($_SESSION['loginType'] == 'Amministratore' || $_SESSION['loginType'] == 'Segretario' || $comment->matricolaStudente == $_SESSION['matricola']) { ?>
                                 <div class="adminTools">
                                     <form action="deleteComment.php" method="POST">
                                         <img src="bin.png" alt="err">
@@ -373,7 +373,13 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                             let text = response.split("-");
                             console.log(text);
                             document.getElementById("votoTot"+text[0]).textContent = text[1];
-                            document.getElementById("repTot"+text[0]).textContent = text[2];
+
+                            var elements = document.getElementsByClassName("repTot"+text[3]);
+                            for (var i = 0; i < elements.length; i++) {
+                                console.log(elements[i].textContent);
+                                elements[i].textContent =  text[2];
+                                
+                            }
                         },
                         error: function () {
                             console.log("error");

@@ -18,7 +18,7 @@ switch ($_SESSION['loginType']) {
         break;
     case 'Docente':
         $utenzaLoggata = getDocenteFromMatricola($_SESSION['matricola']);
-        $corso = getCorsoById($utenzaLoggata->idCorso);
+        $corso = getCorsoById($_GET['idCorso']);
         break;
     case 'Segretario':
         $utenzaLoggata = getSegretarioFromUsername($_SESSION['username']);

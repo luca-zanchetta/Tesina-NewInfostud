@@ -100,11 +100,14 @@ else
                 if($_SESSION['loginType'] == "Docente" && !$corsi)
                     echo '<h2 style="text-align: center;">ERRORE: il docente non ha un corso assegnato.</h2>';
             
-                elseif($_SESSION['loginType'] == "Docente" && $corsi) 
-                    foreach($corsi as $corso)
-                        displayAppelliFromCorso($corso->id);
-
-                elseif($_SESSION['loginType'] == "Segretario" || $_SESSION['loginType'] == "Amministratore") {
+                elseif($_SESSION['loginType'] == "Docente" && $corsi ) {
+                    if(count($corsi) == 0)
+                        echo '<h2 style="text-align: center;">Nessun appello registrato.</h2>';
+                    else{
+                        foreach($corsi as $corso)
+                            displayAppelliFromCorso($corso->id);
+                    }
+                }elseif($_SESSION['loginType'] == "Segretario" || $_SESSION['loginType'] == "Amministratore") {
                     
                     if(isset($_POST['filtro']) && $_POST['filtro'] != "")
                         displayAppelliLike($_POST['filtro']);

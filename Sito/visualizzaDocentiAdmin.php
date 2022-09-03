@@ -139,7 +139,7 @@ require_once('../Sito/phpFunctions-get.php');
                                     <h2><?php echo $docente->nome; ?></h2>
                                 </div>
                                 <div class="element">
-                                    <form action="gestioneUtenza.php" method="POST">
+                                    <form action="gestioneUtenza.php" method="GET">
                                         <input class="admin" type="submit" name="gestisciDocente" value="GESTISCI">
                                         <input type="hidden" name="matricola" value="<?php echo $docente->matricola; ?>">
                                     </form>
@@ -169,7 +169,7 @@ require_once('../Sito/phpFunctions-get.php');
                                     <h2><?php echo $docente->nome; ?></h2>
                                 </div>
                                 <div class="element">
-                                    <form action="gestioneUtenza.php" method="POST">
+                                    <form action="gestioneUtenza.php" method="GET">
                                         <input class="admin" type="submit" name="gestisciDocente" value="GESTISCI">
                                         <input type="hidden" name="matricola" value="<?php echo $docente->matricola; ?>">
                                     </form>
