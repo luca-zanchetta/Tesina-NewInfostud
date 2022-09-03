@@ -319,6 +319,7 @@ function deleteCommentVote($idCommento, $matricola) {
         return TRUE;
 }
 
+
 function deleteComment($idCommento) {
     if($idCommento == 0)
         return FALSE;
@@ -382,6 +383,7 @@ function eliminaCorsoDiLaurea($idCorsoDiLaurea) {
         return TRUE;
 }
 
+
 function deletePostVote($matricola, $idPost) {
     if($idPost == 0 || $matricola == 0)
         return FALSE;
@@ -414,4 +416,139 @@ function deletePostVote($matricola, $idPost) {
         return TRUE;
 }
 
+
+function eliminaPrenotazioniStudente($matricola) {  
+    if($matricola == 0)
+        return FALSE;
+
+    $xmlString = "";
+    foreach ( file("../Xml/prenotazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $prenotazioni = simplexml_load_file('../Xml/prenotazione.xml');
+
+    foreach($prenotazioni as $prenotazione) {
+        if($prenotazione->matricolaStudente == $matricola && $prenotazione->stato == 1)
+            $prenotazione->stato = 0;
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/prenotazione.xml', "w");
+    $result = fwrite($f,  $prenotazioni->asXML());
+    fclose($f);
+    if(!$result) 
+        return FALSE;
+    
+
+    return TRUE;
+}
+
+
+function eliminaStudente($matricola) {
+    if($matricola == 0)
+        return FALSE;
+
+    if(!eliminaPrenotazioniStudente($matricola))
+        return FALSE;
+
+    if(!modificaAffiniStudente($matricola, -1))
+        return FALSE;
+
+    $xmlString = "";
+    foreach ( file("../Xml/studenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $studenti = simplexml_load_file('../Xml/studenti.xml');
+    $eliminato = FALSE;
+
+    foreach($studenti as $studente) {
+        if($studente->matricola == $matricola && $studente->stato != 0) {
+            $studente->stato = 0;
+            $eliminato = TRUE;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/studenti.xml', "w");
+    $result = fwrite($f,  $studenti->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    elseif($result && $eliminato)
+        return TRUE;
+}
+
+
+function eliminaDocente($matricola) {
+    if($matricola == 0)
+        return FALSE;
+
+    if(!modificaAffiniDocente($matricola, 0))
+        return FALSE;
+    
+    $xmlString = "";
+    foreach ( file("../Xml/docenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $eliminato = FALSE;    
+    $docenti = simplexml_load_file('../Xml/docenti.xml');
+
+    foreach($docenti as $docente) {
+        if($docente->matricola == $matricola && $docente->stato != 0) {
+            $docente->stato = 0;
+            $eliminato = TRUE;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/docenti.xml', "w");
+    $result = fwrite($f,  $docenti->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    elseif($result && $eliminato)
+        return TRUE;
+}
+
+
+function eliminaSegretario($username) {
+    if($username == "")
+        return FALSE;
+    
+    $xmlString = "";
+    foreach ( file("../Xml/segreteria.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $eliminato = FALSE;    
+    $segretari = simplexml_load_file('../Xml/segreteria.xml');
+
+    foreach($segretari as $segretario) {
+        if($segretario->username == $username && $segretario->stato != 0) {
+            $segretario->stato = 0;
+            $eliminato = TRUE;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/segreteria.xml', "w");
+    $result = fwrite($f,  $segretari->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    elseif($result && $eliminato)
+        return TRUE;
+}
 ?>

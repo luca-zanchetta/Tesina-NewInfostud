@@ -156,7 +156,26 @@ if(!isset($_POST['gestisciStudente']) && !isset($_POST['gestisciDocente']) && !i
                 ?>
                 </form>
                 <form action="fittizia.php" style="margin-left: 20%;"><input class="admin" type="submit" value="SOSPENDI"></form>
-                <form action="fittizia.php" style="margin-left: 20%;"><input class="admin" type="submit" value="ELIMINA"></form>
+                <form action="eliminaUtenza-script.php" style="margin-left: 20%;" method="POST">
+                    <input class="admin" type="submit" name="elimina" value="ELIMINA">
+                <?php
+                    if(isset($_POST['gestisciStudente'])) {
+                        echo '
+                        <input type="hidden" name="matricola" value="'.$_POST['matricola'].'">
+                        <input type="hidden" name="utenza" value="studente">';
+                    }
+                    elseif(isset($_POST['gestisciDocente'])) {
+                        echo '
+                        <input type="hidden" name="matricola" value="'.$_POST['matricola'].'">
+                        <input type="hidden" name="utenza" value="docente">';
+                    }
+                    elseif(isset($_POST['gestisciSegretario'])) {
+                        echo '
+                        <input type="hidden" name="username" value="'.$_POST['username'].'">
+                        <input type="hidden" name="utenza" value="segretario">';
+                    }
+                ?>
+                </form>
             </div>
         </div>
     </div>

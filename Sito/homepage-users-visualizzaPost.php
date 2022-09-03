@@ -264,7 +264,11 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                     <div class="comment">
                         <div class="commentAuthorData">
                             <div class="authorDataElement">
-                                <?php echo isset($autore) ? 'Nome: '.$autore->nome : 'da Moderatore'?>
+                                <?php 
+                                if($comment->matricolaStudente == -1)
+                                    echo "Utente eliminato";
+                                else
+                                    echo isset($autore) ? 'Nome: '.$autore->nome : 'da Moderatore'?>
                             </div>
                             <div class="authorDataElement">
                                 <?php echo isset($autore) ? 'Matricola: '.$autore->matricola : 'N/A'?>
