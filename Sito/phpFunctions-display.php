@@ -267,7 +267,20 @@ function creaSidebar($loginType) {
 
 
 function displayFullStudente($studente) {
-    $corsoDiLaurea = getNomeCorsoDiLaureaByID($studente->idCorsoLaurea);
+    $tmp = calcolaMedia_CFU($studente);
+    $studTMP = getStudenteFromMatricola($studente->matricola);
+    $tmp = calcolaReputazioneStudente($studTMP->matricola);
+    $stud = getStudenteFromMatricola($studTMP->matricola);
+
+    $statoNum = getStatoStudente($stud);
+    if($statoNum == 1)
+        $stato = "Abilitato";
+    elseif($statoNum == -1)
+        $stato = "Sospeso";
+    elseif($statoNum == 0)
+        $stato = "Eliminato";
+    
+    $corsoDiLaurea = getNomeCorsoDiLaureaByID($stud->idCorsoLaurea);
     echo '
     <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
         <div style="margin-left: 2%;">
@@ -275,31 +288,34 @@ function displayFullStudente($studente) {
                 <h2>Utenza: Studente</h2>
             </div>
             <div class="infoVoice">
-                <h2>Nome: '.$studente->nome.'</h2>
+                <h2>Nome: '.$stud->nome.'</h2>
             </div>  
             <div class="infoVoice">
-                <h2>Cognome: '.$studente->cognome.'</h2>
+                <h2>Cognome: '.$stud->cognome.'</h2>
             </div>  
             <div class="infoVoice">
-                <h2>Matricola: '.$studente->matricola.'</h2>
+                <h2>Matricola: '.$stud->matricola.'</h2>
             </div>  
             <div class="infoVoice">
                 <h2>Corso di laurea: '.$corsoDiLaurea.'</h2>
             </div>
             <div class="infoVoice">
-                <h2>Data di nascita: '.$studente->dataNascita.'</h2>
+                <h2>Data di nascita: '.$stud->dataNascita.'</h2>
             </div>  
             <div class="infoVoice">
-                <h2>Password: '.$studente->password.'</h2>
+                <h2>Password: '.$stud->password.'</h2>
             </div>  
             <div class="infoVoice">
-                <h2>Reputazione totale: '.$studente->reputazioneTotale.'</h2>
+                <h2>Reputazione totale: '.$stud->reputazioneTotale.'</h2>
             </div>  
             <div class="infoVoice">
-                <h2>CFU totali: '.$studente->cfuTotale.'</h2>
+                <h2>CFU totali: '.$stud->cfuTotale.'</h2>
             </div>
             <div class="infoVoice">
-                <h2>Media voti: '.$studente->media.'</h2>
+                <h2>Media voti: '.$stud->media.'</h2>
+            </div>
+            <div class="infoVoice">
+                <h2>Stato utenza: '.$stato.'</h2>
             </div>
         </div>
     </div>
@@ -308,7 +324,14 @@ function displayFullStudente($studente) {
 
 
 function displayFullDocente($docente) {
-    //$corso = getNomeCorso($docente->idCorso);
+    $statoNum = getStatoDocente($docente);
+    if($statoNum == 1)
+        $stato = "Abilitato";
+    elseif($statoNum == -1)
+        $stato = "Sospeso";
+    elseif($statoNum == 0)
+        $stato = "Eliminato";
+    
     $listaCorsi = getCorsiFromDocente($docente->matricola);
     echo '
     <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
@@ -329,13 +352,16 @@ function displayFullDocente($docente) {
         if(count($listaCorsi) != 0) {
             for ($i=0; $i < count($listaCorsi); $i++) { 
                 echo '<div class="infoVoice">
-                        <h2>Insegamento: '.$listaCorsi[$i]->nome.'</h2>
+                        <h2>Insegnamento: '.$listaCorsi[$i]->nome.'</h2>
                     </div>';
             }
         }
     echo '
             <div class="infoVoice">
                 <h2>Password: '.$docente->password.'</h2>
+            </div>
+            <div class="infoVoice">
+                <h2>Stato utenza: '.$stato.'</h2>
             </div>
         </div>
     </div>
@@ -344,6 +370,14 @@ function displayFullDocente($docente) {
 
 
 function displayFullSegretario($segretario) {
+    $statoNum = getStatoSegretario($segretario);
+    if($statoNum == 1)
+        $stato = "Abilitato";
+    elseif($statoNum == -1)
+        $stato = "Sospeso";
+    elseif($statoNum == 0)
+        $stato = "Eliminato";
+
     echo '
     <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
         <div style="margin-left: 2%;">
@@ -356,6 +390,9 @@ function displayFullSegretario($segretario) {
             <div class="infoVoice">
                 <h2>Password: '.$segretario->password.'</h2>
             </div>  
+            <div class="infoVoice">
+                <h2>Stato utenza: '.$stato.'</h2>
+            </div>
         </div>
     </div>
     ';

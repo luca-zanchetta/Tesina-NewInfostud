@@ -144,7 +144,26 @@ if(!isset($_GET['gestisciStudente']) && !isset($_GET['gestisciDocente']) && !iss
                     displayFullSegretario($segretario);
             ?>
             <div class="menuAdmin" style="margin-left: 30%; margin-top: 5%;">
-                <form action="fittizia.php" style=""><input class="admin" type="submit" value="MODIFICA"></form>
+                <form action="modificaUtenza.php" style="" method="POST">
+                    <input class="admin" type="submit" value="MODIFICA">
+                <?php
+                    if(isset($_POST['gestisciStudente'])) {
+                        echo '
+                        <input type="hidden" name="matricola" value="'.$_POST['matricola'].'">
+                        <input type="hidden" name="utenza" value="studente">';
+                    }
+                    elseif(isset($_POST['gestisciDocente'])) {
+                        echo '
+                        <input type="hidden" name="matricola" value="'.$_POST['matricola'].'">
+                        <input type="hidden" name="utenza" value="docente">';
+                    }
+                    elseif(isset($_POST['gestisciSegretario'])) {
+                        echo '
+                        <input type="hidden" name="username" value="'.$_POST['username'].'">
+                        <input type="hidden" name="utenza" value="segretario">';
+                    }
+                ?>
+                </form>
                 <?php
                     if($stato == 1) { ?>
                         <form action="sospendiUtente.php" style="margin-left: 20%;" method="POST">
@@ -159,7 +178,26 @@ if(!isset($_GET['gestisciStudente']) && !isset($_GET['gestisciDocente']) && !iss
                             <input type="hidden" name="id" value="<?php echo $id ?>">
                         </form>
                 <?php } ?>
-                    <form action="eliminaStudente.php" style="margin-left: 20%;"><input class="admin" type="submit" value="ELIMINA" name="elimina"></form>
+                <form action="eliminaUtenza-script.php" style="margin-left: 20%;" method="POST">
+                    <input class="admin" type="submit" name="elimina" value="ELIMINA">
+                <?php
+                    if(isset($_POST['gestisciStudente'])) {
+                        echo '
+                        <input type="hidden" name="matricola" value="'.$_POST['matricola'].'">
+                        <input type="hidden" name="utenza" value="studente">';
+                    }
+                    elseif(isset($_POST['gestisciDocente'])) {
+                        echo '
+                        <input type="hidden" name="matricola" value="'.$_POST['matricola'].'">
+                        <input type="hidden" name="utenza" value="docente">';
+                    }
+                    elseif(isset($_POST['gestisciSegretario'])) {
+                        echo '
+                        <input type="hidden" name="username" value="'.$_POST['username'].'">
+                        <input type="hidden" name="utenza" value="segretario">';
+                    }
+                ?>
+                </form>
             </div>
         </div>
     </div>

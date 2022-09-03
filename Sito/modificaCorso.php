@@ -147,6 +147,8 @@ if(isset($_POST['invio'])) {
                                 $docente = getDocenteFromMatricola($corso->matricolaCoDocente);
                                 echo "<option value=\"{$docente->matricola}\">{$docente->nome} {$docente->cognome}</option>";
                             }
+                            
+                            echo "<option value=\"0\">Nessuno</option>";
 
                             $docenti = [];
                             $docenti = getDocenti();

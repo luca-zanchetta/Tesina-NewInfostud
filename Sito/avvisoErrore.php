@@ -125,6 +125,10 @@
                     echo "<h1>{$_COOKIE['pwd']}</h1>";
                     setcookie('pwd', '', time()-60);
                 }
+                elseif(isset($_COOKIE['modificaUtenza'])) {
+                    echo "<h1>{$_COOKIE['modificaUtenza']}</h1>";
+                    setcookie('modificaUtenza', '', time()-60);
+                }
                 else
                     echo "<h1>ERRORE: Registrazione fallita.</h1>";
                 ?>

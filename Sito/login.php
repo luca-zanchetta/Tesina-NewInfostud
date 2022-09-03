@@ -17,7 +17,7 @@ if(isset($_POST['loginType'])) {
                         
                     $registrato = verificaPresenzaMatricola($_POST['matricola'], $login);
                     if($registrato)
-                        $autenticato = verificaPasswordStudentiDocenti($_POST['password'], $login);
+                        $autenticato = verificaPasswordStudentiDocenti($_POST['matricola'], $_POST['password'], $login);
                         
                     if($autenticato) {
                         session_start();
@@ -34,7 +34,7 @@ if(isset($_POST['loginType'])) {
 
                     $registrato = verificaPresenzaMatricola($_POST['matricola'], $login);
                     if($registrato)
-                        $autenticato = verificaPasswordStudentiDocenti($_POST['password'], $login);
+                        $autenticato = verificaPasswordStudentiDocenti($_POST['matricola'], $_POST['password'], $login);
                         
                     if($autenticato) {
                         session_start();
@@ -51,7 +51,7 @@ if(isset($_POST['loginType'])) {
 
                     $registrato = verificaPresenzaUsername($_POST['username'], $login);
                     if($registrato)
-                        $autenticato = verificaPasswordSegretarioAmministratore($_POST['password'], $login);
+                        $autenticato = verificaPasswordSegretarioAmministratore($_POST['username'], $_POST['password'], $login);
                         
                     if($autenticato) {
                         session_start();
@@ -68,7 +68,7 @@ if(isset($_POST['loginType'])) {
 
                     $registrato = verificaPresenzaUsername($_POST['username'], $login);
                     if($registrato)
-                        $autenticato = verificaPasswordSegretarioAmministratore($_POST['password'], $login);
+                        $autenticato = verificaPasswordSegretarioAmministratore($_POST['username'], $_POST['password'], $login);
                         
                     if($autenticato) {
                         session_start();
@@ -192,6 +192,8 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
             <input class="bottoni" type="submit" name="login" value="LOGIN">
             <input name="loginType" type="hidden" value="<?php echo $login; ?>">
             <br />
+            <a href="recuperaPassword.php" style="color: blue;">Password dimenticata?</a>
+            <?php setcookie('loginType', "{$login}"); ?>
             </form>
             <form action="form_registrazione.php" method="POST">
                 <div style="justify-content: center; display: flex; flex-direction: row; margin-top: 2em;">

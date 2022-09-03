@@ -208,9 +208,12 @@ $colore = [];
                                         Da <?php
                                                 if($faq->idAutore> 0) {
                                                     $autore = getStudenteFromMatricola($faq->idAutore);
-                                                    echo $autore->nome.','.$autore->cognome.','.$autore->matricola;
-                                                }elseif($faq->idAutore == 0)
+                                                    echo $autore->nome.' '.$autore->cognome.','.$autore->matricola;
+                                                }
+                                                elseif($faq->idAutore == 0)
                                                     echo "Segretario";
+                                                elseif($faq->idAutore == -1)
+                                                    echo "Utente eliminato";
                                                 else
                                                     echo "Amministratore";
                                         ?>
@@ -324,9 +327,12 @@ $colore = [];
                                         Da <?php
                                                 if($faq->idAutore> 0) {
                                                     $autore = getStudenteFromMatricola($faq->idAutore);
-                                                    echo $autore->nome.','.$autore->cognome.','.$autore->matricola;
-                                                }elseif($faq->idAutore == 0)
+                                                    echo $autore->nome.' '.$autore->cognome.','.$autore->matricola;
+                                                }
+                                                elseif($faq->idAutore == 0)
                                                     echo "Segretario";
+                                                elseif($faq->idAutore == -1)
+                                                    echo "Utente eliminato";
                                                 else
                                                     echo "Amministratore";
                                             ?>

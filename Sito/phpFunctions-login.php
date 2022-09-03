@@ -71,7 +71,7 @@ function verificaPresenzaUsername($username, $loginType) {
     return FALSE;
 }
 
-function verificaPasswordStudentiDocenti($password, $loginType) {
+function verificaPasswordStudentiDocenti($matricola, $password, $loginType) {
     $file = "";
 
     if($loginType == "Studente")
@@ -97,7 +97,7 @@ function verificaPasswordStudentiDocenti($password, $loginType) {
         $record = $records->item($i);
              
         $con = $record->firstChild;
-        $matricola = $con->textContent;
+        $matr = $con->textContent;
         $con = $con->nextSibling;
         $nome = $con->textContent;
         $con = $con->nextSibling;
@@ -105,13 +105,14 @@ function verificaPasswordStudentiDocenti($password, $loginType) {
         $con = $con->nextSibling;
         $pwd = $con->textContent;
         
-        if($pwd == $password) return TRUE;
+        if($matricola == $matr && $pwd == $password) 
+            return TRUE;
     }
 
     return FALSE;
 }
 
-function verificaPasswordSegretarioAmministratore($password, $loginType) {
+function verificaPasswordSegretarioAmministratore($username, $password, $loginType) {
     $file = "";
 
     if($loginType == "Segretario")
@@ -137,11 +138,12 @@ function verificaPasswordSegretarioAmministratore($password, $loginType) {
         $record = $records->item($i);
              
         $con = $record->firstChild;
-        $username = $con->textContent;
+        $uname = $con->textContent;
         $con = $con->nextSibling;
         $pwd = $con->textContent;
         
-        if($pwd == $password) return TRUE;
+        if($username == $uname && $pwd == $password) 
+            return TRUE;
     }
 
     return FALSE;

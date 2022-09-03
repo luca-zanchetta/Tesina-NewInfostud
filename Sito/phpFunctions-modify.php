@@ -17,7 +17,7 @@ function assegnaCorso($id_corso, $matricola_docente, $matricola_codocente) {
     $corsi = simplexml_load_file('../Xml/corsi.xml');
 
     foreach($corsi as $corso) {
-        if($corso->id == $id_corso) {
+        if($corso->id == $id_corso && $corso->stato == 1) {
             $corso->matricolaDocente = $matricola_docente;
             $corso->matricolaCoDocente = $matricola_codocente;
         }
@@ -50,7 +50,7 @@ function modificaEsitoPrenotazione($idPrenotazione, $nuovoEsito) {
     $prenotazioni = simplexml_load_file('../Xml/prenotazione.xml');
 
     foreach($prenotazioni as $prenotazione) {
-        if($prenotazione->id == $idPrenotazione)
+        if($prenotazione->id == $idPrenotazione && $prenotazione->stato == 1)
             $prenotazione->esito = $nuovoEsito;
     }
 
@@ -114,7 +114,7 @@ function calcolaMedia_CFU($studente) {
     $studenti = simplexml_load_file('../Xml/studenti.xml');
 
     foreach($studenti as $stud) {
-        if($stud->matricola == $studente->matricola) {
+        if($stud->matricola == $studente->matricola && $stud->stato != 0) {
             $stud->cfuTotale = $cfuTot;
             $stud->media = $media;
             break;
@@ -147,7 +147,7 @@ function modificaAppello($idAppello, $nuovaData, $nuovaOra, $nuovoCorso) {
     $appelli = simplexml_load_file('../Xml/appelli.xml');
 
     foreach($appelli as $appello) {
-        if($appello->id == $idAppello) {
+        if($appello->id == $idAppello && $appello->stato == 1) {
             $appello->dataOra = $nuovaData." ".$nuovaOra;
             $appello->idCorso = $nuovoCorso;
         }
@@ -176,7 +176,7 @@ function modificaFaq($id, $newText) {
     $faqs = simplexml_load_file('../Xml/faqs.xml');
 
     foreach($faqs as $faq)
-        if($faq->id == $id)
+        if($faq->id == $id && $faq->stato == 1)
             $faq->risposta = $newText;
 
     // Sovrascrive il vecchio file con i nuovi dati
@@ -201,7 +201,7 @@ function modifyFaqVote($matricola,$idFaq,$voto){
     $voti = simplexml_load_file('../Xml/votoFAQ.xml');
 
     foreach($voti as $voto){
-        if($voto->idFAQ == $idFaq && $voto->matricolaStudente == $matricola)
+        if($voto->idFAQ == $idFaq && $voto->matricolaStudente == $matricola && $voto->stato == 1)
             $voto->utilita = (string)$voto;
     }
     // Sovrascrive il vecchio file con i nuovi dati
@@ -258,7 +258,7 @@ function updateFaqUtility($idFaq) {
     $faqs = simplexml_load_file('../Xml/faqs.xml');
 
     foreach($faqs as $faq){
-        if($faq->id == $idFaq)
+        if($faq->id == $idFaq && $faq->stato == 1)
             $faq->utilitaTotale = $utilitaTot;
     }
     // Sovrascrive il vecchio file con i nuovi dati
@@ -283,7 +283,7 @@ function modifyContentText($id, $newText) {
     $commenti = simplexml_load_file('../Xml/commenti.xml');
 
     foreach($commenti as $comm)
-        if($comm->id == $id)
+        if($comm->id == $id && $comm->stato == 1)
             $comm->corpo = $newText;
 
     // Sovrascrive il vecchio file con i nuovi dati
@@ -307,7 +307,7 @@ function modifyPostContent($id, $newText) {
     $posts = simplexml_load_file('../Xml/posts.xml');
 
     foreach($posts as $post)
-        if($post->id == $id)
+        if($post->id == $id && $post->stato == 1)
             $post->corpo = $newText;
 
     // Sovrascrive il vecchio file con i nuovi dati
@@ -368,7 +368,7 @@ function updateCommentAccordo($idCommento){
     $commenti = simplexml_load_file('../Xml/commenti.xml');
     $autoreCommento = null;
     foreach($commenti as $commento){
-        if($commento->id == $idCommento) {
+        if($commento->id == $idCommento && $commento->stato == 1) {
             $commento->accordoMedio = bcdiv($media, 1, 2);
             $autoreCommento = $commento->matricolaStudente;
         }
@@ -401,7 +401,7 @@ function modificaCorsoDiLaurea($idCorsoDiLaurea, $nome) {
     $corsiDiLaurea = simplexml_load_file('../Xml/corsiDiLaurea.xml');
 
     foreach($corsiDiLaurea as $corsoDiLaurea) {
-        if($corsoDiLaurea->id == $idCorsoDiLaurea && !verificaPresenzaCorsoDiLaurea($nome)) {
+        if($corsoDiLaurea->id == $idCorsoDiLaurea && !verificaPresenzaCorsoDiLaurea($nome) && $corsoDiLaurea->stato == 1) {
             $corsoDiLaurea->nome = $nome;
             $modificato = TRUE;
             break;
@@ -436,7 +436,7 @@ function modificaCorso($idCorso, $nome, $descrizione, $matricolaDocente, $matric
     $corsi = simplexml_load_file('../Xml/corsi.xml');
 
     foreach($corsi as $corso) {
-        if($corso->id == $idCorso) {
+        if($corso->id == $idCorso && $corso->stato == 1) {
             $corso->nome = $nome;
             $corso->descrizione = $descrizione;
             $corso->matricolaDocente = $matricolaDocente;
@@ -606,7 +606,7 @@ function modificaPasswordAmministratore($username, $nuovaPassword) {
 }
 
 
-function updatePostUtility($idPost){
+function updatePostUtility($idPost) {
     $xmlString = "";
     foreach ( file("../Xml/votoPost.xml") as $node ) {
         $xmlString .= trim($node);
@@ -646,6 +646,7 @@ function updatePostUtility($idPost){
         return TRUE;
 }
 
+
 function sospendiStudente($matricola) { 
     /*accedo al file xml*/
     $xmlString = "";
@@ -667,6 +668,7 @@ function sospendiStudente($matricola) {
     $result = fwrite($f,  $studenti->asXML());
     fclose($f);
 }
+
 
 function sospendiDocente($matricola) { 
     /*accedo al file xml*/
@@ -690,6 +692,7 @@ function sospendiDocente($matricola) {
     fclose($f);
 }
 
+
 function sospendiSegretario($username) { 
     /*accedo al file xml*/
     $xmlString = "";
@@ -711,6 +714,7 @@ function sospendiSegretario($username) {
     $result = fwrite($f,  $segretari->asXML());
     fclose($f);
 }
+
 
 function riabilitaStudente($matricola) { 
     /*accedo al file xml*/
@@ -734,6 +738,7 @@ function riabilitaStudente($matricola) {
     fclose($f);
 }
 
+
 function riabilitaDocente($matricola) { 
     /*accedo al file xml*/
     $xmlString = "";
@@ -756,6 +761,7 @@ function riabilitaDocente($matricola) {
     fclose($f);
 }
 
+
 function riabilitaSegretario($username) { 
     /*accedo al file xml*/
     $xmlString = "";
@@ -776,5 +782,302 @@ function riabilitaSegretario($username) {
     $f = fopen('../Xml/segretari.xml', "w");
     $result = fwrite($f,  $segretari->asXML());
     fclose($f);
+}
+
+
+function modificaStudente($matricola, $nuovoNome, $nuovoCognome, $nuovaMatricola, $nuovoCorsoDiLaurea, $nuovaDataNascita, $nuovaPassword) {
+    if($matricola == 0)
+        return FALSE;
+
+    $xmlString = "";
+    foreach ( file("../Xml/studenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $modificato = FALSE;    
+    $studenti = simplexml_load_file('../Xml/studenti.xml');
+
+    foreach($studenti as $studente) {
+        if($studente->matricola == $matricola && $studente->stato != 0) {
+            $studente->matricola = $nuovaMatricola;
+            $studente->nome = $nuovoNome;
+            $studente->cognome = $nuovoCognome;
+            $studente->idCorsoDiLaurea = $nuovoCorsoDiLaurea;
+            $studente->dataNascita = $nuovaDataNascita;
+            $studente->password = $nuovaPassword;
+            
+            $modificato = TRUE;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/studenti.xml', "w");
+    $result = fwrite($f,  $studenti->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    elseif($result && $modificato)
+        return TRUE;
+}
+
+
+function modificaDocente($matricola, $nuovoNome, $nuovoCognome, $nuovaMatricola, $nuovaPassword) {
+    $xmlString = "";
+    foreach ( file("../Xml/docenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $modificato = FALSE;    
+    $docenti = simplexml_load_file('../Xml/docenti.xml');
+
+    foreach($docenti as $docente) {
+        if($docente->matricola == $matricola && $docente->stato != 0) {
+            $docente->matricola = $nuovaMatricola;
+            $docente->nome = $nuovoNome;
+            $docente->cognome = $nuovoCognome;
+            $docente->password = $nuovaPassword;
+            
+            $modificato = TRUE;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/docenti.xml', "w");
+    $result = fwrite($f,  $docenti->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    elseif($result && $modificato)
+        return TRUE;
+}
+
+
+function modificaSegretario($username, $nuovoUsername, $nuovaPassword) {
+    $xmlString = "";
+    foreach ( file("../Xml/segreteria.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $modificato = FALSE;    
+    $segretari = simplexml_load_file('../Xml/segreteria.xml');
+
+    foreach($segretari as $segretario) {
+        if($segretario->username == $username && $segretario->stato != 0) {
+            $segretario->username = $nuovoUsername;
+            $segretario->password = $nuovaPassword;
+            
+            $modificato = TRUE;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/segreteria.xml', "w");
+    $result = fwrite($f,  $segretari->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    elseif($result && $modificato)
+        return TRUE;
+}
+
+
+function modificaAffiniStudente($vecchiaMatricola, $nuovaMatricola) {
+    if($vecchiaMatricola == $nuovaMatricola)
+        return FALSE;
+
+    /* ================== Modifica delle PRENOTAZIONI ============================= */
+    $xmlString = "";
+    foreach ( file("../Xml/prenotazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $prenotazioni = simplexml_load_file('../Xml/prenotazione.xml');
+
+    foreach($prenotazioni as $prenotazione) {
+        if($prenotazione->matricolaStudente == $vecchiaMatricola && $prenotazione->stato == 1)
+            $prenotazione->matricolaStudente = $nuovaMatricola;
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/prenotazione.xml', "w");
+    $result = fwrite($f,  $prenotazioni->asXML());
+    fclose($f);
+    if(!$result)
+        return FALSE;
+
+    
+    
+    /* ================== Modifica dei POST ============================= */
+    $xmlString = "";
+    foreach ( file("../Xml/posts.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $posts = simplexml_load_file('../Xml/posts.xml');
+
+    foreach($posts as $post) {
+        if($post->matricolaStudente == $vecchiaMatricola && $post->stato == 1)
+            $post->matricolaStudente = $nuovaMatricola;
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/posts.xml', "w");
+    $result = fwrite($f,  $posts->asXML());
+    fclose($f);
+    if(!$result)
+        return FALSE;
+    
+
+    
+    /* ================== Modifica dei COMMENTI ============================= */
+    $xmlString = "";
+    foreach ( file("../Xml/commenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $commenti = simplexml_load_file('../Xml/commenti.xml');
+
+    foreach($commenti as $commento) {
+        if($commento->matricolaStudente == $vecchiaMatricola && $commento->stato == 1)
+            $commento->matricolaStudente = $nuovaMatricola;
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/commenti.xml', "w");
+    $result = fwrite($f,  $commenti->asXML());
+    fclose($f);
+    if(!$result)
+        return FALSE;
+    
+    
+    
+    /* ================== Modifica delle FAQ ============================= */
+    $xmlString = "";
+    foreach ( file("../Xml/faqs.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $faqs = simplexml_load_file('../Xml/faqs.xml');
+
+    foreach($faqs as $faq) {
+        if($faq->idAutore == $vecchiaMatricola && $faq->stato == 1)
+            $faq->idAutore = $nuovaMatricola;
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/faqs.xml', "w");
+    $result = fwrite($f,  $faqs->asXML());
+    fclose($f);
+    if(!$result)
+        return FALSE;
+    
+    
+    
+    /* ================== Modifica dei VOTI POST ============================= */
+    $xmlString = "";
+    foreach ( file("../Xml/votoPost.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $voti = simplexml_load_file('../Xml/votoPost.xml');
+
+    foreach($voti as $voto) {
+        if($voto->matricolaStudente == $vecchiaMatricola && $voto->stato == 1)
+            $voto->matricolaStudente = $nuovaMatricola;
+    }
+
+    $f = fopen('../Xml/votoPost.xml', "w");
+    $result = fwrite($f,  $voti->asXML());
+    fclose($f);
+    if(!$result)
+        return FALSE;
+    
+    
+    
+    /* ================== Modifica dei VOTI COMMENTI ============================= */
+    $xmlString = "";
+    foreach ( file("../Xml/votoCommento.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $voti = simplexml_load_file('../Xml/votoCommento.xml');
+
+    foreach($voti as $voto) {
+        if($voto->matricolaStudente == $vecchiaMatricola && $voto->stato == 1)
+            $voto->matricolaStudente = $nuovaMatricola;
+    }
+
+    $f = fopen('../Xml/votoCommento.xml', "w");
+    $result = fwrite($f,  $voti->asXML());
+    fclose($f);
+    if(!$result)
+        return FALSE;
+
+
+
+    /* ================== Modifica dei VOTI FAQ ============================= */
+    $xmlString = "";
+    foreach ( file("../Xml/votoFAQ.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+    
+    $voti = simplexml_load_file('../Xml/votoFAQ.xml');
+
+    foreach($voti as $voto){
+        if($voto->matricolaStudente == $vecchiaMatricola && $voto->stato == 1)
+            $voto->matricolaStudente = $nuovaMatricola;
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/votoFAQ.xml', "w");
+    $result = fwrite($f,  $voti->asXML());
+    fclose($f);
+    if(!$result)
+        return FALSE;
+
+
+    // Se arrivo quì, è andato tutto bene
+    return TRUE;
+}
+
+
+function modificaAffiniDocente($vecchiaMatricola, $nuovaMatricola) {
+    if($vecchiaMatricola == $nuovaMatricola)
+        return FALSE;
+
+    
+    /* ================== Modifica dei CORSI ============================= */
+    $xmlString = "";
+    foreach ( file("../Xml/corsi.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $corsi = simplexml_load_file('../Xml/corsi.xml');
+
+    foreach($corsi as $corso) {
+        if($corso->matricolaDocente == $vecchiaMatricola && $corso->stato == 1)
+            $corso->matricolaDocente = $nuovaMatricola;
+        elseif($corso->matricolaCoDocente == $vecchiaMatricola && $corso->stato == 1)
+            $corso->matricolaCoDocente = $nuovaMatricola;
+    }
+
+    $f = fopen('../Xml/corsi.xml', "w");
+    $result = fwrite($f,  $corsi->asXML());
+    fclose($f);
+    if(!$result) 
+        return FALSE;
+
+    
+    // Se arrivo quì, è andato tutto bene
+    return TRUE;
 }
 ?>

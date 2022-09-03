@@ -124,9 +124,14 @@ require_once('../Sito/phpFunctions-get.php');
                     </div> 
                     <div><hr class="blackBar" /></div>
                     <div class="sub-titles ">
-                        <h3 style="margin-left: 2%;">Professore: <?php
-                        $prof = getDocenteFromMatricola($corso->matricolaDocente);
-                        echo "{$prof->nome} {$prof->cognome}"; ?></h3>
+                        <h3 style="margin-left: 2%;">Docente: <?php
+                        if($corso->matricolaDocente == 0)
+                            echo "Docente in fase di assegnazione";
+                        else {
+                            $prof = getDocenteFromMatricola($corso->matricolaDocente);
+                            echo "{$prof->nome} {$prof->cognome}";
+                        }
+                        ?></h3>
                     </div>
                     <?php
                         if($corso->matricolaCoDocente != 0) { ?>
