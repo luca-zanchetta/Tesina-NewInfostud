@@ -606,7 +606,7 @@ function modificaPasswordAmministratore($username, $nuovaPassword) {
 }
 
 
-function updatePostUtility($idPost){
+function updatePostUtility($idPost) {
     $xmlString = "";
     foreach ( file("../Xml/votoPost.xml") as $node ) {
         $xmlString .= trim($node);
@@ -644,6 +644,144 @@ function updatePostUtility($idPost){
         return FALSE;
     else
         return TRUE;
+}
+
+
+function sospendiStudente($matricola) { 
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/studenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $studenti = simplexml_load_file('../Xml/studenti.xml');
+
+    foreach($studenti as $studente) {
+        if($studente->matricola == $matricola) {
+            $studente->stato = -1;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/studenti.xml', "w");
+    $result = fwrite($f,  $studenti->asXML());
+    fclose($f);
+}
+
+
+function sospendiDocente($matricola) { 
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/docenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $docenti = simplexml_load_file('../Xml/docenti.xml');
+
+    foreach($docenti as $docente) {
+        if($docente->matricola == $matricola) {
+            $docente->stato = -1;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/docenti.xml', "w");
+    $result = fwrite($f,  $docenti->asXML());
+    fclose($f);
+}
+
+
+function sospendiSegretario($username) { 
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/segretari.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $segretari = simplexml_load_file('../Xml/segretari.xml');
+
+    foreach($segretari as $segretario) {
+        if($segretario->username == $username) {
+            $segretario->stato = -1;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/segretari.xml', "w");
+    $result = fwrite($f,  $segretari->asXML());
+    fclose($f);
+}
+
+
+function riabilitaStudente($matricola) { 
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/studenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $studenti = simplexml_load_file('../Xml/studenti.xml');
+
+    foreach($studenti as $studente) {
+        if($studente->matricola == $matricola) {
+            $studente->stato = 1;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/studenti.xml', "w");
+    $result = fwrite($f,  $studenti->asXML());
+    fclose($f);
+}
+
+
+function riabilitaDocente($matricola) { 
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/docenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $docenti = simplexml_load_file('../Xml/docenti.xml');
+
+    foreach($docenti as $docente) {
+        if($docente->matricola == $matricola) {
+            $docente->stato = 1;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/docenti.xml', "w");
+    $result = fwrite($f,  $docenti->asXML());
+    fclose($f);
+}
+
+
+function riabilitaSegretario($username) { 
+    /*accedo al file xml*/
+    $xmlString = "";
+    foreach ( file("../Xml/segretari.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $segretari = simplexml_load_file('../Xml/segretari.xml');
+
+    foreach($segretari as $segretario) {
+        if($segretario->username == $username) {
+            $segretario->stato = 1;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/segretari.xml', "w");
+    $result = fwrite($f,  $segretari->asXML());
+    fclose($f);
 }
 
 
