@@ -134,10 +134,8 @@ $colore = [];
                     <div class="title">
                         Domande e Risposte complete
                     </div>
-                    <div class="researchBar">
-                        <form action="">
-                            <input type="text">
-                        </form>
+                    <div>
+                        <hr/>
                     </div>
                     <div class="faqContainer">      
                         <?php
@@ -255,10 +253,8 @@ $colore = [];
                     <div class="title">
                         Domande e Risposte Incomplete
                     </div>
-                    <div class="researchBar">
-                        <form action="">
-                            <input type="text">
-                        </form>
+                    <div>
+                        <hr/>
                     </div>
                         <div class="faqContainer">
                         <?php

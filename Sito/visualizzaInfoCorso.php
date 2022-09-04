@@ -1,6 +1,12 @@
 <?php
 session_start();
 require_once('../Sito/phpFunctions-get.php');
+if(!isset($_POST['idCorso'])) {
+    if(isset($_SESSION['loginType']))
+        header('Location: homepage-users.php');
+    else
+        header('Location: homepage.php');
+}
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>

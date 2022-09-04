@@ -8,6 +8,8 @@ if(!isset($_SESSION['loginType']))
 
 if(isset($_SESSION['matricola']) && ($_SESSION['loginType'] == "Studente"))
     $studenteLoggato = getStudenteFromMatricola($_SESSION['matricola']);
+else
+    header('Location: homepage.php');
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
