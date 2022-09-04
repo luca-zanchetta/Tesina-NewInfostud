@@ -296,7 +296,7 @@ $maxPageNum = ((int)(count($listaPost)/5)) + (count($listaPost)%5 > 0 ? 1 : 0);
                                                         <h4>
                                                             <?php
                                                                 $autore = getStudenteFromMatricola($list[$i]->matricolaStudente);
-                                                                echo "{$autore->nome}, {$autore->cognome}, {$autore->matricola}";
+                                                                echo "{$autore->nome} {$autore->cognome}, {$autore->matricola}";
                                                             ?>
                                                         </h4>       
                                                     </div>
@@ -343,7 +343,7 @@ $maxPageNum = ((int)(count($listaPost)/5)) + (count($listaPost)%5 > 0 ? 1 : 0);
                                             <h4>
                                                 <?php
                                                     $autore = getStudenteFromMatricola($listaPost[$i]->matricolaStudente);
-                                                    echo "{$autore->nome}, {$autore->cognome}, {$autore->matricola}";
+                                                    echo "{$autore->nome} {$autore->cognome}, {$autore->matricola}";
                                                 ?>
                                             </h4>       
                                         </div>
