@@ -43,7 +43,7 @@ switch ($_SESSION['loginType']) {
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileVisualizzazioneLista.css">
     <link rel="stylesheet" href="stileHomepage-users.css">
-    <title>Homepage</title>
+    <title>FAQ - InfoStuff</title>
 </head>
 <body>
     <div class="header">
@@ -58,7 +58,7 @@ switch ($_SESSION['loginType']) {
                     <form action="">
                         <input type="button">
                     </form>
-                    Infostud
+                    InfoStuff
                 </h2>
             <div class="vertical-bar"></div>
         </div>

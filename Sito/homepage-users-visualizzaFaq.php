@@ -50,7 +50,7 @@ $colore = [];
     <link rel="stylesheet" href="stileBacheca.css">
     <link rel="stylesheet" href="stilePost.css">
     <link rel="stylesheet" href="stileFaq.css">
-    <title>Homepage</title>
+    <title>FAQ - InfoStuff</title>
 </head>
 <body>
     <div class="header">
@@ -65,7 +65,7 @@ $colore = [];
                     <form action="">
                         <input type="button">
                     </form>
-                    Infostud
+                    InfoStuff
                 </h2>
             <div class="vertical-bar"></div>
         </div>

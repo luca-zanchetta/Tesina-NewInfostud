@@ -17,7 +17,7 @@ if(!isset($_GET['gestisciStudente']) && !isset($_GET['gestisciDocente']) && !iss
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stile-amministrazione.css">
     <link rel="stylesheet" href="stileHomepage-users.css">
-    <title>Gestione Utenza - Infostud</title>
+    <title>Gestione Utenza - InfoStuff</title>
 </head>
 <body style="background-color: gainsboro;">
     <div class="header">
@@ -32,7 +32,7 @@ if(!isset($_GET['gestisciStudente']) && !isset($_GET['gestisciDocente']) && !iss
                 <form action="">
                     <input type="button">
                 </form>
-                Infostud
+                InfoStuff
             </h2>  
         </div>
         <div class="nav-right">

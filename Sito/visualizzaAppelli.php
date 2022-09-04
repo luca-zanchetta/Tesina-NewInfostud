@@ -29,7 +29,7 @@ else
 <head>
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileHomepage-users.css">
-    <title>Visualizza appelli - Infostud</title>
+    <title>Visualizza appelli - InfoStuff</title>
 </head>
 <body>
     <div class="header">
@@ -44,7 +44,7 @@ else
                     <form action="">
                         <input type="button">
                     </form>
-                    Infostud
+                    InfoStuff
                 </h2>
             <div class="vertical-bar"></div>
         </div>

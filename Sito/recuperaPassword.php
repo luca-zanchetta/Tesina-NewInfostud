@@ -88,7 +88,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-    <title>Recupera password - Infostud</title>
+    <title>Recupera password - InfoStuff</title>
     <link rel="stylesheet" href="stileLogin.css">
     <link rel="stylesheet" href="stile-base.css">
 </head>
@@ -105,7 +105,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                 <form action="">
                     <input type="button">
                 </form>
-                Infostud
+                InfoStuff
             </h2>  
         </div>
         <div class="nav-right">

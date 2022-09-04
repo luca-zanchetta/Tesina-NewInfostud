@@ -41,7 +41,7 @@ switch($loginType) {
 <head>
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileHomepage-users.css">
-    <title>Homepage - Infostud</title>
+    <title>Homepage - InfoStuff</title>
 </head>
 <body>
     <div class="header">
@@ -56,7 +56,7 @@ switch($loginType) {
                     <form action="">
                         <input type="button">
                     </form>
-                    Infostud
+                    InfoStuff
                 </h2>
             <div class="vertical-bar"></div>
         </div>

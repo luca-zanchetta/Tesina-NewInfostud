@@ -12,7 +12,7 @@ require_once('../Sito/phpFunctions-get.php');
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stile-visualizza-esame.css">
     <link rel="stylesheet" href="stileVisualizzazioneLista.css">
-    <title>Info corso - Infostud</title>
+    <title>Info corso - InfoStuff</title>
 </head>
 <body style="background-color: gainsboro;">
     <div class="header">
@@ -27,7 +27,7 @@ require_once('../Sito/phpFunctions-get.php');
                 <form action="">
                     <input type="button">
                 </form>
-                Infostud
+                InfoStuff
             </h2>  
         </div>
         <div class="nav-right">

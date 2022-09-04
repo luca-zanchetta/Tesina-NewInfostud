@@ -101,7 +101,7 @@ else {
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileLogin.css">
     <link rel="stylesheet" href="stile-amministrazione.css">
-    <title>Registrazione - Infostud</title>
+    <title>Registrazione - InfoStuff</title>
 </head>
 <body class="bodyLogin">
     <div class="header">
@@ -116,7 +116,7 @@ else {
                 <form action="">
                     <input type="button">
                 </form>
-                Infostud
+                InfoStuff
             </h2>  
         </div>
         <div class="nav-right">

@@ -46,7 +46,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
         <link rel="stylesheet" href="stilePost.css">
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
         <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <title>Homepage</title>
+    <title>Post - InfoStuff</title>
     <style>
         .checked {
         color: orange;
@@ -63,7 +63,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
             </div>
             <div class="vertical-bar"></div>
                 <h2>
-                    Infostud
+                    InfoStuff
                     <form action="">
                         <input type="button">
                     </form>

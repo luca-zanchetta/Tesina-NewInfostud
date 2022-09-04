@@ -23,7 +23,7 @@
                 <form action="">
                     <input type="button">
                 </form>
-                Infostud
+                InfoStuff
             </h2>  
         </div>
         <div class="nav-right">

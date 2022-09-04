@@ -65,7 +65,7 @@ $maxPageNum = ((int)(count($listaPost)/5)) + (count($listaPost)%5 > 0 ? 1 : 0);
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileHomepage-users.css">
     <link rel="stylesheet" href="stileBacheca.css">
-    <title>Homepage</title>
+    <title>Bacheca - InfoStuff</title>
 </head>
 <body>
     <div class="header">
@@ -80,7 +80,7 @@ $maxPageNum = ((int)(count($listaPost)/5)) + (count($listaPost)%5 > 0 ? 1 : 0);
                     <form action="">
                         <input type="button">
                     </form>
-                    Infostud
+                    InfoStuff
                 </h2>
             <div class="vertical-bar"></div>
         </div>

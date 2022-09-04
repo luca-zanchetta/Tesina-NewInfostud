@@ -36,7 +36,7 @@ if(isset($_POST['invio'])) {
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileHomepage-users.css">
     <link rel="stylesheet" href="stile-amministrazione.css">
-    <title>Modifica corso di laurea - Infostud</title>
+    <title>Modifica corso di laurea - InfoStuff</title>
 </head>
 <body>
     <div class="header">
@@ -51,7 +51,7 @@ if(isset($_POST['invio'])) {
                     <form action="">
                         <input type="button">
                     </form>
-                    Infostud
+                    InfoStuff
                 </h2>
             <div class="vertical-bar"></div>
         </div>

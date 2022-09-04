@@ -8,7 +8,7 @@
 <head>
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileLogin.css">
-    <title>Recupera password - Infostud</title>
+    <title>Recupera password - InfoStuff</title>
 </head>
 <body style="background-color: white;">
     <div class="header">
@@ -23,7 +23,7 @@
                 <form action="">
                     <input type="button">
                 </form>
-                Infostud
+                InfoStuff
             </h2>  
         </div>
         <div class="nav-right">

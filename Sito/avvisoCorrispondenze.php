@@ -119,7 +119,7 @@ if(isset($_POST['si'])) {
                     <form action="">
                         <input type="button">
                     </form>
-                    Infostud
+                    InfoStuff
                 </h2>
             <div class="vertical-bar"></div>
         </div>

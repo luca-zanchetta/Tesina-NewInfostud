@@ -7,7 +7,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <link rel="stylesheet" href="stile-base.css">
-    <title>Homepage</title>
+    <title>Homepage - InfoStuff</title>
 </head>
 <body style="background-image: url('sapienza.jpg');">
     <div class="header">
@@ -22,7 +22,7 @@
                 <form action="">
                     <input type="button">
                 </form>
-                Infostud
+                InfoStuff
             </h2>  
         </div>
         <div class="nav-right">

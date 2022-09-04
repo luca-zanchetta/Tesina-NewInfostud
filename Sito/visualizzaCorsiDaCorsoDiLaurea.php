@@ -21,7 +21,7 @@ $nomeCorsoDiLaurea = getNomeCorsoDiLaureaByID($_POST['idCorsoLaurea']);
 <head>
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileVisualizzazioneLista.css">
-    <title>Corsi - Infostud</title>
+    <title>Corsi - InfoStuff</title>
 </head>
 <body style="background-color: gainsboro;">
     <div class="header">
@@ -36,7 +36,7 @@ $nomeCorsoDiLaurea = getNomeCorsoDiLaureaByID($_POST['idCorsoLaurea']);
                 <form action="">
                     <input type="button">
                 </form>
-                Infostud
+                InfoStuff
             </h2>  
         </div>
         <div class="nav-central">

@@ -19,7 +19,7 @@ if(isset($_SESSION['matricola']) && ($_SESSION['loginType'] == "Studente"))
 <head>
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileHomepage-users.css">
-    <title>Prenota appello - Infostud</title>
+    <title>Prenota appello - InfoStuff</title>
 </head>
 <body>
     <div class="header">
@@ -34,7 +34,7 @@ if(isset($_SESSION['matricola']) && ($_SESSION['loginType'] == "Studente"))
                     <form action="">
                         <input type="button">
                     </form>
-                    Infostud
+                    InfoStuff
                 </h2>
             <div class="vertical-bar"></div>
         </div>

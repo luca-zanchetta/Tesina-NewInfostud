@@ -20,7 +20,7 @@ if(isset($_SESSION['matricola']) && ($_SESSION['loginType'] == "Studente"))
     <link rel="stylesheet" href="stileVisualizzazioneLista.css">
     <link rel="stylesheet" href="stileHomepage-users.css">
     <link rel="stylesheet" href="stile-amministrazione.css">
-    <title>Appelli prenotati - Infostud</title>
+    <title>Appelli prenotati - InfoStuff</title>
 </head>
 <body>
     <div class="header">
@@ -35,7 +35,7 @@ if(isset($_SESSION['matricola']) && ($_SESSION['loginType'] == "Studente"))
                     <form action="">
                         <input type="button">
                     </form>
-                    Infostud
+                    InfoStuff
                 </h2>
             <div class="vertical-bar"></div>
         </div>
