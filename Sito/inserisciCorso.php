@@ -160,7 +160,7 @@ if(isset($_POST['invio'])) {
                             }
                         ?>
                     </select>
-                    <select class="choice" name="codocente" onfocus='this.size=3; this.style="width: 95%;";' onblur='this.size=1; this.style="width: 68%;";' onchange='this.size=1; this.blur(); this.style="width: 68%;";'>
+                    <select class="choice" name="codocente" onfocus='this.size=3; this.style="width: 95%;";' onblur='this.size=1; this.style="width: 60%;";' onchange='this.size=1; this.blur(); this.style="width: 60%;";'>
                         <?php
                             if(isset($_POST['docente']) && $_POST['docente'] != "seleziona") {
                                 $docente = getDocenteFromMatricola($_POST['docente']);
@@ -234,7 +234,7 @@ if(isset($_POST['invio'])) {
                     elseif(!isset($_POST['ssd']))
                         echo "<input class=\"textField\" type=\"text\" name=\"ssd\" required>";
                     ?>
-                    <select class="choice" name="corsoLaurea" onfocus='this.size=3; this.style="width: 95%;";' onblur='this.size=1; this.style="width: 68%;";' onchange='this.size=1; this.blur(); this.style="width: 68%;";'>
+                    <select class="choice" name="corsoLaurea" onfocus='this.size=3; this.style="width: 95%;";' onblur='this.size=1; this.style="width: 60%;";' onchange='this.size=1; this.blur(); this.style="width: 60%;";'>
                         <?php
                             if(isset($_POST['corsoLaurea']) && $_POST['corsoLaurea'] != "seleziona") {
                                 $nomeCDL = getNomeCorsoDiLaureaByID($_POST['corsoLaurea']);
