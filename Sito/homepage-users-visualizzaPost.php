@@ -193,7 +193,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                     </div>
                     <div class="postData">
                         <div class="postAuthor">
-                            <?php echo $autore == 'tsk'? 'Da Moderatore' : "{$autore->nome}, {$autore->cognome}, {$autore->matricola}" ;?>
+                            <?php echo $autore == 'tsk'? 'Da Moderatore' : "{$autore->nome} {$autore->cognome}, {$autore->matricola}" ;?>
                         </div>
                         <div class="postDate">
                             <?php echo $post->data;?>
@@ -291,7 +291,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                         <div class="commentContent">
                             <div class="commentTopBar">
                                 <div class="commentTime">
-                                    <?php echo  isset($autore) ? "{$comment->data} · Voto Totale : <span id=\"votoTot{$comment->id}\">{$comment->accordoMedio}</span>" : $comment->data ?> 
+                                    <?php echo  isset($autore) ? "{$comment->data} · Voto Totale: <span style=\"margin-left: 1%;\" id=\"votoTot{$comment->id}\">{$comment->accordoMedio}</span>" : $comment->data ?> 
                                 </div>
                                 <?php if ($_SESSION['loginType'] == 'Studente' && isset($autore) && $autore->matricola != $_SESSION['matricola']) { ?>
                                     <div class="commentTime" style="justify-content: flex-end;">
