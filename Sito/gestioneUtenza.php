@@ -147,19 +147,19 @@ if(!isset($_GET['gestisciStudente']) && !isset($_GET['gestisciDocente']) && !iss
                 <form action="modificaUtenza.php" style="" method="POST">
                     <input class="admin" type="submit" value="MODIFICA">
                 <?php
-                    if(isset($_POST['gestisciStudente'])) {
+                    if(isset($_GET['gestisciStudente'])) {
                         echo '
-                        <input type="hidden" name="matricola" value="'.$_POST['matricola'].'">
+                        <input type="hidden" name="matricola" value="'.$_GET['matricola'].'">
                         <input type="hidden" name="utenza" value="studente">';
                     }
-                    elseif(isset($_POST['gestisciDocente'])) {
+                    elseif(isset($_GET['gestisciDocente'])) {
                         echo '
-                        <input type="hidden" name="matricola" value="'.$_POST['matricola'].'">
+                        <input type="hidden" name="matricola" value="'.$_GET['matricola'].'">
                         <input type="hidden" name="utenza" value="docente">';
                     }
-                    elseif(isset($_POST['gestisciSegretario'])) {
+                    elseif(isset($_GET['gestisciSegretario'])) {
                         echo '
-                        <input type="hidden" name="username" value="'.$_POST['username'].'">
+                        <input type="hidden" name="username" value="'.$_GET['username'].'">
                         <input type="hidden" name="utenza" value="segretario">';
                     }
                 ?>
@@ -181,19 +181,19 @@ if(!isset($_GET['gestisciStudente']) && !isset($_GET['gestisciDocente']) && !iss
                 <form action="eliminaUtenza-script.php" style="margin-left: 20%;" method="POST">
                     <input class="admin" type="submit" name="elimina" value="ELIMINA">
                 <?php
-                    if(isset($_POST['gestisciStudente'])) {
+                    if(isset($_GET['gestisciStudente'])) {
                         echo '
-                        <input type="hidden" name="matricola" value="'.$_POST['matricola'].'">
+                        <input type="hidden" name="matricola" value="'.$_GET['matricola'].'">
                         <input type="hidden" name="utenza" value="studente">';
                     }
-                    elseif(isset($_POST['gestisciDocente'])) {
+                    elseif(isset($_GET['gestisciDocente'])) {
                         echo '
-                        <input type="hidden" name="matricola" value="'.$_POST['matricola'].'">
+                        <input type="hidden" name="matricola" value="'.$_GET['matricola'].'">
                         <input type="hidden" name="utenza" value="docente">';
                     }
-                    elseif(isset($_POST['gestisciSegretario'])) {
+                    elseif(isset($_GET['gestisciSegretario'])) {
                         echo '
-                        <input type="hidden" name="username" value="'.$_POST['username'].'">
+                        <input type="hidden" name="username" value="'.$_GET['username'].'">
                         <input type="hidden" name="utenza" value="segretario">';
                     }
                 ?>

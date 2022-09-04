@@ -3,6 +3,8 @@ session_start();
 require_once('phpFunctions-modify.php');
 require_once('phpFunctions-get.php');
 require_once('phpFunctions-display.php');
+require_once('phpFunctions-misc.php');
+require_once('phpClasses.php');
 
 
 if(!isset($_SESSION['loginType']) || $_SESSION['loginType'] != "Amministratore")
@@ -28,19 +30,28 @@ if(isset($_POST['invio'])) {
        (isset($_POST['ssd']) && $_POST['ssd'] != "") &&
        (isset($_POST['corsoLaurea']) && $_POST['corsoLaurea'] != "seleziona") &&
        (isset($_POST['descrizione']) && $_POST['descrizione'] != "")) {
-                  
-            $tmp = modificaCorso($_POST['idCorso'], $_POST['nome'], $_POST['descrizione'], $_POST['docente'], $_POST['codocente'], $_POST['anno'], $_POST['semestre'], $_POST['curriculum'], $_POST['cfu'], $_POST['ssd'], $_POST['corsoLaurea']);
-            if(!$tmp) {
-                setcookie('modificaCorso', 'ERRORE: Modifica del corso non riuscita.');
+
+            $corsoTMP = new corso("", "", 0, 0, 0, 0, "", 0, "", 0);
+            $corsoTMP->nome = $_POST['nome'];
+            $corsoTMP->idCorsoLaurea = $_POST['corsoLaurea'];
+            if(verificaPresenzaCorso($corsoTMP)) {
+                setcookie('modificaCorso', 'ERRORE: Il corso è già presente!');
                 header('Location: avvisoErrore.php');
             }
             else {
-                $corso = getCorsoById($_POST['idCorso']);
-                $tmp = assegnaCorso($corso, $_POST['docente'], $_POST['codocente']);
-                if($tmp)
-                    header('Location: avvisoOK.php');
-                else
-                    header('Location: avvisoErrore.php'); 
+                $tmp = modificaCorso($_POST['idCorso'], $_POST['nome'], $_POST['descrizione'], $_POST['docente'], $_POST['codocente'], $_POST['anno'], $_POST['semestre'], $_POST['curriculum'], $_POST['cfu'], $_POST['ssd'], $_POST['corsoLaurea']);
+                if(!$tmp) {
+                    setcookie('modificaCorso', 'ERRORE: Modifica del corso non riuscita.');
+                    header('Location: avvisoErrore.php');
+                }
+                else {
+                    $corso = getCorsoById($_POST['idCorso']);
+                    $tmp = assegnaCorso($corso, $_POST['docente'], $_POST['codocente']);
+                    if($tmp)
+                        header('Location: avvisoOK.php');
+                    else
+                        header('Location: avvisoErrore.php'); 
+                }
             }
        }
 }
