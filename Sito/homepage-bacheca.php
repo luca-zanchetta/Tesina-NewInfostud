@@ -31,7 +31,7 @@ switch ($_SESSION['loginType']) {
         break;
     }
 
-    if((int)$utenzaLoggata->stato == -1) { ?>
+    if($_SESSION['loginType']!= "Amministratore" && (int)$utenzaLoggata->stato == -1) { ?>
         <script>
             window.alert("sei stato sospeso da questa funzionalità");
             window.location.replace('homepage-users.php');

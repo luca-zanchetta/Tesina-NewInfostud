@@ -25,7 +25,7 @@ switch ($_SESSION['loginType']) {
         break;
 }
 
-if((int)$utenzaLoggata->stato == -1) { ?>
+if($_SESSION['loginType']!= "Amministratore" && (int)$utenzaLoggata->stato == -1) { ?>
     <script>
         window.alert("sei stato sospeso da questa funzionalità");
         window.location.replace('homepage-users.php');
@@ -402,11 +402,13 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
             document.getElementById("vote"+id).style.display = "none";
         }
     }
+    
     function delay(n){
     return new Promise(function(resolve){
         setTimeout(resolve,n*1000);
     });
     }
+
     function editComment(id) {
         
         if(document.getElementById("commentText" +id ).style.display == "none"){
