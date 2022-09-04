@@ -74,7 +74,18 @@ else
         <div class="body">
             <div class="infoTitle">
                 <div class="infoTitle-position">
-                    <h2>Home > Inserisci appello</h2>
+                    <h2 style="margin-left: 3%; padding-right: 1%;" class="hForm"> 
+                        <form action="homepage-users.php">
+                            <input type="submit" value="">
+                        </form>
+                        Home >
+                    </h2>
+                    <h2 class="hForm">
+                        <form action="">
+                            <input type="button">
+                        </form>
+                        Inserisci appello
+                    </h2>
                 </div>
                 <div class="infoTitle-user">
                 <?php

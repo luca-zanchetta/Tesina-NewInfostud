@@ -82,7 +82,24 @@ if(isset($_POST['modifica']) && isset($_POST['idAppello']) && isset($_POST['idCo
         <div class="body">
             <div class="infoTitle">
                 <div class="infoTitle-position">
-                    <h2>Home > Modifica appello</h2>
+                    <h2 style="margin-left: 3%; padding-right: 1%;" class="hForm"> 
+                        <form action="homepage-users.php">
+                            <input type="submit" value="">
+                        </form>
+                        Home >
+                    </h2>
+                    <h2 class="hForm" style="padding-right: 1%;">
+                        <form action="visualizzaAppelli.php">
+                            <input type="submit" value="">
+                        </form>
+                        Visualizza appelli >
+                    </h2>
+                    <h2 class="hForm">
+                        <form action="">
+                            <input type="button">
+                        </form>
+                        Modifica appello
+                    </h2>
                 </div>
                 <div class="infoTitle-user">
                 <?php

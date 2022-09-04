@@ -91,7 +91,24 @@ $colore = [];
             <div class="_body">
                 <div class="infoTitle">
                     <div class="infoTitle-position">
-                        <h2>Home > FAQ > <?php echo $corso->nome;?></h2><!--Generato dallo script-->
+                        <h2 style="margin-left: 3%; padding-right: 1%;" class="hForm"> 
+                            <form action="homepage-users.php">
+                                <input type="submit" value="">
+                            </form>
+                            Home >
+                        </h2>
+                        <h2 class="hForm" style="padding-right: 1%;">
+                            <form action="homepage-faq.php">
+                                <input type="submit" value="">
+                            </form>
+                            FAQ >
+                        </h2>
+                        <h2 class="hForm">
+                            <form action="">
+                                <input type="button" value="" name="dsa">
+                            </form>
+                            <?php echo getCorsoById($_GET['idCorso'])->nome;?>
+                        </h2>
                     </div>
                     <div class="infoTitle-user">
                         <h2>
@@ -99,7 +116,7 @@ $colore = [];
                                 if($_SESSION['loginType'] == 'Docente' || $_SESSION['loginType'] == 'Studente')
                                     echo $utenzaLoggata->nome." ".$utenzaLoggata->cognome.", ".$utenzaLoggata->matricola;
                                 else
-                                    echo $_SESSION['loginType']." : ".$utenzaLoggata->username;
+                                    echo $_SESSION['loginType'].": ".$utenzaLoggata->username;
                             ?>
                         </h2><!--Generato dallo script-->
                     </div>

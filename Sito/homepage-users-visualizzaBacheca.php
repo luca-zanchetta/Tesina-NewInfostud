@@ -105,24 +105,24 @@ $maxPageNum = ((int)(count($listaPost)/5)) + (count($listaPost)%5 > 0 ? 1 : 0);
         <div class="body">
             <div class="infoTitle">
                 <div class="infoTitle-position">
-                <h2 style="margin-left: 3%;" class="hForm"> 
-                    <form action="">
-                        <input type="button">
-                    </form>
-                    Home>
-                </h2>
-                <h2 class="hForm">
-                    <form action="">
-                        <input type="button">
-                    </form>
-                    Bacheca>
-                </h2>
-                <h2 class="hForm">
-                    <form action="">
-                        <input type="button" value="" name="dsa">
-                    </form>
-                    <?php echo getCorsoById($_GET['idCorso'])->nome;?>
-                </h2><!--Generato dallo script-->
+                    <h2 style="margin-left: 3%; padding-right: 1%;" class="hForm"> 
+                        <form action="homepage-users.php">
+                            <input type="submit" value="">
+                        </form>
+                        Home >
+                    </h2>
+                    <h2 class="hForm" style="padding-right: 1%;">
+                        <form action="homepage-bacheca.php">
+                            <input type="submit" value="">
+                        </form>
+                        Bacheche >
+                    </h2>
+                    <h2 class="hForm">
+                        <form action="">
+                            <input type="button" value="" name="dsa">
+                        </form>
+                        <?php echo getCorsoById($_GET['idCorso'])->nome;?>
+                    </h2>
                 </div>
                 <div class="infoTitle-user">
                     <h2> 

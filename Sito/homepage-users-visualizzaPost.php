@@ -91,17 +91,17 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
         <div class="body">
             <div class="infoTitle">
                 <div class="infoTitle-position">
-                    <h2 style="margin-left: 3%;" class="hForm"> 
-                        <form action="">
-                            <input type="button">
+                    <h2 style="margin-left: 3%; padding-right: 1%;" class="hForm"> 
+                        <form action="homepage-users.php">
+                            <input type="submit" value="">
                         </form>
-                        Home>
+                        Home >
                     </h2>
-                    <h2 class="hForm">
-                        <form action="">
-                            <input type="button">
+                    <h2 class="hForm" style="padding-right: 1%;">
+                        <form action="homepage-bacheca.php">
+                            <input type="submit" value="">
                         </form>
-                        Bacheca>
+                        Bacheche >
                     </h2>
                     <h2 class="hForm">
                         <form action="">

@@ -84,7 +84,18 @@ if(isset($_POST['invio'])) {
         <div class="body">
             <div class="infoTitle">
                 <div class="infoTitle-position">
-                    <h2>Home > Inserisci corso di laurea</h2>
+                    <h2 style="margin-left: 3%; padding-right: 1%;" class="hForm"> 
+                        <form action="homepage-users.php">
+                            <input type="submit" value="">
+                        </form>
+                        Home >
+                    </h2>
+                    <h2 class="hForm" style="">
+                        <form action="">
+                            <input type="button" value="">
+                        </form>
+                        Inserisci corso di laurea
+                    </h2>
                 </div>
                 <div class="infoTitle-user">
                 <?php

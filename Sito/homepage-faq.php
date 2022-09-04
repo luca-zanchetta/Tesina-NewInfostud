@@ -83,7 +83,18 @@ switch ($_SESSION['loginType']) {
         <div class="body">
             <div class="infoTitle">
                 <div class="infoTitle-position">
-                    <h2>Home > FAQ</h2><!--Generato dallo script-->
+                    <h2 style="margin-left: 3%; padding-right: 1%;" class="hForm"> 
+                        <form action="homepage-users.php">
+                            <input type="submit" value="">
+                        </form>
+                        Home >
+                    </h2>
+                    <h2 class="hForm">
+                        <form action="">
+                            <input type="button">
+                        </form>
+                        FAQ
+                    </h2>
                 </div>
                 <div class="infoTitle-user">
                     <h2>
