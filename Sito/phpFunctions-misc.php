@@ -603,4 +603,17 @@ function calcolaReputazioneCommenti($idStudente) {
     return $listaVoti;
 
 }
+
+function updateReputazione() {
+    $xmlString = "";
+    foreach ( file("../Xml/studenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $studenti = simplexml_load_file('../Xml/studenti.xml');
+    foreach($studenti as $studente)
+        calcolaReputazioneStudente($studente->matricola);
+
+    return 0;
+}
 ?>

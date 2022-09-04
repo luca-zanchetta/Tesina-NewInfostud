@@ -50,8 +50,16 @@ switch ($order) {
         usort($listaPost, fn($a, $b) => strcmp($b->data,$a->data));
         break;
     default:
-        break;
+        break;  
 }
+if((int)$utenzaLoggata->stato == -1) { ?>
+    <script>
+        window.alert("sei stato sospeso da questa funzionalità");
+        window.location.replace('homepage-users.php');
+    </script>
+<?php 
+}
+
 #calcoliamo il numero di pagine per visualizzare tutti i post
 $maxPageNum = ((int)(count($listaPost)/5)) + (count($listaPost)%5 > 0 ? 1 : 0);
 ?>

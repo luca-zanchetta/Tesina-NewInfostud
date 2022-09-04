@@ -323,9 +323,7 @@ function insertFaqVote($faqVote) {
     }
 
     $xml = simplexml_load_file('../Xml/votoFAQ.xml');
-
-    // Crea una tupla <studente> </studente>
-
+    
     $newStudente = $xml->addChild('votoFAQ');
     $tmp = $newStudente->addChild('id', $faqVote->id);
     $tmp = $newStudente->addChild('matricolaStudente', $faqVote->matricolaStudente);

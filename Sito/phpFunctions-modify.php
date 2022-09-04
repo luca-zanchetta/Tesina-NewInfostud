@@ -242,11 +242,11 @@ function updateFaqUtility($idFaq) {
         $tmp = $con->textContent;
         if($tmp != $idFaq) continue;
         $con = $con->nextSibling;
+        $utilita = (integer)$con->textContent; 
+        $con = $con->nextSibling;
         $stato = $con->textContent;
         if(!$stato) continue;
-        $con = $con->nextSibling;
-        $utilita = $con->textContent;
-        $utilitaTot+=(int)$utilita;
+        $utilitaTot += $utilita;
     }
 
     #modifico la FAQ

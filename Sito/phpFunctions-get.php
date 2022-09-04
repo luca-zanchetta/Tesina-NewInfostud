@@ -655,6 +655,7 @@ function getDocentiLike($_nome) {
 
 
 function getStudenti() {
+    updateReputazione();
     /*accedo al file xml*/
     $xmlString = "";
     foreach ( file("../Xml/studenti.xml") as $node ) {
@@ -673,7 +674,7 @@ function getStudenti() {
         $record = $records->item($i);
              
         $con = $record->firstChild;
-        $studente->matricola = $con->textContent;
+        $studente->matricola = $con->textContent;    
         $con = $con->nextSibling;
         $studente->nome = $con->textContent;
         $con = $con->nextSibling;
@@ -700,6 +701,7 @@ function getStudenti() {
 
 
 function getStudenteFromMatricola($matr) {
+    calcolaReputazioneStudente($matr);
     /*accedo al file xml*/
     $xmlString = "";
     foreach ( file("../Xml/studenti.xml") as $node ) {
@@ -1566,7 +1568,7 @@ function getVotoFaq($idStudente,$idFaq){
         $con = $con->nextSibling;
         $stato = $con->textContent;
 
-        if($idFAQ == $idFaq && $matricola == $idStudente && $stato)
+        if($idFAQ == $idFaq && $matricola == $idStudente && $stato == 1)
             return $utilita;
     }
 
@@ -1915,6 +1917,20 @@ function getStatoSegretario($segretario) {
     foreach($segretari as $sgrt)
         if($segretario->username == $sgrt->username)
             return $sgrt->stato;
+
+    return 0;
+}
+function getUtilitaTotale($id){
+    updateFaqUtility($id);
+    $xmlString = "";
+    foreach ( file("../Xml/faqs.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $faqs = simplexml_load_file('../Xml/faqs.xml');
+    foreach($faqs as $faq)
+        if($faq->id == $id )
+            return $faq->utilitaTotale;
 
     return 0;
 }

@@ -25,6 +25,14 @@ switch ($_SESSION['loginType']) {
         break;
 }
 
+if((int)$utenzaLoggata->stato == -1) { ?>
+    <script>
+        window.alert("sei stato sospeso da questa funzionalità");
+        window.location.replace('homepage-users.php');
+    </script>
+<?php 
+}
+
 $post = getPostFromId($_GET['idPost']);
 $votoPost = isset($_SESSION['matricola']) ? getVotoPostFromStudente($post->id,$_SESSION['matricola']) : "N/A";
 $listaCommenti = getPostComments($_GET['idPost']);
@@ -402,27 +410,34 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
     function editComment(id) {
         
         if(document.getElementById("commentText" +id ).style.display == "none"){
+            event.preventDefault(); //blocchiamo la normale esecuzione della form
+
             document.getElementById("commentText"+id).style.display = "flex";
             document.getElementById("commentInput"+id).style.display = "none";
 
             //Dobbiamo lanciarea la jquery
-            _newText = $("#commentInput"+id).val();
-            document.getElementById("commentText"+id).textContent = _newText;
-
-            //Possiamo usare uno script esterno volendo
-            jQuery.ajax({
-                        url: 'ajaxHandler.php',
-                        type: 'POST',
-                        data: jQuery.param({newText: _newText, id:id, richiesta: "modificaContenutoPost"}), 
-                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                        success: function (response) {
-                            console.log("Success");
-                            //document.getElementById("votoTot"+id).textContent = "prova";
-                            
-                        },
-                        error: function () {
-                            console.log("error");
-                        }});
+            _newText = $("#commentInput"+id).val(); // controlliamo se è vuoto 
+            if(_newText.trim().length === 0){
+                //la stringa inserita è vuota
+                $("#commentInput"+id).textContent =  document.getElementById("commentText"+id).textContent;
+                window.alert("È necessario specificare il contenuto!");
+            }else{
+                document.getElementById("commentText"+id).textContent = _newText;
+                //Possiamo usare uno script esterno volendo
+                jQuery.ajax({
+                            url: 'ajaxHandler.php',
+                            type: 'POST',
+                            data: jQuery.param({newText: _newText, id:id, richiesta: "modificaContenutoPost"}), 
+                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                            success: function (response) {
+                                console.log("Success");
+                                //document.getElementById("votoTot"+id).textContent = "prova";
+                                
+                            },
+                            error: function () {
+                                console.log("error");
+                            }});
+            }
 
         }else{
             document.getElementById("commentText"+id).style.display = "none";
@@ -442,20 +457,26 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
             //Eseguiamo la modifica
 
             _newText = $("#postInput").val();
-            document.getElementById("postText").textContent = _newText;
-
-            //Possiamo usare uno script esterno volendo
-            jQuery.ajax({
-                        url: 'ajaxHandler.php',
-                        type: 'POST',
-                        data: jQuery.param({newText: _newText, id:id, richiesta: "modificaPost"}), 
-                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                        success: function (response) {
-                            console.log("Success");
-                        },
-                        error: function () {
-                            console.log("error");
-                        }});
+            
+            if(_newText.trim().length === 0){
+                //la stringa inserita è vuota
+                $("#postInput"+id).textContent =  document.getElementById("postText").textContent;
+                window.alert("È necessario specificare il contenuto!");
+            }else{
+                //Possiamo usare uno script esterno volendo
+                document.getElementById("postText").textContent = _newText;
+                jQuery.ajax({
+                            url: 'ajaxHandler.php',
+                            type: 'POST',
+                            data: jQuery.param({newText: _newText, id:id, richiesta: "modificaPost"}), 
+                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                            success: function (response) {
+                                console.log("Success");
+                            },
+                            error: function () {
+                                console.log("error");
+                            }});
+            }
         }
     }
 </script>

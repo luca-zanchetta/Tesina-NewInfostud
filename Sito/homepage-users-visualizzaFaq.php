@@ -29,6 +29,13 @@ switch ($_SESSION['loginType']) {
     default:
         break;
 }
+if((int)$utenzaLoggata->stato == -1) { ?>
+    <script>
+        window.alert("sei stato sospeso da questa funzionalità");
+        window.location.replace('homepage-users.php');
+    </script>
+<?php 
+}
 
 //otteniamo il corso che deve essere visualizzato
 if($_SESSION['loginType']!= 'Docente') $corso = getCorsoById($_GET["idCorso"]);
@@ -158,7 +165,7 @@ $colore = [];
                                             <input type="hidden" value="1" name="type">
                                             <input type="hidden" value="<?php echo $faq->id?>" name="idFaq">
                                             <input type="hidden" value="<?php echo $corso->id?>" name="idCorso">
-                                            <?php if($_SESSION['loginType'] == 'Studente') {?>
+                                            <?php if($_SESSION['loginType'] == 'Studente' && $_SESSION['matricola'] !=  $faq->idAutore) {?>
                                                 <input type="hidden" value="<?php echo $voto[$faq->id]?>" name="voto">
                                                 <input type="submit" value="">
                                             <?php }else {?>
@@ -167,7 +174,7 @@ $colore = [];
                                         </div>
                                     </form>
                                     <div <?php if(isset($colore[$faq->id])) echo "style=color:{$colore[$faq->id]}"?>>
-                                        <?php echo $faq->utilitaTotale?>
+                                        <?php echo getUtilitaTotale($faq->id)?>
                                     </div>
                                     <form action="votaFaq.php" method="POST">
                                         <div>
@@ -175,7 +182,7 @@ $colore = [];
                                             <input type="hidden" value="-1" name="type">
                                             <input type="hidden" value="<?php echo $faq->id?>" name="idFaq">
                                             <input type="hidden" value="<?php echo $corso->id?>" name="idCorso">
-                                            <?php if($_SESSION['loginType'] == 'Studente') {?>
+                                            <?php if($_SESSION['loginType'] == 'Studente' && $_SESSION['matricola'] !=  $faq->idAutore) {?>
                                                 <input type="hidden" value="<?php echo $voto[$faq->id]?>" name="voto">
                                                 <input type="submit" value="">
                                             <?php }else {?>
@@ -264,7 +271,7 @@ $colore = [];
                                     //Controlliamo per ogni FAQ se è stata votata dall'utente
                                     //attualmente loggato
                                     if($_SESSION['loginType'] == 'Studente') {
-                                        $voto[$faq->id] =  (float)getVotoFaq($_SESSION['matricola'],$faq->id);
+                                        $voto[$faq->id] =  (int)getVotoFaq($_SESSION['matricola'],$faq->id);
                                         if($voto[$faq->id] > 0)
                                             $colore[$faq->id] = "green";
                                         elseif($voto[$faq->id] < 0)
@@ -278,7 +285,7 @@ $colore = [];
                                             <input type="hidden" value="1" name="type">
                                             <input type="hidden" value="<?php echo $faq->id?>" name="idFaq">
                                             <input type="hidden" value="<?php echo $corso->id?>" name="idCorso">
-                                            <?php if($_SESSION['loginType'] == 'Studente') {?>
+                                            <?php if($_SESSION['loginType'] == 'Studente' && $_SESSION['matricola'] !=  $faq->idAutore) {?>
                                                 <input type="hidden" value="<?php echo $voto[$faq->id]?>" name="voto">
                                                 <input type="submit" value="">
                                             <?php }else {?>
@@ -287,7 +294,7 @@ $colore = [];
                                         </div>
                                     </form>
                                     <div <?php if(isset($colore[$faq->id])) echo "style=\"color:{$colore[$faq->id]}\""?>>
-                                        <?php echo $faq->utilitaTotale?>
+                                        <?php echo getUtilitaTotale($faq->id)?>
                                     </div>
                                     <form action="votaFaq.php" method="POST">
                                         <div>
@@ -295,7 +302,7 @@ $colore = [];
                                             <input type="hidden" value="-1" name="type">
                                             <input type="hidden" value="<?php echo $faq->id?>" name="idFaq">
                                             <input type="hidden" value="<?php echo $corso->id?>" name="idCorso">
-                                            <?php if($_SESSION['loginType'] == 'Studente') {?>
+                                            <?php if($_SESSION['loginType'] == 'Studente' && $_SESSION['matricola'] !=  $faq->idAutore) {?>
                                                 <input type="hidden" value="<?php echo $voto[$faq->id]?>" name="voto">
                                                 <input type="submit" value="">
                                             <?php }else {?>

@@ -30,6 +30,15 @@ switch ($_SESSION['loginType']) {
         # code...
         break;
     }
+
+    if((int)$utenzaLoggata->stato == -1) { ?>
+        <script>
+            window.alert("sei stato sospeso da questa funzionalità");
+            window.location.replace('homepage-users.php');
+        </script>
+    <?php 
+    }
+    ?>
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>

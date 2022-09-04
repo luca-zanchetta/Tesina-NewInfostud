@@ -12,6 +12,7 @@ switch ($_SESSION['loginType']) {
     case 'Studente':
         # code...
         $utenzaLoggata = getStudenteFromMatricola($_SESSION['matricola']);
+        
         $listaCorsi = getCorsiFromCorsoDiLaurea($utenzaLoggata->idCorsoLaurea);
         break;
     case 'Docente':
@@ -31,7 +32,14 @@ switch ($_SESSION['loginType']) {
         break;    
     default:
         # code...
-        break;
+        break;  
+}
+if((int)$utenzaLoggata->stato == -1) { ?>
+    <script>
+        window.alert("sei stato sospeso da questa funzionalità");
+        window.location.replace('homepage-users.php');
+    </script>
+<?php 
 }
 ?>
 <?xml version="1.0" encoding="UTF-8"?>

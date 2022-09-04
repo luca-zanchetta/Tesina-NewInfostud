@@ -195,60 +195,114 @@ function deleteFaq($idFaq) {
 
 
 function deletePost($idPost) {
-    if($idPost == 0)
-        return FALSE;
+    # Rimuoviamo tutti i voti dei commenti associati al post
     
+    $xmlString = "";
+    foreach ( file("../Xml/commenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $commenti = simplexml_load_file('../Xml/commenti.xml');
+
+    foreach($commenti as $commento){
+        if($commento->idPost == $idPost && $commento->stato == 1){
+            print("napoli colera".$commento->id);
+            deleteAllCommentVotes($commento->id);  
+        } 
+    }   
+
+    //============================================================================
+    //==========================Eliminazione Commenti=============================
+    //============================================================================
+
+    $xmlString = "";
+    foreach ( file("../Xml/commenti.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $commenti = simplexml_load_file('../Xml/commenti.xml');
+
+    foreach($commenti as $commento){
+        if($commento->idPost == $idPost && $commento->stato == 1){
+            $commento->stato = 0;
+        }  
+    }
+    $f = fopen('../Xml/commenti.xml', "w");
+    $result = fwrite($f,  $commenti->asXML());
+    fclose($f);
+    if(!$result) return FALSE;
+
+    //============================================================================
+    //==========================Eliminazione Voti Post============================
+    //============================================================================
+
+    $xmlString = "";
+    foreach ( file("../Xml/votoPost.xml") as $node ) {
+    $xmlString .= trim($node);
+    }
+
+    $votiPost = simplexml_load_file('../Xml/votoPost.xml');
+
+    foreach($votiPost as $voto)
+        if($voto->idPost == $idPost && $voto->stato == 1)
+            $voto->stato = 0;
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/votoPost.xml', "w");
+    $result = fwrite($f,  $votiPost->asXML());
+    fclose($f);
+    if(!$result) return FALSE;
+
+    //============================================================================
+    //==========================Eliminazione Post================================
+    //============================================================================
     $xmlString = "";
     foreach ( file("../Xml/posts.xml") as $node ) {
         $xmlString .= trim($node);
     }
 
     $posts = simplexml_load_file('../Xml/posts.xml');
-    $eliminato = FALSE;
 
     foreach($posts as $post) {
         if($post->id == $idPost && $post->stato == 1) {
             $post->stato = 0;
-            $eliminato = TRUE;
             break;
         }
     }
-
 
     // Sovrascrive il vecchio file con i nuovi dati
     $f = fopen('../Xml/posts.xml', "w");
     $result = fwrite($f,  $posts->asXML());
     fclose($f);
 
-
+    updateReputazione();
     if(!$result) 
         return FALSE;
-    elseif($result && $eliminato) {
-        # Rimuoviamo tutti i commenti associati al post
-        
-        $xmlString = "";
-        foreach ( file("../Xml/commenti.xml") as $node ) {
-            $xmlString .= trim($node);
-        }
-
-        $commenti = simplexml_load_file('../Xml/commenti.xml');
-
-        foreach($commenti as $commento)
-            if($commento->idPost == $idPost && $commento->stato == 1)
-                $commento->stato = 0;
-        
-        // Sovrascrive il vecchio file con i nuovi dati
-        $f = fopen('../Xml/commenti.xml', "w");
-        $result = fwrite($f,  $commenti->asXML());
-        fclose($f);
-
-        if(!$result) 
-            return FALSE;
-    }
 
     return TRUE;
+
 }
 
+function deleteAllCommentVotes($idCommento){
+    $xmlString = "";
+    foreach ( file("../Xml/votoCommento.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $votiCommento = simplexml_load_file('../Xml/votoCommento.xml');
+    foreach($votiCommento as $voto) {
+        if((int)$voto->idCommento == (int)$idCommento && $voto->stato ==1) {
+            $voto->stato = 0;
+        }
+    }
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/votoCommento.xml', "w");
+    $result = fwrite($f,  $votiCommento->asXML());
+    fclose($f);
+
+    if(!$result) return FALSE;
+    return true;
+}
 
 function deleteFaqVote($matricola, $idFaq) {
     if($matricola == 0 || $idFaq == 0)
@@ -263,7 +317,7 @@ function deleteFaqVote($matricola, $idFaq) {
     $eliminato = FALSE;
 
     foreach($votiFAQ as $voto) {
-        if($voto->idFAQ == $idFaq && $voto->matricola = $matricola && $voto->stato == 1) {
+        if($voto->idFAQ == $idFaq && $voto->matricolaStudente == $matricola && $voto->stato == 1) {
             $voto->stato = 0;
             $eliminato = TRUE;
             break;
@@ -323,6 +377,8 @@ function deleteCommentVote($idCommento, $matricola) {
 function deleteComment($idCommento) {
     if($idCommento == 0)
         return FALSE;
+
+    deleteAllCommentVotes($idCommento);
     
     $xmlString = "";
     foreach ( file("../Xml/commenti.xml") as $node ) {
