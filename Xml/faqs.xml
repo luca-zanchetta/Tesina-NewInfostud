@@ -21,10 +21,10 @@
     <faq>
         <id>2</id>
         <domanda>In che aula si svolgeranno le lezioni?</domanda>
-        <risposta />
+        <risposta/>
         <utilitaTotale>0</utilitaTotale>
         <idCorso>1</idCorso>
         <idAutore>3</idAutore>
         <stato>1</stato>
     </faq>
-</faqs>
+<faq><id>4</id><domanda>Il corso sarà completamente in presenza?</domanda><risposta/><utilitaTotale>0</utilitaTotale><idCorso>13</idCorso><idAutore>1</idAutore><stato>1</stato></faq><faq><id>5</id><domanda>Quali sono i libri consigliati per affrontare l'esame?</domanda><risposta/><utilitaTotale>0</utilitaTotale><idCorso>17</idCorso><idAutore>1</idAutore><stato>1</stato></faq><faq><id>6</id><domanda>In che aula si svolgerà il corso?</domanda><risposta/><utilitaTotale>0</utilitaTotale><idCorso>14</idCorso><idAutore>1</idAutore><stato>1</stato></faq><faq><id>7</id><domanda>Dove posso trovare le slide?</domanda><risposta/><utilitaTotale>0</utilitaTotale><idCorso>19</idCorso><idAutore>2</idAutore><stato>1</stato></faq><faq><id>8</id><domanda>In cosa consisterà l'esame?</domanda><risposta/><utilitaTotale>0</utilitaTotale><idCorso>21</idCorso><idAutore>2</idAutore><stato>1</stato></faq><faq><id>9</id><domanda>È necessario un libro di testo da affiancare alle slide?</domanda><risposta/><utilitaTotale>0</utilitaTotale><idCorso>23</idCorso><idAutore>2</idAutore><stato>1</stato></faq><faq><id>10</id><domanda>Si sarà un pre appello per questo corso?</domanda><risposta/><utilitaTotale>0</utilitaTotale><idCorso>6</idCorso><idAutore>4</idAutore><stato>1</stato></faq></faqs>

@@ -1,21 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <commenti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="commenti.xsd">
-    <commento>
-        <id>3</id>
-        <corpo>Te li giro per email!</corpo>
-        <matricolaStudente>3</matricolaStudente>
-        <accordoMedio>4.00</accordoMedio>
-        <idPost>1</idPost>
-        <data>2022-08-26</data>
-        <stato>1</stato>
-    </commento>
-    <commento>
-        <id>4</id>
-        <corpo>Grazie a tutti e due!!</corpo>
-        <matricolaStudente>1</matricolaStudente>
-        <accordoMedio>0</accordoMedio>
-        <idPost>1</idPost>
-        <data>2022-08-26</data>
-        <stato>1</stato>
-    </commento>
-</commenti>
+<commento><id>1</id><corpo>Prova a rivederti la lezione, ti passo la registrazione.</corpo><matricolaStudente>4</matricolaStudente><accordoMedio>4.00</accordoMedio><idPost>1</idPost><data>2022-09-04</data><stato>1</stato></commento><commento><id>2</id><corpo>Grazie!!!</corpo><matricolaStudente>3</matricolaStudente><accordoMedio>0</accordoMedio><idPost>1</idPost><data>2022-09-04</data><stato>1</stato></commento><commento><id>3</id><corpo>Anche io stavo avendo problemi, grazie!</corpo><matricolaStudente>5</matricolaStudente><accordoMedio>0</accordoMedio><idPost>1</idPost><data>2022-09-04</data><stato>1</stato></commento><commento><id>4</id><corpo>Ti invio quello che ho!</corpo><matricolaStudente>5</matricolaStudente><accordoMedio>0</accordoMedio><idPost>5</idPost><data>2022-09-04</data><stato>1</stato></commento></commenti>
