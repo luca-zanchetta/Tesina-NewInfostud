@@ -144,7 +144,7 @@ if(isset($_POST['invio'])) {
                     elseif(!isset($_POST['nome']))
                         echo "<input class=\"textField\" type=\"text\" name=\"nome\" required>";
                     ?>
-                    <select class="choice" name="docente" onfocus='this.size=3; this.style="width: 95%;";' onblur='this.size=1; this.style="width: 68%;";' onchange='this.size=1; this.blur(); this.style="width: 68%;";'>
+                    <select class="choice" name="docente" onfocus='this.size=3; this.style="width: 95%;";' onblur='this.size=1; this.style="width: 60%;";' onchange='this.size=1; this.blur(); this.style="width: 60%;";'>
                         <?php
                             if(isset($_POST['docente']) && $_POST['docente'] != "seleziona") {
                                 $docente = getDocenteFromMatricola($_POST['docente']);
