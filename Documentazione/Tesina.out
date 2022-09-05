@@ -11,5 +11,42 @@
 \BOOKMARK [2][-]{subsection.1.3.2}{Struttura file xml}{section.1.3}% 11
 \BOOKMARK [1][-]{section.1.4}{Definizioni XML}{chapter.1}% 12
 \BOOKMARK [0][-]{chapter.2}{Manuale utente}{}% 13
-\BOOKMARK [0][-]{chapter.3}{Programmazione}{}% 14
-\BOOKMARK [0][-]{chapter.4}{Elenco utenze}{}% 15
+\BOOKMARK [1][-]{section.2.1}{Utente visitatore}{chapter.2}% 14
+\BOOKMARK [2][-]{subsection.2.1.1}{Visualizzare i corsi di laurea}{section.2.1}% 15
+\BOOKMARK [2][-]{subsection.2.1.2}{Visualizzare i corsi}{section.2.1}% 16
+\BOOKMARK [2][-]{subsection.2.1.3}{Visualizzare i docenti}{section.2.1}% 17
+\BOOKMARK [2][-]{subsection.2.1.4}{Autenticarsi}{section.2.1}% 18
+\BOOKMARK [1][-]{section.2.2}{Studente}{chapter.2}% 19
+\BOOKMARK [2][-]{subsection.2.2.1}{Visualizzare l'anagrafica}{section.2.2}% 20
+\BOOKMARK [2][-]{subsection.2.2.2}{Visualizzare la carriera}{section.2.2}% 21
+\BOOKMARK [2][-]{subsection.2.2.3}{Visualizzare gli appelli prenotati}{section.2.2}% 22
+\BOOKMARK [2][-]{subsection.2.2.4}{Visualizzare gli esami sostenuti}{section.2.2}% 23
+\BOOKMARK [2][-]{subsection.2.2.5}{Prenotare gli appelli}{section.2.2}% 24
+\BOOKMARK [2][-]{subsection.2.2.6}{Accedere alle bacheche}{section.2.2}% 25
+\BOOKMARK [2][-]{subsection.2.2.7}{Accedere alle FAQ}{section.2.2}% 26
+\BOOKMARK [1][-]{section.2.3}{Docente}{chapter.2}% 27
+\BOOKMARK [2][-]{subsection.2.3.1}{Visualizzare l'anagrafica}{section.2.3}% 28
+\BOOKMARK [2][-]{subsection.2.3.2}{Visualizzare gli appelli}{section.2.3}% 29
+\BOOKMARK [2][-]{subsection.2.3.3}{Inserire un appello}{section.2.3}% 30
+\BOOKMARK [2][-]{subsection.2.3.4}{Gestire le prenotazioni}{section.2.3}% 31
+\BOOKMARK [2][-]{subsection.2.3.5}{Accedere alle FAQ}{section.2.3}% 32
+\BOOKMARK [1][-]{section.2.4}{Segretario}{chapter.2}% 33
+\BOOKMARK [2][-]{subsection.2.4.1}{Visualizzare l'anagrafica}{section.2.4}% 34
+\BOOKMARK [2][-]{subsection.2.4.2}{Visualizzare gli appelli}{section.2.4}% 35
+\BOOKMARK [2][-]{subsection.2.4.3}{Inserire un appello}{section.2.4}% 36
+\BOOKMARK [2][-]{subsection.2.4.4}{Gestire le prenotazioni}{section.2.4}% 37
+\BOOKMARK [2][-]{subsection.2.4.5}{Accedere alle bacheche}{section.2.4}% 38
+\BOOKMARK [2][-]{subsection.2.4.6}{Accedere alle FAQ}{section.2.4}% 39
+\BOOKMARK [1][-]{section.2.5}{Amministratore}{chapter.2}% 40
+\BOOKMARK [2][-]{subsection.2.5.1}{Visualizzare l'anagrafica}{section.2.5}% 41
+\BOOKMARK [2][-]{subsection.2.5.2}{Visualizzare gli appelli}{section.2.5}% 42
+\BOOKMARK [2][-]{subsection.2.5.3}{Inserire un appello}{section.2.5}% 43
+\BOOKMARK [2][-]{subsection.2.5.4}{Gestire le prenotazioni}{section.2.5}% 44
+\BOOKMARK [2][-]{subsection.2.5.5}{Accedere alle bacheche}{section.2.5}% 45
+\BOOKMARK [2][-]{subsection.2.5.6}{Accedere alle FAQ}{section.2.5}% 46
+\BOOKMARK [2][-]{subsection.2.5.7}{Inserire un corso di laurea}{section.2.5}% 47
+\BOOKMARK [2][-]{subsection.2.5.8}{Gestire i corsi di laurea}{section.2.5}% 48
+\BOOKMARK [2][-]{subsection.2.5.9}{Inserire un corso}{section.2.5}% 49
+\BOOKMARK [2][-]{subsection.2.5.10}{Gestire i corsi}{section.2.5}% 50
+\BOOKMARK [0][-]{chapter.3}{Programmazione}{}% 51
+\BOOKMARK [0][-]{chapter.4}{Elenco utenze}{}% 52
