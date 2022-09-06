@@ -3,6 +3,7 @@ session_start();
 require_once("../Sito/phpFunctions-get.php");
 require_once("../Sito/phpFunctions-display.php");
 require_once("../Sito/phpFunctions-modify.php");
+require_once("../Sito/phpFunctions-misc.php");
 
 
 if(!isset($_SESSION['loginType']))
@@ -40,7 +41,7 @@ if(isset($_POST['modifica'])) {
 
     switch($loginType) {
         case "Studente":
-            if($_POST['vecchiaPassword'] == $studenteLoggato->password) {
+            if(encryptPassword($_POST['vecchiaPassword']) == $studenteLoggato->password) {
                 $passwordCorretta = TRUE;
                 if($_POST['nuovaPassword'] == $_POST['confermaPassword']) {
                     $match = TRUE;
@@ -60,7 +61,7 @@ if(isset($_POST['modifica'])) {
             break;
         
         case "Docente":
-            if($_POST['vecchiaPassword'] == $docenteLoggato->password) {
+            if(encryptPassword($_POST['vecchiaPassword']) == $docenteLoggato->password) {
                 $passwordCorretta = TRUE;
                 if($_POST['nuovaPassword'] == $_POST['confermaPassword']) {
                     $match = TRUE;
@@ -80,7 +81,7 @@ if(isset($_POST['modifica'])) {
             break;
 
         case "Segretario":
-            if($_POST['vecchiaPassword'] == $segretarioLoggato->password) {
+            if(encryptPassword($_POST['vecchiaPassword']) == $segretarioLoggato->password) {
                 $passwordCorretta = TRUE;
                 if($_POST['nuovaPassword'] == $_POST['confermaPassword']) {
                     $match = TRUE;
@@ -100,7 +101,7 @@ if(isset($_POST['modifica'])) {
             break;
         
         case "Amministratore":
-            if($_POST['vecchiaPassword'] == $adminLoggato->password) {
+            if(encryptPassword($_POST['vecchiaPassword']) == $adminLoggato->password) {
                 $passwordCorretta = TRUE;
                 if($_POST['nuovaPassword'] == $_POST['confermaPassword']) {
                     $match = TRUE;

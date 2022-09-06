@@ -482,7 +482,7 @@ function modificaPasswordStudente($matricola, $nuovaPassword) {
 
     foreach($studenti as $studente) {
         if($studente->matricola == $matricola && $studente->stato != 0) {
-            $studente->password = $nuovaPassword;
+            $studente->password = encryptPassword($nuovaPassword);
             $modificata = TRUE;
             break;
         }
@@ -517,7 +517,7 @@ function modificaPasswordDocente($matricola, $nuovaPassword) {
 
     foreach($docenti as $docente) {
         if($docente->matricola == $matricola && $docente->stato != 0) {
-            $docente->password = $nuovaPassword;
+            $docente->password = encryptPassword($nuovaPassword);
             $modificata = TRUE;
             break;
         }
@@ -552,7 +552,7 @@ function modificaPasswordSegretario($username, $nuovaPassword) {
 
     foreach($segretari as $segretario) {
         if($segretario->username == $username && $segretario->stato != 0) {
-            $segretario->password = $nuovaPassword;
+            $segretario->password = encryptPassword($nuovaPassword);
             $modificata = TRUE;
             break;
         }
@@ -587,7 +587,7 @@ function modificaPasswordAmministratore($username, $nuovaPassword) {
 
     foreach($amministratori as $amministratore) {
         if($amministratore->username == $username && $amministratore->stato != 0) {
-            $amministratore->password = $nuovaPassword;
+            $amministratore->password = encryptPassword($nuovaPassword);
             $modificata = TRUE;
             break;
         }
@@ -804,7 +804,8 @@ function modificaStudente($matricola, $nuovoNome, $nuovoCognome, $nuovaMatricola
             $studente->cognome = $nuovoCognome;
             $studente->idCorsoDiLaurea = $nuovoCorsoDiLaurea;
             $studente->dataNascita = $nuovaDataNascita;
-            $studente->password = $nuovaPassword;
+            if($nuovaPassword != "")
+                $studente->password = encryptPassword($nuovaPassword);
             
             $modificato = TRUE;
             break;
@@ -838,7 +839,8 @@ function modificaDocente($matricola, $nuovoNome, $nuovoCognome, $nuovaMatricola,
             $docente->matricola = $nuovaMatricola;
             $docente->nome = $nuovoNome;
             $docente->cognome = $nuovoCognome;
-            $docente->password = $nuovaPassword;
+            if($nuovaPassword != "")
+                $docente->password = encryptPassword($nuovaPassword);
             
             $modificato = TRUE;
             break;
@@ -870,7 +872,8 @@ function modificaSegretario($username, $nuovoUsername, $nuovaPassword) {
     foreach($segretari as $segretario) {
         if($segretario->username == $username && $segretario->stato != 0) {
             $segretario->username = $nuovoUsername;
-            $segretario->password = $nuovaPassword;
+            if($nuovaPassword != "")
+                $segretario->password = encryptPassword($nuovaPassword);
             
             $modificato = TRUE;
             break;
