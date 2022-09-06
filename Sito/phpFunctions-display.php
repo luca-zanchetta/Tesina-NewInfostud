@@ -95,7 +95,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="gestionePrenotazioni.php" style="display: flex; margin: 0px;">Gestione prenotazioni</a>
+                        <a class="opzionetab" href="gestionePrenotazioni.php" style="display: flex; margin: 0px;">Verbalizza esami</a>
                     </h5>
                 </div>
                 <hr style="width: 90%; margin-left: -2%;" />
@@ -141,7 +141,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="gestionePrenotazioni.php" style="display: flex; margin: 0px;">Gestione prenotazioni</a>
+                        <a class="opzionetab" href="gestionePrenotazioni.php" style="display: flex; margin: 0px;">Verbalizza esami</a>
                     </h5>
                 </div>
                 <hr style="width: 90%; margin-left: -2%;" />
@@ -193,7 +193,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="gestionePrenotazioni.php" style="display: flex; margin: 0px;">Gestione prenotazioni</a>
+                        <a class="opzionetab" href="gestionePrenotazioni.php" style="display: flex; margin: 0px;">Verbalizza esami</a>
                     </h5>
                 </div>
                 <hr style="width: 90%; margin-left: -2%;" />

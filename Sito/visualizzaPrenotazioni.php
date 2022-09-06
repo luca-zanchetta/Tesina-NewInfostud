@@ -90,7 +90,7 @@ else
                         <form action="gestionePrenotazioni.php">
                             <input type="submit" value="">
                         </form>
-                        Gestione prenotazioni >
+                        Verbalizza esami >
                     </h2>
                     <h2 class="hForm">
                         <form action="">

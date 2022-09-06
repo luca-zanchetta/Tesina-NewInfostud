@@ -29,7 +29,7 @@ else
 <head>
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileHomepage-users.css">
-    <title>Gestione prenotazioni - InfoStuff</title>
+    <title>Verbalizza esami - InfoStuff</title>
 </head>
 <body>
     <div class="header">
@@ -49,7 +49,7 @@ else
             <div class="vertical-bar"></div>
         </div>
         <?php
-        if($_SESSION['loginType'] == "Segretario" || $_SESSION['loginType'] == "Amministratore") {?>
+        if($_SESSION['loginType'] != "Studente") {?>
             <div class="nav-central">
                 <form action="visualizzaAppelli.php" method="POST">
                     <div class="nav-logo">
@@ -91,7 +91,7 @@ else
                         <form action="">
                             <input type="button">
                         </form>
-                        Gestione prenotazioni
+                        Verbalizza esami
                     </h2>
                 </div>
                 <div class="infoTitle-user">
