@@ -114,7 +114,11 @@ require_once('../Sito/phpFunctions-get.php');
                     <div class="element">
                         <h2>Nome</h2>
                     </div>
+                    <div class="element" style="width: -webkit-fill-available;">
+                        <h2>Corsi Di laurea</h2>
+                    </div>
                     <div class="element">
+                       
                     </div>
                 </div>
                 <hr />
@@ -137,6 +141,9 @@ require_once('../Sito/phpFunctions-get.php');
                                 </div>
                                 <div class="element">
                                     <h2><?php echo $studente->nome; ?></h2>
+                                </div>
+                                <div class="element" style="width: -webkit-fill-available;">
+                                    <h2><?php echo getCorsoDiLaureaFromId($studente->idCorsoLaurea)->nome; ?></h2>
                                 </div>
                                 <div class="element">
                                     <form action="gestioneUtenza.php" method="POST">
@@ -167,6 +174,9 @@ require_once('../Sito/phpFunctions-get.php');
                                 </div>
                                 <div class="element">
                                     <h2><?php echo $studente->nome; ?></h2>
+                                </div>
+                                <div class="element" style="width: -webkit-fill-available;">
+                                    <h2><?php echo getCorsoDiLaureaFromId($studente->idCorsoLaurea)->nome; ?></h2>
                                 </div>
                                 <div class="element">
                                     <form action="gestioneUtenza.php" method="GET">

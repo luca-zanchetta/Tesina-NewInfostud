@@ -295,8 +295,11 @@ $maxPageNum = ((int)(count($listaPost)/5)) + (count($listaPost)%5 > 0 ? 1 : 0);
                                                     <div class="postAuthor">
                                                         <h4>
                                                             <?php
-                                                                $autore = getStudenteFromMatricola($list[$i]->matricolaStudente);
-                                                                echo "{$autore->nome} {$autore->cognome}, {$autore->matricola}";
+                                                                if($list[$i]->matricolaStudente > 0){
+                                                                    $autore = getStudenteFromMatricola($list[$i]->matricolaStudente);
+                                                                    echo "{$autore->nome} {$autore->cognome}, {$autore->matricola}";
+                                                                }else 
+                                                                    echo "da Moderatore";
                                                             ?>
                                                         </h4>       
                                                     </div>
@@ -342,8 +345,11 @@ $maxPageNum = ((int)(count($listaPost)/5)) + (count($listaPost)%5 > 0 ? 1 : 0);
                                         <div class="postAuthor">
                                             <h4>
                                                 <?php
-                                                    $autore = getStudenteFromMatricola($listaPost[$i]->matricolaStudente);
-                                                    echo "{$autore->nome} {$autore->cognome}, {$autore->matricola}";
+                                                    if($list[$i]->matricolaStudente > 0){
+                                                        $autore = getStudenteFromMatricola($list[$i]->matricolaStudente);
+                                                        echo "{$autore->nome} {$autore->cognome}, {$autore->matricola}";
+                                                    }else 
+                                                        echo "da Moderatore";
                                                 ?>
                                             </h4>       
                                         </div>

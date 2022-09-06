@@ -29,6 +29,7 @@ else
 <head>
     <link rel="stylesheet" href="stile-base.css">
     <link rel="stylesheet" href="stileHomepage-users.css">
+    <link rel="stylesheet" href="stileBacheca.css">
     <title>Visualizza appelli - InfoStuff</title>
 </head>
 <body>
@@ -102,6 +103,62 @@ else
                 </div>
             </div>    
             <div><hr class="redBar" /></div>
+            <!-- <div style="display: flex;justify-content:center; width:100%">
+                <div class="postListHeader" style="width: 70%;border-radius:35px;">
+                        <div class="headerBar">
+                            <div class="repliesOrUtility" style="color: white;">
+                                <h3 class="hForm">
+                                    <?php 
+                                        if($order == 'repDesc')
+                                            echo '↓Replies↓';
+                                        elseif($order == 'repAsc')
+                                            echo '↑Replies↑';
+                                        else
+                                            echo 'Nome';
+                                        ?>
+                                    <form action="homepage-users-visualizzaBacheca.php" method="GET">
+                                            <input type="submit" value="">
+                                            <input type="hidden" name="filter" value="<?php echo (1 == 'repDesc' ? 'repAsc' : 'repDesc')?>">
+                                    </form> 
+                                </h3>                          
+                            </div>
+                            <div class="repliesOrUtility" style="color: white;">     
+                                <h3 class="hForm">
+                                    <?php 
+                                        if($order == 'utlDesc')
+                                            echo '↓Utility↓';
+                                        elseif($order == 'utlAsc')
+                                            echo '↑Utility↑';
+                                        else
+                                            echo 'Data';
+                                        ?>
+                                    <form action="homepage-users-visualizzaBacheca.php" method="GET">
+                                        <input type="submit" value=''>
+                                        <input type="hidden" name="filter" value="<?php echo (1 == 'utlDesc' ? 'utlAsc' : 'utlDesc')?>">
+                                    </form> 
+                                </h3>    
+                            </div>
+                            <div class="repliesOrUtility" style="color: white;">
+                                <div style="display: flex;width: -webkit-fill-available;"> 
+                                    <h3 class="hForm">
+                                        <?php 
+                                            if($order == 'dateDesc')
+                                                echo '↓Date↓';
+                                            elseif(1 == 'dateAsc')
+                                                echo '↑Date↑';
+                                            else
+                                                echo 'Corso';
+                                        ?>
+                                        <form action="homepage-users-visualizzaBacheca.php" method="GET">
+                                            <input type="submit" value=''>
+                                            <input type="hidden" name="filter" value="<?php echo (1 == 'dateDesc' ? 'dateAsc' : 'dateDesc')?>">
+                                        </form> 
+                                    </h3> 
+                                </div> 
+                            </div>
+                        </div>
+                </div>
+            </div> -->
             <div class="container-esami">
                 <?php
                 if($_SESSION['loginType'] == "Docente" && !$corsi)
@@ -124,7 +181,6 @@ else
                 } 
                 ?>           
             </div>
-        </div>
     </div>
 </div>
 </body>

@@ -193,7 +193,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                     </div>
                     <div class="postData">
                         <div class="postAuthor">
-                            <?php echo $autore == 'tsk'? 'Da Moderatore' : "{$autore->nome} {$autore->cognome}, {$autore->matricola}" ;?>
+                            <?php echo $autore == 'tsk'? 'Da Moderatore' : "{$autore->nome} {$autore->cognome}, {$autore->matricola} · Reputazione: {$autore->reputazioneTotale}" ;?>
                         </div>
                         <div class="postDate">
                             <?php echo $post->data;?>
