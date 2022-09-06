@@ -191,9 +191,6 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
             <br />
             <input class="bottoni" type="submit" name="login" value="LOGIN">
             <input name="loginType" type="hidden" value="<?php echo $login; ?>">
-            <br />
-            <a href="recuperaPassword.php" style="color: blue;">Password dimenticata?</a>
-            <?php setcookie('loginType', "{$login}"); ?>
             </form>
             <form action="form_registrazione.php" method="POST">
                 <div style="justify-content: center; display: flex; flex-direction: row; margin-top: 2em;">
