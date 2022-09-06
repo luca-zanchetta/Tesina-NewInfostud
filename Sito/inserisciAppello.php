@@ -126,11 +126,12 @@ else
                     elseif(!isset($_POST['ora']))
                         echo "<input class=\"textField\" type=\"time\" name=\"ora\" required>";
                     ?>
-                    <select class="choice" name="corso" style="width: 60%;" onfocus='this.size=3; this.style="width: 90%;";' onblur='this.size=1; this.style="width: 60%;";' onchange='this.size=1; this.blur(); this.style="width: 60%;";'>
+                    <select class="choice" name="corso" style="width: 87%;" onfocus='this.size=4; this.style="width: 120%; overflow-x: auto;";' onblur='this.size=1; this.style="width: 87%;";' onchange='this.size=1; this.blur(); this.style="width: 87%;";'>
                         <?php
                             if(isset($_POST['corso']) && $_POST['corso'] != "seleziona") {
                                 $corso = getCorsoById($_POST['corso']);
-                                echo "<option value=\"{$corso->id}\">{$corso->nome}</option>";
+                                $nomeCDL = getNomeCorsoDiLaureaById($corso->idCorsoLaurea);
+                                echo "<option value=\"{$corso->id}\">{$corso->nome} ({$nomeCDL})</option>";
                             }
                             elseif(!isset($_POST['corso']))
                                 echo "<option value=\"seleziona\">Corso...</option>";
@@ -139,14 +140,16 @@ else
                                 $corsi = [];
                                 $corsi = getCorsiFromDocente($docenteLoggato->matricola);
                                 foreach($corsi as $corso) {
-                                    echo "<option value=\"{$corso->id}\">{$corso->nome}</option>";
+                                    $nomeCDL = getNomeCorsoDiLaureaById($corso->idCorsoLaurea);
+                                    echo "<option value=\"{$corso->id}\">{$corso->nome} ({$nomeCDL})</option>";
                                 }
                             }
                             else {
                                 $corsi = [];
                                 $corsi = getCorsi();
                                 foreach($corsi as $corso) {
-                                    echo "<option value=\"{$corso->id}\">{$corso->nome}</option>";
+                                    $nomeCDL = getNomeCorsoDiLaureaById($corso->idCorsoLaurea);
+                                    echo "<option value=\"{$corso->id}\">{$corso->nome} ({$nomeCDL})</option>";
                                 }
                             }
                         ?>
