@@ -564,14 +564,16 @@ function displayFullAppelli() {
     else {
         foreach($appelli as $appello) {
             $corso = getCorsoById($appello->idCorso);
+            $listaPrenotazioni = getPrenotazioniFromAppello($appello->id);
+            $numeroPrenotati = count($listaPrenotazioni);
             
             if($_SESSION['src'] == "manage") {
                 echo '
                 <div class="blocco-esame" style="background-color:lightblue;">
                     <div class="nome-esame">
-                        '.$corso->nome."<br />".$appello->dataOra.'
+                        '.$corso->nome."<br />".$appello->dataOra."<br />Prenotati: ".$numeroPrenotati.'
                     </div> 
-                    <div class="info-button">
+                    <div class="info-button" style="margin-top: 10%;">
                         INFO
                         <form action="visualizzaPrenotazioni.php" method="POST">
                             <input type="submit" name="info" value="" >
@@ -621,14 +623,16 @@ function displayAppelliFromCorso($idCorso) {
     if($appelli) {
         foreach($appelli as $appello) {
             $corso = getCorsoById($appello->idCorso);
+            $listaPrenotazioni = getPrenotazioniFromAppello($appello->id);
+            $numeroPrenotati = count($listaPrenotazioni);
                 
             if($_SESSION['src'] == "manage") {
                 echo '
                 <div class="blocco-esame" style="background-color:lightblue;">
                     <div class="nome-esame">
-                        '.$corso->nome."<br />".$appello->dataOra.'
+                        '.$corso->nome."<br />".$appello->dataOra."<br />Prenotati: ".$numeroPrenotati.'
                     </div> 
-                    <div class="info-button">
+                    <div class="info-button" style="margin-top: 10%;">
                         INFO
                         <form action="visualizzaPrenotazioni.php" method="POST">
                             <input type="submit" name="info" value="" >
@@ -687,13 +691,16 @@ function displayAppelliLike($nomeCorso) {
             }
             else {
                 foreach($appelli as $appello) {
+                    $listaPrenotazioni = getPrenotazioniFromAppello($appello->id);
+                    $numeroPrenotati = count($listaPrenotazioni);
+
                     if($_SESSION['src'] == "manage") {
                         echo '
                         <div class="blocco-esame" style="background-color:lightblue;">
                             <div class="nome-esame">
-                                '.$corso->nome."<br />".$appello->dataOra.'
+                                '.$corso->nome."<br />".$appello->dataOra."<br />Prenotati: ".$numeroPrenotati.'
                             </div> 
-                            <div class="info-button">
+                            <div class="info-button" style="margin-top: 10%;">
                                 INFO
                                 <form action="visualizzaPrenotazioni.php" method="POST">
                                     <input type="submit" name="info" value="" >
@@ -756,14 +763,16 @@ function displayAppelliAfterDate($data) {
     else {
         foreach($appelli as $appello) {
             $corso = getCorsoById($appello->idCorso);
+            $listaPrenotazioni = getPrenotazioniFromAppello($appello->id);
+            $numeroPrenotati = count($listaPrenotazioni);
         
             if($_SESSION['src'] == "manage") {
                 echo '
                 <div class="blocco-esame" style="background-color:lightblue;">
                     <div class="nome-esame">
-                        '.$corso->nome."<br />".$appello->dataOra.'
+                        '.$corso->nome."<br />".$appello->dataOra."<br />Prenotati: ".$numeroPrenotati.'
                     </div> 
-                    <div class="info-button">
+                    <div class="info-button" style="margin-top: 10%;">
                         INFO
                         <form action="visualizzaPrenotazioni.php" method="POST">
                             <input type="submit" name="info" value="" >
