@@ -4,7 +4,7 @@
         <matricola>1</matricola>
         <nome>Mario</nome>
         <cognome>Rossi</cognome>
-        <password>supermario</password>
+        <password>c1210473c214e0cf5968bf147ed079d9</password>
         <dataNascita>2000-07-07</dataNascita>
         <reputazioneTotale>0</reputazioneTotale>
         <cfuTotale>0</cfuTotale>
@@ -16,7 +16,7 @@
         <matricola>2</matricola>
         <nome>Luca</nome>
         <cognome>Zanchetta</cognome>
-        <password>nero</password>
+        <password>770bfedcd56afdbb406a93355add8070</password>
         <dataNascita>1997-02-28</dataNascita>
         <reputazioneTotale>0</reputazioneTotale>
         <cfuTotale>0</cfuTotale>
@@ -28,7 +28,7 @@
         <matricola>3</matricola>
         <nome>Mattia</nome>
         <cognome>Aquilina</cognome>
-        <password>viola</password>
+        <password>c31ac812dbb4b1a273b3c2d3bd465690</password>
         <dataNascita>2000-09-05</dataNascita>
         <reputazioneTotale>10</reputazioneTotale>
         <cfuTotale>0</cfuTotale>
@@ -40,7 +40,7 @@
         <matricola>4</matricola>
         <nome>Giovanni</nome>
         <cognome>Tagliaferri</cognome>
-        <password>norma</password>
+        <password>a6d44ea5029b4901c675606309ae79af</password>
         <dataNascita>2000-08-18</dataNascita>
         <reputazioneTotale>8.67</reputazioneTotale>
         <cfuTotale>0</cfuTotale>
@@ -52,7 +52,7 @@
         <matricola>5</matricola>
         <nome>Alessandro</nome>
         <cognome>Brighenti</cognome>
-        <password>neworld</password>
+        <password>7c15f432a13d318afee868833729e7dc</password>
         <dataNascita>2000-06-12</dataNascita>
         <reputazioneTotale>0</reputazioneTotale>
         <cfuTotale>0</cfuTotale>
@@ -64,7 +64,7 @@
         <matricola>6</matricola>
         <nome>Sara</nome>
         <cognome>Mazzanti</cognome>
-        <password>Taurus</password>
+        <password>ebf25e7a04657c89193770a7489d1cac</password>
         <dataNascita>1997-02-23</dataNascita>
         <reputazioneTotale>0</reputazioneTotale>
         <cfuTotale>0</cfuTotale>
@@ -76,7 +76,7 @@
         <matricola>7</matricola>
         <nome>Lorena</nome>
         <cognome>Padovano</cognome>
-        <password>verde</password>
+        <password>d4177dc752cddc204b22ec5798c4400e</password>
         <dataNascita>2000-11-17</dataNascita>
         <reputazioneTotale>0</reputazioneTotale>
         <cfuTotale>0</cfuTotale>
@@ -88,7 +88,7 @@
         <matricola>8</matricola>
         <nome>Sandra</nome>
         <cognome>Studiosi</cognome>
-        <password>arancione</password>
+        <password>01e255d1dcad62921e34e41fbf88348d</password>
         <dataNascita>1997-02-03</dataNascita>
         <reputazioneTotale>0</reputazioneTotale>
         <cfuTotale>0</cfuTotale>
@@ -100,7 +100,7 @@
         <matricola>9</matricola>
         <nome>Remo</nome>
         <cognome>Dellucci</cognome>
-        <password>marrone</password>
+        <password>2126c164e7abbe8e5561ddfb6192811c</password>
         <dataNascita>1997-12-19</dataNascita>
         <reputazioneTotale>0</reputazioneTotale>
         <cfuTotale>0</cfuTotale>
@@ -108,4 +108,4 @@
         <idCorsoDiLaurea>3</idCorsoDiLaurea>
         <stato>1</stato>
     </studente>
-</studenti>
+<studente><matricola>10</matricola><nome>prova</nome><cognome>prova</cognome><password>189bbbb00c5f1fb7fba9ad9285f193d1</password><dataNascita>2022-09-06</dataNascita><reputazioneTotale>0</reputazioneTotale><cfuTotale>0</cfuTotale><media>0</media><idCorsoDiLaurea>1</idCorsoDiLaurea><stato>1</stato></studente></studenti>
