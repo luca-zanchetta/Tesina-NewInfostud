@@ -105,3 +105,9 @@ else
 </div>
 </body>
 </html>
+<script>
+    function alertClick(){
+        let cnf = confirm("Sei sicuro di voler effettuare l'eliminazione?")
+        if(!cnf) event.preventDefault(); 
+    } 
+</script>

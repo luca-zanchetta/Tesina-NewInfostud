@@ -2,6 +2,8 @@
 session_start();
 require_once('../Sito/phpFunctions-display.php');
 require_once('../Sito/phpFunctions-get.php');
+if(isset($_POST['order'])) $order = $_POST['order'];
+else $order= "matAsc";
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -105,14 +107,53 @@ require_once('../Sito/phpFunctions-get.php');
             <div><hr class="redBar" /></div>
             <div class="listContainer">
                 <div class="listItem">
-                    <div class="element">
-                        <h2>Matricola</h2>
+                <div class="element">
+                    <h2 class="hForm">
+                        <?php 
+                            if($order == 'matDesc')
+                                echo '↓Matricola↓';
+                            elseif($order == 'matAsc')
+                                echo '↑Matricola↑';
+                            else
+                                echo 'Matricola';
+                            ?>
+                        <form action="visualizzaDocentiAdmin.php" method="POST">
+                            <input type="submit" value=''>
+                            <input type="hidden" name="order" value="<?php echo ($order == 'matDesc' ? 'matAsc' : 'matDesc')?>">
+                        </form> 
+                    </h2>
                     </div>
                     <div class="element">
-                        <h2>Cognome</h2>
+                        <h2 class="hForm">
+                            <?php 
+                                if($order == 'cognDesc')
+                                    echo '↓Cognome↓';
+                                elseif($order == 'cognAsc')
+                                    echo '↑Cognome↑';
+                                else
+                                    echo 'Cognome';
+                                ?>
+                            <form action="visualizzaDocentiAdmin.php" method="POST">
+                                <input type="submit" value=''>
+                                <input type="hidden" name="order" value="<?php echo ($order == 'cognDesc' ? 'cognAsc' : 'cognDesc')?>">
+                            </form> 
+                        </h2>
                     </div>
                     <div class="element">
-                        <h2>Nome</h2>
+                        <h2 class="hForm">
+                            <?php 
+                                if($order == 'nomeDesc')
+                                    echo '↓Nome↓';
+                                elseif($order == 'nomeAsc')
+                                    echo '↑Nome↑';
+                                else
+                                    echo 'Nome';
+                                ?>
+                            <form action="visualizzaDocentiAdmin.php" method="POST">
+                                <input type="submit" value=''>
+                                <input type="hidden" name="order" value="<?php echo ($order == 'nomeDesc' ? 'nomeAsc' : 'nomeDesc')?>">
+                            </form> 
+                        </h2>
                     </div>
                     <div class="element">
                     </div>
@@ -150,8 +191,28 @@ require_once('../Sito/phpFunctions-get.php');
                     }
                 }
                 else {
-                    $docenti = getDocenti();
-
+                    $docenti = getDocenti();   
+                    switch ($order) {
+                        case 'nomeDesc':
+                            usort($docenti, fn($a, $b) => strcmp(strtolower($b->nome),strtolower($a->nome)));
+                            break;
+                        case 'nomeAsc':
+                            usort($docenti, fn($a, $b) => strcmp(strtolower($a->nome),strtolower($b->nome)));
+                            break;
+                        case 'cognDesc':
+                            usort($docenti, fn($a, $b) => strcmp(strtolower($b->cognome),strtolower($a->cognome)));
+                            break;
+                        case 'cognAsc':
+                            usort($docenti, fn($a, $b) => strcmp(strtolower($a->cognome),strtolower($b->cognome)));
+                            break;
+                        case 'matDesc':
+                            usort($docenti, fn($a, $b) => $a->matricola < $b->matricola);
+                            break;
+                        case 'matAsc':
+                            usort($docenti, fn($a, $b) => $a->matricola > $b->matricola);
+                            break;
+                    }
+                    
                     if(!$docenti) {
                         echo "<h3 class=\"voceElenco\">Nessun docente registrato.</h3>";
                     }

@@ -177,7 +177,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                         <div class="titleContainer"><?php echo $post->titolo;?></div>
                         <?php if($_SESSION['loginType'] == 'Amministratore' || $_SESSION['loginType'] == 'Segretario' || $post->matricolaStudente == $_SESSION['matricola']) { ?>
                             <div class="adminTools">
-                                <form action="deletePost.php" method="POST">
+                                <form action="deletePost.php" method="POST" onsubmit="alertClick()">
                                     <img src="bin.png" alt="err">
                                     <input type="submit" name="deletePost" value="">
                                     <input type="hidden" value="<?php echo $_GET["pageNum"];?>" name="pageNum"> 
@@ -326,7 +326,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                             </div>
                             <?php if($_SESSION['loginType'] == 'Amministratore' || $_SESSION['loginType'] == 'Segretario' || $comment->matricolaStudente == $_SESSION['matricola']) { ?>
                                 <div class="adminTools">
-                                    <form action="deleteComment.php" method="POST">
+                                    <form action="deleteComment.php" method="POST" onsubmit="alertClick()">
                                         <img src="bin.png" alt="err">
                                         <input type="submit" name="deleteComment" value="">
                                         <input type="hidden" value="<?php echo $_GET["pageNum"];?>" name="pageNum"> 
@@ -481,4 +481,9 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
             }
         }
     }
+
+    function alertClick(){
+        let cnf = confirm("Sei sicuro di voler effettuare l'eliminazione?")
+        if(!cnf) event.preventDefault(); 
+    } 
 </script>

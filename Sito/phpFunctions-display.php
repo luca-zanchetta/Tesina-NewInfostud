@@ -565,7 +565,12 @@ function displayFullAppelli() {
     if(!$appelli)
         echo '<h2>Nessun appello trovato.</h2>';
     else {
-        usort($appelli, fn($a, $b) => strcmp(getCorsoById($a->idCorso)->nome,getCorsoById($b->idCorso)->nome));
+        usort($appelli, function($a, $b){
+            if(strcmp(getCorsoById($a->idCorso)->nome,getCorsoById($b->idCorso)->nome)!= 0) return strcmp(getCorsoById($a->idCorso)->nome,getCorsoById($b->idCorso)->nome);
+            else{
+                return new DateTime($a->dataOra) > new DateTime($b->dataOra);
+            }
+        });
         foreach($appelli as $appello) {
             $corso = getCorsoById($appello->idCorso);
             $listaPrenotazioni = getPrenotazioniFromAppello($appello->id);
@@ -606,8 +611,8 @@ function displayFullAppelli() {
                         </div>  
                         <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
                             ELIMINA
-                            <form action="eliminaAppello-script.php" method="POST">
-                                <input type="submit" name="elimina" value="" >
+                            <form action="eliminaAppello-script.php" method="POST" onsubmit="alertClick()">
+                                <input type="submit" name="elimina" value="">
                                 <input type="hidden" name="idAppello" value="'.$appello->id.'">
                             </form>
                         </div> 
@@ -765,8 +770,12 @@ function displayAppelliAfterDate($data) {
     if(!$appelli)
         echo '<h2>Nessun appello corrispondente ai criteri di ricerca.</h2>';
     else {
-        usort($appelli, fn($a, $b) => strcmp(getCorsoById($a->idCorso)->nome,getCorsoById($b->idCorso)->nome));
-
+        usort($appelli, function($a, $b){
+            if(strcmp(getCorsoById($a->idCorso)->nome,getCorsoById($b->idCorso)->nome)!= 0) return strcmp(getCorsoById($a->idCorso)->nome,getCorsoById($b->idCorso)->nome);
+            else{
+                return new DateTime($a->dataOra) > new DateTime($b->dataOra);
+            }
+        });
         foreach($appelli as $appello) {
             $corso = getCorsoById($appello->idCorso);
             $listaPrenotazioni = getPrenotazioniFromAppello($appello->id);
@@ -807,8 +816,8 @@ function displayAppelliAfterDate($data) {
                         </div>  
                         <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
                             ELIMINA
-                            <form action="eliminaAppello-script.php" method="POST">
-                                <input type="submit" name="elimina" value="" >
+                            <form action="eliminaAppello-script.php" method="POST" onsubmit="alertClick()">
+                                <input type="submit" name="elimina" value="">
                                 <input type="hidden" name="idAppello" value="'.$appello->id.'">
                             </form>
                         </div> 
@@ -861,7 +870,7 @@ function displayCorsiDiLaurea() {
                         </div>  
                         <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
                             ELIMINA
-                            <form action="eliminaCorsoDiLaurea-script.php" method="POST">
+                            <form action="eliminaCorsoDiLaurea-script.php" method="POST" onsubmit="alertClick()">
                                 <input type="submit" name="elimina" value="" >
                                 <input type="hidden" name="idCorsoDiLaurea" value="'.$corsoDiLaurea->id.'">
                             </form>
@@ -900,7 +909,7 @@ function displayCorsiDiLaureaLike($nome) {
                         </div>  
                         <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
                             ELIMINA
-                            <form action="eliminaCorsoDiLaurea-script.php" method="POST">
+                            <form action="eliminaCorsoDiLaurea-script.php" method="POST" onsubmit="alertClick()">
                                 <input type="submit" name="elimina" value="" >
                                 <input type="hidden" name="idCorsoDiLaurea" value="'.$corsoDiLaurea->id.'">
                             </form>
@@ -921,6 +930,7 @@ function displayCorsi() {
     if(!$corsi)
         echo '<h2>Nessun corso trovato.</h2>';
     else {
+        usort($corsi, fn($a, $b) => strcmp($a->nome,$b->nome));
         foreach($corsi as $corso) {
             if($_SESSION['src'] == "edit") {
                 echo '
@@ -938,7 +948,7 @@ function displayCorsi() {
                         </div>  
                         <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
                             ELIMINA
-                            <form action="eliminaCorso-script.php" method="POST">
+                            <form action="eliminaCorso-script.php" method="POST" onsubmit="alertClick()">
                                 <input type="submit" name="elimina" value="" >
                                 <input type="hidden" name="idCorso" value="'.$corso->id.'">
                             </form>
@@ -959,6 +969,7 @@ function displayCorsiLike($nome) {
     if(!$corsi)
         echo '<h2>Nessun corso trovato.</h2>';
     else {
+        usort($corsi, fn($a, $b) => strcmp(getCorsoById($a->idCorso)->nome,getCorsoById($b->idCorso)->nome));
         foreach($corsi as $corso) {
             if($_SESSION['src'] == "edit") {
                 echo '
@@ -976,7 +987,7 @@ function displayCorsiLike($nome) {
                         </div>  
                         <div class="info-button" style="margin-left: 10%; padding-left: 15%; padding-right: 15%;">
                             ELIMINA
-                            <form action="eliminaCorso-script.php" method="POST">
+                            <form action="eliminaCorso-script.php" method="POST" onsubmit="alertClick()">
                                 <input type="submit" name="elimina" value="" >
                                 <input type="hidden" name="idCorso" value="'.$corso->id.'">
                             </form>

@@ -26,7 +26,7 @@ switch ($_SESSION['loginType']) {
 }
 $listaPost = getListaPost($_GET['idCorso']);
 $pageNum = $_GET['pageNum'];
-$order = isset($_GET['filter']) ? $_GET['filter'] : 'default';
+$order = isset($_GET['filter']) ? $_GET['filter'] : 'dateDesc';
 
 #ordiniamo la lista dei post secodno il filtro
 switch ($order) {
@@ -42,12 +42,10 @@ switch ($order) {
     case 'utlAsc':
         usort($listaPost, fn($a, $b) => $a->utilitaTotale <=> $b->utilitaTotale);
         break;
-    case 'dataDesc':
-        # Va implementato in maniera piu particolare
-        usort($listaPost, fn($a, $b) => strcmp($a->data,$b->data));
+    case 'dateDesc':
+        $listaPost = array_reverse($listaPost, false);
         break;
-    case 'dataAsc':
-        usort($listaPost, fn($a, $b) => strcmp($b->data,$a->data));
+    case 'dateAsc':    
         break;
     default:
         break;  

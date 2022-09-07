@@ -178,7 +178,7 @@ if(!isset($_GET['gestisciStudente']) && !isset($_GET['gestisciDocente']) && !iss
                             <input type="hidden" name="id" value="<?php echo $id ?>">
                         </form>
                 <?php } ?>
-                <form action="eliminaUtenza-script.php" style="margin-left: 20%;" method="POST">
+                <form action="eliminaUtenza-script.php" style="margin-left: 20%;" method="POST" onsubmit="alertClick()">
                     <input class="admin" type="submit" name="elimina" value="ELIMINA">
                 <?php
                     if(isset($_GET['gestisciStudente'])) {
@@ -204,3 +204,9 @@ if(!isset($_GET['gestisciStudente']) && !isset($_GET['gestisciDocente']) && !iss
 </div>
 </body>
 </html>
+<script>
+    function alertClick(){
+        let cnf = confirm("Sei sicuro di voler effettuare l'eliminazione?")
+        if(!cnf) event.preventDefault(); 
+    } 
+</script>

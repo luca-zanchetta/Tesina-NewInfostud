@@ -2,6 +2,8 @@
 session_start();
 require_once('../Sito/phpFunctions-display.php');
 require_once('../Sito/phpFunctions-get.php');
+if(isset($_POST['order'])) $order = $_POST['order'];
+else $order= "cdlAsc";
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -106,16 +108,68 @@ require_once('../Sito/phpFunctions-get.php');
             <div class="listContainer">
                 <div class="listItem">
                     <div class="element">
-                        <h2>Matricola</h2>
+                    <h2 class="hForm">
+                        <?php 
+                            if($order == 'matDesc')
+                                echo '↓Matricola↓';
+                            elseif($order == 'matAsc')
+                                echo '↑Matricola↑';
+                            else
+                                echo 'Matricola';
+                            ?>
+                        <form action="visualizzaStudentiAdmin.php" method="POST">
+                            <input type="submit" value=''>
+                            <input type="hidden" name="order" value="<?php echo ($order == 'matDesc' ? 'matAsc' : 'matDesc')?>">
+                        </form> 
+                    </h2>
                     </div>
                     <div class="element">
-                        <h2>Cognome</h2>
+                        <h2 class="hForm">
+                            <?php 
+                                if($order == 'cognDesc')
+                                    echo '↓Cognome↓';
+                                elseif($order == 'cognAsc')
+                                    echo '↑Cognome↑';
+                                else
+                                    echo 'Cognome';
+                                ?>
+                            <form action="visualizzaStudentiAdmin.php" method="POST">
+                                <input type="submit" value=''>
+                                <input type="hidden" name="order" value="<?php echo ($order == 'cognDesc' ? 'cognAsc' : 'cognDesc')?>">
+                            </form> 
+                        </h2>
                     </div>
                     <div class="element">
-                        <h2>Nome</h2>
+                        <h2 class="hForm">
+                            <?php 
+                                if($order == 'nomeDesc')
+                                    echo '↓Nome↓';
+                                elseif($order == 'nomeAsc')
+                                    echo '↑Nome↑';
+                                else
+                                    echo 'Nome';
+                                ?>
+                            <form action="visualizzaStudentiAdmin.php" method="POST">
+                                <input type="submit" value=''>
+                                <input type="hidden" name="order" value="<?php echo ($order == 'nomeDesc' ? 'nomeAsc' : 'nomeDesc')?>">
+                            </form> 
+                        </h2>
                     </div>
                     <div class="element" style="width: -webkit-fill-available;">
-                        <h2>Corsi Di laurea</h2>
+                        <h2 class="hForm">
+                            <?php 
+                                if($order == 'cdlDesc')
+                                    echo '↓Corso di Laurea↓';
+                                elseif($order == 'cdlAsc')
+                                    echo '↑Corso di Laurea↑';
+                                else
+                                    echo 'Corso di Laurea';
+                                ?>
+                            <form action="visualizzaStudentiAdmin.php" method="POST">
+                                <input type="submit" value=''>
+                                <input type="hidden" name="order" value="<?php echo ($order == 'cdlDesc' ? 'cdlAsc' : 'cdlDesc')?>">
+                            </form> 
+                        </h2>    
                     </div>
                     <div class="element">
                        
@@ -126,7 +180,32 @@ require_once('../Sito/phpFunctions-get.php');
                 $studenti = [];     // Da implementare ricerca con MATRICOLA (vedi relazione)
                 if(isset($_POST['filtro']) && $_POST['filtro'] != "") {
                     $studente = getStudenteFromMatricola($_POST['filtro']);
-
+                    switch ($order) {
+                        case 'cdlDesc':
+                            usort($studenti, fn($a, $b) => strcmp(strtolower(getCorsoDiLaureaFromId($b->idCorsoLaurea)->nome),strtolower(getCorsoDiLaureaFromId($a->idCorsoLaurea)->nome)));
+                            break;
+                        case 'cdlAsc':
+                            usort($studenti, fn($a, $b) => strcmp(strtolower(getCorsoDiLaureaFromId($a->idCorsoLaurea)->nome),strtolower(getCorsoDiLaureaFromId($b->idCorsoLaurea)->nome)));
+                            break;
+                        case 'nomeDesc':
+                            usort($studenti, fn($a, $b) => strcmp(strtolower($b->nome),strtolower($a->nome)));
+                            break;
+                        case 'nomeAsc':
+                            usort($studenti, fn($a, $b) => strcmp(strtolower($a->nome),strtolower($b->nome)));
+                            break;
+                        case 'cognDesc':
+                            usort($studenti, fn($a, $b) => strcmp(strtolower($b->cognome),strtolower($a->cognome)));
+                            break;
+                        case 'cognAsc':
+                            usort($studenti, fn($a, $b) => strcmp(strtolower($a->cognome),strtolower($b->cognome)));
+                            break;
+                        case 'matDesc':
+                            usort($studenti, fn($a, $b) => $a->matricola < $b->matricola);
+                            break;
+                        case 'matAsc':
+                            usort($studenti, fn($a, $b) => $a->matricola > $b->matricola);
+                            break;
+                    }
                     if(!$studente) {
                         echo "<h3 class=\"voceElenco\">Nessuno studente corrispondente ai criteri di ricerca.</h3>";
                     }
@@ -158,7 +237,32 @@ require_once('../Sito/phpFunctions-get.php');
                 }
                 else {
                     $studenti = getStudenti();
-
+                    switch ($order) {
+                        case 'cdlDesc':
+                            usort($studenti, fn($a, $b) => strcmp(strtolower(getCorsoDiLaureaFromId($b->idCorsoLaurea)->nome),strtolower(getCorsoDiLaureaFromId($a->idCorsoLaurea)->nome)));
+                            break;
+                        case 'cdlAsc':
+                            usort($studenti, fn($a, $b) => strcmp(strtolower(getCorsoDiLaureaFromId($a->idCorsoLaurea)->nome),strtolower(getCorsoDiLaureaFromId($b->idCorsoLaurea)->nome)));
+                            break;
+                        case 'nomeDesc':
+                            usort($studenti, fn($a, $b) => strcmp(strtolower($b->nome),strtolower($a->nome)));
+                            break;
+                        case 'nomeAsc':
+                            usort($studenti, fn($a, $b) => strcmp(strtolower($a->nome),strtolower($b->nome)));
+                            break;
+                        case 'cognDesc':
+                            usort($studenti, fn($a, $b) => strcmp(strtolower($b->cognome),strtolower($a->cognome)));
+                            break;
+                        case 'cognAsc':
+                            usort($studenti, fn($a, $b) => strcmp(strtolower($a->cognome),strtolower($b->cognome)));
+                            break;
+                        case 'matDesc':
+                            usort($studenti, fn($a, $b) => $a->matricola < $b->matricola);
+                            break;
+                        case 'matAsc':
+                            usort($studenti, fn($a, $b) => $a->matricola > $b->matricola);
+                            break;
+                    }
                     if(!$studenti) {
                         echo "<h3 class=\"voceElenco\">Nessuno studente registrato.</h3>";
                     }

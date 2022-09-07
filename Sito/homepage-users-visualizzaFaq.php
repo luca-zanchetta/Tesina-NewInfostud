@@ -203,7 +203,7 @@ $colore = [];
                                         <div class="contentTitle">
                                             Risposta
                                         </div>
-                                        <form action="deleteFaq.php" method="POST">
+                                        <form action="deleteFaq.php" method="POST" onsubmit="alertClick()">
                                             <div class="content"> 
                                                 <input name="idCorso" type="text" value="<?php echo $corso->id?>"> 
                                                 <input id="input<?php echo $faq->id?>" type="text" value="<?php echo $faq->risposta ?>"> 
@@ -321,7 +321,7 @@ $colore = [];
                                         <div class="contentTitle">
                                             Risposta
                                         </div>
-                                        <form action="deleteFaq.php" method="POST">
+                                        <form action="deleteFaq.php" method="POST" onsubmit="alertClick()"> 
                                             <div class="content"> 
                                                 <input id="input<?php echo $faq->id?>" type="text" value="<?php echo $faq->risposta ?>"> 
                                                 <div id="text<?php echo $faq->id?>"><?php echo $faq->risposta ?></div>
@@ -365,18 +365,20 @@ $colore = [];
                     ?>
                 </div></div>
                 <!-- Container della form di input -->
-                <div class="formContainer">
-                    <div class="formBorder" style="background-color: gainsboro;">
-                        <div class="formTitle">
-                            Proponi una nuova domanda
+                <?php if($_SESSION['loginType'] != 'Docente') { ?>
+                    <div class="formContainer">
+                        <div class="formBorder" style="background-color: gainsboro;">
+                            <div class="formTitle">
+                                Proponi una nuova domanda
+                            </div>
+                            <form action="insertFaq.php" method="POST" id="newFaq">
+                                <textarea name="faqContent" placeholder="Domanda" form="newFaq"></textarea>
+                                <input type="submit" name="addFaq">
+                                <input type="hidden" name="idCorso" value="<?php echo $_GET['idCorso']?>">
+                            </form>
                         </div>
-                        <form action="insertFaq.php" method="POST" id="newFaq">
-                            <textarea name="faqContent" placeholder="Domanda" form="newFaq"></textarea>
-                            <input type="submit" name="addFaq">
-                            <input type="hidden" name="idCorso" value="<?php echo $_GET['idCorso']?>">
-                        </form>
                     </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
     </div>
@@ -420,4 +422,8 @@ $colore = [];
             document.getElementById("input"+id).style.display = "flex";
         }  
     }
+    function alertClick(){
+        let cnf = confirm("Sei sicuro di voler effettuare l'eliminazione?")
+        if(!cnf) event.preventDefault(); 
+    } 
 </script>
