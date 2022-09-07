@@ -31,18 +31,18 @@
         <password>c31ac812dbb4b1a273b3c2d3bd465690</password>
         <dataNascita>2000-09-05</dataNascita>
         <reputazioneTotale>10</reputazioneTotale>
-        <cfuTotale>0</cfuTotale>
-        <media>0</media>
+        <cfuTotale>21</cfuTotale>
+        <media>28.5</media>
         <idCorsoDiLaurea>1</idCorsoDiLaurea>
         <stato>1</stato>
     </studente>
     <studente>
         <matricola>4</matricola>
-        <nome>Giovanni</nome>
-        <cognome>Tagliaferri</cognome>
-        <password>a6d44ea5029b4901c675606309ae79af</password>
+        <nome>Alvisio</nome>
+        <cognome>Milani</cognome>
+        <password>f0c0976535cfaf33574b5175e072bce9</password>
         <dataNascita>2000-08-18</dataNascita>
-        <reputazioneTotale>8.67</reputazioneTotale>
+        <reputazioneTotale>8.86</reputazioneTotale>
         <cfuTotale>0</cfuTotale>
         <media>0</media>
         <idCorsoDiLaurea>1</idCorsoDiLaurea>
@@ -51,10 +51,10 @@
     <studente>
         <matricola>5</matricola>
         <nome>Alessandro</nome>
-        <cognome>Brighenti</cognome>
-        <password>7c15f432a13d318afee868833729e7dc</password>
+        <cognome>Longo</cognome>
+        <password>d4177dc752cddc204b22ec5798c4400e</password>
         <dataNascita>2000-06-12</dataNascita>
-        <reputazioneTotale>0</reputazioneTotale>
+        <reputazioneTotale>3</reputazioneTotale>
         <cfuTotale>0</cfuTotale>
         <media>0</media>
         <idCorsoDiLaurea>1</idCorsoDiLaurea>
@@ -64,7 +64,7 @@
         <matricola>6</matricola>
         <nome>Sara</nome>
         <cognome>Mazzanti</cognome>
-        <password>ebf25e7a04657c89193770a7489d1cac</password>
+        <password>01e255d1dcad62921e34e41fbf88348d</password>
         <dataNascita>1997-02-23</dataNascita>
         <reputazioneTotale>0</reputazioneTotale>
         <cfuTotale>0</cfuTotale>
@@ -76,7 +76,7 @@
         <matricola>7</matricola>
         <nome>Lorena</nome>
         <cognome>Padovano</cognome>
-        <password>d4177dc752cddc204b22ec5798c4400e</password>
+        <password>84109ae4b4178430b8174b1dfef9162b</password>
         <dataNascita>2000-11-17</dataNascita>
         <reputazioneTotale>0</reputazioneTotale>
         <cfuTotale>0</cfuTotale>
@@ -88,7 +88,7 @@
         <matricola>8</matricola>
         <nome>Sandra</nome>
         <cognome>Studiosi</cognome>
-        <password>01e255d1dcad62921e34e41fbf88348d</password>
+        <password>e138262cdff78ec6b6db6a3183fc28f4</password>
         <dataNascita>1997-02-03</dataNascita>
         <reputazioneTotale>0</reputazioneTotale>
         <cfuTotale>0</cfuTotale>
@@ -108,4 +108,4 @@
         <idCorsoDiLaurea>3</idCorsoDiLaurea>
         <stato>1</stato>
     </studente>
-<studente><matricola>10</matricola><nome>prova</nome><cognome>prova</cognome><password>189bbbb00c5f1fb7fba9ad9285f193d1</password><dataNascita>2022-09-06</dataNascita><reputazioneTotale>0</reputazioneTotale><cfuTotale>0</cfuTotale><media>0</media><idCorsoDiLaurea>1</idCorsoDiLaurea><stato>1</stato></studente></studenti>
+<studente><matricola>10</matricola><nome>prova</nome><cognome>prova</cognome><password>189bbbb00c5f1fb7fba9ad9285f193d1</password><dataNascita>2022-09-06</dataNascita><reputazioneTotale>0</reputazioneTotale><cfuTotale>0</cfuTotale><media>0</media><idCorsoDiLaurea>1</idCorsoDiLaurea><stato>1</stato></studente><studente><matricola>11</matricola><nome>Erminia</nome><cognome>Cremonesi</cognome><password>6f2fb2d3def4f99053edab239195f146</password><dataNascita>1999-07-21</dataNascita><reputazioneTotale>10</reputazioneTotale><cfuTotale>18</cfuTotale><media>25.5</media><idCorsoDiLaurea>1</idCorsoDiLaurea><stato>1</stato></studente><studente><matricola>12</matricola><nome>Virginia</nome><cognome>Lori</cognome><password>85f3c35de5e6ac28e4d31b17cbb529d3</password><dataNascita>1997-07-18</dataNascita><reputazioneTotale>9</reputazioneTotale><cfuTotale>9</cfuTotale><media>26</media><idCorsoDiLaurea>1</idCorsoDiLaurea><stato>1</stato></studente></studenti>
