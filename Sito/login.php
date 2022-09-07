@@ -187,7 +187,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
             ?>
             <br />
             <h2>Password:</h2>
-            <div style="display: flex; flex-direction: row; align-items: center; margin-left: 17.5%;">
+            <div style="display: flex; flex-direction: row; align-items: center; margin-left: 15.5%;">
                 <input class="textField" type="password" name="password" id="pwd" required>
                 <img src="show.png" width="30px" height="30px" id="img" onclick="showHidePassword()">
             </div>

@@ -618,42 +618,6 @@ function getDocentiLike($_nome) {
 }
 
 
-// function getDocentiDisponibili() {
-//     /*accedo al file xml*/
-//     $xmlString = "";
-//     foreach ( file("../Xml/docenti.xml") as $node ) {
-//         $xmlString .= trim($node);
-//     }
-         
-//     // Creazione del documento
-//     $doc = new DOMDocument();
-//     $doc->loadXML($xmlString);
-//     $records = $doc->documentElement->childNodes;
-     
-//     $listaDocenti = [];
-     
-//     for ($i=0; $i<$records->length; $i++) {
-//         $docente = new docente("", "", "", 0);  # Default constructor
-//         $record = $records->item($i);
-             
-//         $con = $record->firstChild;
-//         $docente->matricola = $con->textContent;
-//         $con = $con->nextSibling;
-//         $docente->nome = $con->textContent;
-//         $con = $con->nextSibling;
-//         $docente->cognome = $con->textContent;
-//         $con = $con->nextSibling;
-//         $docente->password = $con->textContent;
-//         $con = $con->nextSibling;
-//         $stato = $con->textContent;
-
-//         if($docente->idCorso == 0 && $stato != 0) 
-//             $listaDocenti[] = $docente;
-//     }
-//     return $listaDocenti;
-// }
-
-
 function getStudenti() {
     updateReputazione();
     /*accedo al file xml*/

@@ -117,9 +117,9 @@ else
                     <div class="inputs">
                     <?php
                     if(isset($_POST['data']))
-                        echo "<input class=\"textField\" type=\"date\" name=\"data\" value=\"{$_POST['data']}\" required>";
+                        echo "<input class=\"textField\" type=\"date\" name=\"data\" id=\"data\" value=\"{$_POST['data']}\" required>";
                     elseif(!isset($_POST['data']))
-                        echo "<input class=\"textField\" type=\"date\" name=\"data\" required>";
+                        echo "<input class=\"textField\" type=\"date\" name=\"data\" id=\"data\" required>";
                     
                     if(isset($_POST['ora']))
                         echo "<input class=\"textField\" type=\"time\" name=\"ora\" value=\"{$_POST['ora']}\" required>";
@@ -158,7 +158,7 @@ else
                     </div>
                 </div>
                 <div style="padding-top: 1%; margin-left: 45%;">
-                    <input class="bottoni" type="submit" name="invio" value="INVIO">
+                    <input class="bottoni" type="submit" name="invio" value="INVIO" onclick="popupDate()">
                 </div>
             </form>
             </div>
@@ -174,3 +174,17 @@ else
 </div>
 </body>
 </html>
+
+<script>
+function popupDate() {
+    tmp = document.getElementById("data");
+
+    var dataInserita = new Date(tmp.value);
+    var dataOdierna = new Date();
+
+    if(dataInserita <= dataOdierna) {
+        event.preventDefault();
+        window.alert('ATTENZIONE: Va inserita una data successiva a quella attuale!');
+    }
+}
+</script>

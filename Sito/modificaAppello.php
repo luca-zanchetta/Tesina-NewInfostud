@@ -131,9 +131,9 @@ if(isset($_POST['modifica']) && isset($_POST['idAppello']) && isset($_POST['idCo
                     <div class="inputs">
                     <?php
                     if(isset($_POST['dataOra']))
-                        echo "<input class=\"textField\" type=\"date\" name=\"data\" value=\"{$data}\" required>";
+                        echo "<input class=\"textField\" type=\"date\" name=\"data\" id=\"data\" value=\"{$data}\" required>";
                     elseif(!isset($_POST['dataOra']))
-                        echo "<input class=\"textField\" type=\"date\" name=\"data\" required>";
+                        echo "<input class=\"textField\" type=\"date\" name=\"data\" id=\"data\" required>";
                     
                     if(isset($_POST['dataOra']))
                         echo "<input class=\"textField\" type=\"time\" name=\"ora\" value=\"{$ora}\" required>";
@@ -171,7 +171,7 @@ if(isset($_POST['modifica']) && isset($_POST['idAppello']) && isset($_POST['idCo
                     </div>
                 </div>
                 <div style="padding-top: 1%; margin-left: 45%;">
-                    <input class="bottoni" type="submit" name="invioModifica" value="INVIO">
+                    <input class="bottoni" type="submit" name="invioModifica" value="INVIO" onclick="popupDate()">
                 </div>
                 <input type="hidden" name="idAppello" value="<?php echo $_POST['idAppello']; ?>">
             </form>
@@ -181,3 +181,17 @@ if(isset($_POST['modifica']) && isset($_POST['idAppello']) && isset($_POST['idCo
 </div>
 </body>
 </html>
+
+<script>
+function popupDate() {
+    tmp = document.getElementById("data");
+
+    var dataInserita = new Date(tmp.value);
+    var dataOdierna = new Date();
+
+    if(dataInserita <= dataOdierna) {
+        event.preventDefault();
+        window.alert('ATTENZIONE: Va inserita una data successiva a quella attuale!');
+    }
+}
+</script>

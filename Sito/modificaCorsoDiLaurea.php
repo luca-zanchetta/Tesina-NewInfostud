@@ -107,7 +107,7 @@ if(isset($_POST['invio'])) {
             <hr />
             <div class="boxInsCDL">
             <form action="modificaCorsoDiLaurea.php" method="POST">
-                <div class="insContainer">
+                <div class="insContainer" style="padding-right: 47%;">
                     <div class="labels">
                         <h3>Nome: </h3>
                     </div>

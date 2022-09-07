@@ -1,5 +1,6 @@
 <?php
 require_once('phpFunctions-modify.php');
+require_once('phpFunctions-get.php');
 
 
 /* ================================= 
@@ -487,6 +488,38 @@ function eliminaPrenotazioniStudente($matricola) {
     foreach($prenotazioni as $prenotazione) {
         if($prenotazione->matricolaStudente == $matricola && $prenotazione->stato == 1)
             $prenotazione->stato = 0;
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/prenotazione.xml', "w");
+    $result = fwrite($f,  $prenotazioni->asXML());
+    fclose($f);
+    if(!$result) 
+        return FALSE;
+    
+
+    return TRUE;
+}
+
+
+function eliminaPrenotazioniStudentePostVerbalizzazione($matricola, $idCorso) {  
+    if($matricola == 0 || $idCorso == 0)
+        return FALSE;
+
+    $xmlString = "";
+    foreach ( file("../Xml/prenotazione.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $prenotazioni = simplexml_load_file('../Xml/prenotazione.xml');
+
+    foreach($prenotazioni as $prenotazione) {
+        if($prenotazione->matricolaStudente == $matricola && $prenotazione->esito == "NULL" && $prenotazione->stato == 1) {
+            $appello = getAppelloFromId($prenotazione->idAppello);
+
+            if($appello->idCorso == $idCorso)
+                $prenotazione->stato = 0;
+        }
     }
 
     // Sovrascrive il vecchio file con i nuovi dati
