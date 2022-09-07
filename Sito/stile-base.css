@@ -133,7 +133,7 @@ div.vertical-bar {
     flex-direction: column;
     overflow: auto; 
     height: 80vh;
-    padding-bottom: 15%;
+    padding-bottom: 100%;
 }
 .sidebar>h5{
     margin-top: 1%;
