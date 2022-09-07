@@ -136,6 +136,9 @@ require_once('../Sito/phpFunctions-get.php');
                         echo "<h3 class=\"voceElenco\">Nessun docente corrispondente ai criteri di ricerca.</h3>";
                     }
                     else {
+                        //ordiniamo la lista
+                        usort($docenti, fn($a, $b) => strcmp($a->cognome,$b->cognome));
+
                         foreach($docenti as $docente) {
                             $nomeCorsi = getCorsiFromDocente($docente->matricola);
                         ?>
@@ -172,6 +175,8 @@ require_once('../Sito/phpFunctions-get.php');
                         echo "<h3 class=\"voceElenco\">Al momento non ci sono docenti registrati.</h3>";
                     }
                     else {
+                        usort($docenti, fn($a, $b) => strcmp($a->cognome,$b->cognome));
+
                         foreach($docenti as $docente) {
                             $nomeCorsi = getCorsiFromDocente($docente->matricola);
                         ?>

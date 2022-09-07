@@ -51,7 +51,7 @@ else
         <?php
         if($_SESSION['loginType'] != "Studente") {?>
             <div class="nav-central">
-                <form action="visualizzaAppelli.php" method="POST">
+                <form action="gestionePrenotazioni.php" method="POST">
                     <div class="nav-logo">
                         <input type="submit" name="ricerca" value="">
                         <img src="search.png" alt="err" width="20px" style="display: inline-flex;">
@@ -118,7 +118,7 @@ else
                         foreach($corsi as $corso)
                             displayAppelliFromCorso($corso->id);
                     }
-                }elseif($_SESSION['loginType'] == "Segretario" || $_SESSION['loginType'] == "Amministratore") {
+                }elseif($_SESSION['loginType'] == "Docente" || $_SESSION['loginType'] == "Segretario" || $_SESSION['loginType'] == "Amministratore") {
                     
                     if(isset($_POST['filtro']) && $_POST['filtro'] != "")
                         displayAppelliLike($_POST['filtro']);

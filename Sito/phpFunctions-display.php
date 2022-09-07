@@ -558,7 +558,6 @@ function displayAppelliPrenotabili($studente) {
     }
 }
 
-
 function displayFullAppelli() {
     $appelli = [];
     $appelli = getAppelli();
@@ -566,6 +565,7 @@ function displayFullAppelli() {
     if(!$appelli)
         echo '<h2>Nessun appello trovato.</h2>';
     else {
+        usort($appelli, fn($a, $b) => strcmp(getCorsoById($a->idCorso)->nome,getCorsoById($b->idCorso)->nome));
         foreach($appelli as $appello) {
             $corso = getCorsoById($appello->idCorso);
             $listaPrenotazioni = getPrenotazioniFromAppello($appello->id);
@@ -765,6 +765,8 @@ function displayAppelliAfterDate($data) {
     if(!$appelli)
         echo '<h2>Nessun appello corrispondente ai criteri di ricerca.</h2>';
     else {
+        usort($appelli, fn($a, $b) => strcmp(getCorsoById($a->idCorso)->nome,getCorsoById($b->idCorso)->nome));
+
         foreach($appelli as $appello) {
             $corso = getCorsoById($appello->idCorso);
             $listaPrenotazioni = getPrenotazioniFromAppello($appello->id);
