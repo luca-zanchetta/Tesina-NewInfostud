@@ -1,6 +1,7 @@
 <?php
 require_once('phpFunctions-insert.php');
 require_once('phpFunctions-get.php');
+require_once('phpFunctions-misc.php');
 require_once('phpClasses.php');
 
 if(isset($_POST['loginType'])) {
@@ -17,7 +18,7 @@ if(isset($_POST['loginType'])) {
                     $studente = new studente (
                         $_POST['nome'], 
                         $_POST['cognome'], 
-                        $_POST['password'], 
+                        encryptPassword($_POST['password']), 
                         $_POST['dataNascita'],
                         $_POST['corsoLaurea']
                     );             
@@ -40,7 +41,7 @@ if(isset($_POST['loginType'])) {
                     $docente = new docente (
                         $_POST['nome'],
                         $_POST['cognome'],
-                        $_POST['password'],
+                        encryptPassword($_POST['password']),
                         $idCorso
                     );
 
@@ -59,7 +60,7 @@ if(isset($_POST['loginType'])) {
 
                     $segretario = new segretario (
                         $_POST['username'],
-                        $_POST['password']
+                        encryptPassword($_POST['password'])
                     );
 
                     if(!inserisciSegretario($segretario))
@@ -75,7 +76,7 @@ if(isset($_POST['loginType'])) {
 
                     $amministratore = new amministratore (
                         $_POST['username'],
-                        $_POST['password']
+                        encryptPassword($_POST['password'])
                     );
 
                     if(!inserisciAmministratore($amministratore))
@@ -187,7 +188,7 @@ else {
                     elseif(!isset($_POST['dataNascita']))
                         echo "<input class=\"textField\" type=\"date\" name=\"dataNascita\" required>";
                     ?>
-                    <select class="choice" name="corsoLaurea" onfocus='this.size=3; this.style="width: 100%;";' onblur='this.size=1; this.style="width: 68%;";' onchange='this.size=1; this.blur(); this.style="width: 68%;";'>
+                    <select class="choice" name="corsoLaurea" style="width: 80%;" onfocus='this.size=4; this.style="width: 100%; overflow-x: auto;";' onblur='this.size=1; this.style="width: 80%;";' onchange='this.size=1; this.blur(); this.style="width: 80%;";'>
                         <?php
                             if(isset($_POST['corsoLaurea']) && $_POST['corsoLaurea'] != "seleziona") {
                                 $nomeCDL = getNomeCorsoDiLaureaByID($_POST['corsoLaurea']);
@@ -203,7 +204,10 @@ else {
                             }
                         ?>
                     </select>
-                        <input class="textField" type="password" name="password" required>
+                    <div style="display: flex; flex-direction: row; align-items: center;">
+                        <input class="textField" type="password" name="password" id="pwd" required>
+                        <img src="show.png" width="30px" height="30px" id="img" onclick="showHidePassword()">
+                    </div>
                     </div>
                 </div>
                 <div style="padding-top: 1%; margin-left: 30%;">
@@ -236,7 +240,10 @@ else {
                         echo "<input class=\"textField\" type=\"text\" name=\"cognome\" required>";
                     ?>
                         
-                        <input class="textField" type="password" name="password" required>
+                    <div style="display: flex; flex-direction: row; align-items: center;">
+                        <input class="textField" type="password" name="password" id="pwd" required>
+                        <img src="show.png" width="30px" height="30px" id="img" onclick="showHidePassword()">
+                    </div>
                     </div>
                 </div>
                 <div style="padding-top: 1%; margin-left: 30%;">
@@ -262,7 +269,10 @@ else {
                     elseif(!isset($_POST['username']))
                         echo "<input class=\"textField\" type=\"text\" name=\"username\" required>";
                     ?>
-                        <input class="textField" type="password" name="password" required>
+                    <div style="display: flex; flex-direction: row; align-items: center;">
+                        <input class="textField" type="password" name="password" id="pwd" required>
+                        <img src="show.png" width="30px" height="30px" id="img" onclick="showHidePassword()">
+                    </div>
                     </div>
                 </div>
                 <div style="padding-top: 1%; margin-left: 30%;">
@@ -288,7 +298,10 @@ else {
                     elseif(!isset($_POST['username']))
                         echo "<input class=\"textField\" type=\"text\" name=\"username\" required>";
                     ?>
-                        <input class="textField" type="password" name="password" required>
+                    <div style="display: flex; flex-direction: row; align-items: center;">
+                        <input class="textField" type="password" name="password" id="pwd" required>
+                        <img src="show.png" width="30px" height="30px" id="img" onclick="showHidePassword()">
+                    </div>
                     </div>
                 </div>
                 <div style="padding-top: 1%; margin-left: 30%;">
@@ -312,3 +325,21 @@ else {
 </div>
 </body>
 </html>
+
+<script>
+function showHidePassword() {
+    var input = document.getElementById('pwd');     // Input type
+    var img = document.getElementById('img');       // Occhiolino
+
+    if(input.type === "password") {                 // Se è oscurata, mostrala in chiaro
+        input.type = "text";
+        img.src = "hide.webp";
+    }
+    else {                                          // Se è mostrata in chiaro, oscurala
+        if(input.type === "text") {
+            input.type = "password";
+            img.src = "show.png";
+        }
+    }
+}
+</script>

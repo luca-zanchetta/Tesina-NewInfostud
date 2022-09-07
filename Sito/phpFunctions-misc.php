@@ -616,4 +616,9 @@ function updateReputazione() {
 
     return 0;
 }
+
+
+function encryptPassword($password) {
+    return md5($password);
+}
 ?>

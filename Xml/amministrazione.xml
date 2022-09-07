@@ -2,7 +2,7 @@
 <amministrazione xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amministrazione.xsd">
     <amministratore>
         <username>admin</username>
-        <password>admin</password>
+        <password>21232f297a57a5a743894a0e4a801fc3</password>
         <stato>1</stato>
     </amministratore>
 </amministrazione>

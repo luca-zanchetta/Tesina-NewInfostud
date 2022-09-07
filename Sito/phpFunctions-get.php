@@ -1920,6 +1920,8 @@ function getStatoSegretario($segretario) {
 
     return 0;
 }
+
+
 function getUtilitaTotale($id){
     updateFaqUtility($id);
     $xmlString = "";
@@ -1933,5 +1935,15 @@ function getUtilitaTotale($id){
             return $faq->utilitaTotale;
 
     return 0;
+}
+
+
+function getHiddenPassword($password) {
+    $hidden_password = "";
+
+    for($i = 0; $i < strlen($password); $i+=1)
+        $hidden_password .= '*';
+
+    return $hidden_password;
 }
 ?>

@@ -304,6 +304,13 @@ div.inputs {
     margin: 1em;
     border-radius: 5px;
 }
+.pwdField {
+    width: 150px;
+    height: 25px;
+    font-size: large;
+    margin: 1em;
+    border-radius: 5px;
+}
 .textField:hover {
     background-color:honeydew;
 }

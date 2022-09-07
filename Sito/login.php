@@ -187,13 +187,13 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
             ?>
             <br />
             <h2>Password:</h2>
-            <input class="textField" type="password" name="password" required>
+            <div style="display: flex; flex-direction: row; align-items: center; margin-left: 17.5%;">
+                <input class="textField" type="password" name="password" id="pwd" required>
+                <img src="show.png" width="30px" height="30px" id="img" onclick="showHidePassword()">
+            </div>
             <br />
             <input class="bottoni" type="submit" name="login" value="LOGIN">
             <input name="loginType" type="hidden" value="<?php echo $login; ?>">
-            <br />
-            <a href="recuperaPassword.php" style="color: blue;">Password dimenticata?</a>
-            <?php setcookie('loginType', "{$login}"); ?>
             </form>
             <form action="form_registrazione.php" method="POST">
                 <div style="justify-content: center; display: flex; flex-direction: row; margin-top: 2em;">
@@ -227,6 +227,23 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         ?>
     </div>
 </div>
-
 </body>
 </html>
+
+<script>
+function showHidePassword() {
+    var input = document.getElementById('pwd');     // Input type
+    var img = document.getElementById('img');       // Occhiolino
+
+    if(input.type === "password") {                 // Se è oscurata, mostrala in chiaro
+        input.type = "text";
+        img.src = "hide.webp";
+    }
+    else {                                          // Se è mostrata in chiaro, oscurala
+        if(input.type === "text") {
+            input.type = "password";
+            img.src = "show.png";
+        }
+    }
+}
+</script>

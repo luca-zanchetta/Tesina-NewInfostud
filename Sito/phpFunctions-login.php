@@ -1,4 +1,6 @@
 <?php
+require_once('phpFunctions-misc.php');
+
 /* ================================= 
 ========= Login functions ==========
 ==================================== */
@@ -105,7 +107,7 @@ function verificaPasswordStudentiDocenti($matricola, $password, $loginType) {
         $con = $con->nextSibling;
         $pwd = $con->textContent;
         
-        if($matricola == $matr && $pwd == $password) 
+        if($matricola == $matr && $pwd == encryptPassword($password)) 
             return TRUE;
     }
 
@@ -142,7 +144,7 @@ function verificaPasswordSegretarioAmministratore($username, $password, $loginTy
         $con = $con->nextSibling;
         $pwd = $con->textContent;
         
-        if($username == $uname && $pwd == $password) 
+        if($username == $uname && $pwd == encryptPassword($password))
             return TRUE;
     }
 

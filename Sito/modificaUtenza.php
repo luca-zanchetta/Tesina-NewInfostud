@@ -211,7 +211,7 @@ elseif(isset($_POST['invioSegretario'])) {
                     echo "<input class=\"textField\" type=\"text\" name=\"cognome\" value=\"{$studente->cognome}\" required>";
                     echo "<input class=\"textField\" type=\"text\" name=\"nuovaMatricola\" value=\"{$studente->matricola}\" required>";
                     ?>
-                    <select class="choice" name="corsoLaurea" onfocus='this.size=3; this.style="width: 95%;";' onblur='this.size=1; this.style="width: 68%;";' onchange='this.size=1; this.blur(); this.style="width: 68%;";'>
+                    <select class="choice" name="corsoLaurea" style="width: 80%" onfocus='this.size=4; this.style="width: 95%; overflow-x: auto;";' onblur='this.size=1; this.style="width: 80%;";' onchange='this.size=1; this.blur(); this.style="width: 80%;";'>
                         <?php
                             $nomeCDL = getNomeCorsoDiLaureaByID($studente->idCorsoLaurea);
                             echo "<option value=\"{$studente->idCorsoLaurea}\">{$nomeCDL}</option>";
@@ -225,8 +225,11 @@ elseif(isset($_POST['invioSegretario'])) {
                     </select>
                     <?php
                     echo "<input class=\"textField\" type=\"date\" name=\"dataNascita\" value=\"{$studente->dataNascita}\" required>";
-                    echo "<input class=\"textField\" type=\"text\" name=\"password\" value=\"{$studente->password}\" required>";
                     ?>
+                    <div style="display: flex; flex-direction: row; align-items: center;">
+                        <input class="textField" type="password" name="password" id="pwd">
+                        <img src="show.png" width="30px" height="30px" id="img" onclick="showHidePassword()">
+                    </div>
                     </div>
                 </div>
                 <div style="padding-top: 1%; margin-left: 50%;">
@@ -253,8 +256,11 @@ elseif(isset($_POST['invioSegretario'])) {
                     echo "<input class=\"textField\" type=\"text\" name=\"nome\" value=\"{$docente->nome}\" required>";
                     echo "<input class=\"textField\" type=\"text\" name=\"cognome\" value=\"{$docente->cognome}\" required>";
                     echo "<input class=\"textField\" type=\"text\" name=\"nuovaMatricola\" value=\"{$docente->matricola}\" required>";
-                    echo "<input class=\"textField\" type=\"text\" name=\"password\" value=\"{$docente->password}\" required>";
                     ?>
+                    <div style="display: flex; flex-direction: row; align-items: center;">
+                        <input class="textField" type="password" name="password" id="pwd">
+                        <img src="show.png" width="30px" height="30px" id="img" onclick="showHidePassword()">
+                    </div>
                     </div>
                 </div>
                 <div style="padding-top: 1%; margin-left: 50%;">
@@ -277,8 +283,11 @@ elseif(isset($_POST['invioSegretario'])) {
                     <div class="inputs">
                     <?php
                     echo "<input class=\"textField\" type=\"text\" name=\"nuovoUsername\" value=\"{$segretario->username}\" required>";
-                    echo "<input class=\"textField\" type=\"text\" name=\"password\" value=\"{$segretario->password}\" required>";
                     ?>
+                    <div style="display: flex; flex-direction: row; align-items: center;">
+                        <input class="textField" type="password" name="password" id="pwd">
+                        <img src="show.png" width="30px" height="30px" id="img" onclick="showHidePassword()">
+                    </div>
                     </div>
                 </div>
                 <div style="padding-top: 1%; margin-left: 50%;">
@@ -295,3 +304,21 @@ elseif(isset($_POST['invioSegretario'])) {
 </div>
 </body>
 </html>
+
+<script>
+function showHidePassword() {
+    var input = document.getElementById('pwd');     // Input type
+    var img = document.getElementById('img');       // Occhiolino
+
+    if(input.type === "password") {                 // Se è oscurata, mostrala in chiaro
+        input.type = "text";
+        img.src = "hide.webp";
+    }
+    else {                                          // Se è mostrata in chiaro, oscurala
+        if(input.type === "text") {
+            input.type = "password";
+            img.src = "show.png";
+        }
+    }
+}
+</script>

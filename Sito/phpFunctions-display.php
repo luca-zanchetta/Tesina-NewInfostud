@@ -95,7 +95,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="gestionePrenotazioni.php" style="display: flex; margin: 0px;">Gestione prenotazioni</a>
+                        <a class="opzionetab" href="gestionePrenotazioni.php" style="display: flex; margin: 0px;">Verbalizza esami</a>
                     </h5>
                 </div>
                 <hr style="width: 90%; margin-left: -2%;" />
@@ -141,7 +141,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="gestionePrenotazioni.php" style="display: flex; margin: 0px;">Gestione prenotazioni</a>
+                        <a class="opzionetab" href="gestionePrenotazioni.php" style="display: flex; margin: 0px;">Verbalizza esami</a>
                     </h5>
                 </div>
                 <hr style="width: 90%; margin-left: -2%;" />
@@ -193,7 +193,7 @@ function creaSidebar($loginType) {
                 <div style="display: flex;">
                     <img src="arrow.png" alt="freccia" width="20px" style="display: flex;">
                     <h5 style="display: flex; margin: 0px;">
-                        <a class="opzionetab" href="gestionePrenotazioni.php" style="display: flex; margin: 0px;">Gestione prenotazioni</a>
+                        <a class="opzionetab" href="gestionePrenotazioni.php" style="display: flex; margin: 0px;">Verbalizza esami</a>
                     </h5>
                 </div>
                 <hr style="width: 90%; margin-left: -2%;" />
@@ -400,6 +400,7 @@ function displayFullSegretario($segretario) {
 
 
 function displayAnagraficaStudente($studente) {
+    $hidden_password = getHiddenPassword($studente->password);
     echo '
     <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
         <div style="margin-left: 2%;">
@@ -416,7 +417,7 @@ function displayAnagraficaStudente($studente) {
                 <h2>Data di nascita: '.$studente->dataNascita.'</h2>
             </div>  
             <div class="infoVoice">
-                <div><h2>Password: '.$studente->password.'</h2></div>
+                <div><h2>Password: '.$hidden_password.'</h2></div>
                 <div style="margin-left: 5%; margin-top: 3%;">
                     <form action="modificaPassword.php">
                         <input type="image" src="edit.png" name="pwdStudente" width=30px; heigth=30px;>
@@ -430,6 +431,7 @@ function displayAnagraficaStudente($studente) {
 
 
 function displayAnagraficaDocente($docente) {
+    $hidden_password = getHiddenPassword($docente->password);
     echo '
     <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
         <div style="margin-left: 2%;">
@@ -443,7 +445,7 @@ function displayAnagraficaDocente($docente) {
                 <h2>Cognome: '.$docente->cognome.'</h2>
             </div>  
             <div class="infoVoice">
-                <div><h2>Password: '.$docente->password.'</h2></div>
+                <div><h2>Password: '.$hidden_password.'</h2></div>
                 <div style="margin-left: 5%; margin-top: 3%;">
                     <form action="modificaPassword.php">
                         <input type="image" src="edit.png" name="pwdDocente" width=30px; heigth=30px;>
@@ -457,6 +459,7 @@ function displayAnagraficaDocente($docente) {
 
 
 function displayAnagraficaSegretario($segretario) {
+    $hidden_password = getHiddenPassword($segretario->password);
     echo '
     <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
         <div style="margin-left: 2%;">
@@ -464,7 +467,7 @@ function displayAnagraficaSegretario($segretario) {
                 <h2>Username: '.$segretario->username.'</h2>
             </div>  
             <div class="infoVoice">
-                <div><h2>Password: '.$segretario->password.'</h2></div>
+                <div><h2>Password: '.$hidden_password.'</h2></div>
                 <div style="margin-left: 5%; margin-top: 3%;">
                     <form action="modificaPassword.php">
                         <input type="image" src="edit.png" name="pwdSegretario" width=30px; heigth=30px;>
@@ -478,6 +481,7 @@ function displayAnagraficaSegretario($segretario) {
 
 
 function displayAnagraficaAmministratore($amministratore) {
+    $hidden_password = getHiddenPassword($amministratore->password);
     echo '
     <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
         <div style="margin-left: 2%;">
@@ -485,7 +489,7 @@ function displayAnagraficaAmministratore($amministratore) {
                 <h2>Username: '.$amministratore->username.'</h2>
             </div>  
             <div class="infoVoice">
-                <div><h2>Password: '.$amministratore->password.'</h2></div>
+                <div><h2>Password: '.$hidden_password.'</h2></div>
                 <div style="margin-left: 5%; margin-top: 3%;">
                     <form action="modificaPassword.php">
                         <input type="image" src="edit.png" name="pwdAdmin" width=30px; heigth=30px;>
@@ -564,14 +568,16 @@ function displayFullAppelli() {
         usort($appelli, fn($a, $b) => strcmp(getCorsoById($a->idCorso)->nome,getCorsoById($b->idCorso)->nome));
         foreach($appelli as $appello) {
             $corso = getCorsoById($appello->idCorso);
+            $listaPrenotazioni = getPrenotazioniFromAppello($appello->id);
+            $numeroPrenotati = count($listaPrenotazioni);
             
             if($_SESSION['src'] == "manage") {
                 echo '
                 <div class="blocco-esame" style="background-color:lightblue;">
                     <div class="nome-esame">
-                        '.$corso->nome."<br />".$appello->dataOra.'
+                        '.$corso->nome."<br />".$appello->dataOra."<br />Prenotati: ".$numeroPrenotati.'
                     </div> 
-                    <div class="info-button">
+                    <div class="info-button" style="margin-top: 10%;">
                         INFO
                         <form action="visualizzaPrenotazioni.php" method="POST">
                             <input type="submit" name="info" value="" >
@@ -621,14 +627,16 @@ function displayAppelliFromCorso($idCorso) {
     if($appelli) {
         foreach($appelli as $appello) {
             $corso = getCorsoById($appello->idCorso);
+            $listaPrenotazioni = getPrenotazioniFromAppello($appello->id);
+            $numeroPrenotati = count($listaPrenotazioni);
                 
             if($_SESSION['src'] == "manage") {
                 echo '
                 <div class="blocco-esame" style="background-color:lightblue;">
                     <div class="nome-esame">
-                        '.$corso->nome."<br />".$appello->dataOra.'
+                        '.$corso->nome."<br />".$appello->dataOra."<br />Prenotati: ".$numeroPrenotati.'
                     </div> 
-                    <div class="info-button">
+                    <div class="info-button" style="margin-top: 10%;">
                         INFO
                         <form action="visualizzaPrenotazioni.php" method="POST">
                             <input type="submit" name="info" value="" >
@@ -687,13 +695,16 @@ function displayAppelliLike($nomeCorso) {
             }
             else {
                 foreach($appelli as $appello) {
+                    $listaPrenotazioni = getPrenotazioniFromAppello($appello->id);
+                    $numeroPrenotati = count($listaPrenotazioni);
+
                     if($_SESSION['src'] == "manage") {
                         echo '
                         <div class="blocco-esame" style="background-color:lightblue;">
                             <div class="nome-esame">
-                                '.$corso->nome."<br />".$appello->dataOra.'
+                                '.$corso->nome."<br />".$appello->dataOra."<br />Prenotati: ".$numeroPrenotati.'
                             </div> 
-                            <div class="info-button">
+                            <div class="info-button" style="margin-top: 10%;">
                                 INFO
                                 <form action="visualizzaPrenotazioni.php" method="POST">
                                     <input type="submit" name="info" value="" >
@@ -758,14 +769,16 @@ function displayAppelliAfterDate($data) {
 
         foreach($appelli as $appello) {
             $corso = getCorsoById($appello->idCorso);
+            $listaPrenotazioni = getPrenotazioniFromAppello($appello->id);
+            $numeroPrenotati = count($listaPrenotazioni);
         
             if($_SESSION['src'] == "manage") {
                 echo '
                 <div class="blocco-esame" style="background-color:lightblue;">
                     <div class="nome-esame">
-                        '.$corso->nome."<br />".$appello->dataOra.'
+                        '.$corso->nome."<br />".$appello->dataOra."<br />Prenotati: ".$numeroPrenotati.'
                     </div> 
-                    <div class="info-button">
+                    <div class="info-button" style="margin-top: 10%;">
                         INFO
                         <form action="visualizzaPrenotazioni.php" method="POST">
                             <input type="submit" name="info" value="" >

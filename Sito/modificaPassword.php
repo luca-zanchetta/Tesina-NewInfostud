@@ -3,6 +3,7 @@ session_start();
 require_once("../Sito/phpFunctions-get.php");
 require_once("../Sito/phpFunctions-display.php");
 require_once("../Sito/phpFunctions-modify.php");
+require_once("../Sito/phpFunctions-misc.php");
 
 
 if(!isset($_SESSION['loginType']))
@@ -40,7 +41,7 @@ if(isset($_POST['modifica'])) {
 
     switch($loginType) {
         case "Studente":
-            if($_POST['vecchiaPassword'] == $studenteLoggato->password) {
+            if(encryptPassword($_POST['vecchiaPassword']) == $studenteLoggato->password) {
                 $passwordCorretta = TRUE;
                 if($_POST['nuovaPassword'] == $_POST['confermaPassword']) {
                     $match = TRUE;
@@ -60,7 +61,7 @@ if(isset($_POST['modifica'])) {
             break;
         
         case "Docente":
-            if($_POST['vecchiaPassword'] == $docenteLoggato->password) {
+            if(encryptPassword($_POST['vecchiaPassword']) == $docenteLoggato->password) {
                 $passwordCorretta = TRUE;
                 if($_POST['nuovaPassword'] == $_POST['confermaPassword']) {
                     $match = TRUE;
@@ -80,7 +81,7 @@ if(isset($_POST['modifica'])) {
             break;
 
         case "Segretario":
-            if($_POST['vecchiaPassword'] == $segretarioLoggato->password) {
+            if(encryptPassword($_POST['vecchiaPassword']) == $segretarioLoggato->password) {
                 $passwordCorretta = TRUE;
                 if($_POST['nuovaPassword'] == $_POST['confermaPassword']) {
                     $match = TRUE;
@@ -100,7 +101,7 @@ if(isset($_POST['modifica'])) {
             break;
         
         case "Amministratore":
-            if($_POST['vecchiaPassword'] == $adminLoggato->password) {
+            if(encryptPassword($_POST['vecchiaPassword']) == $adminLoggato->password) {
                 $passwordCorretta = TRUE;
                 if($_POST['nuovaPassword'] == $_POST['confermaPassword']) {
                     $match = TRUE;
@@ -202,9 +203,18 @@ if(isset($_POST['modifica'])) {
                         <h3>Conferma password: </h3>
                     </div>
                     <div class="inputs">
-                        <input class="textField" type="password" name="vecchiaPassword" required>
-                        <input class="textField" type="password" name="nuovaPassword" required>
-                        <input class="textField" type="password" name="confermaPassword" required>
+                        <div style="display: flex; flex-direction: row; align-items: center;">
+                            <input class="textField" type="password" name="vecchiaPassword" id="vecchiaPWD" required>
+                            <img src="show.png" width="30px" height="30px" id="img1" onclick="showHidePassword(1)">
+                        </div>
+                        <div style="display: flex; flex-direction: row; align-items: center;">
+                            <input class="textField" type="password" name="nuovaPassword" id="nuovaPWD" required>
+                            <img src="show.png" width="30px" height="30px" id="img2" onclick="showHidePassword(2)">
+                        </div>
+                        <div style="display: flex; flex-direction: row; align-items: center;">
+                            <input class="textField" type="password" name="confermaPassword" id="confermaPWD" required>
+                            <img src="show.png" width="30px" height="30px" id="img3" onclick="showHidePassword(3)">
+                        </div>
                     </div>
                 </div>
                 <div style="padding-top: 1%; margin-left: 50%;">
@@ -239,3 +249,53 @@ if(isset($_POST['modifica'])) {
 </div>
 </body>
 </html>
+
+<script>
+function showHidePassword(id) {
+    var vecchia = document.getElementById('vecchiaPWD');     // Input type
+    var nuova = document.getElementById('nuovaPWD');
+    var conferma = document.getElementById('confermaPWD');
+    
+    var img1 = document.getElementById('img1');              // Occhiolino
+    var img2 = document.getElementById('img2'); 
+    var img3 = document.getElementById('img3'); 
+
+
+    if(id === 1) {
+        if(vecchia.type === "password") {                 // Se è oscurata, mostrala in chiaro
+            vecchia.type = "text";
+            img1.src = "hide.webp";
+        }
+        else {                                            // Se è mostrata in chiaro, oscurala
+            if(vecchia.type === "text") {
+                vecchia.type = "password";
+                img1.src = "show.png";
+            }
+        }
+    }
+    else if(id === 2) {
+        if(nuova.type === "password") {                 // Se è oscurata, mostrala in chiaro
+            nuova.type = "text";
+            img2.src = "hide.webp";
+        }
+        else {                                            // Se è mostrata in chiaro, oscurala
+            if(nuova.type === "text") {
+                nuova.type = "password";
+                img2.src = "show.png";
+            }
+        }
+    }
+    else if(id === 3) {
+        if(conferma.type === "password") {                 // Se è oscurata, mostrala in chiaro
+            conferma.type = "text";
+            img3.src = "hide.webp";
+        }
+        else {                                            // Se è mostrata in chiaro, oscurala
+            if(conferma.type === "text") {
+                conferma.type = "password";
+                img3.src = "show.png";
+            }
+        }
+    }
+}
+</script>
