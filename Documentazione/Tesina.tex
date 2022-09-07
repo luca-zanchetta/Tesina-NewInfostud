@@ -253,11 +253,12 @@ Lo studente, oltre a poter visualizzare il semplice elenco delle FAQ, ha la poss
 \subsection{Funzionalità professore}
 
 \subsubsection{Gestione degli appelli ed esami}
+\label{sec:verb}
 
 Il sistema degli appelli è una delle funzionalità base previste dalla piattaforma. Per \emph{appello} si intende lo svolgimento (solo figurativo) dell'esame di un determinato corso. Ogni appello viene inserito nella piattaforma, generalmente da un professore; tale funzionalità in ogni caso è accessibile anche alla segreteria e all'utente amministratore per motivi logistici di gestione. In questa sezione tratteremo solamente il punto di vista dei docenti.
 
 Un docente è in grado di inserire, modificare o eliminare un appello relativo al corso a lui referenziato. L'inserimento richiede che vengano specificate la data e l'ora dell'appello. 
-Un docente, può inoltre gestire l'esame vero e proprio; in particolare è in grado di visualizzare gli studenti prenotati a ciascun appello, ed eventualmente inserire la votazione conseguita da ciascuno studente. La votazione può, o essere espressa da un giudizio compreso tra 18/30 e 30/30, oppure espressa tramite lettera, R o B; la lettera R indica il ritiro dello studente dall'esame, mentre la lettera B indica una bocciatura.
+Un docente, può inoltre gestire l'esame vero e proprio; in particolare è in grado di visualizzare gli studenti prenotati a ciascun appello, ed eventualmente inserire la votazione conseguita da ciascuno studente. La votazione può essere espressa da un giudizio compreso tra 18/30 e 30/30 con lode, oppure espressa tramite lettera, R o B; la lettera R indica il ritiro dello studente dall'esame, mentre la lettera B indica una bocciatura.
 
 \medskip
 
@@ -1479,6 +1480,12 @@ Screen 3 -Immagine form crea post
 
 Continuando l'analisi della pagina raggiungiamo il blocco centrale. In esso troviamo l'elenco vero e proprio dei post. In cima alla lista è presente una barra che ci permette di applicare alcuni filtri di visualizzazione, tra i quali troviamo ordinamento sull'utilità, sulle risposte e sulla data. Inoltre, in ogni bacheca vengono sempre messi in sovraimpressione i due post che hanno ricevuto più voti utilità, e vengono separati dall'elenco tramite una barra celeste. Interagendo con una voce dell'elenco si raggiunge una pagina che visualizza il post scelto, la cui descrizione è contenuto nella sezione successiva.
 
+\medskip
+
+\textbf{\underline{Attenzione}}: ricordiamo al lettore che uno studente può accedere alla sezione delle FAQ dei propri corsi solo e soltanto se non è stato sospeso (\emph{soft ban}) da un'utenza amministrativa.
+
+\medskip
+
 \subsubsection{Interagire con i post}
 
 L'interazione con il post avviene in un'apposita pagina di visualizzazione del contenuto di quest'ultimo. Analizzando la schermata dall'alto (Si faccia riferimento alla figura), troviamo innanzitutto l'intestazione del post, che si compone di un coppia di frecce, utilizzate per votare l'utilità del post, e da un blocco contente autore e contenuto di quest'ultimo. 
@@ -1502,45 +1509,78 @@ Screen scelta del corso
 La pagina che si presenterà allo studente è divisa in 3 aree. In cima troviamo un box di domande, che come dice il nome, rappresenta il contenitore di tutte quelle domande che hanno ricevuto una risposta. Il secondo blocco rappresenta invece il container delle domande ancora incomplete, in attesa che il docente pubblichi una risposta. Per una qualsiasi domanda, è possibile interagire con la coppia di frecce, poste alla sinistra del testo, per esprimere un voto riguardante il contenuto.
 
 Infine, in fondo alla pagina troviamo una form che consente all'utente di contribuire alla faq, permettendogli di pubblicare una nuova domanda. 
+
+\medskip
+
+\textbf{\underline{Attenzione}}: ricordiamo al lettore che uno studente può accedere alla sezione delle FAQ dei propri corsi solo e soltanto se non è stato sospeso (\emph{soft ban}) da un'utenza amministrativa.
+
+\medskip
 \medskip
 
 \section{Docente}
 
 \subsection{Visualizzare l'anagrafica}
 
+Una volta effettuato il login, ad un'utenza di tipologia \emph{Docente} verrà presentata una pagina web in cui saranno visualizzate le proprie informazioni anagrafiche, quali matricola, nome, cognome e password; quest'ultima verrà visualizzata coperta da degli asterischi, che rappresentano la lunghezza della relativa password criptata secondo l'algoritmo di cifratura MD5. Come per ogni altra utenza nella piattaforma, anche un docente può cambiare la propria password, premendo sull'apposita icona situata a fianco della password stessa (figura 2.?). 
+
+In questa homepage, inoltre, viene presentata una sidebar con tutte le funzionalità relative ai docenti, e che saranno descritte nel seguito di questo paragrafo. Si ricorda al lettore che, da qualsiasi pagina web del sito, è possibile tornare alla propria homepage di utenza cliccando sull'opportuna icona situata in alto a destra. Inoltre, da qualsiasi pagina web del sito, è possibile effettuare il logout: sarà sufficiente premere sull'apposito bottone sito anch'esso in alto a destra, a fianco dell'icona appena citata.
+
 \medskip
 
 \subsection{Visualizzare gli appelli}
+\label{sec:visualizzaAppelli}
 
-%intro
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Visualizza appelli}, sotto la sezione \emph{Esami}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.?, nella quale verranno presentati a schermo tutti gli appelli di tutti i corsi impartiti dal docente autenticato nella sessione corrente. In particolare, verranno visualizzati tutti gli appelli aventi data pari o successiva a quella corrente; gli appelli sono ordinati... (come? work in progress).%ORDINATI COME?
+
+Il docente, a questo punto, dispone di tre scelte: può modificare un singolo appello, può eliminare un singolo appello, oppure può effettuare una ricerca di un appello mediante l'apposita barra di ricerca. La ricerca avviene tramite un meccanismo basato sulla data: in seguito alla ricerca, verranno visualizzati tutti gli appelli avente data pari o successiva a quella inserita.
+
+\medskip
 
 \subsubsection{Modificare un appello}
+
+A partire dalla pagina di visualizzazione degli appelli, un docente può decidere di modificare un singolo appello: sarà sufficiente cliccare sull'apposito bottone \emph{modifica}, che si trova in corrispondenza dell'appello stesso, come mostrato in figura 2.?. La pressione di questo bottone porterà l'utente in una nuova pagina web, contenente una form di modifica dell'appello: i campi della form, come mostra la figura 2.?, sono già compilati con i dati dell'appello dal quale si proviene. L'utente sarà dunque libero di modificare i dati dell'appello a proprio piacimento; cliccando su \emph{invio}, l'appello verrà generalmente modificato. Tuttavia, in caso di corrispondenze con altri appelli, prima che la modifica venga effettuata, verrà mostrata all'utente una pagina web di segnalazione della corrispondenza avvenuta, come mostrato in figura 2.?. Le corrispondenze saranno approfondite in seguito, nel paragrafo relativo all'inserimento degli appelli.
+
+In ogni caso, l'avvenuta modifica verrà segnalata da un opportuno avviso di successo; dualmente, in caso di errore, l'utente riceverà un'opportuna segnalazione.
 
 \medskip
 
 \subsubsection{Eliminare un appello}
 
+A partire dalla pagina di visualizzazione degli appelli, un docente può decidere di eliminare un singolo appello: sarà sufficiente cliccare sull'apposito bottone \emph{elimina}, che si trova in corrispondenza dell'appello stesso, come mostrato in figura 2.?. La pressione di questo pulsante scatenerà l'esecuzione di una funzione di eliminazione, che \emph{eliminerà} l'appello (per ulteriori approfondimenti sull'eliminazione, si faccia riferimento al capitolo 3).
+
+L'avvenuta eliminazione verrà segnalata da un opportuno avviso di successo; dualmente, in caso di errore, l'utente riceverà un'opportuna segnalazione.
+
 \medskip
 
 \subsection{Inserire un appello}
 
-%nota: collisioni
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Inserisci appello}, sotto la sezione \emph{Esami}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.?, nella quale verrà presentata a schermo una form per l'inserimento di un nuovo appello. L'utente potrà dunque scegliere una qualsiasi data (pari o antecedente a quella attuale?), un qualsiasi orario e uno dei corsi di propria competenza; tutte queste informazioni sono obbligatorie. Premendo poi il pulsante \emph{invio}, le informazioni inserite andranno a costituire un nuovo appello, a meno di \textbf{collisioni}. L'utente potrà verificare l'avvenuto inserimento del nuovo appello mediante l'apposita funzionalità di visualizzazione degli appelli, trattata poc'anzi \hyperref[sec:visualizzaAppelli]{\textcolor{gray}{[$\uparrow$]}}. %WORK IN PROGRESS
+
+Inserendo un appello in prossimità di altri appelli relativi a corsi di uno stesso anno inerenti ad uno stesso corso di laurea, si avrà una \emph{corrispondenza}. In occorrenza di tale evento, prima che avvenga l'effettivo inserimento (o l'effettiva modifica!) dell'appello in questione, l'utente verrà reindirizzato verso una pagina web in cui viene segnalata la presenza di corrispondenze, e in cui vengono presentate le corrispondenze rilevate, al fine di dar modo al docente di prendere la sua decisione sull'effettivo inserimento (o sull'effettiva modifica) dell'appello stesso. Come già citato, un'esemplificazione di una tale pagina web è riportata in figura 2.?. Rispondendo \emph{sì} alla domanda ''\emph{Sono state rilevate corrispondenze. Inserire comunque l'appello?}'', l'inserimento avverrà senza altri indugi; altrimenti, rispondendo \emph{no}, l'utente verrà reindirizzato alla pagina di inserimento (o di modifica) dell'appello, nella quale troverà la form già compilata con i dati precedentemente inseriti.
 
 \medskip
 
-\subsection{Gestire le prenotazioni}
+\subsection{Verbalizzare gli esami}
 
-%intro
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Verbalizza esami}, sotto la sezione \emph{Esami}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.?, nella quale verranno presentati a schermo tutti gli appelli di tutti i corsi impartiti dal docente autenticato nella sessione corrente. In particolare, verranno visualizzati tutti gli appelli aventi data pari o successiva a quella corrente; gli appelli sono ordinati... (come? work in progress).%ORDINATI COME?
 
-\subsubsection{Verbalizzare gli esami}
+A differenza della semplice visualizzazione \hyperref[sec:visualizzaAppelli]{\textcolor{gray}{[$\uparrow$]}}, questa volta gli appelli vengono presentati con un'informazione aggiuntiva: il numero di studenti prenotati ai singoli appelli. Inoltre, come mostrato in figura 2.?, i singoli appelli dispongono di un pulsante \emph{info}, premendo il quale l'utente potrà accedere alla pagina web per l'effettiva verbalizzazione, mostrata in figura 2.?. Tale pagina avrà lo scopo di visualizzare una lista di tutti gli studenti iscritti all'appello selezionato; il docente potrà inserire la relativa valutazione nell'apposito campo \emph{esito} e, premendo sul pulsante \emph{verbalizza}, verrà effettuata la verbalizzazione di tutti gli esami con esito diverso da NULL. Come discusso nel capitolo 1 \hyperref[sec:verb]{\textcolor{gray}{[$\uparrow$]}}, l'esito di un esame verbalizzato può essere un numero compreso fra 18/30 e 30/30 con lode (il valore di un 30/30 con lode è pari a 31), oppure può essere una lettera, R o B; la lettera R indica il ritiro da parte dello studente dallo svolgimento dell'esame, mentre la lettera B indica una bocciatura, ossia la terminazione dell'esame svolto con esito negativo.
 
 \medskip
 
 \subsection{Accedere alle FAQ}
 
-%intro
+A partire da una qualsiasi pagina web relativa all'utenza, \textbf{qualora l'utente non fosse stato sospeso da un'utenza amministrativa}, è possibile cliccare sulla voce \emph{FAQ}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente - \textbf{se non sospeso} - verrà così reindirizzato ad una pagina web come quella in figura 2.?, nella quale verranno presentati a schermo tutti i corsi impartiti dal docente correntemente autenticato nella sessione corrente, come mostrato in figura 2.?. La pressione di una delle apposite frecce laterali permetterà all'utente di accedere alla sezione delle FAQ relative al corso selezionato.
+
+\medskip
 
 \subsubsection{Interagire con le FAQ}
+
+Premendo una freccia nella pagina di visualizzazione dei corsi impartiti dal docente autenticato nella sessione corrente, egli avrà accesso ad una sezione FAQ dedicata al corso selezionato. La pagina web presentata all'utente è simile a quella mostrata in figura 2.?. Vi è una suddivisione della pagina web in due macro-aree: la prima contenente le domande a cui è stata data risposta, visualizzate in ordine decrescente per utilità della domanda stessa; la seconda contenente invece le domande a cui ancora non è stata fornita alcuna risposta. 
+
+Nella prima area, il docente può modificare la propria risposta ad una o più domande, oppure può decidere di eliminare la domanda stessa. Nella seconda area, invece, il docente può inserire una risposta ad una domanda ancora priva di quest'ultima, oppure eliminarla; nel caso in cui il docente decidesse di rispondere ad una domanda presente nella seconda area, questa verrà immediatamente trasferita nella prima, in modo da poter essere visualizzata da tutti gli studenti aventi tale diritto.
+
+\textbf{\underline{Attenzione}}: ricordiamo al lettore che un docente può accedere alla sezione delle FAQ dei propri corsi solo e soltanto se non è stato sospeso (\emph{soft ban}) da un'utenza amministrativa.
 
 \medskip
 \medskip
