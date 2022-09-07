@@ -1979,11 +1979,19 @@ La pagina che si presenterà all'amministratore, mostrata in figura 2.20, è div
 
 A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulle voci \emph{Visualizza studenti}, \emph{Visualizza docenti} e \emph{Visualizza segreteria}, tutte reperibili sotto la sezione \emph{Moderazione utenze}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.36, nella quale verranno presentati a schermo i dati relativi rispettivamente a tutti gli studenti, i docenti e i segretari registrati presso la piattaforma. In particolare, la visualizzazione degli studenti può essere ordinata seguendo criteri legati alla matricola, al cognome, al nome e al corso di laurea di appartenenza del singolo studente. La visualizzazione dei docenti, invece, può essere ordinata seguendo criteri legati alla matricola, al cognome e al nome del singolo docente.
 
-%Screen visualizza studenti/docenti/segreteria 2.36
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-36.png}
+\caption{Visualizzazione dell'elenco delle utenze della tipologia selezionata.}
+\end{figure}
 
 Premendo sul pulsante \emph{gestisci}, presente in ogni singola voce dell'elenco di studenti/docenti/segretari mostrato, l'utente amministratore verrà reindirizzato verso una pagina web contenente tutte le informazioni possibili relative all'utenza appena selezionata. Un esempio di tale pagina web è riportato in figura 2.37: come si può notare dalla figura, oltre alle informazioni caratterizzanti l'utenza selezionata, sono presenti tre bottoni: \emph{modifica}, \emph{sospendi} ed \emph{elimina}, rispettivamente per permettere all'amministratore di modificare, sospendere od eliminare l'utenza cui si sta facendo correntemente riferimento.
 
-%Screen gestione utenza 2.37
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-37.png}
+\caption{Pagina di gestione dell'utenza selezionata.}
+\end{figure}
 
 \medskip
 
@@ -1991,7 +1999,11 @@ Premendo sul pulsante \emph{gestisci}, presente in ogni singola voce dell'elenco
 
 A partire dalla pagina di gestione dell'utenza, riportata in figura 2.37, premendo sul pulsante \emph{modifica}, l'utente amministratore verrà reindirizzato verso un'opportuna form di modifica dei dati dell'utenza, che naturalmente varia dinamicamente in base al tipo di utenza selezionata e in base alle reali necessità di modifica. Come mostra la figura 2.38, la form di modifica dell'utenza viene mostrata pre-compilata con i dati attuali dell'utenza selezionata, a meno del campo \emph{password}. Qualora il campo password restasse vuoto, la password dell'utenza rimarrebbe invariata; qualora, invece, l'amministratore desiderasse modificare la password dell'utenza (ad esempio, in seguito ad una richiesta esplicita di recupero/modifica password da parte dell'utenza stessa - non entriamo nel dettaglio delle conversazioni private fra utente e amministratore...), basterebbe compilare a piacimento il relativo campo testuale. Gli autori precisano che tale soluzione di modifica della password si è rivelata necessaria poiché, data la non reversibilità dell'algoritmo di cifratura MD5 utilizzato nella crittografia delle password, risulta di fatto impossibile recuperare la reale password dell'utente, per poterla mostrare in chiaro all'amministratore.
 
-%Screen modifica utenza 2.38
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-38.png}
+\caption{Form di modifica dell'utenza selezionata.}
+\end{figure}
 
 Eventuali errori nella modifica dell'utenza, ad esempio dovuti alla modifica della matricola di uno studente o di un docente o allo username di un segretario (che devono essere univoci!), verranno prontamente segnalati all'utente amministratore, il quale, per poter effettuare la modifica desiderata, dovrà modificare l'inserimento dei dati che hanno generato l'errore.
 
@@ -2003,7 +2015,11 @@ Supponiamo che l'utenza selezionata sia un'utenza abilitata al pieno utilizzo di
 
 La sospensione di un'utenza può avvenire per svariate ragioni, sostanzialmente a discrezione dell'utente amministratore: pigiando sull'opportuno pulsante, l'utente precedentemente selezionato risulterà sospeso, e il pulsante \emph{sospendi} viene sostituito dal pulsante \emph{riabilita}, come mostrato in figura 2.39.
 
-%Screen utente sospeso 2.39
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-39.png}
+\caption{Gestione di un'utenza sospesa.}
+\end{figure}
 
 \emph{Cosa vuol dire sospendere un'utenza?} Ricordiamo al lettore (\emph{cfr. specifiche nel capitolo 1}) che un utente sospeso (sia esso uno studente, un docente od un segretario) non è abilitato ad accedere alle funzionalità extra messe a disposizione dalla piattaforma, ossia l'accesso alle bacheche e alle sezioni delle FAQ, in qualsivoglia loro aspetto e forma. D'altro canto, un utente riabilitato in seguito ad una sospensione ottiene nuovamente il pieno diritto e la piena libertà di accesso alle appena citate funzionalità offerte dalla piattaforma.
 
@@ -2019,7 +2035,11 @@ A partire dalla pagina di gestione dell'utenza, riportata in figura 2.37, premen
 
 A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Inserisci corso di laurea}, sotto la sezione \emph{Altre funzionalità}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.40, nella quale verrà presentata a schermo una form di inserimento di un nuovo corso di laurea. Sostanzialmente, essendo il corso di laurea caratterizzato unicamente da un nome, l'inserimento di un corso di laurea si riduce all'inserimento del suo nome, che deve essere univoco all'interno della piattaforma.
 
-%Screen inserisci corso di laurea 2.40
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-40.png}
+\caption{Form di inserimento di un corso di laurea.}
+\end{figure}
 
 \medskip
 
@@ -2027,7 +2047,11 @@ A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare
 
 A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Gestisci corsi di laurea}, sotto la sezione \emph{Altre funzionalità}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.41, nella quale verranno presentati a schermo tutti i corsi di laurea registrati all'interno della piattaforma.
 
-%Screen gestisci corsi di laurea 2.41
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-41.png}
+\caption{Visualizzazione di tutti i corsi di laurea registrati presso la piattaforma.}
+\end{figure}
 
 Ogni corso di laurea viene presentato in un box contenente il nome del corso di laurea stesso, e due pulsanti: \emph{modifica} ed \emph{elimina}, esattamente come avviene per la visualizzazione degli appelli. Da qui il lettore potrà facilmente intuire le operazioni applicabili al singolo corso di laurea, che verranno in ogni caso approfondite a breve.
 
@@ -2037,7 +2061,11 @@ Ogni corso di laurea viene presentato in un box contenente il nome del corso di 
 
 A partire dalla pagina di gestione dei corsi di laurea, mostrata in figura 2.41, interagendo con il pulsante \emph{modifica}, l'utente amministratore verrà reindirizzato ad una form di modifica del corso di laurea, come mostrato in figura 2.42. La form verrà visualizzata già pre-compilata con i dati del corso di laurea selezionato; l'utente amministratore potrà dunque cambiare il nome del corso di laurea, a patto che questo non sia già presente all'interno dell'insieme dei dati caratterizzanti la piattaforma.
 
-%Screen modifica corso di laurea 2.42
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-42.png}
+\caption{Form di modifica di un corso di laurea.}
+\end{figure}
 
 \medskip
 
@@ -2051,7 +2079,11 @@ A partire dalla pagina di gestione dei corsi di laurea, mostrata in figura 2.41,
 
 A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Inserisci corso}, sotto la sezione \emph{Altre funzionalità}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.43, nella quale verrà presentata a schermo una form di inserimento di un nuovo corso. Un corso è caratterizzato da un nome, che deve essere univoco entro i limiti di presenza all'interno del corso di laurea cui fa riferimento, da un docente, da un co-docente (opzionale), dall'anno di corso in cui viene erogato, dal semestre in cui viene erogato, dal curriculum cui fa riferimento, dai CFU offerti allo studente dopo il superamento dell'esame che lo caratterizza, da un codice SSD, dal corso di laurea cui fa riferimento e, immancabilmente, da una descrizione che ne permette la fruizione di obiettivi e informazioni.
 
-%Screen inserisci corso 2.43
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-43.png}
+\caption{Form di inserimento di un corso.}
+\end{figure}
 
 Specificate tutte queste informazioni, sarà sufficiente premere sul pulsante \emph{invio} per concludere l'operazione di inserimento del corso.
 
@@ -2061,7 +2093,11 @@ Specificate tutte queste informazioni, sarà sufficiente premere sul pulsante \e
 
 A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Gestisci corsi}, sotto la sezione \emph{Altre funzionalità}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.44, nella quale verranno presentati a schermo tutti i corsi relativi a tutti i corsi di laurea registrati all'interno della piattaforma.
 
-%Screen gestisci corsi 2.44
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-44.png}
+\caption{Visualizzazione di tutti i corsi registrati presso la piattaforma.}
+\end{figure}
 
 Ogni corso viene presentato in un box contenente il nome del corso stesso, e due pulsanti: \emph{modifica} ed \emph{elimina}, esattamente come avviene per la visualizzazione degli appelli e dei corsi di laurea. Da qui il lettore potrà facilmente intuire le operazioni applicabili al singolo corso, che verranno in ogni caso approfondite a breve.
 
@@ -2071,7 +2107,11 @@ Ogni corso viene presentato in un box contenente il nome del corso stesso, e due
 
 A partire dalla pagina di gestione dei corsi, mostrata in figura 2.44, interagendo con il pulsante \emph{modifica}, l'utente amministratore verrà reindirizzato ad una form di modifica del corso selezionato, come mostrato in figura 2.45. La form verrà visualizzata già pre-compilata con i dati del corso selezionato; l'utente amministratore potrà dunque cambiare i dati a proprio piacimento, a patto che il nome del corso resti univoco all'interno dell'insieme dei corsi relativi al corso di laurea specificato nella form.
 
-%Screen modifica corso 2.45
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-45.png}
+\caption{Form di modifica di un corso.}
+\end{figure}
 
 \medskip
 
