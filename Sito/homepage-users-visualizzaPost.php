@@ -34,11 +34,17 @@ if($_SESSION['loginType']!= "Amministratore" && (int)$utenzaLoggata->stato == -1
 }
 
 $post = getPostFromId($_GET['idPost']);
+if(!isset($_GET['idPost'])) header("Location: homepage-bacheca.php");
+
 $votoPost = isset($_SESSION['matricola']) ? getVotoPostFromStudente($post->id,$_SESSION['matricola']) : "N/A";
 $listaCommenti = getPostComments($_GET['idPost']);
-$pageNum = $_GET['pageNum'];
-$autore = ($post->matricolaStudente>0 ? getStudenteFromMatricola($post->matricolaStudente) : 'tsk');
 $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 1 : 0);
+
+$pageNum = $_GET['pageNum'] >= 1 ? $_GET['pageNum'] : 1;
+$pageNum = $_GET['pageNum'] > $maxPageNum ? 1: $_GET['pageNum'];
+
+$autore = ($post->matricolaStudente > 0 ? getStudenteFromMatricola($post->matricolaStudente) : $post->matricolaStudente);
+
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -71,7 +77,7 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
             </div>
             <div class="vertical-bar"></div>
                 <h2>
-                    InfoStuff
+                    InfoStuff 
                     <form action="">
                         <input type="button">
                     </form>
@@ -112,8 +118,10 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                         Bacheche >
                     </h2>
                     <h2 class="hForm">
-                        <form action="">
-                            <input type="button" value="" name="dsa">
+                        <form action="homepage-users-visualizzaBacheca.php" method="GET">
+                            <input type="submit" value="" name="dsa">
+                            <input type="hidden" name="idCorso" value="<?php echo $_GET['idCorso'] ?>">
+                            <input type="hidden" name="pageNum" value="1">
                         </form>
                         <?php echo getCorsoById($_GET['idCorso'])->nome;?>
                     </h2>
@@ -193,7 +201,11 @@ $maxPageNum = ((int)(count($listaCommenti)/5)) + (count($listaCommenti)%5 > 0 ? 
                     </div>
                     <div class="postData">
                         <div class="postAuthor">
-                            <?php echo $autore == 'tsk'? 'Da Moderatore' : "{$autore->nome} {$autore->cognome}, {$autore->matricola} · Reputazione: {$autore->reputazioneTotale}" ;?>
+                            <?php 
+                                if(is_object($autore)) echo "{$autore->nome} {$autore->cognome}, {$autore->matricola} · Reputazione: {$autore->reputazioneTotale}" ;
+                                elseif($autore == -1)  echo 'Da Utente eliminato';
+                                else echo "da Moderatore";
+                            ?>
                         </div>
                         <div class="postDate">
                             <?php echo $post->data;?>

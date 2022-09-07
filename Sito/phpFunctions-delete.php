@@ -412,7 +412,31 @@ function deleteComment($idCommento) {
 function eliminaCorsoDiLaurea($idCorsoDiLaurea) {
     if($idCorsoDiLaurea == 0)
         return FALSE;
-    
+    #In caso di eliminazione del cors di laurea dobbiamo eliminare
+    #Faq, Bacheche, Studenti, Corsi, Appelli
+
+    #=================================
+    #====Eliminazione Degi Studenti===
+    #=================================
+    $studenti = getStudenti();
+    foreach($studenti as $studente){
+        if($studente->idCorsoLaurea == $idCorsoDiLaurea)
+            eliminaStudente($studente->matricola);
+    }
+
+    $corsi = getCorsiFromCorsoDiLaurea($idCorsoDiLaurea);
+    foreach($corsi as $corso){  
+        #eliminiamo post e faqs
+        foreach(getListaPost($corso->id) as $post)
+            deletePost($post->id);
+
+        foreach(array_merge(getFaqComplete($corso->id),getFaqIncomplete($corso->id)) as $faq)
+            deleteFaq($faq->id);
+
+        eliminaCorso($corso->id); #Elimazione di corsi e appelli
+    }
+    #Eliminazione del corso di laurea 
+
     $xmlString = "";
     foreach ( file("../Xml/corsiDiLaurea.xml") as $node ) {
         $xmlString .= trim($node);
@@ -639,5 +663,30 @@ function eliminaSegretario($username) {
         return FALSE;
     elseif($result && $eliminato)
         return TRUE;
+}
+
+function eliminaContributiStudente($matricola){
+    $corsoLaurea = getStudenteFromMatricola($matricola)->idCorsoLaurea;
+
+    foreach(getCorsiFromCorsoDiLaurea($corsoLaurea) as $corso){
+        $faqs = array_merge(getFaqComplete($corso->id),getFaqIncomplete($corso->id));
+        $posts = getListaPost($corso->id);
+
+        foreach($faqs as $faq){
+            if($faq->matricolaStudente == $matricola)
+                deleteFaq($faq->id);
+        }
+
+        foreach($posts as $post){
+            if($post->matricolaStudente == $matricola)
+                    deletePost($post->id);
+            else{
+                foreach(getPostComments($post->id) as $commento){
+                    if($commento->matricolaStudente == $matricola)
+                        deleteComment($commento ->id);
+                }
+            }
+        }
+    }
 }
 ?>

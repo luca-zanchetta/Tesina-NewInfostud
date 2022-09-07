@@ -43,9 +43,10 @@ switch ($order) {
         usort($listaPost, fn($a, $b) => $a->utilitaTotale <=> $b->utilitaTotale);
         break;
     case 'dateDesc':
-        $listaPost = array_reverse($listaPost, false);
+        usort($listaPost, fn($a, $b) => $b->data <=> $a->data);
         break;
     case 'dateAsc':    
+        usort($listaPost, fn($a, $b) => $a->data <=> $b->data);
         break;
     default:
         break;  
@@ -295,8 +296,10 @@ $maxPageNum = ((int)(count($listaPost)/5)) + (count($listaPost)%5 > 0 ? 1 : 0);
                                                             <?php
                                                                 if($list[$i]->matricolaStudente > 0){
                                                                     $autore = getStudenteFromMatricola($list[$i]->matricolaStudente);
-                                                                    echo "{$autore->nome} {$autore->cognome}, {$autore->matricola}";
-                                                                }else 
+                                                                    echo "{$autore->nome} {$autore->cognome}, {$autore->matricola} ";
+                                                                }elseif($list[$i]->matricolaStudente == -1)
+                                                                    echo "da Utente eliminato";
+                                                                else
                                                                     echo "da Moderatore";
                                                             ?>
                                                         </h4>       
@@ -343,10 +346,12 @@ $maxPageNum = ((int)(count($listaPost)/5)) + (count($listaPost)%5 > 0 ? 1 : 0);
                                         <div class="postAuthor">
                                             <h4>
                                                 <?php
-                                                    if($list[$i]->matricolaStudente > 0){
-                                                        $autore = getStudenteFromMatricola($list[$i]->matricolaStudente);
-                                                        echo "{$autore->nome} {$autore->cognome}, {$autore->matricola}";
-                                                    }else 
+                                                    if($listaPost[$i]->matricolaStudente > 0){
+                                                        $autore = getStudenteFromMatricola($listaPost[$i]->matricolaStudente);
+                                                        echo "{$autore->nome} {$autore->cognome}, {$autore->matricola} ";
+                                                    }elseif($listaPost[$i]->matricolaStudente == -1)
+                                                        echo "da Utente eliminato";
+                                                    else
                                                         echo "da Moderatore";
                                                 ?>
                                             </h4>       
