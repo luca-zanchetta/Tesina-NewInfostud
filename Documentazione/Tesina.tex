@@ -1835,47 +1835,109 @@ La pagina che si presenterà all'amministratore, mostrata in figura 2.20, è div
 
 \medskip
 
-\subsubsection{Gestire le utenze}	% RIPRENDI
+\subsubsection{Gestire le utenze}	
 
-%intro
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulle voci \emph{Visualizza studenti}, \emph{Visualizza docenti} e \emph{Visualizza segreteria}, tutte reperibili sotto la sezione \emph{Moderazione utenze}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.36, nella quale verranno presentati a schermo i dati relativi rispettivamente a tutti gli studenti, i docenti e i segretari registrati presso la piattaforma. In particolare, la visualizzazione degli studenti può essere ordinata seguendo criteri legati alla matricola, al cognome, al nome e al corso di laurea di appartenenza del singolo studente. La visualizzazione dei docenti, invece, può essere ordinata seguendo criteri legati alla matricola, al cognome e al nome del singolo docente.
+
+%Screen visualizza studenti/docenti/segreteria 2.36
+
+Premendo sul pulsante \emph{gestisci}, presente in ogni singola voce dell'elenco di studenti/docenti/segretari mostrato, l'utente amministratore verrà reindirizzato verso una pagina web contenente tutte le informazioni possibili relative all'utenza appena selezionata. Un esempio di tale pagina web è riportato in figura 2.37: come si può notare dalla figura, oltre alle informazioni caratterizzanti l'utenza selezionata, sono presenti tre bottoni: \emph{modifica}, \emph{sospendi} ed \emph{elimina}, rispettivamente per permettere all'amministratore di modificare, sospendere od eliminare l'utenza cui si sta facendo correntemente riferimento.
+
+%Screen gestione utenza 2.37
+
+\medskip
 
 \subsubsection{Modificare un'utenza}
+
+A partire dalla pagina di gestione dell'utenza, riportata in figura 2.37, premendo sul pulsante \emph{modifica}, l'utente amministratore verrà reindirizzato verso un'opportuna form di modifica dei dati dell'utenza, che naturalmente varia dinamicamente in base al tipo di utenza selezionata e in base alle reali necessità di modifica. Come mostra la figura 2.38, la form di modifica dell'utenza viene mostrata pre-compilata con i dati attuali dell'utenza selezionata, a meno del campo \emph{password}. Qualora il campo password restasse vuoto, la password dell'utenza rimarrebbe invariata; qualora, invece, l'amministratore desiderasse modificare la password dell'utenza (ad esempio, in seguito ad una richiesta esplicita di recupero/modifica password da parte dell'utenza stessa - non entriamo nel dettaglio delle conversazioni private fra utente e amministratore...), basterebbe compilare a piacimento il relativo campo testuale. Gli autori precisano che tale soluzione di modifica della password si è rivelata necessaria poiché, data la non reversibilità dell'algoritmo di cifratura MD5 utilizzato nella crittografia delle password, risulta di fatto impossibile recuperare la reale password dell'utente, per poterla mostrare in chiaro all'amministratore.
+
+%Screen modifica utenza 2.38
+
+Eventuali errori nella modifica dell'utenza, ad esempio dovuti alla modifica della matricola di uno studente o di un docente o allo username di un segretario (che devono essere univoci!), verranno prontamente segnalati all'utente amministratore, il quale, per poter effettuare la modifica desiderata, dovrà modificare l'inserimento dei dati che hanno generato l'errore.
 
 \medskip
 
 \subsubsection{Sospendere o riabilitare un'utenza}
 
+Supponiamo che l'utenza selezionata sia un'utenza abilitata al pieno utilizzo di tutte le funzionalità messe a disposizione della piattaforma. A partire dalla pagina di gestione dell'utenza, riportata in figura 2.37, premendo sul pulsante \emph{sospendi}, l'utente amministratore scatenerà un processo di sospensione dell'utenza descritto nei dettagli nel capitolo 3 della presente. 
+
+La sospensione di un'utenza può avvenire per svariate ragioni, sostanzialmente a discrezione dell'utente amministratore: pigiando sull'opportuno pulsante, l'utente precedentemente selezionato risulterà sospeso, e il pulsante \emph{sospendi} viene sostituito dal pulsante \emph{riabilita}, come mostrato in figura 2.39.
+
+%Screen utente sospeso 2.39
+
+\emph{Cosa vuol dire sospendere un'utenza?} Ricordiamo al lettore (\emph{cfr. specifiche nel capitolo 1}) che un utente sospeso (sia esso uno studente, un docente od un segretario) non è abilitato ad accedere alle funzionalità extra messe a disposizione dalla piattaforma, ossia l'accesso alle bacheche e alle sezioni delle FAQ, in qualsivoglia loro aspetto e forma. D'altro canto, un utente riabilitato in seguito ad una sospensione ottiene nuovamente il pieno diritto e la piena libertà di accesso alle appena citate funzionalità offerte dalla piattaforma.
+
 \medskip
 
 \subsubsection{Eliminare un'utenza}
+
+A partire dalla pagina di gestione dell'utenza, riportata in figura 2.37, premendo sul pulsante \emph{elimina}, l'utente amministratore scatenerà, dopo opportuna conferma delle proprie intenzioni, un processo di eliminazione dell'utenza precedentemente selezionata, con tutti gli aspetti ad essa relativi. Ad esempio, nel caso dell'eliminazione di uno studente, saranno eliminate anche tutte le informazioni relative alla propria carriera universitaria, così come tutti i suoi dati anagrafici. Tuttavia, a meno che non venga eliminato il relativo corso dalla piattaforma, rimarranno i contributi che lo studente appena eliminato ha apportato nelle bacheche e nelle sezioni FAQ; questi contributi saranno soltanto contrassegnati dall'autore \emph{utente eliminato}, in modo tale che possano continuare ad essere fruibili dalle altre utenze. Un discorso dualmente analogo vale per il caso dell'eliminazione di un docente e di un segretario.
 
 \medskip
 
 \subsection{Inserire un corso di laurea}
 
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Inserisci corso di laurea}, sotto la sezione \emph{Altre funzionalità}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.40, nella quale verrà presentata a schermo una form di inserimento di un nuovo corso di laurea. Sostanzialmente, essendo il corso di laurea caratterizzato unicamente da un nome, l'inserimento di un corso di laurea si riduce all'inserimento del suo nome, che deve essere univoco all'interno della piattaforma.
+
+%Screen inserisci corso di laurea 2.40
+
 \medskip
 
 \subsection{Gestire i corsi di laurea}
 
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Gestisci corsi di laurea}, sotto la sezione \emph{Altre funzionalità}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.41, nella quale verranno presentati a schermo tutti i corsi di laurea registrati all'interno della piattaforma.
+
+%Screen gestisci corsi di laurea 2.41
+
+Ogni corso di laurea viene presentato in un box contenente il nome del corso di laurea stesso, e due pulsanti: \emph{modifica} ed \emph{elimina}, esattamente come avviene per la visualizzazione degli appelli. Da qui il lettore potrà facilmente intuire le operazioni applicabili al singolo corso di laurea, che verranno in ogni caso approfondite a breve.
+
+\medskip 
+
 \subsubsection{Modificare un corso di laurea}
+
+A partire dalla pagina di gestione dei corsi di laurea, mostrata in figura 2.41, interagendo con il pulsante \emph{modifica}, l'utente amministratore verrà reindirizzato ad una form di modifica del corso di laurea, come mostrato in figura 2.42. La form verrà visualizzata già pre-compilata con i dati del corso di laurea selezionato; l'utente amministratore potrà dunque cambiare il nome del corso di laurea, a patto che questo non sia già presente all'interno dell'insieme dei dati caratterizzanti la piattaforma.
+
+%Screen modifica corso di laurea 2.42
 
 \medskip
 
 \subsubsection{Eliminare un corso di laurea}
 
+A partire dalla pagina di gestione dei corsi di laurea, mostrata in figura 2.41, interagendo con il pulsante \emph{elimina}, l'utente amministratore scatenerà, dopo opportuna conferma delle proprie intenzioni, un meccanismo di eliminazione del corso di laurea selezionato. Tale meccanismo di eliminazione risulta essere particolarmente delicato: eliminando un corso di laurea, infatti, si sceglie indirettamente di eliminare i dati relativi a tutti i corsi, tutti gli appelli, tutte le bacheche, tutte le sezioni FAQ, tutte le carriere universitarie e tutti gli studenti ad esso relativi. L'utente amministratore, seppur ''onnipotente'' nei confini entro i quali si sviluppa la piattaforma, dovrebbe porre particolare attenzione in questa delicata funzionalità.
+
 \medskip
 
 \subsection{Inserire un corso}
+
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Inserisci corso}, sotto la sezione \emph{Altre funzionalità}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.43, nella quale verrà presentata a schermo una form di inserimento di un nuovo corso. Un corso è caratterizzato da un nome, che deve essere univoco entro i limiti di presenza all'interno del corso di laurea cui fa riferimento, da un docente, da un co-docente (opzionale), dall'anno di corso in cui viene erogato, dal semestre in cui viene erogato, dal curriculum cui fa riferimento, dai CFU offerti allo studente dopo il superamento dell'esame che lo caratterizza, da un codice SSD, dal corso di laurea cui fa riferimento e, immancabilmente, da una descrizione che ne permette la fruizione di obiettivi e informazioni.
+
+%Screen inserisci corso 2.43
+
+Specificate tutte queste informazioni, sarà sufficiente premere sul pulsante \emph{invio} per concludere l'operazione di inserimento del corso.
 
 \medskip
 
 \subsection{Gestire i corsi}
 
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Gestisci corsi}, sotto la sezione \emph{Altre funzionalità}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.44, nella quale verranno presentati a schermo tutti i corsi relativi a tutti i corsi di laurea registrati all'interno della piattaforma.
+
+%Screen gestisci corsi 2.44
+
+Ogni corso viene presentato in un box contenente il nome del corso stesso, e due pulsanti: \emph{modifica} ed \emph{elimina}, esattamente come avviene per la visualizzazione degli appelli e dei corsi di laurea. Da qui il lettore potrà facilmente intuire le operazioni applicabili al singolo corso, che verranno in ogni caso approfondite a breve.
+
+\medskip 
+
 \subsubsection{Modificare un corso}
+
+A partire dalla pagina di gestione dei corsi, mostrata in figura 2.44, interagendo con il pulsante \emph{modifica}, l'utente amministratore verrà reindirizzato ad una form di modifica del corso selezionato, come mostrato in figura 2.45. La form verrà visualizzata già pre-compilata con i dati del corso selezionato; l'utente amministratore potrà dunque cambiare i dati a proprio piacimento, a patto che il nome del corso resti univoco all'interno dell'insieme dei corsi relativi al corso di laurea specificato nella form.
+
+%Screen modifica corso 2.45
 
 \medskip
 
-\subsubsection{Eliminare un corso}
+\subsubsection{Eliminare un corso di laurea}
+
+A partire dalla pagina di gesione dei corsi, mostrata in figura 2.44, interagendo con il pulsante \emph{elimina}, l'utente amministratore scatenerà, dopo opportuna conferma delle proprie intenzioni, un meccanismo di eliminazione del corso selezionato. L'utente amministratore dovrebbe tenere conto del fatto che eliminando un corso, si sceglie indirettamente di eliminare i dati relativi a tutti gli appelli, tutte le bacheche, tutte le sezioni FAQ e tutte le prenotazioni ad esso relativi. Egli, dunque, seppur ''onnipotente'' nei confini entro i quali si sviluppa la piattaforma, dovrebbe porre particolare attenzione in questa delicata funzionalità.
 
 \medskip
 \medskip
