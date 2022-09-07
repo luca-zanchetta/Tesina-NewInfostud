@@ -155,7 +155,7 @@ if(isset($_POST['invio'])) {
                     <?php
                     echo "<input class=\"textField\" type=\"text\" name=\"nome\" value=\"{$corso->nome}\" required>";
                     ?>
-                    <select class="choice" name="docente" onfocus='this.size=3; this.style="width: 95%;";' onblur='this.size=1; this.style="width: 68%;";' onchange='this.size=1; this.blur(); this.style="width: 68%;";'>
+                    <select class="choice" name="docente" onfocus='this.size=3; this.style="width: 95%;";' onblur='this.size=1; this.style="width: 82%;";' onchange='this.size=1; this.blur(); this.style="width: 82%;";'>
                         <?php
                             $docente = getDocenteFromMatricola($corso->matricolaDocente);
                             echo "<option value=\"{$docente->matricola}\">{$docente->nome} {$docente->cognome}</option>";
@@ -167,7 +167,7 @@ if(isset($_POST['invio'])) {
                             }
                         ?>
                     </select>
-                    <select class="choice" name="codocente" onfocus='this.size=3; this.style="width: 95%;";' onblur='this.size=1; this.style="width: 68%;";' onchange='this.size=1; this.blur(); this.style="width: 68%;";'>
+                    <select class="choice" name="codocente" onfocus='this.size=3; this.style="width: 95%;";' onblur='this.size=1; this.style="width: 82%;";' onchange='this.size=1; this.blur(); this.style="width: 82%;";'>
                         <?php
                             if($corso->matricolaCoDocente == 0)
                                 echo "<option value=\"0\">Nessuno</option>";
@@ -215,7 +215,7 @@ if(isset($_POST['invio'])) {
                     <?php
                     echo "<input class=\"textField\" type=\"text\" name=\"ssd\" value=\"{$corso->ssd}\" required>";
                     ?>
-                    <select class="choice" name="corsoLaurea" onfocus='this.size=3; this.style="width: 95%;";' onblur='this.size=1; this.style="width: 68%;";' onchange='this.size=1; this.blur(); this.style="width: 68%;";'>
+                    <select class="choice" name="corsoLaurea" onfocus='this.size=3; this.style="width: 95%; overflow-x: auto;";' onblur='this.size=1; this.style="width: 80%;";' onchange='this.size=1; this.blur(); this.style="width: 80%;";'>
                         <?php
                             $nomeCDL = getNomeCorsoDiLaureaByID($corso->idCorsoLaurea);
                             echo "<option value=\"{$corso->idCorsoLaurea}\">{$nomeCDL}</option>";
