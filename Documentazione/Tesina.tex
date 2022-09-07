@@ -1410,41 +1410,98 @@ L'elemento in questione, presente nel file \emph{prenotazione.xml} \hyperref[sec
 
 \section{Studente}
 
+In questa sezione analizziamo e descriviamo tutte le funzionalità accessibili ad un'utenza di tipo \emph{studente}. Daremo quindi per scontato che l'utilizzatore della piattaforma abbia eseguito l'accesso tramite l'apposita funzionalità di login sopra descritta.
+
+Prima di entrare approfondire le varie funzionalità, analizziamo la schermata che si presenterà all'utente dopo aver fatto accesso alla piattaforma, ma più in particolare, il menu laterale che si presenterà all'utente.
+
+foto del menu a tendina
+
+Tramite il suddetto menu è possibile accedere ad tutte le funzionalità riservate a questo tipo di utenza. Analizzeremo queste ultime nelle sezioni che seguono.
+
+
 \subsection{Visualizzare l'anagrafica}
 
+Usufruibile dalla prima pagina che si presenta un volta effettuato il login, la funzionalità di visualizzazione dell'anagrafica consiste nella stampa a video di tutte le informazioni personali associate all'utenza. Tra di esse, come possiamo osservare nell'immagine sottostante troviamo: Nome, Cognome, Matricola, Data di nascita e password.
+
+Screen visualizza anagrafica 
+
+Inoltre tramite apposito bottone, posto affianco della voce password è possibile accedere alla funzionalità di modifica della password fruibile dall'apposita pagina.
+
+Screen modifica password
 \medskip
 
 \subsection{Visualizzare la carriera}
 
+Questa funzionalità, utilizzabile dall'apposita pagina raggiungibile dal menu a tendina, consiste nella visualizzazione di tutte le informazioni legate alla carriera di uno studente. Come si può osservare nell'immagine sottostante, esse sono: Corso di laurea, reputazione totale, CFU totali e media dei voti.
+Screen visualizza Carriera
 \medskip
 
 \subsection{Visualizzare gli appelli prenotati}
 
+Prima funzionalità appartenente alla sezione \emph{esami}, essa consiste nella visualizzazione di tutti gli appelli prenotati dallo studente attualmente loggato. L'utente può in ogni momento annullare una prenotazione interagendo con l'apposito bottone.
+Screen appelli prenotati
 \medskip
 
 \subsection{Visualizzare gli esami sostenuti}
 
+Questa funzionalità consiste nella visualizzazione di tutti gli esami sostenuti da uno studente. In particolare, per ogni esame, possiamo vedere sia la data durante il quale è stato sostenuto sia l'esito.
+Per quanto riguarda quest'ultima informazione viene usata una convenzione letterale per visualizzare eventuali fallimenti. (\emph{B per identificare una bocciatura, R per identificare un ritiro})
+
+screen visualizza esami sostenuti 
 \medskip
 
 \subsection{Prenotare gli appelli}
+
+Questa funzionalità consiste nella prenotazione degli appelli dei corsi inerenti al corso di laurea a cui appartiene lo studente.
+L'utente può accedere a questa funzionalità tramite un'apposita pagina che visualizza tutti gli appelli che possono essere prenotati in quel momento. In particolare, verranno visualizzati tutti gli appelli che non sono stati prenotati e che non appartengono ad un esame cui esiste una verbalizzazione con esito positivo nel sistema.
+Interagendo con il blocco dell'esame l'utente potrà prenotarsi all'appello di suo interesse. 
+
+Inoltre, la navigazione di questa pagina è facilità dalla presenza di una barra di ricerca che permette di filtrare i contenuti specificando il nome di un corso.
+
+Screen prenota appelli
 
 \medskip
 
 \subsection{Accedere alle bacheche}
 
-%intro
+La fruizione delle bacheche è un'importante funzionalità offerta dalla piattaforma e si compone di diversi strumenti messi a disposizione allo studente.
+Innanzitutto, interagendo con l'apposita voce nel menu a tendina, raggiungiamo una prima pagina che elenca tutti i corsi appartenenti al nostro corso di laurea.
+
+Screen 1 - lista dei corsi
+
+Ciascuna voce rappresenta la bacheca dei singoli corsi. Interagendo con una di questo voci raggiungiamo la pagina mostra nell'area sottostante.
+
+Screen 2 - visualizzazione della bacheca.
+
+La pagina in questione rappresenta una singola bacheca associata ad un determinato corso. Essa consiste di un menu di navigazione in alto che consente di attraversare le diverse pagine di una bacheca(\emph{facciamo notare che il numero di post che possono essere visualizzati per pagina è pari a 5}). Sempre in alto, allo stesso livello del menù di navigazione, è presente un bottone che  attiva o disattiva una form, che apparirà sopra l'elenco dei post(\emph{Si veda l'immagine che segue}). Tramite questa form è possibile pubblicare un nuovo al post all'interno della bacheca.
+
+Screen 3 -Immagine form crea post
+
+Continuando l'analisi della pagina raggiungiamo il blocco centrale. In esso troviamo l'elenco vero e proprio dei post. In cima alla lista è presente una barra che ci permette di applicare alcuni filtri di visualizzazione, tra i quali troviamo ordinamento sull'utilità, sulle risposte e sulla data. Inoltre, in ogni bacheca vengono sempre messi in sovraimpressione i due post che hanno ricevuto più voti utilità, e vengono separati dall'elenco tramite una barra celeste. Interagendo con una voce dell'elenco si raggiunge una pagina che visualizza il post scelto, la cui descrizione è contenuto nella sezione successiva.
 
 \subsubsection{Interagire con i post}
 
+L'interazione con il post avviene in un'apposita pagina di visualizzazione del contenuto di quest'ultimo. Analizzando la schermata dall'alto (Si faccia riferimento alla figura), troviamo innanzitutto l'intestazione del post, che si compone di un coppia di frecce, utilizzate per votare l'utilità del post, e da un blocco contente autore e contenuto di quest'ultimo. 
+Qualora l'utenza attualmente in uso fosse anche l'autore del post, nell'angolo in basso a destra verrebbero visualizzati due icone che permettono rispettivamente di eliminare il post e modificarne il contenuto.
+
+A seguire, in colonna verranno visualizzati tutti i commenti pubblicati in risposta al post, fino ad un massimo di cinque per pagina. Qualora il numero di commenti superasse questo limite è sempre possibile interagire con la barra di navigazione contenuta tra il blocco post e la lista dei commenti, per attraversare le diverse pagine. 
+Ad un commento associamo due importanti funzionalità, quella di modifica/eliminazione, che si comporta in maniera analoga a quella dei post. In particolare, l'autore di un commento visualizzerà, in un angolo, i pulsanti necessari per esercitare queste due funzionalità.
+La seconda funzione che abbiamo citato è quella di voto. Specificatamente, un utente, che non sia l'autore di un determinato commento, interagendo con la scritta \emph{il tuo voto} locata nell'angolo in alto a destra di blocco commento, attiverà un sistema di voto, graficamente rappresentato da 5 stelle. La scelta di un di queste ultime provocherà l'inoltro del voto.
+
+Infine, ai piedi della pagina, troviamo una forma nominata \emph{contribuisci al post}, che permette all'utente di pubblicare un commento sotto il post che si sta visualizzando in quel momento.
 \medskip
 
 \subsection{Accedere alle FAQ}
 
-%intro
+Il sistema delle faq permette agli studenti di interagire con i docenti proponendo delle domande in appositi box, o di votare quelle già presenti. Saranno poi i docenti a scegliere a quali domande rispondere e quali eventualmente eliminare. Prendiamo in studio ora il funzionamento di questo servizio dal punto di vista di uno studente.
 
-\subsubsection{Interagire con le FAQ}
+Come abbiamo già citato un studente può o votare o pubblicare nuovo domande. Per fare ciò, innanzitutto deve raggiungere la pagina faq relativa ad un corso di suo interesse. Interagendo con il menu a tendina e successivamente scegliendo il corso interessato si raggiunge la pagina faq specifica del corso selezionato.
 
-\medskip
+Screen scelta del corso
+
+La pagina che si presenterà allo studente è divisa in 3 aree. In cima troviamo un box di domande, che come dice il nome, rappresenta il contenitore di tutte quelle domande che hanno ricevuto una risposta. Il secondo blocco rappresenta invece il container delle domande ancora incomplete, in attesa che il docente pubblichi una risposta. Per una qualsiasi domanda, è possibile interagire con la coppia di frecce, poste alla sinistra del testo, per esprimere un voto riguardante il contenuto.
+
+Infine, in fondo alla pagina troviamo una form che consente all'utente di contribuire alla faq, permettendogli di pubblicare una nuova domanda. 
 \medskip
 
 \section{Docente}
