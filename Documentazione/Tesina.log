@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.9.28)  8 SEP 2022 10:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.6)  8 SEP 2022 18:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -889,47 +889,44 @@ Overfull \hbox (73.62335pt too wide) in paragraph at lines 2119--2120
 
 [83 <./figura2-44.PNG>] [84 <./figura2-45.PNG>]
 Capitolo 3.
+[85
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [85
+] [86] [87] [88] [89] [90] [91] [92] [93] [94] [95] [96] [97] [98] [99]
+[100] [101] [102] [103] [104] [105] [106] [107]
+(c:/texlive/2020/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+)
+(c:/texlive/2020/texmf-dist/tex/latex/listings/lstlang2.sty
+File: lstlang2.sty 2020/03/24 1.8d listings language file
+) [108] [109]
+[110] [111] [112] [113] [114] [115] [116] [117] [118
 
 ]
-[86]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [87]
-Overfull \vbox (1153.02034pt too high) has occurred while \output is active []
-
-
-[88]
 Capitolo 4.
 
-Overfull \hbox (112.3993pt too wide) in paragraph at lines 2481--2518
+Overfull \hbox (112.3993pt too wide) in paragraph at lines 3153--3190
 [][] 
  []
 
-[89
-
-]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2597.
- [90]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2597.
+[119]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3269.
+ [120]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3269.
  (./Tesina.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2597.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2597.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3269.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3269.
 
 Package rerunfilecheck Info: File `Tesina.out' has not changed.
 (rerunfilecheck)             Checksum: B2C21A56C57B753A10026B8C559474DC;4417.
  ) 
 Here is how much of TeX's memory you used:
- 9953 strings out of 480608
- 142942 string characters out of 5907536
- 776972 words of memory out of 5000000
- 24721 multiletter control sequences out of 15000+600000
+ 12126 strings out of 480608
+ 180522 string characters out of 5907536
+ 882802 words of memory out of 5000000
+ 26609 multiletter control sequences out of 15000+600000
  549628 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,7n,53p,1605b,1890s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,7n,53p,1605b,2990s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{c:/texl
 ive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<c:/texlive/2020/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2020/texmf-dis
@@ -945,10 +942,10 @@ e1/public/cm-super/sfrm1728.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/
 cm-super/sfsl1095.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/cm-super/s
 fti1095.pfb><c:/texlive/2020/texmf-dist/fonts/type1/public/cm-super/sftt0900.pf
 b>
-Output written on Tesina.pdf (90 pages, 6262290 bytes).
+Output written on Tesina.pdf (120 pages, 6354389 bytes).
 PDF statistics:
- 1853 PDF objects out of 2073 (max. 8388607)
- 1640 compressed objects within 17 object streams
- 928 named destinations out of 1000 (max. 500000)
+ 2289 PDF objects out of 2487 (max. 8388607)
+ 2042 compressed objects within 21 object streams
+ 1208 named destinations out of 1440 (max. 500000)
  722 words of extra memory for PDF output out of 10000 (max. 10000000)
 

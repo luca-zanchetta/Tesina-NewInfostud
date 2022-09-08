@@ -2145,13 +2145,21 @@ Come abbiamo già accennato nell'introduzione, questa sezione sarà dedicata a t
 
 \subsubsection{avvisoCorrispondenze.php}
 
+Questo script realizza una pagina web contenente un avviso che verrà mostrato all'utente qualora si realizzassero delle corrispondenze fra appelli, nell'inserimento o nella modifica degli stessi. La pagina web in questione andrà a chiedere all'utente se, nonostante le corrispondenze avvenute (che vengono mostrate nella parte inferiore della pagina stessa), l'intenzione resta comunque quella di inserire/modificare l'appello che ha generato le corrispondenze in questione. Qualora l'utente rispondesse in modo affermativo, l'inserimento/modifica verrà effettuato/a senza ulteriori indugi; altrimenti, l'utente verrà reindirizzato presso la pagina web di inserimento/modifica dell'appello.
+
+La presenza di eventuali corrispondenze viene calcolata eseguendo la procedura di controllo denominata \emph{verificaProssimità}, disponibile nell'apposito file \emph{phpFunctions-misc.php}.
+
 \medskip
 
 \subsubsection{avvisoErrore.php}
 
+Questo script realizza una pagina web contenente un avviso di errore che verrà mostrato all'utente nelle condizioni opportune, ad esempio nei casi in cui dovessero esserci problemi nell'inserimento di un'entità, nella modifica o nella cancellazione della stessa, e in altre molteplici circostanze. Ogni circostanza viene opportunamente gestita attraverso il set di un cookie contenente il messaggio di errore da mostrare all'utente; una volta mostrato il messaggio, il cookie verrà eliminato dal browser dell'utente. La pagina web, in ultimo, consente all'utente di tornare alla propria homepage, sia essa la homepage di un'utenza autenticata oppure no.
+
 \medskip
 
 \subsubsection{avvisoOK.php}
+
+Questo script realizza una pagina web contenente un avviso di successo che verrà mostrato all'utente nelle condizioni opportune, ad esempio nei casi di inserimento, modifica o cancellazione di un'entità avvenuta in maniera corretta. Nel particolare caso in cui questo script venga chiamato in seguito alla registrazione di uno studente o di un docente presso la piattaforma, verrà stampata anche la matricola generata automaticamente dal sistema, a scopo informativo; il dato viene passato allo script tramite il set di un cookie, come esplicato in precedenza.
 
 \medskip
 
@@ -2183,283 +2191,947 @@ La pagina è inoltre dotata di una barra di ricerca, realizzata come form rimand
 
 \subsubsection{gestioneUtenza.php}
 
+Questo script realizza una pagina web nella quale verrà mostrato un elenco di tutte le informazioni relative ad una certa utenza precedentemente selezionata da un utente amministratore; la visualizzazione dell'elenco suddetto è resa possibile grazie alle opportune funzioni \emph{displayFullStudente}, \emph{displayFullDocente} e \emph{displayFullSegretario}, contenute nell'insieme di funzioni denominato \emph{phpFunctions-display.php}: tali funzioni php raccolgono tutte le informazioni relative all'utenza e le presentano all'utente tramite una echo.
+
+La pagina permette inoltre di reindirizzare l'amministratore verso la modifica dell'utenza selezionata, oppure permette all'amministratore la sospensione, la riabilitazione o l'eliminazione della stessa. L'esecuzione di queste funzionalità può avvenire grazie al passaggio di opportune informazioni attraverso dei campi hidden, passati in POST.
+
+Una nota degna di merito è la seguente: qualora l'amministratore avesse intenzione di proseguire verso l'eliminazione dell'utenza, verrà mostrato a schermo un popup realizzato in Javascript, richiedente conferma delle proprie intenzioni: l'eliminazione, infatti, dovrebbe essere trattata con accortezza.
+
 \medskip
 
 \subsubsection{gestioneCorsi.php}
+
+Questo script realizza una pagina web nella quale verrà mostrato un elenco di tutti i corsi correntemente registrati presso la piattaforma; la visualizzazione dell'elenco suddetto è resa possibile grazie alle opportune funzioni \emph{displayCorsi} e \emph{displayCorsiLike} (nel caso di visualizzazione con filtro di ricerca), contenute nell'insieme di funzioni denominato \emph{phpFunctions-display.php}: tali funzioni php raccolgono le informazioni relative ai corsi registrati e le presentano all'utente tramite una echo in dei riquadri azzurri. L'effetto è realizzato tramite alcune regole di stile contenute principalmente nel file \emph{stile-base.css}, descritto in seguito.
+
+La pagina permette inoltre di reindirizzare l'amministratore verso la modifica o l'eliminazione di un particolare corso selezionato; l'esecuzione di queste funzionalità può avvenire grazie al passaggio di opportune informazioni attraverso dei campi hidden, passati in POST.
+
+Una nota degna di merito è la seguente: qualora l'amministratore avesse intenzione di proseguire verso l'eliminazione di un corso, verrà mostrato a schermo un popup realizzato in Javascript, richiedente conferma delle proprie intenzioni: l'eliminazione, infatti, dovrebbe essere trattata con accortezza.
 
 \medskip
 
 \subsubsection{gestioneCorsiDiLaurea.php}
 
+Questo script realizza una pagina web nella quale verrà mostrato un elenco di tutti i corsi di laurea correntemente registrati presso la piattaforma; la visualizzazione dell'elenco suddetto è resa possibile grazie alle opportune funzioni \emph{displayCorsiDiLaurea} e \emph{displayCorsiDiLaureaLike} (nel caso di visualizzazione con filtro di ricerca), contenute nell'insieme di funzioni denominato \emph{phpFunctions-display.php}: tali funzioni php raccolgono le informazioni relative ai corsi di laurea registrati e le presentano all'utente tramite una echo in dei riquadri azzurri. L'effetto è realizzato tramite alcune regole di stile contenute principalmente nel file \emph{stile-base.css}, descritto in seguito.
+
+La pagina permette inoltre di reindirizzare l'amministratore verso la modifica o l'eliminazione di un particolare corso di laurea selezionato; l'esecuzione di queste funzionalità può avvenire grazie al passaggio di opportune informazioni attraverso dei campi hidden, passati in POST.
+
+Una nota degna di merito è la seguente: qualora l'amministratore avesse intenzione di proseguire verso l'eliminazione di un corso, verrà mostrato a schermo un popup realizzato in Javascript, richiedente conferma delle proprie intenzioni: l'eliminazione, infatti, dovrebbe essere trattata con accortezza.
+
 \medskip
 
 \subsubsection{homepage-bacheca.php}
+
+Questo script realizza una pagina web nella quale, dipendentemente dall'utenza autenticata, verrà mostrato un elenco di tutti i corsi aventi una sezione bacheca; la visualizzazione dell'elenco suddetto è resa possibile grazie ad un ciclo sui vari corsi da visualizzare, che vengono determinati dalla funzione \emph{getCorsi}, nel caso in cui fosse autenticata un'utenza amministrativa, o dalla funzione \emph{getCorsiFromCorsoDiLaurea}, nel caso in cui fosse autenticato uno studente iscritto ad un corso di laurea. Entrambe le funzioni sono contenute nell'insieme di funzioni denominato \emph{phpFunctions-get.php}. L'effetto di visualizzazione dei corsi suddetti è realizzato tramite alcune regole di stile contenute nel file \emph{stileVisualizzazioneLista.css}, descritto in seguito.
+
+La pagina permette inoltre di reindirizzare l'utente verso la bacheca del singolo corso selezionato, grazie al passaggio di opportune informazioni attraverso dei campi hidden, passati in POST. Una nota degna di merito è la seguente: qualora l'utenza autenticata fosse stata sospesa da un'utenza amministrativa, lo script impedirà l'accesso alla visualizzazione dei corsi sopra esplicata, e verrà mostrato a schermo un popup realizzato in Javascript indicante l'impossibilità di accedere a tale sezione della piattaforma. Il controllo sulla sospensione viene realizzato tramite un controllo sulla flag di stato dell'utenza autenticata, non appena essa dovesse venire reindirizzata al presente script.
 
 \medskip
 
 
 \subsubsection{homepage-faq.php}
 
+Questo script realizza una pagina web nella quale, dipendentemente dall'utenza autenticata, verrà mostrato un elenco di tutti i corsi aventi una sezione FAQ; la visualizzazione dell'elenco suddetto è resa possibile grazie ad un ciclo sui vari corsi da visualizzare, che vengono determinati dalla funzione \emph{getCorsi}, nel caso in cui fosse autenticata un'utenza amministrativa, o dalla funzione \emph{getCorsiFromCorsoDiLaurea}, nel caso in cui fosse autenticato uno studente iscritto ad un corso di laurea. Entrambe le funzioni sono contenute nell'insieme di funzioni denominato \emph{phpFunctions-get.php}. L'effetto di visualizzazione dei corsi suddetti è realizzato tramite alcune regole di stile contenute nel file \emph{stileVisualizzazioneLista.css}, descritto in seguito.
+
+La pagina permette inoltre di reindirizzare l'utente verso la sezione FAQ del singolo corso selezionato, grazie al passaggio di opportune informazioni attraverso dei campi hidden, passati in POST. Una nota degna di merito è la seguente: qualora l'utenza autenticata fosse stata sospesa da un'utenza amministrativa, lo script impedirà l'accesso alla visualizzazione dei corsi sopra esplicata, e verrà mostrato a schermo un popup realizzato in Javascript indicante l'impossibilità di accedere a tale sezione della piattaforma. Il controllo sulla sospensione viene realizzato tramite un controllo sulla flag di stato dell'utenza autenticata, non appena essa dovesse venire reindirizzata al presente script.
+
 \medskip
 
 \subsubsection{homepage-users-appelliPrenotati.php}
+
+Questo script realizza una pagina web nella quale verrà mostrato un elenco di tutte le prenotazioni relative agli appelli effettuate dallo studente autenticato nella sessione corrente; la visualizzazione dell'elenco suddetto è resa possibile grazie ad un ciclo sulle varie prenotazioni da visualizzare, che vengono determinate dalla funzione \emph{getPrenotazioniStudente}. Per ogni prenotazione trovata, viene determinato l'appello di afferenza e il relativo corso di riferimento, grazie alle due funzioni \emph{getAppelloFromId} e \emph{getCorsoById}; la singola voce sarà costituita dal nome del corso, dalla data dell'appello e da un pulsante di annullamento della prenotazione. Le funzioni citate sono contenute nell'insieme di funzioni denominato \emph{phpFunctions-get.php}. L'effetto di visualizzazione dei corsi suddetti è realizzato tramite alcune regole di stile contenute nel file \emph{stileVisualizzazioneLista.css}, descritto in seguito.
+
+La pagina permette, come già citato, di annullare in qualsiasi momento una prenotazione effettuata; ciò è viene reso possibile dall'esecuzione dello script \emph{eliminaPrenotazioneAppello-script.php}, descritto in seguito, al quale viene passata l'informazione circa l'id della prenotazione da eliminare attraverso un campo hidden, passato in POST.
 
 \medskip
 
 \subsubsection{homepage-users-Carriera.php}
 
+Questo script realizza una pagina web accessibile dalla sola utenza \emph{studente}, nella quale verrà mostrato un elenco di tutte le informazioni relative alla carriera universitaria dello studente autenticato nella sessione corrente; la visualizzazione dell'elenco suddetto è resa possibile grazie all'opportuna funzione \emph{displayCarrieraStudente}, contenuta nell'insieme di funzioni denominato \emph{phpFunctions-display.php}: tale funzione php raccoglie le informazioni relative alla carriera universitaria dello studente ricevuto come parametro, e le presenta all'utente tramite una echo.
+
+Più in dettaglio, verranno presentate all'utente le seguenti informazioni: corso di laurea di riferimento, reputazione totale, numero totale dei CFU acquisiti e media dei voti relativi agli esami sostenuti.
+
 \medskip
 
 \subsubsection{homepage-users-esamiSostenuti.php}
+
+Questo script realizza una pagina web accessibile dalla sola utenza \emph{studente}, nella quale verrà mostrato un elenco di tutte le informazioni relative agli esami sostenuti dallo studente autenticato nella sessione corrente; la visualizzazione dell'elenco suddetto è resa possibile grazie all'esecuzione di un ciclo su una lista di esami sostenuti dallo studente, ottenibile mediante l'esecuzione della funzione \emph{getEsamiSostenuti}. Per ogni esame sostenuto contenuto in questa lista, si ottengono informazioni relative all'appello di riferimento (tramite la funzione \emph{getAppelloFromId}), al relativo corso (tramite la funzione \emph{getCorsoById}) e alla data in cui lo studente ha svolto l'esame. Le funzioni appena citate sono tutte contenute nell'insieme di funzioni denominato \emph{phpFunctions-get.php}. L'effetto di visualizzazione dei suddetti esami sostenuti è realizzato tramite alcune regole di stile contenute nel file \emph{stileVisualizzazioneLista.css}, descritto in seguito.
+
+Più in dettaglio, verranno presentate all'utente le seguenti informazioni: nome del corso del quale si è sostenuto l'esame, data di svolgimento dell'esame ed esito complessivo (verbalizzato) dell'esame stesso.
 
 \medskip
 
 \subsubsection{homapage-users-prenotaAppello.php}
 
+Questo script realizza una pagina web accessibile unicamente da parte dell'utenza \emph{studente}, nella quale verrà mostrato un elenco di tutti gli appelli prenotabili da parte dello studente autenticato nella sessione corrente; la visualizzazione dell'elenco suddetto è resa possibile grazie alla funzione \emph{displayAppelliPrenotabili}, contenuta nell'insieme di funzioni denominato \emph{phpFunctions-display.php}: tale funzione php raccoglie le informazioni relative agli appelli prenotabili da parte dello studente autenticato nella sessione corrente, e le presenta all'utente tramite una echo in dei riquadri azzurri. L'effetto è realizzato tramite alcune regole di stile contenute principalmente nel file \emph{stile-base.css}, descritto in seguito.
+
+Per \emph{appello prenotabile} si intende un appello non ancora prenotato, relativo ad un corso del quale non si sia ancora sostenuto un esame che abbia avuto esito positivo. La pagina permette, tramite un opportuno pulsante \emph{prenota} sito all'interno del singolo riquadro azzurro dell'appello di interesse, di rendere possibile allo studente la prenotazione di un qualsiasi appello fra quelli mostrati: interagendo con tale pulsante, infatti, verrà eseguito lo script \emph{prenotaAppello-script.php}, al quale, per poter completare l'opera di prenotazione, vengono passate le informazioni relative alla matricola dello studente autenticato nella sessione corrente e l'id dell'appello selezionato, tramite opportuni campi hidden inviati in POST. Il funzionamento specifico di tale script sarà approfondito nel seguito.
+
 \medskip
 
 \subsubsection{homapage-users-visualizzaBacheca.php}
+
+Questo script realizza una pagina web non accessibile all'utenza \emph{docente}, nella quale verrà mostrato un elenco di tutti i post contenuti nella bacheca relativa al corso selezionato nella pagina generata dallo script \emph{homepage-bacheca.php}: tale pagina è accessibile unicamente da utenze \textbf{non sospese}. La visualizzazione dell'elenco suddetto è resa possibile grazie all'esecuzione di un ciclo su una lista di post relativi alla bacheca del corso selezionato, ottenibile mediante l'esecuzione della funzione \emph{getListaPost}. 
+
+La lista dei post viene visualizzata in modo particolare: vengono fissati in cima i due post aventi la maggiore utilità, seguiti da tutti gli altri, visualizzati cinque per volta; è possibile cambiare pagina di visualizzazione da un piccolo menù di pagine sito in cima alla lista dei post, realizzato dinamicamente con dei bottoni submit in base al numero totale dei post da visualizzare; un campo hidden mantiene memoria del numero della pagina correntemente in visualizzazione. I post, inoltre, possono essere riordinati secondo differenti criteri: per numero di repliche, per utilità o per data di pubblicazione; sarà sufficiente premere sugli appositi pulsanti presenti in cima alla lista; questi reindirizzano l'utente alla pagina stessa, che questa volta disporrà di un'informazione di visualizzazione passata in POST tramite un opportuno campo hidden. Per ogni post contenuto in questa lista, si potranno visualizzare le informazioni relative al titolo, all'autore, al numero di repliche, all'utilità totale e alla data di pubblicazione del post stesso. Le funzioni appena citate sono tutte contenute nell'insieme di funzioni denominato \emph{phpFunctions-get.php}. 
+
+Interagendo con un qualsiasi post, l'utente verrà reindirizzato verso una pagina di visualizzazione del post stesso, creata dallo script \emph{homepage-users-visualizzaPost}, alla quale vengono passate le opportune informazioni in GET attraverso dei campi hidden. Inoltre, la pagina rende disponibile una funzionalità di creazione di un post: interagendo con l'apposito pulsante \emph{crea post}, infatti, verrà eseguita una funzione Javascript in grado di rendere visibile la form di inserimento di un nuovo post. L'effetto di visualizzazione del suddetto elenco di post è realizzato tramite alcune regole di stile contenute nel file \emph{stileBacheca.css}, descritto in seguito.
 
 \medskip
 
 \subsubsection{homapage-users-visualizzaFaq.php}
 
+Questo script realizza una pagina web relativa alla sezione FAQ inerente al corso selezionato nella pagina generata dallo script \emph{homepage-faq.php}; in questa pagina verranno mostrati due blocchi principali: il primo è costituito da una lista di domande a cui è stata già data una risposta, mentre il secondo è costituito da una lista di domande a cui, invece, non è ancora stata data alcuna risposta. Tale pagina è accessibile unicamente da utenze \textbf{non sospese}. La visualizzazione dei suddetti blocchi è resa possibile grazie all'esecuzione di due cicli: il primo su una lista di FAQ complete, il secondo su una lista di FAQ incomplete, entrambe relative alla sezione FAQ del corso selezionato. Queste due liste sono ottenibili mediante l'esecuzione delle funzioni \emph{getFaqComplete} e \emph{getFaqIncomplete}; le funzioni appena citate sono tutte contenute nell'insieme di funzioni denominato \emph{phpFunctions-get.php}. 
+
+La singola FAQ (coppia domanda-risposta) è accompagnata da un voto di utilità totale, calcolato a partire dalla somma algebrica di tutti i voti di \emph{up (+1)} e \emph{down (-1)} ricevuti dalla FAQ stessa, da parte di altre utenze. Tale voto è racchiuso fra due frecce, realizzate con due image submit buttons: tramite queste frecce, uno studente autenticato nella sessione corrente è in grado di votare tutte le FAQ di cui non è autore. Oltre alla funzionalità di voto, uno studente può proporre nuove domande, grazie ad una form visualizzabile nella parte inferiore della pagina web.
+
+Un'utenza di tipo \emph{docente} è in grado di poter modificare od eliminare tutte le FAQ (complete e incomplete) relative alle sole sezioni FAQ di propria competenza, ossia alle sezioni FAQ relative a corsi da egli impartiti. Premendo sull'apposita icona di eliminazione (facilmente identificabile: è a forma di cestino), un docente scatenerà l'eliminazione, dopo opportuna conferma delle proprie intenzioni, della FAQ selezionata: ciò è possibile grazie all'esecuzione dello script \emph{deleteFaq.php}, approfondito in seguito. Premendo invece sull'apposita  icona di modifica (facilmente identificabile: è a forma di matita), un docente scatenerà un evento di richiesta JQuery che, tramite il metodo 	\emph{ajax()} e con l'ausilio dello script \emph{ajaxHandler.php}, permetterà di rendere editabile l'area di risposta della FAQ selezionata. A questo punto, sarà possibile inserire o modificare la risposta alla domanda relativa alla FAQ selezionata; premendo nuovamente sul pulsante di modifica, poi, tutto verrà salvato, a meno che la risposta inserita non sia vuota. In tal caso, infatti, l'utente sarebbe obbligato da un popup Javascript ad inserire una risposta non vuota. Si ricorda al lettore che un docente non può votare alcuna FAQ, così come non può inserirne di nuove.
+
+Un'utenza amministrativa (\emph{segretario} o \emph{amministratore}), invece, è abilitata all'accesso a tutte le sezioni FAQ di tutti i corsi registrati presso la piattaforma. Questa tipologia di utenza è in grado di modificare od eliminare una qualsivoglia FAQ, con modalità analoghe a quelle già descritte nel caso del docente. Un'utenza amministrativa non è in grado di votare una FAQ, ma può inserire coppie domanda-risposta a proprio piacimento.
+
+L'effetto di visualizzazione delle singole sezioni FAQ è realizzato tramite alcune regole di stile contenute nel file \emph{stileFaq.css}, descritto in seguito.
+
 \medskip
 
 \subsubsection{homapage-users-visualizzaPost.php}
+
+Questo script realizza la funzionalità di visualizzazione di un post, stampandone il contenuto, in un blocco post in alto nella pagina, e a seguire tutti i commenti che sono stati pubblicati in riferimento a quest'ultimo. 
+
+Ricordiamo che questa pagina è accessibile a tutte le utenze, fatta eccezione per la tipologia Docente, purché \textbf{non sospese}.
+
+Innanzitutto, prima di produrre il codice xhtml, lo script analizza il tipo di utenza attualmente autenticata, informazione memorizzata all'interno delle variabili di sessione, e l'effettiva presenza dei campi GET, necessari per produrre la pagina. Tra i suddetti campi, individuiamo numero di pagina (\emph{pageNum}), l'id del post che si sta visualizzando (\emph{idPost}) e l'id del corso a cui appartiene la bacheca (\emph{idCorso}). In questo momento avviene il controllo sullo stato dell'utenza che, qualora 
+sancisse la sospensione di quest'ultima, notificherebbe l'utente tramite un pop up (\emph{funzione javascript window.alter()}) dell'esito di questo controllo. La pressione del pulsante conferma, unica azione eseguibile dall'utente in questo, causerebbe il reindirizzamento alla homepage.
+
+Superati i controlli di sessione, lo script inizializza una serie di variabili che verranno successivamente utilizzate per produrre la pagina. Tra di esse troviamo, il post che si vuole visualizzare, ottenibile tramite l'apposita funzione, il voto di utilità proposto dall'utente attualmente autenticato, qualora l'utente appartenesse alla tipologia Studente, la lista dei commenti del post e il massimo numero di pagine necessarie a visualizzare quest'ultimo (\emph{il calcolo avviene avendo come ipotesi che il numero massimo di commenti visualizzabili in una singola pagina è pari a cinque}).
+
+Successivamente si inizia la generazione del contenuto della pagina. Nella parte superiore verrà stampato un blocco contenente tutti le informazioni associate al post. Alla destra di quest'ultimo viene creato il sistema di voto costituito da due frecce e dall'utilità totale del post. Il numero dell'utilità verrà colorato di rosso o di verde, in base al valore del campo voto citato poc'anzi. In caso il valore del campo voto fosse  pari a 1, il numero verrebbe colorato di verde, qualora fosse pari -1, il numero verrebbe colorato di rosso. In caso di mancata inizializzazione di questo campo, corrispondente al valore 0, il colore non verrebbe alterato. Il sistema di voto funziona in maniera analoga a quello descritto nella sezione dedicata alle faq.
+
+Si procede poi a generare il menu di navigazione, costituito da due bottoni denominati \emph{prev} e \emph{next}, nel cui mezzo vengono stampati un numero di bottoni pari al massimo numero di pagine(valore calcolato precedentemente). I tasti in questione sono delle form rimandanti alla stessa pagina, il cui compito è quello di modificare il solo campo \emph{pageNum}. In particolare, i bottoni relativi ai numeri di pagina inoltrano nella richiesta il numero di pagina a cui riferiscono. Mentre i bottoni \emph{prev} e \emph{next} alterano il numero di pagina di \emph{+1} o \emph{-1} rispettivamente. In questa fase qualora l'utente autenticato corrispondesse all'autore del post oppure fosse un'utenza di tipo amministrativo (\emph{Segretario} o \emph{Amministratore}) verrebbero stampati in un angolo due bottoni, uno dedicato all'eliminazione del post, uno che ne abilita temporaneamente la modifica.
+
+Il passo successivo consiste nella generazione della lista dei commenti. Questa fase consiste nell'attraversamento della variabile contente la lista dei commenti, citata poco sopra, e nell'esecuzione di una serie di operazioni per ogni elemento di quest'ultima. Per prima cosa, si ottiene, tramite apposita funzione, il voto assegnato dall'utenza, in quel momento autenticata, al commento che si sta analizzando (questo campo può essere 0, in caso di voto non dato, e non inizializzato in caso di utenza diversa dallo studente).
+Successivamente procederemo con la stampa del contenuto nel commento.
+In questa fase qualora l'utente autenticato corrispondesse all'autore del commento oppure fosse un'utenza di tipo amministrativo (\emph{Segretario} o \emph{Amministratore}) verrebbero stampati in un angolo due bottoni, uno dedicato all'eliminazione del commento e uno che ne abilita temporaneamente la modifica.
+
+In ogni commento è inoltre presente un sistema di voto posto nell'angolo in alto a destra del blocco che lo contiene. Questo sistema viene realizzato mediante la gestione dell'evento \emph{onclick} a cui è associato un apposito script js. Il funzionamento di quest'ultimo consiste nel alternare la visualizzazione del voto inviato con la stampa di cinque stelle utilizzate per inviare il proprio voto. Nel momento in cui viene dichiarato il voto, si inoltrata una richiesta, tramite ajax, allo script \emph{ajaxHandler}. 
+
+Abbiamo precedentemente citato la possibilità, in determinati casi, che vengano generati bottoni di gestione del post/commento, uno di eliminazione e uno di modifica.
+La logica dietro questi bottoni è esplicata successivamente.
+
+L'eliminazione avviene tramite richiesta ad uno script adibito all'eliminazione di post o commenti (\emph{si faccia riferimento alla sezione successiva}). La richiesta viene inoltrata solo dopo che l'utente ha confermato l'operazione, premendo il tasto di conferma sul pop up generato alla pressione del bottone di eliminazione.
+
+La modifica del post avviene tramite gestione dell'evento \emph{onclick} del bottone di modifica. In particolare, uno script js attiverà o disattiverà un campo \emph{textarea}, utilizzabile per modificare il contenuto del post o commento. Ogni qualvolta lo script disabilita la visualizzazione del campo \emph{textarea}, qualora quest'ultimo non fosse vuoto, inoltrerebbe una richiesta ajax allo script \emph{ajaxHandler} specificando la modifica effettuata.
 
 \medskip
 
 \subsubsection{homapage-users.php}
 
+Questo script realizza una pagina web nella quale verrà mostrato un elenco di tutte le informazioni relative all'anagrafica dell'utenza autenticata nella sessione corrente; la visualizzazione dell'elenco suddetto è resa possibile grazie alle opportune funzioni \emph{displayAnagraficaStudente}, \emph{displayAnagraficaDocente}, \emph{displayAnagraficaSegretario} oppure \emph{displayAnagraficaAmministratore}, dipendentemente dalla tipologia di utenza autenticata. Le funzioni citate sono contenute nell'insieme di funzioni denominato \emph{phpFunctions-display.php}: tali funzioni php raccolgono le informazioni relative all'anagrafica dell'utenza ricevuta come parametro, e le presentano all'utente tramite una echo.
+
+Più in dettaglio, verranno presentate all'utente le seguenti informazioni:
+\begin{description}
+\item[Studente:] matricola, nome, cognome, data di nascita e password;
+\item[Docente:] matricola, nome, cognome e password;
+\item[Segretario:] username e password;
+\item[Amministratore:] username e password.
+\end{description}
+
+\medskip
+
+\subsubsection{homapage.php}
+
+Questo script realizza una pagina web nella quale verrà mostrato un elenco di tutte le possibili funzionalità relative all'utente visitatore. La pagina permette all'utente di essere reindirizzato verso altre pagine web di visualizzazione, grazie all'interazione dell'utente stesso con dei semplici link o dei semplici bottoni submit. I link reindirizzeranno l'utente verso pagine web di visualizzazione dei corsi di laurea, dei corsi o dei docenti registrati presso la piattaforma; i bottoni submit, invece, reindirizzeranno l'utente visitatore verso una form di login dinamica, che varia in base al singolo bottone premuto. L'informazione sulla tipologia di utenza con la quale l'utente desidera autenticarsi viene passata a tale form di login in POST, mediante un opportuno campo hidden.
+
 \medskip
 
 \subsubsection{index.php}
+
+Questo script è un semplice script di reindirizzamento, creato al fine di evitare il directory listing nell'accesso al sito web cui questa relazione fa riferimento. Tramite una funzione \emph{header}, infatti, l'utente verrà immediatamente reindirizzato alla pagina web generata dallo script \emph{homepage.php}.
 
 \medskip
 
 \subsubsection{inserisciAppello.php}
 
+Questo script realizza una pagina web non accessibile agli studenti, nella quale verrà mostrata una form di inserimento di un appello; all'utente verrà richiesto di specificare una data (tramite una input date), un'ora (tramite una input time) e il corso cui il nuovo appello farà riferimento (tramite una select). La specifica del corso varia a seconda dell'utenza autenticata: un \emph{docente}, infatti, sarà in grado di specificare un corso fra quelli di sua competenza, mentre un'utenza amministrativa (\emph{segretario} o \emph{amministratore}) potrà invece specificare un qualsiasi corso registrato nella piattaforma.
+
+Premendo il pulsante \emph{invio}, verranno effettuati i relativi controlli di collisione trattati nello script \emph{avvisoCorrispondenze.php}.
+
 \medskip
 
 \subsubsection{inserisciCorso.php}
+
+Questo script realizza una pagina web accessibile unicamente da un'utenza di tipologia \emph{amministratore}, nella quale verrà mostrata una form di inserimento di un corso; all'utente verrà richiesto di specificare un nome (che dovrà essere univoco all'interno dei confini designati da uno stesso corso di laurea), un docente, un co-docente (opzionale), l'anno di corso e il semestre in cui verrà impartito, il curriculum offerto, il numero di CFU offerti agli studenti in caso di superamento del relativo esame con esito positivo, il codice SSD e il corso di laurea cui esso fa riferimento.
+
+Premendo il pulsante \emph{invio}, verranno effettuati i relativi controlli di collisione fra i nomi dei corsi di uno stesso corso di laurea e, in caso di errore, verrà mostrato un opportuno messaggio tramite lo script \emph{avvisoErrore.php}.
 
 \medskip
 
 \subsubsection{inserisciCorsoDiLaurea.php}
 
+Questo script realizza una pagina web accessibile unicamente da un'utenza di tipologia \emph{amministratore}, nella quale verrà mostrata una form di inserimento di un corso di laurea; all'utente verrà richiesto di specificare unicamente un nome, che dovrà essere univoco all'interno della piattaforma.
+
+Premendo il pulsante \emph{invio}, verranno effettuati i relativi controlli di collisione fra i nomi dei corsi di laurea registrati nella piattaforma e, in caso di errore, verrà mostrato un opportuno messaggio tramite lo script \emph{avvisoErrore.php}.
+
 \medskip
 
 \subsubsection{login.php}
+
+Questo script genera una pagina web contenente una form di login, accessibile unicamente da un'utenza non autenticata. La form di login in questione viene generata dinamicamente a seconda della tipologia di utenza con la quale l'utente chiamante desidera autenticarsi; questa informazione viene ricevuta in POST tramite un campo hidden opportuno. 
+
+Qualora l'utente desiderasse autenticarsi come \emph{studente} o come \emph{docente}, dovrà inserire la propria matricola e la propria password; in questo caso, il login avviene nel modo seguente. La password viene innanzitutto criptata tramite l'algoritmo di cifratura MD5; si cerca nell'opportuno file XML la coppia matricola-password (utilizzando la tecnica di ricerca fornita dal DOM) e, in caso di successo, verrà impostata una variabile di sessione che consentirà all'utente di usufruire di tutte le funzionalità cui ha diritto in seguito all'autenticazione.
+
+Qualora l'utente desiderasse invece autenticarsi come \emph{segretario} o come \emph{amministratore}, dovrà inserire il proprio username e la propria password; in questo caso, il login avviene nel modo seguente. La password viene innanzitutto criptata tramite l'algoritmo di cifratura MD5; si cerca nell'opportuno file XML la coppia username-password (utilizzando la tecnica di ricerca fornita dal DOM) e, in caso di successo, verrà impostata una variabile di sessione che consentirà all'utente di usufruire di tutte le funzionalità cui ha diritto in seguito all'autenticazione.
+
+Qualora invece l'utente non disponesse di credenziali, potrà sempre premere sul bottone \emph{registrati}: egli verrà dunque reindirizzato verso l'opportuna form di registrazione, generata dallo script \emph{form-registrazione.php}.
 
 \medskip
 
 \subsubsection{modificaAppello.php}
 
+Questo script realizza una pagina web non accessibile agli studenti, nella quale verrà mostrata una form di inserimento di un appello, già precompilata con i dati dell'appello selezionato nella pagina web generata dallo script \emph{visualizzaAppelli.php}; all'utente verrà richiesto di specificare una data (tramite una input date), un'ora (tramite una input time) e il corso cui il nuovo appello farà riferimento (tramite una select). La specifica del corso varia a seconda dell'utenza autenticata: un \emph{docente}, infatti, sarà in grado di specificare un corso fra quelli di sua competenza, mentre un'utenza amministrativa (\emph{segretario} o \emph{amministratore}) potrà invece specificare un qualsiasi corso registrato nella piattaforma.
+
+Premendo il pulsante \emph{invio}, verranno effettuati i relativi controlli di collisione trattati nello script \emph{avvisoCorrispondenze.php}.
+
 \medskip
 
-\subsubsection{modficaCorso.php}
+\subsubsection{modificaCorso.php}
+
+Questo script realizza una pagina web accessibile unicamente da un'utenza di tipologia \emph{amministratore}, nella quale verrà mostrata una form di inserimento di un corso, già precompilata con i dati del corso selezionato nella pagina web generata dallo script \emph{gestioneCorsi.php}; all'utente verrà richiesto di specificare un nome (che dovrà essere univoco all'interno dei confini designati da uno stesso corso di laurea), un docente, un co-docente (opzionale), l'anno di corso e il semestre in cui verrà impartito, il curriculum offerto, il numero di CFU offerti agli studenti in caso di superamento del relativo esame con esito positivo, il codice SSD e il corso di laurea cui esso fa riferimento.
+
+Premendo il pulsante \emph{invio}, verranno effettuati i relativi controlli di collisione fra i nomi dei corsi di uno stesso corso di laurea e, in caso di errore, verrà mostrato un opportuno messaggio tramite lo script \emph{avvisoErrore.php}.
 
 \medskip
 
 \subsubsection{modificaCorsoDiLaurea.php}
 
+Questo script realizza una pagina web accessibile unicamente da un'utenza di tipologia \emph{amministratore}, nella quale verrà mostrata una form di inserimento di un corso di laurea, già precompilata con i dati del corso di laurea selezionato nella pagina web generata dallo script \emph{gestioneCorsiDiLaurea.php}; all'utente verrà richiesto di specificare unicamente un nome, che dovrà essere univoco all'interno della piattaforma.
+
+Premendo il pulsante \emph{invio}, verranno effettuati i relativi controlli di collisione fra i nomi dei corsi di laurea registrati nella piattaforma e, in caso di errore, verrà mostrato un opportuno messaggio tramite lo script \emph{avvisoErrore.php}.
+
 \medskip
 
 \subsubsection{modificaPassword.php}
+
+Questo script realizza una pagina web nella quale verrà mostrata una form di modifica della password; all'utente verrà richiesto di inserire la propria vecchia password, una nuova password e una conferma della nuova password inserita. Sussistono i seguenti vincoli: la vecchia password deve naturalmente essere corretta; le due nuove password inserite devono coincidere e, banalmente, non devono essere identiche alla vecchia password. 
+
+Qualora, premendo il pulsante \emph{modifica}, anche solo uno di questi vincoli non fosse rispettato, all'utente verrebbe impedita la modifica della password e verrebbe mostrato a schermo un opportuno messaggio di errore.
 
 \medskip
 
 \subsubsection{modificaUtenza.php}
 
+Questo script realizza una pagina web accessibile unicamente da un'utenza di tipologia \emph{amministratore}, nella quale verrà mostrata una form di inserimento di un'utenza, già precompilata con i dati dell'utenza selezionata nella pagina web generata dallo script \emph{gestioneUtenza.php}. In base alla tipologia di utenza selezionata, all'utente verrà richiesto di specificare:
+\begin{description}
+\item[Studente:] nome, cognome, matricola (deve essere univoca!), corso di laurea, data di nascita e password (opzionale);
+\item[Docente:] nome, cognome, matricola (deve essere univoca!) e password (opzionale);
+\item[Segretario:] username (deve essere univoco!) e password (opzionale).
+\end{description}
+
+Premendo il pulsante \emph{invio}, verranno effettuati i relativi controlli di collisione fra le matricole/gli username delle utenze registrate presso la piattaforma e, in caso di errore, verrà mostrato un opportuno messaggio tramite lo script \emph{avvisoErrore.php}.
+
+\medskip
+
+\subsubsection{verbalizza-script.php}
+
+Questo script si occupa di effettuare la verbalizzazione di una lista di prenotazioni, passata come informazione dalla pagina web generata dallo script \emph{visualizzaPrenotazioni.php}. La verbalizzazione avviene come segue: per ogni prenotazione ricevuta, se ne controlla l'esito. Qualora l'esito fosse diverso da NULL, si prosegue modificando l'esito della singola prenotazione tramite la funzione \emph{modificaEsitoPrenotazione}. Fatto ciò, se l'esame ha avuto esito positivo (esito diverso da NULL, diverso da B e diverso da R), si procede all'eliminazione di eventuali prenotazioni residue per quello studente relative ad altri appelli dello stesso corso.
+
+Qualora l'operazione di verbalizzazione fallisse, l'utente verrà reindirizzato sulla pagina web generata dallo script \emph{avvisoErrore.php}, dove avrà modo di visualizzare un opportuno messaggio di errore. 
+
 \medskip
 
 \subsubsection{visualizzaAppelli.php}
+
+Questo script genera una pagina web nella quale vengono mostrati, dipendentemente dall'utenza autenticata, gli appelli relativi ai corsi registrati presso la piattaforma. Nel caso di un'utenza di tipologia \emph{docente}, verranno mostrati i soli appelli relativi ai corsi di competenza del docente stesso. La visualizzazione degli appelli avviene grazie alla funzione \emph{displayAppelliAfterDate} che, ricevuta una data (default: quella attuale), permette la visualizzazione degli appelli avente data pari o successiva ad essa. Le utenze amministrative hanno la possibilità di poter interagire con tutti gli appelli memorizzati all'interno della piattaforma, indipendentemente dalla data cui essi si riferiscono.
+
+L'utenza autenticata ha a disposizione due possibilità: modificare od eliminare un certo appello. Premendo sul pulsante \emph{elimina}, dopo un'opportuna conferma delle proprie intenzioni, verrà eseguito lo script \emph{eliminaAppello-script.php}, che eliminerà l'appello nella maniera opportuna. Premendo invece sul pulsante \emph{modifica}, verrà eseguito lo script \emph{modificaAppello.php}; i dati relativi all'appello selezionato vengono passati in POST tramite opportuni campi hidden.
 
 \medskip
 
 \subsubsection{visualizzaCorsi.php}
 
+Questo script genera una pagina web nella quale vengono mostrati tutti i corsi registrati presso la piattaforma. La visualizzazione è facilitata da un filtro di ricerca: inserendo il nome di un corso (o parte di esso), verrà effettuata una preg\_match per ogni corso registrato; verranno naturalmente visualizzati solo i corsi corrispondenti al criterio di ricerca inserito. La visualizzazione dei corsi avviene grazie ad un ciclo su una lista di corsi, fornita eseguendo la funzione \emph{getCorsi} (o \emph{getCorsiLike}, per la ricerca filtrata).
+
+L'utente può interagire con le singole voci del corso tramite un bottone, presente nella parte finale della singola voce, che lo reindirizzerà verso una pagina di informazioni relative al corso stesso, generata dallo script \emph{visualizzaInfoCorso.php}; le informazioni relative al corso selezionato verranno passate in POST tramite opportuni campi hidden.
+
 \medskip
 
 \subsubsection{visualizzaCorsiDaCorsoDiLaurea.php}
+
+Questo script genera una pagina web nella quale vengono mostrati tutti i corsi relativi ad un certo corso di laurea, selezionato in precedenza in una pagina web generata dallo script \emph{visualizzaCorsiDiLaurea.php}. La visualizzazione è facilitata da un filtro di ricerca: inserendo il nome di un corso (o parte di esso), verrà effettuata una preg\_match per ogni corso relativo al corso di laurea selezionato; verranno naturalmente visualizzati solo i corsi corrispondenti al criterio di ricerca inserito. La visualizzazione dei corsi avviene grazie ad un ciclo su una lista di corsi, fornita eseguendo la funzione \emph{getCorsiFromCorsoDiLaurea} (o \emph{getCorsiFromCorsoDiLaureaLike}, per la ricerca filtrata).
+
+L'utente può interagire con le singole voci del corso tramite un bottone, presente nella parte finale della singola voce, che lo reindirizzerà verso una pagina di informazioni relative al corso stesso, generata dallo script \emph{visualizzaInfoCorso.php}; le informazioni relative al corso selezionato verranno passate in POST tramite opportuni campi hidden.
 
 \medskip
 
 \subsubsection{visualizzaCorsiDiLaurea.php}
 
+Questo script genera una pagina web nella quale vengono mostrati tutti i corsi di laurea registrati presso la piattaforma. La visualizzazione è facilitata da un filtro di ricerca: inserendo il nome di un corso di laurea (o parte di esso), verrà effettuata una preg\_match per ogni corso di laurea registrato; verranno naturalmente visualizzati solo i corsi di laurea corrispondenti al criterio di ricerca inserito. La visualizzazione dei corsi di laurea avviene grazie ad un ciclo su una lista di corsi di laurea, fornita eseguendo la funzione \emph{getCorsiDiLaurea} (o \emph{getCorsiDiLaureaLike}, per la ricerca filtrata).
+
+L'utente può interagire con le singole voci del corso di laurea tramite un bottone, presente nella parte finale della singola voce, che lo reindirizzerà verso una pagina di corsi correlati al corso di laurea stesso, generata dallo script \emph{visualizzaCorsiDaCorsoDiLaurea.php}; le informazioni relative al corso di laurea selezionato verranno passate in POST tramite opportuni campi hidden.
+
 \medskip
 
 \subsubsection{visualizzaDocenti.php}
+
+Questo script genera una pagina web nella quale vengono mostrati tutti i docenti registrati presso la piattaforma, in ordine alfabetico. La visualizzazione è facilitata da un filtro di ricerca: inserendo il nome di un docente (o parte di esso), verrà effettuata una preg\_match per ogni docente registrato; verranno naturalmente visualizzati solo i docenti corrispondenti al criterio di ricerca inserito. La visualizzazione dei docenti avviene grazie ad un ciclo su una lista di docenti, fornita eseguendo la funzione \emph{getDocenti} (o \emph{getDocentiLike}, per la ricerca filtrata).
 
 \medskip
 
 \subsubsection{visualizzaDocentiAdmin.php}
 
+Questo script genera una pagina web, accessibile dalla sola utenza di tipologia \emph{amministratore}, nella quale viene mostrato un elenco di tutti i docenti registrati presso la piattaforma. La visualizzazione dell'appena citato elenco è facilitata dalla presenza di un filtro di ricerca, con criterio basato sulla matricola del docente. Inoltre, tale visualizzazione può essere ordinata in base a diversi criteri: in ordine di matricola, in ordine alfabetico per cognome, oppure in ordine alfabetico per nome.
+
+Ogni voce è affiancata da un pulsante \emph{gestisci}, premendo il quale l'utente verrà reindirizzato alla pagina web generata dallo script \emph{gestioneUtenza.php}; le informazioni relative all'utenza selezionata verranno passate in POST mediante l'utilizzo di opportuni campi hidden.
+
 \medskip
 
 \subsubsection{visualizzaInfoCorso.php}
+
+Questo script genera una pagina web nella quale vengono mostrate le principali informazioni relative ad un determinato corso selezionato in precedenza, da una pagina web generata dallo script \emph{visualizzaCorsi.php} o dallo script \emph{visualizzaCorsiDaCorsoDiLaurea.php}.
 
 \medskip
 
 \subsubsection{visualizzaPrenotazioni.php}
 
+Questo script genera una pagina web non accessibile agli studenti, nella quale viene mostrato un elenco di prenotazioni all'appello precedentemente selezionato dalla pagina web generata dallo script \emph{gestionePrenotazioni.php}.
+
+L'utente può interagire con la pagina grazie alla presenza di una select, contenente i valori per determinare l'esito del singolo esame sostenuto, rappresentato dalla singola voce dell'elenco. Premendo sul pulsante \emph{verbalizza}, verranno verbalizzati come esami sostenuti tutte quelle prenotazioni che non abbiano esito pari a NULL, mediante l'esecuzione dello script \emph{verbalizza-script.php}.
+
 \medskip
 
-\subsubsection{visualizzaSegreteriaAdmin}
+\subsubsection{visualizzaSegreteriaAdmin.php}
+
+Questo script genera una pagina web, accessibile dalla sola utenza di tipologia \emph{amministratore}, nella quale viene mostrato un elenco di tutti i segretari registrati presso la piattaforma. La visualizzazione dell'appena citato elenco è facilitata dalla presenza di un filtro di ricerca, con criterio basato sullo username del segretario.
+
+Ogni voce è affiancata da un pulsante \emph{gestisci}, premendo il quale l'utente verrà reindirizzato alla pagina web generata dallo script \emph{gestioneUtenza.php}; le informazioni relative all'utenza selezionata verranno passate in POST mediante l'utilizzo di opportuni campi hidden.
 
 \medskip
 
-\subsubsection{visualizzaStudentiAdmin}
+\subsubsection{visualizzaStudentiAdmin.php}
+
+Questo script genera una pagina web, accessibile dalla sola utenza di tipologia \emph{amministratore}, nella quale viene mostrato un elenco di tutti gli studenti registrati presso la piattaforma. La visualizzazione dell'appena citato elenco è facilitata dalla presenza di un filtro di ricerca, con criterio basato sulla matricola dello studente. Inoltre, tale visualizzazione può essere ordinata in base a diversi criteri: in ordine di matricola, in ordine alfabetico per cognome, in ordine alfabetico per nome, oppure in ordine alfabetico per nome del corso di laurea cui lo studente è iscritto.
+
+Ogni voce è affiancata da un pulsante \emph{gestisci}, premendo il quale l'utente verrà reindirizzato alla pagina web generata dallo script \emph{gestioneUtenza.php}; le informazioni relative all'utenza selezionata verranno passate in POST mediante l'utilizzo di opportuni campi hidden.
 
 \medskip
 
 \section{Script di lavoro}
 
+La sezione script di lavoro contiene di tutti quelli script il cui unico scopo è quello di interagire con i file xml. Motivo per il quale essi non generano alcun codice xhtml e devono necessariamente essere lanciati da determinate form. 
+Ricevuti i dati, e dopo un controllo di adeguatezza di questi ultimi, lo script procederà ad eseguire determinate operazioni reindirizzando l'utente in una diversa pagina. 
+Talvolta la pagina raggiunta mostra a video l'esito dell'operazione (\emph{si faccia riferimento agli script di avviso descritti all'inizio del capitolo}). 
 \medskip
 
 \subsubsection{ajaxHandler.php}
 
+Lo script \emph{ajaxHandler.php} viene utilizzato per gestire tutte le richieste eseguite con \emph{JQuery}. Il funzionamento di quest'ultimo dipende da un campo denominato \emph{richiesta}, contente informazioni sulla provenienza della richiesta.
+
+In particolare, questo script viene interpellato in 4 casi. Il primo riguarda la modifica del contenuto di una faq. In questo caso l'unico compito dello script consiste nell'eseguire un determinata funzione (\emph{modificaFaq}, appartenente alle \emph{phpFunctions-modify}), per  adempire al suo scopo.
+Il secondo caso riguarda la modifica del voto di un commento. Lo script, proverà ad eliminare un eventuale voto già esistente, e successivamente inserirà il nuovo voto. Infine, utilizzerà una echo per comunicare i nuovi dati, successivamente impiegati per aggiornare la visualizzazione della pagina \emph{homepage-users-visualizzaPost.php}.
+Il terzo e il quarto caso sono molto simili poiché entrami riguardano la modifica del contenuto di un post/commento. In questi due casi, lo script non farà altro che eseguire l'adeguata funzione di modifica (dipendentemente dal caso verrà eseguita \emph{modifyContentText} o \emph{modifyPostContent}, entrambe appartenenti a \emph{phpFunctionts-modify}).
+
+Facciamo notare che questo script non necessità alcun reindirizzamento poichè viene eseguito tramite ajax.
 \medskip
 
 \subsubsection{deleteComment.php}
 
+Questo script si occupa di eliminare un determinato commento, il cui id viene specificato tra i parametri della richiesta. L'eliminazione avviene utilizzando la funzione \emph{deleteComment} contenuta in \emph{phpFunctions-delete.php}.
+L'utente verrà successivamente reindirizzato alla pagina precedente.
+
 \medskip
 
 \subsubsection{deleteFaq.php}
+Questo script si occupa di eliminare una determinata faq, il cui id viene specificato tra i parametri della richiesta. L'eliminazione avviene utilizzando la funzione \emph{deleteFaq} contenuta in \emph{phpFunctions-delete.php}.
+L'utente verrà successivamente reindirizzato alla pagina precedente.
 
 \medskip
 
 \subsubsection{deletePost.php}
 
+Questo script si occupa di eliminare un determinato post, il cui id viene specificato tra i parametri della richiesta. L'eliminazione avviene utilizzando la funzione \emph{deletePost} contenuta in \emph{phpFunctions-delete.php}.
+L'utente verrà successivamente reindirizzato alla pagina precedente.
+
 \medskip
 
 \subsubsection{eliminaAppello-script.php}
+
+Questo script si occupa di eliminare un determinato appello, il cui id viene specificato tra i parametri della richiesta. L'eliminazione avviene utilizzando la funzione \emph{eliminaAppello} contenuta in \emph{phpFunctions-delete.php}.
+Dipendentemente dall'esito di questa operazione verrà impostato un \emph{cookie}, e reindirizzato l'utente su un pagina di avviso.
 
 \medskip
 
 \subsubsection{eliminaCorsoDiLaurea-script.php}
 
+Questo script si occupa di eliminare un determinato corso di laurea, il cui id viene specificato tra i parametri della richiesta. L'eliminazione avviene utilizzando la funzione \emph{eliminaCorsoDiLaurea} contenuta in \emph{phpFunctions-delete.php}.
+Dipendentemente dall'esito di questa operazione verrà impostato un \emph{cookie}, e reindirizzato l'utente su un pagina di avviso.
+
 \medskip
 
 \subsubsection{eliminaCorso-script.php}
+
+Questo script si occupa di eliminare un determinato corso, il cui id viene specificato tra i parametri della richiesta. L'eliminazione avviene utilizzando la funzione \emph{eliminaAppello} contenuta in \emph{phpFunctions-delete.php}.
+Dipendentemente dall'esito di questa operazione verrà impostato un \emph{cookie}, e reindirizzato l'utente su un pagina di avviso.
 
 \medskip
 
 \subsubsection{eliminaPrenotazioneAppello.php}
 
+Questo script si occupa di eliminare una determinata prenotazione, il cui id viene specificato tra i parametri della richiesta. L'eliminazione avviene utilizzando la funzione \emph{eliminaPrenotazioneAppello} contenuta in \emph{phpFunctions-delete.php}.
+Dipendentemente dall'esito di questa operazione verrà impostato un \emph{cookie}, e reindirizzato l'utente su un pagina di avviso.
 \medskip
 
 \subsubsection{eliminaUtenza-script.php}
 
+Questo script si occupa di eliminare una determinata utenza, il cui id e il tipo viene specificato tra i parametri della richiesta. Dipendentemente dal tipo di utenza verrà eseguita una delle seguenti funzioni: \emph{eliminaStudente}, \emph{eliminaDocente}, \emph{eliminaSegretario}. Tutte queste funzioni sono contenute in \emph{phpFunctions-delete.php}.
+Dipendentemente dall'esito di questa operazione verrà impostato un \emph{cookie}, e reindirizzato l'utente su un pagina di avviso.
 \medskip
 
 \subsubsection{insertComment.php}
+
+Questo script si occupa di inserire un nuovo commento associato ad un determinato post. Necessità il contenuto testuale del commento, l'id dell'autore e l'id del post per eseguire le su operazioni. Qualora l'autore del commento fosse un segretario/amministratore si imposterebbe il valore del campo idAutore al valore di \emph{-2}. L'inserimento avviene utilizzando la funzione \emph{inserisciCommento} contenuta in \emph{phpFunctions-insert.php}.
+L'utente verrà successivamente reindirizzato alla pagina precedente.
 
 \medskip
 
 \subsubsection{insertFaq.php}
 
+Questo script si occupa di inserire una nuova faq associata ad un determinato corso. Necessità il contenuto testuale della faq, l'id dell'autore e l'id del corso per eseguire le su operazioni. Qualora l'autore della faq fosse un segretario/amministratore si imposterebbe il valore del campo idAutore al valore di \emph{-2}. L'inserimento avviene utilizzando la funzione \emph{insertFaq} contenuta in \emph{phpFunctions-insert.php}.
+L'utente verrà successivamente reindirizzato alla pagina precedente.
+
 \medskip
 
 \subsubsection{insertPost.php}
+
+Questo script si occupa di inserire un nuovo post all'interno di una determinata bacheca. Necessità il titolo del post, il corpo del post, l'id dell'autore e l'id del corso per eseguire le su operazioni. Qualora l'autore del post fosse un segretario/amministratore si imposterebbe il valore del campo idAutore al valore di \emph{-2}. L'inserimento avviene utilizzando la funzione \emph{inserisciPost} contenuta in \emph{phpFunctions-insert.php}.
+L'utente verrà successivamente reindirizzato alla pagina precedente.
 
 \medskip
 
 \subsubsection{prenotaAppello-script.php}
 
+Questo script si occupa di inserire un nuova prenotazione, il cui appello di riferimento viene specificato tra i parametri della richiesta. L'inserimento avviene utilizzando la funzione \emph{inserisciPrenotazioneAppello} contenuta in \emph{phpFunctions-insert.php}.
+Dipendentemente dall'esito di questa operazione verrà impostato un \emph{cookie}, e reindirizzato l'utente su un pagina di avviso.
+
 \medskip
 
+
 \subsubsection{riabilitaStudente.php}
+
+Questo script si occupa di riabilitare un utente (\emph{impostarne lo stato nuovamente a 1)}, il cui id e tipologia vengono specificati tra i parametri della richiesta. Dipendentemente da quest'ultimo valore viene eseguita una delle seguenti funzioni: \emph{riabilitaStudente}, \emph{riabilitaDocente}, \emph{riabilitaSegretario}. Tutte queste funzioni sono contenute in \emph{phpFunctions-modify.php}.
+Dipendentemente dall'esito di questa operazione verrà impostato un \emph{cookie}, e reindirizzato l'utente su un pagina di avviso. 
 
 \medskip
 
 \subsubsection{sospendiStudente.php}
 
+Questo script si occupa di sospendere un utente (\emph{impostarne lo stato a -1)}, il cui id e tipologia vengono specificati tra i parametri della richiesta. Dipendentemente da quest'ultimo valore viene eseguita una delle seguenti funzioni: \emph{sospendiStudente}, \emph{sospendiDocente}, \emph{sospendiSegretario}. Tutte queste funzioni sono contenute in \emph{phpFunctions-modify.php}.
+Dipendentemente dall'esito di questa operazione verrà impostato un \emph{cookie}, e reindirizzato l'utente su un pagina di avviso. 
+
 \medskip
 
 \subsubsection{votaFaq.php}
 
+Questo script si occupa di registrare un il voto utilità di un faq. L'attivazione di questo script è permessa solo ad un'utenza è di tipo studente, in quanto la funzionalità di voto è strettamente riservata alla suddetta utenza.
+Per quanto riguarda il funzionamento dello script, esso si basa sull'invio, da parte dello script chiamante, di tre un campi,  denominati rispettivamente \emph{type}, \emph{voto} e \emph{idFaq}. I primi due sono necessari a determinare se il voto deve essere inserito e modificato, mentre il terzo serve a identificare la faq che si sta votando.
+L'utente verrà successivamente reindirizzato alla pagina precedente.
 \medskip
 
 \subsubsection{votaPost.php}
 
+Questo script si occupa di registrare un il voto utilità di un post. L'attivazione di questo script è permessa solo ad un'utenza è di tipo studente, in quanto la funzionalità di voto è strettamente riservata alla suddetta utenza.
+Per quanto riguarda il funzionamento dello script, esso si basa sull'invio, da parte dello script chiamante, di tre un campi,  denominati rispettivamente \emph{type}, \emph{voto} e \emph{idPost}. I primi due sono necessari a determinare se il voto deve essere inserito e modificato, mentre il terzo serve a identificare il post che si sta votando.
+L'utente verrà successivamente reindirizzato alla pagina precedente.
 \medskip
 
 \section{Script dichiarativi}
 
+La sezione degli script dichiarativi è costituita da tutti quelli script il cui contenuto consiste solamente in dichiarazioni di funzioni o strutture dati. 
 \medskip
 
 \subsubsection{phpClasses.php}
+
+Lo script \emph{phpClasses.php} contiene la dichiarazioni alle strutture dati impiegate da gran parte degli script. In esso vengono definite le classi associate ai singoli elementi dei file xml. In particolare, si è scelto di creare una classe per ogni file xml, ciascuna delle quali contente gli attributi dei file stessi. Per alcune classi si è anche scelto di ridefinire il costruttore, così da facilitare l'inserimento dei dati.
+
+Si può anche notare che, fatta eccezione per le classi associate alle utenze, non si è scelto di memorizzare il campo stato. Questo perché, tutti i contenuti del sito sono visualizzabili solo se non sono stati eliminati (\emph{campo stato uguale a 0}), rendendo così superficiale la memorizzazione di quest'ultimo. Al contrario, un'utenza possiede più di due stati, potendo ricevere un \emph{soft ban} dagli amministratori. È quindi necessario memorizzare questa informazione, che viene impiegata per limitare eventuali accessi illegittimi.
 
 \medskip
 
 \subsubsection{phpFunctions-delete.php}
 
+La collezione di funzioni \emph{phpFunctions-delete.php} contiene tutte quelle funzioni php che, interagendo con i file xml, eliminano il contenuto di uno o più elementi. La differenza tra le diverse procedure dichiarate all'interno di questa collezione è solo nei file coinvolti, e non nelle metodologie applicate per implementare l'eliminazione. Per questo motivo prenderemo in studio una sola funzione presa a campione all'interno del file.
 \medskip
 
-\subsubsection{phpFunctions-display.get}
+(\emph{Si ricorda al lettore che l'eliminazione di un elemento si traduce nella assegnazione del valore \emph{-1} nel campo stato di quest'ultimo.})
+
+\medskip
+
+Per realizzare la modifica di un determinato elemento si è adottato l'uso del metodo \emph{simplexml-load-file()}, che permette di caricare il file xml all'interno di una variabile, rendendolo così attraversabile tramite un ciclo. 
+Eseguita la modifica, si effettua il salvataggio del file utilizzando le funzioni \emph{fwrite()} e \emph{fopen}. Riportiamo un esempio nell'area sottostante.
+
+\medskip
+
+
+Funzione - \emph{eliminaAppello()} 
+
+\medskip
+
+\begin{lstlisting}[language=PHP]
+function eliminaAppello($idAppello) {
+    if($idAppello == 0)
+        return FALSE;
+    
+    $xmlString = "";
+    foreach ( file("../Xml/appelli.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $appelli = simplexml_load_file('../Xml/appelli.xml');
+    $eliminato = FALSE;
+
+    foreach($appelli as $appello) {
+        if($appello->id == $idAppello && $appello->stato == 1) {
+            $appello->stato = 0;
+            $eliminato = TRUE;
+            break;
+        }
+    }
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/appelli.xml', "w");
+    $result = fwrite($f,  $appelli->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    elseif($result && $eliminato)
+        return TRUE;
+}
+\end{lstlisting}
+
+\medskip
+
+\subsubsection{phpFunctions-display.php}
+
+La collezioni dei funzioni \emph{phpFunctions-display.php} comprende tutte quelle funzioni che, in determinati script, vengono impiegate per stampare a video il contenuto dei file xml. La logica dietro queste funzioni si basa sull'uso delle procedure contenute all'interno di \emph{phpFunctions-get.php}.
+Riportiamo un esempio preso a campione dal file.
+
+
+\medskip
+
+Funzione - \emph{displayFullSegretario()} 
+
+\medskip
+
+\begin{lstlisting}[language=PHP]
+function displayFullSegretario($segretario) {
+    $statoNum = getStatoSegretario($segretario);
+    if($statoNum == 1)
+        $stato = "Abilitato";
+    elseif($statoNum == -1)
+        $stato = "Sospeso";
+    elseif($statoNum == 0)
+        $stato = "Eliminato";
+
+    echo '
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+        <div style="margin-left: 2%;">
+            <div class="infoVoice">
+                <h2>Utenza: Segretario</h2>
+            </div>
+            <div class="infoVoice">
+                <h2>Username: '.$segretario->username.'</h2>
+            </div>  
+            <div class="infoVoice">
+                <h2>Password: '.$segretario->password.'</h2>
+            </div>  
+            <div class="infoVoice">
+                <h2>Stato utenza: '.$stato.'</h2>
+            </div>
+        </div>
+    </div>
+    ';
+}
+\end{lstlisting}
 
 \medskip
 
 \subsubsection{phpFunctions-get.php}
 
+La collezione di funzioni \emph{phpFunctions-get.php} contiene tutte quelle funzioni php che, interagendo con i file xml, ricavano il contenuto di uno o più elementi e lo restituiscono allo script chiamante. La differenza tra le diverse procedure dichiarate all'interno di questa collezione è solo nei file coinvolti, e non nelle metodologie applicate per implementare la lettura e lo scorrimento del file. Per questo motivo prenderemo in studio una sola funzione presa a campione all'interno dello script.
+
+\medskip
+
+Si sono seguiti due diversi approcci per effettuare la lettura del contenuto di un file, dipendentemente dalla quantità di informazioni da ricavare.
+In caso di piccole quantità di dati, come il valore di un solo campo, l'interazione con file è stata fatta utilizzando il metodo \emph{simplexml-load-file()}, per poi scorrere tra i diversi elementi utilizzando un foreach. Riportiamo un esempio nell'area sottostante.
+
+\medskip
+
+Funzione - \emph{getUtilitaTotale()} 
+
+\medskip
+
+\begin{lstlisting}[language=PHP]
+function getUtilitaTotale($id){
+    updateFaqUtility($id);
+    $xmlString = "";
+    foreach ( file("../Xml/faqs.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $faqs = simplexml_load_file('../Xml/faqs.xml');
+    foreach($faqs as $faq)
+        if($faq->id == $id )
+            return $faq->utilitaTotale;
+
+    return 0;
+}
+\end{lstlisting}
+
+\medskip
+
+In caso di importanti quantità di dati, come interi elementi o liste di elementi, si è utilizzato il \emph{DOMDocument} e il metodo \emph{loadXML()}. Così facendo, si può ciclare sul risultato dell'esecuzione di quest'ultima funzione per attraversare il contenuto del file. Riportiamo un esempio dell'applicazione di questo approccio nell'area sottostante.
+
+\medskip
+
+Funzione - \emph{getCorsi()} 
+
+\medskip
+
+\begin{lstlisting}[language=PHP]
+function getCorsi() {
+    /*accedo al file xml*/
+   $xmlString = "";
+   foreach ( file("../Xml/corsi.xml") as $node ) {
+       $xmlString .= trim($node);
+   }
+   
+   // Creazione del documento
+   $doc = new DOMDocument();
+   $doc->loadXML($xmlString);
+   $records = $doc->documentElement->childNodes;
+
+   $listaCorsi = [];
+
+   for ($i=0; $i<$records->length; $i++) {
+       $corso = new corso("", "", 0, 0, 0, 0, "", 0, "", 0);
+       $record = $records->item($i);
+       
+       $con = $record->firstChild;
+       $corso->id = $con->textContent;
+       $con = $con->nextSibling;
+       $corso->nome = $con->textContent;
+       $con = $con->nextSibling;
+       $corso->matricolaDocente = $con->textContent;
+       $con = $con->nextSibling;
+       $corso->matricolaCoDocente = $con->textContent;
+       $con = $con->nextSibling;
+       $corso->descrizione = $con->textContent;
+       $con = $con->nextSibling;
+       $corso->colore = $con->textContent;
+       $con = $con->nextSibling;
+       $corso->anno = $con->textContent;
+       $con = $con->nextSibling;
+       $corso->semestre = $con->textContent;
+       $con = $con->nextSibling;
+       $corso->curriculum = $con->textContent;
+       $con = $con->nextSibling;
+       $corso->cfu = $con->textContent;
+       $con = $con->nextSibling;
+       $corso->ssd = $con->textContent;
+       $con = $con->nextSibling;
+       $corso->idCorsoLaurea = $con->textContent;
+       $con = $con->nextSibling;
+       $stato = $con->textContent;
+       if($stato)
+        $listaCorsi[] = $corso;
+   }
+   return $listaCorsi;
+}
+
+\end{lstlisting}
+
 \medskip
 
 \subsubsection{phpFunctions-insert.php}
+
+La collezione di funzioni \emph{phpFunctions-insert.php} contiene tutte quelle funzioni php che, interagendo con i file xml, inseriscono dati all'interno di uno o più file. La differenza tra le diverse procedure dichiarate all'interno di questa collezione è solo nei file coinvolti, e non nelle metodologie applicate per implementare l'inserimento. Per questo motivo prenderemo in studio una sola funzione presa a campione all'interno dello script.
+
+\medskip
+
+L'operazione di inserimento viene realizzata utilizzando il metodo \emph{addChild()}, specificato come parametro della funzione l'elemento che si vuole inserire nel file. Prima però, è necessario che il file sia stato caricato in un'apposita variabile tramite la funzione \emph{simplexml-load-file()}.
+Riportiamo un esempio nell'area sottostante.
+
+\medskip
+
+Funzione - \emph{nextFaqVoteId()} 
+
+\medskip
+
+\begin{lstlisting}[language=PHP]
+function nextFaqVoteId(){
+    $xmlString = "";
+    foreach ( file("../Xml/votoFAQ.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaId = [];
+     
+    for ($i=0; $i<$records->length; $i++) { 
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $listaId[] = $con->textContent;
+    }
+    $id = 1;
+
+    while(in_array($id,$listaId)){
+        $id++;
+    }
+    
+    return $id;
+}
+\end{lstlisting}
 
 \medskip
 
 \subsubsection{phpFunctions-login.php}
 
+La collezione di \emph{phpFunctions-login.php} contiene tutte quelle funzioni impiegate per autenticare le diverse tipologie di utenze. Le funzioni si basano sugli approcci visti nella sezione dedicata allo script \emph{phpFunctions-get.php}.
+Riportiamo una funzione presa a campione dal file nell'area sottostante.
+
+\medskip
+
+Funzione - \emph{eliminaAppello()} 
+
+\medskip
+
+\begin{lstlisting}[language=PHP]
+function assegnaCorso($id_corso, $matricola_docente, $matricola_codocente) {
+    $xmlString = "";
+    foreach ( file("../Xml/corsi.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $corsi = simplexml_load_file('../Xml/corsi.xml');
+
+    foreach($corsi as $corso) {
+        if($corso->id == $id_corso && $corso->stato == 1) {
+            $corso->matricolaDocente = $matricola_docente;
+            $corso->matricolaCoDocente = $matricola_codocente;
+        }
+    }
+
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/corsi.xml', "w");
+    $result = fwrite($f,  $corsi->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    else
+        return TRUE;
+}
+\end{lstlisting}
+
 \medskip
 
 \subsubsection{phpFunctions-misc.php}
 
+La collezione di funzioni \emph{phpFunctions-misc.php} contiene tutte quelle funzioni che non sono inquadrabili in un particolare categoria. Al suo interno troviamo funzioni che generano progressivamente gli id , funzioni che verificano la presenza di elementi all'interno di file e l'insieme di funzioni dedite al calcolo della reputazione.
+
+La definizione di queste funzioni si basa sulle metodologie viste nelle altre sezioni e non aggiunge niente di nuovo a quanto già visto. In ogni caso, vengono successivamente riportate due funzioni presa a campione al file, una dedita alla generazione dell'id, e un dedicata alla verifica della presenza di dati all'interno del file.
+ 
 \medskip
 
+Funzione - \emph{nextFaqid()} 
+
+\medskip
+
+\begin{lstlisting}[language=PHP]
+function nextFaqid(){
+    $xmlString = "";
+    foreach ( file("../Xml/faqs.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+         
+    // Creazione del documento
+    $doc = new DOMDocument();
+    $doc->loadXML($xmlString);
+    $records = $doc->documentElement->childNodes;
+     
+    $listaId = [];
+     
+    for ($i=0; $i<$records->length; $i++) {
+        $record = $records->item($i);
+             
+        $con = $record->firstChild;
+        $listaId[] = $con->textContent;
+    }
+    $id = 1;
+
+    while(in_array($id,$listaId)){
+        $id++;
+    }
+    
+    return $id;
+}
+\end{lstlisting}
+
+\medskip
+
+Funzione - \emph{verificaPresenzaCorsoDiLaurea()} 
+
+\medskip
+
+\begin{lstlisting}[language=PHP]
+function verificaPresenzaCorsoDiLaurea($nome) {
+    $listaCorsiDiLaurea = getCorsiDiLaurea();
+
+    foreach($listaCorsiDiLaurea as $corso)
+        if(strtolower($corso->nome) == strtolower($nome))
+            return TRUE;
+    
+    return FALSE;
+}
+
+\end{lstlisting}
+
+\medskip
 \subsubsection{phpFunctions-modify.php}
+
+La collezione di funzioni \emph{phpFunctions-modify.php} contiene tutte quelle funzioni php che, interagendo con i file xml, modificano il contenuto di uno o più elementi. La differenza tra le diverse procedure dichiarate all'interno di questa collezione è solo nei file coinvolti, e non nelle metodologie applicate per implementare la modifica. Per questo motivo prenderemo in studio una sola funzione presa a campione all'interno del file.
+
+\medskip
+
+Per realizzare la modifica di un determinato elemento si è adottato l'uso del metodo \emph{simplexml-load-file()}, che permette di caricare il file xml all'interno di una variabile, rendendolo così attraversabile tramite un ciclo. 
+Eseguita la modifica, si effettua il salvataggio del file utilizzando le funzioni \emph{fwrite()} e \emph{fopen}. Riportiamo un esempio nell'area sottostante.
+
+\medskip
+
+Funzione - \emph{eliminaAppello()} 
+
+\medskip
+
+\begin{lstlisting}[language=PHP]
+function assegnaCorso($id_corso, $matricola_docente, $matricola_codocente) {
+    $xmlString = "";
+    foreach ( file("../Xml/corsi.xml") as $node ) {
+        $xmlString .= trim($node);
+    }
+
+    $corsi = simplexml_load_file('../Xml/corsi.xml');
+
+    foreach($corsi as $corso) {
+        if($corso->id == $id_corso && $corso->stato == 1) {
+            $corso->matricolaDocente = $matricola_docente;
+            $corso->matricolaCoDocente = $matricola_codocente;
+        }
+    }
+
+
+    // Sovrascrive il vecchio file con i nuovi dati
+    $f = fopen('../Xml/corsi.xml', "w");
+    $result = fwrite($f,  $corsi->asXML());
+    fclose($f);
+
+
+    if(!$result) 
+        return FALSE;
+    else
+        return TRUE;
+}
+\end{lstlisting}
 
 \medskip
 
 \section{Script di definizione dello stile}
 
+In questo sezione analizzeremo tutti gli script contenti le definizioni dello stile impiegato all'interno delle diverse pagine web della piattaforma. È stato fatto un ampio uso delle regole associate all'attributo \emph{FLEX}, tra cui allineamento del contenuto e giustificazione di quest'ultimo. Perciò, si eviterà  di far notare la presenza delle suddette regole in ogni script che segue. 
+
 \medskip
 
 \subsubsection{stile-amministrazione.css}
+
+Questo script definisce regole di stile comuni a tutte quelle pagine, associate ad un utenza di tipo Amministratore, contenti form di modifica dei dati(\emph{si faccia riferimento alla sezione dedicata agli amministratori presente nel capitolo 2}).
+In particolare ,al suo interno, sono presenti tutte quelle dichiarazioni che definiscono la visualizzazione e il comportamento dei tag \emph{form} e \emph{input}, in modo da ottenere l'effetto mostrato nei diversi screenshot sopracitati. 
 
 \medskip
 
 \subsubsection{stile-base.css}
 
+Questo script definisce regole di stile comuni a gran parte delle pagine. 
+Innanzitutto, contiene le dichiarazioni di tutte le proprietà che permettono di visualizzare la barra superiore, presente in tutte le pagine web appartenenti alla piattaforma. 
+Definisce, inoltre, le regole necessarie a visualizzare la barra laterale presente in tutte quelle pagine accessibili solo dopo essersi autenticati. Nel dettaglio, definisce altezza della barra, utilizzando la \emph{viewHeight} come unità di misura della dimensione e specifica il comportamento delle diverse voci presenti nel menu, che siano animate (uso della proprietà \emph{hover}) o meno.
+
+Vengono dichiarate al suo interno quelle regole per la visualizzazione dei blocchi contenti le informazioni di appelli e corsi(si veda il manuale utente alla sezione \emph{verbalizzare appelli} per un riscontro grafico) e dei blocchi visualizzati nella homepage.
+
+Infine, un'ultima porzione delle dichiarazioni riguarda il comportamento di\emph{form} e tag \emph{input} contenute all'interno di \emph{div} o tag \emph{H}.
+
 \medskip
 
 \subsubsection{stile-visualizza-esame.css}
+
+Questo script definisce le regole necessarie per realizzare la pagina
+\emph{visualizzaInfoCorso.php}. In particolare, si fa uso dell'attributo \emph{FLEX} per strutturare la pagina in blocchi, e per creare sia il container della descrizione del corso, sia il piccolo indice contente le informazioni specifiche di quest'ultimo.
 
 \medskip
 
 \subsubsection{stileBacheca.css}
 
+Questo script definisce le regole necessarie per realizzare la pagina
+\emph{homepage-users-visualizzaBacheca.php}. Lo script può essere separato in diversi gruppi per facilitarne la comprensione.
+
+Il primo gruppo che analizziamo riguarda l'insieme di regole che realizzano la barra di navigazione posta in alto all'interno della pagina. Oltre ad utilizzare flex, si è gestito l'evento \emph{hover} per rendere interattivi i singoli blocchi che compongono il navigatore.
+
+A seguire incontriamo le regole necessarie a definire la form per creare un nuovo post. Si usa la regola \emph{display} impostato \emph{none} così da poterla visualizzare alla pressione di un bottone.
+
+Infine, troviamo il gruppo contente le dichiarazioni per visualizzare correttamente la lista dei post. Anche qui, gestendo l'evento \emph{hover} e utilizzando in maniera opportuna le proprietà di \emph{display} e \emph{position}, rendiamo gran parte dell'interfaccia interattiva e animata.
 \medskip
 
 \subsubsection{stileFaq.css}
 
+Questo script definisce le regole necessarie per realizzare la pagina
+\emph{homepage-users-visualizzaFaq.php}. 
+
+Un primo insieme di regole definisce la visualizzazione dei blocchi contenitori della domande, che siano complete o incomplete. Per quanto riguarda questo aspetto, un importante ruolo è rivestito dalle proprietà \emph{max-height} e \emph{overflow}. Queste due proprietà permettono ai container delle domande di adattarsi al loro contenuto, fino ad un certo limite di altezza, oltre il quale, comparirà una scrollbar.
+
+Il secondo gruppo di dichiarazioni riguarda le regole di stile per visualizzare la form di inserimento delle domande posta in fondo alla pagina.
 \medskip
 
 \subsubsection{stileHomepage-users.css}
+
+Questo script definisce le regole necessarie per realizzare le pagine 
+\emph{homepage-users.php} e\emph{homepage-users-Carriera.php}. In particolare, al suo interno vengono dichiarate tutte le regole impiegate per presentare l'anagrafica e la carriera di un utente.
 
 \medskip
 
 \subsubsection{stileLogin.css}
 
+Questo script definisce le regole di stile necessarie a visualizzare le pagine \emph{login.php} e \emph{form-registrazione.php}.
+
+Si fa ampio uso della proprietà \emph{border} per creare un layout moderno, e si gestiscono gli eventi di \emph{hover} per migliorare l'interattività della pagina.
+
 \medskip
 
 \subsubsection{stileVisualizzazioneLista.css}
 
+Questo script definisce le regole necessarie per ottenere un effetto di visualizzazione a lista, analogo a quello visto in pagine come \emph{homepage-users-esamiSostenuti} (\emph{si faccia riferimento al capitolo 2 per un avere un riferimento grafico}).
+
+La realizzazione dello script, oltre a basarsi sulle regole \emph{FLEX}, gioca con l'attributo \emph{absolute} e \emph{relative}, della proprietà \emph{position}, per ricoprire determinati \emph{div} con bottoni, rendendoli a tutti gli effetti cliccabili.
 \medskip
 
 \subsubsection{stilePost.css}
 
+Questo script contiene la definizione di tutte le regole di stile impiegate nella pagina \emph{homepage-users-visualizzaPost.php}.
+Come già accennato la pagina è stata divisa mediante \emph{flexbox}, generando così una struttur a blocchi.
+
+Prendendo spunto da una risorsa online, si è importato un sistema di voto a stelle, realizzato con una combinazione delle proprietà \emph{hover}, \emph{checked} e \emph{before}.
 \medskip
 
 \chapter{Elenco utenze}
