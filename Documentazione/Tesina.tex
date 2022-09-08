@@ -66,16 +66,18 @@ Tramite due pagine dedicate, egli può inoltre prenotarsi o cancellare le prenot
 
 Gli stessi studenti, e non solo i creatori dei post, possono valutare le risposte ottenute secondo i metodi di giudizio di utilità e accordo. L’insieme dei giudizi ricevuti costituirà la reputazione di uno studente.
 
-Un’altra funzionalità importante è quella del FAQ. Esiste una pagina di FAQ per ogni corso. Queste pagine possono essere costruite dai professori aggiungendo sia coppie di domande e risposte, sia risposte a domande proposte dagli studenti.
+Un’altra funzionalità importante è quella delle FAQ. Esiste una pagina di FAQ per ogni corso. Queste pagine possono essere costruite dai professori aggiungendo sia coppie di domande e risposte, sia risposte a domande proposte dagli studenti.
+%EDIT?
 
-In entrambe le due pagine (Bacheca e FAQ), un’utenza autenticata come Segreteria è in grado di moderare, potendo modificare, eliminare o fissare post e domande.
+In entrambe le sezioni di bacheca e FAQ, un’utenza autenticata come Segreteria è in grado di moderare, potendo modificare, eliminare o fissare post e domande.
+%EDIT?
 
 Le tipologie di utenti che possono usufruire della piattaforma, con annesse rispettive funzionalità, sono le seguenti:
 \begin{itemize}
 \item Visitatore (utente non autenticato);
 \item Studente;
-\item Professore;
-\item Segreteria (moderatore FAQ);
+\item Docente;
+\item Segreteria (moderatore bacheche e FAQ);
 \item Utente Amministratore.
 \end{itemize}
 
@@ -103,30 +105,32 @@ Le funzionalità associate alle utenze sopra elencate sono elencate di seguito.
 \item Visualizzare le pagine FAQ dei corsi, ed eventualmente contribuire con delle domande.
 \end{itemize}
 
-\item[Utente registrato – Professore.] Un utente di questo tipo è abilitato a:
+\item[Utente registrato – Docente.] Un utente di questo tipo è abilitato a:
 
 \begin{itemize}
-\item Aggiungere, modificare o eliminare appelli del suo corso;
-\item Visualizzare gli studenti prenotati ad un dato appello, ed eventualmente registrare i voti, rinunce o bocciature;
-\item Utilizzare il portale delle FAQ inserendo nuove domande con risposte, oppure rispondendo alle domande che gli studenti propongono.
+\item Aggiungere, modificare o eliminare appelli del suo corso;	%EDIT
+\item Visualizzare gli studenti prenotati ad un dato appello, ed eventualmente registrare i voti, le rinunce o le bocciature;
+\item Utilizzare il portale delle FAQ inserendo nuove domande con risposte, oppure rispondendo alle domande che gli studenti propongono.	%EDIT
 \end{itemize}
 
 \item[Utente registrato – Segreteria.] Un utente di questo tipo è abilitato a:
 
 \begin{itemize}
-\item Moderare la bacheca dei corsi;
-\item Moderare le pagine FAQ, in particolare fissando alcune risposte o inserendone di nuove, che in caso saranno fissate in cima;
-\item Visualizzare la lista degli appelli proposti da tutti i professori;
+\item Moderare le bacheche dei corsi;
+\item Moderare le pagine FAQ, in particolare fissando alcune risposte o inserendone di nuove, che in caso saranno fissate in cima;	%EDIT
+\item Visualizzare la lista degli appelli proposti da tutti i docenti;
 \item Inserire, modificare ed eliminare appelli relativi agli esami presenti.
+% verbalizzare esami
 \end{itemize}
 
 \item[Utente Amministratore.] Un utente di questo tipo è abilitato a:
 
 \begin{itemize}
 \item Sospendere o bloccare utenti;
-\item Moderare le sezioni bacheca e FAQ, potendone eliminare i post, o alcune risposte;
+\item Moderare le sezioni bacheca e FAQ, potendone modificare/eliminare i post, o alcune risposte;
 \item Modificare dati associati delle altre utenze;
 \item Inserire, modificare ed eliminare appelli relativi agli esami presenti.
+% verbalizzare esami
 \end{itemize}
 \end{description}
 
@@ -157,7 +161,7 @@ I dati che verranno manipolati dalla piattaforma sono elencati di seguito.
 \item Nome;
 \item Cognome;
 \item Matricola;
-\item Corso;
+\item Corso;	%EDIT
 \item Password di accesso.
 \end{itemize}
 
@@ -165,6 +169,9 @@ I dati che verranno manipolati dalla piattaforma sono elencati di seguito.
 \begin{itemize}
 \item Username e password di accesso al pannello di amministrazione.
 \end{itemize}
+
+%Amministratore = segreteria qui
+
 \end{description}
 
 \medskip
@@ -178,7 +185,7 @@ In questa sezione verranno approfondite le funzionalità elencate nella sezione 
 
 \subsubsection{Login e registrazione}
 
-La piattaforma, tramite un'opportuna form, offre la possibilità all'utente di effettuare il login, in modo da poter accedere alle funzionalità previste per la sua tipologia di utenza. In particolare, poiché ciascuna utenza possiede caratteristiche differenti, al fine di permetterne il login viene inserito un menù di scelta multipla, che consentirà all'utente di scegliere l'utenza con cui desidera autenticarsi. In base alla scelta effettuata dall'utente, comparirà una diversa form di login; per uno studente e per un professore verranno richiesti matricola e password; per un addetto alla segreteria e per un utente amministratore, invece, verranno richiesti uno username e una password.
+La piattaforma, tramite un'opportuna form, offre la possibilità all'utente di effettuare il login, in modo da poter accedere alle funzionalità previste per la sua tipologia di utenza. In particolare, poiché ciascuna utenza possiede caratteristiche differenti, al fine di permetterne il login, tale form varia dinamicamente in base alla tipologia di utenza con la quale l'utente desidera autenticarsi. In base alla scelta effettuata dall'utente, comparirà quindi una diversa form di login; per uno studente e per un docente verranno richiesti matricola e password; per un addetto alla segreteria e per un utente amministratore, invece, verranno richiesti uno username e una password.
 
 Qualora l'utente visitatore non fosse registrato presso il portale, invece, potrà sempre avere la possibilità di registrarsi, specificando la tipologia di utenza desiderata. In base alla tipologia di utenza scelta, dunque, verrà presentata un'opportuna form di registrazione, che richiederà l'inserimento dei dati già presentati nel \emph{paragrafo 1.1}.
 
@@ -186,9 +193,9 @@ Qualora l'utente visitatore non fosse registrato presso il portale, invece, potr
 
 \subsubsection{Visualizzazione di corsi ed esami}
 
-La piattaforma mette a disposizione dell'utente, sia egli autenticato oppure un semplice visitatore, la possibilità di visualizzare un elenco dei corsi di laurea offerti dall'università cui il sito fa riferimento. Tale elenco può essere presentato all'utente in vari modi. In particolare, è data la possibilità all'utente di visualizzare l'elenco dei corsi di laurea per intero (opzione di default, raggiungibile tramite la pressione di un apposito pulsante), o ridotto, tramite un filtro di ricerca basato sul nome. Questo filtro verrà implementato tramite una barra di ricerca, nella quale l'utente può inserire del contenuto testuale; la ricerca potrà concludersi con esito negativo o con esito positivo. In caso di esito negativo, verrà semplicemente stampato un opportuno messaggio di errore, indicante il fatto che non è presente nella piattaforma un corso di laurea il cui nome soddisfi le specifiche richieste dall'utente. In caso di esito positivo, invece, verrà presentato un elenco contenente tutte le voci (almeno una) relative ai corsi di laurea il cui nome contiene, almeno in parte, il contenuto testuale inserito dall'utente.
+La piattaforma mette a disposizione dell'utente, sia egli autenticato oppure un semplice visitatore, la possibilità di visualizzare un elenco dei corsi di laurea offerti dall'università cui il sito fa riferimento. Tale elenco può essere presentato all'utente in vari modi. In particolare, è data la possibilità all'utente di visualizzare l'elenco dei corsi di laurea per intero (opzione di default, raggiungibile tramite la pressione di un apposito pulsante), o in modo ridotto, tramite un filtro di ricerca basato sul nome. Questo filtro verrà implementato tramite una barra di ricerca, nella quale l'utente può inserire del contenuto testuale; la ricerca potrà concludersi con esito negativo o con esito positivo. In caso di esito negativo, verrà semplicemente stampato un opportuno messaggio di errore, indicante il fatto che non è presente nella piattaforma un corso di laurea il cui nome soddisfi le specifiche richieste dall'utente. In caso di esito positivo, invece, verrà presentato un elenco contenente tutte le voci (almeno una) relative ai corsi di laurea il cui nome contiene, almeno in parte, il contenuto testuale inserito dall'utente.
 
-Una volta presentato il suddetto elenco, l'utente può selezionare una delle voci che compaiono a schermo; in questo caso, si avrà accesso ad una pagina di visualizzazione degli esami relativi al particolare corso di laurea selezionato. La presentazione degli esami avviene secondo modalità analoghe a quelle descritte per la presentazione dei corsi di laurea; inizialmente, vengono presentati a schermo tutti gli esami in appositi riquadri, ciascuno contenente il nome dell'esame e un pulsante \emph{info} che, se premuto, reindirizza l'utente ad una pagina di informazioni relative all'esame selezionato. Anche nel caso degli esami, inoltre, è possibile sfruttare la barra di ricerca per imporre un filtro sul nome dell'esame, con modalità identiche a quelle precedentemente esplicate.
+Una volta presentato il suddetto elenco, l'utente può selezionare una delle voci che compaiono a schermo; in questo caso, si avrà accesso ad una pagina di visualizzazione degli esami relativi al particolare corso di laurea selezionato. La presentazione degli esami avviene secondo modalità analoghe a quelle descritte per la presentazione dei corsi di laurea; inizialmente, vengono presentati a schermo tutti gli esami in appositi riquadri, ciascuno contenente il nome dell'esame e un pulsante che, se premuto, reindirizza l'utente ad una pagina di informazioni relative all'esame selezionato. Anche nel caso degli esami, inoltre, è possibile sfruttare la barra di ricerca per imporre un filtro sul nome dell'esame, con modalità identiche a quelle precedentemente esplicate.
 
 \medskip
 
@@ -196,19 +203,19 @@ Una volta presentato il suddetto elenco, l'utente può selezionare una delle voc
 
 \subsubsection{Visualizzazione informazioni personali}
 
-All'interno della piattaforma l'utenza studente è definita da molti campi, alcuni dei quali rappresentano la carriera, mentre altri semplici dati anagrafici. Il portale mette a disposizione diverse pagine per permettere la visualizzazione e la modifica, ove fosse permessa, di questi ultimi.
+All'interno della piattaforma, l'utenza studente è definita da molti campi, alcuni dei quali rappresentano la carriera, mentre altri semplici dati anagrafici. Il portale mette a disposizione diverse pagine per permettere la visualizzazione e la modifica, ove fosse permessa, di questi ultimi.
 
-Tramite un'apposita pagina è possibile visualizzare tutte le informazioni relative alla propria carriera. In particolare, potrà visualizzare: il totale dei crediti acquisiti, media ponderata e aritmetica, reputazione totale (si veda sezione bacheca). Strettamente legato alla carriera, esiste uno storico di esami, anch'esso visualizzabile tramite apposita pagina, che consente all'utente di ripercorre tutti gli esami dati, con informazioni relative a voto e data. La navigazione di questo elenco viene facilitata dalla possibilità di effettuare una ricerca tramite nome, o imponendo un diverso un ordinamento dei contenuti, scegliendo tra quelli proposti: per voto (crescente o decrescente), per data (crescente o decrescente), ordine alfabetico.
+Tramite un'apposita pagina, è possibile visualizzare tutte le informazioni relative alla propria carriera. In particolare, uno studente potrà visualizzare: il totale dei crediti acquisiti, la media aritmetica degli esami sostenuti e la propria reputazione totale (si veda sezione bacheca). Strettamente legato alla carriera, esiste uno storico di esami, anch'esso visualizzabile tramite apposita pagina, che consente all'utente di ripercorrere tutti gli esami da egli sostenuti, con informazioni relative ad esito e data; la visualizzazione di questo storico avviene per ordine di esame sostenuto.
 
-Una terza pagina, invece, permette all'utente di visualizzare le proprie informazioni personali quali nome, cognome, matricola e data di nascita. Si permette la modifica del solo campo della password.
+Una terza pagina, invece, permette all'utente di visualizzare le proprie informazioni personali quali nome, cognome, matricola, data di nascita e password, opportunamente oscurata; si permette la modifica del solo campo relativo alla password.
 
 \medskip
 
 \subsubsection{Gestione delle prenotazioni degli appelli}
 
-Il sistema degli appelli è una delle funzionalità base previste dalla piattaforma. Per \emph{appello} si intende lo svolgimento (solo figurativo) dell'esame di un determinato corso. Ogni appello viene inserito nella piattaforma, generalmente da un professore; tale funzionalità in ogni caso è accessibile anche alla segreteria e all'utente amministratore per motivi logistici di gestione. In questa sezione tratteremo solamente il punto di vista degli studenti.
+Il sistema di gestione degli appelli è una delle funzionalità base previste dalla piattaforma. Per \emph{appello} si intende la possibilità di svolgimento (solo figurativo) dell'esame di un determinato corso, in una certa data. Ogni appello viene inserito nella piattaforma, generalmente da un docente; tale funzionalità, in ogni caso, è accessibile anche alla segreteria e all'utente amministratore per motivi logistici di gestione. In questa sezione tratteremo solamente il punto di vista degli studenti.
 
-Uno studente, potendo visualizzare tutti gli appelli relativi al corso a cui è iscritto, ha la possibilità di prenotare la propria partecipazione allo svolgimento del relativo l'esame. Qualora sorgesse la necessità, è sempre possibile cancellare una prenotazione effettuata.
+Uno studente, potendo visualizzare tutti gli appelli relativi al corso di laurea a cui è iscritto, ha la possibilità di prenotare la propria partecipazione allo svolgimento del relativo l'esame. Qualora sorgesse la necessità, è sempre possibile cancellare una prenotazione effettuata.
 
 \medskip
 
@@ -218,13 +225,13 @@ Uno studente, potendo visualizzare tutti gli appelli relativi al corso a cui è 
 
 Una bacheca è uno spazio che permette a diversi studenti di scambiarsi informazioni. Tale scambio di informazioni, che può essere volto all'aiuto reciproco, può avvenire tramite la pubblicazione di post o tramite replica a post già esistenti.
 
-Una bacheca contiene tutti i post, con i relativi commenti, riguardanti un singolo esame di un corso di laurea; di conseguenza, la piattaforma mette a disposizione una bacheca per ogni esame di ogni corso di laurea. Con il termine \emph{post} si intende un messaggio testuale, con funzione di opinione, commento o intervento, inviato nella relativa bacheca. Tutti i post di una bacheca saranno presentati all'utente sotto forma di riquadro testuale, il cui contenuto rappresenta l'effettiva informazione; inoltre, un post è caratterizzato anche dal suo autore e dall'istante temporale di pubblicazione. Un \emph{commento} è un messaggio testuale di intervento in relazione al post cui si riferisce; viene visualizzato in subordinazione al post cui si riferisce, ed è caratterizzato da un contenuto testuale, che rappresenta l'informazione di intervento, dal suo autore e dall'istante temporale di pubblicazione. Ogni post ed ogni commento, infine, possono essere recensiti e giudicati da altri studenti in base a criteri di utilità e accordo, che saranno definiti nel seguito del paragrafo. Le recensioni dei commenti, in particolare, sono volte a stabilire la reputazione totale di uno studente: essa, infatti, viene calcolata come media di tutti i voti di accordo che lo studente stesso ha ricevuto nelle sue interazioni con gli altri studenti, commentando i post delle varie bacheche messe a disposizione dalla piattaforma. Le precise modalità di valutazione saranno esplicate in seguito.
+Una bacheca contiene tutti i post, con i relativi commenti, riguardanti un singolo esame di un corso di laurea; di conseguenza, la piattaforma mette a disposizione una bacheca per ogni esame di ogni corso di laurea. Con il termine \emph{post} si intende un messaggio testuale, con funzione di opinione, commento o intervento, inviato nella relativa bacheca. Tutti i post di una bacheca saranno presentati all'utente sotto forma di riquadro testuale, il cui contenuto rappresenta l'effettiva informazione; inoltre, un post è caratterizzato anche dal suo autore (con annessa reputazione) e dall'istante temporale di pubblicazione. Un \emph{commento} è un messaggio testuale di intervento in relazione al post cui si riferisce; viene visualizzato in subordinazione al post cui si riferisce, ed è caratterizzato da un contenuto testuale, che rappresenta l'informazione di intervento, dal suo autore e dall'istante temporale di pubblicazione. Ogni post ed ogni commento, infine, possono essere recensiti e giudicati da altri studenti in base a criteri di utilità e accordo, che saranno definiti nel seguito del paragrafo. I voti di utilità e di accordo su post e commenti, in particolare, sono volti a stabilire la reputazione totale di uno studente: essa, infatti, viene calcolata come media di tutti i voti di utilità e di accordo che lo studente stesso ha ricevuto nelle sue interazioni con gli altri studenti, pubblicando e commentando i post nelle varie bacheche messe a disposizione dalla piattaforma. Le precise modalità di valutazione saranno esplicate in seguito.
 
-Uno studente, qualora avesse la necessità di ricavare informazioni aggiuntive su un singolo esame, può scegliere di visitare l'apposita bacheca, nella quale saranno contenuti i post e relativi commenti riguardanti l'esame in oggetto. Nel caso in cui le richieste dello studente non risultassero soddisfatte dai post esistenti nella bacheca, lo studente in questione può decidere di creare egli stesso un post, in cui avanzare esplicitamente la richiesta. Tale post potrà poi essere commentato da altri studenti. Nel caso in cui, invece, lo studente si sentisse preparato per rispondere ad una domanda presente in un post già esistente in bacheca, egli può scegliere di commentare quello stesso post, inserendo la risposta che ritiene più opportuna.
+Uno studente, qualora avesse la necessità di ricavare informazioni aggiuntive su un singolo esame, può scegliere di visitare l'apposita bacheca, nella quale saranno contenuti i post e relativi commenti riguardanti l'esame in oggetto. Nel caso in cui le richieste dello studente non risultassero soddisfatte dai post esistenti nella bacheca, lo studente in questione può decidere di creare egli stesso un post, in cui avanzare esplicitamente la richiesta. Tale post potrà poi essere commentato da altri studenti. Nel caso in cui, invece, lo studente si sentisse preparato per rispondere ad una domanda o ad una questione presente in un post già esistente in bacheca, egli può scegliere di commentare quello stesso post, inserendo la risposta che ritiene più opportuna.
 
 \medskip
 
-Per quanto riguarda la fruizione dei contenuti delle bacheche, il portale mette a disposizione una pagina web che permette la visualizzazione di tutte le bacheche esistenti. Tale pagina offre inoltre una funzionalità di ricerca di una singola bacheca tramite un filtro applicato sul nome; l'implementazione logica della ricerca è la stessa già precedentemente esplicata nel caso della ricerca di corsi dei laurea o degli esami. Selezionando una particolare bacheca, è possibile accedere ad un'altra pagina web che permette la visualizzazione di un elenco di tutti i titoli dei post contenuti nella bacheca selezionata. Selezionando un particolare post fra quelli elencati, l'utente viene reindirizzato verso una pagina web che permette la visualizzazione completa del post, in cima alla pagina stessa, a cui seguono gli eventuali commenti pubblicati da altri studenti. 
+Per quanto riguarda la fruizione dei contenuti delle bacheche, il portale mette a disposizione una pagina web che permette la visualizzazione di tutte le bacheche esistenti. Selezionando una particolare bacheca, è possibile accedere ad un'altra pagina web che permette la visualizzazione di un elenco di tutti i titoli dei post contenuti nella bacheca selezionata. Selezionando un particolare post fra quelli elencati, l'utente viene reindirizzato verso una pagina web che permette la visualizzazione completa del post, in cima alla pagina stessa, a cui seguono gli eventuali commenti pubblicati da altri studenti. 
 
 \medskip
 
@@ -234,13 +241,13 @@ Ogni post ed ogni commento contenuti nelle varie bacheche, come già precedentem
 
 La recensione di un commento viene effettuata tramite un meccanismo di valutazione basato sull'assegnazione di un punteggio, che varia in valore da 1 a 5 punti. Il singolo commento, pertanto, sarà caratterizzato da un grado di accordo pari alla media delle valutazioni ricevute.
 
-La recensione di un post, invece, viene effettuata tramite un meccanismo di valutazione basato sull'assegnazione di un \emph{up} o di un \emph{down}, che incrementano o decrementano rispettivamente un punteggio complessivo; questo punteggio complessivo andrà a caratterizzare l'utilità del post stesso.
+La recensione di un post, invece, viene effettuata tramite un meccanismo di valutazione basato sull'assegnazione di un \emph{up} o di un \emph{down}, che incrementano o decrementano rispettivamente un punteggio complessivo; questo punteggio complessivo andrà a caratterizzare l'utilità totale del post stesso.
 
 \medskip
 
 \subsubsection{Utilizzo del sistema delle FAQ}
 
-Il sistema delle FAQ è un potente strumento che permette ai professori di andare incontro alle necessità dei loro studenti. Infatti, questa funzionalità prevede un sistema di domande e risposte, che tentanto di ricoprire tutti le possibili perplessità in relazione al corso trattato. Tratteremo ora solamente la fruizione di questo strumento dal punto di vista dello studente.
+Il sistema delle FAQ è un potente strumento che permette ai docenti di andare incontro alle necessità dei loro studenti. Infatti, questa funzionalità prevede un sistema di domande e risposte, che tentano di ricoprire tutte le possibili perplessità in relazione al corso trattato. Tratteremo ora la fruizione di questo strumento solamente dal punto di vista dello studente.
 
 Uno studente può accedere ad una homepage dedicata contente l'elenco di tutte le FAQ associate agli esami del suo corso di laurea. Ciascun elemento reindirizza lo studente ad una pagina che permette di visualizzare l'elenco delle FAQ relative all'esame selezionato. Quest'ultima pagina è costituita da due blocchi, disposti in colonna: il primo situato nella parte alta della pagina contente le FAQ complete di domanda e risposta; il secondo invece, conterrà quelle FAQ, proposte dagli studenti, a cui non è ancora stata data una risposta.
 
@@ -250,25 +257,24 @@ Lo studente, oltre a poter visualizzare il semplice elenco delle FAQ, ha la poss
 
 \medskip
 
-\subsection{Funzionalità professore}
+\subsection{Funzionalità docente}
 
 \subsubsection{Gestione degli appelli ed esami}
 \label{sec:verb}
 
-Il sistema degli appelli è una delle funzionalità base previste dalla piattaforma. Per \emph{appello} si intende lo svolgimento (solo figurativo) dell'esame di un determinato corso. Ogni appello viene inserito nella piattaforma, generalmente da un professore; tale funzionalità in ogni caso è accessibile anche alla segreteria e all'utente amministratore per motivi logistici di gestione. In questa sezione tratteremo solamente il punto di vista dei docenti.
+Il sistema di gestione degli appelli è una delle funzionalità base previste dalla piattaforma. Per \emph{appello} si intende la possibilità di svolgimento (solo figurativo) dell'esame di un determinato corso, in una certa data. Ogni appello viene inserito nella piattaforma, generalmente da un docente; tale funzionalità, in ogni caso, è accessibile anche alla segreteria e all'utente amministratore per motivi logistici di gestione. In questa sezione tratteremo solamente il punto di vista dei docenti.
 
-Un docente è in grado di inserire, modificare o eliminare un appello relativo al corso a lui referenziato. L'inserimento richiede che vengano specificate la data e l'ora dell'appello. 
-Un docente, può inoltre gestire l'esame vero e proprio; in particolare è in grado di visualizzare gli studenti prenotati a ciascun appello, ed eventualmente inserire la votazione conseguita da ciascuno studente. La votazione può essere espressa da un giudizio compreso tra 18/30 e 30/30 con lode, oppure espressa tramite lettera, R o B; la lettera R indica il ritiro dello studente dall'esame, mentre la lettera B indica una bocciatura.
+Un docente è in grado di inserire, modificare o eliminare un appello relativo al corso a lui referenziato. L'inserimento richiede che vengano specificate la data e l'ora dell'appello. Un docente, inoltre, può gestire l'esame vero e proprio; è in grado cioè di visualizzare gli studenti prenotati a ciascun appello, ed eventualmente inserire la votazione conseguita da ciascuno studente. La votazione può essere espressa da un giudizio compreso tra 18/30 e 30/30 con lode, oppure espressa tramite lettera, R o B; la lettera R indica il ritiro dello studente dall'esame, mentre la lettera B indica una bocciatura.
 
 \medskip
 
 \subsubsection{Utilizzo del sistema delle FAQ}
 
-Il sistema delle FAQ è un potente strumento che permette ai professori di andare incontro alle necessità dei loro studenti. Infatti, questa funzionalità prevede un sistema di domande e risposte, che tentanto di ricoprire tutti le possibili perplessità in relazione al corso trattato. Tratteremo ora solamente la fruizione di questo strumento dal punto di vista del docente.
+Il sistema delle FAQ è un potente strumento che permette ai docenti di andare incontro alle necessità dei loro studenti. Infatti, questa funzionalità prevede un sistema di domande e risposte, che tentano di ricoprire tutte le possibili perplessità in relazione al corso trattato. Tratteremo ora la fruizione di questo strumento solamente dal punto di vista del docente.
 
-A differenze di uno studente, ad un docente è data la possibilità di inserire coppie domanda-risposta all'interno della FAQ relativa al proprio corso o, in alternativa, la possibilità di completare le domande proposte dagli studenti.
+A differenza di uno studente, ad un docente è data la possibilità di inserire coppie domanda-risposta all'interno della FAQ relativa al proprio corso o, in alternativa, la possibilità di completare le domande proposte dagli studenti.
 
-\emph{Si fa notare al lettore che un docente è in grado di visualizzare la sola FAQ di sua competenza, ossia la FAQ dell'unico corso assegnatogli.}
+\emph{Si fa notare al lettore che un docente è in grado di visualizzare le sole FAQ di propria competenza, ossia le FAQ dei corsi ad egli assegnati.}
 \medskip
 
 \subsection{Funzionalità segreteria}
@@ -277,41 +283,37 @@ A differenze di uno studente, ad un docente è data la possibilità di inserire 
 
 Una bacheca è uno spazio che permette a diversi studenti di scambiarsi informazioni. Tale scambio di informazioni, che può essere volto all'aiuto reciproco, può avvenire tramite la pubblicazione di post o tramite replica a post già esistenti. Tratteremo ora solamente la fruizione di questo strumento dal punto di vista della segreteria.
 
-Per \emph{moderazione} delle bacheche si intende la possibilità di controllare i contenuti testuali di ciascun post e commento di ciascuna bacheca. Qualora fosse necessario intervenire, è sempre possibile eliminare uno o più commenti o un intero post. 
+Per \emph{moderazione} delle bacheche si intende la possibilità di controllare i contenuti testuali di ciascun post e commento di ciascuna bacheca. Qualora fosse necessario intervenire, è sempre possibile eliminare uno o più commenti o un intero post, oppure modificarne il contenuto.
 
 \medskip
 
 \subsubsection{Moderazione delle FAQ}
 
-Il sistema delle FAQ è un potente strumento che permette ai professori di andare incontro alle necessità dei loro studenti. Infatti, questa funzionalità prevede un sistema di domande e risposte, che tentanto di ricoprire tutti le possibili perplessità in relazione al corso trattato. Tratteremo ora solamente la fruizione di questo strumento dal punto di vista della segreteria.
+Il sistema delle FAQ è un potente strumento che permette ai docenti di andare incontro alle necessità dei loro studenti. Infatti, questa funzionalità prevede un sistema di domande e risposte, che tentano di ricoprire tutte le possibili perplessità in relazione al corso trattato. Tratteremo ora la fruizione di questo strumento solamente dal punto di vista della segreteria.
 
 La segreteria è incaricata di moderare la sezione delle FAQ. In particolare, per \emph{moderazione}, in questo caso, si intende la possibilità di controllare i contenuti di tutte le FAQ. In caso di necessità, essa può intervenire direttamente sulle singole FAQ, potendone modificare o eliminare il contenuto. 
-
 
 \medskip
 
 \subsubsection{Gestione degli appelli}
 
-Il sistema degli appelli è una delle funzionalità base previste dalla piattaforma. Per \emph{appello} si intende lo svolgimento (solo figurativo) dell'esame di un determinato corso. Ogni appello viene inserito nella piattaforma, generalmente da un professore; tale funzionalità in ogni caso è accessibile anche alla segreteria e all'utente amministratore per motivi logistici di gestione. In questa sezione tratteremo solamente il punto di vista della segreteria.
+Il sistema di gestione degli appelli è una delle funzionalità base previste dalla piattaforma. Per \emph{appello} si intende la possibilità di svolgimento (solo figurativo) dell'esame di un determinato corso, in una certa data. Ogni appello viene inserito nella piattaforma, generalmente da un docente; tale funzionalità, in ogni caso, è accessibile anche alla segreteria e all'utente amministratore per motivi logistici di gestione. In questa sezione tratteremo solamente il punto di vista della segreteria.
 
-La segreteria, per ragioni amministrative può accedere alle funzionalità, sia degli studenti, sia dei docenti.
+Per quanto riguarda la gestione degli appelli, alla segreteria sono fruibili tutte le funzionalità già previste e descritte per un'utenza di tipologia \emph{docente}, per ragioni amministrative.
+
 \medskip
 
 \subsection{Funzionalità amministratore}
 
 \subsubsection{Gestione degli account utenti}
 
-La gestione degli account è una funzionalità strettamente riservata all'utenza  amministratore. Consiste nel poter visualizzare, ed eventualmente modificare, le informazioni relative ad ogni tipo di account e, qualora ritenesse necessario un intervento diretto su un particolare account, può decidere di optare per una sospensione o eliminazione dello stesso.
+La gestione degli account è una funzionalità strettamente riservata all'utenza \emph{amministratore}. Questa gestione consiste nel poter visualizzare, ed eventualmente modificare, le informazioni relative ad ogni tipo di account e, qualora ritenesse necessario un intervento diretto su un particolare account, può decidere di optare per una sospensione o eliminazione dello stesso. \emph{Si fa notare al lettore che è sempre possibile revocare una sospensione.} 
 
-\emph{Si fa notare al lettore che è sempre possibile revocare una sospensione.} 
-
-Più nel dettaglio, esiste una schermata per ogni tipo di utenza, che permette all'amministratore di visualizzare tutte le utenze registrate presso il portale, appartenenti al tipo che si sta visualizzando. La navigazione all'interno di queste pagine è facilitata dalla possibilità di effettuare ricerche in base al campo identificativo dell'utenza. 
-A partire da una di queste schermate, e premendo sull'utenza interessata, si accede ad una pagina che permette la visualizzazione, e l'eventuale modifica, delle informazioni relative ad essa. Inoltre, attraverso la pagina in questione, è possibile sospendere (\emph{Soft Ban}) o eliminare (\emph{Ban definitivo}).
+Più nel dettaglio, esiste una schermata per ogni tipo di utenza, che permette all'amministratore di visualizzare tutte le utenze registrate presso il portale, appartenenti al tipo di utenza che si sta visualizzando. La navigazione all'interno di queste pagine è facilitata dalla possibilità di effettuare ricerche in base al campo identificativo dell'utenza. A partire da una di queste schermate, e premendo sull'utenza interessata, si accede ad una pagina che permette la visualizzazione e l'eventuale modifica delle informazioni relative ad essa. Inoltre, attraverso la pagina in questione, è possibile sospendere (\emph{Soft Ban}) o eliminare (\emph{Ban definitivo}) l'utenza selezionata.
 
 \medskip
 
-\emph{Si fa notare al lettore che l'attuazione di una sospensione (\emph{Soft Ban}) su un utente, non gli impedisce l'accesso a tutta la piattaforma, ma solamente alla sezione bacheca e alle sezione FAQ.}
-
+\emph{Si fa notare al lettore che l'attuazione di una sospensione (\emph{Soft Ban}) su un utente non gli impedisce l'accesso a tutta la piattaforma, ma solamente alla sezione bacheca e alle sezione FAQ.}
 
 \medskip
 
@@ -325,17 +327,17 @@ L'utente amministratore è in grado di usufruire di tutte le funzionalità dispo
 
 \subsubsection{Moderazione delle FAQ}
 
-Il sistema delle FAQ è un potente strumento che permette ai professori di andare incontro alle necessità dei loro studenti. Infatti, questa funzionalità prevede un sistema di domande e risposte, che tentanto di ricoprire tutti le possibili perplessità in relazione al corso trattato. Tratteremo ora solamente la fruizione di questo strumento dal punto di vista dell'amministratore.
+Il sistema delle FAQ è un potente strumento che permette ai docenti di andare incontro alle necessità dei loro studenti. Infatti, questa funzionalità prevede un sistema di domande e risposte, che tentano di ricoprire tutte le possibili perplessità in relazione al corso trattato. Tratteremo ora la fruizione di questo strumento solamente dal punto di vista dell'amministratore.
 
-L'utente amministratore, oltre alle funzionalità accessibili dall'utenza  \emph{segreteria} (già trattate nel \emph{paragrafo 1.2.4}), può forzare l'inserimento di coppie domande-risposta.
+L'utente amministratore gode di tutte le funzionalità accessibili dall'utenza \emph{segreteria} (già trattate nel \emph{paragrafo 1.2.4}).
 
 \medskip
 
 \subsubsection{Gestione degli appelli}
 
-Il sistema degli appelli è una delle funzionalità base previste dalla piattaforma. Per \emph{appello} si intende lo svolgimento (solo figurativo) dell'esame di un determinato corso. Ogni appello viene inserito nella piattaforma, generalmente da un professore; tale funzionalità in ogni caso è accessibile anche alla segreteria e all'utente amministratore per motivi logistici di gestione. In questa sezione tratteremo solamente il punto di vista dell'utente amministratore.
+Il sistema di gestione degli appelli è una delle funzionalità base previste dalla piattaforma. Per \emph{appello} si intende la possibilità di svolgimento (solo figurativo) dell'esame di un determinato corso, in una certa data. Ogni appello viene inserito nella piattaforma, generalmente da un docente; tale funzionalità, in ogni caso, è accessibile anche alla segreteria e all'utente amministratore per motivi logistici di gestione. In questa sezione tratteremo solamente il punto di vista dell'utente amministratore.
 
-L'utente amministratore, per ragioni amministrative, può accedere alle funzionalità sia degli studenti, sia dei docenti.
+Per quanto riguarda la gestione degli appelli, all'amministratore sono fruibili tutte le funzionalità già previste e descritte per un'utenza di tipologia \emph{docente}, per ragioni amministrative.
 
 \medskip
 
@@ -421,7 +423,7 @@ Per quanto riguarda l'utenza \textbf{Docente}, i campi \emph{nome}, \emph{cognom
 
 \subsubsection{Amministrazione}
 
-Il file in questione rappresenta l'elenco degli utenti amministratori. Per tali, si è scelto di memorizzare i soli campi dedicati all'autenticazione.
+Il file in questione rappresenta l'elenco degli utenti amministratori. Per tali utenti, si è scelto di memorizzare i soli campi dedicati all'autenticazione.
 
 \medskip
 
@@ -433,6 +435,7 @@ Il file in questione rappresenta l'elenco degli utenti amministratori. Per tali,
  <amministratore>
   <username>admin</username>
   <password>admin</password>
+  <stato>1</stato>
  </amministratore>
 </amministrazione>
 \end{lstlisting}
@@ -458,66 +461,13 @@ Il file in questione rappresenta l'elenco degli utenti amministratori. Per tali,
   <xsd:sequence>
    <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
    <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="stato" minOccurs="1" maxOccurs="1"/>
   </xsd:sequence>
  </xsd:complexType>
 </xsd:element>
 <xsd:element name="username" type="xsd:string"/>
 <xsd:element name="password" type="xsd:string"/>
-</xsd:schema>
-\end{lstlisting}
-
-\medskip
-
-\subsubsection{Appartiene}
-
-Il file in questione realizza l'associazione tra \emph{Corso} e \emph{Corso di laurea}. Il singolo elemento \emph{Appartiene} si compone della coppia di chiavi, \emph{idCorso} e \emph{idCorsoDiLaurea}, il cui significato è l'appartenenza di un dato corso ad un determinato corso di laurea. È inoltre presente un id identificativo del singolo elemento.
-
-\medskip
-
-\emph{Appartiene.XML}
-
-\begin{lstlisting}[language=XML]
-<?xml version="1.0" encoding="UTF-8"?>
-<appartenenze xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="appartiene.xsd">
- <appartenenza>
-  <id>1</id>
-  <idCorso>1</idCorso>
-  <idCorsoDiLaurea>1</idCorsoDiLaurea>
- </appartenenza>
-</appartenenze>
-\end{lstlisting}
-
-\medskip
-
-\emph{Appartiene.XSD}
-
-\begin{lstlisting}[language=XML]
-
-<?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-
-<xsd:element name="appartenenze">  <!-- Tabella delle appartenenze ai corsi di laurea, da parte dei corsi -->
- <xsd:complexType> 
-  <xsd:sequence>
-   <xsd:element ref="appartenenza" minOccurs="1" maxOccurs="1" />
-  </xsd:sequence>
- </xsd:complexType>
-</xsd:element>
-
-<xsd:element name="appartenenza">  <!-- Singola appartenenza ad un corso di laurea, da parte di un singolo corso -->
- <xsd:complexType> 
-  <xsd:sequence>
-   <xsd:element ref="id" minOccurs="1" maxOccurs="1" /> 
-   <xsd:element ref="idCorso" minOccurs="1" maxOccurs="1" /> 
-  <xsd:element ref="idCorsoDiLaurea" minOccurs="1" maxOccurs="1" /> 
- </xsd:sequence>
-</xsd:complexType>
-</xsd:element>
-
-<xsd:element name="id" type="xsd:short" />
-<xsd:element name="idCorso" type="xsd:short" />
-<xsd:element name="idCorsoDiLaurea" type="xsd:short" />
-
+<xsd:element name="stato" type="xsd:integer"/>
 </xsd:schema>
 \end{lstlisting}
 
@@ -525,7 +475,7 @@ Il file in questione realizza l'associazione tra \emph{Corso} e \emph{Corso di l
 
 \subsubsection{Appelli}
 
-Il file in questione memorizza gli appelli associati a ciascun esame. Un singolo elemento \emph{appello} è costituito da: un id univoco, un campo \emph{idCorso} che memorizza il corso al quale l'appello riferisce e un campo \emph{dataOra} che rappresenta la data e ora durante il quale si svolgerà l'appello.
+Il file in questione memorizza gli appelli associati a ciascun esame. Un singolo elemento \emph{appello} è costituito da: un id univoco, un campo \emph{idCorso} che memorizza il corso al quale l'appello riferisce e un campo \emph{dataOra} che rappresenta la data e l'ora durante la quale si svolgerà l'appello.
 
 \medskip
 
@@ -538,6 +488,7 @@ Il file in questione memorizza gli appelli associati a ciascun esame. Un singolo
   <id>1</id>
   <idCorso>1</idCorso>
   <dataOra>01/01/2000 10:10</dataOra>
+  <stato>1</stato>
  </appello>
 </appelli>
 \end{lstlisting}
@@ -563,11 +514,13 @@ Il file in questione memorizza gli appelli associati a ciascun esame. Un singolo
   <xsd:sequence>
    <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
    <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="stato" minOccurs="1" maxOccurs="1"/>
   </xsd:sequence>
  </xsd:complexType>
 </xsd:element>
 <xsd:element name="username" type="xsd:string"/>
 <xsd:element name="password" type="xsd:string"/>
+<xsd:element name="stato" type="xsd:integer"/>
 </xsd:schema>
 \end{lstlisting}
 
@@ -575,7 +528,7 @@ Il file in questione memorizza gli appelli associati a ciascun esame. Un singolo
 
 \subsubsection{Commenti}
 
-Il file in questione memorizza la lista dei commenti pubblicati a seguito di un post contenuto in una data bacheca. Il singolo elemento \emph{commento} è costituito da: un id univoco, il corpo testuale del commento, la matricola dello studente che ha pubblicato il commento, l'accordo medio, e l'id del post che lo contiene. In particolare, il campo \emph{accordoMedio} contiene la media di tutti i voti che il commento ha ricevuto (\emph{nella sezione riguardante il file votoCommento viene approfondito meglio il funzionamento del sistema di voto}).
+Il file in questione memorizza la lista dei commenti pubblicati a seguito di un post contenuto in una data bacheca. Il singolo elemento \emph{commento} è costituito da: un id univoco, il corpo testuale del commento, la matricola dello studente che ha pubblicato il commento, l'accordo medio, l'id del post che lo contiene e l'istante temporale di pubblicazione. In particolare, il campo \emph{accordoMedio} contiene la media di tutti i voti che il commento ha ricevuto (\emph{nella sezione riguardante il file votoCommento viene approfondito meglio il funzionamento del sistema di voto}).
 
 \medskip
 
@@ -592,6 +545,8 @@ Il file in questione memorizza la lista dei commenti pubblicati a seguito di un 
   <matricolaStudente>1</matricolaStudente>
   <accordoMedio>2</accordoMedio>
   <idPost>1</idPost>
+  <data>2022-09-04</data>
+  <stato>1</stato>
  </commento>
 </commenti>
 \end{lstlisting}
@@ -619,6 +574,8 @@ Il file in questione memorizza la lista dei commenti pubblicati a seguito di un 
    <xsd:element ref="matricolaStudente" minOccurs="1" maxOccurs="1" />
    <xsd:element ref="accordoMedio" minOccurs="1" maxOccurs="1" />
    <xsd:element ref="idPost" minOccurs="1" maxOccurs="1" />
+   <xsd:element ref="data" minOccurs="1" maxOccurs="1" />
+   <xsd:element ref="stato" minOccurs="1" maxOccurs="1"/>
   </xsd:sequence>   
  </xsd:complexType>
 </xsd:element>
@@ -627,14 +584,16 @@ Il file in questione memorizza la lista dei commenti pubblicati a seguito di un 
 <xsd:element name="matricolaStudente" type="xsd:integer"/>
 <xsd:element name="accordoMedio" type="xsd:float"/>
 <xsd:element name="idPost" type="xsd:integer"/>
+<xsd:element name="data" type="xsd:string"/>
+<xsd:element name="stato" type="xsd:string"/>
 </xsd:schema>
 \end{lstlisting}
 
 \medskip
 
-\subsubsection{Corsi}
+\subsubsection{Corsi}	%EDIT?
 
-Il file in questione memorizza la lista di tutti i corsi presenti nella piattaforma. Il singolo elemento di tipo corso è costituito da: un id univoco, un campo descrizione, un campo \emph{matricolaProf} che memorizza il professore associato al corso, un campo \emph{colore}, contenente il colore di visualizzazione del corso all'interno della piattaforma. È inoltre presente un insieme di campi memorizzanti le informazioni didattiche del corso quali: anno, semestre, curriculum, cfu e ssd.
+Il file in questione memorizza la lista di tutti i corsi presenti nella piattaforma. Il singolo elemento di tipo corso è costituito da: un id univoco, un nome, un campo descrizione, un campo \emph{matricolaProf} che memorizza il professore associato al corso, un campo \emph{colore}, contenente il colore di visualizzazione del corso all'interno della piattaforma. È inoltre presente un insieme di campi memorizzanti le informazioni didattiche del corso quali: anno, semestre, curriculum, cfu e ssd.
 
 \medskip
 
@@ -648,8 +607,9 @@ Il file in questione memorizza la lista di tutti i corsi presenti nella piattafo
  <corso>
     <id>1</id>
     <nome>Basi di Dati</nome>
+    <matricolaDocente>1</matricolaDocente>
+    <matricolaCoDocente>0</matricolaCoDocente>
     <descrizione>Il corso si propone di insegnare 1. aspetti teorici, consistenti in modelli e linguaggi di basi di dati, 2. metodologie di progetto, che consentiranno allo studente, una volta che siano acquisite, di affrontare e risolvere casi concreti, 3. tecnologie, consistenti in diversi strumenti software usati in modo combinato per la implementazione delle basi di dati, scegliendo strumenti diffusi nelle pratiche aziendali. Alla fine del corso lo studente sara in grado di interagire con il destinatario di una applicazione di basi di dati in modo da sintetizzare correttamente i requisiti e di sviluppare prima il progetto, poi la applicazione stessa, scegliendo gli strumenti piu idonei.</descrizione>
-    <matricolaProf>1</matricolaProf>
     <colore>lightblue</colore>
     <anno>3</anno>
     <semestre>1</semestre>
@@ -657,7 +617,8 @@ Il file in questione memorizza la lista di tutti i corsi presenti nella piattafo
     <cfu>9</cfu>
     <ssd>ING/INF-04</ssd>
     <idCorsoLaurea>1</idCorsoLaurea>
-    </corso>
+    <stato>1</stato>
+ </corso>
 </corsi>
 \end{lstlisting}
 
@@ -681,27 +642,33 @@ Il file in questione memorizza la lista di tutti i corsi presenti nella piattafo
   <xsd:sequence>
    <xsd:element ref="id" minOccurs="1" maxOccurs="1" /> 
    <xsd:element ref="nome" minOccurs="1" maxOccurs="1" />
+   <xsd:element ref="matricolaDocente" minOccurs="1" maxOccurs="1" />
+   <xsd:element ref="matricolaCoDocente" minOccurs="1" maxOccurs="1" />
    <xsd:element ref="descrizione"  minOccurs="1" maxOccurs="1" />
-   <xsd:element ref="matricolaProf" minOccurs="1" maxOccurs="1" />
    <xsd:element ref="colore" minOccurs="1" maxOccurs="1" />
    <xsd:element ref="anno" minOccurs="1" maxOccurs="1" />
    <xsd:element ref="semestre" minOccurs="1" maxOccurs="1" />
    <xsd:element ref="curriculum" minOccurs="1" maxOccurs="1" />
    <xsd:element ref="cfu" minOccurs="1" maxOccurs="1" />
    <xsd:element ref="ssd" minOccurs="1" maxOccurs="1" />
+   <xsd:element ref="idCorsoLaurea" minOccurs="1" maxOccurs="1" />
+   <xsd:element ref="stato" minOccurs="1" maxOccurs="1"/>
   </xsd:sequence>   
  </xsd:complexType>
 </xsd:element>
  <xsd:element name="id" type="xsd:integer"/>
  <xsd:element name="nome" type="xsd:string"/>
+ <xsd:element name="matricolaDocente" type="xsd:short"/>
+ <xsd:element name="matricolaCoDocente" type="xsd:short"/>
  <xsd:element name="descrizione" type="xsd:string"/>
- <xsd:element name="matricolaProf" type="xsd:integer"/>
  <xsd:element name="colore" type="xsd:string"/>
  <xsd:element name="anno" type="xsd:short"/>
  <xsd:element name="curriculum" type="xsd:string"/>
  <xsd:element name="semestre" type="xsd:short"/>
  <xsd:element name="cfu" type="xsd:short"/>
  <xsd:element name="ssd" type="xsd:string"/>
+ <xsd:element name="idCorsoLaurea" type="xsd:short"/>
+ <xsd:element name="stato" type="xsd:integer"/>
 </xsd:schema>
 \end{lstlisting}
 
@@ -721,6 +688,7 @@ Il file in questione memorizza la lista dei corsi di laurea gestiti dalla piatta
  <corsoDiLaurea>
   <id>1</id>
   <nome>Ingegneria dell'Informazione</nome>
+  <stato>1</stato>
  </corsoDiLaurea>
 </corsiDiLaurea>
 \end{lstlisting}
@@ -746,19 +714,21 @@ Il file in questione memorizza la lista dei corsi di laurea gestiti dalla piatta
   <xsd:sequence>
    <xsd:element ref="id" minOccurs="1" maxOccurs="1"/>
    <xsd:element ref="nome" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="stato" minOccurs="1" maxOccurs="1"/>
   </xsd:sequence>
  </xsd:complexType>
 </xsd:element>
 <xsd:element name="id" type="xsd:integer"/>
 <xsd:element name="nome" type="xsd:string"/>
+<xsd:element name="stato" type="xsd:integer"/>
 </xsd:schema>
 \end{lstlisting}
 
 \medskip
 
-\subsubsection{Docenti}
+\subsubsection{Docenti}	%EDIT
 
-Il file in questione memorizza la lista di docenti registrati presso la piattaforma. Come già detto nella sezione \emph{Anagrafica}, un singolo elemento docente si costituisce, da un campo matricola, che funge sia da identificativo univoco sia come username per l'autenticazione, un campo password, i campi anagrafici nome e cognome e un campo \emph{idCorso} che memorizza il corso associato al docente.
+Il file in questione memorizza la lista di docenti registrati presso la piattaforma. Come già detto nella sezione \emph{Anagrafica}, un singolo elemento docente si costituisce da un campo matricola, che funge sia da identificativo univoco sia come username per l'autenticazione, un campo password, dai propri campi anagrafici nome e cognome e un campo \emph{idCorso} che memorizza il corso associato al docente.
 
 \medskip
 
@@ -771,8 +741,8 @@ Il file in questione memorizza la lista di docenti registrati presso la piattafo
   <matricola>1</matricola>
   <nome>Umberto</nome>
   <cognome>Nanni</cognome>
-  <password>meglio che niente</password>
-  <idCorso>1</idCorso>
+  <password>f85c55a20e3035f63d6f8e656e90300f</password>
+  <stato>1</stato>
  </docente>
 </docenti>
 \end{lstlisting}
@@ -800,7 +770,7 @@ Il file in questione memorizza la lista di docenti registrati presso la piattafo
    <xsd:element ref="nome" minOccurs="1" maxOccurs="1"/>
    <xsd:element ref="cognome" minOccurs="1" maxOccurs="1"/>
    <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
-   <xsd:element ref="idCorso" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="stato" minOccurs="1" maxOccurs="1"/>
   </xsd:sequence>
  </xsd:complexType>
 </xsd:element>
@@ -809,14 +779,14 @@ Il file in questione memorizza la lista di docenti registrati presso la piattafo
 <xsd:element name="nome" type="xsd:string"/>
 <xsd:element name="cognome" type="xsd:string"/>
 <xsd:element name="password" type="xsd:string"/>
-<xsd:element name="idCorso" type="xsd:integer"/>
+<xsd:element name="stato" type="xsd:integer"/>
   
 </xsd:schema>
 \end{lstlisting}
 
 \medskip
 
-\subsubsection{FAQs}
+\subsubsection{FAQs}	%EDIT idAutore
 
 Il file in questione memorizza la lista di tutte le FAQs presenti nel sistema. Essendo una faq costituita da un coppia domanda e risposta, un singolo elemento di questo di tipo è costituito da i campi \emph{domanda} e \emph{risposta}. Sono inoltre presenti un campo identificativo id, un campo utilitaTotale, ricavato sommando tutti i voti \emph{utilità} ricevuti dalla faq (si veda la sezione riguardante \emph{votoFaq} dove viene approfondito il funzionamento del sistema di voto), ed infine è presente un campo \emph{idCorso} che memorizza il corso al quale la faq riferisce.
 
@@ -835,6 +805,8 @@ Il file in questione memorizza la lista di tutte le FAQs presenti nel sistema. E
   <risposta>Si, in particolare su quelle che saranno messe a disposizione durante il corso</risposta>
   <utilitaTotale>1</utilitaTotale>
   <idCorso>1<idCorso>
+  <idAutore>1</idAutore>
+  <stato>1</stato>
  </faq>
 </faqs>
 \end{lstlisting}
@@ -861,6 +833,8 @@ Il file in questione memorizza la lista di tutte le FAQs presenti nel sistema. E
    <xsd:element ref="risposta" minOccurs="1" maxOccurs="1"/>
    <xsd:element ref="utilitaTotale" minOccurs="1" maxOccurs="1"/>
    <xsd:element ref="idCorso" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="idAutore" minOccurs="1" maxOccurs="1"/>
+   <xsd:element ref="stato" minOccurs="1" maxOccurs="1"/>
   </xsd:sequence>
  </xsd:complexType>
 </xsd:element>
@@ -869,12 +843,14 @@ Il file in questione memorizza la lista di tutte le FAQs presenti nel sistema. E
 <xsd:element name="risposta" type="xsd:string"/>
 <xsd:element name="utilitaTotale" type="xsd:string"/>
 <xsd:element name="idCorso" type="xsd:integer"/>
+<xsd:element name="idAutore" type="xsd:integer"/>
+<xsd:element name="stato" type="xsd:integer"/>
 </xsd:schema>
 \end{lstlisting}
 
 \medskip
 
-\subsubsection{POSTs}
+\subsubsection{POSTs}	%EDIT data
 
 Una delle funzionalità della piattaforma consiste, come già esplicato nel corso del presente capitolo, nel dare la possibilità agli studenti di usufruire di alcune bacheche, una per ogni corso. In ogni bacheca, uno studente può pubblicare dei post, oppure commentare post già esistenti. Pertanto, per poter memorizzare i dati relativi ad ogni post, è necessaria una tabella dei post; ogni record di questa tabella rappresenta il singolo post pubblicato. In particolare, ogni post è caratterizzato da un \emph{id}, da un \emph{titolo}, da un \emph{corpo} contenente il contenuto informativo del post stesso, dalla \emph{matricola} dello studente che lo ha pubblicato, dalla sua \emph{utilità totale} e dall'\emph{id} del corso cui si riferisce la bacheca in cui è stato pubblicato il post.
 
@@ -896,6 +872,8 @@ L'\emph{utilità totale} di un post viene stabilita dalla somma algebrica di tut
         <matricolaStudente>1</matricolaStudente>
         <utilitaTotale>1</utilitaTotale>
         <idCorso>1</idCorso>
+        <data>2022-09-04</data>
+        <stato>1</stato>
     </post>
 </posts>
 \end{lstlisting}
@@ -921,6 +899,8 @@ L'\emph{utilità totale} di un post viene stabilita dalla somma algebrica di tut
         <xsd:element ref="matricolaStudente" minOccurs="1" maxOccurs="1" />
         <xsd:element ref="utilitaTotale" minOccurs="1" maxOccurs="1" />
         <xsd:element ref="idCorso" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="data" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="stato" minOccurs="1" maxOccurs="1"/>
         </xsd:sequence>   
     </xsd:complexType>
     </xsd:element>
@@ -930,6 +910,8 @@ L'\emph{utilità totale} di un post viene stabilita dalla somma algebrica di tut
     <xsd:element name="matricolaStudente" type="xsd:integer"/>
     <xsd:element name="utilitaTotale" type="xsd:integer"/>
     <xsd:element name="idCorso" type="xsd:integer"/>
+    <xsd:element name="data" type="xsd:string"/>
+    <xsd:element name="stato" type="xsd:integer"/>
 </xsd:schema>
 \end{lstlisting}
 
@@ -962,6 +944,7 @@ L'\emph{esito}, in particolare, è un elemento delicato: se uno studente ha solo
     <matricolaStudente>1</matricolaStudente>
     <idAppello>1</idAppello>
     <esito>25</esito>
+    <stato>1</stato>
   </prenotazione>
 </prenotazioni>
 \end{lstlisting}
@@ -975,7 +958,7 @@ L'\emph{esito}, in particolare, è un elemento delicato: se uno studente ha solo
 <xsd:element name="prenotazioni">  <!-- Tabella delle prenotazioni agli appelli -->
    <xsd:complexType> 
       <xsd:sequence>
-	      <xsd:element ref="prenotazione" minOccurs="1" maxOccurs="1" />
+	      <xsd:element ref="prenotazione" minOccurs="0" maxOccurs="unbounded" />
       </xsd:sequence>
    </xsd:complexType>
 </xsd:element>
@@ -987,6 +970,7 @@ L'\emph{esito}, in particolare, è un elemento delicato: se uno studente ha solo
         <xsd:element ref="matricolaStudente" minOccurs="1" maxOccurs="1" />
         <xsd:element ref="idAppello" minOccurs="1" maxOccurs="1" /> 
         <xsd:element ref="esito" minOccurs="1" maxOccurs="1" /> 
+        <xsd:element ref="stato" minOccurs="1" maxOccurs="1"/>
       </xsd:sequence>
    </xsd:complexType>
 </xsd:element>
@@ -995,6 +979,7 @@ L'\emph{esito}, in particolare, è un elemento delicato: se uno studente ha solo
 <xsd:element name="matricolaStudente" type="xsd:integer" />
 <xsd:element name="idAppello" type="xsd:short" />
 <xsd:element name="esito" type="xsd:string" />
+<xsd:element name="stato" type="xsd:integer"/>
 
 </xsd:schema>
 \end{lstlisting}
@@ -1014,7 +999,8 @@ Gli utenti della piattaforma, come già precedentemente esplicato, possono esser
 <segreteria xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="segreteria.xsd">
     <segretario>
         <username>segretario1</username>
-        <password>segretario1</password>
+        <password>b58b71f31b9fb82e2bb615e93a3a39fe</password>
+        <stato>1</stato>
     </segretario>
 </segreteria>
 \end{lstlisting}
@@ -1037,17 +1023,19 @@ Gli utenti della piattaforma, come già precedentemente esplicato, possono esser
             <xsd:sequence>
                 <xsd:element ref="username" minOccurs="1" maxOccurs="1"/>
                 <xsd:element ref="password" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="stato" minOccurs="1" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="username" type="xsd:string"/>
     <xsd:element name="password" type="xsd:string"/>
+    <xsd:element name="stato" type="xsd:integer"/>
 </xsd:schema>
 \end{lstlisting}
 
 \medskip
 
-\subsubsection{Studenti}
+\subsubsection{Studenti}	%EDIT: reputazione totale non è un integer ma un float
 
 Gli utenti della piattaforma, come già precedentemente esplicato, possono essere di quattro diverse categorie; una di esse è la categoria \emph{studente}. Per memorizzare i dati relativi ad ogni studente della piattaforma, si rende necessaria una tabella degli studenti, in cui il singolo record rappresenta il singolo studente registrato; tale tabella viene costruita nel file XML mostrato di seguito. Come possiamo notare dalla grammatica (il file \emph{.xsd}) presentata di seguito, il singolo studente è caratterizzato da una \emph{matricola}, da un \emph{nome}, da un \emph{cognome}, dalla \emph{password} che egli stesso ha scelto in fase di registrazione (qui riportata in chiaro), dalla sua \emph{data di nascita}, dalla sua \emph{reputazione totale}, dal totale dei \emph{cfu} acquisiti durante la sua carriera, dalla \emph{media} dei voti conseguiti negli esami registrati e dall'\emph{id} del corso di laurea cui si riferisce il suo percorso di studi.
 
@@ -1066,12 +1054,13 @@ La \emph{reputazione totale} di uno studente viene calcolata come media di tutti
         <matricola>1</matricola>
         <nome>Mario</nome>
         <cognome>Rossi</cognome>
-        <password>supermario</password>
+        <password>c1210473c214e0cf5968bf147ed079d9</password>
         <dataNascita>01/01/2000</dataNascita>
         <reputazioneTotale>0</reputazioneTotale>
         <cfuTotale>0</cfuTotale>
         <media>0</media>
         <idCorsoDiLaurea>1</idCorsoDiLaurea>
+        <stato>1</stato>
     </studente>
 </studenti>
 \end{lstlisting}
@@ -1108,10 +1097,11 @@ La \emph{reputazione totale} di uno studente viene calcolata come media di tutti
    <xsd:element name="cognome" type="xsd:string"/>
    <xsd:element name="password" type="xsd:string"/>
    <xsd:element name="dataNascita" type="xsd:string"/>
-   <xsd:element name="reputazioneTotale" type="xsd:integer"/>
+   <xsd:element name="reputazioneTotale" type="xsd:integer"/>	% FLOAT!
    <xsd:element name="cfuTotale" type="xsd:integer"/>
    <xsd:element name="media" type="xsd:float"/>
    <xsd:element name="idCorsoDiLaurea" type="xsd:integer"/>
+   <xsd:element name="stato" type="xsd:integer"/>
 </xsd:schema>
 \end{lstlisting}
 
@@ -1136,6 +1126,7 @@ Come già precedentemente esplicato, i commenti presenti all'interno di un post 
     <idCommento>1</idCommento>
     <accordo>2</accordo>
     <idAutoreCommento>1</idAutoreCommento>
+    <stato>1</stato>
   </votoCommento>
 </votiCommento>
 \end{lstlisting}
@@ -1149,7 +1140,7 @@ Come già precedentemente esplicato, i commenti presenti all'interno di un post 
 <xsd:element name="votiCommento">  <!-- Tabella dei voti sui commenti -->
    <xsd:complexType> 
       <xsd:sequence>
-	      <xsd:element ref="votoCommento" minOccurs="1" maxOccurs="1" />
+	      <xsd:element ref="votoCommento" minOccurs="0" maxOccurs="unbounded" />
       </xsd:sequence>
    </xsd:complexType>
 </xsd:element>
@@ -1162,6 +1153,7 @@ Come già precedentemente esplicato, i commenti presenti all'interno di un post 
         <xsd:element ref="idCommento" minOccurs="1" maxOccurs="1" /> 
         <xsd:element ref="accordo" minOccurs="1" maxOccurs="1" /> 
 	<xsd:element ref="idAutoreCommento" minOccurs="1" maxOccurs="1" /> 
+        <xsd:element ref="stato" minOccurs="1" maxOccurs="1"/>
       </xsd:sequence>
    </xsd:complexType>
 </xsd:element>
@@ -1171,6 +1163,7 @@ Come già precedentemente esplicato, i commenti presenti all'interno di un post 
 <xsd:element name="idCommento" type="xsd:short" />
 <xsd:element name="accordo" type="xsd:short" />
 <xsd:element name="idAutoreCommento" type="xsd:integer" /> 
+<xsd:element name="stato" type="xsd:integer"/>
 </xsd:schema>
 \end{lstlisting}
 
@@ -1194,6 +1187,7 @@ Come già precedentemente esplicato, le domande presenti nella sezione FAQ posso
     <matricolaStudente>1</matricolaStudente>
     <idFAQ>1</idFAQ>
     <utilita>1</utilita>
+	 <stato>1</stato>
   </votoFAQ>
 </votiFAQ>
 \end{lstlisting}
@@ -1207,7 +1201,7 @@ Come già precedentemente esplicato, le domande presenti nella sezione FAQ posso
 <xsd:element name="votiFAQ">  <!-- Tabella dei voti sulle FAQ -->
    <xsd:complexType> 
       <xsd:sequence>
-	      <xsd:element ref="votoFAQ" minOccurs="1" maxOccurs="1" />
+	      <xsd:element ref="votoFAQ" minOccurs="0" maxOccurs="unbounded" />
       </xsd:sequence>
    </xsd:complexType>
 </xsd:element>
@@ -1219,6 +1213,7 @@ Come già precedentemente esplicato, le domande presenti nella sezione FAQ posso
         <xsd:element ref="matricolaStudente" minOccurs="1" maxOccurs="1" />
         <xsd:element ref="idFAQ" minOccurs="1" maxOccurs="1" /> 
         <xsd:element ref="utilita" minOccurs="1" maxOccurs="1" /> 
+        <xsd:element ref="stato" minOccurs="1" maxOccurs="1"/>
       </xsd:sequence>
    </xsd:complexType>
 </xsd:element>
@@ -1227,6 +1222,7 @@ Come già precedentemente esplicato, le domande presenti nella sezione FAQ posso
 <xsd:element name="matricolaStudente" type="xsd:integer" />
 <xsd:element name="idFAQ" type="xsd:short" />
 <xsd:element name="utilita" type="xsd:short" />
+<xsd:element name="stato" type="xsd:integer"/>
 
 </xsd:schema>
 \end{lstlisting}
@@ -1264,7 +1260,7 @@ Come già precedentemente esplicato, i post possono essere recensiti; la singola
 <xsd:element name="votiPost">  <!-- Tabella dei voti sui post -->
    <xsd:complexType> 
       <xsd:sequence>
-	      <xsd:element ref="votoPost" minOccurs="1" maxOccurs="1" />
+	      <xsd:element ref="votoPost" minOccurs="0" maxOccurs="unbounded" />
       </xsd:sequence>
    </xsd:complexType>
 </xsd:element>
@@ -1276,6 +1272,7 @@ Come già precedentemente esplicato, i post possono essere recensiti; la singola
         <xsd:element ref="matricolaStudente" minOccurs="1" maxOccurs="1" />
         <xsd:element ref="idPost" minOccurs="1" maxOccurs="1" /> 
         <xsd:element ref="utilita" minOccurs="1" maxOccurs="1" /> 
+        <xsd:element ref="stato" minOccurs="1" maxOccurs="1"/>
       </xsd:sequence>
    </xsd:complexType>
 </xsd:element>
@@ -1284,13 +1281,14 @@ Come già precedentemente esplicato, i post possono essere recensiti; la singola
 <xsd:element name="matricolaStudente" type="xsd:integer" />
 <xsd:element name="idPost" type="xsd:short" />
 <xsd:element name="utilita" type="xsd:short" />
+<xsd:element name="stato" type="xsd:integer"/>
 
 </xsd:schema>
 \end{lstlisting}
 
 \medskip
 
-\section{Definizioni XML}
+\section{Definizioni XML}	%EDIT
 
 In questa sezione andremo a discutere una selezione a campione di 12 elementi scelti da alcuni file definiti nella precedente sezione. Per ogni elemento, verrà specificato il motivo della sua definizione facendo riferimento alla parte di specifica testuale che lo rende necessario.
 
@@ -1390,125 +1388,248 @@ L'elemento in questione, presente nel file \emph{prenotazione.xml} \hyperref[sec
 
 \chapter{Manuale utente}
 
+In questo capitolo, verrà presentato al lettore un manuale di utilizzo dell'intera piattaforma; l'utilizzo della stessa e la navigazione fra le varie pagine del portale variano a seconda dell'utenza che vi fa riferimento. In particolare, ricordiamo la presenza di ben cinque tipologie di utenza che possono usufruire dei servizi della piattaforma: l'utente visitatore, lo studente, il docente, il segretario e l'amministratore; queste cinque tipologie saranno descritte nel dettaglio nel seguito del presente capitolo.
+
+\medskip
+
 \section{Utente visitatore}
 
+Definiamo \emph{utente visitatore} una qualsivoglia tipologia di utente \textbf{non autenticato} che abbia interesse nell'usufruire dei servizi della nostra piattaforma. In questa sezione verranno dettagliatamente descritte le varie funzionalità a disposizione per questa tipologia di utenza che, in primo luogo, si trova di fronte alla schermata iniziale del sito, riportata in figura 2.1. 
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-1.png}
+\caption{Homepage del sito.}
+\end{figure}
+
+Tale pagina web è costituita da un'immagine di sfondo che accompagna tre blocchi principali, indicanti tre delle cinque funzionalità a disposizione di un utente visitatore: la visualizzazione dei corsi di laurea, dei corsi e dei docenti attualmente presenti presso la piattaforma. Nella parte superiore della pagina web, invece, possiamo apprezzare diversi pulsanti relativi ad ogni altra utenza in grado di usufruire dei servizi offerti dalla piattaforma: questi pulsanti rappresentano dei collegamenti a varie pagine di login, presso le quali l'utente è in grado di autenticarsi. Qualora non disponesse di credenziali, invece, l'utente può registrarsi tramite l'opportuna funzionalità messa a disposizione all'interno delle form di login appena citate.
+
+\medskip
+
 \subsection{Visualizzare i corsi di laurea}
+
+A partire dalla homepage del sito, riportata in figura 2.1, è possibile interagire con il blocco ''\emph{I nostri corsi di laurea}'': facendo click sulla scritta, infatti, l'utente verrà reindirizzato verso una pagina web simile a quella riportata in figura 2.2, nella quale viene presentato un elenco di tutti i corsi di laurea attualmente registrati presso la piattaforma. Le singole voci dell'elenco dispongono di un bottone che, se premuto, reindirizzerà l'utente verso una pagina web di visualizzazione di tutti i corsi relativi al corso di laurea precedentemente selezionato. Questa pagina web è mostrata in figura 2.3: anche qui, le singole voci dell'elenco presentato all'utente dispongono di un bottone che, se premuto, lo reindirizzerà verso un'ulteriore pagina web, mostrata in figura 2.4, avente uno scopo puramente informativo sui dettagli del singolo corso.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-2.png}
+\caption{Visualizzazione dei corsi di laurea.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-3.png}
+\caption{Visualizzazione dei corsi relativi ad un corso di laurea.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-4.png}
+\caption{Visualizzazione delle informazioni relative ad un corso.}
+\end{figure}
+
+La visualizzazione delle singole voci dei vari elenchi di presentazione citati in questo paragrafo è facilitata dalla presenza di una barra di ricerca nella parte superiore delle varie pagine web. Per effettuare una ricerca filtrata, sarà sufficiente inserire il nome di un corso/corso di laurea (o anche solo parte di esso): premendo poi sull'opportuna icona costituita da una lente di ingrandimento, verranno presentati a schermo tutti i risultati della ricerca.
 
 \medskip
 
 \subsection{Visualizzare i corsi}
 
+A partire dalla homepage del sito, riportata in figura 2.1, è possibile interagire con il blocco ''\emph{I nostri corsi}'': facendo click sulla scritta, infatti, l'utente verrà reindirizzato verso una pagina web simile a quella riportata in figura 2.5, nella quale viene presentato un elenco di tutti i corsi attualmente registrati presso la piattaforma, con l'ulteriore informazione relativa al rispettivo corso di laurea di afferenza. Le singole voci dell'elenco presentato all'utente dispongono di un bottone che, se premuto, lo reindirizzerà verso un'ulteriore pagina web, mostrata in figura 2.4, avente uno scopo puramente informativo sui dettagli del singolo corso.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-5.png}
+\caption{Visualizzazione dei corsi.}
+\end{figure}
+
+La visualizzazione delle singole voci dell'elenco dei corsi citato in questo paragrafo è facilitata dalla presenza di una barra di ricerca nella parte superiore della pagina web. Per effettuare una ricerca filtrata, sarà sufficiente inserire il nome di un corso (o anche solo parte di esso): premendo poi sull'opportuna icona costituita da una lente di ingrandimento, verranno presentati a schermo tutti i risultati della ricerca.
+
 \medskip
 
 \subsection{Visualizzare i docenti}
 
+A partire dalla homepage del sito, riportata in figura 2.1, è possibile interagire con il blocco ''\emph{I nostri docenti}'': facendo click sulla scritta, infatti, l'utente verrà reindirizzato verso una pagina web simile a quella riportata in figura 2.6, nella quale viene presentato un elenco di tutti i docenti attualmente registrati presso la piattaforma, in ordine alfabetico. È inoltre presente un'informazione aggiuntiva sugli insegnamenti di ciascun docente; per ragioni pratiche, la visualizzazione è limitata ad al più tre insegnamenti per ciascun docente.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-6.png}
+\caption{Visualizzazione dei docenti.}
+\end{figure}
+
+La visualizzazione delle singole voci dell'elenco dei docenti citato in questo paragrafo è facilitata dalla presenza di una barra di ricerca nella parte superiore della pagina web. Per effettuare una ricerca filtrata, sarà sufficiente inserire il cognome/nome di un docente (o anche solo parte di esso): premendo poi sull'opportuna icona costituita da una lente di ingrandimento, verranno presentati a schermo tutti i risultati della ricerca.
+
 \medskip
 
 \subsection{Autenticarsi}
+
+A partire da una qualsiasi pagina web fra quelle citate in precedenza, è possibile interagire con i pulsanti \emph{Studenti}, \emph{Docenti}, \emph{Segreteria} e \emph{Amministrazione}, che hanno lo scopo di reindirizzare l'utente verso le rispettive pagine di login; una pagina web di login di esempio è mostrata in figura 2.7. Per le utenze che intendano autenticarsi come studente o come docente, sarà necessario disporre di una matricola e di una password; per le utenze che intendano autenticarsi come segretario o come amministratore, invece, sarà necessario disporre di uno username e di una password.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-7.png}
+\caption{Form di login di esempio.}
+\end{figure}
+
+Una volta autenticato, l'utente cesserà di essere un semplice visitatore della piattaforma, potendo usufruire di molteplici ulteriori funzionalità, dipendentemente dalla tipologia di utenza con la quale l'utente stesso ha scelto di autenticarsi per la corrente sessione.
+
+\medskip
+
+\subsection{Registrarsi}
+
+Qualora l'utente visitatore non disponesse di alcune credenziali, non potendo di fatto autenticarsi nella piattaforma, potrebbe decidere di registrarsi presso di essa: sarà sufficiente premere l'apposito pulsante \emph{registrati} mostrato nella parte inferiore della figura 2.7. In base al tipo di utenza selezionata, l'utente, in seguito alla pressione del pulsante appena citato, verrà reindirizzato verso una form di registrazione alla piattaforma; generalmente, sarà richiesto all'utente di specificare alcuni dati personali, così come la scelta di una password. Nel caso particolare di uno studente, verrà richiesto anche lo specifico corso di laurea al quale l'utente desidera iscriversi; una pagina web di registrazione di esempio è mostrata in figura 2.8.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-8.png}
+\caption{Form di registrazione di esempio.}
+\end{figure}
 
 \medskip
 \medskip
 
 \section{Studente}
 
-In questa sezione analizziamo e descriviamo tutte le funzionalità accessibili ad un'utenza di tipo \emph{studente}. Daremo quindi per scontato che l'utilizzatore della piattaforma abbia eseguito l'accesso tramite l'apposita funzionalità di login sopra descritta.
+In questa sezione analizziamo e descriviamo tutte le funzionalità accessibili ad un'utenza di tipo \emph{studente}. Assumeremo quindi che l'utilizzatore della piattaforma abbia eseguito l'accesso tramite l'apposita funzionalità di login sopra descritta. Prima di approfondire le varie funzionalità, analizziamo la schermata che si presenterà all'utente dopo aver fatto accesso alla piattaforma; più in particolare, il menù laterale che si presenterà all'utente, mostrato in figura 2.9.
 
-Prima di entrare approfondire le varie funzionalità, analizziamo la schermata che si presenterà all'utente dopo aver fatto accesso alla piattaforma, ma più in particolare, il menu laterale che si presenterà all'utente.
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-9.png}
+\caption{Homepage dell'utenza \emph{Studente}.}
+\end{figure}
 
-foto del menu a tendina
+Tramite il suddetto menù, è possibile accedere a tutte le funzionalità riservate a questo tipo di utenza. Analizzeremo queste ultime nelle sezioni che seguono.
 
-Tramite il suddetto menu è possibile accedere ad tutte le funzionalità riservate a questo tipo di utenza. Analizzeremo queste ultime nelle sezioni che seguono.
-
+\medskip
 
 \subsection{Visualizzare l'anagrafica}
 
-Usufruibile dalla prima pagina che si presenta un volta effettuato il login, la funzionalità di visualizzazione dell'anagrafica consiste nella stampa a video di tutte le informazioni personali associate all'utenza. Tra di esse, come possiamo osservare nell'immagine sottostante troviamo: Nome, Cognome, Matricola, Data di nascita e password.
+Usufruibile dalla pagina home che si presenta all'utente un volta effettuato il login, la funzionalità di visualizzazione dell'anagrafica consiste nella stampa a video di tutte le informazioni personali associate all'utenza. Tra di esse, come mostrato in figura 2.9, troviamo nome, cognome, matricola, data di nascita e password; quest'ultima verrà visualizzata coperta da degli asterischi, che rappresentano la lunghezza della relativa password criptata secondo l'algoritmo di cifratura MD5. Come per ogni altra utenza nella piattaforma, uno studente può modificare la propria password (figura 2.10), premendo sull'apposita icona situata a fianco della password stessa.
 
-Screen visualizza anagrafica 
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-10.png}
+\caption{Form di modifica password.}
+\end{figure}
 
-Inoltre tramite apposito bottone, posto affianco della voce password è possibile accedere alla funzionalità di modifica della password fruibile dall'apposita pagina.
-
-Screen modifica password
 \medskip
 
 \subsection{Visualizzare la carriera}
 
-Questa funzionalità, utilizzabile dall'apposita pagina raggiungibile dal menu a tendina, consiste nella visualizzazione di tutte le informazioni legate alla carriera di uno studente. Come si può osservare nell'immagine sottostante, esse sono: Corso di laurea, reputazione totale, CFU totali e media dei voti.
-Screen visualizza Carriera
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Visualizza carriera}, sotto la sezione \emph{Informazioni}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.11, nella quale verranno presentati a schermo i dati relativi a tutte le informazioni legate alla carriera dello studente autenticato nella sessione corrente. Come mostrato in figura, tali informazioni comprendono il corso di laurea cui si è iscritti, la propria reputazione totale, i CFU totali accumulati fino a quel momento e la propria media dei voti, risultato di tutti gli esami svolti fino a quel momento con esito positivo.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-11.png}
+\caption{Pagina di visualizzazione delle informazioni relative alla carriera dello studente.}
+\end{figure}
+
 \medskip
 
 \subsection{Visualizzare gli appelli prenotati}
 
-Prima funzionalità appartenente alla sezione \emph{esami}, essa consiste nella visualizzazione di tutti gli appelli prenotati dallo studente attualmente loggato. L'utente può in ogni momento annullare una prenotazione interagendo con l'apposito bottone.
-Screen appelli prenotati
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Appelli prenotati}, sotto la sezione \emph{Esami}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.12, nella quale verranno presentate a schermo tutte le prenotazioni relative agli appelli di esame prenotati dallo studente autenticato nella sessione corrente. In ogni momento, uno studente ha facoltà di annullare una prenotazione interagendo con l'apposito pulsante \emph{annulla}.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-12.png}
+\caption{Pagina di visualizzazione dell'elenco degli appelli prenotati.}
+\end{figure}
+
 \medskip
 
 \subsection{Visualizzare gli esami sostenuti}
 
-Questa funzionalità consiste nella visualizzazione di tutti gli esami sostenuti da uno studente. In particolare, per ogni esame, possiamo vedere sia la data durante il quale è stato sostenuto sia l'esito.
-Per quanto riguarda quest'ultima informazione viene usata una convenzione letterale per visualizzare eventuali fallimenti. (\emph{B per identificare una bocciatura, R per identificare un ritiro})
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Esami sostenuti}, sotto la sezione \emph{Esami}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.13, nella quale verranno presentati a schermo tutti gli esami sostenuti dallo studente autenticato nella sessione corrente. In particolare, per ogni esame sostenuto, possiamo apprezzare sia la data di svolgimento dell'esame, che l'esito dello stesso.
 
-screen visualizza esami sostenuti 
+Per quanto riguarda quest'ultima informazione - l'esito dell'esame - viene utilizzata una convenzione letterale per visualizzare eventuali fallimenti: la lettera \emph{B} identifica una bocciatura; la lettera \emph{R}, invece, identifica un ritiro.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-13.png}
+\caption{Pagina di visualizzazione dell'elenco degli esami sostenuti.}
+\end{figure}
+
 \medskip
 
 \subsection{Prenotare gli appelli}
 
-Questa funzionalità consiste nella prenotazione degli appelli dei corsi inerenti al corso di laurea a cui appartiene lo studente.
-L'utente può accedere a questa funzionalità tramite un'apposita pagina che visualizza tutti gli appelli che possono essere prenotati in quel momento. In particolare, verranno visualizzati tutti gli appelli che non sono stati prenotati e che non appartengono ad un esame cui esiste una verbalizzazione con esito positivo nel sistema.
-Interagendo con il blocco dell'esame l'utente potrà prenotarsi all'appello di suo interesse. 
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Prenota appello}, sotto la sezione \emph{Esami}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.14, nella quale verranno mostrati tutti gli appelli che possono essere prenotati in quel momento; in particolare, verranno visualizzati tutti gli appelli che non sono stati prenotati e che non appartengono ad un esame per il quale esiste una verbalizzazione con esito positivo nel sistema. Interagendo con il blocco dell'esame, l'utente potrà quindi prenotarsi all'appello di suo interesse, tramite la pressione del bottone \emph{prenota}.
 
-Inoltre, la navigazione di questa pagina è facilità dalla presenza di una barra di ricerca che permette di filtrare i contenuti specificando il nome di un corso.
-
-Screen prenota appelli
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-14.png}
+\caption{Pagina di prenotazione di un appello.}
+\end{figure}
 
 \medskip
 
 \subsection{Accedere alle bacheche}
 
-La fruizione delle bacheche è un'importante funzionalità offerta dalla piattaforma e si compone di diversi strumenti messi a disposizione allo studente.
-Innanzitutto, interagendo con l'apposita voce nel menu a tendina, raggiungiamo una prima pagina che elenca tutti i corsi appartenenti al nostro corso di laurea.
+La fruizione delle bacheche è un'importante ed innovativa funzionalità offerta dalla piattaforma e si compone di diversi strumenti messi a disposizione allo studente, \textbf{purché non sia stato sospeso da un'utenza amministrativa}. A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Bacheca}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.15, nella quale vengono elencati tutti i corsi appartenenti al corso di laurea cui lo studente autenticato nella sessione corrente risulta iscritto.
 
-Screen 1 - lista dei corsi
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-15.png}
+\caption{Lista dei corsi relativi al corso di laurea a cui lo studente autenticato è iscritto.}
+\end{figure}
 
-Ciascuna voce rappresenta la bacheca dei singoli corsi. Interagendo con una di questo voci raggiungiamo la pagina mostra nell'area sottostante.
+In questa pagina web, ciascuna voce rappresenta la bacheca dei singoli corsi. Interagendo con una di queste voci, l'utente viene reindirizzato ad una pagina web simile a quella mostrata in figura 2.16. La pagina in questione rappresenta una singola bacheca associata ad un determinato corso. Essa consiste di un menù di navigazione, posto nella parte superiore del corpo della bacheca, che consente all'utente di attraversare le diverse pagine della bacheca stessa (\emph{facciamo notare che il numero di post che possono essere visualizzati per pagina è pari a 5}). Sempre nella parte superiore, allo stesso livello del menù di navigazione, è presente un bottone \emph{crea post}, la cui pressione scatena un evento di creazione o di eliminazione di una form, posta al di sopra dell'elenco dei post (figura 2.17). Tramite questa form è possibile pubblicare un nuovo al post all'interno della bacheca.
 
-Screen 2 - visualizzazione della bacheca.
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-16.png}
+\caption{Bacheca di un singolo corso.}
+\end{figure}
 
-La pagina in questione rappresenta una singola bacheca associata ad un determinato corso. Essa consiste di un menu di navigazione in alto che consente di attraversare le diverse pagine di una bacheca(\emph{facciamo notare che il numero di post che possono essere visualizzati per pagina è pari a 5}). Sempre in alto, allo stesso livello del menù di navigazione, è presente un bottone che  attiva o disattiva una form, che apparirà sopra l'elenco dei post(\emph{Si veda l'immagine che segue}). Tramite questa form è possibile pubblicare un nuovo al post all'interno della bacheca.
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-17.png}
+\caption{Bacheca con opzione di creazione di un post.}
+\end{figure}
 
-Screen 3 -Immagine form crea post
-
-Continuando l'analisi della pagina raggiungiamo il blocco centrale. In esso troviamo l'elenco vero e proprio dei post. In cima alla lista è presente una barra che ci permette di applicare alcuni filtri di visualizzazione, tra i quali troviamo ordinamento sull'utilità, sulle risposte e sulla data. Inoltre, in ogni bacheca vengono sempre messi in sovraimpressione i due post che hanno ricevuto più voti utilità, e vengono separati dall'elenco tramite una barra celeste. Interagendo con una voce dell'elenco si raggiunge una pagina che visualizza il post scelto, la cui descrizione è contenuto nella sezione successiva.
-
-\medskip
-
-\textbf{\underline{Attenzione}}: ricordiamo al lettore che uno studente può accedere alla sezione delle FAQ dei propri corsi solo e soltanto se non è stato sospeso (\emph{soft ban}) da un'utenza amministrativa.
+Nel blocco centrale della pagina web, troviamo l'elenco vero e proprio dei post relativi alla singola bacheca selezionata. In cima alla lista dei post è presente una barra orizzontale, che ci permette di applicare alcuni filtri di visualizzazione dei post sottostanti, fra i quali possiamo citare l'ordinamento sull'utilità dei post, sul numero di risposte ai singoli post e sulla data di pubblicazione dei singoli post. Inoltre, in ogni bacheca vengono sempre posti in sovraimpressione i due post che hanno ricevuto più voti utilità, e vengono separati dall'elenco tramite un separatore a forma di barra orizzontale celeste. Interagendo con una voce dell'elenco visualizzato, si raggiunge una pagina che visualizza il post scelto, la cui descrizione è contenuta nella sezione successiva.
 
 \medskip
 
 \subsubsection{Interagire con i post}
 
-L'interazione con il post avviene in un'apposita pagina di visualizzazione del contenuto di quest'ultimo. Analizzando la schermata dall'alto (Si faccia riferimento alla figura), troviamo innanzitutto l'intestazione del post, che si compone di un coppia di frecce, utilizzate per votare l'utilità del post, e da un blocco contente autore e contenuto di quest'ultimo. 
-Qualora l'utenza attualmente in uso fosse anche l'autore del post, nell'angolo in basso a destra verrebbero visualizzati due icone che permettono rispettivamente di eliminare il post e modificarne il contenuto.
+L'interazione con il post avviene in un'apposita pagina di visualizzazione del contenuto di quest'ultimo. Analizzando la schermata dall'alto (cfr. figura 2.18), troviamo innanzitutto l'intestazione del post, che si compone di una coppia di frecce, utilizzate per votare l'utilità del post stesso, e da un blocco contente autore, data di pubblicazione e contenuto di quest'ultimo. Qualora l'utenza correntemente autenticata fosse anche l'autore del post in visualizzazione, nell'angolo in alto a destra verrebbero visualizzate due icone, che permettono rispettivamente di eliminare il post e di modificarne il contenuto.
 
-A seguire, in colonna verranno visualizzati tutti i commenti pubblicati in risposta al post, fino ad un massimo di cinque per pagina. Qualora il numero di commenti superasse questo limite è sempre possibile interagire con la barra di navigazione contenuta tra il blocco post e la lista dei commenti, per attraversare le diverse pagine. 
-Ad un commento associamo due importanti funzionalità, quella di modifica/eliminazione, che si comporta in maniera analoga a quella dei post. In particolare, l'autore di un commento visualizzerà, in un angolo, i pulsanti necessari per esercitare queste due funzionalità.
-La seconda funzione che abbiamo citato è quella di voto. Specificatamente, un utente, che non sia l'autore di un determinato commento, interagendo con la scritta \emph{il tuo voto} locata nell'angolo in alto a destra di blocco commento, attiverà un sistema di voto, graficamente rappresentato da 5 stelle. La scelta di un di queste ultime provocherà l'inoltro del voto.
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-18.png}
+\caption{Pagina di visualizzazione di un post, con relativi commenti.}
+\end{figure}
 
-Infine, ai piedi della pagina, troviamo una forma nominata \emph{contribuisci al post}, che permette all'utente di pubblicare un commento sotto il post che si sta visualizzando in quel momento.
+A seguire, verranno visualizzati in colonna tutti i commenti pubblicati in risposta al post, fino ad un massimo di cinque per pagina. Qualora il numero di commenti superasse questo limite, è sempre possibile interagire con la barra di navigazione contenuta tra il post e la lista dei commenti, per attraversare le diverse pagine. 
+
+Ad un commento associamo due importanti funzionalità: quella di modifica/eliminazione, analoga a quelle dei post, e quella di voto. Nello specifico, un utente che non sia l'autore di un determinato commento, interagendo con la scritta \emph{il tuo voto} presente nell'angolo in alto a destra di blocco commento, attiverà un sistema di voto, graficamente rappresentato da cinque stelle: la pressione di una di queste ultime indicherà il grado di accordo dell'utente in relazione al commento votato.
+
+Infine, ai piedi della pagina, troviamo una sezione che permette all'utente di pubblicare un commento relativo al post correntemente visualizzato nella pagina web.
+
+\medskip
+
+\textbf{\underline{Attenzione}}: ricordiamo al lettore che uno studente può accedere alla sezione delle bacheche dei propri corsi solo e soltanto se non è stato sospeso (\emph{soft ban}) da un'utenza amministrativa.
+
 \medskip
 
 \subsection{Accedere alle FAQ}
 
-Il sistema delle faq permette agli studenti di interagire con i docenti proponendo delle domande in appositi box, o di votare quelle già presenti. Saranno poi i docenti a scegliere a quali domande rispondere e quali eventualmente eliminare. Prendiamo in studio ora il funzionamento di questo servizio dal punto di vista di uno studente.
+Il sistema delle FAQ permette agli studenti di interagire con i docenti proponendo delle domande in appositi box, o di votare quelle già presenti; saranno poi i docenti a scegliere le domande alle quali rispondere e le domande che possono essere eventualmente eliminate. A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{FAQ}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente, \textbf{a patto di non essere stato sospeso da un'utenza amministrativa}, alla pressione di tale pulsante verrà reindirizzato ad una pagina web come quella in figura 2.19, nella quale verrà presentata una lista dei corsi relativi al corso di laurea cui lo studente autenticato nella sessione corrente risulta essere iscritto; da qui, l'utente può scegliere un corso e, interagendo con l'apposito pulsante, può raggiungere la pagina delle FAQ specifica per il corso selezionato.
 
-Come abbiamo già citato un studente può o votare o pubblicare nuovo domande. Per fare ciò, innanzitutto deve raggiungere la pagina faq relativa ad un corso di suo interesse. Interagendo con il menu a tendina e successivamente scegliendo il corso interessato si raggiunge la pagina faq specifica del corso selezionato.
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-19.png}
+\caption{Lista dei corsi relativi al corso di laurea a cui lo studente autenticato è iscritto.}
+\end{figure}
 
-Screen scelta del corso
+La pagina che si presenterà allo studente, mostrata in figura 2.20, è divisa in tre aree. In cima troviamo un box che rappresenta il contenitore di tutte quelle domande che hanno ricevuto una risposta. Il secondo blocco rappresenta invece il container delle domande ancora incomplete, ossia delle domande alle quali il docente non ha ancora pubblicato una risposta. Per una qualsiasi domanda, è possibile interagire con la coppia di frecce poste alla sinistra del testo, per esprimere un voto di utilità riguardante il contenuto della FAQ proposta. In fondo alla pagina, infine, troviamo una form che consente all'utente di contribuire alla FAQ, permettendogli di pubblicare una nuova domanda. 
 
-La pagina che si presenterà allo studente è divisa in 3 aree. In cima troviamo un box di domande, che come dice il nome, rappresenta il contenitore di tutte quelle domande che hanno ricevuto una risposta. Il secondo blocco rappresenta invece il container delle domande ancora incomplete, in attesa che il docente pubblichi una risposta. Per una qualsiasi domanda, è possibile interagire con la coppia di frecce, poste alla sinistra del testo, per esprimere un voto riguardante il contenuto.
-
-Infine, in fondo alla pagina troviamo una form che consente all'utente di contribuire alla faq, permettendogli di pubblicare una nuova domanda. 
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-20.png}
+\caption{Pagina di visualizzazione della sezione FAQ relativa al corso selezionato.}
+\end{figure}
 
 \medskip
 
@@ -1521,7 +1642,13 @@ Infine, in fondo alla pagina troviamo una form che consente all'utente di contri
 
 \subsection{Visualizzare l'anagrafica}
 
-Una volta effettuato il login, ad un'utenza di tipologia \emph{Docente} verrà presentata una pagina web in cui saranno visualizzate le proprie informazioni anagrafiche, quali matricola, nome, cognome e password; quest'ultima verrà visualizzata coperta da degli asterischi, che rappresentano la lunghezza della relativa password criptata secondo l'algoritmo di cifratura MD5. Come per ogni altra utenza nella piattaforma, anche un docente può cambiare la propria password, premendo sull'apposita icona situata a fianco della password stessa (figura 2.?). 
+Una volta effettuato il login, ad un'utenza di tipologia \emph{Docente} verrà presentata una pagina web in cui saranno visualizzate le proprie informazioni anagrafiche, quali matricola, nome, cognome e password; quest'ultima verrà visualizzata coperta da degli asterischi, che rappresentano la lunghezza della relativa password criptata secondo l'algoritmo di cifratura MD5. Come per ogni altra utenza nella piattaforma, anche un docente può cambiare la propria password, premendo sull'apposita icona situata a fianco della password stessa (figura 2.21). 
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-21.png}
+\caption{Homepage dell'utenza \emph{Docente}.}
+\end{figure}
 
 In questa homepage, inoltre, viene presentata una sidebar con tutte le funzionalità relative ai docenti, e che saranno descritte nel seguito di questo paragrafo. Si ricorda al lettore che, da qualsiasi pagina web del sito, è possibile tornare alla propria homepage di utenza cliccando sull'opportuna icona situata in alto a destra. Inoltre, da qualsiasi pagina web del sito, è possibile effettuare il logout: sarà sufficiente premere sull'apposito bottone sito anch'esso in alto a destra, a fianco dell'icona appena citata.
 
@@ -1530,7 +1657,13 @@ In questa homepage, inoltre, viene presentata una sidebar con tutte le funzional
 \subsection{Visualizzare gli appelli}
 \label{sec:visualizzaAppelli}
 
-A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Visualizza appelli}, sotto la sezione \emph{Esami}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.?, nella quale verranno presentati a schermo tutti gli appelli di tutti i corsi impartiti dal docente autenticato nella sessione corrente. In particolare, verranno visualizzati tutti gli appelli aventi data pari o successiva a quella corrente; gli appelli sono ordinati... (come? work in progress).%ORDINATI COME?
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Visualizza appelli}, sotto la sezione \emph{Esami}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.22, nella quale verranno presentati a schermo tutti gli appelli di tutti i corsi impartiti dal docente autenticato nella sessione corrente. In particolare, verranno visualizzati tutti gli appelli aventi data pari o successiva a quella corrente; la visualizzazione degli appelli è ordinata in base al seguente criterio: viene data la priorità all'ordinamento per nome del corso cui l'appello fa riferimento e, in seguito, gli appelli inerenti allo stesso corso vengono visualizzati in ordine cronologico.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-22.png}
+\caption{Visualizzazione degli appelli.}
+\end{figure}
 
 Il docente, a questo punto, dispone di tre scelte: può modificare un singolo appello, può eliminare un singolo appello, oppure può effettuare una ricerca di un appello mediante l'apposita barra di ricerca. La ricerca avviene tramite un meccanismo basato sulla data: in seguito alla ricerca, verranno visualizzati tutti gli appelli avente data pari o successiva a quella inserita.
 
@@ -1538,7 +1671,19 @@ Il docente, a questo punto, dispone di tre scelte: può modificare un singolo ap
 
 \subsubsection{Modificare un appello}
 
-A partire dalla pagina di visualizzazione degli appelli, un docente può decidere di modificare un singolo appello: sarà sufficiente cliccare sull'apposito bottone \emph{modifica}, che si trova in corrispondenza dell'appello stesso, come mostrato in figura 2.?. La pressione di questo bottone porterà l'utente in una nuova pagina web, contenente una form di modifica dell'appello: i campi della form, come mostra la figura 2.?, sono già compilati con i dati dell'appello dal quale si proviene. L'utente sarà dunque libero di modificare i dati dell'appello a proprio piacimento; cliccando su \emph{invio}, l'appello verrà generalmente modificato. Tuttavia, in caso di corrispondenze con altri appelli, prima che la modifica venga effettuata, verrà mostrata all'utente una pagina web di segnalazione della corrispondenza avvenuta, come mostrato in figura 2.?. Le corrispondenze saranno approfondite in seguito, nel paragrafo relativo all'inserimento degli appelli.
+A partire dalla pagina di visualizzazione degli appelli, un docente può decidere di modificare un singolo appello: sarà sufficiente cliccare sull'apposito bottone \emph{modifica}, che si trova in corrispondenza dell'appello stesso, come mostrato in figura 2.22. La pressione di questo bottone porterà l'utente in una nuova pagina web, contenente una form di modifica dell'appello: i campi della form, come mostra la figura 2.23, sono già compilati con i dati dell'appello dal quale si proviene. L'utente sarà dunque libero di modificare i dati dell'appello a proprio piacimento; cliccando su \emph{invio}, l'appello verrà generalmente modificato. Tuttavia, in caso di corrispondenze con altri appelli, prima che la modifica venga effettuata, verrà mostrata all'utente una pagina web di segnalazione della corrispondenza avvenuta, come mostrato in figura 2.24. Le corrispondenze saranno approfondite in seguito, nel paragrafo relativo all'inserimento degli appelli.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-23.png}
+\caption{Form di modifica di un appello.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-24.png}
+\caption{Visualizzazione delle corrispondenze.}
+\end{figure}
 
 In ogni caso, l'avvenuta modifica verrà segnalata da un opportuno avviso di successo; dualmente, in caso di errore, l'utente riceverà un'opportuna segnalazione.
 
@@ -1546,7 +1691,7 @@ In ogni caso, l'avvenuta modifica verrà segnalata da un opportuno avviso di suc
 
 \subsubsection{Eliminare un appello}
 
-A partire dalla pagina di visualizzazione degli appelli, un docente può decidere di eliminare un singolo appello: sarà sufficiente cliccare sull'apposito bottone \emph{elimina}, che si trova in corrispondenza dell'appello stesso, come mostrato in figura 2.?. La pressione di questo pulsante scatenerà l'esecuzione di una funzione di eliminazione, che \emph{eliminerà} l'appello (per ulteriori approfondimenti sull'eliminazione, si faccia riferimento al capitolo 3).
+A partire dalla pagina di visualizzazione degli appelli, un docente può decidere di eliminare un singolo appello: sarà sufficiente cliccare sull'apposito bottone \emph{elimina}, che si trova in corrispondenza dell'appello stesso, come mostrato in figura 2.22. La pressione di questo pulsante scatenerà l'esecuzione di una funzione di eliminazione che, dopo una prima conferma da parte dell'utente, \emph{eliminerà} l'appello selezionato (per ulteriori approfondimenti sull'eliminazione, si faccia riferimento al capitolo 3).
 
 L'avvenuta eliminazione verrà segnalata da un opportuno avviso di successo; dualmente, in caso di errore, l'utente riceverà un'opportuna segnalazione.
 
@@ -1554,29 +1699,59 @@ L'avvenuta eliminazione verrà segnalata da un opportuno avviso di successo; dua
 
 \subsection{Inserire un appello}
 
-A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Inserisci appello}, sotto la sezione \emph{Esami}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.?, nella quale verrà presentata a schermo una form per l'inserimento di un nuovo appello. L'utente potrà dunque scegliere una qualsiasi data (pari o antecedente a quella attuale?), un qualsiasi orario e uno dei corsi di propria competenza; tutte queste informazioni sono obbligatorie. Premendo poi il pulsante \emph{invio}, le informazioni inserite andranno a costituire un nuovo appello, a meno di \textbf{collisioni}. L'utente potrà verificare l'avvenuto inserimento del nuovo appello mediante l'apposita funzionalità di visualizzazione degli appelli, trattata poc'anzi \hyperref[sec:visualizzaAppelli]{\textcolor{gray}{[$\uparrow$]}}. %WORK IN PROGRESS
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Inserisci appello}, sotto la sezione \emph{Esami}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.25, nella quale verrà presentata a schermo una form per l'inserimento di un nuovo appello. L'utente potrà dunque scegliere una qualsiasi data, purché successiva a quella corrente, un qualsiasi orario e uno dei corsi di propria competenza; tutte queste informazioni sono obbligatorie. Premendo poi il pulsante \emph{invio}, le informazioni inserite andranno a costituire un nuovo appello, a meno di \textbf{collisioni}. L'utente potrà verificare l'avvenuto inserimento del nuovo appello mediante l'apposita funzionalità di visualizzazione degli appelli, trattata poc'anzi \hyperref[sec:visualizzaAppelli]{\textcolor{gray}{[$\uparrow$]}}.
 
-Inserendo un appello in prossimità di altri appelli relativi a corsi di uno stesso anno inerenti ad uno stesso corso di laurea, si avrà una \emph{corrispondenza}. In occorrenza di tale evento, prima che avvenga l'effettivo inserimento (o l'effettiva modifica!) dell'appello in questione, l'utente verrà reindirizzato verso una pagina web in cui viene segnalata la presenza di corrispondenze, e in cui vengono presentate le corrispondenze rilevate, al fine di dar modo al docente di prendere la sua decisione sull'effettivo inserimento (o sull'effettiva modifica) dell'appello stesso. Come già citato, un'esemplificazione di una tale pagina web è riportata in figura 2.?. Rispondendo \emph{sì} alla domanda ''\emph{Sono state rilevate corrispondenze. Inserire comunque l'appello?}'', l'inserimento avverrà senza altri indugi; altrimenti, rispondendo \emph{no}, l'utente verrà reindirizzato alla pagina di inserimento (o di modifica) dell'appello, nella quale troverà la form già compilata con i dati precedentemente inseriti.
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-25.png}
+\caption{Form di inserimento di un appello.}
+\end{figure}
+
+Inserendo un appello in prossimità di altri appelli relativi a corsi di uno stesso anno inerenti ad uno stesso corso di laurea, si avrà una \emph{corrispondenza}. In occorrenza di tale evento, prima che avvenga l'effettivo inserimento (o l'effettiva modifica!) dell'appello in questione, l'utente verrà reindirizzato verso una pagina web in cui viene segnalata la presenza di corrispondenze, e in cui vengono presentate le corrispondenze rilevate, al fine di dar modo al docente di prendere la sua decisione sull'effettivo inserimento (o sull'effettiva modifica) dell'appello stesso. Come già citato, un'esemplificazione di una tale pagina web è riportata in figura 2.24. Rispondendo \emph{sì} alla domanda ''\emph{Sono state rilevate corrispondenze. Inserire comunque l'appello?}'', l'inserimento avverrà senza altri indugi; altrimenti, rispondendo \emph{no}, l'utente verrà reindirizzato alla pagina di inserimento (o di modifica) dell'appello, nella quale troverà la form già compilata con i dati precedentemente inseriti.
 
 \medskip
 
 \subsection{Verbalizzare gli esami}
 
-A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Verbalizza esami}, sotto la sezione \emph{Esami}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.?, nella quale verranno presentati a schermo tutti gli appelli di tutti i corsi impartiti dal docente autenticato nella sessione corrente. In particolare, verranno visualizzati tutti gli appelli aventi data pari o successiva a quella corrente; gli appelli sono ordinati... (come? work in progress).%ORDINATI COME?
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Verbalizza esami}, sotto la sezione \emph{Esami}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.26, nella quale verranno presentati a schermo tutti gli appelli di tutti i corsi impartiti dal docente autenticato nella sessione corrente. In particolare, verranno visualizzati tutti gli appelli aventi data pari o successiva a quella corrente; la visualizzazione degli appelli è ordinata in base al seguente criterio: viene data la priorità all'ordinamento per nome del corso cui l'appello fa riferimento e, in seguito, gli appelli inerenti allo stesso corso vengono visualizzati in ordine cronologico.
 
-A differenza della semplice visualizzazione \hyperref[sec:visualizzaAppelli]{\textcolor{gray}{[$\uparrow$]}}, questa volta gli appelli vengono presentati con un'informazione aggiuntiva: il numero di studenti prenotati ai singoli appelli. Inoltre, come mostrato in figura 2.?, i singoli appelli dispongono di un pulsante \emph{info}, premendo il quale l'utente potrà accedere alla pagina web per l'effettiva verbalizzazione, mostrata in figura 2.?. Tale pagina avrà lo scopo di visualizzare una lista di tutti gli studenti iscritti all'appello selezionato; il docente potrà inserire la relativa valutazione nell'apposito campo \emph{esito} e, premendo sul pulsante \emph{verbalizza}, verrà effettuata la verbalizzazione di tutti gli esami con esito diverso da NULL. Come discusso nel capitolo 1 \hyperref[sec:verb]{\textcolor{gray}{[$\uparrow$]}}, l'esito di un esame verbalizzato può essere un numero compreso fra 18/30 e 30/30 con lode (il valore di un 30/30 con lode è pari a 31), oppure può essere una lettera, R o B; la lettera R indica il ritiro da parte dello studente dallo svolgimento dell'esame, mentre la lettera B indica una bocciatura, ossia la terminazione dell'esame svolto con esito negativo.
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-26.png}
+\caption{Pagina di visualizzazione degli appelli relativi ai corsi impartiti dal docente autenticato.}
+\end{figure}
+
+A differenza della semplice visualizzazione \hyperref[sec:visualizzaAppelli]{\textcolor{gray}{[$\uparrow$]}}, questa volta gli appelli vengono presentati con un'informazione aggiuntiva: il numero di studenti prenotati ai singoli appelli. Inoltre, come mostrato in figura 2.26, i singoli appelli dispongono di un pulsante \emph{info}, premendo il quale l'utente potrà accedere alla pagina web per l'effettiva verbalizzazione, mostrata in figura 2.27. Tale pagina avrà lo scopo di visualizzare una lista di tutti gli studenti iscritti all'appello selezionato; il docente potrà inserire la relativa valutazione nell'apposito campo \emph{esito} e, premendo sul pulsante \emph{verbalizza}, verrà effettuata la verbalizzazione di tutti gli esami aventi esito diverso da NULL. Come discusso nel capitolo 1 \hyperref[sec:specifiche]{\textcolor{gray}{[$\uparrow$]}}, l'esito di un esame verbalizzato può essere un numero compreso fra 18/30 e 30/30 con lode (il valore di un 30/30 con lode è pari a 31), oppure può essere una lettera, R o B; la lettera R indica il ritiro da parte dello studente dallo svolgimento dell'esame, mentre la lettera B indica una bocciatura, ossia la terminazione dell'esame svolto con esito negativo.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-27.png}
+\caption{Pagina di verbalizzazione di un esame.}
+\end{figure}
 
 \medskip
 
 \subsection{Accedere alle FAQ}
 
-A partire da una qualsiasi pagina web relativa all'utenza, \textbf{qualora l'utente non fosse stato sospeso da un'utenza amministrativa}, è possibile cliccare sulla voce \emph{FAQ}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente - \textbf{se non sospeso} - verrà così reindirizzato ad una pagina web come quella in figura 2.?, nella quale verranno presentati a schermo tutti i corsi impartiti dal docente correntemente autenticato nella sessione corrente, come mostrato in figura 2.?. La pressione di una delle apposite frecce laterali permetterà all'utente di accedere alla sezione delle FAQ relative al corso selezionato.
+A partire da una qualsiasi pagina web relativa all'utenza, \textbf{qualora l'utente non fosse stato sospeso da un'utenza amministrativa}, è possibile cliccare sulla voce \emph{FAQ}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente - \textbf{se non sospeso} - verrà così reindirizzato ad una pagina web come quella in figura 2.28, nella quale verranno presentati a schermo tutti i corsi impartiti dal docente correntemente autenticato nella sessione corrente. La pressione di una delle apposite frecce laterali permetterà all'utente di accedere alla sezione delle FAQ relative al corso selezionato.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-28.png}
+\caption{Visualizzazione dell'elenco dei corsi impartiti dal docente autenticato.}
+\end{figure}
 
 \medskip
 
 \subsubsection{Interagire con le FAQ}
 
-Premendo una freccia nella pagina di visualizzazione dei corsi impartiti dal docente autenticato nella sessione corrente, egli avrà accesso ad una sezione FAQ dedicata al corso selezionato. La pagina web presentata all'utente è simile a quella mostrata in figura 2.?. Vi è una suddivisione della pagina web in due macro-aree: la prima contenente le domande a cui è stata data risposta, visualizzate in ordine decrescente per utilità della domanda stessa; la seconda contenente invece le domande a cui ancora non è stata fornita alcuna risposta. 
+Premendo una freccia nella pagina di visualizzazione dei corsi impartiti dal docente autenticato nella sessione corrente, egli avrà accesso ad una sezione FAQ dedicata al corso selezionato. La pagina web presentata all'utente è simile a quella mostrata in figura 2.29. Vi è una suddivisione della pagina web in due macro-aree: la prima contenente le domande a cui è stata data risposta, visualizzate in ordine decrescente per utilità della domanda stessa; la seconda contenente invece le domande a cui ancora non è stata fornita alcuna risposta. 
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-29.png}
+\caption{Sezione FAQ relativa ad un corso.}
+\end{figure}
 
 Nella prima area, il docente può modificare la propria risposta ad una o più domande, oppure può decidere di eliminare la domanda stessa. Nella seconda area, invece, il docente può inserire una risposta ad una domanda ancora priva di quest'ultima, oppure eliminarla; nel caso in cui il docente decidesse di rispondere ad una domanda presente nella seconda area, questa verrà immediatamente trasferita nella prima, in modo da poter essere visualizzata da tutti gli studenti aventi tale diritto.
 
@@ -1589,47 +1764,121 @@ Nella prima area, il docente può modificare la propria risposta ad una o più d
 
 \subsection{Visualizzare l'anagrafica}
 
+Una volta effettuato il login, ad un'utenza di tipologia \emph{Segretario} verrà presentata una pagina web in cui saranno visualizzate le proprie informazioni di login, quali username e password; quest'ultima verrà visualizzata coperta da degli asterischi, che rappresentano la lunghezza della relativa password criptata secondo l'algoritmo di cifratura MD5. Come per ogni altra utenza nella piattaforma, anche un segretario può cambiare la propria password, premendo sull'apposita icona situata a fianco della password stessa (figura 2.30). 
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-30.png}
+\caption{Homepage dell'utenza \emph{Segretario}.}
+\end{figure}
+
+In questa homepage, inoltre, viene presentata una sidebar con tutte le funzionalità relative alla segreteria, e che saranno descritte nel seguito di questo paragrafo. Si ricorda al lettore che, da qualsiasi pagina web del sito, è possibile tornare alla propria homepage di utenza cliccando sull'opportuna icona situata in alto a destra. Inoltre, da qualsiasi pagina web del sito, è possibile effettuare il logout: sarà sufficiente premere sull'apposito bottone sito anch'esso in alto a destra, a fianco dell'icona appena citata.
+
 \medskip
 
 \subsection{Visualizzare gli appelli}
 
-%intro
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Visualizza appelli}, sotto la sezione \emph{Esami}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.31, nella quale verranno presentati a schermo tutti gli appelli di tutti i corsi registrati presso la piattaforma - inerenti, cioè, a qualsiasi corso di laurea registrato. In particolare, verranno visualizzati tutti gli appelli aventi data pari o successiva a quella corrente; la visualizzazione degli appelli è ordinata in base al seguente criterio: viene data la priorità all'ordinamento per nome del corso cui l'appello fa riferimento e, in seguito, gli appelli inerenti allo stesso corso vengono visualizzati in ordine cronologico.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-31.png}
+\caption{Visualizzazione di tutti gli appelli relativi a tutti i corsi di laurea registrati nella piattaforma.}
+\end{figure}
+
+Il segretario, a questo punto, dispone di tre scelte: può modificare un singolo appello, può eliminare un singolo appello, oppure può effettuare una ricerca di un appello mediante l'apposita barra di ricerca. La ricerca avviene tramite un meccanismo basato sulla data: in seguito alla ricerca, verranno visualizzati tutti gli appelli avente data pari o successiva a quella inserita.
+
+\medskip
 
 \subsubsection{Modificare un appello}
+
+A partire dalla pagina di visualizzazione degli appelli, un segretario può decidere di modificare un singolo appello: sarà sufficiente cliccare sull'apposito bottone \emph{modifica}, che si trova in corrispondenza dell'appello stesso, come mostrato in figura 2.31. La pressione di questo bottone porterà l'utente in una nuova pagina web, contenente una form di modifica dell'appello: i campi della form, come mostrava la figura 2.23, sono già compilati con i dati dell'appello dal quale si proviene. L'utente sarà dunque libero di modificare i dati dell'appello a proprio piacimento; cliccando su \emph{invio}, l'appello verrà generalmente modificato. Tuttavia, in caso di corrispondenze con altri appelli, prima che la modifica venga effettuata, verrà mostrata all'utente una pagina web di segnalazione della corrispondenza avvenuta, come mostrato in figura 2.24.
+
+In ogni caso, l'avvenuta modifica verrà segnalata da un opportuno avviso di successo; dualmente, in caso di errore, l'utente riceverà un'opportuna segnalazione.
 
 \medskip
 
 \subsubsection{Eliminare un appello}
 
+A partire dalla pagina di visualizzazione degli appelli, un segretario può decidere di eliminare un singolo appello: sarà sufficiente cliccare sull'apposito bottone \emph{elimina}, che si trova in corrispondenza dell'appello stesso, come mostrato in figura 2.31. La pressione di questo pulsante scatenerà l'esecuzione di una funzione di eliminazione che, dopo una prima conferma da parte dell'utente, \emph{eliminerà} l'appello selezionato (per ulteriori approfondimenti sull'eliminazione, si faccia riferimento al capitolo 3).
+
+L'avvenuta eliminazione verrà segnalata da un opportuno avviso di successo; dualmente, in caso di errore, l'utente riceverà un'opportuna segnalazione.
+
 \medskip
 
 \subsection{Inserire un appello}
 
-%nota: collisioni
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Inserisci appello}, sotto la sezione \emph{Esami}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.25, nella quale verrà presentata a schermo una form per l'inserimento di un nuovo appello. L'utente potrà dunque scegliere una qualsiasi data, purché successiva a quella corrente, un qualsiasi orario e uno dei corsi fra quelli registrati nella piattaforma; tutte queste informazioni sono obbligatorie. Premendo poi il pulsante \emph{invio}, le informazioni inserite andranno a costituire un nuovo appello, a meno di \textbf{collisioni}. L'utente potrà verificare l'avvenuto inserimento del nuovo appello mediante l'apposita funzionalità di visualizzazione degli appelli, trattata poc'anzi.
+
+Inserendo un appello in prossimità di altri appelli relativi a corsi di uno stesso anno inerenti ad uno stesso corso di laurea, si avrà una \emph{corrispondenza}. In occorrenza di tale evento, prima che avvenga l'effettivo inserimento (o l'effettiva modifica!) dell'appello in questione, l'utente verrà reindirizzato verso una pagina web in cui viene segnalata la presenza di corrispondenze, e in cui vengono presentate le corrispondenze rilevate, al fine di dar modo al docente di prendere la sua decisione sull'effettivo inserimento (o sull'effettiva modifica) dell'appello stesso. Come già citato, un'esemplificazione di una tale pagina web è riportata in figura 2.24. Rispondendo \emph{sì} alla domanda ''\emph{Sono state rilevate corrispondenze. Inserire comunque l'appello?}'', l'inserimento avverrà senza altri indugi; altrimenti, rispondendo \emph{no}, l'utente verrà reindirizzato alla pagina di inserimento (o di modifica) dell'appello, nella quale troverà la form già compilata con i dati precedentemente inseriti.
 
 \medskip
 
-\subsection{Gestire le prenotazioni}
+\subsection{Verbalizzare gli esami}
 
-%intro
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Verbalizza esami}, sotto la sezione \emph{Esami}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.32, nella quale verranno presentati a schermo tutti gli appelli di tutti i corsi registrati presso la piattaforma - inerenti, cioè, a tutti i corsi di laurea presenti. In particolare, verranno visualizzati tutti gli appelli aventi data pari o successiva a quella corrente; la visualizzazione degli appelli è ordinata in base al seguente criterio: viene data la priorità all'ordinamento per nome del corso cui l'appello fa riferimento e, in seguito, gli appelli inerenti allo stesso corso vengono visualizzati in ordine cronologico.
 
-\subsubsection{Verbalizzare gli esami}
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-32.png}
+\caption{Visualizzazione di tutti gli appelli relativi a tutti i corsi registrati presso la piattaforma.}
+\end{figure}
+
+A differenza della semplice visualizzazione, questa volta gli appelli vengono presentati con un'informazione aggiuntiva: il numero di studenti prenotati ai singoli appelli. Inoltre, come mostrato in figura 2.32, i singoli appelli dispongono di un pulsante \emph{info}, premendo il quale l'utente potrà accedere alla pagina web per l'effettiva verbalizzazione, mostrata in figura 2.27. Tale pagina avrà lo scopo di visualizzare una lista di tutti gli studenti iscritti all'appello selezionato; il segretario potrà inserire la relativa valutazione nell'apposito campo \emph{esito} e, premendo sul pulsante \emph{verbalizza}, verrà effettuata la verbalizzazione di tutti gli esami aventi esito diverso da NULL. Come discusso nel capitolo 1 \hyperref[sec:specifiche]{\textcolor{gray}{[$\uparrow$]}}, l'esito di un esame verbalizzato può essere un numero compreso fra 18/30 e 30/30 con lode (il valore di un 30/30 con lode è pari a 31), oppure può essere una lettera, R o B; la lettera R indica il ritiro da parte dello studente dallo svolgimento dell'esame, mentre la lettera B indica una bocciatura, ossia la terminazione dell'esame svolto con esito negativo.
 
 \medskip
 
 \subsection{Accedere alle bacheche}
 
-%intro
+La fruizione delle bacheche è un'importante ed innovativa funzionalità offerta dalla piattaforma e si compone di diversi strumenti messi a disposizione agli studenti, \textbf{purché non siano stati sospesi da un'utenza amministrativa}. Qui, il ruolo svolto dalla segreteria è un ruolo di \emph{moderazione}: un segretario, cioè, non può prendere parte in modo attivo alle votazioni di post e commenti, ma è in grado di creare post di avviso, così come di commentare sotto ogni tipologia di post, in modo da far percepire alla community studentesca una presenza autorevole atta a garantire il giusto grado di ordine nelle varie bacheche. Qualora gli studenti non dovessero rispettare le più banali norme di comportamento, un segretario può scegliere di modificare o di eliminare il contenuto di un post o di un commento.
+
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Bacheca}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente, \textbf{a patto di non essere stato sospeso da un'utenza amministrativa}, verrà reindirizzato ad una pagina web come quella in figura 2.33, nella quale vengono elencati tutti i corsi appartenenti a tutti i corsi di laurea registrati all'interno della piattaforma.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-33.png}
+\caption{Lista dei corsi relativi a tutti i corsi di laurea memorizzati nella piattaforma.}
+\end{figure}
+
+In questa pagina web, ciascuna voce rappresenta la bacheca dei singoli corsi. Interagendo con una di queste voci, l'utente viene reindirizzato ad una pagina web simile a quella mostrata in figura 2.16. La pagina in questione rappresenta una singola bacheca associata ad un determinato corso. Essa consiste di un menù di navigazione, posto nella parte superiore del corpo della bacheca, che consente all'utente di attraversare le diverse pagine della bacheca stessa (\emph{facciamo notare che il numero di post che possono essere visualizzati per pagina è pari a 5}). Sempre nella parte superiore, allo stesso livello del menù di navigazione, è presente un bottone \emph{crea post}, la cui pressione scatena un evento di creazione o di eliminazione di una form, posta al di sopra dell'elenco dei post (figura 2.17). Tramite questa form è possibile pubblicare un nuovo al post all'interno della bacheca.
+
+Nel blocco centrale della pagina web, troviamo l'elenco vero e proprio dei post relativi alla singola bacheca selezionata. In cima alla lista dei post è presente una barra orizzontale, che ci permette di applicare alcuni filtri di visualizzazione dei post sottostanti, fra i quali possiamo citare l'ordinamento sull'utilità dei post, sul numero di risposte ai singoli post e sulla data di pubblicazione dei singoli post. Inoltre, in ogni bacheca vengono sempre posti in sovraimpressione i due post che hanno ricevuto più voti utilità, e vengono separati dall'elenco tramite un separatore a forma di barra orizzontale celeste. Interagendo con una voce dell'elenco visualizzato, si raggiunge una pagina che visualizza il post scelto, la cui descrizione è contenuta nella sezione successiva.
+
+\medskip
 
 \subsubsection{Interagire con i post}
+
+L'interazione con il post avviene in un'apposita pagina di visualizzazione del contenuto di quest'ultimo. Analizzando la schermata dall'alto (cfr. figura 2.18), troviamo innanzitutto l'intestazione del post, che si compone di una coppia di frecce, utilizzate per votare l'utilità del post stesso, e da un blocco contente autore, data di pubblicazione e contenuto di quest'ultimo. Qualora l'utenza correntemente autenticata fosse anche l'autore del post in visualizzazione, nell'angolo in alto a destra verrebbero visualizzate due icone, che permettono rispettivamente di eliminare il post e di modificarne il contenuto.
+
+A seguire, verranno visualizzati in colonna tutti i commenti pubblicati in risposta al post, fino ad un massimo di cinque per pagina. Qualora il numero di commenti superasse questo limite, è sempre possibile interagire con la barra di navigazione contenuta tra il post e la lista dei commenti, per attraversare le diverse pagine. 
+
+Ricordiamo che un segretario non può prendere parte in modo attivo alle votazioni di post e commenti, ma è in grado di creare post di avviso, così come di commentare sotto ogni tipologia di post, in modo da far percepire alla community studentesca una presenza autorevole atta a garantire il giusto grado di ordine nelle varie bacheche. Qualora gli studenti non dovessero rispettare le più banali norme di comportamento, un segretario può scegliere di modificare o di eliminare il contenuto di un post o di un commento.
+
+Infine, ai piedi della pagina, troviamo una sezione che permette all'utente di pubblicare un commento relativo al post correntemente visualizzato nella pagina web.
+
+\medskip
+
+\textbf{\underline{Attenzione}}: ricordiamo al lettore che un segretario può accedere alla sezione delle bacheche dei propri corsi solo e soltanto se non è stato sospeso (\emph{soft ban}) da un'utenza amministrativa.
 
 \medskip
 
 \subsection{Accedere alle FAQ}
 
-%intro
+Il sistema delle FAQ permette agli studenti di interagire con i docenti proponendo delle domande in appositi box, o di votare quelle già presenti; saranno poi i docenti a scegliere le domande alle quali rispondere e le domande che possono essere eventualmente eliminate. Qui, il ruolo svolto dalla segreteria è un ruolo di \emph{moderazione}: un segretario, cioè, non può prendere parte in modo attivo alle votazioni delle domande poste, ma è in grado di inserire nuove domande con annesse risposte, in modo da far percepire alla community una presenza autorevole atta a garantire il giusto grado di ordine nelle varie sezioni FAQ. Qualora gli studenti e/o i docenti non dovessero rispettare le più banali norme di comportamento, un segretario può scegliere di modificare o di eliminare il contenuto di una domanda o di una risposta.
 
-\subsubsection{Interagire con le FAQ}
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{FAQ}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente, \textbf{a patto di non essere stato sospeso da un'utenza amministrativa}, alla pressione di tale pulsante verrà reindirizzato ad una pagina web come quella in figura 2.34, nella quale verrà presentata una lista dei corsi relativi a tutti i corsi di laurea registrati presso la piattaforma; da qui, l'utente può scegliere un corso e, interagendo con l'apposito pulsante, può raggiungere la pagina delle FAQ specifica per il corso selezionato.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-34.png}
+\caption{Lista dei corsi relativi a tutti i corsi di laurea memorizzati nella piattaforma.}
+\end{figure}
+
+La pagina che si presenterà al segretario, mostrata in figura 2.20, è divisa in tre aree. In cima troviamo un box che rappresenta il contenitore di tutte quelle domande che hanno ricevuto una risposta. Il secondo blocco rappresenta invece il container delle domande ancora incomplete, ossia delle domande alle quali nessuno ha ancora pubblicato una risposta. Per una qualsiasi domanda, è possibile interagire con la coppia di frecce poste alla sinistra del testo, per esprimere un voto di utilità riguardante il contenuto della FAQ proposta. In fondo alla pagina, infine, troviamo una form che consente all'utente di contribuire alla FAQ, permettendogli di pubblicare una nuova domanda. 
+
+\medskip
+
+\textbf{\underline{Attenzione}}: ricordiamo al lettore che un segretario può accedere alla sezione delle FAQ dei propri corsi solo e soltanto se non è stato sospeso (\emph{soft ban}) da un'utenza amministrativa.
 
 \medskip
 \medskip
@@ -1638,91 +1887,235 @@ Nella prima area, il docente può modificare la propria risposta ad una o più d
 
 \subsection{Visualizzare l'anagrafica}
 
+Una volta effettuato il login, ad un'utenza di tipologia \emph{Amministratore} verrà presentata una pagina web in cui saranno visualizzate le proprie informazioni di login, quali username e password; quest'ultima verrà visualizzata coperta da degli asterischi, che rappresentano la lunghezza della relativa password criptata secondo l'algoritmo di cifratura MD5. Come per ogni altra utenza nella piattaforma, anche un amministratore può cambiare la propria password, premendo sull'apposita icona situata a fianco della password stessa (figura 2.35). 
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-35.png}
+\caption{Homepage dell'utenza \emph{Amministratore}.}
+\end{figure}
+
+In questa homepage, inoltre, viene presentata una sidebar con tutte le funzionalità relative all'amministrazione, e che saranno descritte nel seguito di questo paragrafo. Si ricorda al lettore che, da qualsiasi pagina web del sito, è possibile tornare alla propria homepage di utenza cliccando sull'opportuna icona situata in alto a destra. Inoltre, da qualsiasi pagina web del sito, è possibile effettuare il logout: sarà sufficiente premere sull'apposito bottone sito anch'esso in alto a destra, a fianco dell'icona appena citata.
+
 \medskip
 
 \subsection{Visualizzare gli appelli}
 
-%intro
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Visualizza appelli}, sotto la sezione \emph{Esami}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.31, nella quale verranno presentati a schermo tutti gli appelli di tutti i corsi registrati presso la piattaforma - inerenti, cioè, a qualsiasi corso di laurea registrato. In particolare, verranno visualizzati tutti gli appelli aventi data pari o successiva a quella corrente; la visualizzazione degli appelli è ordinata in base al seguente criterio: viene data la priorità all'ordinamento per nome del corso cui l'appello fa riferimento e, in seguito, gli appelli inerenti allo stesso corso vengono visualizzati in ordine cronologico.
+
+L'amministratore, a questo punto, dispone di tre scelte: può modificare un singolo appello, può eliminare un singolo appello, oppure può effettuare una ricerca di un appello mediante l'apposita barra di ricerca. La ricerca avviene tramite un meccanismo basato sulla data: in seguito alla ricerca, verranno visualizzati tutti gli appelli avente data pari o successiva a quella inserita.
+
+\medskip
 
 \subsubsection{Modificare un appello}
+
+A partire dalla pagina di visualizzazione degli appelli, un amministratore può decidere di modificare un singolo appello: sarà sufficiente cliccare sull'apposito bottone \emph{modifica}, che si trova in corrispondenza dell'appello stesso, come mostrato in figura 2.31. La pressione di questo bottone porterà l'utente in una nuova pagina web, contenente una form di modifica dell'appello: i campi della form, come mostrava la figura 2.23, sono già compilati con i dati dell'appello dal quale si proviene. L'utente sarà dunque libero di modificare i dati dell'appello a proprio piacimento; cliccando su \emph{invio}, l'appello verrà generalmente modificato. Tuttavia, in caso di corrispondenze con altri appelli, prima che la modifica venga effettuata, verrà mostrata all'utente una pagina web di segnalazione della corrispondenza avvenuta, come mostrato in figura 2.24.
+
+In ogni caso, l'avvenuta modifica verrà segnalata da un opportuno avviso di successo; dualmente, in caso di errore, l'utente riceverà un'opportuna segnalazione.
 
 \medskip
 
 \subsubsection{Eliminare un appello}
 
+A partire dalla pagina di visualizzazione degli appelli, un amministratore può decidere di eliminare un singolo appello: sarà sufficiente cliccare sull'apposito bottone \emph{elimina}, che si trova in corrispondenza dell'appello stesso, come mostrato in figura 2.31. La pressione di questo pulsante scatenerà l'esecuzione di una funzione di eliminazione che, dopo una prima conferma da parte dell'utente, \emph{eliminerà} l'appello selezionato (per ulteriori approfondimenti sull'eliminazione, si faccia riferimento al capitolo 3).
+
+L'avvenuta eliminazione verrà segnalata da un opportuno avviso di successo; dualmente, in caso di errore, l'utente riceverà un'opportuna segnalazione.
+
 \medskip
 
 \subsection{Inserire un appello}
 
-%nota: collisioni
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Inserisci appello}, sotto la sezione \emph{Esami}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.25, nella quale verrà presentata a schermo una form per l'inserimento di un nuovo appello. L'utente potrà dunque scegliere una qualsiasi data, purché successiva a quella corrente, un qualsiasi orario e uno dei corsi fra quelli registrati nella piattaforma; tutte queste informazioni sono obbligatorie. Premendo poi il pulsante \emph{invio}, le informazioni inserite andranno a costituire un nuovo appello, a meno di \textbf{collisioni}. L'utente potrà verificare l'avvenuto inserimento del nuovo appello mediante l'apposita funzionalità di visualizzazione degli appelli, trattata poc'anzi.
+
+Inserendo un appello in prossimità di altri appelli relativi a corsi di uno stesso anno inerenti ad uno stesso corso di laurea, si avrà una \emph{corrispondenza}. In occorrenza di tale evento, prima che avvenga l'effettivo inserimento (o l'effettiva modifica!) dell'appello in questione, l'utente verrà reindirizzato verso una pagina web in cui viene segnalata la presenza di corrispondenze, e in cui vengono presentate le corrispondenze rilevate, al fine di dar modo al docente di prendere la sua decisione sull'effettivo inserimento (o sull'effettiva modifica) dell'appello stesso. Come già citato, un'esemplificazione di una tale pagina web è riportata in figura 2.24. Rispondendo \emph{sì} alla domanda ''\emph{Sono state rilevate corrispondenze. Inserire comunque l'appello?}'', l'inserimento avverrà senza altri indugi; altrimenti, rispondendo \emph{no}, l'utente verrà reindirizzato alla pagina di inserimento (o di modifica) dell'appello, nella quale troverà la form già compilata con i dati precedentemente inseriti.
 
 \medskip
 
-\subsection{Gestire le prenotazioni}
+\subsection{Verbalizzare gli esami}
 
-%intro
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Verbalizza esami}, sotto la sezione \emph{Esami}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.32, nella quale verranno presentati a schermo tutti gli appelli di tutti i corsi registrati presso la piattaforma - inerenti, cioè, a tutti i corsi di laurea presenti. In particolare, verranno visualizzati tutti gli appelli aventi data pari o successiva a quella corrente; la visualizzazione degli appelli è ordinata in base al seguente criterio: viene data la priorità all'ordinamento per nome del corso cui l'appello fa riferimento e, in seguito, gli appelli inerenti allo stesso corso vengono visualizzati in ordine cronologico.
 
-\subsubsection{Verbalizzare gli esami}
+A differenza della semplice visualizzazione, questa volta gli appelli vengono presentati con un'informazione aggiuntiva: il numero di studenti prenotati ai singoli appelli. Inoltre, come mostrato in figura 2.32, i singoli appelli dispongono di un pulsante \emph{info}, premendo il quale l'utente potrà accedere alla pagina web per l'effettiva verbalizzazione, mostrata in figura 2.27. Tale pagina avrà lo scopo di visualizzare una lista di tutti gli studenti iscritti all'appello selezionato; l'amministratore potrà inserire la relativa valutazione nell'apposito campo \emph{esito} e, premendo sul pulsante \emph{verbalizza}, verrà effettuata la verbalizzazione di tutti gli esami aventi esito diverso da NULL. Come discusso nel capitolo 1 \hyperref[sec:specifiche]{\textcolor{gray}{[$\uparrow$]}}, l'esito di un esame verbalizzato può essere un numero compreso fra 18/30 e 30/30 con lode (il valore di un 30/30 con lode è pari a 31), oppure può essere una lettera, R o B; la lettera R indica il ritiro da parte dello studente dallo svolgimento dell'esame, mentre la lettera B indica una bocciatura, ossia la terminazione dell'esame svolto con esito negativo.
 
 \medskip
 
 \subsection{Accedere alle bacheche}
 
-%intro
+La fruizione delle bacheche è un'importante ed innovativa funzionalità offerta dalla piattaforma e si compone di diversi strumenti messi a disposizione agli studenti, \textbf{purché non siano stati sospesi da un'utenza amministrativa}. Qui, il ruolo svolto dall'amministrazione è un ruolo di \emph{moderazione}: un amministratore, cioè, non può prendere parte in modo attivo alle votazioni di post e commenti, ma è in grado di creare post di avviso, così come di commentare sotto ogni tipologia di post, in modo da far percepire alla community studentesca una presenza autorevole atta a garantire il giusto grado di ordine nelle varie bacheche. Qualora gli studenti non dovessero rispettare le più banali norme di comportamento, un amministratore può scegliere di modificare o di eliminare il contenuto di un post o di un commento e, nei casi più gravi, di \emph{sospendere} se non addirittura \emph{eliminare} l'utenza responsabile.
+
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Bacheca}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà reindirizzato ad una pagina web come quella in figura 2.33, nella quale vengono elencati tutti i corsi appartenenti a tutti i corsi di laurea registrati all'interno della piattaforma.
+
+In questa pagina web, ciascuna voce rappresenta la bacheca dei singoli corsi. Interagendo con una di queste voci, l'utente viene reindirizzato ad una pagina web simile a quella mostrata in figura 2.16. La pagina in questione rappresenta una singola bacheca associata ad un determinato corso. Essa consiste di un menù di navigazione, posto nella parte superiore del corpo della bacheca, che consente all'utente di attraversare le diverse pagine della bacheca stessa (\emph{facciamo notare che il numero di post che possono essere visualizzati per pagina è pari a 5}). Sempre nella parte superiore, allo stesso livello del menù di navigazione, è presente un bottone \emph{crea post}, la cui pressione scatena un evento di creazione o di eliminazione di una form, posta al di sopra dell'elenco dei post (figura 2.17). Tramite questa form è possibile pubblicare un nuovo al post all'interno della bacheca.
+
+Nel blocco centrale della pagina web, troviamo l'elenco vero e proprio dei post relativi alla singola bacheca selezionata. In cima alla lista dei post è presente una barra orizzontale, che ci permette di applicare alcuni filtri di visualizzazione dei post sottostanti, fra i quali possiamo citare l'ordinamento sull'utilità dei post, sul numero di risposte ai singoli post e sulla data di pubblicazione dei singoli post. Inoltre, in ogni bacheca vengono sempre posti in sovraimpressione i due post che hanno ricevuto più voti utilità, e vengono separati dall'elenco tramite un separatore a forma di barra orizzontale celeste. Interagendo con una voce dell'elenco visualizzato, si raggiunge una pagina che visualizza il post scelto, la cui descrizione è contenuta nella sezione successiva.
+
+\medskip
 
 \subsubsection{Interagire con i post}
+
+L'interazione con il post avviene in un'apposita pagina di visualizzazione del contenuto di quest'ultimo. Analizzando la schermata dall'alto (cfr. figura 2.18), troviamo innanzitutto l'intestazione del post, che si compone di una coppia di frecce, utilizzate per votare l'utilità del post stesso, e da un blocco contente autore, data di pubblicazione e contenuto di quest'ultimo. Qualora l'utenza correntemente autenticata fosse anche l'autore del post in visualizzazione, nell'angolo in alto a destra verrebbero visualizzate due icone, che permettono rispettivamente di eliminare il post e di modificarne il contenuto.
+
+A seguire, verranno visualizzati in colonna tutti i commenti pubblicati in risposta al post, fino ad un massimo di cinque per pagina. Qualora il numero di commenti superasse questo limite, è sempre possibile interagire con la barra di navigazione contenuta tra il post e la lista dei commenti, per attraversare le diverse pagine. 
+
+Ricordiamo che un amministratore non può prendere parte in modo attivo alle votazioni di post e commenti, ma è in grado di creare post di avviso, così come di commentare sotto ogni tipologia di post, in modo da far percepire alla community studentesca una presenza autorevole atta a garantire il giusto grado di ordine nelle varie bacheche. Qualora gli studenti non dovessero rispettare le più banali norme di comportamento, un amministratore può scegliere di modificare o di eliminare il contenuto di un post o di un commento e, nei casi più gravi, di \emph{sospendere} se non addirittura \emph{eliminare} l'utenza responsabile dell'infrazione commessa.
+
+Infine, ai piedi della pagina, troviamo una sezione che permette all'utente di pubblicare un commento relativo al post correntemente visualizzato nella pagina web.
 
 \medskip
 
 \subsection{Accedere alle FAQ}
 
-%intro
+Il sistema delle FAQ permette agli studenti di interagire con i docenti proponendo delle domande in appositi box, o di votare quelle già presenti; saranno poi i docenti a scegliere le domande alle quali rispondere e le domande che possono essere eventualmente eliminate. Qui, il ruolo svolto dall'amministrazione è un ruolo di \emph{moderazione}: un amministratore, cioè, non può prendere parte in modo attivo alle votazioni delle domande poste, ma è in grado di inserire nuove domande con annesse risposte, in modo da far percepire alla community una presenza autorevole atta a garantire il giusto grado di ordine nelle varie sezioni FAQ. Qualora gli studenti e/o i docenti non dovessero rispettare le più banali norme di comportamento, un amministratore può scegliere di modificare o di eliminare il contenuto di una domanda e/o di una risposta e, nei casi più gravi, di \emph{sospendere} se non addirittura \emph{eliminare} l'utenza responsabile dell'infrazione commessa.
 
-\subsubsection{Interagire con le FAQ}
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{FAQ}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente, alla pressione di tale pulsante, verrà reindirizzato ad una pagina web come quella in figura 2.34, nella quale verrà presentata una lista dei corsi relativi a tutti i corsi di laurea registrati presso la piattaforma; da qui, l'utente può scegliere un corso e, interagendo con l'apposito pulsante, può raggiungere la pagina delle FAQ specifica per il corso selezionato.
+
+La pagina che si presenterà all'amministratore, mostrata in figura 2.20, è divisa in tre aree. In cima troviamo un box che rappresenta il contenitore di tutte quelle domande che hanno ricevuto una risposta. Il secondo blocco rappresenta invece il container delle domande ancora incomplete, ossia delle domande alle quali nessuno ha ancora pubblicato una risposta. Per una qualsiasi domanda, è possibile interagire con la coppia di frecce poste alla sinistra del testo, per esprimere un voto di utilità riguardante il contenuto della FAQ proposta. In fondo alla pagina, infine, troviamo una form che consente all'utente di contribuire alla FAQ, permettendogli di pubblicare una nuova domanda. 
 
 \medskip
 
-\subsubsection{Gestire le utenze}
+\subsection{Gestire le utenze}	
 
-%intro
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulle voci \emph{Visualizza studenti}, \emph{Visualizza docenti} e \emph{Visualizza segreteria}, tutte reperibili sotto la sezione \emph{Moderazione utenze}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.36, nella quale verranno presentati a schermo i dati relativi rispettivamente a tutti gli studenti, i docenti e i segretari registrati presso la piattaforma. In particolare, la visualizzazione degli studenti può essere ordinata seguendo criteri legati alla matricola, al cognome, al nome e al corso di laurea di appartenenza del singolo studente. La visualizzazione dei docenti, invece, può essere ordinata seguendo criteri legati alla matricola, al cognome e al nome del singolo docente.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-36.png}
+\caption{Visualizzazione dell'elenco delle utenze della tipologia selezionata.}
+\end{figure}
+
+Premendo sul pulsante \emph{gestisci}, presente in ogni singola voce dell'elenco di studenti/docenti/segretari mostrato, l'utente amministratore verrà reindirizzato verso una pagina web contenente tutte le informazioni possibili relative all'utenza appena selezionata. Un esempio di tale pagina web è riportato in figura 2.37: come si può notare dalla figura, oltre alle informazioni caratterizzanti l'utenza selezionata, sono presenti tre bottoni: \emph{modifica}, \emph{sospendi} ed \emph{elimina}, rispettivamente per permettere all'amministratore di modificare, sospendere od eliminare l'utenza cui si sta facendo correntemente riferimento.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-37.png}
+\caption{Pagina di gestione dell'utenza selezionata.}
+\end{figure}
+
+\medskip
 
 \subsubsection{Modificare un'utenza}
+
+A partire dalla pagina di gestione dell'utenza, riportata in figura 2.37, premendo sul pulsante \emph{modifica}, l'utente amministratore verrà reindirizzato verso un'opportuna form di modifica dei dati dell'utenza, che naturalmente varia dinamicamente in base al tipo di utenza selezionata e in base alle reali necessità di modifica. Come mostra la figura 2.38, la form di modifica dell'utenza viene mostrata pre-compilata con i dati attuali dell'utenza selezionata, a meno del campo \emph{password}. Qualora il campo password restasse vuoto, la password dell'utenza rimarrebbe invariata; qualora, invece, l'amministratore desiderasse modificare la password dell'utenza (ad esempio, in seguito ad una richiesta esplicita di recupero/modifica password da parte dell'utenza stessa - non entriamo nel dettaglio delle conversazioni private fra utente e amministratore...), basterebbe compilare a piacimento il relativo campo testuale. Gli autori precisano che tale soluzione di modifica della password si è rivelata necessaria poiché, data la non reversibilità dell'algoritmo di cifratura MD5 utilizzato nella crittografia delle password, risulta di fatto impossibile recuperare la reale password dell'utente, per poterla mostrare in chiaro all'amministratore.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-38.png}
+\caption{Form di modifica dell'utenza selezionata.}
+\end{figure}
+
+Eventuali errori nella modifica dell'utenza, ad esempio dovuti alla modifica della matricola di uno studente o di un docente o allo username di un segretario (che devono essere univoci!), verranno prontamente segnalati all'utente amministratore, il quale, per poter effettuare la modifica desiderata, dovrà modificare l'inserimento dei dati che hanno generato l'errore.
 
 \medskip
 
 \subsubsection{Sospendere o riabilitare un'utenza}
 
+Supponiamo che l'utenza selezionata sia un'utenza abilitata al pieno utilizzo di tutte le funzionalità messe a disposizione della piattaforma. A partire dalla pagina di gestione dell'utenza, riportata in figura 2.37, premendo sul pulsante \emph{sospendi}, l'utente amministratore scatenerà un processo di sospensione dell'utenza descritto nei dettagli nel capitolo 3 della presente. 
+
+La sospensione di un'utenza può avvenire per svariate ragioni, sostanzialmente a discrezione dell'utente amministratore: pigiando sull'opportuno pulsante, l'utente precedentemente selezionato risulterà sospeso, e il pulsante \emph{sospendi} viene sostituito dal pulsante \emph{riabilita}, come mostrato in figura 2.39.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-39.png}
+\caption{Gestione di un'utenza sospesa.}
+\end{figure}
+
+\emph{Cosa vuol dire sospendere un'utenza?} Ricordiamo al lettore (\emph{cfr. specifiche nel capitolo 1}) che un utente sospeso (sia esso uno studente, un docente od un segretario) non è abilitato ad accedere alle funzionalità extra messe a disposizione dalla piattaforma, ossia l'accesso alle bacheche e alle sezioni delle FAQ, in qualsivoglia loro aspetto e forma. D'altro canto, un utente riabilitato in seguito ad una sospensione ottiene nuovamente il pieno diritto e la piena libertà di accesso alle appena citate funzionalità offerte dalla piattaforma.
+
 \medskip
 
 \subsubsection{Eliminare un'utenza}
+
+A partire dalla pagina di gestione dell'utenza, riportata in figura 2.37, premendo sul pulsante \emph{elimina}, l'utente amministratore scatenerà, dopo opportuna conferma delle proprie intenzioni, un processo di eliminazione dell'utenza precedentemente selezionata, con tutti gli aspetti ad essa relativi. Ad esempio, nel caso dell'eliminazione di uno studente, saranno eliminate anche tutte le informazioni relative alla propria carriera universitaria, così come tutti i suoi dati anagrafici. Tuttavia, a meno che non venga eliminato il relativo corso dalla piattaforma, rimarranno i contributi che lo studente appena eliminato ha apportato nelle bacheche e nelle sezioni FAQ; questi contributi saranno soltanto contrassegnati dall'autore \emph{utente eliminato}, in modo tale che possano continuare ad essere fruibili dalle altre utenze. Un discorso dualmente analogo vale per il caso dell'eliminazione di un docente e di un segretario.
 
 \medskip
 
 \subsection{Inserire un corso di laurea}
 
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Inserisci corso di laurea}, sotto la sezione \emph{Altre funzionalità}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.40, nella quale verrà presentata a schermo una form di inserimento di un nuovo corso di laurea. Sostanzialmente, essendo il corso di laurea caratterizzato unicamente da un nome, l'inserimento di un corso di laurea si riduce all'inserimento del suo nome, che deve essere univoco all'interno della piattaforma.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-40.png}
+\caption{Form di inserimento di un corso di laurea.}
+\end{figure}
+
 \medskip
 
 \subsection{Gestire i corsi di laurea}
 
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Gestisci corsi di laurea}, sotto la sezione \emph{Altre funzionalità}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.41, nella quale verranno presentati a schermo tutti i corsi di laurea registrati all'interno della piattaforma.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-41.png}
+\caption{Visualizzazione di tutti i corsi di laurea registrati presso la piattaforma.}
+\end{figure}
+
+Ogni corso di laurea viene presentato in un box contenente il nome del corso di laurea stesso, e due pulsanti: \emph{modifica} ed \emph{elimina}, esattamente come avviene per la visualizzazione degli appelli. Da qui il lettore potrà facilmente intuire le operazioni applicabili al singolo corso di laurea, che verranno in ogni caso approfondite a breve.
+
+\medskip 
+
 \subsubsection{Modificare un corso di laurea}
+
+A partire dalla pagina di gestione dei corsi di laurea, mostrata in figura 2.41, interagendo con il pulsante \emph{modifica}, l'utente amministratore verrà reindirizzato ad una form di modifica del corso di laurea, come mostrato in figura 2.42. La form verrà visualizzata già pre-compilata con i dati del corso di laurea selezionato; l'utente amministratore potrà dunque cambiare il nome del corso di laurea, a patto che questo non sia già presente all'interno dell'insieme dei dati caratterizzanti la piattaforma.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-42.png}
+\caption{Form di modifica di un corso di laurea.}
+\end{figure}
 
 \medskip
 
 \subsubsection{Eliminare un corso di laurea}
 
+A partire dalla pagina di gestione dei corsi di laurea, mostrata in figura 2.41, interagendo con il pulsante \emph{elimina}, l'utente amministratore scatenerà, dopo opportuna conferma delle proprie intenzioni, un meccanismo di eliminazione del corso di laurea selezionato. Tale meccanismo di eliminazione risulta essere particolarmente delicato: eliminando un corso di laurea, infatti, si sceglie indirettamente di eliminare i dati relativi a tutti i corsi, tutti gli appelli, tutte le bacheche, tutte le sezioni FAQ, tutte le carriere universitarie e tutti gli studenti ad esso relativi. L'utente amministratore, seppur ''onnipotente'' nei confini entro i quali si sviluppa la piattaforma, dovrebbe porre particolare attenzione in questa delicata funzionalità.
+
 \medskip
 
 \subsection{Inserire un corso}
+
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Inserisci corso}, sotto la sezione \emph{Altre funzionalità}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.43, nella quale verrà presentata a schermo una form di inserimento di un nuovo corso. Un corso è caratterizzato da un nome, che deve essere univoco entro i limiti di presenza all'interno del corso di laurea cui fa riferimento, da un docente, da un co-docente (opzionale), dall'anno di corso in cui viene erogato, dal semestre in cui viene erogato, dal curriculum cui fa riferimento, dai CFU offerti allo studente dopo il superamento dell'esame che lo caratterizza, da un codice SSD, dal corso di laurea cui fa riferimento e, immancabilmente, da una descrizione che ne permette la fruizione di obiettivi e informazioni.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-43.png}
+\caption{Form di inserimento di un corso.}
+\end{figure}
+
+Specificate tutte queste informazioni, sarà sufficiente premere sul pulsante \emph{invio} per concludere l'operazione di inserimento del corso.
 
 \medskip
 
 \subsection{Gestire i corsi}
 
+A partire da una qualsiasi pagina web relativa all'utenza, è possibile cliccare sulla voce \emph{Gestisci corsi}, sotto la sezione \emph{Altre funzionalità}, all'interno della barra laterale sita a sinistra della pagina stessa. L'utente verrà così reindirizzato ad una pagina web come quella in figura 2.44, nella quale verranno presentati a schermo tutti i corsi relativi a tutti i corsi di laurea registrati all'interno della piattaforma.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-44.png}
+\caption{Visualizzazione di tutti i corsi registrati presso la piattaforma.}
+\end{figure}
+
+Ogni corso viene presentato in un box contenente il nome del corso stesso, e due pulsanti: \emph{modifica} ed \emph{elimina}, esattamente come avviene per la visualizzazione degli appelli e dei corsi di laurea. Da qui il lettore potrà facilmente intuire le operazioni applicabili al singolo corso, che verranno in ogni caso approfondite a breve.
+
+\medskip 
+
 \subsubsection{Modificare un corso}
+
+A partire dalla pagina di gestione dei corsi, mostrata in figura 2.44, interagendo con il pulsante \emph{modifica}, l'utente amministratore verrà reindirizzato ad una form di modifica del corso selezionato, come mostrato in figura 2.45. La form verrà visualizzata già pre-compilata con i dati del corso selezionato; l'utente amministratore potrà dunque cambiare i dati a proprio piacimento, a patto che il nome del corso resti univoco all'interno dell'insieme dei corsi relativi al corso di laurea specificato nella form.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{figura2-45.png}
+\caption{Form di modifica di un corso.}
+\end{figure}
 
 \medskip
 
-\subsubsection{Eliminare un corso}
+\subsubsection{Eliminare un corso di laurea}
+
+A partire dalla pagina di gesione dei corsi, mostrata in figura 2.44, interagendo con il pulsante \emph{elimina}, l'utente amministratore scatenerà, dopo opportuna conferma delle proprie intenzioni, un meccanismo di eliminazione del corso selezionato. L'utente amministratore dovrebbe tenere conto del fatto che eliminando un corso, si sceglie indirettamente di eliminare i dati relativi a tutti gli appelli, tutte le bacheche, tutte le sezioni FAQ e tutte le prenotazioni ad esso relativi. Egli, dunque, seppur ''onnipotente'' nei confini entro i quali si sviluppa la piattaforma, dovrebbe porre particolare attenzione in questa delicata funzionalità.
 
 \medskip
 \medskip
