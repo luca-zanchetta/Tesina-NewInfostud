@@ -29,7 +29,7 @@
     <xsd:element name="cognome" type="xsd:string"/>
     <xsd:element name="password" type="xsd:string"/>
     <xsd:element name="dataNascita" type="xsd:string"/>
-    <xsd:element name="reputazioneTotale" type="xsd:integer"/>
+    <xsd:element name="reputazioneTotale" type="xsd:float"/>
     <xsd:element name="cfuTotale" type="xsd:integer"/>
     <xsd:element name="media" type="xsd:float"/>
     <xsd:element name="idCorsoDiLaurea" type="xsd:integer"/>
