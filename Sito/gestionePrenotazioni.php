@@ -114,10 +114,16 @@ else
                 elseif($_SESSION['loginType'] == "Docente" && $corsi ) {
                     if(count($corsi) == 0)
                         echo '<h2 style="text-align: center;">Nessun appello registrato.</h2>';
-                    else{
+                    elseif(!isset($_POST['filtro']))
                         foreach($corsi as $corso)
                             displayAppelliFromCorso($corso->id);
-                    }
+                    else{
+                        $corsiLike = getCorsiLike($_POST['filtro']);
+                        foreach($corsi as $corso){
+                            if(in_array($corso, $corsiLike))
+                                displayAppelliFromCorso($corso->id);
+                        }        
+                    }         
                 }elseif($_SESSION['loginType'] == "Docente" || $_SESSION['loginType'] == "Segretario" || $_SESSION['loginType'] == "Amministratore") {
                     
                     if(isset($_POST['filtro']) && $_POST['filtro'] != "")
