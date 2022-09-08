@@ -3,7 +3,7 @@
 \BOOKMARK [1][-]{section.1.2}{Funzionalit\340 specifiche}{chapter.1}% 3
 \BOOKMARK [2][-]{subsection.1.2.1}{Funzionalit\340 visitatore}{section.1.2}% 4
 \BOOKMARK [2][-]{subsection.1.2.2}{Funzionalit\340 studente}{section.1.2}% 5
-\BOOKMARK [2][-]{subsection.1.2.3}{Funzionalit\340 professore}{section.1.2}% 6
+\BOOKMARK [2][-]{subsection.1.2.3}{Funzionalit\340 docente}{section.1.2}% 6
 \BOOKMARK [2][-]{subsection.1.2.4}{Funzionalit\340 segreteria}{section.1.2}% 7
 \BOOKMARK [2][-]{subsection.1.2.5}{Funzionalit\340 amministratore}{section.1.2}% 8
 \BOOKMARK [1][-]{section.1.3}{Strutture dati}{chapter.1}% 9
@@ -51,4 +51,12 @@
 \BOOKMARK [2][-]{subsection.2.5.10}{Inserire un corso}{section.2.5}% 51
 \BOOKMARK [2][-]{subsection.2.5.11}{Gestire i corsi}{section.2.5}% 52
 \BOOKMARK [0][-]{chapter.3}{Programmazione}{}% 53
-\BOOKMARK [0][-]{chapter.4}{Elenco utenze}{}% 54
+\BOOKMARK [1][-]{section.3.1}{Script per pagine web}{chapter.3}% 54
+\BOOKMARK [1][-]{section.3.2}{Script di lavoro}{chapter.3}% 55
+\BOOKMARK [1][-]{section.3.3}{Script dichiarativi}{chapter.3}% 56
+\BOOKMARK [1][-]{section.3.4}{Script di definizione dello stile}{chapter.3}% 57
+\BOOKMARK [0][-]{chapter.4}{Elenco utenze}{}% 58
+\BOOKMARK [1][-]{section.4.1}{Utenze - Studente}{chapter.4}% 59
+\BOOKMARK [1][-]{section.4.2}{Utenze - Docente}{chapter.4}% 60
+\BOOKMARK [1][-]{section.4.3}{Utenze - Segretario}{chapter.4}% 61
+\BOOKMARK [1][-]{section.4.4}{Utenze - Amministratore}{chapter.4}% 62

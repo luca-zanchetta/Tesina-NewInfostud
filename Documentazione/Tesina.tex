@@ -66,11 +66,9 @@ Tramite due pagine dedicate, egli può inoltre prenotarsi o cancellare le prenot
 
 Gli stessi studenti, e non solo i creatori dei post, possono valutare le risposte ottenute secondo i metodi di giudizio di utilità e accordo. L’insieme dei giudizi ricevuti costituirà la reputazione di uno studente.
 
-Un’altra funzionalità importante è quella delle FAQ. Esiste una pagina di FAQ per ogni corso. Queste pagine possono essere costruite dai professori aggiungendo sia coppie di domande e risposte, sia risposte a domande proposte dagli studenti.
-%EDIT?
+Un’altra funzionalità importante è quella delle FAQ. Esiste una pagina di FAQ per ogni corso. Queste pagine possono essere costruite dai professori aggiungendo risposte a domande proposte dagli studenti.
 
-In entrambe le sezioni di bacheca e FAQ, un’utenza autenticata come Segreteria è in grado di moderare, potendo modificare, eliminare o fissare post e domande.
-%EDIT?
+In entrambe le sezioni di bacheca e FAQ, un’utenza autenticata come Segreteria è in grado di moderare, potendo modificare o eliminare post e domande.
 
 Le tipologie di utenti che possono usufruire della piattaforma, con annesse rispettive funzionalità, sono le seguenti:
 \begin{itemize}
@@ -108,19 +106,19 @@ Le funzionalità associate alle utenze sopra elencate sono elencate di seguito.
 \item[Utente registrato – Docente.] Un utente di questo tipo è abilitato a:
 
 \begin{itemize}
-\item Aggiungere, modificare o eliminare appelli del suo corso;	%EDIT
+\item Aggiungere, modificare o eliminare appelli dei suoi corsi (\textbf{\underline{Edit}}: \emph{era inizialmente previsto un solo corso per ogni docente});
 \item Visualizzare gli studenti prenotati ad un dato appello, ed eventualmente registrare i voti, le rinunce o le bocciature;
-\item Utilizzare il portale delle FAQ inserendo nuove domande con risposte, oppure rispondendo alle domande che gli studenti propongono.	%EDIT
+\item Utilizzare il portale delle FAQ rispondendo alle domande che gli studenti propongono.	
 \end{itemize}
 
 \item[Utente registrato – Segreteria.] Un utente di questo tipo è abilitato a:
 
 \begin{itemize}
 \item Moderare le bacheche dei corsi;
-\item Moderare le pagine FAQ, in particolare fissando alcune risposte o inserendone di nuove, che in caso saranno fissate in cima;	%EDIT
+\item Moderare le pagine FAQ, anche inserendo nuove coppie domanda-risposta;
 \item Visualizzare la lista degli appelli proposti da tutti i docenti;
-\item Inserire, modificare ed eliminare appelli relativi agli esami presenti.
-% verbalizzare esami
+\item Inserire, modificare ed eliminare appelli relativi agli esami presenti;
+\item Verbalizzare gli esami sostenuti da parte degli studenti (\textbf{\underline{Edit}}: \emph{non era inizialmente previsto});
 \end{itemize}
 
 \item[Utente Amministratore.] Un utente di questo tipo è abilitato a:
@@ -130,7 +128,7 @@ Le funzionalità associate alle utenze sopra elencate sono elencate di seguito.
 \item Moderare le sezioni bacheca e FAQ, potendone modificare/eliminare i post, o alcune risposte;
 \item Modificare dati associati delle altre utenze;
 \item Inserire, modificare ed eliminare appelli relativi agli esami presenti.
-% verbalizzare esami
+\item Verbalizzare gli esami sostenuti da parte degli studenti (\textbf{\underline{Edit}}: \emph{non era inizialmente previsto});
 \end{itemize}
 \end{description}
 
@@ -155,13 +153,13 @@ I dati che verranno manipolati dalla piattaforma sono elencati di seguito.
 \item Password di accesso.
 \end{itemize}
 
-\item[Professore.] Verranno manipolati i seguenti dati:
+\item[Docente.] Verranno manipolati i seguenti dati:
 
 \begin{itemize}
 \item Nome;
 \item Cognome;
 \item Matricola;
-\item Corso;	%EDIT
+\item Lista dei corsi impartiti (\textbf{\underline{Edit}}: \emph{era inizialmente previsto un solo corso per ogni docente});
 \item Password di accesso.
 \end{itemize}
 
@@ -170,7 +168,10 @@ I dati che verranno manipolati dalla piattaforma sono elencati di seguito.
 \item Username e password di accesso al pannello di amministrazione.
 \end{itemize}
 
-%Amministratore = segreteria qui
+\item[Amministrazione.] Verranno manipolati i seguenti dati:
+\begin{itemize}
+\item Username e password di accesso al pannello di amministrazione.
+\end{itemize}
 
 \end{description}
 
@@ -366,11 +367,11 @@ Matricola & Nome & Cognome & Password & DataNascita & ReputazioneTotale & CFU & 
 
 \medskip
 
-\begin{tabular}{|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|}
 \hline
-Matricola & Nome & Cognome & Password & idCorso\\
+Matricola & Nome & Cognome & Password\\
 \hline
-1 & Umberto & Nanni & meglio che niente & 1\\
+1 & Umberto & Nanni & meglio che niente\\
 \hline
 \end{tabular}
 
@@ -591,9 +592,9 @@ Il file in questione memorizza la lista dei commenti pubblicati a seguito di un 
 
 \medskip
 
-\subsubsection{Corsi}	%EDIT?
+\subsubsection{Corsi}
 
-Il file in questione memorizza la lista di tutti i corsi presenti nella piattaforma. Il singolo elemento di tipo corso è costituito da: un id univoco, un nome, un campo descrizione, un campo \emph{matricolaProf} che memorizza il professore associato al corso, un campo \emph{colore}, contenente il colore di visualizzazione del corso all'interno della piattaforma. È inoltre presente un insieme di campi memorizzanti le informazioni didattiche del corso quali: anno, semestre, curriculum, cfu e ssd.
+Il file in questione memorizza la lista di tutti i corsi presenti nella piattaforma. Il singolo elemento di tipo corso è costituito da: un id univoco, un nome, un campo descrizione, un campo \emph{matricolaDocente} che memorizza il professore associato al corso, un campo \emph{matricolaCoDocente} che memorizza l'eventuale presenza di un co-docente, un campo \emph{colore}, contenente il colore di visualizzazione del corso all'interno della piattaforma. È inoltre presente un insieme di campi memorizzanti le informazioni didattiche del corso quali: anno, semestre, curriculum, cfu e ssd.
 
 \medskip
 
@@ -726,9 +727,11 @@ Il file in questione memorizza la lista dei corsi di laurea gestiti dalla piatta
 
 \medskip
 
-\subsubsection{Docenti}	%EDIT
+\subsubsection{Docenti}	
 
-Il file in questione memorizza la lista di docenti registrati presso la piattaforma. Come già detto nella sezione \emph{Anagrafica}, un singolo elemento docente si costituisce da un campo matricola, che funge sia da identificativo univoco sia come username per l'autenticazione, un campo password, dai propri campi anagrafici nome e cognome e un campo \emph{idCorso} che memorizza il corso associato al docente.
+Il file in questione memorizza la lista di docenti registrati presso la piattaforma. Come già detto nella sezione \emph{Anagrafica}, un singolo elemento docente si costituisce da un campo matricola, che funge sia da identificativo univoco sia come username per l'autenticazione, un campo password e dai propri campi anagrafici nome e cognome.
+
+\textbf{\underline{Edit}}: \emph{era inizialmente previsto un solo corso per ogni docente}.
 
 \medskip
 
@@ -788,7 +791,9 @@ Il file in questione memorizza la lista di docenti registrati presso la piattafo
 
 \subsubsection{FAQs}	%EDIT idAutore
 
-Il file in questione memorizza la lista di tutte le FAQs presenti nel sistema. Essendo una faq costituita da un coppia domanda e risposta, un singolo elemento di questo di tipo è costituito da i campi \emph{domanda} e \emph{risposta}. Sono inoltre presenti un campo identificativo id, un campo utilitaTotale, ricavato sommando tutti i voti \emph{utilità} ricevuti dalla faq (si veda la sezione riguardante \emph{votoFaq} dove viene approfondito il funzionamento del sistema di voto), ed infine è presente un campo \emph{idCorso} che memorizza il corso al quale la faq riferisce.
+Il file in questione memorizza la lista di tutte le FAQs presenti nel sistema. Essendo una faq costituita da un coppia domanda e risposta, un singolo elemento di questo di tipo è costituito da i campi \emph{domanda} e \emph{risposta}. Sono inoltre presenti un campo identificativo id, un campo utilitaTotale, ricavato sommando tutti i voti \emph{utilità} ricevuti dalla faq (si veda la sezione riguardante \emph{votoFaq} dove viene approfondito il funzionamento del sistema di voto), ed infine sono presenti un campo \emph{idCorso}, che memorizza il corso al quale la faq riferisce, ed un campo \emph{idAutore}, che memorizza l'autore della domanda posta nell'apposita sezione.
+
+\textbf{\underline{Edit}}: \emph{Il campo idAutore era stato tralasciato in una prima fase di stesura della documentazione}.
 
 \medskip
 
@@ -850,9 +855,11 @@ Il file in questione memorizza la lista di tutte le FAQs presenti nel sistema. E
 
 \medskip
 
-\subsubsection{POSTs}	%EDIT data
+\subsubsection{POSTs}
 
-Una delle funzionalità della piattaforma consiste, come già esplicato nel corso del presente capitolo, nel dare la possibilità agli studenti di usufruire di alcune bacheche, una per ogni corso. In ogni bacheca, uno studente può pubblicare dei post, oppure commentare post già esistenti. Pertanto, per poter memorizzare i dati relativi ad ogni post, è necessaria una tabella dei post; ogni record di questa tabella rappresenta il singolo post pubblicato. In particolare, ogni post è caratterizzato da un \emph{id}, da un \emph{titolo}, da un \emph{corpo} contenente il contenuto informativo del post stesso, dalla \emph{matricola} dello studente che lo ha pubblicato, dalla sua \emph{utilità totale} e dall'\emph{id} del corso cui si riferisce la bacheca in cui è stato pubblicato il post.
+Una delle funzionalità della piattaforma consiste, come già esplicato nel corso del presente capitolo, nel dare la possibilità agli studenti di usufruire di alcune bacheche, una per ogni corso. In ogni bacheca, uno studente può pubblicare dei post, oppure commentare post già esistenti. Pertanto, per poter memorizzare i dati relativi ad ogni post, è necessaria una tabella dei post; ogni record di questa tabella rappresenta il singolo post pubblicato. In particolare, ogni post è caratterizzato da un \emph{id}, da un \emph{titolo}, da un \emph{corpo} contenente il contenuto informativo del post stesso, dalla \emph{matricola} dello studente che lo ha pubblicato, dalla sua \emph{utilità totale}, dall'\emph{id} del corso cui si riferisce la bacheca in cui è stato pubblicato il post e dalla \emph{data} di pubblicazione del post stesso.
+
+\textbf{\underline{Edit}}: \emph{Il campo data era stato tralasciato in una prima fase di stesura della documentazione}.
 
 L'\emph{utilità totale} di un post viene stabilita dalla somma algebrica di tutti i voti di utilità attribuiti al post stesso; in particolare, come verrà successivamente mostrato nel dettaglio, il voto di un post può essere effettuato tramite un meccanismo di \emph{up}, che corrisponde ad un \emph{+1} sul punteggio di utilità totale, e di \emph{down}, che invece corrisponde ad un \emph{-1}.
 
@@ -1035,7 +1042,7 @@ Gli utenti della piattaforma, come già precedentemente esplicato, possono esser
 
 \medskip
 
-\subsubsection{Studenti}	%EDIT: reputazione totale non è un integer ma un float
+\subsubsection{Studenti}
 
 Gli utenti della piattaforma, come già precedentemente esplicato, possono essere di quattro diverse categorie; una di esse è la categoria \emph{studente}. Per memorizzare i dati relativi ad ogni studente della piattaforma, si rende necessaria una tabella degli studenti, in cui il singolo record rappresenta il singolo studente registrato; tale tabella viene costruita nel file XML mostrato di seguito. Come possiamo notare dalla grammatica (il file \emph{.xsd}) presentata di seguito, il singolo studente è caratterizzato da una \emph{matricola}, da un \emph{nome}, da un \emph{cognome}, dalla \emph{password} che egli stesso ha scelto in fase di registrazione (qui riportata in chiaro), dalla sua \emph{data di nascita}, dalla sua \emph{reputazione totale}, dal totale dei \emph{cfu} acquisiti durante la sua carriera, dalla \emph{media} dei voti conseguiti negli esami registrati e dall'\emph{id} del corso di laurea cui si riferisce il suo percorso di studi.
 
@@ -1097,13 +1104,15 @@ La \emph{reputazione totale} di uno studente viene calcolata come media di tutti
    <xsd:element name="cognome" type="xsd:string"/>
    <xsd:element name="password" type="xsd:string"/>
    <xsd:element name="dataNascita" type="xsd:string"/>
-   <xsd:element name="reputazioneTotale" type="xsd:integer"/>	% FLOAT!
+   <xsd:element name="reputazioneTotale" type="xsd:float"/>
    <xsd:element name="cfuTotale" type="xsd:integer"/>
    <xsd:element name="media" type="xsd:float"/>
    <xsd:element name="idCorsoDiLaurea" type="xsd:integer"/>
    <xsd:element name="stato" type="xsd:integer"/>
 </xsd:schema>
 \end{lstlisting}
+
+\textbf{\underline{Edit}}: \emph{Il campo reputazioneTotale era stato inserito come "integer" in una prima fase di stesura della documentazione, a causa di un errore di distrazione}.
 
 \medskip
 
@@ -1288,7 +1297,7 @@ Come già precedentemente esplicato, i post possono essere recensiti; la singola
 
 \medskip
 
-\section{Definizioni XML}	%EDIT
+\section{Definizioni XML}
 
 In questa sezione andremo a discutere una selezione a campione di 12 elementi scelti da alcuni file definiti nella precedente sezione. Per ogni elemento, verrà specificato il motivo della sua definizione facendo riferimento alla parte di specifica testuale che lo rende necessario.
 
@@ -1374,7 +1383,7 @@ L'elemento in questione, presente nel file \emph{posts.xml} \hyperref[sec:posts]
 
 \medskip
 
-\subsubsection{matricolaProf - corsi.xml}
+\subsubsection{matricolaDocente - corsi.xml}
 
 L'elemento in questione, presente nel file \emph{corsi.xml} \hyperref[sec:corsi]{\textcolor{gray}{[$\uparrow$]}}, si riferisce alla matricola del professore correntemente assegnato ad un determinato corso. È ovviamente necessario al fine di realizzare l'associazione tra corsi e docente.
 
@@ -2122,6 +2131,467 @@ A partire dalla pagina di gesione dei corsi, mostrata in figura 2.44, interagend
 
 \chapter{Programmazione}
 
+In questo capitolo passeremo in rassegna tutti gli script di cui la piattaforma si costituisce, spiegandone il funzionamento. Per facilitarne lo studio separeremo l'insieme del codice in quattro grandi gruppi: l'insieme degli script associati a pagine web, l'insieme degli script che eseguono semplicemente operazioni quali ad esempio inserimenti e cancellazioni, distinguibili dagli ultimi poiché non generano codice xhtml, gli script di definizione, che comprendono le dichiarazioni di strutture dati e funzioni e, in ultimo, gli script dedicati alla definizione dello stile grafico.
+
+\medskip
+
+Per quanto riguarda il terzo gruppo, esso si costituisce per la quasi totalità di script contenti dichiarazioni di funzioni php, il che comporta un'elevata dimensione degli script stessi. Motivo per il quale spiegare il funzionamento di ogni procedura, nelle sezioni dedicate a questi ultimi, risulterebbe di difficile lettura. Si è quindi scelto di esplicare/citare le singole funzioni in tutti quelli script il cui funzionamento dipende dalle ultime.
+ 
+\medskip
+
+\section{Script per pagine web}
+
+Come abbiamo già accennato nell'introduzione, questa sezione sarà dedicata a tutti quegli script associati a pagine web visitabili. Prevedendo molteplici utenze, ciascuna dotata di diverse pagine visitabili, su ciascuna pagina di questo gruppo verrà effettuato un opportuno controllo sulle variabili di sessione assicurando che nessun utente indesiderato raggiunga pagine critiche.
+
+\subsubsection{avvisoCorrispondenze.php}
+
+\medskip
+
+\subsubsection{avvisoErrore.php}
+
+\medskip
+
+\subsubsection{avvisoOK.php}
+
+\medskip
+
+\subsubsection{form-registrazione.php}
+
+Questo script realizza la funzionalità di registrazione, consentendo all'utente visitatore di creare un account relativo ad un'utenza da lui specificata. Per prima cosa, lo script necessita la ricezione di un campo POST denominato \emph{loginType}, che contiene informazioni sul tipo di utenza di cui si vuole creare l'account. Questo campo viene inviato da una form contenuta nella pagina \emph{login.php} (\emph{si veda a seguire}).
+
+\medskip
+
+La registrazione vera e propria viene gestita da una form che rimanda alla pagina stessa passando i campi necessari per effettuare l'inserimento. In seguito all'invio, lo script effettuerà un controllo sulla presenza dei dati che, in caso di esito positivo, rimanderà l'utente in una pagina di conferma di avvenuta registrazione, descritta poc'anzi.
+
+L'inserimento della nuova utenza avviene utilizzando una delle funzioni contenute in \emph{phpFunctions-insert.php}, in base alla tipologia di utenza selezionata.
+ 
+\medskip
+
+\subsubsection{gestionePrenotazioni.php}
+
+Questo script genera una pagina il cui contenuto dipende dall'utenza, come successivamente vedremo, che in linea di massima mostra un insieme di appelli presenti nel sistema, associando a ciascuno di essi il numero di studenti prenotati e i dettagli su corso e data relativi all'appello stesso. L'accesso alla pagina è vietato agli studenti.
+
+Lo script, dopo aver ricavato informazioni sull'utenza attualmente loggata, genera un contenuto adeguato alla stessa. Più in particolare, qualora l'utenza fosse di tipo amministrativo (\emph{Segreterio} o \emph{Amministratore}), la pagina dovrà contenere tutti gli appelli memorizzati all'interno della piattaforma. A tale scopo, viene utilizzata una funzione denominata \emph{displayFullAppelli}, che genererà il codice necessario allo scopo (\emph{la funzione appartiene alle phpFunctions-display, script che verrà esplicato successivamente}).
+
+Nel caso in cui l'utenza fosse un docente, dovranno essere visualizzati i soli appelli relativi ai corsi di competenza di quest'ultimo. In questi frangenti facciamo affidamento da una seconda procedura denominata \emph{displayAppelliFromCorso}, che verrà eseguita un numero di volte pari al numero di corsi associati al docente, visualizzando così il contenuto richiesto.
+
+\medskip
+
+La pagina è inoltre dotata di una barra di ricerca, realizzata come form rimandante alla pagina stessa. All'atto dell'invio, viene passato un campo denominato \emph{filtro}, rappresentante il contenuto della barra di ricerca. Qualora fosse stato specificato un filtro di visualizzazione tramite la suddetta barra di ricerca, la pagina, dovendo modificare il contenuto, affiderà il compito a due funzioni analoghe a quelle viste sopra che, oltre a ricavare gli appelli, effettuano anche un filtraggio sul nome del corso.
+
+\medskip
+
+\subsubsection{gestioneUtenza.php}
+
+\medskip
+
+\subsubsection{gestioneCorsi.php}
+
+\medskip
+
+\subsubsection{gestioneCorsiDiLaurea.php}
+
+\medskip
+
+\subsubsection{homepage-bacheca.php}
+
+\medskip
+
+
+\subsubsection{homepage-faq.php}
+
+\medskip
+
+\subsubsection{homepage-users-appelliPrenotati.php}
+
+\medskip
+
+\subsubsection{homepage-users-Carriera.php}
+
+\medskip
+
+\subsubsection{homepage-users-esamiSostenuti.php}
+
+\medskip
+
+\subsubsection{homapage-users-prenotaAppello.php}
+
+\medskip
+
+\subsubsection{homapage-users-visualizzaBacheca.php}
+
+\medskip
+
+\subsubsection{homapage-users-visualizzaFaq.php}
+
+\medskip
+
+\subsubsection{homapage-users-visualizzaPost.php}
+
+\medskip
+
+\subsubsection{homapage-users.php}
+
+\medskip
+
+\subsubsection{index.php}
+
+\medskip
+
+\subsubsection{inserisciAppello.php}
+
+\medskip
+
+\subsubsection{inserisciCorso.php}
+
+\medskip
+
+\subsubsection{inserisciCorsoDiLaurea.php}
+
+\medskip
+
+\subsubsection{login.php}
+
+\medskip
+
+\subsubsection{modificaAppello.php}
+
+\medskip
+
+\subsubsection{modficaCorso.php}
+
+\medskip
+
+\subsubsection{modificaCorsoDiLaurea.php}
+
+\medskip
+
+\subsubsection{modificaPassword.php}
+
+\medskip
+
+\subsubsection{modificaUtenza.php}
+
+\medskip
+
+\subsubsection{visualizzaAppelli.php}
+
+\medskip
+
+\subsubsection{visualizzaCorsi.php}
+
+\medskip
+
+\subsubsection{visualizzaCorsiDaCorsoDiLaurea.php}
+
+\medskip
+
+\subsubsection{visualizzaCorsiDiLaurea.php}
+
+\medskip
+
+\subsubsection{visualizzaDocenti.php}
+
+\medskip
+
+\subsubsection{visualizzaDocentiAdmin.php}
+
+\medskip
+
+\subsubsection{visualizzaInfoCorso.php}
+
+\medskip
+
+\subsubsection{visualizzaPrenotazioni.php}
+
+\medskip
+
+\subsubsection{visualizzaSegreteriaAdmin}
+
+\medskip
+
+\subsubsection{visualizzaStudentiAdmin}
+
+\medskip
+
+\section{Script di lavoro}
+
+\medskip
+
+\subsubsection{ajaxHandler.php}
+
+\medskip
+
+\subsubsection{deleteComment.php}
+
+\medskip
+
+\subsubsection{deleteFaq.php}
+
+\medskip
+
+\subsubsection{deletePost.php}
+
+\medskip
+
+\subsubsection{eliminaAppello-script.php}
+
+\medskip
+
+\subsubsection{eliminaCorsoDiLaurea-script.php}
+
+\medskip
+
+\subsubsection{eliminaCorso-script.php}
+
+\medskip
+
+\subsubsection{eliminaPrenotazioneAppello.php}
+
+\medskip
+
+\subsubsection{eliminaUtenza-script.php}
+
+\medskip
+
+\subsubsection{insertComment.php}
+
+\medskip
+
+\subsubsection{insertFaq.php}
+
+\medskip
+
+\subsubsection{insertPost.php}
+
+\medskip
+
+\subsubsection{prenotaAppello-script.php}
+
+\medskip
+
+\subsubsection{riabilitaStudente.php}
+
+\medskip
+
+\subsubsection{sospendiStudente.php}
+
+\medskip
+
+\subsubsection{votaFaq.php}
+
+\medskip
+
+\subsubsection{votaPost.php}
+
+\medskip
+
+\section{Script dichiarativi}
+
+\medskip
+
+\subsubsection{phpClasses.php}
+
+\medskip
+
+\subsubsection{phpFunctions-delete.php}
+
+\medskip
+
+\subsubsection{phpFunctions-display.get}
+
+\medskip
+
+\subsubsection{phpFunctions-get.php}
+
+\medskip
+
+\subsubsection{phpFunctions-insert.php}
+
+\medskip
+
+\subsubsection{phpFunctions-login.php}
+
+\medskip
+
+\subsubsection{phpFunctions-misc.php}
+
+\medskip
+
+\subsubsection{phpFunctions-modify.php}
+
+\medskip
+
+\section{Script di definizione dello stile}
+
+\medskip
+
+\subsubsection{stile-amministrazione.css}
+
+\medskip
+
+\subsubsection{stile-base.css}
+
+\medskip
+
+\subsubsection{stile-visualizza-esame.css}
+
+\medskip
+
+\subsubsection{stileBacheca.css}
+
+\medskip
+
+\subsubsection{stileFaq.css}
+
+\medskip
+
+\subsubsection{stileHomepage-users.css}
+
+\medskip
+
+\subsubsection{stileLogin.css}
+
+\medskip
+
+\subsubsection{stileVisualizzazioneLista.css}
+
+\medskip
+
+\subsubsection{stilePost.css}
+
+\medskip
+
 \chapter{Elenco utenze}
+
+\medskip
+
+In questa sezione riportiamo e descriviamo tutte le utenze registrate nel sistema. Di ogni utenza specificheremo la coppia di credenziali necessarie per effettuare l'accesso più una serie di informazioni necessarie a facilitare la lettura e la ricerca.
+
+\section{Utenze - Studente}
+
+In questa sezione elenchiamo tutte le utenze di tipo \emph{studente} registrate nella piattaforma. Per ogni utenza si è scelto di riportare un porzione di dati ritenuti essenziali. Onde evitare l'inserimento di un'enorme quantità dati si è scelto di popolare un particolare corso di laurea, così da ricreare verosimilmente il funzionamento della piattaforma. Si consiglia quindi di effettuare eventuali test con le utenze segnate in \textcolor{red}{rosso}. 
+
+\medskip
+
+\emph{Si ricorda che per accedere alla piattaforma utilizzando una delle utenze riportate nell'area sottostante è necessario specificare il numero di matricola e la password nella pagina di login associata agli studenti.}
+
+\medskip
+\medskip
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Matricola & Nome & Cognome & Password & Corso Di Laurea\\
+\hline
+1 & Mario & Rossi & supermario & Artificial Intelligence and Robotics\\
+\hline
+2 & Luca & Zanchetta & nero & 
+Engineering in Computer Science\\
+\hline
+3 & \textcolor{red}{Mattia} & \textcolor{red}{Aquilina} & viola & 
+Ingegneria dell'Informazione\\
+\hline
+4 & \textcolor{red}{Alvisio} & \textcolor{red}{Milani} & rosso & 
+Ingegneria dell'Informazione\\
+\hline
+5 & \textcolor{red}{Alessandro} & \textcolor{red}{Longo} & verde & 
+Ingegneria dell'Informazione\\
+\hline
+6 & Sara & Mazzanti & arancione & 
+Artificial Intelligence and Robotics\\
+\hline
+7 & Lorena & Padovano & rosa & 
+Engineering in Computer Science\\
+\hline
+8 & Sandra & Studiosi & celeste & Artificial Intelligence and Robotics\\
+\hline
+9 & Remo & Dellucci & meglio che niente & 
+Engineering in Computer Science\\
+\hline
+10 & \textcolor{red}{prova} & \textcolor{red}{prova} & prova & Ingegneria dell'Informazione\\
+\hline
+11& \textcolor{red}{Erminia} & \textcolor{red}{Cremonesi} & blu & Ingegneria dell'Informazione\\
+\hline
+12 & \textcolor{red}{Virginia} & \textcolor{red}{Lori} & giallo & 
+Ingegneria dell'Informazione\\
+\hline
+\end{tabular}
+
+\medskip
+
+\section{Utenze - Docente}
+
+In questa sezione elenchiamo tutte le utenze di tipo \emph{docente} registrate nella piattaforma. Per ogni utenza si è scelto di riportare un porzione di dati ritenuti essenziali. 
+
+\medskip
+
+\emph{Si ricorda che per accedere alla piattaforma utilizzando una delle utenze riportate nell'area sottostante è necessario specificare il numero di matricola e la password nella pagina di login associata ai docenti.}
+
+\medskip
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+Matricola & Nome & Cognome & Password\\
+\hline
+1 & Umberto & Nanni & meglio che niente\\
+\hline
+2 & Marco & Temperini & marte \\
+\hline
+3 & Massimo & Petrarca & giroscopio\\
+\hline
+4 & Paolo & Di Lorenzo & segnali\\
+\hline
+5 & Alberto & Bersani & congiuntivo\\
+\hline
+6 & Bruno & Cifra & retteshgembe\\
+\hline
+7 & Giuseppe &  Scotti & peppe75\\
+\hline
+8 & Paolo & Di Giamberardino & salute\\
+\hline
+9 & Gianluca & Cima & paint\\
+\hline
+10 & Fulvio & Schettino & economiediscala\\
+\hline
+11& Marco & Toppi & campo\\
+\hline
+12 & Roberto & Beraldi & you86\\
+\hline
+\end{tabular}
+
+\medskip
+
+\section{Utenze - Segretario}
+
+In questa sezione elenchiamo tutte le utenze di tipo \emph{segretario} registrate nella piattaforma.
+
+\medskip
+
+\emph{Si ricorda che per accedere alla piattaforma utilizzando una delle utenze riportate nell'area sottostante è necessario specificare lo username a e la password nella pagina di login associata ai segretari.}
+
+\begin{tabular}{|c|c|}
+\hline
+Username & Password \\
+\hline
+segretario1 & segretario1 \\
+\hline
+\end{tabular}
+
+\medskip
+
+\section{Utenze - Amministratore}
+
+In questa sezione elenchiamo tutte le utenze di tipo \emph{amministratore} registrate nella piattaforma. 
+
+\medskip
+
+\emph{Si ricorda che per accedere alla piattaforma utilizzando una delle utenze riportate nell'area sottostante è necessario specificare lo username a e la password nella pagina di login associata agli amministratori.}
+
+\begin{tabular}{|c|c|}
+\hline
+Username & Password \\
+\hline
+admin & admin \\
+\hline
+\end{tabular}
 
 \end{document}
